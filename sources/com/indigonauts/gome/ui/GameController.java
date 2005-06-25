@@ -124,8 +124,6 @@ public class GameController implements ServerCallback
 
   public void reset(MainCanvas c) {
     this.canvas = c;
-    canvas.setGameController(this);
-    // clock = new Clock(canvas);
     currentNode = null;
     model = new SgfModel();
     moveNb = 0;

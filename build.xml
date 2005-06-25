@@ -209,7 +209,7 @@
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
 		<echo message="MIDP2" />
 		<var name="midlet.name" value="gome-normal-MIDP2" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,DEBUG" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />

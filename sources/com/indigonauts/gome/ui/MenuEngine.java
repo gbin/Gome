@@ -8,6 +8,7 @@ import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
@@ -19,6 +20,8 @@ import org.apache.log4j.LogCanvas;
 import org.apache.log4j.Logger;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.Loader;
+import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.igs.ServerChallenge;
@@ -116,6 +119,7 @@ public class MenuEngine implements CommandListener {
   Form onlineChangeHandicapForm;
   Chat chat;
 
+  private boolean fullscreen = true;
   private List igsUserList;
   private ServerChallenge currentChallenge;
 
@@ -158,9 +162,9 @@ public class MenuEngine implements CommandListener {
     //#endif
 
     HELP = new Command(Gome.singleton.bundle.getString("ui.help"), Command.SCREEN, 9); //$NON-NLS-1$
-    BACK = new Command(Gome.singleton.bundle.getString("ui.back"), Command.BACK, 0); //$NON-NLS-1$
+    BACK = new Command(Gome.singleton.bundle.getString("ui.back"), Command.BACK, 0); // BACK
     START = new Command(Gome.singleton.bundle.getString("ui.start"), Command.SCREEN, 10); //$NON-NLS-1$
-    EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); //$NON-NLS-1$
+    EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); // EXIT
 
     FINISHED_COUNTING = new Command(Gome.singleton.bundle.getString("count.endCounting"), Command.SCREEN, 4); //$NON-NLS-1$
     EVALUATE = new Command(Gome.singleton.bundle.getString("count.evaluate"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -211,6 +215,7 @@ public class MenuEngine implements CommandListener {
     createForm.setCommandListener(cmd);
     return createForm;
   }
+
   //#ifdef MIDP2
   public void updateLastBrowser(FileBrowserV2 browser)
   //#else
@@ -219,6 +224,7 @@ public class MenuEngine implements CommandListener {
   {
     fileBrowser = browser;
   }
+
   public void commandAction(Command c, Displayable d) {
     try {
       Gome.singleton.mainCanvas.setSplashInfo(null);
@@ -323,7 +329,9 @@ public class MenuEngine implements CommandListener {
         } else if (c == MenuEngine.GAME_STATUS) {
           Info help = new Info(Gome.singleton.mainCanvas, MenuEngine.GAME_STATUS);
           help.show(Gome.singleton.display);
-        } else if (c == EXIT) {
+        }
+
+        else if (c == EXIT) {
           Gome.singleton.notifyDestroyed();
         } else if (c == RESIGN) {
           gc.resign();
@@ -456,7 +464,7 @@ public class MenuEngine implements CommandListener {
     log.debug("Show igs gamelist");
     //#endif
     igsGameList = new List(Gome.singleton.bundle.getString("online.gameList"), Choice.IMPLICIT);
-    
+
     for (int i = 0; i < games.length; i++) {
       igsGameList.append(games[i].toString(), null);
     }
