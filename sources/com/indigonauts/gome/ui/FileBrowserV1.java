@@ -16,7 +16,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
 //#ifndef JSR75
-//# import javax.microedition.rms.RecordStoreException;
+ import javax.microedition.rms.RecordStoreException;
 //#endif
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Rectangle;
@@ -304,17 +304,17 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
       if (c == MenuEngine.SAVE) {
         String name = Gome.singleton.menuEngine.gameFileName.getString();
         //#ifdef JSR75
-        try {
-          IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
-        } catch (IOException e) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
-        }
+        //#try {
+        //#  IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
+        //#} catch (IOException e) {
+        //#  Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+        //#}
         //#else
-        //# try {
-        //#  IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
-        //# } catch (RecordStoreException rse) {
-        //#  Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
-        //# }
+         try {
+          IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
+         } catch (RecordStoreException rse) {
+          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
+         }
         //#endif
         boolean alreadyThere = false;
         Enumeration elements = entries.elements();

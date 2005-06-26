@@ -8,7 +8,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 //#ifndef JSR75
-//# import javax.microedition.rms.RecordStoreException;
+ import javax.microedition.rms.RecordStoreException;
 //#endif
 
 import com.indigonauts.gome.io.FileEntry;
@@ -46,16 +46,16 @@ public class FileImporter extends Fetcher {
   private void downloadFile(String fileUrl) throws IOException {
     
     //#ifdef JSR75
-    new IOException("ui.error.recordStore"); // TODO: implement
+    //#new IOException("ui.error.recordStore"); // TODO: implement
     //#else
-    //# try {
-    //# byte[] file = IOManager.singleton.loadFile(fileUrl, this);
-    //# String name = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
-    //# gauge.setLabel(name);
-    //# IOManager.singleton.saveLocalStore(name, file);
-    //# } catch (RecordStoreException e) {
-    //# throw new IOException("ui.error.recordStore"); //$NON-NLS-1$
-    //# }
+     try {
+     byte[] file = IOManager.singleton.loadFile(fileUrl, this);
+     String name = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+     gauge.setLabel(name);
+     IOManager.singleton.saveLocalStore(name, file);
+     } catch (RecordStoreException e) {
+     throw new IOException("ui.error.recordStore"); //$NON-NLS-1$
+     }
     //#endif
   }
 

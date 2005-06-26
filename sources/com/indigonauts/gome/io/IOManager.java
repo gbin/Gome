@@ -259,7 +259,7 @@ public class IOManager {
 
   public void saveLocalStore(String fileName, byte[] content) throws RecordStoreException {
     //#ifdef DEBUG
-    log.debug("fileName" + fileName);
+    log.debug("fileName " + fileName);
     //#endif
     try {
       deleteLocalStore(fileName);
@@ -273,6 +273,9 @@ public class IOManager {
   }
 
   public void deleteLocalStore(String name) throws RecordStoreException {
+    //#ifdef DEBUG
+    log.debug("deleteLocalStore " + name);
+    //#endif
     RecordStore.deleteRecordStore(name);
   }
 
@@ -402,14 +405,14 @@ public class IOManager {
       return readFileFromHttp(url, status);
     }
     //#ifdef JSR75
-    else if (url.startsWith(LOCAL_NAME)) {
-      return loadJSR75(url, status);
-    }
+    //#else if (url.startsWith(LOCAL_NAME)) {
+    //#  return loadJSR75(url, status);
+    //#}
     //#else
-    //# else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
-    //#  url = url.substring(url.indexOf(':') + 4);
-    //#  return readFromLocalStore(url);
-    //# }
+    else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
+     url = url.substring(url.indexOf(':') + 4);
+      return readFromLocalStore(url);
+     }
     //#endif
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);
@@ -423,7 +426,7 @@ public class IOManager {
     for (int i = 0; i < listRecordStores.length; i++) {
       String filename = listRecordStores[i];
       if (filename.toLowerCase().endsWith(SGF))
-        answer.addElement(new LocalFileEntry(LOCAL_NAME + filename, null, filename)); //$NON-NLS-1$
+        answer.addElement(new LocalFileEntry(LOCAL_NAME, filename, filename)); //$NON-NLS-1$
     }
     return answer;
 

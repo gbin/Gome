@@ -37,7 +37,7 @@ import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
 //#ifndef JSR75
-//# import javax.microedition.rms.RecordStoreException;
+ import javax.microedition.rms.RecordStoreException;
 //#endif
 
 /**
@@ -147,6 +147,11 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
+      //#ifdef DEBUG
+      log.debug("Entry name: " + current.getName());
+      log.debug("Entry url: " + current.getUrl());
+      log.debug("Entry path: " + current.getPath());
+      //#endif
       Image image = null;
       if (current instanceof CollectionEntry) {
         CollectionEntry file = (CollectionEntry) current;
@@ -324,17 +329,17 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       if (c == MenuEngine.SAVE) {
         String name = Gome.singleton.menuEngine.gameFileName.getString();
         //#ifdef JSR75
-        try {
-          IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
-        } catch (IOException e) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
-        }
+        //#try {
+        //#  IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
+        //#} catch (IOException e) {
+        //#  Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+        //#}
         //#else
-        //# try {
-        //#  IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
-        //# } catch (RecordStoreException rse) {
-        //#  Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
-        //# }
+         try {
+          IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
+         } catch (RecordStoreException rse) {
+          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
+         }
         //#endif
         boolean alreadyThere = false;
         Enumeration elements = entries.elements();
