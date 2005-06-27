@@ -184,6 +184,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
         else
           refreshNeeded = Rectangle.union(refreshNeeded, gc.doMoveCursor(keyCode));
       }
+      scroller.setCoordinates(gc.getCursor());
       break;
 
     default:
@@ -471,9 +472,12 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       scroller.setBigStep(scrollerFont.getHeight() / 2);
 
       // log.debug("Scroller height = " + scroller.getHeight());
-      Image img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
-              Util.COLOR_LIGHT_BACKGROUND);
-      scroller.setImg(img);
+      //Image img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
+      //        Util.COLOR_LIGHT_BACKGROUND);
+      //scroller.setImg(img);
+      scroller.setMoveNb(gc.getMoveNb());
+      scroller.setComment(currentComment);
+      scroller.setCoordinates(gc.getCursor());
       scroller.setVisible(true);
       scroller.repaint();
     }
@@ -485,7 +489,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#endif
     synchronized (SCROLLER_SYNC) {
       scroller.setVisible(false);
-      scroller.setImg(null);
+      //scroller.setImg(null);
+      scroller.setComment(null);
     }
   }
 

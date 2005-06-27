@@ -833,11 +833,11 @@ public class GameController implements ServerCallback
     currentNode = node;
     String comment = currentNode.getComment();
     if ((playMode == PROBLEM_MODE) && currentNode.getFather() != null && currentNode.getFather().getComment() != null) {
-      canvas.setCurrentComment("#" + (getMoveNb() - 1) + "\n" + currentNode.getFather().getComment() + "\n--\n#" + getMoveNb() + "\n" + comment);
+      canvas.setCurrentComment( currentNode.getFather().getComment() + "\n--\n" + comment);
 
     } else {
       if (comment != null)
-        canvas.setCurrentComment("#" + getMoveNb() + "\n" + comment);
+        canvas.setCurrentComment(comment);
       else
         canvas.setCurrentComment(null);
     }

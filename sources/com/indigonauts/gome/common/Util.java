@@ -171,11 +171,14 @@ public class Util {
       // don't
       // scroll
     }
-    drawText(imagedComment.getGraphics(), 0, 0, width, imagedComment.getHeight(), lines, font, fgColor, bgcolor);
+    Graphics graphics = imagedComment.getGraphics();
+    graphics.setColor(bgcolor);
+    graphics.fillRect(0, 0, imagedComment.getWidth(), imagedComment.getHeight());
+    drawText(graphics,0, 0, lines, font, fgColor);
     return imagedComment;
   }
 
-  private static Vector lineSplitter(String text, int width, Font font) {
+  public static Vector lineSplitter(String text, int width, Font font) {
     Vector lines = new Vector();
     char[] commentChars = text.toCharArray();
 
@@ -215,11 +218,10 @@ public class Util {
     return lines;
   }
 
-  private static void drawText(Graphics graphics, int x, int y, int width, int heigth, Vector lines, Font font, int fgColor, int bgcolor) {
+  public static void drawText(Graphics graphics, int x, int y, Vector lines, Font font, int fgColor) {
     Enumeration lineEnum = lines.elements();
     int drawat = y;
-    graphics.setColor(bgcolor);
-    graphics.fillRect(x, y, width, heigth);
+   
     graphics.setFont(font);
     graphics.setColor(fgColor);
     while (lineEnum.hasMoreElements()) {
@@ -282,7 +284,10 @@ public class Util {
     int height = (lines.size()) * info_font.getHeight();
     int x = totalwidth / 12;
     int y = totalHeight / 4;
-    drawText(g, x, y, textWidth, height, lines, info_font, fg, bg);
+    
+    g.setColor(bg);
+    g.fillRect(x, y, textWidth, height);
+    drawText(g, x, y, lines, info_font, fg);
     g.setColor(Util.COLOR_LIGHTGREY);
     g.drawRect(x - 1, y - 1, textWidth + 1, height + 1);
     g.setColor(Util.COLOR_DARKGREY);
