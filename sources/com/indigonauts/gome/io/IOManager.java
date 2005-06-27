@@ -405,9 +405,9 @@ public class IOManager {
       return readFileFromHttp(url, status);
     }
     //#ifdef JSR75
-    //#else if (url.startsWith(LOCAL_NAME)) {
+    //# else if (url.startsWith(LOCAL_NAME)) {
     //#  return loadJSR75(url, status);
-    //#}
+    //# }
     //#else
     else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
      url = url.substring(url.indexOf(':') + 4);

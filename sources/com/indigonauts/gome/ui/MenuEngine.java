@@ -552,7 +552,7 @@ public class MenuEngine implements CommandListener {
   public void deleteFile(FileEntry file) {
     if (file instanceof LocalFileEntry) {
       //#ifdef JSR75
-      //#IOManager.singleton.deleteJSR75(file.getUrl());
+      //# IOManager.singleton.deleteJSR75(file.getUrl());
       //#else
 
        try {

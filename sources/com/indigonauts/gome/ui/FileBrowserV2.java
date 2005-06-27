@@ -329,11 +329,11 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       if (c == MenuEngine.SAVE) {
         String name = Gome.singleton.menuEngine.gameFileName.getString();
         //#ifdef JSR75
-        //#try {
-        //#  IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
-        //#} catch (IOException e) {
-        //#  Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
-        //#}
+        //# try {
+        //#   IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
+        //# } catch (IOException e) {
+        //#   Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+        //# }
         //#else
          try {
           IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());

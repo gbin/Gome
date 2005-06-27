@@ -28,16 +28,16 @@ public class IndexLoader extends Fetcher {
 
     if (entry.getUrl().equals(IOManager.LOCAL_NAME)) {
       //#ifdef JSR75
-      //#fileList = IOManager.singleton.getJSR75Roots();
+      //# fileList = IOManager.singleton.getJSR75Roots();
       //#else
       fileList = IOManager.singleton.getLocalGamesList();
       //#endif
     } else {
       //#ifdef JSR75
-      //#if (entry.getUrl().startsWith(IOManager.LOCAL_NAME)) {
+      //# if (entry.getUrl().startsWith(IOManager.LOCAL_NAME)) {
       //#  fileList = IOManager.singleton.loadJSR75Index(((IndexEntry) entry).getPath(), ((IndexEntry) entry).getName());
-      //#} else
-        //#endif
+      //# } else
+       //#endif
         fileList = IOManager.singleton.getFileList(((IndexEntry) entry).getUrl(), this);
       // watch out  the weird conditional compilation here !
 
