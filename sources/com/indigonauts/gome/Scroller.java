@@ -26,7 +26,7 @@ class Scroller extends Thread {
   private int y;
   private int width;
   private int height;
-  //private Image img;
+  
   private int offset = 0;
   private int speed;
   private int bigStep;
@@ -75,38 +75,55 @@ class Scroller extends Thread {
     }
     //#endif
   }
+  private static final int boxHeight = SMALL_FONT_BOLD.getHeight() + 1;
+  
+  
+  private Image tempBuff;
+  private int[] afterRaster;
+  
+  private void drawOverlayBox(Graphics g, int x, int y, String content, int color)
+  {
+    int boxWidth = SMALL_FONT_BOLD.stringWidth(content) + 4;
+       
+    Graphics gt = tempBuff.getGraphics();
+    gt.setColor(Util.COLOR_LIGHTGREY);
+    gt.fillRect(0, 0, boxWidth, boxHeight);
+    gt.setColor(color);
+    gt.setFont(SMALL_FONT_BOLD);
+    gt.drawString(content, 2, 2, Graphics.TOP | Graphics.LEFT);
+    
+    int len = boxWidth*boxHeight;
+    //int[] afterRaster = new int[len];
+    tempBuff.getRGB(afterRaster, 0, boxWidth, 0, 0, boxWidth, boxHeight);
+    
+    for(int i=0; i<len; i++){
+            afterRaster[i]= 0xA0000000 + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
+        }
+    g.drawRGB(afterRaster, 0, boxWidth, x, y, boxWidth, boxHeight, true);
+    
+  }
 
   public void drawMe(Graphics g) // should be callbacked from the paint
   {
+    
     waitingRepaint = false;
     g.setColor(Util.COLOR_LIGHT_BACKGROUND);
     g.fillRect(0, y, width, height);
 
     if (lines != null) {
-      Util.drawText(g, 0, y - offset, lines, font, Util.COLOR_BLACK);
+      Util.drawText(g, 0, y-offset, lines, font, Util.COLOR_BLACK);
     }
     String mvString = "#" + moveNb;
-    g.setColor(Util.GOBAN_COLOR_MEDIUM);
-    int stringWidth = SMALL_FONT_BOLD.stringWidth(mvString) + 4;
-    int mvTextHeight = SMALL_FONT_BOLD.getHeight() + 1;
-    g.fillRect(0, y, stringWidth, mvTextHeight);
-    g.setColor(Util.COLOR_DARKGREY);
-    g.drawRect(0, y, stringWidth, mvTextHeight);
-    g.setColor(Util.COLOR_BLUE);
-    g.setFont(SMALL_FONT_BOLD);
-    g.drawString(mvString, 2, y + 1, Graphics.TOP | Graphics.LEFT);
-
+    int yy = y + height - boxHeight;
+    
+    drawOverlayBox(g,0, yy, mvString, Util.COLOR_BLUE);
     if (coordinates != null) {
-      stringWidth = SMALL_FONT_BOLD.stringWidth(coordinates) + 4;
+      int stringWidth = SMALL_FONT_BOLD.stringWidth(coordinates) + 4;
       int stringx = width - stringWidth - 1;
-      g.setColor(Util.GOBAN_COLOR_MEDIUM);
-      g.fillRect(stringx, y, stringWidth, mvTextHeight);
-      g.setColor(Util.COLOR_DARKGREY);
-      g.drawRect(stringx, y, stringWidth, mvTextHeight);
-      g.setColor(Util.COLOR_RED);
-      g.setFont(SMALL_FONT_BOLD);
-      g.drawString(coordinates, stringx + 2, y + 1, Graphics.TOP | Graphics.LEFT);
+
+      drawOverlayBox(g,stringx, yy, coordinates, Util.COLOR_RED);
     }
+    
   }
 
   public void bigStepUp() {
@@ -178,6 +195,10 @@ class Scroller extends Thread {
     this.y = y;
     this.width = width;
     this.height = height;
+    //#ifdef MIDP2
+    tempBuff = Image.createImage(width/2, boxHeight);
+    afterRaster = new int[(width/2) * boxHeight];
+    //#endif
   }
 
   private int moveNb;
@@ -200,7 +221,8 @@ class Scroller extends Thread {
 
   public void setComment(String comments) {
     reachTheEnd = false;
-    offset = -SMALL_FONT_BOLD.getHeight() - 2;
+    // offset = -SMALL_FONT_BOLD.getHeight() - 2;
+    offset = 0;
     if (comments == null) {
       lines = null;
       pause();
@@ -222,22 +244,6 @@ class Scroller extends Thread {
       }
     }
   }
-
-  /*public void setImg(Image img) {
-   reachTheEnd = false;
-   offset = 0;
-   //#ifdef DEBUG
-   log.debug("set img " + img);
-   //#endif
-   this.img = img;
-   if (img != null && img.getHeight() > height) {
-   //log.debug("image too large start the scroll");
-   resume();
-   } else {
-   //log.debug("image is null or small pause");
-   pause();
-   }
-   }*/
 
   public synchronized void start() {
 
