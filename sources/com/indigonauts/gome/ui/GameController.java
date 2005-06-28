@@ -185,9 +185,9 @@ public class GameController implements ServerCallback
     // something else.
     currentNode = new SgfNode();
     board = new Board();
-
     fileLoader = new FileLoader(this, currentCollection, ++currentIndexInCollection);
     fileLoader.show(display);
+    canvas.scroller.setFileIndex(currentIndexInCollection);
     fileLoader.start();
   }
 
@@ -202,6 +202,11 @@ public class GameController implements ServerCallback
     currentIndexInCollection = fileIndex;
     fileLoader = new FileLoader(this, file, fileIndex);
     fileLoader.show(display);
+    if(currentCollection.getCollectionSize() > 1)
+      canvas.scroller.setFileIndex(currentIndexInCollection);
+    else
+      canvas.scroller.setFileIndex(0);
+
     fileLoader.start();
   }
 

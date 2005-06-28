@@ -8,7 +8,6 @@ import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
@@ -20,8 +19,6 @@ import org.apache.log4j.LogCanvas;
 import org.apache.log4j.Logger;
 
 import com.indigonauts.gome.Gome;
-import com.indigonauts.gome.Loader;
-import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.igs.ServerChallenge;
@@ -99,27 +96,25 @@ public class MenuEngine implements CommandListener {
   //# private FileBrowserV1 fileBrowser;
   //#endif
 
-  Options optionsForm = null;
+  private Options optionsForm = null;
 
-  Form newGameForm;
-  Form saveGameForm;
-  List igsGameList;
-  ChoiceGroup newGameSize, setKomi;
-  TextField newGameHandicap, newGameKomi;
-  TextField url;
+  private Form newGameForm;
+  private Form saveGameForm;
+  private List igsGameList;
+  private ChoiceGroup newGameSize, setKomi;
+  private TextField newGameHandicap, newGameKomi;
   public TextField gameFileName;
 
   //#ifdef DEBUG
-  LogCanvas logCanvas;
+  private LogCanvas logCanvas;
   //#endif
 
-  Form challengeForm;
-  Form oppRequestKomiForm;
-  Form requestOnlineKomiForm;
-  Form onlineChangeHandicapForm;
-  Chat chat;
+  private Form challengeForm;
+  private Form oppRequestKomiForm;
+  private Form requestOnlineKomiForm;
+  private Form onlineChangeHandicapForm;
+  private Chat chat;
 
-  private boolean fullscreen = true;
   private List igsUserList;
   private ServerChallenge currentChallenge;
 

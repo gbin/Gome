@@ -10,14 +10,12 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
-//#ifndef JSR75
- import javax.microedition.rms.RecordStoreException;
-//#endif
+import javax.microedition.rms.RecordStoreException;
+
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.StringVector;

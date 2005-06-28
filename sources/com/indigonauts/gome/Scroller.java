@@ -14,7 +14,7 @@ import javax.microedition.lcdui.Image;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Util;
 
-class Scroller extends Thread {
+public class Scroller extends Thread {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Scroller");
   //#endif
@@ -89,11 +89,13 @@ class Scroller extends Thread {
   private void drawOverlayBox(Graphics g, int x, int y, String[] content, int[] color, int bg) {
     int boxWidth = 0;
     int sep = SMALL_FONT_BOLD.stringWidth(SEP);
+    int space = SMALL_FONT_BOLD.charWidth(' ');
 
     for (int i = 0; i < content.length; i++)
       boxWidth += SMALL_FONT_BOLD.stringWidth(content[i]);
 
     boxWidth += content.length * sep;
+    boxWidth += space;
     
     Graphics gt = tempBuff.getGraphics();
     gt.setColor(bg);
@@ -104,11 +106,12 @@ class Scroller extends Thread {
     gt.fillRoundRect(0, 0, boxWidth, boxHeight, boxHeight, boxHeight);
     gt.setFont(SMALL_FONT_BOLD);
     
-    int xx = 0;
+    int xx = space;
     for (int i = 0; i < content.length - 1; i++) {
       gt.setColor(color[i]);
       gt.drawString(content[i], xx, 1, Graphics.TOP | Graphics.LEFT);
       xx += SMALL_FONT_BOLD.stringWidth(content[i]);
+      gt.setColor(Util.COLOR_DARKGREY);
       gt.drawString(SEP, xx, 1, Graphics.TOP | Graphics.LEFT);
       xx += sep;
     }
@@ -140,20 +143,30 @@ class Scroller extends Thread {
       Util.drawText(g, 0, y - offset, lines, font, Util.COLOR_BLACK);
     }
     
-    String[] strings;
-    int[] colors;
+    int nb = 1;
+    if (coordinates != null)
+      nb++;
+    if (fileIndex != null)
+      nb++;
+    
+    String[] strings = new String[nb];
+    int[] colors = new int[nb];
+    
+    
+    
     if (coordinates != null) {
-      strings = new String[2];
-      colors = new int[2];
-      strings[1] = coordinates;
-      colors[1] = Util.COLOR_RED;
+      strings[--nb] = coordinates;
+      colors[nb] = Util.COLOR_RED;
     }
-    else
-    {
-      strings = new String[1];
-      colors = new int[1];
+    
+    strings[--nb] = "#" + moveNb;
+    colors[nb] = Util.COLOR_BLUE;
+    
+    if (fileIndex != null) {
+      strings[--nb] = fileIndex;
+      colors[nb] = Util.COLOR_GREEN;
     }
-    strings[0] = " #" + moveNb;
+    
 
     drawOverlayBox(g, width-2, y+1, strings, colors, Util.COLOR_LIGHT_BACKGROUND);
     
@@ -239,6 +252,7 @@ class Scroller extends Thread {
   private Vector lines;
   private Font font;
   private int textHeight;
+  private String fileIndex;
 
   public void setMoveNb(int nb) {
     moveNb = nb;
@@ -324,6 +338,14 @@ class Scroller extends Thread {
     this.visible = visible;
     if (!visible)
       pause();
+  }
+
+  public void setFileIndex(int i) {
+    if(i==0)
+      fileIndex = null;
+    else
+      fileIndex = String.valueOf(i); 
+    
   }
 
 }

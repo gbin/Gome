@@ -14,7 +14,6 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
@@ -46,13 +45,13 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public int KEY_SCROLLDOWN;
   public int KEY_10NEXTMOVES;
   public int KEY_10PREVMOVES;
-  private Scroller scroller;
+  public Scroller scroller;
   private BoardPainter boardPainter;
   private String currentComment;
   private String splashInfo;
   private ClockController clockControl;
   private ClockPainterTask clockPainter;
-  private int clockAndCommentMode = NOTHING_TO_DISPLAY_MODE;
+  public int clockAndCommentMode = NOTHING_TO_DISPLAY_MODE;
 
   public static final byte NOTHING_TO_DISPLAY_MODE = 0;
   public static final byte COMMENT_MODE = 1;
