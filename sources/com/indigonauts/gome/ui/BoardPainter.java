@@ -374,7 +374,8 @@ public class BoardPainter {
     int size = delta + 1;
     Image cachedStone = Image.createImage(size, size);
     Graphics g = cachedStone.getGraphics();
-    
+    g.setColor(Gome.singleton.options.gobanColor);
+    g.fillRect(0, 0, delta + 1, delta + 1);
 
     whiteStoneRGB = new int[size * size];
     blackStoneRGB = new int[size * size];
