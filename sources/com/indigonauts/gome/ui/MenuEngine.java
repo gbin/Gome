@@ -91,7 +91,7 @@ public class MenuEngine implements CommandListener {
 
   //#ifdef MIDP2 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-  private FileBrowserV2 fileBrowser;
+  private FileBrowser fileBrowser;
   //#else
   //# private FileBrowserV1 fileBrowser;
   //#endif
@@ -212,7 +212,7 @@ public class MenuEngine implements CommandListener {
   }
 
   //#ifdef MIDP2
-  public void updateLastBrowser(FileBrowserV2 browser)
+  public void updateLastBrowser(FileBrowser browser)
   //#else
   //# public void updateLastBrowser(FileBrowserV1 browser)
   //#endif
@@ -236,7 +236,7 @@ public class MenuEngine implements CommandListener {
           try {
             if (fileBrowser == null) {
               //#ifdef MIDP2
-              fileBrowser = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
+              fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
               //#else
               //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
               //#endif
@@ -277,7 +277,7 @@ public class MenuEngine implements CommandListener {
           gc.pass();
         } else if (c == SAVE) {
           //#ifdef MIDP2
-          FileBrowserV2 fb = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
+          FileBrowser fb = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
           //#else
           //# FileBrowserV1 fb = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
           //#endif

@@ -4,7 +4,6 @@
 
 package com.indigonauts.gome.ui;
 
-//#ifdef MIDP2
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
@@ -37,15 +36,14 @@ import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
 //#ifndef JSR75
- import javax.microedition.rms.RecordStoreException;
-//#endif
+import javax.microedition.rms.RecordStoreException;
 
 /**
  * Fetcher extention is just for the text files
  * @author gbin
  *
  */
-public class FileBrowserV2 implements CommandListener, Showable, Runnable, DownloadCallback {
+public class FileBrowser implements CommandListener, Showable, DownloadCallback {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
@@ -107,16 +105,16 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private String currentDirectory;
   private Form saveGame;
 
-  boolean ended = false;
-  Thread ticker;
+  //boolean ended = false;
+  //Thread ticker;
 
-  public FileBrowserV2(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
+  public FileBrowser(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
     this(parent, listener, saveMode);
     this.entries = entries;
     this.currentDirectory = path;
   }
 
-  private FileBrowserV2(Showable parent, MenuEngine listener, boolean saveMode) {
+  private FileBrowser(Showable parent, MenuEngine listener, boolean saveMode) {
 
     this.parent = parent;
     this.listener = listener;
@@ -138,11 +136,11 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
   public void show(Display disp) {
     uiFolder = new Form(Gome.singleton.bundle.getString("ui.filesIn", new String[] { currentDirectory }));
-    ended = false;
-    if (!Util.SE_J5_FLAG) {
-      ticker = new Thread(this);
-      ticker.start();
-    }
+    //ended = false;
+    //if (!Util.SE_J5_FLAG) {
+    //  ticker = new Thread(this);
+    //  ticker.start();
+    //}
     visibleItems.removeAllElements();
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
@@ -180,9 +178,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
     }
     // Workaround : the traverse method of the first item will not be called if it is this serie of buggy SonyEricssons
-    if (Util.SE_J5_FLAG) {
-      ((IllustratedItem) uiFolder.get(0)).traverse(0, 0, 0, null);
-    }
+    //if (Util.SE_J5_FLAG) {
+    //  ((IllustratedItem) uiFolder.get(0)).traverse(0, 0, 0, null);
+    //}
 
     uiFolder.addCommand(MenuEngine.BACK);
     if (saveMode) {
@@ -234,7 +232,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   }
 
   public void commandAction(Command c, Displayable s) {
-    ended = true;
+    //ended = true;
     if (s == uiFolder) {
       if (c == OPEN || c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
         FileEntry entry = currentItem.getEntry();
@@ -335,11 +333,11 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         //#   Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
         //# }
         //#else
-         try {
+        try {
           IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
-         } catch (RecordStoreException rse) {
+        } catch (RecordStoreException rse) {
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
-         }
+        }
         //#endif
         boolean alreadyThere = false;
         Enumeration elements = entries.elements();
@@ -439,7 +437,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   }
 
   public void downloadFinished(String path, Vector files) {
-    FileBrowserV2 son = new FileBrowserV2(this, listener, files, path, saveMode);
+    FileBrowser son = new FileBrowser(this, listener, files, path, saveMode);
     son.show(Gome.singleton.display);
   }
 
@@ -468,7 +466,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     private String text;
     private boolean repaint, traversed;
     private boolean tooLarge;
-    private int ticked = -2;
+    private int ticked = 0;
 
     public IllustratedItem(FileEntry entry, Image icon, String text) {
       super(null);
@@ -479,44 +477,30 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
-
-      // hack for the buggy Sonyericsson implementations
-      if (Util.SE_J5_FLAG && currentItem == this) 
-      {
-
-        // find back where I was
-        int index = 0;
-        while (uiFolder.get(index) != this) {
-          index++;
-        }
-
-        switch (dir) {
-        case Canvas.UP:
-        case Canvas.LEFT:
-          if (index > 0)
-            index--;
-          break;
-        case Canvas.DOWN:
-        case Canvas.RIGHT:
-          if (index < uiFolder.size() - 1) {
-            index++;
-          }
-        }
-        // do what it is supposed to do on the *right* traverse in item 
-        currentItem = (IllustratedItem) uiFolder.get(index);
-        traverseOut();
-      } else {
+      if (currentItem != this) {
         currentItem = this;
+        currentItem.repaint = !currentItem.traversed;
+        currentItem.traversed = true;
+        currentItem.repaint();
+        return true;
       }
-      // end of hack
-      currentItem.repaint = !currentItem.traversed;
-      currentItem.traversed = true;
-      currentItem.repaint();
+
+      if (tooLarge) {
+        if (dir == Canvas.RIGHT) {
+          tickRight();
+
+        } else if (dir == Canvas.LEFT) {
+          tickLeft();
+        } else
+          return false;
+        return true;
+      }
       return false;
+
     }
 
     protected void traverseOut() {
-      ticked = -2;
+      //ticked = 0;
       for (int i = 0, size = visibleItems.size(); i < size; i++)
         ((IllustratedItem) visibleItems.elementAt(i)).repaint();
     }
@@ -564,12 +548,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       String showText;
 
       if (ticked > 0) {
-        showText = text.substring(ticked) + "-" + text;
-        if (ticked == text.length()) {
-          ticked = -1;
-        }
+        showText = text.substring(ticked);
+      }
 
-      } else {
+      else {
         showText = text;
       }
       g.drawString(showText, icon.getWidth() + ITEM_FONT.charWidth(' '), (h - ITEM_FONT.getHeight()) / 2, Graphics.TOP | Graphics.LEFT);
@@ -582,7 +564,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
     protected void keyPressed(int keyCode) {
       if (Gome.singleton.mainCanvas.getGameAction(keyCode) == Canvas.FIRE) {
-        (FileBrowserV2.this).commandAction(OPEN, uiFolder);
+        (FileBrowser.this).commandAction(OPEN, uiFolder);
       } else {
         super.keyPressed(keyCode);
       }
@@ -595,39 +577,24 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
     protected void pointerReleased(int x, int y) {
       if (lastClickedItem == this) {
-        (FileBrowserV2.this).commandAction(OPEN, uiFolder);
+        (FileBrowser.this).commandAction(OPEN, uiFolder);
       } else {
         lastClickedItem = this;
       }
     }
 
-    public void tick() {
-      ticked++;
+    public void tickRight() {
+      if (icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text.substring(ticked)) > uiFolder.getWidth())
+        ticked++;
+      repaint();
+    }
+
+    public void tickLeft() {
+      if (ticked > 0)
+        ticked--;
       repaint();
     }
 
   }
 
-  public void run() {
-    while (!ended) {
-      synchronized (this) {
-        try {
-          wait(500);
-        } catch (InterruptedException e) {
-
-        }
-      }
-      if (currentItem != null) {
-        if (currentItem.isTooLarge())
-          currentItem.tick();
-      }
-    }
-    //#ifdef DEBUG
-    log.debug("end of ticker");
-    //#endif
-  }
 }
-// MIDP1 case, just do nothing
-//#else
-// public class FileBrowserV2 {}
-//#endif
