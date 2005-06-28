@@ -372,6 +372,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     } else {
       this.removeCommand(MenuEngine.NEXT);
     }
+    if (gc.hasPreviousInCollection()) {
+      this.addCommand(MenuEngine.PREVIOUS);
+    } else {
+      this.removeCommand(MenuEngine.PREVIOUS);
+    }
 
     if (!Gome.singleton.checkLicense())
       return;

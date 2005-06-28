@@ -122,6 +122,12 @@ public class GameController implements ServerCallback
       return false;
     return currentIndexInCollection < currentCollection.getCollectionSize() - 1;
   }
+  public boolean hasPreviousInCollection() {
+    if (currentCollection == null)
+      return false;
+    return currentIndexInCollection > 1;
+  }
+
 
   public void reset(MainCanvas c) {
     this.canvas = c;
@@ -180,13 +186,13 @@ public class GameController implements ServerCallback
     }
   }
 
-  public void loadAndPlayNextInCollection() {
+  public void loadAndPlayNextInCollection(boolean reverse) {
 
     model = new SgfModel(); // free up some memory before reloading
     // something else.
     currentNode = new SgfNode();
     board = new Board();
-    fileLoader = new FileLoader(this, currentCollection, ++currentIndexInCollection);
+    fileLoader = new FileLoader(this, currentCollection, reverse ? --currentIndexInCollection : ++currentIndexInCollection);
     fileLoader.show(display);
     canvas.scroller.setFileIndex(currentIndexInCollection);
     fileLoader.start();

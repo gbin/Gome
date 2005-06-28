@@ -40,6 +40,7 @@ public class MenuEngine implements CommandListener {
 
   // constants
   public static Command NEXT;
+  public static Command PREVIOUS;
   public static Command NEW;
   public static Command FILES;
   public static Command SAVE;
@@ -122,6 +123,7 @@ public class MenuEngine implements CommandListener {
 
   static {
     NEXT = new Command(Gome.singleton.bundle.getString("ui.nextInCollection"), Command.SCREEN, 1); //$NON-NLS-1$
+    PREVIOUS = new Command(Gome.singleton.bundle.getString("ui.previousInCollection"), Command.SCREEN, 1); //$NON-NLS-1$
     NEW = new Command(Gome.singleton.bundle.getString("ui.new"), Command.SCREEN, 2); //$NON-NLS-1$
     FILES = new Command(Gome.singleton.bundle.getString("ui.fileselect"), Command.SCREEN, 2); //$NON-NLS-1$
     SAVE = new Command(Gome.singleton.bundle.getString("ui.save"), Command.SCREEN, 2); //$NON-NLS-1$
@@ -264,7 +266,9 @@ public class MenuEngine implements CommandListener {
         }
         //#endif
         else if (c == NEXT) {
-          gc.loadAndPlayNextInCollection();
+          gc.loadAndPlayNextInCollection(false);
+        } else if (c == PREVIOUS) {
+          gc.loadAndPlayNextInCollection(true);
         } else if (c == FIRST_MOVE) {
           gc.goToFirstMove();
         } else if (c == LAST_MOVE) {
@@ -550,11 +554,11 @@ public class MenuEngine implements CommandListener {
       //# IOManager.singleton.deleteJSR75(file.getUrl());
       //#else
 
-       try {
-       IOManager.singleton.deleteLocalStore(file.getName());
-       } catch (RecordStoreException e) {
-       Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
-       }
+      try {
+        IOManager.singleton.deleteLocalStore(file.getName());
+      } catch (RecordStoreException e) {
+        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      }
       //#endif
     } else {
       Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.wrongType"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
