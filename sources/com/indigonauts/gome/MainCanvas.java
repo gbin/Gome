@@ -45,6 +45,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public int KEY_SCROLLDOWN;
   public int KEY_10NEXTMOVES;
   public int KEY_10PREVMOVES;
+  public int KEY_NEXTCORNER;
+  public int KEY_PREVCORNER;
+
   public Scroller scroller;
   private BoardPainter boardPainter;
   private String currentComment;
@@ -84,9 +87,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       if (size > 1) {
         KEY_SCROLLDOWN = ((Integer) keys.elementAt(1)).intValue();
         if (size > 2) {
-          KEY_10NEXTMOVES = ((Integer) keys.elementAt(2)).intValue();
+          KEY_NEXTCORNER = KEY_10NEXTMOVES = ((Integer) keys.elementAt(2)).intValue();
           if (size > 3) {
-            KEY_10PREVMOVES = ((Integer) keys.elementAt(3)).intValue();
+            KEY_PREVCORNER = KEY_10PREVMOVES = ((Integer) keys.elementAt(3)).intValue();
           }
         }
       }
@@ -161,38 +164,50 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
     scroll(keyCode);
     Rectangle refreshNeeded = null;
+
+    if (splashInfo != null) {
+      splashInfo = null;
+      refreshNeeded = getBoardPainter().getDrawArea();
+
+    }
+
     char playMode = gc.getPlayMode();
     boolean review = playMode == GameController.REVIEW_MODE || playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE;
 
-    switch (getGameAction(keyCode)) {
-    case ACTION_UP:
-    case ACTION_DOWN:
-    case ACTION_LEFT:
-    case ACTION_RIGHT:
-      if (splashInfo != null) {
-        splashInfo = null;
-        refreshNeeded = getBoardPainter().getDrawArea();
+    if (!review) {
+      if (keyCode == KEY_NEXTCORNER) {
+        gc.nextCorner();
+
+      } else if (keyCode == KEY_PREVCORNER) {
+        gc.prevCorner();
 
       }
 
-      if (gc.isCountMode()) {
-        refreshNeeded = Rectangle.union(refreshNeeded, gc.doMoveCursor(keyCode));
-      } else {
-        if (review)
-          refreshNeeded = Rectangle.union(refreshNeeded, gc.doReviewMove(keyCode));
-        else
+    } else
+      switch (getGameAction(keyCode)) {
+      case ACTION_UP:
+      case ACTION_DOWN:
+      case ACTION_LEFT:
+      case ACTION_RIGHT:
+
+        if (gc.isCountMode()) {
           refreshNeeded = Rectangle.union(refreshNeeded, gc.doMoveCursor(keyCode));
-      }
-      scroller.setCoordinates(gc.getCursor());
-      break;
+        } else {
+          if (review)
+            refreshNeeded = Rectangle.union(refreshNeeded, gc.doReviewMove(keyCode));
+          else
+            refreshNeeded = Rectangle.union(refreshNeeded, gc.doMoveCursor(keyCode));
+        }
+        scroller.setCoordinates(gc.getCursor());
+        break;
 
-    default:
-      if (review) {
-        refreshNeeded = Rectangle.union(refreshNeeded, Rectangle.union(gc.doAction(keyCode), gc.doReviewAction(keyCode)));
-      } else {
-        refreshNeeded = Rectangle.union(refreshNeeded, gc.doAction(keyCode));
+      default:
+        if (review) {
+          refreshNeeded = Rectangle.union(refreshNeeded, Rectangle.union(gc.doAction(keyCode), gc.doReviewAction(keyCode)));
+        } else {
+          refreshNeeded = Rectangle.union(refreshNeeded, gc.doAction(keyCode));
+        }
       }
-    }
     if (refreshNeeded != null) {
       refresh(refreshNeeded);
     }
@@ -368,8 +383,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     dis.setCurrent(this);
   }
 
-  
-
   protected void pointerReleased(int x, int y) {
     gc.pointerReleased(x, y);
     super.pointerReleased(x, y);
@@ -396,8 +409,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void paint(Graphics g) {
     g.setColor(0xccccff);
     g.fillRect(0, 0, getWidth(), getHeight());
-    
-    
+
     if (scroller.isVisible() && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
       //#ifdef DEBUG
       log.debug("status bar only");
@@ -572,13 +584,13 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       boardHeight = boardPainter.getEffectiveHeight(getWidth(), getHeight() - minimalBottomHeight);
     // log.debug("EffectiveBoardHeight = " + boardHeight);
 
-    int extraSpace = getHeight() - boardHeight; 
-    
+    int extraSpace = getHeight() - boardHeight;
+
     // reduce extra space to give some room for a small margin
     int margin = (extraSpace - minimalBottomHeight) / 2;
-    extraSpace-= margin;
-    boardHeight+= margin;
-    
+    extraSpace -= margin;
+    boardHeight += margin;
+
     // log.debug("ExtraSpace = " + extraSpace);
 
     if (clockAndCommentMode == CLOCK_MODE) {

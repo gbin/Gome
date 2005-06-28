@@ -183,6 +183,15 @@ public class Info extends Fetcher implements CommandListener, Showable {
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_10PREVMOVES));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.prev10Moves")); //$NON-NLS-1$
+    buf.append('\n');
+    buf.append(Util.safeGetKeyName(canvas, canvas.KEY_NEXTCORNER));
+    buf.append(' ');
+    buf.append(bundle.getString("ui.help.nextCorner")); //$NON-NLS-1$
+    buf.append('\n');
+    buf.append(Util.safeGetKeyName(canvas, canvas.KEY_PREVCORNER));
+    buf.append(' ');
+    buf.append(bundle.getString("ui.help.prevCorner")); //$NON-NLS-1$
+    
     StringItem si = new StringItem("", buf.toString());
     //#ifdef MIDP2
     si.setFont(MainCanvas.SMALL_FONT);

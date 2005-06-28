@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Graphics;
 
 import com.indigonauts.gome.ClockController;
 import com.indigonauts.gome.Gome;
@@ -202,7 +203,7 @@ public class GameController implements ServerCallback
     currentIndexInCollection = fileIndex;
     fileLoader = new FileLoader(this, file, fileIndex);
     fileLoader.show(display);
-    if(currentCollection.getCollectionSize() > 1)
+    if (currentCollection.getCollectionSize() > 1)
       canvas.scroller.setFileIndex(currentIndexInCollection);
     else
       canvas.scroller.setFileIndex(0);
@@ -838,7 +839,7 @@ public class GameController implements ServerCallback
     currentNode = node;
     String comment = currentNode.getComment();
     if ((playMode == PROBLEM_MODE) && currentNode.getFather() != null && currentNode.getFather().getComment() != null) {
-      canvas.setCurrentComment( currentNode.getFather().getComment() + "\n--\n" + comment);
+      canvas.setCurrentComment(currentNode.getFather().getComment() + "\n--\n" + comment);
 
     } else {
       if (comment != null)
@@ -1600,6 +1601,62 @@ public class GameController implements ServerCallback
 
   public Board getBoard() {
     return board;
+  }
+
+  private static final int CORNER_DEF = 3;
+
+  private int currentQuadrant() {
+    boolean left = cursor.x < board.getBoardSize() / 2;
+    boolean top = cursor.y < board.getBoardSize() / 2;
+    return (left ? Graphics.LEFT : Graphics.RIGHT) | (top ? Graphics.TOP : Graphics.BOTTOM);
+  }
+
+  public void nextCorner() {
+    int boardSize = board.getBoardSize();
+    byte other = (byte) (boardSize - CORNER_DEF-1);
+    switch (currentQuadrant()) {
+    case Graphics.TOP | Graphics.LEFT:
+      cursor.x = other;
+      cursor.y = CORNER_DEF;
+      break;
+    case Graphics.TOP | Graphics.RIGHT:
+      cursor.x = other;
+      cursor.y = other;
+      break;
+    case Graphics.BOTTOM | Graphics.RIGHT:
+      cursor.x = CORNER_DEF;
+      cursor.y = other;
+      break;
+    case Graphics.BOTTOM | Graphics.LEFT:
+      cursor.x = CORNER_DEF;
+      cursor.y = CORNER_DEF;
+      break;
+    }
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
+  }
+
+  public void prevCorner() {
+    int boardSize = board.getBoardSize();
+    byte other = (byte) (boardSize - CORNER_DEF-1);
+    switch (currentQuadrant()) {
+    case Graphics.TOP | Graphics.LEFT:
+      cursor.x = CORNER_DEF;
+      cursor.y = other;
+      break;
+    case Graphics.TOP | Graphics.RIGHT:
+      cursor.x = CORNER_DEF;
+      cursor.y = CORNER_DEF;
+      break;
+    case Graphics.BOTTOM | Graphics.RIGHT:
+      cursor.x = other;
+      cursor.y = CORNER_DEF;
+      break;
+    case Graphics.BOTTOM | Graphics.LEFT:
+      cursor.x = other;
+      cursor.y = other;
+      break;
+    }
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
 }
