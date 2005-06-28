@@ -227,7 +227,7 @@ public class BoardPainter {
 
     // draw cursor
     if (cursor != null)
-      drawCursor(g, cursor, playerColor); // guess the
+      drawCursor(g, cursor, playerColor, board.getPosition(cursor) == Board.EMPTY); // guess the
     // next color
 
     if (markLastMove) {
@@ -371,7 +371,27 @@ public class BoardPainter {
       currentAnnotationFont = ANNOTATION_FONT_SMALL;
     }
 
+    int size = delta + 1;
+    Image cachedStone = Image.createImage(size, size);
+    Graphics g = cachedStone.getGraphics();
+    
+
+    whiteStoneRGB = new int[size * size];
+    blackStoneRGB = new int[size * size];
+    
+    drawStone(g, 0, 0, Board.WHITE);
+    cachedStone.getRGB(whiteStoneRGB, 0, size, 0, 0, size, size);
+    drawStone(g, 0, 0, Board.BLACK);
+    cachedStone.getRGB(blackStoneRGB, 0, size, 0, 0, size, size);
+    int len = whiteStoneRGB.length;
+    for (int i = 0; i < len; i++) {
+      whiteStoneRGB[i] = 0x70000000 + (whiteStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
+      blackStoneRGB[i] = 0x70000000 + (blackStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
+    }
   }
+
+  private int[] whiteStoneRGB;
+  private int[] blackStoneRGB;
 
   private void drawCell(Graphics g, int x, int y) {
 
@@ -388,11 +408,11 @@ public class BoardPainter {
     switch (position) {
     case Board.BLACK:
       drawBorder(g, x, y, 0xCCCCCC);
-      drawStone(g, x, y, Util.COLOR_BLACK);
+      drawStone(g, tlx, tly, Util.COLOR_BLACK);
       break;
     case Board.WHITE:
       drawBorder(g, x, y, 0xCCCCCC);
-      drawStone(g, x, y, Util.COLOR_WHITE);
+      drawStone(g, tlx, tly, Util.COLOR_WHITE);
       break;
     default:
       drawEmpty(g, x, y);
@@ -400,21 +420,19 @@ public class BoardPainter {
     }
   }
 
-  private void drawStone(Graphics g, int xx, int yy, int color) {
-    int cx = getCellX(xx);
-    int cy = getCellY(yy);
+  private void drawStone(Graphics g, int tlx, int tly, int color) {
+
     int w = delta;
-    int x = cx - halfdelta;
-    int y = cy - halfdelta;
+
     g.setColor(color);
 
     if (Gome.singleton.options.stoneBug == 1)
-      g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
+      g.fillArc(tlx + 1, tly + 1, w - 1, w - 1, 0, 360);
     else
-      g.fillArc(x, y, w, w, 0, 360);
+      g.fillArc(tlx, tly, w, w, 0, 360);
 
     g.setColor(Util.COLOR_GREY);
-    g.drawArc(x, y, w, w, 0, 360);
+    g.drawArc(tlx, tly, w, w, 0, 360);
 
   }
 
@@ -500,14 +518,19 @@ public class BoardPainter {
 
   }
 
-  public void drawCursor(Graphics g, Point c, int color) {
+  public void drawCursor(Graphics g, Point c, int color, boolean phantom) {
     int cx = getCellX(c.x);
     int cy = getCellY(c.y);
 
-    if (color == -1)
+    if (color == -1) {
       g.setColor(Util.COLOR_WHITE);
-    else {
+      if (phantom)
+        g.drawRGB(whiteStoneRGB, 0, delta + 1, cx - halfdelta, cy - halfdelta, delta + 1, delta + 1, true);
+    } else {
       g.setColor(Util.COLOR_DARKGREY);
+      if (phantom)
+        g.drawRGB(blackStoneRGB, 0, delta + 1, cx - halfdelta, cy - halfdelta, delta + 1, delta + 1, true);
+
     }
 
     int upx = cx - halfdelta - 1;

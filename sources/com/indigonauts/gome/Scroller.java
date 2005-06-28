@@ -36,6 +36,8 @@ public class Scroller extends Thread {
   boolean visible = false;
   boolean paused = true;
   private boolean running = true;
+  
+  private static final int boxHeight = SMALL_FONT_BOLD.getHeight();
 
   public Scroller(Canvas target) {
     this.target = target;
@@ -76,7 +78,7 @@ public class Scroller extends Thread {
     //#endif
   }
 
-  private static final int boxHeight = SMALL_FONT_BOLD.getHeight() + 1;
+  
 
   private Image tempBuff;
   private int[] afterRaster;
@@ -109,15 +111,15 @@ public class Scroller extends Thread {
     int xx = space;
     for (int i = 0; i < content.length - 1; i++) {
       gt.setColor(color[i]);
-      gt.drawString(content[i], xx, 1, Graphics.TOP | Graphics.LEFT);
+      gt.drawString(content[i], xx, boxHeight, Graphics.BOTTOM | Graphics.LEFT);
       xx += SMALL_FONT_BOLD.stringWidth(content[i]);
       gt.setColor(Util.COLOR_DARKGREY);
-      gt.drawString(SEP, xx, 1, Graphics.TOP | Graphics.LEFT);
+      gt.drawString(SEP, xx, boxHeight, Graphics.BOTTOM | Graphics.LEFT);
       xx += sep;
     }
     
     gt.setColor(color[content.length - 1]);
-    gt.drawString(content[content.length - 1], xx, 1, Graphics.TOP | Graphics.LEFT);
+    gt.drawString(content[content.length - 1], xx, boxHeight, Graphics.BOTTOM | Graphics.LEFT);
 
     int len = boxWidth * boxHeight;
     if (afterRaster == null || afterRaster.length < len)
@@ -268,7 +270,6 @@ public class Scroller extends Thread {
 
   public void setComment(String comments) {
     reachTheEnd = false;
-    // offset = -SMALL_FONT_BOLD.getHeight() - 2;
     offset = 0;
     if (comments == null) {
       lines = null;
