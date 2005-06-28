@@ -89,6 +89,8 @@ public class MenuEngine implements CommandListener {
   public static Command ZOOM;
   public static Command UNDO;
   public static Command HINT;
+  public static Command NEXT10MOVES;
+  public static Command PREV10MOVES;
 
   //#ifdef MIDP2 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
@@ -175,6 +177,8 @@ public class MenuEngine implements CommandListener {
     ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
     UNDO = new Command(Gome.singleton.bundle.getString("ui.undo"), Command.SCREEN, 5); //$NON-NLS-1$
     HINT = new Command(Gome.singleton.bundle.getString("ui.hint"), Command.SCREEN, 5); //$NON-NLS-1$
+    NEXT10MOVES = new Command(Gome.singleton.bundle.getString("ui.next10Moves"), Command.SCREEN, 5); //$NON-NLS-1$
+    PREV10MOVES = new Command(Gome.singleton.bundle.getString("ui.prev10Moves"), Command.SCREEN, 5); //$NON-NLS-1$
   }
 
   public Form createNewGameMenu() {
@@ -313,7 +317,15 @@ public class MenuEngine implements CommandListener {
             gc.tuneBoardPainter();
             Gome.singleton.mainCanvas.refresh();
           }
-        } else if (c == HINT) {
+        } else if (c == NEXT10MOVES) {
+          gc.do10NextMoves();
+          Gome.singleton.mainCanvas.refresh();
+        } else if (c == PREV10MOVES) {
+          gc.do10PrevMoves();
+          Gome.singleton.mainCanvas.refresh();
+        }
+
+        else if (c == HINT) {
           gc.reverseShowHint();
           gc.tuneBoardPainter();
           Gome.singleton.mainCanvas.refresh();

@@ -217,15 +217,13 @@ public class Gome extends MIDlet implements CommandListener {
     }
     menuEngine.startNewGame();
     String message;
-    if (options.user.length() != 0) {
-      message = bundle.getString("ui.registeredTo", new String[] { Gome.singleton.options.user });
-    } else {
+    if (options.user.length() == 0) {
       long msLeft = options.expiration - System.currentTimeMillis();
-
       message = bundle.getString("ui.hoursLeft", new String[] { String.valueOf(msLeft / HOUR), String.valueOf((msLeft % HOUR) / (60 * 1000L)) });
+      mainCanvas.setSplashInfo(message);
     }
 
-    mainCanvas.setSplashInfo(message);
+    
   }
 
 }

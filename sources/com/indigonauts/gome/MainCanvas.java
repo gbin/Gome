@@ -176,8 +176,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
     if (!review && keyCode == KEY_NEXTCORNER) {
       gc.nextCorner();
+      scroller.setCoordinates(gc.getCursor());
     } else if (!review && keyCode == KEY_PREVCORNER) {
       gc.prevCorner();
+      scroller.setCoordinates(gc.getCursor());
     } else
       switch (getGameAction(keyCode)) {
       case ACTION_UP:
@@ -236,6 +238,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.ZOOM);
     removeCommand(MenuEngine.UNDO);
     removeCommand(MenuEngine.HINT);
+    removeCommand(MenuEngine.NEXT10MOVES);
+    removeCommand(MenuEngine.PREV10MOVES);
   }
 
   public void switchToPlayMenu() {
@@ -289,9 +293,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.ZOOM);
     addCommand(MenuEngine.FIRST_MOVE);
     addCommand(MenuEngine.LAST_MOVE);
+    addCommand(MenuEngine.NEXT10MOVES);
+    addCommand(MenuEngine.PREV10MOVES);
     addCommand(MenuEngine.PLAY_MODE);
     addCommand(MenuEngine.EVALUATE);
-
     //#ifdef IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
       addCommand(MenuEngine.IGS_CONNECT);
@@ -319,6 +324,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     clearOptionalItems();
     addCommand(MenuEngine.FIRST_MOVE);
     addCommand(MenuEngine.LAST_MOVE);
+    addCommand(MenuEngine.NEXT10MOVES);
+    addCommand(MenuEngine.PREV10MOVES);
     addCommand(MenuEngine.ZOOM);
     addCommand(MenuEngine.COMMENT);
     addCommand(MenuEngine.IGS_GAMELIST);

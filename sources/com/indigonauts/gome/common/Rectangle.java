@@ -107,6 +107,9 @@ public class Rectangle {
     return pt.x >= x0 && pt.x <= x1 && pt.y >= y0 && pt.y <= y1;
   }
 
+  public boolean contains(int xx, int yy) {
+    return xx >= x0 && xx <= x1 && yy >= y0 && yy <= y1;
+  }
   public boolean equals(Object obj) {
     if (!(obj instanceof Rectangle))
       return false;

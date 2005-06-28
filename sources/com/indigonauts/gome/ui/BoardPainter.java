@@ -634,7 +634,7 @@ public class BoardPainter {
     return (866 * x) / 1000;
   }
 
-  Rectangle getPlayArea() {
+  Rectangle getViewedArea() {
     return boardArea;
   }
 

@@ -57,6 +57,9 @@ public class GameController implements ServerCallback
 
   private Board board;
 
+  // play area is where it makes sense to play :
+  // full board for a review or a normal game
+  // around the present stones in the problems
   private Rectangle playArea;
 
   private SgfPoint cursor = new SgfPoint((byte) 0, (byte) 0);
@@ -122,12 +125,12 @@ public class GameController implements ServerCallback
       return false;
     return currentIndexInCollection < currentCollection.getCollectionSize() - 1;
   }
+
   public boolean hasPreviousInCollection() {
     if (currentCollection == null)
       return false;
     return currentIndexInCollection > 1;
   }
-
 
   public void reset(MainCanvas c) {
     this.canvas = c;
@@ -254,17 +257,26 @@ public class GameController implements ServerCallback
     case ONLINE_MODE:
     case OBSERVE_MODE:
       playArea = board.getFullBoardArea();
+      // by politeness put the cursor at the top right corner
+      cursor.x = (byte) (board.getBoardSize() - CORNER_DEF - 1);
+      cursor.y = CORNER_DEF;
       break;
     case JOSEKI_MODE:
     case PROBLEM_MODE:
       playArea = model.getStoneArea();
       playArea.grow((byte) 3, (byte) 3);
+      // center out the cursor
+      cursor.x = (byte) ((playArea.x1 + playArea.x0) / 2);
+      cursor.y = (byte) ((playArea.y1 + playArea.y0) / 2);
       break;
     }
     //        
 
     if (playArea == null || model.getViewArea().isValid()) {
       playArea = Rectangle.union(playArea, model.getViewArea());
+      // center out even furthur the cursor
+      cursor.x = (byte) ((playArea.x1 + playArea.x0) / 2);
+      cursor.y = (byte) ((playArea.y1 + playArea.y0) / 2);
     }
     playArea = Rectangle.intersect(playArea, board.getFullBoardArea());
 
@@ -272,8 +284,6 @@ public class GameController implements ServerCallback
       playArea = new Rectangle((byte) 0, (byte) 0, (byte) (board.getBoardSize() - 1), (byte) (board.getBoardSize() - 1));
     }
 
-    cursor.x = (byte) ((playArea.x0 + playArea.x1) / 2);
-    cursor.y = (byte) ((playArea.y0 + playArea.y1) / 2);
     switchCurrentNode(model.getFirstNode());
     playNode(currentNode);
     initPainter(); // setclockandcomment need the definitive painter for the layout
@@ -334,7 +344,7 @@ public class GameController implements ServerCallback
 
   public Rectangle doMoveCursor(int keyCode) {
     boolean refreshPainter = false;
-    Rectangle area = canvas.getBoardPainter().getPlayArea();
+    Rectangle area = canvas.getBoardPainter().getViewedArea();
     byte x = cursor.x;
     byte y = cursor.y;
     switch (canvas.getGameAction(keyCode)) {
@@ -342,6 +352,9 @@ public class GameController implements ServerCallback
 
       if (y > 0) {
         y--;
+        if (!playArea.contains(x, y)) {
+          return null;
+        }
         if (y < area.y0) {
           area.y0 = y;
           area.y1--;
@@ -353,6 +366,10 @@ public class GameController implements ServerCallback
 
       if (y < board.getBoardSize() - 1) {
         y++;
+        if (!playArea.contains(x, y)) {
+          return null;
+        }
+
         if (y > area.y1) {
           area.y1 = y;
           area.y0++;
@@ -364,6 +381,10 @@ public class GameController implements ServerCallback
     case MainCanvas.ACTION_LEFT:
       if (x > 0) {
         x--;
+        if (!playArea.contains(x, y)) {
+          return null;
+        }
+
         if (x < area.x0) {
           area.x0 = x;
           area.x1--;
@@ -374,6 +395,10 @@ public class GameController implements ServerCallback
     case MainCanvas.ACTION_RIGHT:
       if (x < board.getBoardSize() - 1) {
         x++;
+        if (!playArea.contains(x, y)) {
+          return null;
+        }
+
         if (x > area.x1) {
           area.x1 = x;
           area.x0++;
@@ -383,11 +408,15 @@ public class GameController implements ServerCallback
       break;
     default:
     }
+    // do a full refresh because we scrolled
     if (refreshPainter) {
       tuneBoardPainter();
       canvas.getBoardPainter().setPlayArea(area); // Otherwise it will not be notified of the change
+      cursor.x = x;
+      cursor.y = y;
+      return canvas.getBoardPainter().getDrawArea();
     }
-
+    // do a partial refresh as we moved inside the visible area
     boolean refreshNeeded = (x != cursor.x) || (y != cursor.y);
     if (refreshNeeded) {
       areaToRefresh.x0 = canvas.getBoardPainter().getCellX(Math.min(x, cursor.x) - 1);
@@ -442,7 +471,7 @@ public class GameController implements ServerCallback
   }
 
   private void spanInZoomedModeIfTheCursorIsOut() {
-    Rectangle displayArea = canvas.getBoardPainter().getPlayArea();
+    Rectangle displayArea = canvas.getBoardPainter().getViewedArea();
     if (bZoomIn && (cursor.x > displayArea.x1 || cursor.x < displayArea.x0 || cursor.y < displayArea.y0 || cursor.y > displayArea.y1)) {
 
       switchToZoomedPainter();
@@ -456,17 +485,25 @@ public class GameController implements ServerCallback
    */
   public Rectangle doReviewAction(int keyCode) {
     if (keyCode == canvas.KEY_10PREVMOVES) {
-      for (int i = 0; i < 10; i++)
-        doGoBack();
-      tuneBoardPainter();
+      do10PrevMoves();
       return canvas.getBoardPainter().getDrawArea();
     } else if (keyCode == canvas.KEY_10NEXTMOVES) {
-      for (int i = 0; i < 10; i++)
-        doGoNext();
-      tuneBoardPainter();
+      do10NextMoves();
       return canvas.getBoardPainter().getDrawArea();
     }
     return null;
+  }
+
+  public void do10NextMoves() {
+    for (int i = 0; i < 10; i++)
+      doGoNext();
+    tuneBoardPainter();
+  }
+
+  public void do10PrevMoves() {
+    for (int i = 0; i < 10; i++)
+      doGoBack();
+    tuneBoardPainter();
   }
 
   /**
@@ -1623,7 +1660,7 @@ public class GameController implements ServerCallback
 
   public void nextCorner() {
     int boardSize = board.getBoardSize();
-    byte other = (byte) (boardSize - CORNER_DEF-1);
+    byte other = (byte) (boardSize - CORNER_DEF - 1);
     switch (currentQuadrant()) {
     case Graphics.TOP | Graphics.LEFT:
       cursor.x = other;
@@ -1648,7 +1685,7 @@ public class GameController implements ServerCallback
 
   public void prevCorner() {
     int boardSize = board.getBoardSize();
-    byte other = (byte) (boardSize - CORNER_DEF-1);
+    byte other = (byte) (boardSize - CORNER_DEF - 1);
     switch (currentQuadrant()) {
     case Graphics.TOP | Graphics.LEFT:
       cursor.x = CORNER_DEF;
