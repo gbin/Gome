@@ -1661,51 +1661,64 @@ public class GameController implements ServerCallback
   public void nextCorner() {
     int boardSize = board.getBoardSize();
     byte other = (byte) (boardSize - CORNER_DEF - 1);
+    byte x = 0;
+    byte y = 0;
+
     switch (currentQuadrant()) {
     case Graphics.TOP | Graphics.LEFT:
-      cursor.x = other;
-      cursor.y = CORNER_DEF;
+      x = other;
+      y = CORNER_DEF;
       break;
     case Graphics.TOP | Graphics.RIGHT:
-      cursor.x = other;
-      cursor.y = other;
+      x = other;
+      y = other;
       break;
     case Graphics.BOTTOM | Graphics.RIGHT:
-      cursor.x = CORNER_DEF;
-      cursor.y = other;
+      x = CORNER_DEF;
+      y = other;
       break;
     case Graphics.BOTTOM | Graphics.LEFT:
-      cursor.x = CORNER_DEF;
-      cursor.y = CORNER_DEF;
+      x = CORNER_DEF;
+      y = CORNER_DEF;
       break;
     }
-    spanInZoomedModeIfTheCursorIsOut();
-    canvas.refresh(canvas.getBoardPainter().getDrawArea());
+    if (playArea.contains(x, y)) {
+      cursor.x = x;
+      cursor.y = y;
+      spanInZoomedModeIfTheCursorIsOut();
+      canvas.refresh(canvas.getBoardPainter().getDrawArea());
+    }
   }
 
   public void prevCorner() {
     int boardSize = board.getBoardSize();
     byte other = (byte) (boardSize - CORNER_DEF - 1);
+    byte x = 0;
+    byte y = 0;
     switch (currentQuadrant()) {
     case Graphics.TOP | Graphics.LEFT:
-      cursor.x = CORNER_DEF;
-      cursor.y = other;
+      x = CORNER_DEF;
+      y = other;
       break;
     case Graphics.TOP | Graphics.RIGHT:
-      cursor.x = CORNER_DEF;
-      cursor.y = CORNER_DEF;
+      x = CORNER_DEF;
+      y = CORNER_DEF;
       break;
     case Graphics.BOTTOM | Graphics.RIGHT:
-      cursor.x = other;
-      cursor.y = CORNER_DEF;
+      x = other;
+      y = CORNER_DEF;
       break;
     case Graphics.BOTTOM | Graphics.LEFT:
-      cursor.x = other;
-      cursor.y = other;
+      x = other;
+      y = other;
       break;
     }
-    spanInZoomedModeIfTheCursorIsOut();
-    canvas.refresh(canvas.getBoardPainter().getDrawArea());
+    if (playArea.contains(x, y)) {
+      cursor.x = x;
+      cursor.y = y;
+      spanInZoomedModeIfTheCursorIsOut();
+      canvas.refresh(canvas.getBoardPainter().getDrawArea());
+    }
   }
 
 }
