@@ -26,7 +26,7 @@ class Scroller extends Thread {
   private int y;
   private int width;
   private int height;
-  
+
   private int offset = 0;
   private int speed;
   private int bigStep;
@@ -75,55 +75,89 @@ class Scroller extends Thread {
     }
     //#endif
   }
+
   private static final int boxHeight = SMALL_FONT_BOLD.getHeight() + 1;
-  
-  
+
   private Image tempBuff;
   private int[] afterRaster;
-  
-  private void drawOverlayBox(Graphics g, int x, int y, String content, int color)
-  {
-    int boxWidth = SMALL_FONT_BOLD.stringWidth(content) + 4;
-       
-    Graphics gt = tempBuff.getGraphics();
-    gt.setColor(Util.COLOR_LIGHTGREY);
-    gt.fillRect(0, 0, boxWidth, boxHeight);
-    gt.setColor(color);
-    gt.setFont(SMALL_FONT_BOLD);
-    gt.drawString(content, 2, 2, Graphics.TOP | Graphics.LEFT);
+
+  private static final String SEP = "-";
+
+  /*
+   * Specify top right corner
+   */
+  private void drawOverlayBox(Graphics g, int x, int y, String[] content, int[] color, int bg) {
+    int boxWidth = 0;
+    int sep = SMALL_FONT_BOLD.stringWidth(SEP);
+
+    for (int i = 0; i < content.length; i++)
+      boxWidth += SMALL_FONT_BOLD.stringWidth(content[i]);
+
+    boxWidth += content.length * sep;
     
-    int len = boxWidth*boxHeight;
-    //int[] afterRaster = new int[len];
+    Graphics gt = tempBuff.getGraphics();
+    gt.setColor(bg);
+    gt.fillRect(0, 0, boxWidth, boxHeight);
+
+    gt.setColor(Util.COLOR_WHITE);
+    
+    gt.fillRoundRect(0, 0, boxWidth, boxHeight, boxHeight, boxHeight);
+    gt.setFont(SMALL_FONT_BOLD);
+    
+    int xx = 0;
+    for (int i = 0; i < content.length - 1; i++) {
+      gt.setColor(color[i]);
+      gt.drawString(content[i], xx, 1, Graphics.TOP | Graphics.LEFT);
+      xx += SMALL_FONT_BOLD.stringWidth(content[i]);
+      gt.drawString(SEP, xx, 1, Graphics.TOP | Graphics.LEFT);
+      xx += sep;
+    }
+    
+    gt.setColor(color[content.length - 1]);
+    gt.drawString(content[content.length - 1], xx, 1, Graphics.TOP | Graphics.LEFT);
+
+    int len = boxWidth * boxHeight;
+    if (afterRaster == null || afterRaster.length < len)
+      afterRaster = new int[len];
+    
     tempBuff.getRGB(afterRaster, 0, boxWidth, 0, 0, boxWidth, boxHeight);
     
-    for(int i=0; i<len; i++){
-            afterRaster[i]= 0xA0000000 + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
-        }
-    g.drawRGB(afterRaster, 0, boxWidth, x, y, boxWidth, boxHeight, true);
-    
+    for (int i = 0; i < len; i++) {
+      afterRaster[i] = 0xA0000000 + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
+    }
+    g.drawRGB(afterRaster, 0, boxWidth, x -boxWidth, y, boxWidth, boxHeight, true);
+
   }
 
   public void drawMe(Graphics g) // should be callbacked from the paint
   {
-    
+    g.setClip(0, y, width, height);
     waitingRepaint = false;
     g.setColor(Util.COLOR_LIGHT_BACKGROUND);
     g.fillRect(0, y, width, height);
 
     if (lines != null) {
-      Util.drawText(g, 0, y-offset, lines, font, Util.COLOR_BLACK);
+      Util.drawText(g, 0, y - offset, lines, font, Util.COLOR_BLACK);
     }
-    String mvString = "#" + moveNb;
-    int yy = y + height - boxHeight;
     
-    drawOverlayBox(g,0, yy, mvString, Util.COLOR_BLUE);
+    String[] strings;
+    int[] colors;
     if (coordinates != null) {
-      int stringWidth = SMALL_FONT_BOLD.stringWidth(coordinates) + 4;
-      int stringx = width - stringWidth - 1;
-
-      drawOverlayBox(g,stringx, yy, coordinates, Util.COLOR_RED);
+      strings = new String[2];
+      colors = new int[2];
+      strings[1] = coordinates;
+      colors[1] = Util.COLOR_RED;
     }
+    else
+    {
+      strings = new String[1];
+      colors = new int[1];
+    }
+    strings[0] = " #" + moveNb;
+
+    drawOverlayBox(g, width-2, y+1, strings, colors, Util.COLOR_LIGHT_BACKGROUND);
     
+
   }
 
   public void bigStepUp() {
@@ -196,8 +230,7 @@ class Scroller extends Thread {
     this.width = width;
     this.height = height;
     //#ifdef MIDP2
-    tempBuff = Image.createImage(width/2, boxHeight);
-    afterRaster = new int[(width/2) * boxHeight];
+    tempBuff = Image.createImage(width / 2, boxHeight);
     //#endif
   }
 

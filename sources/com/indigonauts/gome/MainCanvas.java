@@ -573,8 +573,13 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       boardHeight = boardPainter.getEffectiveHeight(getWidth(), getHeight() - minimalBottomHeight);
     // log.debug("EffectiveBoardHeight = " + boardHeight);
 
-    int extraSpace = getHeight() - boardHeight;
-
+    int extraSpace = getHeight() - boardHeight; 
+    
+    // reduce extra space to give some room for a small margin
+    int margin = (extraSpace - minimalBottomHeight) / 2;
+    extraSpace-= margin;
+    boardHeight+= margin;
+    
     // log.debug("ExtraSpace = " + extraSpace);
 
     if (clockAndCommentMode == CLOCK_MODE) {
