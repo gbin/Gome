@@ -70,113 +70,14 @@
 		<var name="wtk.cldc.version" value="1.1" />
 		<var name="wtk.midp.version" value="2.0" />
 	</target>
-
-	<target name="MIDP1">
-		<var name="wtk.midpapi" value="/opt/wtk104/lib/midpapi.zip" />
-		<var name="wtk.cldc.version" value="1.0" />
-		<var name="wtk.midp.version" value="1.0" />
-	</target>
-
-	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75, VJOSEKI_MIDP2_JSR75" />
+	
+	<target name="all" depends="cleandist, VMIDP2, VMIDP2_JSR75, VJOSEKI_MIDP2_JSR75" />
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
 		<exclude name="**/*.*" />
 	</fileset>
 
-	<target name="Vminimal" depends="MIDP1" description="Minimal">
-		<echo message="Minimal" />
-		<var name="midlet.name" value="gome-minimal" />
-		<var name="symbols" value="" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<fileset id="gome-minimal-bundle-files" dir="${project.root.gome}/sources">
-		<patternset refid="games" />
-		<patternset refid="problems" />
-	</fileset>
-
-	<target name="Vminimal-bundle" depends="MIDP1" description="Minimal bundle">
-		<echo message="Minimal-bundle" />
-		<var name="midlet.name" value="gome-minimal-bundle" />
-		<var name="symbols" value="" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<fileset id="gome-online-files" dir="${project.root.gome}/sources">
-		<patternset refid="games" />
-		<patternset refid="problems" />
-	</fileset>
-
-	<target name="Vonline" depends="MIDP1" description="Online version">
-		<echo message="Online" />
-		<var name="midlet.name" value="gome-online" />
-		<var name="symbols" value="IGS" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<fileset id="gome-i18n-files" dir="${project.root.gome}/sources">
-		<patternset refid="i18n" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-	</fileset>
-
-	<target name="Vi18n" depends="MIDP1" description="I18N version">
-		<echo message="I18n" />
-		<var name="midlet.name" value="gome-i18n" />
-		<var name="symbols" value="IGS,I18N" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<fileset id="gome-normal-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="gomoku" />
-		<patternset refid="i18n" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-	</fileset>
-
-	<target name="Vnormal" depends="MIDP1" description="Normal version">
-		<echo message="Normal" />
-		<var name="midlet.name" value="gome-normal" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
+	
 	<fileset id="gome-normal-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
@@ -249,31 +150,7 @@
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
 
-	<target name="Vjoseki" depends="MIDP1" description="Joseki version">
-		<var name="midlet.name" value="gome-joseki" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-		<fileset id="gome-joseki-files" dir="${project.root.gome}/sources">
-			<patternset refid="file-icons" />
-			<patternset refid="menu-icons" />
-			<patternset refid="gomoku" />
-			<patternset refid="i18n" />
-			<patternset refid="games" />
-			<patternset refid="problems" />
-			<patternset refid="joseki" />
-		</fileset>
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-
-	<!-- Initialize the build environment as necessary -->
+		<!-- Initialize the build environment as necessary -->
 	<target name="-initialize">
 		<echo message="Initializing build environment..." />
 

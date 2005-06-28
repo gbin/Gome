@@ -242,17 +242,13 @@ public class Util {
   }
 
   public static Image renderIcon(Image icon, int width, int height) {
-    Image imagedComment = Image.createImage(width, height);
-    Graphics graphics = imagedComment.getGraphics();
-    //#ifdef MIDP2
+    if(width < icon.getWidth() || height < icon.getHeight())
+      return icon;
     int[] is = new int[width * height];
-    for (int i = 0; i < is.length; i++) {
-      is[i] = 0xffffffff;
-    }
-    graphics.drawRGB(is, 0, width, 0, 0, width, height, true);
-    //#endif
-    graphics.drawImage(icon, (width - icon.getWidth()) / 2, (height - icon.getHeight()) / 2, Graphics.LEFT | Graphics.TOP);
-    return Image.createImage(imagedComment);
+    int x = (width - icon.getWidth()) / 2;
+    int y = (height - icon.getHeight()) / 2;
+    icon.getRGB(is, x + y *width, width,0, 0, icon.getWidth(), icon.getHeight());
+    return Image.createRGBImage(is, width, height, true);
   }
 
   // public static Image
