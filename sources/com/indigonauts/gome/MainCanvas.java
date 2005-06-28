@@ -174,15 +174,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     char playMode = gc.getPlayMode();
     boolean review = playMode == GameController.REVIEW_MODE || playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE;
 
-    if (!review) {
-      if (keyCode == KEY_NEXTCORNER) {
-        gc.nextCorner();
-
-      } else if (keyCode == KEY_PREVCORNER) {
-        gc.prevCorner();
-
-      }
-
+    if (!review && keyCode == KEY_NEXTCORNER) {
+      gc.nextCorner();
+    } else if (!review && keyCode == KEY_PREVCORNER) {
+      gc.prevCorner();
     } else
       switch (getGameAction(keyCode)) {
       case ACTION_UP:

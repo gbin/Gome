@@ -430,13 +430,17 @@ public class GameController implements ServerCallback
       }
       tuneBoardPainter();
     }
+    spanInZoomedModeIfTheCursorIsOut();
+
+    return refreshNeeded ? canvas.getBoardPainter().getDrawArea() : null;
+  }
+
+  private void spanInZoomedModeIfTheCursorIsOut() {
     Rectangle displayArea = canvas.getBoardPainter().getPlayArea();
     if (bZoomIn && (cursor.x > displayArea.x1 || cursor.x < displayArea.x0 || cursor.y < displayArea.y0 || cursor.y > displayArea.y1)) {
 
       switchToZoomedPainter();
     }
-
-    return refreshNeeded ? canvas.getBoardPainter().getDrawArea() : null;
   }
 
   /**
@@ -1632,6 +1636,7 @@ public class GameController implements ServerCallback
       cursor.y = CORNER_DEF;
       break;
     }
+    spanInZoomedModeIfTheCursorIsOut();
     canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
@@ -1656,6 +1661,7 @@ public class GameController implements ServerCallback
       cursor.y = other;
       break;
     }
+    spanInZoomedModeIfTheCursorIsOut();
     canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
