@@ -37,6 +37,7 @@ import com.indigonauts.gome.sgf.SgfPoint;
 
 //#ifndef JSR75
 import javax.microedition.rms.RecordStoreException;
+//#endif
 
 /**
  * Fetcher extention is just for the text files
@@ -289,7 +290,6 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         int nb = uiFolder.size();
         for (int i = 0; i < nb; i++) {
           if (uiFolder.get(i) == currentItem) {
-            log.debug("found it at " + i);
             uiFolder.delete(i);
             break;
           }
@@ -609,7 +609,5 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         ticked--;
       repaint();
     }
-
   }
-
 }
