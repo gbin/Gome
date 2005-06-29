@@ -30,6 +30,7 @@ import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
+import com.indigonauts.gome.ui.FileBrowser.IllustratedItem;
 
 public class MenuEngine implements CommandListener {
   //#ifdef DEBUG
@@ -200,14 +201,18 @@ public class MenuEngine implements CommandListener {
     return game;
   }
 
-  public Form createSaveGameMenu(CommandListener cmd, String name) {
+  public Form createSaveGameMenu(CommandListener cmd, String name, String defaultName) {
 
-    Calendar cal = Calendar.getInstance();
-    int y = cal.get(Calendar.YEAR);
-    int m = cal.get(Calendar.MONTH) + 1;
-    int d = cal.get(Calendar.DAY_OF_MONTH);
-    String defaultFN = Gome.singleton.bundle.getString("ui.defaultFilename") + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d)) + ".sgf";
-
+    String defaultFN;
+    if (defaultName != null) {
+      defaultFN = defaultName;
+    } else {
+      Calendar cal = Calendar.getInstance();
+      int y = cal.get(Calendar.YEAR);
+      int m = cal.get(Calendar.MONTH) + 1;
+      int d = cal.get(Calendar.DAY_OF_MONTH);
+      defaultFN = Gome.singleton.bundle.getString("ui.defaultFilename") + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d)) + ".sgf";
+    }
     Form createForm = new Form(Gome.singleton.bundle.getString("ui.saveIn", new String[] { name })); //$NON-NLS-1$
     gameFileName = new TextField(Gome.singleton.bundle.getString("ui.filename"), defaultFN, 28, TextField.ANY); //$NON-NLS-1$
     createForm.append(gameFileName);

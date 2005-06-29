@@ -60,6 +60,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   private Display display;
 
   public static Command OPEN;
+  public static Command SAVE_AS;
   public static Command OPEN_REVIEW;
   public static Command DELETE;
   public static Command IMPORT;
@@ -92,6 +93,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     }
 
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
+    SAVE_AS = new Command(Gome.singleton.bundle.getString("ui.saveAs"), Command.SCREEN, 2); //$NON-NLS-1$
     OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
     DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
     IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
@@ -184,7 +186,10 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
 
     uiFolder.addCommand(MenuEngine.BACK);
     if (saveMode) {
+      uiFolder.addCommand(SAVE_AS);
       uiFolder.addCommand(MenuEngine.SAVE);
+      uiFolder.addCommand(SEND_BY_EMAIL);
+      uiFolder.addCommand(DELETE);
     } else {
       uiFolder.addCommand(OPEN);
       uiFolder.addCommand(SEND_BY_EMAIL);
@@ -263,7 +268,11 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         showFileBlock();
 
       } else if (c == MenuEngine.SAVE) {
-        saveGame = listener.createSaveGameMenu(this, currentDirectory);
+        saveGame = listener.createSaveGameMenu(this, currentDirectory, currentItem.getEntry().getName());
+        Gome.singleton.display.setCurrent(saveGame);
+      }
+      else if (c == SAVE_AS) {
+        saveGame = listener.createSaveGameMenu(this, currentDirectory, null);
         Gome.singleton.display.setCurrent(saveGame);
       }
 
@@ -280,11 +289,13 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         int nb = uiFolder.size();
         for (int i = 0; i < nb; i++) {
           if (uiFolder.get(i) == currentItem) {
+            log.debug("found it at " + i);
             uiFolder.delete(i);
             break;
           }
         }
-        show(Gome.singleton.display);
+       
+        Gome.singleton.display.setCurrent(uiFolder); // don't reparse everthing with "show"
       } else if (c == IMPORT) {
         FileEntry selectedFile = currentItem.getEntry();
         importFile(selectedFile);
@@ -326,6 +337,17 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     else if (s == saveGame) {
       if (c == MenuEngine.SAVE) {
         String name = Gome.singleton.menuEngine.gameFileName.getString();
+        boolean alreadyThere = false;
+        Enumeration elements = entries.elements();
+        while (elements.hasMoreElements()) {
+          if (((FileEntry) elements.nextElement()).getName().equals(name)) {
+            alreadyThere = true;
+            break;
+          }
+        }
+        // TODO confirmation
+        
+        
         //#ifdef JSR75
         //# try {
         //#   IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
@@ -339,14 +361,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
         }
         //#endif
-        boolean alreadyThere = false;
-        Enumeration elements = entries.elements();
-        while (elements.hasMoreElements()) {
-          if (((FileEntry) elements.nextElement()).getName().equals(name)) {
-            alreadyThere = true;
-            break;
-          }
-        }
+        
         if (!alreadyThere)
           addFile(new LocalFileEntry(currentDirectory, name, name));
         this.show(display);

@@ -189,8 +189,15 @@ public class IOManager {
           httpConnection.setRequestProperty("Content-Type", "application/x-go-sgf");
           httpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
           os = httpConnection.openDataOutputStream();
+          //#ifdef DEBUG
+          log.debug("load file " + url);
+          //#endif
           byte[] game = singleton.loadFile(url, null);
+
           int l = game.length;
+          //#ifdef DEBUG
+          log.debug("gonna send " + l + " bytes");
+          //#endif
           int i = 0;
           for (; i < l - BUFF_SIZE; i += BUFF_SIZE) {
             os.write(game, i, BUFF_SIZE);
@@ -410,9 +417,9 @@ public class IOManager {
     //# }
     //#else
     else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
-     url = url.substring(url.indexOf(':') + 4);
+      url = url.substring(url.indexOf(':') + 4);
       return readFromLocalStore(url);
-     }
+    }
     //#endif
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);

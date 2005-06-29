@@ -147,11 +147,11 @@ AB[fp][gp][cq][fq][hq][iq][jq][lq][mq][nq][kr][mr][or][ls][ms][ns][os]
 (;GM[1]FF[3]
 AW[fp][gp][dq][hq][iq][er][hr][jr][hs][is]
 AB[hp][ip][jp][lp][gq][jq][gr][lr][gs]
-(;B[kr]WV[kr];W[fr])
 (;B[ks]
 (;W[fr];B[js])
 (;W[kr];B[ls];W[fq];B[js])
 )
+(;B[kr]WV[kr];W[fr])
 )
 (;GM[1]FF[3]
 AW[hp][jp][kp][lp][iq][mq][pq][hr][jr][mr][hs][js]
