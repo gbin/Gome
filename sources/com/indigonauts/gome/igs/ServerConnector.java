@@ -287,6 +287,9 @@ public class ServerConnector extends Thread {
           break;
         case OBSERVE_EVENT:
           int nbMoves = input.readInt();
+          //#ifdef DEBUG
+          log.debug("Observe event with " + nbMoves + " moves");
+          //#endif
           ServerMove[] moveList = new ServerMove[nbMoves];
           for (int i = 0; i < nbMoves; i++) {
             moveList[i] = ServerMove.unmarshal(input);
@@ -296,6 +299,9 @@ public class ServerConnector extends Thread {
 
         case MOVE_EVENT:
           ServerMove move = ServerMove.unmarshal(input);
+          //#ifdef DEBUG
+          log.debug("IGS move event " + move);
+          //#endif
           callback.moveEvent(move);
           break;
 
@@ -348,13 +354,14 @@ public class ServerConnector extends Thread {
           callback.startGame(challenge);
           break;
         case TIME_EVENT:
-          //#ifdef DEBUG
-          log.debug("time event");
-          //#endif
+          
           int whiteTime = input.readInt();
           int whiteByoStone = input.readInt();
           int blackTime = input.readInt();
           int blackByoStone = input.readInt();
+          //#ifdef DEBUG
+          log.debug("W"+ whiteTime + "/" + whiteByoStone + " B " + blackTime + "/" + blackByoStone);
+          //#endif
           callback.synOnlineTime(whiteTime, whiteByoStone, blackTime, blackByoStone);
           break;
         case TIMES_UP_EVENT:

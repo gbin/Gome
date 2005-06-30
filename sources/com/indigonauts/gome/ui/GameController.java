@@ -1016,13 +1016,7 @@ public class GameController implements ServerCallback
       currentIgsGame = igs.getGameList()[selectedIndex];
       igs.observe(currentIgsGame.nb);
 
-      newGame(currentIgsGame.size, currentIgsGame.handi, OBSERVE_MODE);
-
-      clock = new ClockController(true, this);
-
-      canvas.assignClockController(clock);
-      canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
-    } catch (Exception e) {
+      } catch (Exception e) {
       Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
     }
   }
@@ -1092,15 +1086,24 @@ public class GameController implements ServerCallback
   //#ifdef IGS
   public void observeEvent(ServerMove[] moves) {
     try {
+      newGame(currentIgsGame.size, currentIgsGame.handi, OBSERVE_MODE);
+
+      clock = new ClockController(true, this);
+
+      canvas.assignClockController(clock);
+      canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
 
       ServerMove move = null;
+      SgfNode current = currentNode;         
       for (int i = 0; i < moves.length; i++) {
         move = moves[i];
-        playNewMove(move.color, move.x, move.y);
+        current = current.addBranch(new SgfPoint(move.x, move.y));
+        current.setPlayerColor(move.color);
       }
       tuneBoardPainter();
       Gome.singleton.mainCanvas.setSplashInfo(null);
-      canvas.refresh(canvas.getBoardPainter().getDrawArea());
+      //canvas.refresh(canvas.getBoardPainter().getDrawArea());
+      goToLastMove();
     } catch (Exception e) {
       e.printStackTrace();
     }
