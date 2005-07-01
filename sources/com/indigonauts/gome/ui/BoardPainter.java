@@ -226,8 +226,11 @@ public class BoardPainter {
     drawBoard(g, currentNode.getAnnotations());
 
     // draw cursor
-    if (cursor != null)
+    if (cursor != null) {
+
       drawCursor(g, cursor, playerColor, board.getPosition(cursor) == Board.EMPTY); // guess the
+    }
+
     // next color
 
     if (markLastMove) {
@@ -379,7 +382,7 @@ public class BoardPainter {
 
     whiteStoneRGB = new int[size * size];
     blackStoneRGB = new int[size * size];
-    
+
     drawStone(g, 0, 0, Board.WHITE);
     cachedStone.getRGB(whiteStoneRGB, 0, size, 0, 0, size, size);
     drawStone(g, 0, 0, Board.BLACK);
@@ -519,11 +522,12 @@ public class BoardPainter {
 
   }
 
-  public void drawCursor(Graphics g, Point c, int color, boolean phantom) {
+  public void drawCursor(Graphics g, Point c, int playerColor, boolean phantom) {
     int cx = getCellX(c.x);
     int cy = getCellY(c.y);
-
-    if (color == -1) {
+    if (counting)
+      g.setColor(Util.COLOR_GREEN);
+    else if (playerColor == Board.WHITE) {
       g.setColor(Util.COLOR_WHITE);
       if (phantom)
         g.drawRGB(whiteStoneRGB, 0, delta + 1, cx - halfdelta, cy - halfdelta, delta + 1, delta + 1, true);
