@@ -93,12 +93,8 @@ public class MenuEngine implements CommandListener {
   public static Command NEXT10MOVES;
   public static Command PREV10MOVES;
 
-  //#ifdef MIDP2 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
   private FileBrowser fileBrowser;
-  //#else
-  //# private FileBrowserV1 fileBrowser;
-  //#endif
 
   private Options optionsForm = null;
 
@@ -222,11 +218,7 @@ public class MenuEngine implements CommandListener {
     return createForm;
   }
 
-  //#ifdef MIDP2
   public void updateLastBrowser(FileBrowser browser)
-  //#else
-  //# public void updateLastBrowser(FileBrowserV1 browser)
-  //#endif
   {
     fileBrowser = browser;
   }
@@ -246,11 +238,7 @@ public class MenuEngine implements CommandListener {
         } else if (c == FILES) {
           try {
             if (fileBrowser == null) {
-              //#ifdef MIDP2
               fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
-              //#else
-              //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
-              //#endif
             }
             fileBrowser.show(Gome.singleton.display);
           } catch (IOException e1) {
@@ -289,11 +277,7 @@ public class MenuEngine implements CommandListener {
         } else if (c == PASS) {
           gc.pass();
         } else if (c == SAVE) {
-          //#ifdef MIDP2
           FileBrowser fb = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
-          //#else
-          //# FileBrowserV1 fb = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
-          //#endif
           new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fb).show(Gome.singleton.display);
 
         } else if (c == OPTIONS) {
@@ -484,11 +468,9 @@ public class MenuEngine implements CommandListener {
     for (int i = 0; i < games.length; i++) {
       igsGameList.append(games[i].toString(), null);
     }
-    //#ifdef MIDP2
     igsGameList.setFitPolicy(Choice.TEXT_WRAP_ON);
     for (int i = 0; i < igsGameList.size(); i++)
       igsGameList.setFont(i, FIXED_FONT);
-    //#endif
     igsGameList.addCommand(BACK);
     igsGameList.addCommand(IGS_OBSERVE);
     igsGameList.setCommandListener(this);
@@ -504,20 +486,13 @@ public class MenuEngine implements CommandListener {
     //#endif
     QuickSortable.quicksort(users);
     if (igsUserList != null) {
-      //#ifdef MIDP2
       igsUserList.deleteAll();
-      //#else
-      //# setUpUserList(); // Under midp1 you have to reset everything
-      //# Gome.singleton.display.setCurrent(igsUserList);
-      //#endif
       for (int i = 0; i < users.length; i++) {
         igsUserList.append(users[i].toString(), null);
 
       }
-      //#ifdef MIDP2
       for (int i = 0; i < igsUserList.size(); i++)
         igsUserList.setFont(i, FIXED_FONT);
-      //#endif
     }
 
   }

@@ -79,11 +79,7 @@ public class Options extends Form {
     return Image.createImage(temp);
   }
 
-  //#ifdef MIDP2
   private static final int CHOICE_TYPE = Choice.POPUP;
-  //#else
-  //# private static final int CHOICE_TYPE = Choice.EXCLUSIVE;
-  //#endif
 
   public Options(String title, CommandListener parent, boolean registrationOnly) throws IOException {
     super(title);
@@ -99,14 +95,9 @@ public class Options extends Form {
     Image jp = null;
     Image[] stones = new Image[2];
 
-    int bestImageWidth = 32;
-    int bestImageHeight = 32;
-
     //#ifdef MENU_IMAGES
-    //#ifdef MIDP2
-    bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
-    bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
-    //#endif MIDP2
+    int bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
+    int bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
     smallLetter = Util.renderOffScreenTextIcon(
             "abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
     mediumLetter = Util.renderOffScreenTextIcon(

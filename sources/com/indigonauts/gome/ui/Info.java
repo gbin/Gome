@@ -193,9 +193,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
     buf.append(bundle.getString("ui.help.prevCorner")); //$NON-NLS-1$
     
     StringItem si = new StringItem("", buf.toString());
-    //#ifdef MIDP2
     si.setFont(MainCanvas.SMALL_FONT);
-    //#endif
     help.append(si);
     return help;
   }
@@ -306,9 +304,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
       info.append('\n');
     }
     StringItem si = new StringItem("", info.toString());
-    //#ifdef MIDP2
     si.setFont(MainCanvas.SMALL_FONT);
-    //#endif
     form.append(si);
     return form;
   }
@@ -321,12 +317,8 @@ public class Info extends Fetcher implements CommandListener, Showable {
     buf.append("\n\n");
     buf.append("(c) 2005-2007 Indigonauts");
     buf.append("\n\n");
-    //#ifdef MIDP2
     StringItem url = new StringItem("", "http://www.indigonauts.com/gome", Item.HYPERLINK);
     url.setFont(MainCanvas.SMALL_FONT);
-    //#else
-    //# StringItem url = new StringItem("", "http://www.indigonauts.com/gome");
-    //#endif
     form.append(buf.toString());
     form.append(url);
 
@@ -350,21 +342,15 @@ public class Info extends Fetcher implements CommandListener, Showable {
           form.append(Util.generatePosition(element));
         } else if (element.startsWith("*")) {
           StringItem si = new StringItem("", element.substring(1));
-          //#ifdef MIDP2
           si.setFont(TITLE_FONT);
-          //#endif
           form.append(si);
         } else if (element.startsWith("_")) {
           StringItem si = new StringItem("", element.substring(1));
-          //#ifdef MIDP2
           si.setFont(UNDERLINED_FONT);
-          //#endif
           form.append(si);
         } else {
           StringItem si = new StringItem("", element);
-          //#ifdef MIDP2
           si.setFont(MainCanvas.SMALL_FONT);
-          //#endif
           form.append(si);
         }
         form.append("\n");

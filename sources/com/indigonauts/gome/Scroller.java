@@ -244,9 +244,7 @@ public class Scroller extends Thread {
     this.y = y;
     this.width = width;
     this.height = height;
-    //#ifdef MIDP2
     tempBuff = Image.createImage(width / 2, boxHeight);
-    //#endif
   }
 
   private int moveNb;

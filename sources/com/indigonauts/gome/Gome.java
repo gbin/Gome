@@ -57,9 +57,7 @@ public class Gome extends MIDlet implements CommandListener {
     singleton = this;
     display = Display.getDisplay(this);
     Loader splash = new Loader();
-    //#ifdef MIDP2
     splash.setFullScreenMode(true);
-    //#endif
     display.setCurrent(splash);
     splash.serviceRepaints();
   }
@@ -207,9 +205,7 @@ public class Gome extends MIDlet implements CommandListener {
       gameController = new GameController(display);
     if (mainCanvas == null) {
       mainCanvas = new MainCanvas(gameController);
-      //#ifdef MIDP2
       mainCanvas.setFullScreenMode(true);
-      //#endif
     }
 
     if (menuEngine == null) {
