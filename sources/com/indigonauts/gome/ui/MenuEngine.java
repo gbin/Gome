@@ -30,7 +30,6 @@ import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
-import com.indigonauts.gome.ui.FileBrowser.IllustratedItem;
 
 public class MenuEngine implements CommandListener {
   //#ifdef DEBUG
