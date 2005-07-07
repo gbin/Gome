@@ -64,6 +64,7 @@ public class GomeOptions {
   public String key = "";
 
   public long expiration = 0;
+  public byte ghostStone = 3;
 
   public Font getScrollerFont() {
     return Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, fontSize);
@@ -96,7 +97,7 @@ public class GomeOptions {
       expiration = is.readLong();
       stoneBug = is.readByte();
       optimize = is.readByte();
-      
+      ghostStone = is.readByte();
 
     } catch (IOException ioe) {
       //#ifdef DEBUG
@@ -241,6 +242,7 @@ public class GomeOptions {
     out.writeLong(expiration);
     out.writeByte(stoneBug);
     out.writeByte(optimize);
+    out.writeByte(ghostStone);
   }
 
   public int getScrollerSpeed() {

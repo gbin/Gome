@@ -18,13 +18,20 @@ import javax.microedition.lcdui.TextField;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.sgf.Board;
 
 public class Options extends Form {
+  //#ifdef DEBUG
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Options");
+  //#endif
+
   private ChoiceGroup lang;
 
   private ChoiceGroup scrollerFont;
 
   private ChoiceGroup gobanColor;
+
+  private ChoiceGroup ghostStone;
 
   private ChoiceGroup stoneBug;
 
@@ -93,7 +100,8 @@ public class Options extends Form {
     Image medium = null;
     Image dark = null;
     Image jp = null;
-    Image[] stones = new Image[2];
+    Image[] bugStones = new Image[2];
+    Image[] transparentStones = new Image[6];
 
     //#ifdef MENU_IMAGES
     int bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
@@ -114,7 +122,15 @@ public class Options extends Form {
     medium = Util.renderIcon(Image.createImage("/gmedium.png"), bestImageWidth, bestImageHeight);
     dark = Util.renderIcon(Image.createImage("/gdark.png"), bestImageWidth, bestImageHeight);
     for (byte i = 0; i < 2; i++)
-      stones[i] = generateFillTest(i, bestImageWidth, bestImageHeight);
+      bugStones[i] = generateFillTest(i, bestImageWidth, bestImageHeight);
+
+    Image cachedStone = Image.createImage(bestImageWidth, bestImageHeight);
+    Graphics g = cachedStone.getGraphics();
+    g.setColor(Gome.singleton.options.gobanColor);
+    g.fillRect(0, 0, bestImageWidth, bestImageHeight);
+    BoardPainter.drawStone(g, bestImageWidth / 4, bestImageWidth / 4, bestImageWidth / 2, Board.BLACK);
+    for (byte i = 0; i < 6; i++)
+      transparentStones[i] = generateTransparencyTest(cachedStone, i * 32, bestImageWidth, bestImageHeight);
     //#endif
 
     //#ifdef I18N
@@ -137,9 +153,14 @@ public class Options extends Form {
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.dark"), dark); //$NON-NLS-1$ //$NON-NLS-2$
     gobanColor.setSelectedIndex(Gome.singleton.options.getGobanColorByte(), true);
 
+    ghostStone = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.ghostStone"), CHOICE_TYPE); //$NON-NLS-1$
+
+    for (byte i = 0; i < 6; i++)
+      ghostStone.append("" + i * 10 + "%", transparentStones[i]); //$NON-NLS-1$//$NON-NLS-2$
+    ghostStone.setSelectedIndex(Gome.singleton.options.ghostStone, true);
     stoneBug = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.stoneBug"), CHOICE_TYPE); //$NON-NLS-1$
     for (int i = 0; i < 2; i++)
-      stoneBug.append(Gome.singleton.bundle.getString("ui.option.stone") + " " + (i + 1), stones[i]); //$NON-NLS-1$//$NON-NLS-2$
+      stoneBug.append(Gome.singleton.bundle.getString("ui.option.stone") + " " + (i + 1), bugStones[i]); //$NON-NLS-1$//$NON-NLS-2$
     stoneBug.setSelectedIndex(Gome.singleton.options.stoneBug, true);
     optimize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.optimize"), CHOICE_TYPE); //$NON-NLS-1$
     optimize.append(Gome.singleton.bundle.getString("ui.option.speed"), null);
@@ -188,6 +209,7 @@ public class Options extends Form {
       append(Gome.singleton.bundle.getString("ui.option.aspect"));
       append(scrollerFont);
       append(gobanColor);
+      append(ghostStone);
       append(scrollerSpeed);
       append(scrollerSize);
       append(Gome.singleton.bundle.getString("ui.option.compatibility"));
@@ -213,6 +235,25 @@ public class Options extends Form {
     setCommandListener(parent);
   }
 
+  private Image generateTransparencyTest(Image cachedStone, int trans, int bestImageWidth, int bestImageHeight) {
+    Image background = Image.createImage(bestImageWidth, bestImageHeight);
+    Graphics g = background.getGraphics();
+    g.setColor(Gome.singleton.options.gobanColor);
+    g.fillRect(0, 0, bestImageWidth, bestImageHeight);
+    g.setColor(Util.COLOR_DARKGREY);
+    g.drawLine(bestImageWidth / 2, 0, bestImageWidth / 2, bestImageWidth);
+    g.drawLine(0, bestImageWidth / 2, bestImageWidth, bestImageWidth / 2);
+    int[] blackStoneRGB = new int[bestImageWidth * bestImageHeight];
+
+    cachedStone.getRGB(blackStoneRGB, 0, bestImageWidth, 0, 0, bestImageWidth, bestImageHeight);
+    int len = blackStoneRGB.length;
+    for (int i = 0; i < len; i++) {
+      blackStoneRGB[i] = trans << 24 | (blackStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
+    }
+    g.drawRGB(blackStoneRGB, 0, bestImageWidth, 0, 0, bestImageWidth, bestImageHeight, true);
+    return background;
+  }
+
   public boolean save() {
     String prev_locale = Gome.singleton.options.locale;
     //#ifdef I18N
@@ -223,6 +264,7 @@ public class Options extends Form {
     Gome.singleton.options.scrollerSize = (byte) scrollerSize.getSelectedIndex();
     Gome.singleton.options.scrollerSpeed = (byte) scrollerSpeed.getSelectedIndex();
     Gome.singleton.options.stoneBug = (byte) stoneBug.getSelectedIndex();
+    Gome.singleton.options.ghostStone = (byte) ghostStone.getSelectedIndex();
     Gome.singleton.options.optimize = (byte) optimize.getSelectedIndex();
     //#ifdef IGS
     Gome.singleton.options.igsLogin = igsLogin.getString();

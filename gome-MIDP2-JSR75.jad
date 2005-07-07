@@ -6,4 +6,4 @@ MIDlet-Version: @VERSION
 MIDlet-Name: Gome
 MIDlet-Vendor: Indigonauts
 MicroEdition-Profile: MIDP-2.0
-MIDlet-Permissions: javax.microedition.io.Connector.file.read, javax.microedition.io.Connector.file.write, javax.microedition.io.Connector.http
+MIDlet-Permissions: javax.microedition.io.Connector.file.read, javax.microedition.io.Connector.file.write

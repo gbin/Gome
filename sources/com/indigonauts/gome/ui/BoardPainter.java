@@ -374,23 +374,25 @@ public class BoardPainter {
       currentAnnotationFont = ANNOTATION_FONT_SMALL;
     }
 
-    int size = delta + 1;
-    Image cachedStone = Image.createImage(size, size);
-    Graphics g = cachedStone.getGraphics();
-    g.setColor(Gome.singleton.options.gobanColor);
-    g.fillRect(0, 0, delta + 1, delta + 1);
+    if (Gome.singleton.options.ghostStone != 0) {
+      int size = delta + 1;
+      whiteStoneRGB = new int[size * size];
+      blackStoneRGB = new int[size * size];
 
-    whiteStoneRGB = new int[size * size];
-    blackStoneRGB = new int[size * size];
-
-    drawStone(g, 0, 0, Board.WHITE);
-    cachedStone.getRGB(whiteStoneRGB, 0, size, 0, 0, size, size);
-    drawStone(g, 0, 0, Board.BLACK);
-    cachedStone.getRGB(blackStoneRGB, 0, size, 0, 0, size, size);
-    int len = whiteStoneRGB.length;
-    for (int i = 0; i < len; i++) {
-      whiteStoneRGB[i] = 0x70000000 + (whiteStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
-      blackStoneRGB[i] = 0x70000000 + (blackStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
+      Image cachedStone = Image.createImage(size, size);
+      Graphics g = cachedStone.getGraphics();
+      g.setColor(Gome.singleton.options.gobanColor);
+      g.fillRect(0, 0, size, size);
+      drawStone(g, 0, 0, delta, Board.WHITE);
+      cachedStone.getRGB(whiteStoneRGB, 0, size, 0, 0, size, size);
+      drawStone(g, 0, 0, delta, Board.BLACK);
+      cachedStone.getRGB(blackStoneRGB, 0, size, 0, 0, size, size);
+      int len = whiteStoneRGB.length;
+      int trans = Gome.singleton.options.ghostStone << 29;
+      for (int i = 0; i < len; i++) {
+        whiteStoneRGB[i] = trans | (whiteStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
+        blackStoneRGB[i] = trans | (blackStoneRGB[i] & 0x00FFFFFF); // get the color of the pixel.
+      }
     }
   }
 
@@ -412,11 +414,11 @@ public class BoardPainter {
     switch (position) {
     case Board.BLACK:
       drawBorder(g, x, y, 0xCCCCCC);
-      drawStone(g, tlx, tly, Util.COLOR_BLACK);
+      drawStone(g, tlx, tly, delta, Util.COLOR_BLACK);
       break;
     case Board.WHITE:
       drawBorder(g, x, y, 0xCCCCCC);
-      drawStone(g, tlx, tly, Util.COLOR_WHITE);
+      drawStone(g, tlx, tly, delta, Util.COLOR_WHITE);
       break;
     default:
       drawEmpty(g, x, y);
@@ -424,19 +426,17 @@ public class BoardPainter {
     }
   }
 
-  private void drawStone(Graphics g, int tlx, int tly, int color) {
-
-    int w = delta;
+  public static void drawStone(Graphics g, int tlx, int tly, int size, int color) {
 
     g.setColor(color);
 
     if (Gome.singleton.options.stoneBug == 1)
-      g.fillArc(tlx + 1, tly + 1, w - 1, w - 1, 0, 360);
+      g.fillArc(tlx + 1, tly + 1, size - 1, size - 1, 0, 360);
     else
-      g.fillArc(tlx, tly, w, w, 0, 360);
+      g.fillArc(tlx, tly, size, size, 0, 360);
 
     g.setColor(Util.COLOR_GREY);
-    g.drawArc(tlx, tly, w, w, 0, 360);
+    g.drawArc(tlx, tly, size, size, 0, 360);
 
   }
 
@@ -529,11 +529,11 @@ public class BoardPainter {
       g.setColor(Util.COLOR_GREEN);
     else if (playerColor == Board.WHITE) {
       g.setColor(Util.COLOR_WHITE);
-      if (phantom)
+      if (phantom & Gome.singleton.options.ghostStone != 0)
         g.drawRGB(whiteStoneRGB, 0, delta + 1, cx - halfdelta, cy - halfdelta, delta + 1, delta + 1, true);
     } else {
       g.setColor(Util.COLOR_DARKGREY);
-      if (phantom)
+      if (phantom & Gome.singleton.options.ghostStone != 0)
         g.drawRGB(blackStoneRGB, 0, delta + 1, cx - halfdelta, cy - halfdelta, delta + 1, delta + 1, true);
 
     }
