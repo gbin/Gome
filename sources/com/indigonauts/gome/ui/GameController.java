@@ -880,6 +880,17 @@ public class GameController implements ServerCallback
 
   public void reverseShowHint() {
     bShowHint = !bShowHint;
+
+    //if (bShowHint) {
+    //  long bf = System.currentTimeMillis();
+    //  SgfNode current = model.getFirstNode();
+    //  current.getSon();
+      //#ifdef DEBUG
+    //  log.debug("tree building time = " + (System.currentTimeMillis() - bf));
+      //#endif
+
+    //}
+
   }
 
   private void switchCurrentNode(SgfNode node) {
@@ -1016,7 +1027,7 @@ public class GameController implements ServerCallback
       currentIgsGame = igs.getGameList()[selectedIndex];
       igs.observe(currentIgsGame.nb);
 
-      } catch (Exception e) {
+    } catch (Exception e) {
       Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
     }
   }
@@ -1094,7 +1105,7 @@ public class GameController implements ServerCallback
       canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
 
       ServerMove move = null;
-      SgfNode current = currentNode;         
+      SgfNode current = currentNode;
       for (int i = 0; i < moves.length; i++) {
         move = moves[i];
         current = current.addBranch(new SgfPoint(move.x, move.y));

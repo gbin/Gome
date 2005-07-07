@@ -71,7 +71,7 @@
 		<var name="wtk.midp.version" value="2.0" />
 	</target>
 	
-	<target name="all" depends="cleandist, VMIDP2, VMIDP2_JSR75, VJOSEKI_MIDP2_JSR75" />
+	<target name="all" depends="cleandist, VMIDP2, VMIDP2_JSR75, VJOSEKI_MIDP2_JSR75, VJOSEKI_NOIMAGE_MIDP2_JSR75" />
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
 		<exclude name="**/*.*" />
@@ -105,12 +105,21 @@
 		<patternset refid="problems" />
 		<patternset refid="joseki" />
 	</fileset>
+	<fileset id="gome-joseki-noimage-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
+			<patternset refid="file-icons" />
+			<patternset refid="menu-icons" />
+			<patternset refid="gomoku" />
+			<patternset refid="i18n" />
+			<patternset refid="games" />
+			<patternset refid="problems" />
+			<patternset refid="joseki" />
+		</fileset>
 
 
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
 		<echo message="MIDP2" />
 		<var name="midlet.name" value="gome-normal-MIDP2" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,DEBUG" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
@@ -124,7 +133,7 @@
 	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="MIDP2 JSR75" />
 		<var name="midlet.name" value="gome-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
@@ -139,7 +148,7 @@
 	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="JOSEKI MIDP2 JSR75" />
 		<var name="midlet.name" value="gome-joseki-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
@@ -150,7 +159,22 @@
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
 
-		<!-- Initialize the build environment as necessary -->
+
+	<target name="VJOSEKI_NOIMAGE_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
+			<echo message="JOSEKI NOIMAGE MIDP2 JSR75" />
+			<var name="midlet.name" value="gome-joseki-noimage-jsr75-MIDP2" />
+			<var name="symbols" value="IGS,I18N,SPLASH,JSR75,DEBUG" />
+			<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+			<replace file="${project.root.gome}/${midlet.name}.jad">
+				<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+				<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+			</replace>
+
+			<antcall target="deployable" />
+			<delete file="${project.root.gome}/${midlet.name}.jad" />
+		</target>
+
+	<!-- Initialize the build environment as necessary -->
 	<target name="-initialize">
 		<echo message="Initializing build environment..." />
 

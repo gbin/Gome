@@ -35,10 +35,6 @@ public class SgfNode extends Point {
     return older;
   }
 
-  /*
-   * public void setOlder(SgfNode newOlder) { this.older = newOlder; if
-   * (newOlder!=null) newOlder.younger=this; }
-   */
   public SgfNode getFather() {
     return father;
   }
