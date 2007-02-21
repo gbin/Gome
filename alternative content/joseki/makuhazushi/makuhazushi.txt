@@ -1,0 +1,4 @@
+jar:/joseki/makuhazushi/
+makuhazushi-a.txt,I,typical,ma;sf,oc,qd
+makuhazushi-b.sgf,J,forfeits the corner and emphasizes the right side so locally this is disadvantageous for White,1,ma;se,oc,pe
+makuhazushi-c.sgf,J,leads to a division of profit for White and influence for Black. A ladder helps.,1,ma;se,oc,qc

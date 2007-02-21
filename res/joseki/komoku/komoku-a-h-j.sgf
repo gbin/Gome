@@ -1,0 +1,57 @@
+(;
+GM[1]FF[4]AB[qd][ld]AW[oc]C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n];W[qg]C[White should have the ladder to play the two-space pincer. Black can answer at 'a' or 'b'.]LB[od:a][pe:b]
+(;B[od]C[White continues with 'a' to 'c'. White plays 'a' as part of a fuseki strategy; locally it is a loss.  White plays 'b' with a favorable ladder.]LB[qj:a][pd:b][nd:c]
+(;W[qj]C[White 6 if it helps the lower right, but this results in a loss in the local context of the joseki.];B[pc])
+(;W[pd]C[Black continues with 'a'. If Black plays 'b' when the ladder favors White, Black is sadly mistaken.]LB[pe:a][pc:b]
+(;B[pe];W[pc];B[re]C[White continues with 'a' to 'c'. White 'd' is a mistake.]LB[nc:a][md:b][mc:c][nd:d]
+(;W[nc]C[Black continues with 'a' or 'b'. Black 'c' is not recommended.]LB[me:a][nd:b][qc:c]
+(;B[me];W[rc]C[White can aim at the severe move at 'a'. Black probably needs an immediate reinforcement at 'b'.]LB[ne:a][og:b])
+(;B[nd];W[md];B[me];W[mc]C[Black continues with 'a'. Black 'b' is an overplay, as the White cut at 'a' presents difficulty.]LB[le:a][lc:b]
+(;B[le]C[White continues with 'a'. White 'b' is possible, at a cost.]LB[kb:a][pk:b]
+(;W[kb])
+(;W[pk];B[lc];W[rb];B[rc];W[sb];B[mb]C[White continues with 'a'. White 'b' is a mistake.]LB[qb:a][nb:b]
+(;W[qb]C[Black 'a' is sente.]LB[kb:a])
+(;W[nb]C[White 22 is a mistake.];B[qb];W[qc];B[pb]C[White cannot live.])))
+(;B[lc];W[le];B[ne];W[lb];B[kb];W[ma];B[jc];W[rc];B[pj];W[oh]))
+(;B[qc];W[oe];B[pf];W[ne]))
+(;W[md]C[Black continues with 'a' or 'b'.]LB[nd:a][le:b]
+(;B[nd]C[White continues with 'a' or 'b'.]LB[nc:a][mc:b]
+(;W[nc];B[me];W[mc];B[le];W[kb])
+(;W[mc];B[me]C[White continues with 'a' or 'b'. White 'b' is played only if the right side is important.]LB[lb:a][lc:b]
+(;W[lb]C[Black continues with 'a' or 'b'.]LB[le:a][pj:b]
+(;B[le]C['a' and 'b' are miai.]LB[qc:a][jc:b];W[pk])
+(;B[pj]C[If Black values the lower right enough to suffer the cut at 'a'.]LB[le:a];W[le];B[mf];W[ke]))
+(;W[lc]C[Black continues with 'a' for thickness or 'b' to take a vital point on the right side.]LB[kd:a][le:b]
+(;B[kd];W[kc];B[jd];W[pk])
+(;B[le];W[kc];B[pj]))))
+(;B[le];W[oe]C[Black continues with 'a' or 'b'.]LB[pf:a][of:b]
+(;B[pf];W[mf])
+(;B[of];W[ne];B[nf];W[pf];B[qe];W[ph];B[mc];W[nc];B[qc];W[lb]C[The result cannot be fully evaluated in the local context.])))
+(;W[mc]C[Black continues with 'a'. Black 'b' is not recommended.]LB[ne:a][lc:b]
+(;B[ne];W[lc];B[kd];W[kc];B[jd];W[pk];B[jc])
+(;B[lc]C[Black 11 is not recommended.];W[oe]C[Black continues with 'a'. Black 'b' is a mistake.]LB[pf:a][nd:b]
+(;B[pf];W[nd]C[White has the initiative.])
+(;B[nd]C[Black 13 is a mistake.];W[md];B[ne];W[me]C[White plays 16. White avoids playing the atari at 'a'.]LB[pf:a])))
+(;W[nd]C[White 10 demonstrates an ignorance of the principles of Go. White is easily forced into bad shape.];B[oe];W[ne];B[nf];W[me];B[qc];W[mc]C[Black follows up locally with 'a'.]LB[og:a]))
+(;B[pc]C[Black 7 is a mistake.];W[pe];B[nc];W[qc];B[ob]C[White continues with 'a'. White 'b' is ko food.]LB[qb:a][pb:b]
+(;W[qb]C[If later Black 'a', White must give way with 'b'.]LB[pf:a][qf:b])
+(;W[pb])))
+(;W[nd];B[oe];W[pc];B[qc];W[ne]C[Black continues with 'a'. Black 'b' is a mistake.]LB[pg:a][nf:b]
+(;B[pg]C[White continues with 'a' or 'b'.]LB[mf:a][le:b]
+(;W[mf];B[ph])
+(;W[le];B[ke];W[lf];B[kd];W[qh];B[nf];W[md];B[jg];W[lh]))
+(;B[nf]C[Black 11 is a mistake.];W[mf]C[Black 'a' is no good. Black 'b', slightly better.]LB[me:a][ng:b]
+(;B[me];W[of]C[Black may try 'a' or 'b'.]LB[nc:a][ng:b]
+(;B[nc];W[ng];B[md];W[nf];B[pd];W[mc];B[nb];W[mb];B[pb];W[kc]C[The White atari at 'a' should be saved as a ko threat, as it is playable anytime.]LB[na:a])
+(;B[ng];W[pd];B[pe];W[qe];B[pf];W[pg];B[og];W[qf];B[of];W[nc]C['a' and 'b' are miai for White.]LB[lc:a][qb:b]))
+(;B[ng];W[le];B[mg];W[lg];B[lh];W[kg]C[White has nice shape.]))))
+(;B[pe];W[qj]C[Black continues with 'a' or 'b'.]LB[pc:a][nd:b]
+(;B[pc])
+(;B[nd]C[White can live with 'a', and the side is open at 'b'.]LB[qb:a][lb:b])))

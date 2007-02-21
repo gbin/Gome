@@ -1,0 +1,12 @@
+(;
+GM[1]FF[4]AB[pd][jc]AW[qi]C[White may try 2 when Black has already played at top as shown.];B[qk];W[qf];B[qe];W[pf];B[nd];W[qc]C[Black continues with 'a' or 'b'. Black 'c' is weak.]LB[pc:a][re:b][qd:c]
+(;B[pc];W[re]C[Black 'a' is fine. Black 'b' is stronger.]LB[rd:a][qd:b]
+(;B[rd];W[qd];B[rc];W[pe];B[qb])
+(;B[qd]C[White continues locally with 'a' or plays elsewhere ('b').]LB[rd:a][dp:b]
+(;W[rd];B[rc]C[White has the move at 'a', while Black has the peep at 'b'.]LB[rb:a][rg:b])
+(;
+C[White plays elsewhere.];B[rg]C[The peep at 13 is not recommended.];W[rf];B[ri];W[rc]C[White can easily settle himself if he gets an eye in the corner.])))
+(;B[re]C[Black 9 shows an uncompromising attitude. Black accepts a reduction at top for an attack on the three White stones at right.];W[oc];B[od];W[nc];B[pc];W[pb];B[mc]C[White continues with 'a' to live in the corner, 'b' to live on the top.]LB[rb:a][mb:b]
+(;W[rb]C[White 16 to live in the corner.];B[mb];W[oa];B[nf];W[oi];B[ok])
+(;W[mb]C[White 16 to live at top (and give Black the corner).];B[qb];W[ob];B[rc];W[kc];B[jd];W[md];B[me];W[lc];B[ke]C[Black gets good outside strength with 25.];W[oi]))
+(;B[qd]C[Black 9 is bad shape. White may play elsewhere.];W[pb]C[White 10 is the right move when the time comes.]))

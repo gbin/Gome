@@ -1,0 +1,156 @@
+(;
+GM[1]FF[4]
+AB[pd][jd]
+AW[qf]
+C[White continues with 'a' or 'b'.]
+LB[md:b][nc:a]
+
+(;W[nc];B[pf];W[pg];B[of])
+(;W[md];B[pf];W[pg];B[of];W[qe];B[qd]
+C[White continues with 'a' or the trick play of 'b'.]
+LB[rd:b][pe:a]
+
+(;W[pe];B[oe];W[od];B[nd];W[oc];B[rd];W[qh];B[nc]
+C[White continues with 'a', or the trick play at 'b'.]
+LB[pc:b][ob:a]
+
+(;W[ob];B[nb]
+C[White continues with 'a', sacrificing the three White corner stones, or 'b' to try trick Black.]
+LB[qb:b][ne:a]
+
+(;W[ne];B[nf];W[me];B[pb];W[mg];B[lc])
+(;W[qb]
+C[White 20 is a trick play.]
+;B[rb];W[ra]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[sb:b][me:a]
+
+(;B[me]
+C[White continues with 'a' or 'b'.]
+LB[sb:b][rc:a]
+
+(;W[rc];B[pb]
+C[White continues with 'a' or 'b'.]
+LB[pc:b][pa:a]
+
+(;W[pa];B[pc];W[oa];B[na];W[qa];B[sb])
+(;W[pc];B[qc];W[pa];B[sc];W[re];B[na];W[oa]
+C[The corner can be regarded as seki, unless someone starts a ko by playing at the 1-1 point.
+
+Black sente and the Black hane at 23 makes this a favorable result for Black.]
+))
+(;W[sb];B[rc];W[re];B[sc]
+C[The ko is not important: the hane of Black 23 is sufficient profit, according to Yoshio Ishida.]
+))
+(;B[sb]
+C[Black 23 is a mistake; Black has been tricked.]
+;W[ne];B[nf];W[me];B[lc];W[mg];B[pb];W[pc];B[qc]
+;W[pa];B[na];W[oa];B[sa];W[mc];B[qa];W[mb];B[pb];W[mf]
+C[White has great thickness, and Black is sealed in. This is a success for White.]
+)))
+(;W[pc]
+C[White 18 is a trick play. Black continues with 'a'. Black 'b' and 'c' are mistakes.]
+LB[nb:c][qb:b][qc:a]
+
+(;B[qc];W[nb];B[mc];W[qb];B[rb];W[mb];B[lc];W[pb];B[ra]
+;W[lb];B[kc];W[oa]
+C[Black continues with 'a'. Black 'b' to save the corner stones looks necessary, but is not.]
+LB[sc:b][mf:a]
+;B[mf];W[sc]
+C[White 32 attempts to kill the Black corner stones.]
+;B[re];W[rf]
+C[White must play 34 to prevent Black from playing there.]
+;B[sb];W[se];B[rc]
+;W[sd];B[sf];W[se];B[sd])
+(;B[qb]
+C[Black 19 is a mistake.]
+;W[ne];B[nf];W[me];B[nb];W[mg];B[qc];W[mf];B[ob]
+C[Black is worse off than in variation 3-1-9-2-1-1, where Black connected to Black 3 with a stone at the marked location.]
+MA[lc]
+)
+(;B[nb]
+C[Black 19 is a mistake.]
+;W[qc];B[rc];W[rb];B[qb]
+C[Black must fight a ko, which is a disadvantgeous result for Black.]
+;W[pb];B[ra];W[qa];B[sb]
+;W[sa])))
+(;W[rd]
+C[White 10 is a trick play.
+
+Black continues with 'a'. White 'b' is a mistake.]
+LB[od:b][rc:a]
+
+(;B[rc];W[pe];B[oe];W[od]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[re:b][qg:a]
+
+(;B[qg]
+C[White continues with 'a' or 'b'.]
+LB[rg:b][re:a]
+
+(;W[re];B[oc]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[nd:b][qh:a]
+
+(;W[qh];B[nd])
+(;W[nd]
+C[White 18 is a mistake.]
+;B[rg]
+C[Black captures the 5 White stones.]
+))
+(;W[rg];B[qh];W[rh]
+C[Black continues with 'a' or 'b'.]
+LB[re:b][qi:a]
+
+(;B[qi];W[ri];B[qj];W[re]
+C[Black continues with 'a' to live in the corner, or 'b' for outside influence.]
+LB[nd:b][oc:a]
+
+(;B[oc]
+C[Black for corner territory.]
+;W[nd]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[qb:b][rb:a]
+
+(;B[rb];W[ng]
+C[White 26 starts a difficult fight for Black.]
+;B[og];W[oh]
+C[A classic squeeze play.]
+;B[nh];W[nf];B[ph];W[oi]
+C[Further, White 'a' is sente against the Black corner group.]
+LB[mb:a]
+)
+(;B[qb]
+C[If Black plays 25 here, it leaves aji for White to play 'a' later and reduce Black to one eye.]
+LB[pc:a]
+;W[pc]
+AW[mb]
+C[White can play 26 with support as shown.]
+;B[qc];W[ob];B[pb];W[nb]
+C['a' and 'b' are miai, and Black dies.]
+LB[sb:b][ra:a]
+))
+(;B[nd]
+C[Black sacrifices the corner for influence.]
+;W[oc];B[nc];W[qc];B[ob];W[pc];B[me]
+C[The result is considered clearly favorable for Black, as Black's thickness is superior to White's 20 points in the corner.]
+))
+(;B[re];W[rf];B[sd];W[qi];B[nd]
+C[With the White stone captured, White's extending to 'a' is fruitless.]
+LB[oc:a]
+;W[og];B[me]
+C[Black gets a favorable result.]
+)))
+(;B[re]
+C[Black 15 is a mistake.]
+;W[qg]
+C[Black may try 'a' or 'b'.]
+LB[oc:b][nd:a]
+
+(;B[nd];W[oc];B[nc];W[qc])
+(;B[oc];W[nd];B[nc];W[mg]
+C[Black's three stones are trapped.]
+)))
+(;B[od]
+C[Black 11 is weak: Black has tricked himself.]
+;W[rc]))))

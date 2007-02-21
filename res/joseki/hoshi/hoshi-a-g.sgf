@@ -1,0 +1,129 @@
+(;
+GM[1]FF[4]AB[pd][pi]AW[qf]C[Black 3 is used most often when Black has an extension at top.
+
+White continues with 'a' or 'b'. If White does not have an extension at the top, White 'c' is also possible.]LB[nc:c][of:b][qc:a]
+(;W[qc]C[Black continues with 'a' or 'b'. 'b' is played when Black has support at top.]LB[pc:b][qd:a]
+(;B[qd]C[When Black has no extension at top.];W[pc]C[Black continues with 'a'. Black 'b' is a mistake.]LB[oc:b][od:a]
+(;B[od];W[rd];B[re];W[rc];B[qe];W[nc];B[pf])
+(;B[oc]C[Black 7 is a mistake.
+
+White continues with 'a', possibly 'b'. White 'c' is not recommended.]LB[ob:c][rd:b][rc:a]
+(;W[rc]C[Black continues with 'a'. Black 'b' is not recommended.]LB[rd:b][od:a]
+(;B[od];W[rd];B[kd]C[Black plays an extension towards the top as shown (11 being just one possible point; others nearby may be preferred). Black may also play elsewhere.
+
+This sequence is very favoable to White.])
+(;B[rd]C[Black prevents White's attempt to connect, but at considerable cost.];W[od]C[Black has no adequate continuation, as either the Black 7 cutting stone or three Black stones are subject to capture.];B[oe]C[Black gives up on the cutting stone.];W[nd];B[pf];W[nc]C[The result is very favorable to White, as White gains territory and thickness.
+
+White 2 still has aji.]))
+(;W[rd];B[re];W[rc];B[qe];W[od]C[Black continues with 'a'. Black 'b', or descending from 7 is a mistake.]LB[nc:b][pf:a]
+(;B[pf]C[At this point, Black must submit with 13.];W[nc];B[oe];W[nd])
+(;B[nc]C[Black 13 or descending from 7 is not good.]MA[ob];W[rf]C[Black continues with 'a'. Black 'b' is unreasonable.]LB[se:b][oe:a]
+(;B[oe];W[se];B[pe])
+(;B[se]C[Black 15 is a mistake.];W[oe]C[Black is doomed.])))
+(;W[ob]C[White 8 fails to punish Black for playing 7, a missed opportunity.
+
+Black continues with 'a'. Black 'b' is a mistake.]LB[nb:b][nc:a]
+(;B[nc];W[nb];B[mc];W[rd];B[re];W[rc];B[qe])
+(;B[nb]C[Black 9 is unreasonable. Black has too many cutting points.];W[od];B[nc];W[rd];B[re];W[pe]))))
+(;B[pc]AB[jd]C[When Black has an extension at top.];W[qd];B[pe]C[White continues with 'a' to 'e'.
+
+e5, d4, c3, b2, a1]LB[rg:e][qg:d][pf:c][qe:b][qb:a]
+(;W[qb]C[Black continues with 'a' or 'b'.]LB[pb:b][pf:a]
+(;B[pf];W[qg];B[pg])
+(;B[pb];W[pf];B[of];W[og];B[pg];W[nf]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qe:b][oe:a]
+(;B[oe];W[rg];B[qg];W[rf];B[qi];W[ng];B[md];W[ni])
+(;B[qe]C[Black 15 is a mistake, upsetting Black's strategy of gaining thickness for less than 20 points of territory.];W[oe];B[re])))
+(;W[qe];B[pf];W[pg];B[og];W[oh];B[ph];W[qg]C[Black continues with 'a'. Black 'b' is a mistake.]LB[nh:b][ng:a]
+(;B[ng]C[White hopes later to play 'a', while Black would like to eliminate the White aji with Black 'b'.]LB[mi:b][nh:a])
+(;B[nh]C[Black 15 is a mistake.];W[ng];B[oi];W[of];B[oh];W[pb];B[ob];W[oc];B[qb];W[od];B[pa];W[oe];B[pb];W[nb]))
+(;W[pf];B[qe];W[re]C[Black continues with 'a'. Black 'b' is a mistake.]LB[rf:b][rd:a]
+(;B[rd];W[rc];B[rf];W[sd];B[of]C[White continues with 'a' or 'b'.]LB[og:b][rg:a]
+(;W[rg];B[og])
+(;W[og]C[Black continues with 'a' or 'b'.]LB[ng:b][pg:a]
+(;B[pg];W[qg];B[rg]C[Black 19 is a sacrifice.];W[qh];B[ph];W[ri]C[Black continues with 'a'. Black 'b' is playable, but not recommended.]LB[rj:b][nf:a]
+(;B[nf]C[White can play elsewhere ('a'), or continue locally with 'b'.]LB[qj:b][dp:a]
+(;
+C[White plays elsewhere. Black 'a' through 'f' are sente.]LB[ql:f][pk:e][qk:d][pj:c][oj:b][qj:a]
+(;B[qj]C[Black 24, otherwise Black plays 'a' and captures the White stones.]LB[rh:a])
+(;B[oj]C[Black 24 is sente.];
+C[White plays elsewhere; a mistake.];B[rh];W[qi];B[qj];W[rj];B[rk];W[qk];B[sj];W[pj];B[si];W[qj];B[ql]))
+(;W[qj]AB[pp]C[White 24 eliminates the aji problem of the other variation, but gives Black additional thickness.];B[pj];W[qk];B[pk]C[White continues with 'a'. White 'b' is an overplay.]LB[pl:b][ql:a]
+(;W[ql])
+(;W[pl]C[White 28 is an overplay.];B[ql];W[qm];B[rk]C[White 'a' and 'b' are both traumatic.]LB[rh:b][rl:a]
+(;W[rl];B[qi];W[rh];B[rj])
+(;W[rj];B[rl];W[rh];B[qn];W[rm];B[pm];W[sk];B[ol];W[sl];B[pl]))))
+(;B[rj]C[Black 23 is not recommended, as it removes aji of Black sente (see the joseki variation).];W[rh];B[si];W[sf];B[nf]))
+(;B[ng]C[Black 17 was invented by Abe against Tozawa in a preliminary round of the 1970 Nihon Ki-in Chamionship.];W[pg]C[Further resistence would be futile, so connecting at 18 is proper.];B[nh]C[Tozawa played 'a', but 'b' looks like a missed opportunity.]LB[oe:b][nf:a]
+(;W[nf];B[oe];W[rg];B[mf])
+(;W[oe];B[nf];W[pb]C[Black continues with 'a' or 'b'.]LB[nd:b][oc:a]
+(;B[oc];W[ob];B[nc];W[rg]C[White 'a' is a good forcing move later.]LB[nb:a])
+(;B[nd];W[nc];B[od];W[md];B[rg];W[lc]C[The joseki concludes.];;W[qh]C[White tries to extract his stones.];B[rh];W[qi];B[ph];W[qg];B[qj];W[ri];B[rj])))))
+(;B[rf]C[Black 11 is a mistake.
+
+White continues with 'a'. White 'b' is a mistake.]LB[rd:b][rg:a]
+(;W[rg];B[rd];W[sf];B[rc];W[nf])
+(;W[rd]C[White 12 is a mistake.];B[of]C[Black is satisfied that White has let Black overcome the mistake of Black 11.])))
+(;W[qg];B[qe];W[re];B[rf];W[rd]C[Black continues with 'a' or 'b'.]LB[pg:b][pf:a]
+(;B[pf];W[pg];B[og];W[rg];B[oh])
+(;B[pg]C[The combination of Black 11 and 13 was invented by Shimamura Toshihiro, first played against Takagawa Kaku in game 5 of the 1956 Honinbo title.
+
+White continues with 'a' or 'b'.]LB[pb:b][pf:a]
+(;W[pf];B[of];W[rg];B[og])
+(;W[pb]C[Black continues with 'a'. Black 'b' is a mistake.]LB[ob:b][pf:a]
+(;B[pf];W[ob];B[rg])
+(;B[ob]C[Black 15 is a mistake.];W[pf];B[of];W[og];B[rg];W[qh];B[qb];W[ph];B[rh];W[qi];B[rb];W[ri];B[rc];W[nf]))))
+(;W[rg];B[pf];W[pg];B[og];W[oh];B[ph];W[qg];B[ng])))
+(;W[of];B[nd]C[When Black has no extension at top.
+
+White continues with 'a' or 'b'.]LB[qc:b][rd:a]
+(;W[rd];B[qc]C[White continues with 'a'. Playing elsewhere ('b') is a mistake.]LB[dp:b][ri:a]
+(;W[ri]C[Black plays 'a' if there is no extension, or 'b' if Black already has an extension at top.]LB[mf:b][jc:a]
+(;B[jc]C[White continues with 'a'. 'b' shows the result of White playing elsewhere.]LB[dp:b][qi:a]
+(;W[qi]C[Continuation.
+
+The large knight's move is thin, so White 10 is worth devoting a move to.])
+(;
+C[Black continues at 'a' or 'b'.]LB[qg:b][pg:a]
+(;B[pg];W[pf]C[Black plays 'a' to block White from the lower right side, or 'b' to split White into two groups.]LB[rj:b][rh:a]
+(;B[rh]C[Black aims to seal White off from the lower right side.];W[qh];B[qi];W[rg];B[rj];W[sh])
+(;B[rj]C[Black aims to separate White into two groups.
+
+Fighting spirit dictates White continues with 'a'. White 'b' is painfully submissive.]LB[rh:b][qj:a]
+(;W[qj];B[qi];W[rk];B[rh];W[sj];B[qg])
+(;W[rh];B[qj])))
+(;B[qg];W[rg];B[rf]C[Black 12 is a tesuji.
+
+White must decide how best to continue.  White 'a' gives away the corner.]LB[pg:a];W[pg];B[qe]C[Black takes the corner.])))
+(;B[mf]AB[jd]C[Black plays 9 if there is already an extension as shown.]))
+(;
+C[White cannot afford to play elsewhere.];B[pg];W[pf];B[qg];W[rg]C[White 11 is necessary, though it is submissive..];B[rh];W[rf];B[rc];W[mf]))
+(;W[qc]C[White 6 was invented by Kitani Minoru in 1956 (Kitani-Shimamura, 1956 2nd Top Position Tournament league).];B[qd];W[rd];B[re];W[rc];B[qe];W[ob];B[pg];W[pf];B[rg];W[ni]))
+(;W[nc];B[pf]C[White continues with 'a' or 'b'.]LB[qc:b][pg:a]
+(;W[pg]C[White 6 is conventional.];B[of];W[qc];B[qe];W[pc];B[rf]C[Black can later play 'a' in sente, aiming at an attack at 'b'.]LB[ob:b][lc:a])
+(;W[qc]C[White 6 is a recent Korean innovation.
+
+Black can block at 'a' or at 'b'.]LB[pc:b][qe:a]
+(;B[qe];W[pc];B[qg]C[Black's shape is a bit overconcentrated.])
+(;B[pc];W[qd]C[Black can simply connect at 'a', which gives White the chance to play a fast-paced fuseki. If Black wants to forestall that, he can also wedge at 'b'.]LB[qe:b][pe:a]
+(;B[pe];W[qe];B[qg]C[White can now choose a fast-paced strategy at 'a'. The hane at 'b' emphasises territory, but is a little slack.]LB[rg:b][jd:a]
+(;W[jd];B[rg];W[pb];B[ob];W[qb];B[oc]C[White now has sente again and can continue his fast-paced strategy.])
+(;W[rg]C[White 12 is not recommended.];B[rh];W[qh];B[pg];W[ri];B[qi];W[sh];B[kc]C[Black is happy with this result.]))
+(;B[qe];W[re];B[pe]C[White 'a', the connection, is the only choice. White 'b' gives away the corner, while White 'c' leads to a painfully low position.]LB[rg:c][qg:b][rf:a]
+(;W[rf]C[Black 'a' is the best tactic to secure territory. Black 'b' leads to an exchange of black influence for white territory.]LB[kc:b][pb:a]
+(;B[pb]C[Jumping to 'a' is correct for White. If he blocks at 'b', Black will confine him to the corner.]LB[qb:b][jd:a]
+(;W[jd]C[Black 'a' takes away White's base. Black 'b' is not so good: Black can't seal White in.]LB[qg:b][rb:a]
+(;B[rb]C[The jump to 'a' is White's best option. White 'b' or 'c' leaves him with an inferior position.]LB[ri:c][pg:b][rh:a]
+(;W[rh]C[Black 'a' keeps White out of the center, although White develops good shape. Black 'b' lets White get into the center.]LB[ri:b][qg:a]
+(;B[qg];W[qh];B[pg];W[qj];B[rg];W[sg];B[ph];W[pj];B[qi];W[rj];B[ri];W[si];B[oj];W[ok]C[White can make good shape after 30.])
+(;B[ri];W[ph];B[qi];W[pg]))
+(;W[pg];B[og];W[ph];B[oh];W[qi];B[qj];W[rh];B[ri];W[qh];B[pj]C[White is sealed in.])
+(;W[ri];B[qh];W[rh];B[qg];W[rg];B[qj]C[White's position on the second line is painfully low.]))
+(;B[qg];W[rg];B[qh];W[qb]))
+(;W[qb];B[qg];W[jd];B[rg]))
+(;B[kc];W[pg];B[og];W[oh];B[ph];W[qg]C[Black 'a' is a calm play leading to an even exchange. Black 'b' is a mistake.]LB[nh:b][ng:a]
+(;B[ng];W[nh];B[mg];W[mh];B[lg];W[nj]C[Black builds considerable thickness in exhange for White territory with 'a'. Black 'b' is a tactic to complicate the situation and start a fight in the center of the board.]LB[pl:b][lh:a]
+(;B[lh];W[pk])
+(;B[pl]))
+(;B[nh];W[ng];B[oi];W[of]C[Black has no defense against this powerful countertactic.])))
+(;W[qg]C[White 12 is not recommended.];B[rf];W[rg];B[rd];W[sf];B[rc]C[Black is satisfied to take the corner.])
+(;W[rg]C[White 12 is not recommended, as White is too low.];B[qg];W[rf];B[kc]C[White is forced to play on the second line three times, after which Black can play the ideal point of 15.]))))))

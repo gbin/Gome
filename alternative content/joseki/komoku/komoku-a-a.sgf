@@ -1,0 +1,277 @@
+(;
+GM[1]FF[4]
+AB[qd][pe]
+AW[oc]
+C[Black 3, the famous Shusaku diagonal move, is a steady way of responding to White's kakari. Black can now aim to press against the lone White stone with 'a'.
+
+White's possible local responses are 'a' through 'd'. 
+White 'a': White must be prepared to fight.
+White 'b': secure.
+White 'c': invites invasion.
+White 'd': played as an extension from the top left; invites invasion.
+
+Variation 5 shows Black continuations when White plays elsewhere.
+
+White 'f' is an Edo period (1600-1867) joseki that has since been abandoned as unfavorable to White.
+
+f6, e5, d4, c3, b2, a1]
+LB[nd:f][dp:e][jc:d][kc:c][lc:b][md:a]
+
+(;W[md]
+C[White must be prepared for a fight. Black finishes the joseki with 'a', or starts a fight with 'b'.]
+LB[kc:b][qj:a]
+
+(;B[qj];W[ic];B[pc]
+C[Continuation. The difference between Black and White playing here (White at R18) is nearly 20 points. This is a large endgame move.]
+;W[od];B[pb])
+(;B[kc]
+C[Black must consider the upper left corner when playing this way. Without support this is an overplay for Black.
+
+White attacks the lone Black stone with 'a' (joseki), or slides in the corner with 'b', which is not joseki, as 'b' has problems.]
+LB[qb:b][hd:a]
+
+(;W[hd];B[ke];W[mf])
+(;W[qb]
+C[The slide of White 6 is not recommended.]
+;B[qi]
+C[White doesn't have a good follow-up. Black 'a' is intolerable, but White 'b', Black 'c' is not favorable to White.]
+LB[kd:c][lc:b][mb:a]
+)))
+(;W[lc]
+C[Black continues with 'a' or possibly 'b'. Playing elsewhere ('c'; tenuki) is not joseki.
+
+c3, b2, a1]
+LB[dp:c][qj:b][pc:a]
+
+(;B[pc];W[od];B[pg])
+(;B[qj]
+C[White continues with 'a'. White 'b' gives Black a chance for moyo.]
+LB[qb:b][ne:a]
+
+(;W[ne];B[pc];W[ob];B[pg])
+(;W[qb];B[nd];W[nc];B[le]))
+(;
+C[Black plays elsewhere (not joseki).]
+;W[qb]
+C[White makes ideal shape if Black plays elsewhere.]
+;B[qi]))
+(;W[kc]
+C[The three-space extension is a light move and is most often used in actual games. For Black to attack at 'a' and provoke 'b' would give White an ideal position. Black should invade.]
+LB[od:b][pc:a]
+;B[mc]
+C[White continues with 'a' or 'b'. White 'a' leads to capture of Black 5 at top. White 'b' leads to thickness at the loss of territory.]
+LB[mb:b][oe:a]
+
+(;W[oe];B[of];W[ne];B[pg];W[ld];B[pc];W[ob])
+(;W[mb]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[nb:b][lb:a]
+
+(;B[lb];W[lc];B[nb];W[md];B[nc];W[nd]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[kb:b][od:a]
+
+(;B[od];W[ob];B[ma];W[oa];B[na];W[kb];B[pc];W[oe];B[pd]
+;W[of])
+(;B[kb]
+C[Black 13 is a mistake.]
+;W[ob];B[ma];W[oe]
+C[No matter what Black does, White can play at 'a' or 'b', either of which are severe.]
+LB[of:b][jc:a]
+))
+(;B[nb]
+C[Black 7 is a mistake in direction.]
+;W[nc];B[lb];W[md];B[lc];W[ld];B[ob];W[kb];B[ma]
+;W[ke];B[pc]
+C[White has made good shape in sente. If Black cuts at 'a', White sacrifices the two White stones.]
+LB[nd:a]
+)))
+(;W[jc]
+C[The four-space extension of White 4 is often played in relation to stones in the upper left corner. This extension, however, is quite wide and if Black invades, it is impossible to determine how the sequence will develop, so White must be ready for anything.
+
+Black continues with 'a' or 'b'.]
+LB[lc:b][nd:a]
+
+(;B[nd];W[nc]
+C[Joseki continues with Black 'a', not 'b'.]
+LB[md:b][ld:a]
+
+(;B[ld]
+C[White continues with 'a', not 'b'.]
+LB[od:b][mc:a]
+
+(;W[mc];B[ne];W[lc];B[qj])
+(;W[od]
+C[White 8 is vulgar.]
+;B[oe];W[md];B[me];W[ne];B[nf]
+C[White must play at 'a', not 'b'.]
+LB[le:b][lc:a]
+
+(;W[lc];B[nd];W[mc])
+(;W[le]
+C[White 14 is a mistake.]
+;B[nd];W[mc];B[kd]
+C[Black has thickness and White must still defend the left side.]
+)))
+(;B[md]
+C[Black 7 is poor.]
+;W[mc];B[ld];W[lc]
+C['a' and 'b' are miai, to Black's disadvantage.]
+LB[qj:b][kd:a]
+))
+(;B[lc];W[oe];B[of];W[ne]
+C[Black continues with 'a'. Black 'b' is unreasonable.]
+LB[le:b][pc:a]
+
+(;B[pc]
+C[White continues with 'a'. Black 'b' is not as favorable.]
+LB[nb:b][pb:a]
+
+(;W[pb];B[qb];W[le])
+(;W[nb]))
+(;B[le]
+C[Black 9 is unreasonable.]
+;W[pf];B[pg];W[qf];B[qg];W[re]
+C[White captures the two Black stones by playing 'a' or 'b'.]
+LB[rd:b][rg:a]
+)))
+(;
+C[White plays elsewhere. Black continues with 'a' to 'c'.
+
+Black 'a': gives White territory.
+Black 'b', 'c': White choice of territory or outside fighting.]
+LB[kc:c][lc:b][nd:a]
+
+(;B[nd]
+C[White continues with 'a'. White 'b' is slow and produces a heavy shape.]
+LB[nc:b][mc:a]
+
+(;W[mc]
+C[The exchange of the pressing play of Black 5 and White 6 is the classical way of handling this position. Nowadays, however, players do not like to give White secure territory so this joseki is not used very often.
+
+Black can play elsewhere or continue locally with 'a' or 'b'.]
+LB[kc:b][ld:a]
+
+(;B[ld]
+C[White continues with 'a' or 'c'. White 'b' leads to a trap. White 'c' gives White life in sente.]
+LB[qc:c][md:b][lb:a]
+
+(;W[lb];B[md];W[jc])
+(;W[md];B[me];W[le];B[lc]
+C[White continues with 'a'. White 'b' is a mistake. White 'c' confines White completely.]
+LB[mb:c][ne:b][nc:a]
+
+(;W[nc];B[ne];W[lb];B[kb];W[ma];B[jd];W[qb])
+(;W[ne]
+C[White 12 is a mistake.]
+;B[mf];W[od];B[nf];W[oe];B[mb]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[of:b][nc:a]
+
+(;W[nc];B[of])
+(;W[of]
+C[White 18 is a mistake.]
+;B[nc];W[pf];B[qf];W[qg];B[rg]
+C[White continues with 'a'. White 'b' is unreasonable.]
+LB[rf:b][qh:a]
+
+(;W[qh];B[rh];W[qi];B[ri];W[qj];B[qc])
+(;W[rf]
+C[White 24 is unreasonable.]
+;B[qe];W[rh];B[pg];W[qh];B[og];W[qc];B[rc];W[qb]
+;B[rb];W[re];B[rd];W[ob];B[ra]
+C[Black must play 37, not 'a'. White cannot save the stones in the corner.]
+LB[qa:a]
+)))
+(;W[mb];B[ke];W[lf];B[lb]
+C[White may try the cut at 'a' or attachment at 'b'.]
+LB[qc:b][ne:a]
+
+(;W[ne];B[mf];W[nf];B[mg];W[od];B[ng]
+C[White may try 'a' or 'b'. Neither work.]
+LB[pf:b][of:a]
+
+(;W[of];B[pg])
+(;W[pf];B[qf];W[pg];B[qg];W[ph];B[of];W[oe];B[og];W[qb]
+;B[pi]
+C[Black 31 is the nose attachment (hana-tsuke) tesuji.]
+;W[qh];B[qi];W[oh];B[rh]
+C[The five White stones will have trouble.]
+))
+(;W[qc];B[rc];W[pc];B[nf];W[rb];B[rd];W[sb];B[kf];W[lg]
+;B[kg];W[lh];B[nh])))
+(;W[qc];B[rc];W[pb];B[qb];W[pc]
+C[Black continues with 'a', not 'b'.]
+LB[rb:b][md:a]
+
+(;B[md];W[rb];B[sb];W[ra];B[re])
+(;B[rb]
+C[Black 13 is a mistake.]
+;W[oe]
+C[White escapes to the center.]
+)))
+(;B[kc]
+C[Black plays this way to emphasize the top. White continues with 'a' or 'b' ('b' to thwart Black's plan).]
+LB[ic:b][md:a]
+
+(;W[md];B[hc])
+(;W[ic];B[ld];W[qc]
+C[White tries to live.]
+;B[rc];W[rb])))
+(;W[nc]
+C[White 6 is poor.]
+;B[md]
+C[White continues with 'a'. White 'b' involves a ladder.]
+LB[lc:b][mc:a]
+
+(;W[mc];B[ld];W[kc])
+(;W[lc]
+C[Black plays 'a' with a favorable ladder, Black if not.]
+LB[ld:b][mc:a]
+
+(;B[mc]
+C[Black must have the ladder to play this way.]
+;W[mb];B[nb]
+C[Black plays this way then the ladder to capture 8 is favorable. White continues with 'a' or 'b'.]
+LB[lb:b][ob:a]
+
+(;W[ob];B[lb];W[na];B[kc])
+(;W[lb];B[ob];W[pc];B[pb];W[qc];B[qb];W[rb];B[rc];W[rd]
+;B[sc];W[sd];B[re];W[sb];B[rc]
+C[White loses.]
+))
+(;B[ld];W[kc];B[mc];W[mb];B[lb];W[nb];B[jc]
+C[Black 15 is a tesuji. White must play 'a', not 'b'.]
+LB[kd:b][kb:a]
+
+(;W[kb];B[kd])
+(;W[kd]
+C[White 16 is a mistake. The White stones below will be captured.]
+;B[kb])))))
+(;B[lc]
+C[White continues with 'a' or 'b'. White 'c' is a mistake.]
+LB[oe:c][qb:b][nd:a]
+
+(;W[nd]
+C[Black continues with 'a' or 'b'.]
+LB[ic:b][pc:a]
+
+(;B[pc];W[id];B[le];W[nf];B[lg];W[nh])
+(;B[ic];W[qb];B[qi];W[rc]))
+(;W[qb];B[nd];W[nc];B[md];W[rc])
+(;W[oe]
+C[White 6 is a mistake.]
+;B[of];W[ne];B[le];W[nf];B[og]))
+(;B[kc]
+C[White continues with 'a' or 'b'. White 'c' is also possible if White greatly favors the top.]
+LB[ic:c][qb:b][mc:a]
+
+(;W[mc];B[pc];W[me];B[ke];W[mg])
+(;W[qb];B[nd];W[nc];B[md];W[lb];B[kb];W[lc];B[ld];W[rc]
+;B[je])
+(;W[ic];B[nd];W[mc];B[ld]
+C[The same as variation 2-1-1-5-1-1-2-2.]
+;W[qc];B[rc];W[rb])))
+(;W[nd]
+C[White 4, known as the "double diagonal move", is no longer joseki, as Black gets a favorably thick shape.]
+;B[ne];W[me];B[nf];W[kc];B[mf]))

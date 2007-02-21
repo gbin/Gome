@@ -1,0 +1,8 @@
+jar:/joseki/komoku/
+komoku-a.txt,I,The small knight move is the basic approach move to the 3-4 point stone.,ma;sf,qd,oc
+komoku-b.sgf,J,,1,la;sf,qd,nc
+komoku-c.sgf,J,,1,la;sf,qd,nd
+komoku-d.txt,I,5-4 approach move,ma;sf,qd,od
+komoku-e.sgf,J,enclosure (shimari),1,na;sf,qd,dp
+komoku-f.sgf,J,special strategy,1,na;sl,qd,qj
+komoku-g.sgf,J,special strategy,1,na;si,qd,pg

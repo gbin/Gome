@@ -1,0 +1,30 @@
+(;
+GM[1]FF[4]AB[pd]AW[qc]C[White 2 is not joseki, but illustrates the possbilities without considering surrounding stones.];B[qd];W[pc];B[oc];W[ob]C[Black continues with 'a' or 'b'. Both end with Black gote.]LB[nc:a][nb:b]
+(;B[nc];W[nb];B[mc]C[White continues with 'a'.
+
+It is possible for White to play elsewhere and still live in the corner.]LB[rd:a][dp:b]
+(;W[rd];B[re];W[rc];B[qf]C[The sequence ends.];
+C[White plays elsewhere.];B[mb]C[White plays locally at 'a', but can survive after playing elsewhere ('b').]LB[pa:a][dp:b]
+(;W[pa];B[na];W[ra])
+(;
+C[White plays elsewhere.
+
+Black may try 'a' or 'b'.]LB[na:a][pa:b]
+(;B[na];W[pa];B[ra]C[White continues with 'a' or 'b'.]LB[rb:a][qa:b]
+(;W[rb]C['a' and 'b' are miai.]LB[qa:a][qb:b];B[qa];W[qb];B[ma];W[sa])
+(;W[qa];B[rb];W[sb]))
+(;B[pa];W[pb];B[ra];W[qa];B[qb];W[rb];B[qa];W[oa];B[sd];W[sc])))
+(;
+C[White plays elsewhere. White can still live in the corner in gote.];B[rc];W[rb];B[rd];W[sb]C[White 14 is necessary.]))
+(;B[nb]C[White continues with 'a' to 'c'.]LB[nc:a][rd:b][od:c]
+(;W[nc];B[od];W[mb]C[Black continues with 'a', possibly 'b'. Black 'a' gives thickness, Black 'b' the corner.]LB[nd:a][pb:b]
+(;B[nd]C[Black 11 plays for thickness.];W[na];B[mc];W[nb];B[lc])
+(;B[pb]C[Black 11 to take the two White corner stones.];W[na];B[qb]C[Unlikely to realize, but the White stones have some aji at 'a'.]LB[rc:a]))
+(;W[rd];B[re];W[qe]C[Black 'a' next keeps things simple for Black and gives him a good result. Black 'b' is sometimes possible, but Black needs to be careful.]LB[od:a][pe:b]
+(;B[od];W[rf];B[rc];W[se];B[rb])
+(;B[pe]C[White can now defend at 'a'. Cutting at 'b' does not produce a good result for White.]LB[rc:a][nc:b]
+(;W[rc];B[qf];W[pb];B[nd]C[Black gets a thick position and White a living L+2 group.])
+(;W[nc]C[White 12 is a mistake.];B[od];W[mb];B[pb];W[na];B[qb]C[Compared to the usual variation with Black taking the corner, White 8 and 10 don't serve any purpose.])))
+(;W[od]C[White 8 was played by Kato Masao against Cho Chikun in game 1 of the 21st Judan Title, March 3, 1983.];B[nc];W[rd];B[re];W[rb];B[sd];W[rc]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qf:a][pb:b]
+(;B[qf];W[pb];B[oe])
+(;B[pb]C[Black 15 is unreasonable.];W[qe];B[pe];W[qf];B[rf];W[pf];B[oe];W[rg]))))

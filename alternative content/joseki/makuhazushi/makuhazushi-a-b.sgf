@@ -1,0 +1,180 @@
+(;
+GM[1]FF[4]
+AB[oc][kc]
+AW[qd]
+C[Three spaces is the minimum extension. Two spaces is too mild, as White attaches against the 5-3 stone.
+
+White can play at 'a' through 'c', or play elsewhere.]
+LB[dp:d][mc:c][pf:b][pe:a]
+
+(;W[pe];
+C[Black plays elsewhere.]
+;W[mc]
+C[Black continues with 'a' or 'b'.]
+LB[oe:b][mb:a]
+
+(;B[mb];W[lb];B[lc];W[nb];B[md];W[nc];B[nd];W[od];B[ob]
+;W[ma];B[oa];W[na];B[kb];W[pc];B[oe];W[pd];B[of])
+(;B[oe];W[of];B[ne]
+(;W[pc];B[ob];W[pg];B[ld])
+(;W[ld]
+C[Trying to escape with White 9 is a costly overplay.]
+;B[pf];W[pg];B[qf];W[qg];B[re]
+C['a' and 'b' are miai.]
+LB[rg:b][rd:a]
+
+(;W[rd];B[rg]
+C[White loses.]
+)
+(;W[rg];B[rd]))))
+(;W[pf]
+C[Black may play elsewhere after this.]
+;B[qc];W[rc];B[pd]
+C[White continues with 'a' or 'b'.]
+LB[qb:b][qe:a]
+
+(;W[qe];
+C[Black plays elsewhere.]
+;W[qb]
+C[Black continues with 'a'. Black 'b' is too submissive.]
+LB[pc:b][pb:a]
+;B[pb])
+(;W[qb];B[qe];W[pc]
+C[Black continues with 'a'. Black 'b' is timid.]
+LB[pe:b][rd:a]
+
+(;B[rd];W[od];B[qc];W[pb]
+C[Black continues with 'a', or the fierce fighting move of 'b'. Black must have the ladder to play 'b'.]
+LB[nc:b][oe:a]
+
+(;B[oe];W[nd];B[pe])
+(;B[nc]
+C[Black must have the ladder to play 15.]
+;W[qd];B[pe];W[oe];B[qf];W[md];B[mc];W[qg];B[rg]
+;W[pg];B[rh];W[re];B[rf];W[sd]
+C[Black plays 'a' with a favorable ladder. Without the ladder, Black must play 'b', and let White make good shape.]
+LB[qj:b][of:a]
+
+(;B[of]
+C[Black 29 starts a squeeze play. Black must have the ladder to play this way.]
+;W[oh]
+C[White 30 is correct shape.]
+;B[me]
+C[Black 31 is a tesuji to squeeze White into bad shape.]
+;W[nf];B[ne];W[og];B[nd];W[of];B[pi])
+(;B[qj]
+C[Black 29 is necessary if Black does not have a favorable ladder, leaving White the opportunity to make good shape toward the center.]
+;W[ld];B[lc];W[ng])))
+(;B[pe]
+C[Black 11 is not recommended. Black gives up too much.]
+;W[ob];B[nc];W[re];B[qf];W[pi])))
+(;W[mc]
+C[Black continues with 'a' or 'b'. Black 'c' is submissive.]
+LB[mb:c][pe:b][oe:a]
+
+(;B[oe];W[pf];B[ld];W[pc];B[ob]
+C[White continues with an extension near 'a'. White cannot afford to play elsewhere ('b').]
+LB[dp:b][qj:a]
+
+(;W[qj]
+C[Depending on the position, White may extend one space further than 10, as White 'a' forces Black 'b'.]
+LB[ne:b][of:a]
+)
+(;
+C[White plays elsewhere, a mistake.
+
+Black continues locally with 'a'. Black 'b' is a mistake.]
+LB[of:b][ph:a]
+
+(;B[ph];W[of];B[ne];W[pb]
+C[White must play 13 to secure a base in the corner.]
+)
+(;B[of]
+C[Black 10 is a mistake, allowing White to solidify on the right.]
+;W[pg])))
+(;B[pe]
+C[White continues with 'a' or 'b'.]
+LB[pd:b][qe:a]
+
+(;W[qe];B[pf];W[qg];B[ld]
+C[The joseki concludes.]
+;W[md]
+C[White 10 is not recommended.]
+;B[me];W[ne];B[nf];W[nd]
+;B[pg];W[pd];B[qf]
+C[The result favors Black.
+
+Though Black has cutting points, the threat of a Black play at the marked location keeps White from  losing liberties by squeezing Black using the group of White stones on the left (without first connecting).]
+MA[od]
+)
+(;W[pd];B[od];W[oe];B[ne];W[of];B[md];W[pf];
+C[Black plays elsewhere.]
+;W[ic]
+C[If White makes an approach here, Black must respond at 'a'. Black cannot afford to play elsewhere ('b').]
+LB[dp:b][jc:a]
+
+(;B[jc];W[id])
+(;
+C[Black plays elsewhere, a mistake.]
+;W[lc];B[kd];W[ld];B[le];W[ke]
+C[Black continues with 'a' if Black has a favorable ladder to the lower left. Black 'b' is a mistake.]
+LB[kb:b][lf:a]
+
+(;B[lf];W[kb];B[je]
+C[If Black does not have the ladder, Black is in trouble.]
+)
+(;B[kb]
+C[Black 19 is a mistake. Black gets squeezed, give White massive thickness.]
+;W[lf];B[me];W[mf];B[je];W[kf];B[mb];W[nf];B[nd]
+;W[jd]))))
+(;B[mb]
+C[Black 5 is not recommended.
+
+White can consider 4 as a forcing play and continue at 'a', play elsewhere, or, with a favorable ladder, play 'b'.]
+LB[lb:b][pe:a]
+
+(;W[pe];B[md])
+(;W[lb]
+C[White must have the ladder to play this way.]
+;B[lc];W[nb];B[md];W[nc];B[nd];W[od];B[pd];W[oe]
+C[Black continues with 'a' if the ladder is favorable, or 'b' if not.]
+LB[pc:b][pe:a]
+
+(;B[pe]
+C[White plays 'a' with a favorable ladder. Without a favorable ladder, White must play 'b' - with a result favoring Black.]
+LB[pf:b][pc:a]
+
+(;W[pc];B[ob];W[ma];B[of])
+(;W[pf]
+C[White plays 16 if the ladder to the lower left is unfavorable.]
+;B[pc];W[qe];B[ob];W[ma];B[oa];W[na];B[qf];W[of]
+;B[qc];W[kb];B[jc];W[qg];B[jb];W[ka];B[rf]))
+(;B[pc]
+C[Black plays 15 when the ladder is not favorable.]
+;W[pe];B[ob];W[ma];B[oa];W[na];B[qc];W[kb];B[jc]
+;W[rd];B[rc];W[jb];B[ic]
+C[The result favors White.
+
+Further, White can get a seki in the corner.]
+))))
+(;
+C[White plays elsewhere.
+
+Black pincers with 'a' or 'b'.]
+LB[qg:b][qf:a]
+
+(;B[qf];W[pe];B[pf];W[ne];B[of];W[oe];B[md])
+(;B[qg];W[pe];B[qj]
+C[White continues with 'a', possibly 'b'. White 'a' is preferred as White is out more in the center, and, as seen in variation 'a', likely has a chance to defend the corner with 'b' after playing 'a'.]
+LB[pc:b][of:a]
+
+(;W[of]
+C[White 7 aims at invading.]
+;B[md]
+C[Black defends...]
+;W[pc]
+C[...so White protects the corner.]
+)
+(;W[pc]
+C[White defends the corner.]
+))))

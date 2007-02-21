@@ -1,0 +1,48 @@
+(;
+GM[1]FF[4]
+AB[pd]
+AW[qd]
+C[White 2 is exceptional, used only when 'a' and 'b' are miai.]
+LB[qc:a][qe:b]
+
+(;B[qc];W[qe]
+C[Black continues with 'a' or 'b'.]
+LB[rc:a][pc:b]
+
+(;B[rc]
+C[White continues with 'a'. White 'b' is recommended only if a Black play at 'c' is not disadvantageous (forcing Black along the fourth line is generally bad).]
+LB[qh:a][pe:b][od:c]
+;W[qh])
+(;B[pc];W[qh];B[pe]))
+(;B[qe];W[qc]
+C[Black continues with 'a' or 'b', depending upon the side of interest.]
+LB[pc:a][re:b]
+
+(;B[pc];W[re]
+C[Black continues with 'a' for thickness, or 'b' for the corner.]
+LB[qf:a][rf:b]
+
+(;B[qf];W[rf];B[qg];W[pb];B[ob];W[qb];B[nc])
+(;B[rf];W[qf];B[pe];W[rg];B[rd];W[sf];B[rc]))
+(;B[re];W[pc];B[od]
+C[White continues with 'a'. White 'b' is a mistake]
+LB[oc:a][nc:b]
+
+(;W[oc]
+C[White must crawl once more with 8.
+
+Black continues with 'a'. Black 'b' creates too many cutting points.]
+LB[nd:a][nc:b]
+
+(;B[nd];W[mc];B[md];W[lc];B[pj])
+(;B[nc]
+C[Black 9 leaves one too many cutting points.]
+;W[nb];B[mc];W[mb];B[lc]))
+(;W[nc]
+C[White 8 is a mistake.]
+;B[oc];W[ob];B[nb];W[pb];B[mc];W[rb];B[rd];W[qa]
+C['a' and 'b' are miai.
+
+Black has superior thickness.]
+LB[sb:a][oa:b]
+))))

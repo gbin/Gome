@@ -1,0 +1,96 @@
+(;
+GM[1]FF[4]
+AB[pd][re]
+AW[qf]
+C[White continues with 'a' to 'c'. White should be prepared for a fight with 'b' and 'c'.
+
+White 'd' and 'e' are a special strategy, not recommended.
+
+White 'f' is an amateurish mistake.]
+LB[qe:f][rf:e][of:d][pc:c][nc:b][pj:a]
+
+(;W[pj];B[qh]
+C[White can emphasize the bottom right with 'a', or fight with 'b'.]
+LB[rf:b][qj:a]
+
+(;W[qj];B[of])
+(;W[rf]))
+(;W[nc];B[oc];W[nd];B[of]
+C[Fighting erupts. Continuation depends on overall board position.]
+;W[pe]
+C[White 8 shows toughness.]
+;B[oe];W[od];B[pc]
+C[White 'a' and 'b' are possibilities.]
+LB[og:b][qd:a]
+
+(;W[qd];B[qe];W[pf];B[og]
+C[White 'a' and 'b' are possibilities.]
+LB[rd:b][rf:a]
+
+(;W[rf];B[rd];W[qi];B[oi])
+(;W[rd];B[rf];W[qb];B[qg];W[ob]))
+(;W[og];B[ng];W[qd]
+C[Black continues with 'a' or 'b'.]
+LB[qc:b][qe:a]
+
+(;B[qe];W[pf];B[pg];W[rf];B[rd];W[oh];B[nf];W[nh];B[mg]
+;W[qh])
+(;B[qc]
+AB[qk][ok][jd][jf]
+AW[ld][lf]
+C[The additional stones are from the professional game where this variation arose: 1973 Pro Best Ten: Takagawa (White) versus Cho Chikun (Black).]
+;W[rd];B[rc];W[pg];B[qe];W[nf];B[pf];W[ne];B[pe]
+;W[nh];B[mg];W[li];B[mh];W[mi];B[oh];W[ni];B[ph];W[qg];B[qh]
+;W[lh];B[rg];W[lg];B[rf])))
+(;W[pc]
+C[Black continues with 'a' or 'b'.]
+LB[oc:b][qc:a]
+
+(;B[qc];W[oc]
+C[Black 'a' is preferable to 'b'.]
+LB[qb:b][od:a]
+
+(;B[od];W[nc];B[qb];W[nd];B[of];W[jd])
+(;B[qb];W[od];B[pe];W[kd]))
+(;B[oc];W[qd];B[qe];W[od]
+C[Black continues with 'a' or 'b'.]
+LB[qc:b][pe:a]
+
+(;B[pe];W[nc];B[qc];W[pb]
+C[Black continues with 'a'. Black 'b' is not as favorable.]
+LB[qb:b][oe:a]
+
+(;B[oe];W[nd])
+(;B[qb];W[ob]
+C[Now Black 'a', White 'b', not as favorable for Black as the other variation.]
+LB[ne:b][oe:a]
+))
+(;B[qc];W[pe];B[rd];W[pd];B[qb];W[nc];B[pf])))
+(;W[of]
+C[White 4 gives away much profit, but breaks up the center.]
+;B[nd];W[mf]
+C[Black continues with 'a' to solidify the corner position. Black 'b' is premature.]
+LB[kf:b][rf:a]
+
+(;B[rf]
+C[White continues with 'a' or 'b'.]
+LB[kf:b][qg:a]
+
+(;W[qg];B[kf];W[qd];B[qe];W[pe];B[oe];W[pf];B[qc])
+(;W[kf];B[if];W[qg]))
+(;B[kf]
+C[Black 7 is premature.]
+;W[qd];B[qe];W[pe];B[oe];W[pf];B[qc];W[rf];B[rd]
+;W[nj]))
+(;W[rf]
+C[White 4 gives away much profit, strongly emphasizing the right side.
+
+White 4 was played by Fujisawa Shuko against Kato Masao in game 4 of the 1978 Kisei Title.]
+;B[qe];W[pf];B[nd];W[qj])
+(;W[qe]
+C[White 4 is a mistake, giving Black solid territory.]
+;B[qd];W[rf];B[rd];W[pj]
+C[White may extend nearby 8 (instead of White 8).]
+;B[md]
+C[Black may also play above Black 9, at n17.]
+))

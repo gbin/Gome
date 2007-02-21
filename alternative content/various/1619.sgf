@@ -1,0 +1,41 @@
+(;SZ[9]FF[4]GM[1]
+AP[GOWrite:1.99g]WR[19 kyu]HA[0]PB[Tim Brent]BR[19 kyu]KM[5.5]
+EV[go9.rt.2002.7.43]SO[http\://www.littlegolem.com]PW[Marc Oldenhof]
+GN[ ]
+;
+
+AW [gd][dg][df][cf][bf][ag][bh][ch][de][ci][ec][fc][db][gf][he][ge][ie][be][ea][ca][da];
+AB [gg][dd][ee][dh][di][eg][fh][ef][cc][bd][ei][ed][ce][cb][hf][ff][if][hh][dc][ba];
+
+C[Black to somehow win];
+
+B[fa];W[eb]
+;
+B[ae]
+;W[cd]
+;B[gc]
+;
+W[gb]
+;B[hc]
+;W[fd]
+;B[hb]
+;W[ga]
+;
+B[ha]
+;W[fb]
+;B[fe]
+;W[bb]
+;
+B[ab]
+;W[aa]
+;B[ac]
+;W[ba]
+;
+B[bc]
+;W[af]
+;B[id]
+;W[ad]
+;
+B[hd]C[RIGHT]
+C[And Black wins the capturing race and game :)]
+)

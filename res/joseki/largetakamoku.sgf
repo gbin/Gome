@@ -1,0 +1,101 @@
+(;
+GM[1]FF[4]AB[nd]C[The large takamoku (high) point (6-4), experimented with during the "new fuseki" movement in Japan in the 1930's. This point is seldom played as the initial corner point nowadays.
+
+White continues with 'a' to 'f'.]LB[pe:f][qe:e][qc:d][pc:c][qd:b][pd:a]
+(;W[pd]C[Black continues with 'a' or 'b'.]LB[pe:b][pf:a]
+(;B[pf]C[See variation 3-2-5.])
+(;B[pe];W[qe]C[Black continues with 'a' to 'c'.]LB[qd:c][pf:b][qf:a]
+(;B[qf]C[White continues with 'a' or 'b'. White 'c' is an overplay.]LB[pf:c][qd:b][oe:a]
+(;W[oe];B[pf];W[od];B[qd];W[qc];B[re];W[rd])
+(;W[qd]C[Black continues with 'a' or 'b'.]LB[oe:b][pf:a]
+(;B[pf];W[od];B[ne];W[nb];B[mb];W[ob];B[mc])
+(;B[oe];W[rf];B[qg];W[rg];B[qh]))
+(;W[pf]C[White 6 is an overplay.];B[oe];W[qg];B[rf];W[qd];B[qh];W[of];B[rg];W[nf];B[nc];W[pb];B[kd]))
+(;B[pf]C[White continues with 'a'. White 'b' is not recommended.]LB[qf:b][od:a]
+(;W[od];B[ne];W[qf]C[Black continues with 'a'. Black 'b' is not recommended.]LB[qd:b][qg:a]
+(;B[qg];W[qd];B[pg];W[nb];B[nc];W[ob];B[lc])
+(;B[qd]C[Black 9 is not recommended, as Black gains no advantage.];W[qc];B[rd];W[rc];B[qg];W[re]C[Black still has to cover the potential cutting point. This variation is not favorable to Black.]MA[pg]))
+(;W[qf]C[White 6 is not recommended.];B[qd];W[pc];B[rd];W[qg];B[qb];W[pb];B[qc];W[oe];B[pg];W[od];B[qh];W[rh];B[qi]C[The Black group in the corner may not live, but White is split in two, and the White group at right must crawl along the second line, to gain liberties, giving Black favorable thickness.]))
+(;B[qd]C[Black 5 results in Black building a moyo on the right, while White builds a moyo at top.];W[qc];B[rd];W[oe];B[pf];W[od];B[rc];W[pb];B[qf];W[of];B[og];W[ng];B[oh];W[nh];B[oi];W[jd];B[ni];W[lh])))
+(;W[qd]C[Black continues with 'a' or 'b'.]LB[pd:b][qc:a]
+(;B[qc]C[White continues with 'a' or 'b'.]LB[pc:b][rc:a]
+(;W[rc]C[Black continues with 'a' or 'b'.]LB[pd:b][pc:a]
+(;B[pc]C[White continues with 'a' or 'b'.]LB[qg:b][re:a]
+(;W[re];B[jc])
+(;W[qg];B[rb];W[qj]))
+(;B[pd];W[pe];B[pc];W[re];B[oe];W[pf]))
+(;W[pc];B[pd]C[White continues with 'a' to take the corner or top, 'b' to emphasize the right, 'c' to take the corner, or 'd' for influence at top, or possibly the right.]LB[ob:d][pb:c][rc:b][od:a]
+(;W[od]C[White 6 emphasizes the corner or top.];B[pe];W[oc];B[oe]C[White continues with 'a' to take the corner, or 'b' to emphasize the top.]LB[qb:b][rc:a]
+(;W[rc];B[qb];W[rb]C[Black continues with 'a' or 'b'.]LB[rd:b][qe:a]
+(;B[qe];W[rd];B[nc];W[pb];B[ob];W[qa];B[mf])
+(;B[rd];W[qe];B[qf];W[re];B[rf];W[sd];B[nc];W[pb];B[ob];W[qa];B[ne]))
+(;W[qb];B[rc];W[rb];B[rd];W[mb];B[qj]))
+(;W[rc]C[White 6 emphasizes the right.];B[qb];W[pe];B[od];W[re];B[rb];W[sb];B[ob];W[pg])
+(;W[pb]C[Black continues with 'a' or 'b', but 'a' is preferred.]LB[qe:b][qb:a]
+(;B[qb]C[White continues with 'a' or 'b'.]LB[rb:b][rd:a]
+(;W[rd];B[oc];W[pe];B[od];W[rb];B[ob];W[rc];B[pa];W[qh])
+(;W[rb]C[Black continues with 'a' or 'b'.]LB[rd:b][rc:a]
+(;B[rc];W[rd]C[Black continues with 'a'. Black 'b' is a mistake.]LB[ra:b][sb:a]
+(;B[sb];W[ra];B[qa];W[nb]C[Black continues with 'a'. 
+
+Black 'b' is not recommended.]LB[od:b][pe:a]
+(;B[pe]C[White continues with 'a'. White 'b' and 'c' are mistakes.]LB[rf:c][qf:b][sd:a]
+(;W[sd]C[Black plays 'a' to emphasize the right, 'b' to emphasize the top.]LB[mb:b][qe:a]
+(;B[qe]C[Black 17 emphasizes the right.];W[sc];B[sa];W[rb];B[re];W[ra];B[se];W[pa])
+(;B[mb]C[Black 17 emphasizes the top.];W[sc];B[sa];W[rb];B[nc]))
+(;W[qf]C[White 16 is a mistake.];B[mb];W[sd];B[sa];W[qe];B[oc];W[ob];B[nc])
+(;W[rf]C[White 16 is a mistake.];B[qf];W[re];B[mb];W[sd];B[nc];W[ob];B[qh]))
+(;B[od]C[Black 15 is not recommended, though White must play correctly to get a favorable result.
+
+White continues with 'a'. White 'b' is a mistake.]LB[sd:b][qf:a]
+(;W[qf];B[ob];W[oc];B[nc];W[oa];B[mb];W[lb];B[sa];W[pa](;B[pf]C[White 'a' sacrifices the corner for the center and right side.
+
+White 'b' takes the corner, scraficing the center.]LB[sd:b][pe:a]
+(;W[pe]C[White sacrifices for the right side and center.];B[oe];W[qe]C[Black continues with 'a' to 'c'.
+
+Black 'b' requires a ladder block to the lower left corner.]LB[of:c][ma:b][qg:a]
+(;B[qg];W[rg];B[rh];W[pg];B[of];W[qh];B[ma];W[mc];B[lc];W[md];B[kb];W[ld];B[la];W[mg])
+(;B[ma]C[Black 29 is unreasonable without a ladder block to the lower left.];W[mc];B[lc];W[md];B[kb];W[of];B[ne];W[ld])
+(;B[of]C[Black 29 is slow but sure.];W[mc];B[qg];W[rg];B[rh];W[qh];B[pg];W[rf];B[ri];W[sd]))
+(;W[sd]C[White takes the corner.];B[qg];W[qe];B[ma];W[mc];B[lc];W[md];B[kb];W[sc];B[me];W[ld];B[la];W[rb];B[ke]))
+(;B[ma];W[mc];B[lc];W[md];B[kb]C[White plays 'a' for thickness and the right side, or 'b' to take the top at the expense of the right side.]LB[ne:b][ld:a]
+(;W[ld]C[White plays 30 for thickness and the right side.];B[la];W[ne];B[pe];W[pf];B[na])
+(;W[ne]C[White plays 30 to take the top.];B[me];W[ld];B[nf];W[kc];B[la];W[jb];B[lc];W[pe];B[oe];W[of];B[ne];W[lb];B[og];W[ka];B[qg];W[rg];B[pf];W[rf])))
+(;W[sd]C[White 16 is a mistake.];B[sa];W[mb];B[qe];W[rf];B[re];W[se];B[qf];W[rg];B[qh]C[White dies quickly with 'a', or crawls along the second line (the "line of defeat") with 'b' to live in agony.]LB[qg:b][rh:a]
+(;W[rh];B[sf]C[White dies.];W[sg];B[sc];W[sf];B[ri])
+(;W[qg];B[pg];W[pf];B[pe];W[ph];B[og];W[rh];B[sf];W[sg];B[qi];W[ri];B[qj];W[rj];B[qk];W[rk];B[ql];W[rl];B[qm]))))
+(;B[ra]C[Black 11 is a mistake.];W[sb];B[sc]C[White continues with 'a'. White 'b' is a mistake.]LB[nb:b][pa:a]
+(;W[pa];B[pe](;W[qa];B[sa];W[rb]C[Black plays 'a' to emphasize the right, 'b' to emphasize the top.]LB[oc:b][re:a]
+(;B[re];W[sb];B[qe];W[sd])
+(;B[oc];
+C[White plays elsewhere.];B[ob];W[sb];B[oa];W[sd]))
+(;W[rf]C[White 16 is a mistake.];B[sa]C['a' and 'b' are miai.]LB[oc:b][re:a]))
+(;W[nb]C[White 14 is a mistake.];B[pe]C[White may try 'a' or 'b'.]LB[rf:b][qf:a]
+(;W[qf];B[mb];W[pa];B[qe];W[re];B[rf];W[rg];B[oc])
+(;W[rf];B[sa]C['a' and 'b' are miai.]LB[mb:b][re:a]))))
+(;B[rd];W[qe];B[rc];W[nb]C[Black continues with 'a' or 'b'.]LB[pa:b][pe:a]
+(;B[pe];W[qf]C[Black plays 'a' to take the corner, and 'b' for influence toward the top.]LB[pf:b][sb:a]
+(;B[sb];W[lc];B[og])
+(;B[pf];W[qg];B[pg];W[qh];B[mb];W[qa]C[Black gives away the corner straight-away with 'a', or plays a ko for the corner with 'b'.]LB[ra:b][nc:a]
+(;B[nc];W[re];B[ob])
+(;B[ra]C[Black 21 forces a ko fight for the corner.];W[sa];B[sb];W[sc];B[sd];W[re];B[sb];W[nc];B[mc];W[sc])))
+(;B[pa]C[White continues with 'a'. White 'b' is an overplay.]LB[lc:b][nc:a]
+(;W[nc];B[od];W[re];B[sb];W[md];B[me];W[ld];B[le];W[kd];B[ph];W[ke])
+(;W[lc]C[White 'b' is an overplay.];B[pe];W[qf];B[mb]C[White continues with 'a'. White 'b' is a mistake.]LB[mc:b][nc:a]
+(;W[nc];B[pf];W[md];B[qg])
+(;W[mc]C[White 18 is a mistake.];B[ob];W[oc];B[nc];W[oa];B[qa]))))))
+(;B[qe];W[rd];B[pe];W[rc]))
+(;W[ob]C[Almost ironically, White 6 aims at influence at the top.];B[qe];W[rd];B[qb]C[White plays 'a' for influence at top, or 'b' for territory on the right side.]LB[re:b][od:a]
+(;W[od];B[pe];W[oe];B[re])
+(;W[re];B[oc];W[pb];B[nb];W[pe];B[od];W[rb];B[oa];W[rc];B[pa];W[qf]))))
+(;B[pd]))
+(;W[pc];B[pd];W[qc]C[Black continues with 'a' to emphasize the top, 'b' to emphasize the right side.]LB[qd:b][oc:a]
+(;B[oc];W[qd];B[pe];W[qe];B[pf];W[qg])
+(;B[qd];W[od];B[oe];W[oc];B[ne];W[nc];B[ld];W[pe];B[pf];W[qe];B[rd];W[rf];B[rg];W[re];B[qh]))
+(;W[qc]C[Black continues with 'a' or'b'.]LB[pd:b][qe:a]
+(;B[qe])
+(;B[pd];W[re];B[pc];W[qb];B[qf]C[White continues with 'a' peaceably, or 'b' to cut.]LB[qe:b][rf:a]
+(;W[rf];B[qg];W[pb])
+(;W[qe];B[pe];W[pf];B[qh];W[of];B[rf];W[pb];B[qd];W[rd];B[ob];W[sc];B[ld])))
+(;W[qe];B[pd];W[rc];B[pf];W[qf];B[pg];W[rh])
+(;W[pe];B[pd];W[qd];B[qc]))

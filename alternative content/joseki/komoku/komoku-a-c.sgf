@@ -1,0 +1,80 @@
+(;
+GM[1]FF[4]
+AB[qd][qg]
+AW[oc]
+C[The primary objective of Black 3 is to ensure his own safety rather than attack White. If White is thick at the bottom, Black 3 serves to forestall an attack while erasing that thickness. That this is a negative attitude is undeniable.
+
+White's local responses include 'a' through 'c'. Playing elsewhere is also usual, as Black has already played submissively.]
+LB[jc:c][kc:b][pf:a]
+
+(;W[pf];B[qf];W[qc];B[rc];W[pd]
+C[Black continues with 'a'. Black 'b' is unreasonable.]
+LB[qb:b][qe:a]
+
+(;B[qe];W[qb])
+(;B[qb];W[qe];B[pc];W[rd];B[qc];W[rf];B[od];W[pe];B[nc]
+C[Black position is weak as White can aim at extending at 'a'.]
+LB[ob:a]
+))
+(;W[kc];B[mc]
+C[White continues with 'a' or 'b'.]
+LB[pf:b][mb:a]
+
+(;W[mb];B[lb];W[lc];B[nb];W[md];B[nc];W[nd];B[od];W[ob]
+;B[ma];W[oa];B[na];W[kb];B[pc];W[oe];B[pd])
+(;W[pf]
+C[Black continues with 'a' or 'b'.]
+LB[od:b][qf:a]
+
+(;B[qf];W[mb]
+C[Black continues with 'a'. Black 'b' is reckless.]
+LB[lb:b][pe:a]
+
+(;B[pe];W[md])
+(;B[lb]
+C[Black 9 won't work.]
+;W[lc];B[nb];W[md];B[nc];W[nd];B[od];W[pd];B[oe]
+;W[pe]))
+(;B[od]
+C[White continues with 'a'. White 'b' is not joseki.]
+LB[nd:b][qf:a]
+
+(;W[qf];B[pc]
+C[The swap is locally favorable for Black, but given White thickness at right-bottom, White should be okay.]
+)
+(;W[nd];B[oe];W[nc];B[pc]
+C[Black 11 makes nice shape.
+White continues with 'a'. White 'b' is unreasonable.]
+LB[qf:b][md:a]
+
+(;W[md];B[qf])
+(;W[qf]
+C[White 12 is unreasonable.]
+;B[ne];W[md];B[rf];W[re];B[rh]
+C[If White 'a', Black 'b', and White is in trouble.]
+LB[og:b][qe:a]
+)))))
+(;W[jc];B[lc]
+C[White continues with 'a' to 'c'.]
+LB[of:c][gc:b][pf:a]
+
+(;W[pf]
+C[Black continues with 'a'. Black 'b' is bad.]
+LB[od:b][qf:a]
+
+(;B[qf];W[qc];B[rc];W[pd]
+C[Black continues with 'a' or 'b'.]
+LB[qb:b][qe:a]
+
+(;B[qe];W[qb];B[le])
+(;B[qb];W[qe];B[pc];W[rd];B[qc];W[rf];B[od];W[pe];B[nd]))
+(;B[od]
+C[Black 7 is a mistake.]
+;W[nd];B[oe];W[pc];B[nc];W[ne]
+C[White 12 makes miai of 'a' and 'b'. Black is in trouble.]
+LB[pd:b][mc:a]
+))
+(;W[gc];B[pc];W[od];B[pf];W[me];B[le];W[lf];B[ke];W[mg])
+(;W[of]
+C[This reverts to variation 2-1-5-1.]
+;B[me])))

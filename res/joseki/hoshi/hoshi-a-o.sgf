@@ -1,0 +1,69 @@
+(;
+GM[1]FF[4]AB[pd][qi]AW[qf]C[Black 3, the two-space low pincer, at best indicates a special strategy. 
+
+The two-space low pincer is not as forceful as the one-space pincer, nor as relaxed as the three-space pincer, which is most often used as a dual purpose move to pincer and extend at the same time. Neither fish nor fowl, the two-space low pincer is less able to secure territory compared to the one-space pincer, if the selected variation comes to that, and perhaps more likely to later come under attack if White establishes a base for White 2.
+
+White continues with 'a' to 'c'. White 'd' and 'e' are not recommended.
+
+e5, d4, c3, b2, a1]LB[pi:e][qd:d][of:c][nc:b][qc:a]
+(;W[qc]C[White 4 is a natural choice.
+
+Black continues with 'a' or 'b'.]LB[pc:b][qd:a]
+(;B[qd];W[pc]C[Black continues with 'a' or 'b'.]LB[rc:b][od:a]
+(;B[od]C[White continues with 'a' or 'b'.]LB[oc:b][rd:a]
+(;W[rd];B[re];W[rc];B[qe];W[nc];B[pf]C[Black 3 does not contain White 2 as well as a one-space pincer would (the marked spot).]MA[qh])
+(;W[oc];B[nd];W[mc];B[le]))
+(;B[rc];W[rb];B[rd];W[oc];B[od];W[nd];B[ne];W[md];B[me];W[ld];B[pg]))
+(;B[pc];W[qd];B[pe];W[qe];B[pf]C[White continues with 'a', or begins an aggressive sequence with 'b'. White should have support in the lower right to play 'b'.]LB[pg:b][qg:a]
+(;W[qg];B[oh])
+(;W[pg]C[White should have support in the lower right to play this way.];B[qg];W[og];B[rg];W[pb];B[ob];W[qb];B[nc];W[pl];B[oi];W[mg])))
+(;W[nc]C[Black continues with 'a' or 'b'.]LB[pf:b][nd:a]
+(;B[nd];W[md]C[Black continues with 'a' or 'b'.]LB[oc:b][ne:a]
+(;B[ne]C[White takes the corner with 'a', or builds thickness to the top with 'b'.]LB[oc:b][qc:a]
+(;W[qc]C[White goes for the corner.];B[oc];W[qd];B[mc])
+(;W[oc]C[White begins a sequence to build thickness.];B[pc];W[od];B[pe];W[oe];B[pf];W[of];B[pg]))
+(;B[oc];W[ne];B[od];W[mc];B[pf];W[pg];B[of];W[pi];B[pj];W[oi];B[qh];W[qg];B[rd]))
+(;B[pf]C[White continues with 'a' or 'b'.]LB[pg:b][qc:a]
+(;W[qc]C[Black continues with 'a' or 'b'.]LB[qe:b][pc:a]
+(;B[pc];W[qd];B[qe];W[re];B[pe];W[rf];B[ph];W[kc])
+(;B[qe];W[pc];B[lc];W[mc];B[ld]))
+(;W[pg];B[qg];W[pe];B[of]C[White continues with 'a'. White 'b' is unreasonable. White 'c' likewise leads to a bad result for White.]LB[oe:c][qh:b][qe:a]
+(;W[qe];B[oe];W[rg];B[qh]C[White continues with 'a' or 'b'.]
+(;W[qd];B[oc];W[qc];B[nd])
+(;W[od];B[qd];W[rd];B[rc];W[re];B[qc];W[sf];B[ob];W[nb];B[sd];W[rh];B[ri];W[sh];B[oc];W[nd];B[oh]))
+(;W[qh]C[White 10 is a mistake.];B[rg];W[rf];B[og];W[ph];B[rh];W[oe];B[qe];W[re];B[qd];W[rd];B[od];W[ne];B[rc];W[pi];B[sd])
+(;W[oe]C[White 10 is not recommended.];B[qe];W[rf];B[re];W[nf];B[og];W[qd];B[rd];W[qc];B[rc];W[pc];B[ne];W[od];B[ng]))
+(;W[pe]C[White 6 is not recommended.
+
+Black continues with 'a' or 'b'.]LB[qe:b][oe:a]
+(;B[oe];W[qe];B[nd];W[oc];B[od];W[pg];B[of];W[pi];B[pj];W[oi];B[qh];W[qg];B[mc];W[mb];B[lc];W[lb];B[kc];W[qb])
+(;B[qe];W[oe];B[qd];W[pg];B[od];W[of];B[nd]))))
+(;W[of];B[nd];W[oi];B[pk];W[lc];B[me];W[jd];B[qe];W[rf];B[re])
+(;W[qd]C[White 4 is not recommended.];B[qc];W[pc]C[This cross-cut is a possible continuation.];B[od];W[oc];B[qe];W[rd];B[qb]C[White has no good continuation.])
+(;W[pi]C[White 4 may lead to complications.
+
+Black continues with 'a' or 'b'.]LB[ph:b][pj:a]
+(;B[pj];W[qh];B[qj]C[White may switch directions by trying 'a' to 'c'.]LB[md:c][nd:b][nc:a]
+(;W[nc];B[nd];W[md]C[Black continues with 'a'. Black 'b' is a mistake.]LB[ne:b][oc:a]
+(;B[oc];W[ne];B[od]C[White continues with 'a'. White 'b' is not recommended.]LB[nb:b][mc:a]
+(;W[mc];B[re])
+(;W[nb]C[White 14 attempts to later infiltrate the corner, but this move is not recommended.];B[me];W[ld];B[nf]C[White continues with 'a' or 'b'.]LB[le:b][oi:a]
+(;W[oi];B[oj];W[ni];B[le];W[kd];B[pf];W[pg];B[qe])
+(;W[le];B[oe];W[oi];B[oj];W[ni];B[lf];W[kf];B[lg];W[rd];B[rh];W[pg];B[rg];W[rf];B[qc])))
+(;B[ne]C[Black 11 is a mistake.
+
+White continues with 'a'. White 'b' is an overplay. White 'c' is likewise not recommended.]LB[qc:c][pc:b][oc:a]
+(;W[oc]C[Black may try 'a' or 'b'.]LB[qe:b][pc:a]
+(;B[pc];W[rd];B[rh];W[pg];B[rg];W[rf]C[Black continues with 'a'. Black 'b' is a mistake.]LB[od:b][pe:a]
+(;B[pe];W[oi])
+(;B[od]C[Black 19 is a mistake.];W[ld]C[White 20 prepares for a sacrifice play.];B[qg];W[of];B[ph];W[oh];B[oi];W[mf]C[Black cannot escape or live in the corner.]))
+(;B[qe]C[White continues with 'a'. White 'b' is too slow.]LB[pf:b][pg:a]
+(;W[pg];B[pf];W[of];B[pe];W[qb];B[og];W[oi];B[ng];W[mi]C[White has the better position.])
+(;W[pf]C[White 14 is too slow.];B[pe];W[qb];B[oi];W[ng];B[me];W[ld];B[le];W[kd];B[nh])))
+(;W[pc]C[White 12 is unreasonable.];B[oc];W[ob];B[od];W[mb];B[qc];W[oi];B[lc];W[mc];B[pb])
+(;W[qc]C[White 12 nullifies White 4: better to have invaded without playing 4.];B[oc];W[qd];B[mc])))
+(;W[nd];B[pf];W[pg];B[of];W[qe];B[od];W[rc];B[oi];W[og];B[mf];W[ng];B[me];W[mg];B[qc];W[rb];B[lc])
+(;W[md];B[oe];W[oi];B[qe];W[pf];B[oc];W[nc];B[ob]))
+(;B[ph];W[qh];B[qg];W[rh];B[oh]C[White continues with 'a' or 'b'.]LB[rg:b][pg:a]
+(;W[pg];B[og];W[rg];B[oe];W[pj];B[jc])
+(;W[rg];B[pj];W[nc];B[oe];W[rd];B[oi];W[qc];B[pc]))))

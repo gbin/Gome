@@ -1,0 +1,57 @@
+(;
+GM[1]FF[4]AB[oe]C[The 5-5 was experimented with briefly during the "New Fuseki" movement in Japan in the 1930s. The 5-5 point has not retained popularity because the 4-4 hoshi (star) point strikes a better balance between influence and territory. As one can see from the variations, though, the 5-5 is playable.
+
+White responds with 'a' to 'e'.]LB[pd:e][qf:d][qe:c][qd:b][qc:a]
+(;W[qc]C[Black continues with 'a' or 'b'.]LB[pc:b][oc:a]
+(;B[oc]C[White continues with 'a' or 'b'.]LB[qf:b][qe:a]
+(;W[qe];B[pg])
+(;W[qf]C[Black continues with 'a' or 'b'.]LB[qb:b][pg:a]
+(;B[pg];W[qg];B[ph];W[qh];B[pi])
+(;B[qb];W[rb];B[qd];W[pc];B[pd];W[rd];B[pb];W[rc];B[pg])))
+(;B[pc];W[pb];B[qd];W[oc];B[pd];W[rb];B[rc];W[qb];B[nc]))
+(;W[qd]C[Black continues with 'a' or 'b'.]LB[pc:b][qe:a]
+(;B[qe]C[White continues with 'a'. White 'b' gives Black great thickness to the top, though White gets good territory.]LB[pe:b][re:a]
+(;W[re]C[Black continues with 'a'. Black 'b' is not recommended.]LB[rf:b][pe:a]
+(;B[pe]C[White continues with 'a'. White 'b' is not recommended.]LB[qf:b][rf:a]
+(;W[rf];B[oc];W[pc];B[ob])
+(;W[qf]C[Black continues with 'a'. Black 'b' is a mistake.]LB[rd:b][rf:a]
+(;B[rf];W[rg];B[rd];W[sf];B[qc])
+(;B[rd]C[Black 7 is a mistake.];W[rc];B[rf];W[sd];B[qg];W[oc])))
+(;B[rf]C[Black 5 is not recommended.];W[pe];B[qf];W[pd];B[pf];W[od];B[ne];W[nd];B[me];W[lc]))
+(;W[pe]C[White 4 gives Black great thickness towards the top, while White gets solid territory at right.];B[pd];W[pf];B[qc];W[rd];B[od];W[rc];B[og]C[White continues with 'a'. White 'b' is a mistake.]LB[of:b][pg:a]
+(;W[pg];B[ph];W[qh];B[of];W[pi];B[oh];W[qg])
+(;W[of]C[White's attempt to make cutting points in Black's shape does not work well, and Black gets better access to the right than in the alternate variation.];B[nf];W[qf];B[ng])))
+(;B[pc];W[qc];B[pf]C[White continues with 'a' or 'b'.]LB[rf:b][pd:a]
+(;W[pd];B[od]C[White continues with 'a' or 'b'.]LB[ob:b][oc:a]
+(;W[oc];B[nc];W[pb];B[ob];W[rf])
+(;W[ob];B[oc];W[pb];B[nb];W[rf];B[mc];W[qg]))
+(;W[rf];B[pb];W[qg];B[kc])))
+(;W[qe]C[Black continues with 'a' to 'c'.]LB[qf:c][qd:b][oc:a]
+(;B[oc]C[White continues with 'a' or 'b'.]LB[qc:b][qh:a]
+(;W[qh];B[qc])
+(;W[qc];B[pg];W[rg];B[jd]))
+(;B[qd]C[White continues with 'a' to settle on the right, or 'b' to start a fight.]LB[pd:b][rd:a]
+(;W[rd];B[pd]C[White continues with 'a' or 'b'.
+
+White 'a' emphasizes the right side. With 'b', White settles his stones in sente.]LB[qc:b][qg:a]
+(;W[qg];B[rc];W[qj])
+(;W[qc]C[White 6 is played if White wants sente.];B[pc];W[rb];B[qb];W[rc];B[qf];W[re];B[pf]))
+(;W[pd]C[As always, White 4 is a fighting move.];B[pe];W[qc];B[rd];W[qf];B[pc];W[od];B[qb];W[oc];B[pb];W[md];B[ne];W[ld];B[pi];W[qh];B[og];W[qi];B[pj];W[qk];B[id]))
+(;B[qf]C[Black 3 emphasizes the right side, though White has the choice of that.];W[rf];B[pf]C[White continues with 'a'. White 'b' is not recommended. White 'c' is very loose.]LB[qc:c][qg:b][pd:a]
+(;W[pd];B[rg];W[od];B[re];W[rd];B[sf];W[md])
+(;W[qg]C[White 6 is not recommended.];B[rg];W[rh];B[re];W[sg];B[qd];W[pg];B[jd])
+(;W[qc]C[White 6 is a loose way of playing.];B[rg];W[nc];B[rd])))
+(;W[qf]C[White forsakes the corner for the right.];B[qd]C[White continues with 'a' or 'b'. White 'c' is not recommended.]LB[oc:c][nc:b][qi:a]
+(;W[qi];B[nc])
+(;W[nc];B[pc])
+(;W[oc]C[White 4 is not recommended. White cannot have it both ways.];B[od];W[pc]C[Here is the real overplay, but going the other way (the marked location) makes little sense.]CR[nc];B[qe];W[lc];B[qc];W[pg];B[ob];W[pb];B[nc];W[nb];B[mb];W[oa];B[mc];W[qb];B[rb];W[qa]C[Locally, Black may next address White 8. Depending upon circumstances, 'a' and 'b' are possibilities.]LB[jc:b][ld:a]))
+(;W[pd];B[pe]C[White continues with 'a' to 'c'.]LB[oc:c][qe:b][qd:a]
+(;W[qd];B[qe]C[White continues with 'a' or 'b'.]LB[nc:b][od:a]
+(;W[od];B[nd];W[nc];B[mc];W[nb];B[mb];W[pb];B[md])
+(;W[nc];B[oc];W[od];B[nd]C[White continues with 'a' or 'b'.]LB[md:b][ob:a]
+(;W[ob];B[mc];W[nb];B[md])
+(;W[md];B[ne];W[mc];B[rd];W[pb];B[qb];W[pc];B[qc];W[ob])))
+(;W[qe];B[qf];W[qd];B[od];W[rf];B[qg];W[rg];B[qh];W[ob];B[oc];W[pb];B[mc])
+(;W[oc]C[Black continues with 'a' or 'b'.]LB[qd:b][qe:a]
+(;B[qe];W[mc];B[qc];W[jc])
+(;B[qd];W[qc];B[qe];W[rc];B[nc];W[nb];B[od];W[pc];B[mc];W[mb];B[lc]))))

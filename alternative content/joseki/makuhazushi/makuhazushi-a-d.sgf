@@ -1,0 +1,22 @@
+(;
+GM[1]FF[4]
+AB[oc][ic]
+AW[qd]
+C[The maximum extension for Black. Black's choice of this extension is influenced by the position in the top-left corner.
+
+White can answer 'a' through 'c'. Playing elsewhere is ot favorable, as Black can make effective use of this five-space extension. This is a relaxed extension so there are no fierce variations.]
+LB[ld:c][pf:b][pe:a]
+
+(;W[pe];B[md])
+(;W[pf];B[ld])
+(;W[ld]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[pe:b][of:a]
+
+(;B[of];W[qg])
+(;B[pe]
+C[Black 5 is not recommended.]
+;W[pd];B[od];W[oe];B[ne];W[of];B[md];W[le]
+C[Black cannot connect on the third line at 'a', and pushing at 'b' is bad, as Black extends along the fifth line.]
+LB[nf:b][lc:a]
+)))

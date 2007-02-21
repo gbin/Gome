@@ -1,0 +1,693 @@
+(;
+GM[1]FF[4]
+AB[oc][qf]
+AW[qd]
+C[The aim of playing the close pincer of Black 3 is mainly to build influence on the right. Therefore a Black position in the lower right corner is desirable when making this pincer.
+
+White replies range from 'a' to 'd'. White 'a' is most popular. The other moves indicate a special strategy.
+
+White cannot play elsewhere, as Black 'a' gives White a very unfavorable result.]
+LB[qe:d][od:c][pf:b][pe:a]
+
+(;W[pe];B[pf]
+C[White continues with 'a' or 'b'. White 'c' has also been played professionally.]
+LB[oe:c][nd:b][ne:a]
+
+(;W[ne]
+C[The combination of White 4 and 6 was invented by Shusaku, who mentioned in a letter that he contemplated the moves for six hours before playing them.
+
+Black continues with 'a', possibly 'b'. In the game where Shusaku first played the move (in 1853), his opponent, Ota Yuzo, played at 'c'.]
+LB[lc:c][md:b][of:a]
+
+(;B[of]
+C[White continues with 'a' or 'b'.]
+LB[nc:b][oe:a]
+
+(;W[oe];B[lc]
+C[White continues with 'a', 'b' or 'c'.]
+LB[pj:c][ob:b][md:a]
+
+(;W[md];B[mc];W[pc]
+C[Black continues with the tesuji at 'a'. The simple extension at 'b' is a mistake.]
+LB[pj:b][rc:a]
+
+(;B[rc]
+C[Black 13 is a sacrifice tesuji to help Black settle at top.]
+;W[ob]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[rd:b][nb:a]
+
+(;B[nb];W[od];B[nc];W[rd];B[pb];W[qb];B[oa];W[rb])
+(;B[rd]
+C[Black takes much of the corner....]
+;W[nc]
+C[... but White easily gets good eye shape.]
+;B[ic]))
+(;B[pj]
+C[Black 13 is a mistake (though not an obvious one).]
+;W[nb];B[nc];W[ob];B[ic]))
+(;W[ob]
+C[Black continues with 'a' or 'b'. Black 'c' is not recommended.]
+LB[nb:c][pc:b][pb:a]
+
+(;B[pb];W[nc];B[nb];W[mb];B[oa];W[mc];B[rb];W[ld])
+(;B[pc];W[nc]
+C[Black continues with the sacrifice at 'a'. Black 'b' just makes Black heavy.]
+LB[nd:b][nb:a]
+
+(;B[nb];W[mb];B[nd];W[mc];B[md];W[lb];B[od];W[kc];B[ld]
+;W[nf])
+(;B[nd]
+C[Black 13 is a mistake.]
+;W[nb];B[md];W[qc];B[od];W[pb]))
+(;B[nb]
+C[Black 11 is too mild.]
+;W[pb]LB[jc:a]
+;B[jc]
+C[Black must play at top. White at 13 would put Black in considerable difficulty.]
+;W[pj]
+C[Now White can ruin Black's hoped-for extension.
+
+The cutting point at the marked location remains.]
+CR[nc]
+))
+(;W[pj];B[mg]
+C[White has a joseki continuation at 'a'. White 'b' is also playable, but gives Black an attack on the corner.]
+LB[le:b][md:a]
+
+(;W[md];B[mc];W[pc]
+C[The joseki move is 'a'. If Black plays tenuki ('b'), White can easily settle his stones and grab a bigger corner.]
+LB[dp:b][rc:a]
+
+(;B[rc];W[ob];B[nb];W[od];B[nc];W[rd];B[pb];W[qb];B[oa]
+;W[rb])
+(;
+C[Black plays elsewhere.]
+;W[nb];B[nc];W[ob];B[ic]))
+(;W[le]
+C[White 12 gives Black an opportunity to tear into the corner.]
+;B[qc];W[rc];B[pb];W[qb];B[pc]
+C[Black 'a' and 'b' are now forcing moves.]
+LB[re:b][rf:a]
+)))
+(;W[nc]
+C[Black continues with 'a'. Black 'b' is also possible.]
+LB[mc:b][nb:a]
+
+(;B[nb];W[mc];B[pc];W[oe];B[mb];W[kc]
+C[Black continues with 'a'. Black 'b' is premature.]
+LB[qc:b][lc:a]
+
+(;B[lc];W[ld];B[lb];W[kd];B[qc];W[rd];B[pj];W[mg];
+C[Black plays elsewhere.]
+
+;W[kb]
+C[White 23 is not sente.]
+;
+C[Black plays elsewhere.]
+;W[rb];B[rc];W[sc];B[qb];W[la];B[sb];W[sa];B[qa]
+;W[sd];B[oa];W[ma];B[pb])
+(;B[qc]
+AB[pp][dd]
+AW[eq][cp]
+C[Black 15 is out of order. 
+
+Ishida Yoshio made this mistake against Rin Kaiho in game 2 of the 1971 Honinbo Title match.]
+;W[rd];B[lc];W[ld];B[lb];W[pj]
+C[White 20 breaks up Black's position.
+
+The game continued with 'a'. Ishida commented later that a Black cut at 'b' was fighting spirit.]
+LB[kd:b][qm:a]
+
+(;B[qm]
+C[Game continuation.]
+;W[mg];B[oi];W[kd]
+C[White is already in better position.]
+;B[oj];W[pl]
+C[The game continued with Black 'a'. Ishida later commented that 'b' was a better continuation for Black.]
+LB[nl:b][ql:a]
+
+(;B[ql]
+C[Game continuation.]
+;W[ok];B[qk];W[pk];B[mj];W[pm];B[pn];W[on];B[po]
+;W[mm])
+(;B[nl]
+C[Suggested improvement over the game continuation.]
+;W[pm];B[qn];W[nm];B[mm];W[nn];B[ql]))
+(;B[kd]
+C[Suggested improvement over the game continuation.]
+;W[le];B[jd];W[mi])))
+(;B[mc]
+AB[dp][pq][qo]
+AW[ec][cd][jq]
+C[This variation is from a 1959 Japanese professional game (Sugiuchi (White) versus Nakamurs (Black)).]
+;W[nb];B[nd];W[md];B[od];W[oe];B[ob]
+C[White continues with 'a'. White 'b' is unreasonable.]
+LB[mb:b][lc:a]
+
+(;W[lc];B[mb];W[lb];B[na];W[me];B[qb];W[pj]
+C[Locally, the result is rougly equal, but White should be satisfied with the influence at top, as well as breaking up Black's position on the right.]
+)
+(;W[mb]
+C[White 16 is a mistake.]
+;B[lc];W[lb];B[kc];W[kb];B[me];W[ld];B[mf];W[kd]
+;B[qb];W[rb];B[qc];W[rc];B[qe];W[pd];B[rd];W[re];B[sd];W[se]
+;B[nf];W[sc];B[rd];W[sd];B[ra];W[pa];B[qa];W[oa];B[pc];W[rd]
+;B[rf]
+C[White can start a ko at 'a', but he has no ko threats, and so loses.]
+LB[sa:a]
+))))
+(;B[md]
+C[Black 7 is a relatively new pattern developed by Kitani disciples.
+
+White continues with 'a'. 
+
+Examples of White 'b' are shown from professional games.
+
+White 'c' is not recommended.]
+LB[of:c][pj:b][pc:a]
+
+(;W[pc];B[me]
+C[White continues with 'a'. White 'b' is not recommended.]
+LB[nf:b][nc:a]
+
+(;W[nc];B[nf];W[nd])
+(;W[nf]
+C[White 10 is not recommended.]
+;B[od];W[oe];B[pi]))
+(;W[pj];B[oi];W[qn]
+C[Professional game examples of continuations include 'a' and 'b'.]
+LB[me:b][qb:a]
+
+(;B[qb]
+C[Game continuations include 'a' and 'b'.]
+LB[lf:b][pi:a]
+
+(;W[pi]
+AB[pp][dd]
+AW[eq][cp]
+C[Rin Kaiho (w) versus Fujisawa Shuko in game 2 of the 1970 Meijin title.]
+;B[og];W[me];B[ld];W[mg];B[oj];W[pk];B[mi];W[kg]
+;B[ki]
+C[White should continue with 'a', but Rin played 'b'.]
+LB[ig:b][ke:a]
+
+(;W[ke]
+C[White 22 is the vital point in this shape.]
+;B[jc];W[hf])
+(;W[ig]
+C[Game continuation. White 22 is thin.]
+;B[ke]
+C[White 17 is the vital point, aiming at 'a' and 'b'.]
+LB[jg:b][lf:a]
+;W[he];B[ii];W[gg]
+C[The game continued with 'a', but the splitting move of 'b' is possible.]
+LB[jg:b][dg:a]
+
+(;B[dg]
+C[Rin Kaiho (w) versus Fujisawa Shuko in game 2 of the 1970 Meijin title. Game continuation.]
+;W[nq];B[pn];W[pm];B[qo];W[on];B[po];W[qm];B[np]
+;W[mp];B[no];W[or];B[pr];W[pq];B[qq];W[oq];B[nl];W[jq];B[cn]
+;W[nd];B[nc];W[hc];B[jc];W[kf];B[eo];W[cl];B[fq];W[fr];B[er]
+;W[ep];B[dr];W[fp];B[gq];W[gr];B[hr];W[hq];B[gp];W[ir];B[hp]
+;W[iq];B[cq];W[dp];B[fo];W[bp];B[bo];W[go];B[ho];W[gn];B[do]
+;W[hn];B[io];W[jn];B[jo];W[ko];B[in];W[co];B[dn];W[bn];B[bm]
+;W[ao];B[cm];W[bl];B[im];W[el];B[fm];W[br];B[al];W[ak];B[am]
+;W[fl];B[gm];W[di];B[hh];W[je];B[bk];W[ck];B[aj];W[gh];B[hg]
+;W[hf];B[gi];W[eh];B[fi];W[eg];B[df];W[dc];B[ec];W[cd];B[ed]
+;W[cc];B[gf];W[fe];B[be];W[ce];B[bf];W[eb];B[fb];W[da];B[ef]
+;W[ff];B[fa];W[bd];B[bb];W[ad];B[gc];W[ab];B[gd];W[ge];B[hd]
+;W[kn];B[ri];W[rj];B[qi];W[ph];B[rg];W[qj];B[rn];W[rm];B[ro]
+;W[oh];B[nh];W[ng];B[qh];W[pg];B[rd];W[rc];B[re];W[qc];B[qr]
+;W[hj];B[hi];W[hl];B[hm];W[bi];B[lp];W[mo];B[lo];W[ln];B[mq]
+;W[mn];B[lq];W[mr];B[lr];W[kp];B[ls];W[jk];B[jj];W[kk];B[gl]
+;W[lj];B[ik];W[li];B[rb];W[fk];B[pc];W[hk];B[gk];W[il];B[jl]
+;W[ij];B[gj];W[ik];B[cj];W[dj];B[ci];W[bj];B[ch];W[ak];B[bq]
+;W[cr];B[bk];W[kr];B[op];W[ak];B[dk];W[dl];B[bk];W[ns];B[ps]
+;W[ak];B[fh];W[fg];B[bk];W[ks];B[os];W[ak];B[hs];W[is];B[bk]
+;W[kq];B[nr];W[ak];B[dq];W[aq];B[bk];W[nq];B[ms];W[ak];B[ar]
+;W[as];B[bk];W[an];B[jm];W[ak];B[lh];W[ll];B[kh];W[mh];B[bk]
+;W[of];B[sc];W[ak];B[ej];W[ek];B[bk];W[jh];B[ji];W[ak];B[mk]
+;W[lk];B[bk];W[id];B[ic];W[ak];B[fs];W[gs];B[bk];W[cf];B[cg]
+;W[ak];B[bs];W[cs];B[bk];W[jd]
+C[White wins by resignation.]
+)
+(;B[jg];W[jf];B[kf];W[jh];B[lg];W[ph];B[oh];W[lh];B[lf]
+;W[ji];B[li];W[jj]
+C[White 38 gives White good center position, which is a good reason for Black to reserve the splitting move that begins this sequence until later.]
+)))
+(;W[lf]
+AB[dd][pp]
+AW[cp][eq]
+C[Hane (w) versus Takagawa in the 1973 Pro Best Ten title.]
+;B[ld];W[pc];B[pb];W[od];B[nd];W[of];B[pi];W[qj]
+;B[qi]
+C[White is thin in the upper right, but has sente.]
+;W[nq]
+C[Black has a move at 'a', while White can later aim at 'b'.]
+LB[kd:b][rd:a]
+
+(;B[rd]
+C[White now faces a dilemma: if he tries to prevent Black from connecting, he faces a ko which he cannot afford to lose, owing the his thin shape.]
+)
+(;
+C[Later in the game, if White has secured his shape in the upper right corner...]
+;W[nc]
+C[... a setup move.]
+;B[ob];W[kd]
+C[White plays a tough forcing move.
+
+This is only possible with a more established shape than shown for White's stones in the upper right.]
+;B[kc];W[jc])))
+(;B[me]
+AB[dc][gc][dg][pp]
+AW[ce][ef][dk][cq]
+C[Black 11 was played by Ishida Yoshio against Iwata in game 4 of the 1971 Pro Best Ten playoff.]
+;W[pc];B[fh];W[fd];B[fc];W[cc];B[cb];W[dd];B[ec]
+;W[bc]
+C[Black continued with 'a'.
+
+Blocking at 'b' would have been a mistake.]
+LB[nf:b][od:a]
+
+(;B[od]
+C[Game continuation.]
+;W[oe];B[pi];W[nd];B[nc];W[pb];B[qj];W[qq]
+C[White 22 is big.
+
+White has left the cut at 'a' for later.]
+LB[mc:a]
+)
+(;B[nf]
+C[Blocking at 21 makes Black overconcentrated in light of White 8.]
+;W[nc])))
+(;W[of]
+C[White 8 is not recommended.]
+;B[ph];W[pc];B[od]))
+(;B[lc]
+AB[cd][ec][qo]
+AW[pq][co][dq]
+C[Shusaku versus Ota Yuzo in game 17 of what was supposed to be a 30-game title match; 1853-06-05.]
+;W[pk];B[of];W[oe];B[mg];W[md];B[mc];W[pc]
+C[Black continued with 'a', but should have played the placement of 'b' first.]
+LB[rc:b][oo:a]
+
+(;B[oo]
+C[The actual game continuation.]
+;W[kd]
+C[Because Black failed to play in the corner, White gets the forcing move of 16.]
+;B[jc];W[mq];B[nk];W[pi];B[nf];W[qm];B[mo]
+;W[qh];B[lq];W[lr];B[nq];W[kq];B[nr];W[lp];B[pm];W[pl];B[om]
+;W[qn];B[ro];W[pn];B[po];W[np];B[op];W[on];B[no];W[ld];B[nm]
+;W[kn];B[ni];W[ci];B[dj];W[di];B[ej];W[bk];B[eq];W[ep];B[fq]
+;W[dp];B[go];W[hq];B[gq];W[hp];B[fo];W[fm];B[hr];W[ir];B[dr]
+;W[cr];B[fr];W[hm];B[cs];W[bs];B[ds];W[bq];B[gs];W[is];B[hs]
+;W[cf];B[gl];W[gm];B[ei];W[nb];B[nc];W[ob];B[ic];W[rn];B[dg]
+;W[cg];B[jf];W[bd];B[bc];W[dd];B[cc];W[de];B[ik];W[ge];B[hf]
+;W[gf];B[gg];W[fg];B[gh];W[gc];B[hd];W[eb];B[dc];W[fc];B[be]
+;W[gb];B[db];W[fh];B[gi];W[eh];B[mb];W[lf];B[lg];W[mp];B[oq]
+;W[so];B[sp];W[sn];B[rq];W[kl];B[re];W[rc];B[kk];W[jl];B[jk]
+;W[kf];B[kg];W[ho];B[rg];W[rh];B[ed];W[ee];B[cl];W[ck];B[dl]
+;W[dk];B[en];W[bl];B[ag];W[gk];B[hk];W[ml];B[ll];W[mm];B[mk]
+;W[lm];B[bh];W[fl];B[gj];W[ie];B[he];W[je];B[if];W[hc];B[id]
+;W[ib];B[jb];W[em];B[dn];W[bf];B[af];W[ce];B[ad];W[cn];B[ek]
+;W[ja];B[fd];W[gd];B[fe];W[ff];B[ch];W[dh];B[ea];W[fb];B[mf]
+;W[me];B[sh];W[si];B[sg];W[rj];B[bj];W[cj];B[bi];W[lk];B[lj]
+;W[oh];B[lo];W[ko];B[nh];W[rd];B[ka];W[ia];B[na];W[pb];B[kc]
+;W[se];B[oj];W[pj];B[fk];W[jd];B[cm];W[bm];B[gn];W[hn];B[il]
+;W[im];B[mr];W[fa];B[da];W[oa];B[ma];W[ms];B[ns];W[ls];B[ak]
+;W[al];B[aj];W[og];B[fi];W[hl];B[pg];W[od];B[gk];W[ll]
+C[White wins by 3.]
+)
+(;B[rc])))
+(;W[nd]
+C[Black continues with 'a' or 'b'.  Black 'c' is not recommended.]
+LB[qc:c][nc:b][mc:a]
+
+(;B[mc]
+C[Black 7 is a light move. White continues with 'a' or 'b'.]
+LB[qj:b][pc:a]
+
+(;W[pc];B[qj];W[nc]
+C[Black has sente but this is an adequate result for White.]
+)
+(;W[qj];B[of];W[oe];B[nf];W[md];B[lc];W[ld];B[kc];W[lf]))
+(;B[nc];W[md];B[mc];W[ld];B[kc];W[qj];B[nf];W[oe];B[of]
+;W[lf])
+(;B[qc]
+C[Black 7 is too territory oriented in emphasizing the corner.]
+;W[rc];B[pc];W[oe];B[rb];W[rd];B[mb];W[qj];B[ng]
+;W[ld]))
+(;W[oe]
+C[White 6 was played by Fujisawa Shuko against Yoshio Ishida in the 1974 Meijin league. The game continuation follows.]
+;B[of];W[ne];B[lc];W[pk];
+C[Black plays elsewhere.]
+;W[md];B[mc];W[pc]
+;B[rc];W[ob];B[nb];W[od];B[nc];W[rd];B[pb];W[qb];B[oa];W[rb]))
+(;W[pf]
+C[Black continues with 'a'. Black 'b' is playable, but not so good by itself.]
+LB[qg:b][pg:a]
+
+(;B[pg]
+C[White continues with 'a' to 'c'.]
+LB[od:c][of:b][pe:a]
+
+(;W[pe];B[qh]
+C[White continues with 'a' or 'b'.]
+LB[nd:b][lc:a]
+
+(;W[lc]
+C[Black continues with 'a' or 'b'. Black 'c' is not recommended.]
+LB[qb:c][nd:b][ng:a]
+
+(;B[ng];W[nd];B[rc]
+C[This is Black's continuation from the joseki.]
+;W[qc];B[qb];W[pb];B[rb];W[pc];B[rd])
+(;B[nd];W[nf];B[ld];W[kd];B[le];W[mc];B[ne];W[og])
+(;B[qb]
+C[Black 'c' is not recommended.]
+;W[nf]
+C[Black continues with 'a'. Black 'b' and Black lives in the corner in gote.]
+LB[og:b][rc:a]
+
+(;B[rc];W[og];B[oh];W[nh];B[oi];W[ni];B[oj];W[rd])
+(;B[og];W[nd];B[rc];W[rd];B[nc];W[mc];B[qc])))
+(;W[nd]
+C[If White wants to play a good point elsewhere, he can take sente with White 8. The idea is to switch elsewhere, answering Black lightly if he plays locally.]
+;B[mc]
+C[White may play elsewhere ('a'), or make Black overconcentrated while getting good shape ('b').]
+LB[nc:b][dp:a]
+
+(;
+C[White plays elsewhere.]
+;B[md]
+C[Black's continuation when White plays elsewhere.]
+;W[pc];B[od];W[rf];B[nf];W[rg];B[qg];W[qe]
+C[Black 'a' rounds off Black's shape, but may not be necessary.]
+LB[nh:a]
+)
+(;W[nc];B[nb];W[ob];B[pb];W[od];B[oa];W[le])))
+(;W[of]
+C[Black continues with 'a' to 'c'.]
+LB[qe:c][og:b][qg:a]
+
+(;B[qg];W[od]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[nd:b][pc:a]
+
+(;B[pc];W[pd]
+C[Black continues with 'a'. Black 'b' and 'c' are not recommended.]
+LB[nd:c][qc:b][mc:a]
+
+(;B[mc];W[qk];B[pj];W[pk];B[oj];W[ok];B[nj];W[mf];B[jc])
+(;B[qc]
+C[Black 11 is not recommended. White gets superior thickness.]
+;W[nc];B[nb];W[mc];B[mb];W[lc];B[qk];W[lb])
+(;B[nd]
+C[Black 11 is pointless, as White already has a solid position.]
+;W[qc]
+C[Letting White play 12 in sente is a loss for Black.]
+;B[mc];W[mf]
+C[White 14 makes sente of 'a' and 'b'.]
+LB[pj:b][jc:a]
+))
+(;B[nd]
+C[Black 9 is not recommended.]
+;W[pc]
+C[Black continues at 'a'. Black 'b' is not recommended.]
+LB[oe:b][nc:a]
+
+(;B[nc];W[ne];B[ld];W[qe];B[qk];W[jc])
+(;B[oe];W[pe];B[pd];W[pb]
+C[Black continues with 'a' or 'b'; neither is appealing.]
+LB[od:b][qe:a]
+
+(;B[qe];W[od]
+C[Black will have to have a very big ko threat for White not to take Black 11 (the marked location).]
+CR[ne]
+)
+(;B[od];W[qe]))))
+(;B[og]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[nf:b][od:a]
+
+(;W[od]
+C[Black continues with 'a'. Black 'b' is an overplay.]
+LB[nf:b][pc:a]
+
+(;B[pc];W[pd];B[mc]
+C[White continues with the hane at 'a'. The cut at 'b' is a mistake.]
+LB[qg:b][ng:a]
+
+(;W[ng]
+C[White 12 is the crucial point for both sides.]
+;B[qi];W[ld];B[lc];W[kd];B[jc];W[nh]
+C[If Black 'a', White 'b'.]
+LB[mf:b][nf:a]
+)
+(;W[qg]
+C[White 12 is a mistake.]
+;B[qh];W[rg];B[rh];W[rf];B[ng]
+C[Black takes the crucial point.]
+))
+(;B[nf]
+C[Black 9 is an overplay that gives White a big corner.]
+;W[nd];B[ng];W[pc]
+C[The cut at 'a' is still and issue.]
+LB[qg:a]
+))
+(;W[nf]
+C[White 8 is a mistake.]
+;B[qe];W[pd];B[ng];W[mf];B[lc]))
+(;B[qe];W[pd]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[pe:b][od:a]
+
+(;B[od];W[pe];B[ph];W[pc];B[kc];W[mc]
+C[White 14 is a probe. White should immediately play this move.]
+LB[ob:b][md:a]
+
+(;B[md];W[ob]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[nb:b][nc:a]
+
+(;B[nc];W[nb];B[mb])
+(;B[nb]
+C[Black 17 is unreasonable.]
+;W[nc];B[pb];W[nd]))
+(;B[ob]
+C[Black 15 is not recommended, as it creates a disadvantageous fight.]
+;W[lc];B[ne];W[kd]
+C[White can settle himself with a play at 'a'. Black has no reason to pick this fight.]
+LB[pb:a]
+))
+(;B[pe]
+C[Black 9 is a mistake.]
+;W[od]
+C[White easily gets superior territory by sacrificing the two stones.]
+;B[oe];W[nd];B[ne];W[md])))
+(;W[od]
+C[White 6 is a light way of playing.
+
+Black continues with 'a' or 'b'.]
+LB[nd:b][pc:a]
+
+(;B[pc];W[of];B[pd];W[qe];B[qg];W[pe]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[qc:b][nd:a]
+
+(;B[nd];W[qc];B[og];W[nf];B[ld])
+(;B[qc]
+C[Black 13 is not recommended.]
+;W[md]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[nd:b][mb:a]
+
+(;B[mb];W[nh];B[pj]
+C[White 'a' is a severe follow-up move.]
+LB[lb:a]
+)
+(;B[nd]
+C[Black 15 is not recommended.]
+;W[nc];B[oe];W[ne];B[od];W[mc])))
+(;B[nd]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[pc:b][of:a]
+
+(;W[of]
+C[Black continues with 'a' or 'b'.]
+LB[pd:b][pc:a]
+
+(;B[pc];W[pd];B[qc];W[qg];B[qh];W[rg];B[ph];W[rf])
+(;B[pd];W[pc];B[oe];W[pe];B[od];W[qg];B[qh];W[rg];B[qc]
+;W[rc];B[pb];W[rh];B[rd];W[qe];B[rb]))
+(;W[pc]
+C[White 8 is a mistake.]
+;B[oe];W[pd]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[nc:b][pe:a]
+
+(;B[pe]
+C[White continues with 'a'. White 'b' is unreasonable.]
+LB[ne:b][nc:a]
+
+(;W[nc];B[md]
+C[White takes at 'a'. Not taking the stone ('b') is a mistake.]
+LB[dp:b][ob:a]
+
+(;W[ob];B[lc])
+(;
+C[White fails to take at 'a'.]
+LB[ob:a]
+;B[ob]
+C[Black aims to sacrifice the two stones to get thickness by squeezing White.]
+;W[nb];B[mb];W[pb];B[mc];W[oa]))
+(;W[ne]
+C[White 12 is a mistake.]
+;B[nc];W[me];B[kc]
+C[White does not have a good follow-up.
+
+White would like to play 'a', causing Black 'b', which threatens Black playing 'c'; that would be a disaster.]
+LB[rd:c][qe:b][of:a]
+))
+(;B[nc]
+C[Black 11 is a mistake.]
+;W[of]
+C[White splits Black in two.]
+)))))
+(;B[qg]
+C[The idea behind Black 5 is not to give White momentum, but the move does little for Black either.]
+;W[pe]
+C['a' and 'b' are miai.]
+LB[pi:b][lc:a]
+;B[lc];W[pi]
+(;B[pg];W[og];B[ri];W[nd]
+C[A sente forcing move by White.]
+;B[nc];W[qj];B[rj];W[qk]
+C[Black has a low position on the right.]
+)
+(;B[qi]
+C[Black can play 9 with a favorable ladder.
+
+White continues with 'a' if the ladder is unfavorable to White, or 'b' if the ladder is favorable.]
+LB[qj:b][nd:a]
+
+(;W[nd];B[nc];W[pj];B[qj];W[pk];B[qk];W[pl])
+(;W[qj]
+C[White must have the ladder to play this way.]
+;B[pj];W[qh];B[ri];W[oi];B[rh];W[pk];B[oh];W[oj]
+C[The ponnuki is excellent shape for White.]
+
+;B[og];W[pc]
+C[White secures the corner in sente.]
+;B[od]))))
+(;W[od]
+C[White 4 is a simple move that gives a less satisfactory result than variations 'a' and 'b'.]
+;B[nd]
+C[White continues with 'a' or 'b'.]
+LB[pf:b][oe:a]
+
+(;W[oe];B[pc];W[qe]
+C[Black continues with 'a' or 'b'.]
+LB[pg:b][qc:a]
+
+(;B[qc];W[qh];B[qg]
+C[Black must consider carefully before setting this sequence in motion.]
+;W[ph];B[of];W[ne];B[og];W[md];B[nc]
+C[Black having to connect this way is painful. This is the cost of activating Black 3 without further play by Black at top.]
+
+;W[me])
+(;B[pg]
+C[Black 9 emphasizes the right side.]
+;W[qc];B[ng]
+C[White has a tesuji at 'a'. White 'b' is now considered good for Black.]
+LB[nf:b][mg:a]
+
+(;W[mg]
+C[Black continues with 'a'. Black cannot resist with 'b', 'c', or 'd'.]
+LB[ne:d][nf:c][me:b][nh:a]
+
+(;B[nh];W[nf];B[lc];W[lf];B[qk])
+(;B[me]
+C[Black 13 is a mistake.]
+;W[nf])
+(;B[nf]
+C[Black 13 is a mistake.]
+;W[ne];B[me];W[nc]
+C[Black continues with 'a' or 'b'.]
+LB[mc:b][md:a]
+
+(;B[md];W[nb])
+(;B[mc];W[md];B[ld];W[mb];B[nd];W[nb];B[lb];W[md];B[lc]
+;W[pb]))
+(;B[ne]
+C[Black 13 is a mistake.]
+;W[nf];B[of];W[mf]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[lc:b][mc:a]
+
+(;B[mc])
+(;B[lc]
+C[Black 17 is a mistake.]
+;W[ob]
+C[Black continues with 'a'. Black cannot resist with 'b'.]
+LB[pb:b][nb:a]
+
+(;B[nb];W[pb])
+(;B[pb]
+C[Black 19 is a mistake.]
+;W[nc];B[nb];W[mc];B[md];W[mb]))))
+(;W[nf]
+C[White 12 is not recommended.
+
+Black continues with 'a' or 'b'.]
+LB[lc:b][mg:a]
+
+(;B[mg];W[nc];B[mc];W[nb];B[mb]
+C[White 'a' leads to bad shape for White. White 'b' takes the corner, but gives Black thickness.]
+LB[na:b][md:a]
+
+(;W[md]
+C[With White 18, White gets out at the top, while Black makes a low group at top.]
+;B[na];W[ne];B[ob];W[lc]
+C[It is not easy to attack the black group at the top forcefully. The exchange of the marked stones is bad for White.]
+MA[mg][nf]
+)
+(;W[na]
+C[White takes the corner, giving Black considerable thickness.]
+;B[md];W[pb];B[mf]
+C[Black's thickness may be considered superior to White's corner.]
+))
+(;B[lc];W[mg];B[nh];W[lf];B[qj]))))
+(;W[pf];B[pd];W[qe];B[pe];W[qg];B[rf];W[rg];B[of];W[pg]
+;B[qc];W[re];B[rd];W[sf]))
+(;W[qe]
+C[Joseki continues with Black 'a'. Black 'b' has been played professionally.]
+LB[pf:b][pg:a]
+
+(;B[pg]
+C[White continues with 'a' or 'b'.]
+LB[oe:b][od:a]
+
+(;W[od];B[nd]
+C[White continues with 'a' or 'b'.]
+LB[ne:b][oe:a]
+
+(;W[oe];B[pb];W[qb];B[qc];W[rc];B[pc];W[rb];B[re];W[rd]
+;B[ng])
+(;W[ne];B[md];W[of];B[pc];W[me];B[ld];W[og]))
+(;W[oe]
+C[Black continues with 'a' or 'b'.]
+LB[md:b][lc:a]
+
+(;B[lc];W[pc];B[ob];W[pb])
+(;B[md];W[nf]
+C[Black will probably extend down the right next, so White gets a base with 'a'.]
+LB[pc:a]
+)))
+(;B[pf]
+C[Black 5 was played by Handa Dogen against Kitani Minoru in round 2 of the 18th (1963) Honinbo League.]
+;W[od];B[pc];W[qc];B[qj];W[nd];B[mc];W[nc];B[nb]
+;W[ob]
+C[The two Black stones are captured. In the game, Black played elsewhere.]
+)))

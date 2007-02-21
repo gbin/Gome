@@ -1,0 +1,127 @@
+(;
+GM[1]FF[4]
+AB[qd][md]
+AW[od]
+C[White responds with 'a' or 'b'. White 'c' is unreasonable. White 'd' is a mistake. White 'e' is weak.
+
+outcomes
+White 'a' = White top, Black right
+White 'b' = White corner, Black right
+White 'c' = White resignation
+White 'd' = White thickness, Black corner + favorable result]
+LB[pg:e][pf:d][qe:c][qc:b][of:a]
+
+(;W[of]
+C[Black continues with 'a'. Black 'b', attempting to connect underneath, is vulgar.]
+LB[oc:b][qf:a]
+
+(;B[qf];W[qc];B[rc];W[pc];B[rb];W[jd])
+(;B[oc]
+C[Black 5 is a mistake.
+
+White continues with 'a'. White 'b' is not recommended.]
+LB[pc:b][nc:a]
+
+(;W[nc];B[nd];W[pc]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[ob:b][pd:a]
+
+(;B[pd]
+C[White continues with 'a'. White 'b' is not recommended.]
+LB[oe:b][ob:a]
+
+(;W[ob];B[oe];W[oc];B[pe];W[ne])
+(;W[oe]
+C[White 10 is not recommended.]
+;B[ob];W[nb];B[pb];W[lc];B[ld];W[kc];B[kd];W[jc]
+;B[mg]))
+(;B[ob]
+C[Black 9 is unreasonable.]
+;W[pd];B[nb];W[qe]
+C[White has superior position.]
+))
+(;W[pc]
+C[White 6 is not recommended.]
+;B[pd];W[nc];B[ob];W[nd];B[pb]
+C[White's outside shape is okay, but Black has a better position, and profit in the large corner.]
+)))
+(;W[qc];B[pd];W[pc];B[oe];W[oc];B[pf]
+C[White continues with 'a', possibly 'b'.]
+LB[ne:b][mb:a]
+
+(;W[mb];B[ne])
+(;W[ne]
+C[White 10 creates a center group, as Black cuts 10 off from the White corner group. White must want that result for White 10 to be considered a reasonable play.]
+;B[nd];W[nf];B[nb]
+C[This variation is the same as 2-1-7-2-1-2-2.]
+;W[nc];B[mc];W[ob];B[ph];W[lf]
+;B[jd]))
+(;W[qe]
+C[White 4 is unreasonable.
+
+Black continues with 'a'. 
+Black 'b' is too mild. 
+Black 'c' is frightening.]
+LB[pe:c][re:b][pd:a]
+
+(;B[pd];W[pe]
+C[Black continues with 'a' or 'b'.]
+LB[oc:b][oe:a]
+
+(;B[oe]
+C[With the one-space pincer, this sequence is more threatening than the Magic Sword of Muramasa (see variation 2-4-6-3-3).]
+;W[ne];B[of];W[nd];B[re];W[qf];B[qg];W[rf];B[rd]
+C[White now has to crawl along the second line to live (if he can), beginning with 'a'. The result is a disaster for White.]
+LB[rg:a]
+)
+(;B[oc]
+C[Black creates a large corner.]
+;W[nc]
+C[White 8 is unreasonable, but creates aji.]
+;B[nd];W[oe];B[pb]))
+(;B[re]
+C[Black 5 is a mistake; a lost opportunity for Black to punish White for an unreasonable move.]
+;W[pe];B[rf];W[qc];B[rc];W[pd];B[rd];W[ph])
+(;B[pe]
+C[Black 'c' is bold, but in the ensuing fight, it is hard to see how Black can get a satisfactory result.]
+;W[pd];B[qf];W[re];B[qc];W[rf]
+C[Black faces a difficult fight.]
+))
+(;W[pf]
+C[White 4 is a mistake.
+
+Black continues with a sacrifice at 'a'. White 'b' is not recommended.]
+LB[qf:b][oe:a]
+
+(;B[oe]
+C[Black 5 is a sacrifice play.]
+;W[pe];B[pd]
+C[White may try 'a' or 'b'.]
+LB[oc:b][ne:a]
+
+(;W[ne];B[oc];W[of];B[nd])
+(;W[oc]
+C[White 8 resists the outcome of variation 'a' (2-4-7-4-1), but faces a difficult fight because of it.]
+;B[of];W[pg];B[pc]))
+(;B[qf]
+C[Black 5 makes White 4 a successful move.]
+;W[pg];B[qg]
+C[Black 5 & 7 help secure the corner at the expense of the top.]
+;W[ph]
+C[The pincer of Black 3 has lost its value.]
+))
+(;W[pg]
+C[White 4 is not helpful.]
+
+(;B[pd]
+(;W[oe];B[oc];W[nc];B[nd]
+C[White lacks a good follow-up move.]
+)
+(;W[oc];B[oe];W[ne];B[of];W[nd]
+C[White 10 is necessary, but makes White heavy.]
+))
+(;B[oe]
+C[The sacrifice play of Black 5 is not as good as the alternative: variation 'a' (2-4-7-5-1).]
+;W[ne];B[nd];W[pe];B[pd];W[of];B[oc]
+C[Black gets a big corner, but White has decent outside shape. Variation 'a' (2-4-7-5-1) is better for Black.]
+)))

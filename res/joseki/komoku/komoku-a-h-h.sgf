@@ -1,0 +1,60 @@
+(;
+GM[1]FF[4]AB[qd][ld]AW[oc]C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n];W[md]C[White makes a "belly attachment" to the Black pincer. Locally the play is not advantageous, but may produce a reasonable whole board result. 
+
+Typically the result is a Black wall facing the left side (from Black 3), with White emphasizing the top and right. This is consistent with the proverb "attaching to a stone makes it stronger".
+
+Black continues with 'a' to 'c'.]LB[le:a][mc:b][me:c]
+(;B[le];W[me];B[lf]C[White continues with 'a' or 'b'.]LB[qf:a][mf:b]
+(;W[qf];B[pc];W[pe];B[ob];W[nb];B[nc];W[od];B[mb];W[pb];B[na];W[qc]C[The joseki ends, but Black retains the play at 'a'. Black may also play elsewhere ('b').]LB[qb:a][dp:b]
+(;B[qb];W[pd]C[Black 'a' diminishes White's corner. Black 'b' is most tenacious.]LB[pa:a][rc:b]
+(;B[pa];W[rb];B[pc];W[rc])
+(;B[rc];W[pc];B[pa];W[rb];B[ra]C[Black gets a "flower-viewing" ko (nothing to lose).]))
+(;
+C[Black plays elsewhere. White may try 'a'.]LB[lc:a];W[lc]C[Black continues with 'a' or 'b'.]LB[kc:a][mc:b]
+(;B[kc]C[White must play 'a'. White 'b' is hopeless.]LB[mc:a][lb:b]
+(;W[mc];B[lb])
+(;W[lb]C[White 22 is a mistake.];B[mc];W[kb];B[jc];W[jb];B[ib]))
+(;B[mc];W[kc];B[jd])))
+(;W[mf]C[Black continues with 'a'. Black 'b' is timid.]LB[lg:a][qg:b]
+(;B[lg];W[qf];B[pc];W[ob]C[Black 'a' is solid. Black 'b' provokes a fight.]LB[pb:a][pf:b]
+(;B[pb];W[pe];B[rf]C[White continues with 'a' or 'b'.]LB[rg:a][re:b]
+(;W[rg];B[re];W[qh])
+(;W[re];B[qe];W[rd];B[pf]C[White continues with 'a'. White 'b' is not recommended.]LB[qg:a][pd:b]
+(;W[qg];B[oe];W[pg];B[od];W[lc];B[kc];W[of];B[rc];W[rg];B[mc];W[nc];B[mb];W[nd])
+(;W[pd]C[White 20 is a mistake.];B[qg];W[qc];B[qf];W[qb];B[mg]C[Black 25 is a superb point. White's corner is small, and Black's influence commanding.])))
+(;B[pf];W[pe];B[qe];W[pg];B[of];W[qg];B[oe];W[od];B[pd];W[og];B[ng];W[nf];B[pb];W[mg];B[nh];W[mh];B[ni];W[pj];B[nk]C[Fighting continues from here.]))
+(;B[qg]C[Black 9 is a mistake.];W[lc];B[kc];W[lg];B[kg];W[kh]C[Black thickness has been erased.])))
+(;B[mc]C[White continues with 'a' or 'b'.]LB[nd:a][me:b]
+(;W[nd])
+(;W[me];B[nc];W[od]))
+(;B[me]C[White continues with 'a', possbily 'b'.]LB[nd:a][pe:b]
+(;W[nd];B[le]C[White continues with 'a'. White 'b' is not recommended.]LB[pe:a][of:b]
+(;W[pe];B[qe];W[pg];B[pf];W[of];B[qf];W[qg];B[og];W[nf];B[oh];W[qi]C[Black can play 'a', taking th corner, but 'b' is even stronger.]LB[pc:a][pi:b]
+(;B[pc];W[mg])
+(;B[pi];W[rh];B[rg];W[qh];B[mg]C[White continues with 'a'. White 'b' is premature.]LB[lc:a][qb:b]
+(;W[lc]C[White 24 is essential.];B[kc];W[qb];B[rb];W[pb];B[ra];W[mb]C[A possible continuation.];B[lb];W[mc]C[Black continues with 'a'. Black 'b' is a serious mistake.]LB[rf:a][dp:b]
+(;B[rf];W[pj];B[mh]C[White may extend down the right side, while Black plays at 'a'.]LB[jd:a])
+(;
+C[Black plays elsewhere, a grievous error.];W[rc];B[qc];W[sb];B[rd];W[sc]C[Black must play 'a'. Black 'b' is a mistake.]LB[sf:a][sd:b]
+(;B[sf])
+(;B[sd]C[Black 38 is a mistake.];W[rf]C[Black dies with one eye.])))
+(;W[qb]C[White 24 is a mistake.];B[pc];W[pb];B[od]C[White 'a' loses only three stones. White 'b' loses them all.]LB[nb:a][ne:b]
+(;W[nb];B[ne])
+(;W[ne];B[nc];W[ob];B[mc];W[lc];B[lb];W[kc];B[mb]C[Black is one liberty ahead (that's all it ever takes).]))))
+(;W[of];B[qg]C[White has a difficult position. Black has a share of the corner and side, and thickness on the outside. Meanwhile, White will struggle while Black profits at tormenting White.
+
+If White had played 8 (the two-space jump), and Black responded with 9, White would not have played 4, attaching to the pincer stone (3). Instead, White would have played a pincer (such as 'a').]LB[id:a]))
+(;W[pe];B[qe]C[White continues with 'a'. White 'b' is also possible, though strategically advanced.]LB[pf:a][pg:b]
+(;W[pf];B[qf];W[pg];B[nd];W[qg];B[mc];W[od];B[qb]C[White continues with an extension or approach move on the right side.])
+(;W[pg]AB[cp][eq][ce]AW[dc][oq][qp]C[1967 (6th) Meijin Title, Game 3: White: Sakata Eio, Honinbo; Black: Rin Kaiho, Meijin];B[qf];W[mc]C[Black continues with 'a'. If Black 'b'....]LB[fd:a][pf:b]
+(;B[fd]C[White continued with 'a', avoiding a disadvantageous fight with 'b'.]LB[ed:a][de:b]
+(;W[ed]C[1967 (6th) Meijin Title, Game 3: White: Sakata Eio, Honinbo; Black: Rin Kaiho, Meijin - continued];B[ee];W[de];B[df];W[dd];B[ef];W[cf];B[be];W[bf];B[bc];W[cc];B[ch];W[bd];B[cg];W[ae];B[jp];W[dm];B[ge];W[le];B[pf];W[ne];B[mq];W[eo];B[gp];W[go];B[hp];W[cn];B[do];W[dn];B[ck];W[dk];B[dj];W[ej];B[ek];W[dl];B[fj];W[ei];B[gk];W[cj];B[di];W[bj];B[qn];W[ql];B[on];W[nq];B[mp];W[qb];B[qi];W[pi];B[qh];W[pj];B[pp];W[qq];B[mf];W[ke];B[nd];W[jc];B[qj];W[ol];B[nj];W[nk];B[qo];W[po];B[op];W[np];B[oo];W[pq];B[mj];W[mk];B[mo];W[lj];B[li];W[ki];B[mh];W[kj];B[od];W[nc];B[pc];W[pb];B[bo];W[lh];B[mi];W[no];B[nn];W[pm];B[pn];W[mm];B[qk];W[pk];B[nr];W[or];B[mr];W[rp];B[mn];W[fl];B[fk];W[hh];B[gh];W[mg];B[ng];W[lg];B[nf];W[ph];B[nh];W[dq];B[ep];W[dp];B[co];W[cq];B[bq];W[br];B[ar];W[dr];B[cs];W[rk];B[hg];W[ig];B[ih];W[hi];B[hf];W[qg];B[rg];W[rj];B[rh];W[jh];B[jd];W[kd];B[ic];W[jb];B[ib];W[id];B[rm];W[rl];B[fo];W[en];B[if];W[jg];B[fb];W[bn];B[cr];W[rc];B[bk];W[sf];B[rd];W[sd];B[se];W[re];B[rf];W[se];B[qc];W[sc];B[oi];W[ak];B[ca];W[eb];B[ea];W[fc];B[gb];W[gc];B[hc];W[ia];B[hd];W[bb];B[gn];W[kn];B[ij];W[ii];B[ln];W[lm];B[ko];W[jn];B[jl];W[in];B[il];W[kl];B[bg];W[cd];B[bi];W[ao];B[bp];W[bl];B[ro];W[os];B[sp];W[sq];B[so];W[rr];B[rb];W[ra];B[ha];W[ja];B[ba];W[fa];B[da];W[gi];B[fi];W[gl];B[hl];W[oj];B[oh];W[ie];B[el];W[fm];B[io];W[hn];B[ho];W[jj];B[sl];W[jk];B[hk];W[ns];B[ms];W[lf];B[jf];W[je];B[gd];W[ec];B[fn];W[hm];B[of];W[kf];B[nm];W[nl];B[ci];W[cl];B[ai];W[ag];B[ah];W[cb];B[hb];W[an];B[bs];W[ap];B[aq];W[af]C[Black wins by 6 points.])
+(;W[de]C[This fight would be difficult for White.];B[dd];W[ed];B[cd]C[Black will lead the fighting to the right, where he can effectively use a connection at 'a'.]LB[le:a]))
+(;B[pf];W[ne])))))

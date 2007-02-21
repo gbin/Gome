@@ -1,0 +1,8 @@
+jar:/joseki/hoshi/
+hoshi-a.txt,I,,na;sh,pd,qf
+hoshi-b.sgf,J,,1,na;sh,pd,pf
+hoshi-c.sgf,J,,1,na;si,pd,pg
+hoshi-d.sgf,J,,1,na;sh,pd,dp
+hoshi-e.sgf,J,,1,na;sf,pd,qc
+hoshi-f.sgf,J,,1,na;sk,pd,qi
+hoshi-g.sgf,J,,1,na;sf,pd,qd

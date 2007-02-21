@@ -1,0 +1,110 @@
+(;
+GM[1]FF[4]
+AB[qd][pf]
+AW[od]
+C[Black 3 is a peaceful response, aiming to maintain balance with White's high approach.
+
+White continues with 'a'. White 'b' and 'c' represents unorthodox strategies.]
+LB[of:c][qh:b][qc:a]
+
+(;W[qc];B[rc];W[pc]
+C[Black continues with 'a' or 'b'.]
+LB[rb:b][re:a]
+
+(;B[re];W[kc];B[ne]
+C[Continuation. White continues with 'a' or 'b'.]
+LB[oe:b][mc:a]
+
+(;W[mc];B[ld];W[lc])
+(;W[oe];B[of];W[nf];B[me];W[mc];B[ld];W[lc];B[ng]))
+(;B[rb];W[kc]
+C[Black extends to 'a', or, with support in the top-left corner, may play 'b'. If 'b' doesn't work (because of lack of support), Black may press at 'c'.]
+LB[ne:c][ic:b][qj:a]
+
+(;B[qj])
+(;B[ic]
+AB[dd]
+C[Black may play 9 as a check if there is Black support in the top-left corner. White must reply; 'a' is suitable. White cannot afford to play elsewhere ('b').]
+LB[dp:b][ke:a]
+
+(;W[ke])
+(;
+C[White plays elsewhere, a mistake.]
+;B[mc];W[md];B[lc];W[ld];B[kb];W[kd];B[jc];W[nc]))
+(;B[ne]
+C[White may submit with 'a'. If the ladder to the bottom left corner favors White, White may resist with 'b'.]
+LB[oe:b][mc:a]
+
+(;W[mc]
+C[White plays 10 when the ladder is unfavorable.]
+;B[ld];W[lc])
+(;W[oe]
+C[White must have the ladder to play this way.]
+;B[of];W[nf]
+C[White 12 must not be able to be caught in a ladder.]
+;B[me];W[mc]
+C[White 14 can only be played if White 12 cannot be captured in a ladder.]
+;B[ld]
+C[Black 16 takes care of the ladder issue for White 12.]
+;W[lc]
+C[White might like to resist with 'a', but White 16 is correct.]
+LB[ng:a]
+;B[ng]
+C[White 12 can be captured because of the Black 15, White 16 exchange.
+
+White has territory in sente, Black has thickness: a fairly even exchange.]
+;W[mf]
+;B[lg]))))
+(;W[qh]
+C[White 4 is a tough-minded move. 
+
+Rin Kaiho played White 4 against Yoshio Ishida in the 3rd game of the 1974 Oza title match.]
+;B[ld];W[qe];B[pe];W[pd];B[qc];W[re];B[ne];W[pb]
+;B[qb];W[nb];B[rd];W[qg];B[mc]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[nd:b][lc:a]
+
+(;W[lc]
+C[White 18 is the tesuji that lets top White group live.
+
+Black continues with 'a'. Black 'b', letting White live in the corner, is too mild.]
+LB[oc:b][pc:a]
+
+(;B[pc];W[oc];B[pa];W[mb];B[kc];W[lb];B[ob];W[md];B[le]
+C[The cut of 'a' is correct. In the actual game, White played 'b'.]
+LB[oe:b][kd:a]
+
+(;W[kd])
+(;W[oe];B[of];W[nf];B[og];W[ng];B[nh];W[lf]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[oi:b][pi:a]
+
+(;B[pi]
+C[Black can capture the White group on the right side with Black 35.]
+;W[me]
+C[White must play 36.]
+;B[qi]
+C[White cannot live on the right.]
+)
+(;B[oi]
+C[Black 35, the play in the game from which this variation is taken, is a mistake.]
+;W[me])))
+(;B[oc]
+C[Black 19 lets White live in the corner.]
+;W[pc];B[nc];W[mb]))
+(;W[nd]
+C[White 18 is a mistake.]
+;B[me];W[lc];B[kc];W[lb];B[md];W[mb];B[kb]
+C[White pushing through at 'a' and then cutting does not work. White loses the fight in the corner, so the situation is hopeless for White.]
+LB[oe:a]
+))
+(;W[of];B[og];W[qc];B[rc];W[rd]
+C[Black continues with 'a' to surrender the corner, or 'b' to take the right.]
+LB[pd:b][qe:a]
+
+(;B[qe]
+C[Black gives away the corner for the sides.]
+;W[rb];B[pc];W[qb];B[pd];W[re];B[rf];W[pb];B[oc])
+(;B[pd]
+C[Black takes the corner and the right side.]
+;W[pc];B[rb];W[nc];B[re];W[nf];B[pg];W[kc])))

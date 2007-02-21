@@ -1,0 +1,183 @@
+(;
+GM[1]FF[4]
+AB[pd]
+AW[pg]
+C[White 2 is a light approach move. Rarely played in even games, White 2 is typically employed in handicap games.
+
+Black continues with 'a' or 'b'.]
+LB[qj:b][nd:a]
+
+(;B[nd]
+C[White continues with 'a' or 'b'.]
+LB[qd:b][qk:a]
+
+(;W[qk];B[jc])
+(;W[qd]
+C[Black continues with 'a' or 'b'. Black 'a' gives a clear-cut division of territory: Black at top, White at right. Black 'b' offers White choices.]
+LB[qe:b][qc:a]
+
+(;B[qc]
+C[White continues with 'a' to 'c'.]
+LB[rc:c][pe:b][qe:a]
+
+(;W[qe];B[rc];W[pe];B[od];W[qk];B[jc])
+(;W[pe];B[od];W[re];B[rc];W[qk];B[jc])
+(;W[rc]
+C[Black continues with 'a' or 'b'.]
+LB[qe:b][pc:a]
+
+(;B[pc];W[qe];B[rb];W[qk];B[jc])
+(;B[qe];W[rd];B[pc];W[pe]
+C[Black continues with 'a' or 'b'.]
+LB[oe:b][pf:a]
+
+(;B[pf];W[oe];B[qg];W[of];B[qf];W[ph];B[ri];W[od];B[oc]
+;W[nc];B[nb];W[mc];B[mb];W[lc];B[rb]
+C[Black's territory is superior to White's thickness.]
+)
+(;B[oe];W[pf];B[rb];W[re]))))
+(;B[qe];W[pe]
+C[White 6 is a trick play.
+
+Black 'a' offers Black an advantage. Black 'b' makes White fight a ko for life in the corner. Black 'c' is a mistake, with Black taking the corner and White getting superior thickness.]
+LB[qf:c][pf:b][re:a]
+
+(;B[re]
+C[White continues with 'a' to 'c'. White 'a' results in an ongoing fight. White takes the corner with 'b' or 'c', yielding superior thickness to Black.]
+LB[pc:c][qc:b][rd:a]
+
+(;W[rd]
+C[White 8 is a fighting move.]
+;B[rg]LB[pc:b][od:a]
+
+(;W[od];B[pc];W[oe];B[oc];W[nc];B[mc];W[nb];B[qc])
+(;W[pc]
+C[White 10 is not recommended.]
+;B[od];W[ob];B[nb]
+C[White continues with 'a' or 'b'.]
+LB[pf:b][rb:a]
+
+(;W[rb];B[pf]
+C[White 14 is correct shape.
+
+Being sealed in the corner is painful for White.]
+)
+(;W[pf];B[qc];W[rc];B[qb];W[rb];B[pb];W[qa];B[oc]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[rf:b][rh:a]
+
+(;W[rh];B[qh];W[rf];B[ri];W[qf];B[pk])
+(;W[rf]
+C[White 22 is a mistake.]
+;B[qf];W[qg];B[sf];W[rh];B[ri];W[sd];B[se];W[qh]
+;B[sh];W[qj];B[sb]
+C[Black wins by one move.
+
+The ko at 'a' is easily dismissed as out of question.]
+LB[sa:a]
+;W[sa];B[ra];W[dp]
+C[White make a threat elsewhere.]
+;B[pa]
+C[Black takes.]
+))))
+(;W[qc]
+C[White takes the corner, giving Black thickness.]
+;B[pc];W[pb];B[pf];W[oe];B[of];W[ne];B[ob];W[qb]
+;B[nc];W[rd];B[qg];W[sb])
+(;W[pc];B[od];W[rc];B[pf];W[nb];B[mb]
+C[White continues with 'a'. White 'b' concedes a large corner.]
+LB[mc:b][ob:a]
+
+(;W[ob];B[qb]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[qc:b][rb:a]
+
+(;W[rb];B[nc];W[qc];B[lc])
+(;W[qc]
+C[White 16 is a mistake.]
+;B[mc]
+C[Black 17 is still sente. White continues with 'a'. White playing elsewhere ('b') and Black can get a ko on the White corner stones.]
+LB[dp:b][rb:a]
+
+(;W[rb])
+(;
+C[White plays elsewhere, a mistake.]
+;B[rb];W[sb];B[na];W[ra]
+C[A ko results.]
+)))
+(;W[mc];B[ob];W[lb];B[oc])))
+(;B[pf]
+C[Black 7 makes White fight a ko for life in the corner.]
+;W[oe];B[od];W[of];B[qc];W[rd];B[re];W[rc];B[rb]
+;W[qb];B[pc];W[sb];B[ra];W[qa];B[sd];W[sa];B[rb];W[ra];B[se]
+;W[pb];B[ob];W[oa];B[nb];W[sc])
+(;B[qf]
+C[Black 7 is a mistake. Black gets a sizable corner, but White has great thickness.]
+;W[pf];B[qc];W[rd];B[rc];W[od];B[pc];W[qg];B[re]
+;W[rf];B[sd];W[oc]))))
+(;B[qj]
+C[White continues with 'a' to 'd'.]
+LB[od:d][md:c][nd:b][nc:a]
+
+(;W[nc];B[nd];W[md];B[ne];W[oc];B[pc])
+(;W[nd];B[oe]
+C[White continues with 'a'. White 'b' and 'c' are not recommended.]
+LB[ne:c][ld:b][ng:a]
+
+(;W[ng];B[ne];W[ld];B[me]
+C[White continues with 'a'. White 'b' is unreasonable.]
+LB[le:b][md:a]
+
+(;W[md];B[le]
+C[White must extend with 'a'. The White hane of 'b' is unreasonable.]
+LB[ke:b][kd:a]
+
+(;W[kd];B[oh];W[og];B[lg])
+(;W[ke]
+C[White 12 is unreasonable.]
+;B[kd];W[jd];B[kc];W[jc];B[lb];W[jb];B[nc]))
+(;W[le]
+C[White 10 is unreasonable.]
+;B[md];W[mc];B[lc];W[kc];B[lb];W[mb];B[kb];W[jc]
+;B[jb];W[ic];B[ib];W[hc]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[nc:b][ob:a]
+
+(;B[ob];W[hb]
+C[White 24 is not sente.]
+)
+(;B[nc]
+C[Black 23 is a mistake.]
+;W[qc]
+C[White 24 is possible because of Black 23 (threatening to extend from 16).]
+)))
+(;W[ld]
+C[White 6 is not recommended.]
+;B[ne];W[me];B[ng];W[pi];B[pj];W[oi];B[mf];W[lf]
+;B[lg];W[kf];B[oj]
+C[Because White is high on both sides, White cannot slide into the corner or invade at the 3-3.]
+)
+(;W[ne]
+C[White 6 is not recommended.]
+;B[of];W[pi];B[pj];W[oi];B[nf];W[mf];B[mg];W[lf]
+;B[nh];W[oj];B[ok];W[nk];B[ol]))
+(;W[md];B[ne]
+C[White continues with 'a' or 'b'.]
+LB[nd:b][me:a]
+
+(;W[me];B[nf];W[nd];B[od];W[pi];B[pj];W[oi];B[mf])
+(;W[nd];B[oe];W[ng];B[me]
+C[See 3-3-2-2-1-1 for continuation.]
+))
+(;W[od]
+C[Black continues with 'a'. Black 'b' or 'c' are a mistake, as White cross-cuts, and has the advantage of the nearby stone.]
+LB[oc:c][oe:b][pe:a]
+
+(;B[pe];W[oe];B[oc];W[nc];B[pc];W[of];B[nb];W[mc];B[mb]
+;W[lc];B[oj])
+(;B[oe]
+C[Black 5 is a mistake.]
+;W[pe])
+(;B[oc]
+C[Black 5 is a mistake.]
+;W[pc]))))

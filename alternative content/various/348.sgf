@@ -1,0 +1,24 @@
+(;GM[1]FF[4]CA[UTF-8]
+SZ[19]RU[Japanese]KM[0]TM[1800,0,30,5]PW[]PB[]AB[cp][eq]AW[ep][fq]AB[dq]AW[fp]AB[cn]AW[jq]AB[lq]AE[pp][pq]AB[hq]LB[hq:1]PL[W]C[what's the best way to respond to 1?]
+(;W[dp]CR[dp]
+;B[do]CR[do]
+;W[fr]CR[fr]
+;B[er]CR[er]
+;W[ip]CR[ip]C[RIGHT
+threats in the corner let white play this move])
+(;W[ip]CR[ip]
+;B[hp]CR[hp]
+;W[ho]CR[ho]
+;B[hr]CR[hr]LB[fr:A][jr:B]C[black has A and B])
+(;W[jp]CR[jp]C[too easy on black])
+(;W[gr]CR[gr]C[too easy on black])
+(;W[hp]CR[hp]
+;B[iq]CR[iq]
+;W[ip]CR[ip]
+;B[jr]CR[jr]
+(;W[jp]CR[jp]
+;B[kr]CR[kr]C[easy for black])
+(;W[kr]CR[kr]
+;B[kq]CR[kq]
+;W[jp]CR[jp]
+;B[ir]CR[ir])))

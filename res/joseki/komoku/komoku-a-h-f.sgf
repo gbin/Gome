@@ -1,0 +1,36 @@
+(;
+GM[1]FF[4]AB[qd][ld]AW[oc]C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n];W[oe]C[White 4 is standard with the one-space pincer, high or low, but it is not played with the low two- or three-space pincer. White 4 reflects a special strategy by White. Black continues with 'a' or 'b'.]LB[pf:a][qg:b]
+(;B[pf]C[White continues with 'a'. White 'b' is a mistake.]LB[qc:a][of:b]
+(;W[qc]C[Black continues with 'a'. Black 'b' is a mistake.]LB[rc:a][pd:b]
+(;B[rc]C[White continues with 'a'. White 'b' is a mistake in this case.]LB[qb:a][pd:b]
+(;W[qb]C[White 8 is important. White continues with 'a', or simply at 'b'.]LB[pd:a][qj:b]
+(;B[pd];W[od]C[White continues with 'a', 'c' or 'd'. Black 'd' is an old pattern, not recommended, as it strengthens White.]LB[qi:a][mf:b][qj:c][pg:d]
+(;B[qi]C[Black may play 'a' or 'b' instead of 11.]LB[qj:a][pg:b])
+(;B[mf];W[ng];B[pg];W[nf];B[qj]C[Black now lacks a good move at top.])
+(;B[qj]AB[pq][ce]AW[dp][dc]C[Yoshio Ishida versus Rin Kaiho, 6th game of the 13th Meijin Title, 1974.];W[dh];B[hc];W[lb];B[ed];W[ec];B[fd];W[fc];B[gd];W[cd];B[bd];W[bc];B[dd];W[cc];B[fq];W[dn];B[dr];W[cq];B[iq];W[cf];B[be];W[df];B[de];W[dk];B[po];W[kd];B[ke];W[je];B[kf];W[jd];B[ef];W[qm];B[of];W[qp];B[qo];W[ro];B[rn];W[qi];B[pj];W[rp];B[qn];W[pp];B[op];W[oq];B[qq];W[rq];B[or];W[nq];B[np];W[rm];B[rr];W[rj];B[rk];W[rh];B[pl];W[qr];B[pr];W[rs];B[sr];W[mp];B[on];W[nr];B[qs];W[qf];B[pe];W[re];B[pc];W[pb];B[rd];W[sk];B[sl];W[sj];B[pi];W[ph];B[sh];W[sg];B[rg];W[qk];B[qg];W[pk];B[ok];W[ql];B[sm];W[pm];B[mo];W[rl];B[sn];W[qh];B[sf];W[ni];B[oj];W[pg];B[se];W[ng];B[nf];W[om];B[nm];W[nl];B[ol];W[nn];B[mm];W[so];B[lp];W[nk];B[lc];W[kb];B[mb];W[mc];B[nc];W[nb];B[md];W[ma];B[ib];W[jb];B[gb];W[fb];B[fo];W[jf];B[ac];W[ab];B[eh];W[di];B[cr];W[br];B[kg];W[jg];B[fm];W[kh];B[mg];W[ip];B[jq];W[bg];B[gi];W[hj];B[gj];W[hi];B[gk];W[hk];B[hh];W[ih];B[hg];W[hm];B[dm];W[cm];B[cn];W[em];B[en];W[do];B[el];W[dl];B[dq];W[bp];B[in];W[hn];B[ho];W[io];B[im];W[hp];B[go];W[kn];B[jo];W[lo];B[ln];W[jn];B[il];W[jl];B[jp];W[ik];B[hq];W[hl];B[gp];W[ko];B[mq];W[ll];B[lh];W[li];B[mi];W[lj];B[ki];W[jh];B[mj];W[nj];B[lk];W[kj];B[kk];W[jj];B[mk];W[cs];B[ek]C[Black wins by resignation.]))
+(;B[qj]C[White could attack at 'a', or play elsewhere ('b'). White 'c', prompting Black 'a', is weak.]LB[qe:a][dp:b][pd:c]
+(;W[qe];B[pe];W[rd];B[pd];W[re];B[od];W[nc];B[nd]C[Black's thickness is better than White's profit.])
+(;W[dp]C[White plays elsewhere.];B[pe]C[Black 11 is the recommended follow-up locally.])
+(;W[pd]C[White gives Black a "thank-you" move.];B[qe])))
+(;W[pd]C[White 8 is a mistake.];B[qe];W[qb];B[qj]C[White 4 is wrongly placed. It should be at 'a'.]LB[nd:a]))
+(;B[pd]C[Black 7 is a mistake.];W[pc];B[od];W[nd]C[Black continues with 'a'. Black 'b' is a mistake.]LB[ne:a][nc:b]
+(;B[ne];W[me];B[nf];W[md])
+(;B[nc]C[Black 11 is a mistake.];W[mc];B[ne];W[md];B[me];W[of]C[Black's shape is thin.])))
+(;W[of]C[White 6 is a mistake.];B[pg]C[White makes Black crawl along the fourth line, the "line of victory".]))
+(;B[qg]C[White continues with 'a' or 'b'.]LB[qc:a][pf:b]
+(;W[qc];B[rc];W[qb]C[Black normally plays 'a', but 'b' is playable.]LB[pd:a][nd:b]
+(;B[pd];W[od]C[Black must reinforce at 'a', so is dissatisfied. Playing elsewhere ('b') is a mistake.]LB[qi:a][dp:b]
+(;B[qi])
+(;
+C[Black plays elsewhere, a mistake.];W[re];B[rd];W[qf];B[pf];W[rg];B[qh];W[rh]C[Black continues with 'a'. Black cannot play 'b'.]LB[pe:a][qi:b]
+(;B[pe];W[qi])
+(;B[qi]C[Black 19 is unreasonable.];W[pe];B[qe];W[rf];B[ri];W[rb])))
+(;B[nd];W[od];B[re];W[lb]C[White 12 at 'a' is also feasible.]LB[mb:a]))
+(;W[pf]C[White gets settled quickly, but he should only play this way when driven by necessity, as all the subtlety is taken out of the position.];B[qf];W[qc];B[rc];W[pd];B[qe];W[qb])))

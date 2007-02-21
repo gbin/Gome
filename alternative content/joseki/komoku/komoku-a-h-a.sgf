@@ -1,0 +1,99 @@
+(;
+GM[1]FF[4]
+AB[qd][ld]
+AW[oc]
+C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]
+LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n]
+;W[qc]
+C[Black continues with 'a'. Black 'b' is not good enough.]
+LB[rc:a][pd:b]
+
+(;B[rc];W[pd]
+C[Black continues with 'a' or 'b'.]
+LB[qe:a][qb:b]
+
+(;B[qe];W[qb];B[pg])
+(;B[qb]
+C[White continues with 'a' or 'b'.]
+LB[qe:a][pe:b]
+
+(;W[qe];B[pc];W[rd];B[qc]
+C[Black 11 completes the "plum bowl" shape.
+
+White continues with 'a' or 'b'.]
+LB[oe:a][pe:b]
+
+(;W[oe]
+C[Black should continue with 'a'. Playing elsewhere with 'b' results in a local loss. White 'c' is an overplay that may work.]
+LB[ob:a][dp:b][pf:c]
+
+(;B[ob];W[nc];B[mb]
+C[The joseki ends.]
+;W[nb]
+C[White's later continuation.]
+;B[na];W[mc];B[lc];W[lb];B[ma]
+;W[kb];B[jc])
+(;
+C[Black plays elsewhere; not recommended.]
+;W[nb];B[re];W[rf];B[sd];W[qf])
+(;B[pf]
+C[White 13 is an overplay.]
+;W[pe];B[nd]
+C[White continues with 'a' or 'b'.]
+LB[od:a][ne:b]
+
+(;W[od];B[ph]
+C[With forcing moves at 'a' and 'b', White will have no trouble settling himself.]
+LB[nb:a][rf:b]
+)
+(;W[ne];B[nc];W[me];B[kc];W[pj]
+C[White may hope for more from his moyo at right than Black's territory at top. Black is left with a weak point at 'a' where White may play in.]
+LB[lb:a]
+)))
+(;W[pe]
+C[White must have the ladder at 2 to play this way.]
+;B[nc];W[qi];B[ob]))
+(;W[pe]
+C[White needs a favorable ladder at 2 to play this way.]
+;B[pc];W[pb];B[qc];W[qf];B[nc];W[od];B[ob];W[me]
+;B[mc])))
+(;B[pd]
+C[Black 5 is not recommended.]
+;W[pc];B[od];W[nd];B[ne]
+C[White continues with 'a', though White 'b' is possible with a favorable ladder.]
+LB[nc:a][me:b]
+
+(;W[nc];B[me];W[qj])
+(;W[me];B[nc];W[md];B[mc]
+C[If the ladder off White 10 is favorable, White may play 'a'. Otherwise 'b' is the only move left.]
+LB[lc:a][nf:b]
+
+(;W[lc];B[lb];W[kc];B[kd]
+C[If the ladder off 'b' is not favorable to White, White collapses as 'a' and 'b' are miai.]
+LB[jc:a][mf:b]
+)
+(;W[nf];B[rc];W[rb];B[rd];W[nb];B[mb];W[na];B[kc]
+C[White lives with 'a' as considerable disadvantage. White 'b' and the corner can be killed through a ko.]
+LB[sb:a][pg:b]
+
+(;W[sb];B[qh])
+(;W[pg]
+C[White risks the corner. Black must play 'a', not 'b'.]
+LB[ra:a][sb:b]
+
+(;B[ra];W[sb];B[pa];W[pb];B[ma];W[ob];B[qb]
+C[While White captures first, Black has a ko threat at 'a'.]
+LB[mf:a]
+)
+(;B[sb]
+C[Black 23 is a mistake.]
+;W[ra]
+C[White lives.]
+))))))

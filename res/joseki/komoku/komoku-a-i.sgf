@@ -1,0 +1,110 @@
+(;
+GM[1]FF[4]AB[qd][kd]AW[oc]C[The three-space high pincer is relatively recent (since the 1950s). It is not often played, and not many definitive sequences have been worked out.
+
+The balance with the top-left corner is usually the main factor in choosing this pincer.
+
+White responds from 'a' to 'g', and may play elsewhere. 
+
+White 'i' represents a special strangness.
+
+i9, h8, g7, f6, e5, d4, c3, b2, a1]LB[mc:i][dp:h][qb:g][pg:f][pf:e][of:d][pe:c][pd:b][qc:a]
+(;W[qc]C[White aim to settle quickly.];B[rc]C[White continues with 'a'. White 'b' is a mistake.]LB[rb:b][pd:a]
+(;W[pd]C[Black continues with 'a' or 'b'.]LB[qb:b][qe:a]
+(;B[qe];W[qb];B[pg])
+(;B[qb];W[qe];B[pc];W[rd];B[qc];W[oe]))
+(;W[rb]C[White 6 is slow.
+
+Black continues with 'a'. Black 'b' is mild. Black 'c' is also a mistake.]LB[qb:c][rd:b][pc:a]
+(;B[pc];W[qb];B[pd];W[pb];B[od];W[nc];B[nd]C[Black creates a powerful wall.])
+(;B[rd];W[pb])
+(;B[qb];W[pc];B[sb];W[rd];B[ra];W[qe]C[This works even if the ladder does not favor White.];B[pd];W[oe]C[White 14 lets White squeeze Black if there is an unfavorable ladder.])))
+(;W[pd]C[Black continues with 'a'. Black 'b' is unreasonable.]LB[qc:b][qe:a]
+(;B[qe];W[qc];B[rc];W[qb];B[pg])
+(;B[qc]C[Black 5 is a mistake.];W[qe]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qf:b][re:a]
+(;B[re]C[White continues with 'a' to take the corner, or 'b' to force Black along to crawl along the second line (the 'line of defeat').]LB[qf:b][rf:a]
+(;W[rf];B[qf];W[pe];B[rg];W[rd];B[sf];W[rc]C[White takes the corner.])
+(;W[qf];B[rf];W[qg]))
+(;B[qf]C[Black 7 is a mistake.
+
+White continues with 'a'. White 'b' fails to take advantage of Black's mistake.]LB[re:b][pe:a]
+(;W[pe];B[re];W[rf]C[Black continues with 'a'. Black 'b' is not recommended.]LB[rd:b][rg:a]
+(;B[rg];W[rd];B[sf];W[rc])
+(;B[rd]C[Black 11 is slow.];W[qg];B[rb];W[pf]C[White 14 leaves no bad aji.]))
+(;W[re]C[With White 8, White loses an opportunity to take advantage.];B[pe];W[rf];B[oe];W[pc];B[qb];W[rd];B[nc]))))
+(;W[pe]C[White 4 is a bit risky, though nothing happens if Black plays 'a' rather than the cut following 'b'.
+
+Black continues with 'a' or 'b'.]LB[pd:b][qe:a]
+(;B[qe];W[pf];B[qg];W[id]C[Black may continue with 'a'.]LB[ne:a])
+(;B[pd]C[Black plays tough, planning to cut.];W[od];B[oe];W[pf]C[White 8 is the only move.
+
+Black continues with 'a'. Black 'b' is too mild.]LB[ne:b][of:a]
+(;B[of];W[pg];B[og];W[ph];B[pc];W[pb];B[qb];W[ob];B[rc];W[re];B[rd]C[White continues with 'a'. 
+
+White 'b' and 'c' are not recommended, as Black gets superior thickness. White 'c' is better than 'b', but not by much.]LB[md:c][lc:b][ne:a]
+(;W[ne]C[White 20 is the strongest continuation.];B[oh];W[oi];B[mh];W[le];B[ld];W[md];B[mf];W[me];B[pi]C[White continues with 'a'. White 'b' is unreasonable.]LB[pj:b][qi:a]
+(;W[qi];B[pj];W[qj];B[pk])
+(;W[pj]C[White 30 is a mistake. The five White stones on the right will be captured.];B[qi];W[qj];B[rh]C[Black 33 is the tesuji. White 'a' is the best White can do, but not good enough. If White 'b', Black 'a'.]LB[rg:b][rj:a];W[rj];B[rg];W[rf];B[qe];W[qf];B[sg];W[sf];B[ri]))
+(;W[lc]C[White 20 is not recommended.];B[oh];W[pi];B[ld];W[kc];B[jc];W[jb];B[ib]C[To live, White gives Black considerable thickness.])
+(;W[md]C[White 20 is not very good.];B[me];W[ld];B[le];W[kb];B[kc];W[lb];B[ic];W[jb];B[ie]))
+(;B[ne]C[Black 9 is too mild.];W[qb];B[rf]C[White can settle himself with 'a'. The three-space pincer is too far to be a weapon. White has an easy fight.]LB[mc:a])))
+(;W[of]C[White 4 is natural. Variations are the same as other pincers.
+
+Black continues with 'a' or 'b'.]LB[oe:b][qg:a]
+(;B[qg]C[White continues with 'a' or 'b'.]LB[ph:b][id:a]
+(;W[id])
+(;W[ph]C[White may choose the right side.];B[pg];W[og];B[oh];W[pj];B[nh];W[qh]))
+(;B[oe];W[ne];B[pe]C[White continues with 'a' or 'b'.]LB[mc:b][nd:a]
+(;W[nd];B[nf]C[White must now decide what to do about White 4, the cut stone. White 'a' is the better option. White 'b', the sacrifice, is not recommended.]LB[ld:b][og:a]
+(;W[og];B[ng];W[oh];B[lf];W[qb];B[qg])
+(;W[ld]C[White 10 is not recommended.];B[og];W[mf];B[ng];W[kc]C[White position is tenuous. Compare this result with variation 2-1-8-5-2-1-1-1.]))
+(;W[mc]C[White 8 avoids fighting.];B[nf];W[me];B[og];W[mf];B[ng]C[White may continue with 'a'.]LB[hd:a])))
+(;W[pf]C[White adopts the taisha. Black can play 'a' or 'b'.]LB[pe:b][od:a]
+(;B[od];W[pd];B[pe];W[pc];B[qe];W[oe];B[nd];W[qc]C[Black continues with 'a'. Black 'b' was recently played by Nie 9-dan, who reportedly liked the result he got.]LB[re:b][qf:a]
+(;B[qf];W[of];B[qh];W[mb])
+(;B[re]AB[dq]AW[dd][pp]C[The game setup where this variation occurred is shown for reference. The colors are reversed from the actual game.];W[rc];B[of];W[ne];B[md];W[og];B[nf];W[me];B[le];W[mf];B[ng];W[nh];B[mg];W[lf];B[pg];W[kf];B[nb];W[ob];B[id];W[lh];B[oh];W[gc]))
+(;B[pe];W[oe];B[qf]C[White continues with 'a'. White 'b' is an overplay.]LB[qg:b][pg:a]
+(;W[pg];B[qg];W[ph]C[Black continues with 'a'. A Black jump to 'c' is premature.]LB[qi:b][qh:a]
+(;B[qh];W[pi];B[qj];W[id])
+(;B[qi]C[Black 11 is a mistake.];W[pd];B[qe];W[qc];B[rc];W[rb];B[qb];W[pc]C[Black continues with 'a'. Black 'b' is a mistake.]LB[sb:b][rd:a]
+(;B[rd])
+(;B[sb]C[Black 19 is a mistake.];W[qh];B[rh]C[Depending upon the ladder, White can play 'a', threatening to capture Black 11, or 'b', aiming for Black 15 or the five Black stones.]LB[ri:b][rg:a])))
+(;W[qg]C[White 8 is a mistake.
+
+Black continues with 'a'. Black 'b' is a mistake.]LB[pg:b][od:a]
+(;B[od]C[White may try 'a' or 'b'. Either results in a loss.]LB[of:b][nd:a]
+(;W[nd];B[of];W[pd];B[pg])
+(;W[of];B[nd]))
+(;B[pg]C[White 9 is a mistake.];W[of];B[qh];W[rg];B[ph];W[qc];B[rf];W[rd]))))
+(;W[pg]C[The large taisha.];B[od]C[White continues with 'a' or 'b'.]LB[pd:b][nd:a]
+(;W[nd];B[oe];W[pc]C[Black continues with 'a'. Black 'b' is not recomended.]LB[qc:b][ne:a]
+(;B[ne];W[md];B[me]C[White continues with 'a' or 'b'.]LB[pd:b][qc:a]
+(;W[qc]C[Black continues with 'a'. Black 'b' is a mistake.]LB[ld:b][mb:a]
+(;B[mb]C[White continues with 'a'. White 'b' is a mistake.]LB[lc:b][nb:a]
+(;W[nb];B[ld];W[pj])
+(;W[lc]C[White 14 is a mistake.];B[kc];W[lb];B[kb];W[la];B[ld];W[mc]))
+(;B[ld]C[Black 13 is a mistake.];W[mb]))
+(;W[pd];B[pe];W[qe]C[Black continues with 'a'. Black 'b' keeps the situation simple, but gives White superior profit.]LB[qf:b][re:a]
+(;B[re];W[qf];B[qc];W[qb];B[rb];W[pb];B[rf];W[rg];B[qh];W[qg];B[ra];W[mb]C[Black continues with 'a' through 'c', depending on the overall situation.]LB[pk:c][oi:b][kb:a])
+(;B[qf]C[Black 15 is not recommended.];W[re];B[qg];W[rd];B[ph])))
+(;B[qc]C[Black 9 is not recommended. White is conservative, and Black gets the better of it. White 'b' is a light, flexible reply that Black will have trouble answering.]LB[le:b][mc:a]
+(;W[mc];B[og];W[oh];B[ng])
+(;W[le])))
+(;W[pd];B[pe];W[pc]C[Black continues with 'a' or 'b'. 'a' is simple but a bit mild, while 'b' is complicated.]LB[qc:b][nd:a]
+(;B[nd];W[qe];B[qf];W[re];B[pf];W[rd];B[og])
+(;B[qc]C[White continues with 'a'. White 'b' is not recommended.]LB[oe:b][mc:a]
+(;W[mc];B[oe];W[qb];B[rb];W[me];B[og];W[oh];B[ng]C[White 'a' and 'b' are possible continuations. White 'a' is simple, White 'b' a strong move.]LB[qe:b][lf:a]
+(;W[lf];B[ph];W[pi];B[qh];W[qi];B[rg];W[rh];B[qg])
+(;W[qe];B[pb];W[ob];B[qf];W[re];B[qa];W[qg]C[Black continues with 'a'. Black 'b' is a mistake.]LB[rf:b][lf:a]
+(;B[lf]C[What should follow is not altogether clear.])
+(;B[rf]C[Black 25 is a mistake.];W[pf];B[rd];W[of];B[nf];W[ne];B[se];W[pi]C[White looks forward to profitably tormenting the three Black stones.])))
+(;W[oe]C[White 10 is an old 2-space pincer joseki that is no longer considered favorably.];B[pf]C[White continues with 'a'. White 'b' is reckless.]LB[of:b][nd:a]
+(;W[nd];B[of];W[me];B[qg])
+(;W[of]C[White 12 is a mistake.];B[nd];W[qb];B[rf]C['a' and 'b' are miai.]LB[og:b][rb:a])))))
+(;W[qb];B[pf];W[mc];B[qj])
+(;
+C[White plays elsewhere.];B[pc];W[od];B[pf];W[md];B[ph])
+(;W[mc]C[White 4 is peculiar, but the result for White, played properly, is not horrendous.];B[nd]C[White continues with 'a'. White 'b' is a mistake in direction.]LB[md:b][od:a]
+(;W[od];B[oe];W[ne]C[Black continues with 'a'. Black 'b' is not recommended.]LB[pe:b][md:a]
+(;B[md];W[pe];B[of];W[pd])
+(;B[pe];W[me]))
+(;W[md]C[White 6 is a mistake in direction.];B[me];W[le];B[ne];W[ld];B[kc])))

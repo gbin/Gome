@@ -1,0 +1,2699 @@
+(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]TM[]
+PW[White]PB[Black]AW[rl][pm][rm][rn][oo][po][qo][op][oq][pq][qr][ps]AB[sn][ro][pp][qp][rp][qq][sq][rr]C[how can white best attack the black group?]PL[W]
+(;W[rs]CR[rs]
+;B[so]CR[so]
+(;W[sr]CR[sr]C[RIGHT
+white makes a ko])
+(;W[ss]CR[ss]
+;B[sr]CR[sr])
+(;W[sm]CR[sm]
+;B[sr]CR[sr]))
+(;W[sr]CR[sr]
+;B[rs]CR[rs]
+(;W[so]CR[so]
+;B[sp]CR[sp])
+(;W[qs]CR[qs]
+;B[ss]CR[ss])
+(;W[sm]CR[sm]
+;B[so]CR[so]))
+(;W[ss]CR[ss]
+;B[rs]CR[rs])
+(;W[sm]CR[sm]
+;B[rs]CR[rs])
+(;W[sp]CR[sp]
+;B[rs]CR[rs])
+(;W[qs]CR[qs]
+;B[rs]CR[rs])
+(;W[so]CR[so]
+;B[rs]CR[rs]))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]TM[]
+PW[White]PB[Black]AW[cm][dm][cn][co][fo][ap][bp][cp][fp][dq][eq][fq][br][er][fr][bs][es]AB[em][dn][fn][gn][do][eo][go][dp][gp][bq][cq][gq][ar][dr][gr][cs][fs][gs]C[how can black win?]
+(;B[aq]CR[aq]C[RIGHT
+white cannot approach anywhere here])
+(;B[cr]CR[cr]
+;W[aq]CR[aq]
+(;B[as]CR[as]
+;W[br]CR[br]
+(;B[bs]CR[bs]C[RIGHT])
+(;B[ds]CR[ds]
+;W[bs]CR[bs]))
+(;B[ep]CR[ep]
+;W[en]CR[en]))
+(;B[as]CR[as]
+;W[aq]CR[aq])
+(;B[ep]CR[ep]
+;W[en]CR[en])
+(;B[ds]CR[ds]
+;W[cr]CR[cr])
+(;B[en]CR[en]
+;W[aq]CR[aq]
+(;B[cr]CR[cr]
+;W[ds]CR[ds])
+(;B[ep]CR[ep]
+;W[cr]CR[cr])))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[pl][nm][qm][mn][qn][no][oo][qo][pp][oq][pq][or]
+AB[on][pn][po][ro][mp][np][op][qp][sp][lq][qq][rq][kr][pr]
+C[black to win
+]
+(;B[os];W[qr]
+(;B[nr];W[ps]
+(;B[ns]C[RIGHT
+])
+
+(;B[nq];W[ns];B[ms];W[nn]C[ko
+])
+)
+
+(;B[ps];W[ns];B[nr];W[qs])
+
+(;B[qs];W[ps]C[only ko
+])
+)
+
+(;B[nr];W[os];B[nq];W[qr]
+(;B[ns];W[ps];B[rr];W[nn])
+
+(;B[rr];W[ps])
+)
+
+(;B[nq];W[qr];B[os];W[nr]
+(;B[mr];W[ps]
+(;B[ms];W[ns])
+
+(;B[ns];W[ms])
+)
+
+(;B[ns];W[mr];B[ms];W[ls])
+)
+
+)(
+;
+FF[4]
+GM[1]
+SZ[19]
+AP[Jago:Version 4.27]
+AW[be][ce][df][cc][dc][ec][gc]
+AB[bd][bc][cb][db]
+GN[temp]
+(
+;
+W[ba]
+(
+;
+B[bb]
+(
+;
+W[ad]
+;
+B[ac]
+(
+;
+W[eb]
+;
+B[aa]
+)
+(
+;
+W[aa]
+;
+B[eb]
+;
+W[fb]
+;
+B[ea]
+;
+W[ca]
+C[RIGHT]
+)
+)
+(
+;
+W[eb]
+;
+B[ad]
+(
+;
+W[ab]
+C[RIGHT]
+)
+(
+;
+W[da]
+;
+B[ca]
+)
+(
+;
+W[ca]
+;
+B[da]
+)
+)
+)
+(
+;
+B[eb]
+;
+W[fb]
+(
+;
+B[ea]
+;
+W[bb]
+C[RIGHT]
+)
+(
+;
+B[bb]
+(
+;
+W[ea]
+;
+B[ad]
+;
+W[ab]
+C[RIGHT]
+)
+(
+;
+W[ad]
+;
+B[ac]
+;
+W[aa]
+;
+B[ea]
+;
+W[ca]
+C[RIGHT]
+)
+)
+)
+)
+(
+;
+W[eb]
+;
+B[ba]
+)
+(
+;
+W[ab]
+;
+B[ba]
+)
+(
+;
+W[ad]
+;
+B[ba]
+)
+)(
+;
+FF[4]
+GM[1]
+SZ[19]
+AP[Jago:Version 4.29]
+AB[ab][bb][cb][db][eb]
+AW[ac][bc][cc][dc][ec][fc][gc][hc][hb][jb]
+GN[temp]
+(
+;
+W[ba]
+(
+;
+B[fb]
+(
+;
+W[fa]
+(
+;
+B[gb]
+;
+W[ga]
+;
+B[ea]
+;
+W[ca]
+;
+B[ha]
+;
+W[ga]
+C[RIGHT]
+)
+(
+;
+B[ca]
+;
+W[ea]
+;
+B[ga]
+;
+W[gb]
+;
+B[da]
+;
+W[fa]
+C[RIGHT]
+)
+)
+(
+;
+W[ca]
+;
+B[fa]
+LB[da:a]
+C[Seki after white a]
+)
+)
+(
+;
+B[ca]
+;
+W[ea]
+;
+B[fb]
+;
+W[fa]
+;
+B[ga]
+;
+W[gb]
+;
+B[da]
+;
+W[fa]
+C[RIGHT]
+)
+)
+(
+;
+W[ea]
+;
+B[fb]
+;
+W[fa]
+;
+B[ga]
+;
+W[gb]
+;
+B[da]
+LB[ba:a][fa:b]
+C[a and b are now miai]
+)
+(
+;
+W[fb]
+;
+B[ea]
+)
+)(
+;
+FF[4]
+GM[1]
+SZ[19]
+AP[Jago:Version 4.32]
+AB[cd][ce][be][cf][de][ee][ec][eb][fb][jb][jd][kd][le][jf][dh]
+AW[lb][ld][md][me][gb][fc][fd][hd][cg][dg][df][ef][bf]
+TR[ee]
+C[how to handle the black thrust?]
+GN[temp]
+(
+;
+W[gf]
+;
+B[fe]
+;
+W[hg]
+C[RIGHT white stays connected]
+)
+(
+;
+W[fe]
+;
+B[ff]
+(
+;
+W[gf]
+;
+B[fg]
+C[trouble]
+)
+(
+;
+W[fg]
+;
+B[gf]
+C[trouble]
+)
+(
+;
+W[gg]
+;
+B[fg]
+;
+W[fh]
+;
+B[gf]
+C[trouble]
+)
+)
+(
+;
+W[ff]
+;
+B[fe]
+;
+W[ge]
+;
+B[gf]
+;
+W[hf]
+;
+B[gg]
+;
+W[hg]
+;
+B[gh]
+;
+W[hh]
+;
+B[hi]
+;
+W[gi]
+;
+B[fh]
+C[more trouble for white than for black]
+)
+)(
+;
+FF[4]
+GM[1]
+SZ[19]
+AP[Jago:Version 4.33]
+AW[dc][ed][fc][gc][ic]
+AB[ce][ee][fd][gd][hd]
+TR[ic]
+C[Whites has just played the triangled move. Does it leave any kind of weakness?]
+GN[temp]
+(
+;
+B[dd]
+;
+W[ec]
+;
+B[cc]
+;
+W[cb]
+;
+B[bb]
+;
+W[bc]
+;
+B[cd]
+(
+;
+W[db]
+C[RIGHT this slow connection is the price white has to pay for jumping too early.]
+)
+(
+;
+W[ba]
+;
+B[hc]
+;
+W[hb]
+;
+B[ib]
+C[RIGHT if white captures in the corner black can cut on the side]
+)
+)
+(
+;
+B[hc]
+;
+W[hb]
+;
+B[gb]
+;
+W[ib]
+;
+B[cc]
+;
+W[cb]
+;
+B[bc]
+;
+W[bb]
+C[black doesn't achieve much by cutting early]
+)
+)(
+
+;
+
+FF[4]
+
+GM[1]
+
+SZ[19]
+
+AP[Jago:Version 4.35]
+
+AB[qr][qq][qp][rp][sq][oq]
+
+AW[nr][nq][np][po][qo][ro][so][sp][rr][oo]
+
+C[Black first to live.]
+
+GN[goproblem]
+
+(
+
+;
+
+B[sr]
+
+;
+
+W[rs]
+
+(
+
+;
+
+B[or]
+
+;
+
+W[rq]
+
+;
+
+B[qs]
+
+;
+
+W[ss]
+
+;
+
+B[sq]
+
+C[RIGHT]
+
+)
+
+(
+
+;
+
+B[qs]
+
+;
+
+W[or]
+
+)
+
+(
+
+;
+
+B[rq]
+
+;
+
+W[or]
+
+)
+
+(
+
+;
+
+B[pp]
+
+;
+
+W[or]
+
+)
+
+)
+
+(
+
+;
+
+B[rs]
+
+;
+
+W[sr]
+
+(
+
+;
+
+B[rq]
+
+;
+
+W[or]
+
+)
+
+(
+
+;
+
+B[or]
+
+;
+
+W[rq]
+
+)
+
+)
+
+(
+
+;
+
+B[or]
+
+;
+
+W[rq]
+
+)
+
+(
+
+;
+
+B[rq]
+
+;
+
+W[or]
+
+)
+
+)(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-29]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[mb][nb][nc][oc][od][pd][qd][oe][qg]
+AB[lb][mc][ld][nd][ne][pe][qe][nf][of]LB[qg:1]
+C[white has just played one. what's the best response?
+]
+(;B[pf]C[not a good result for black
+])
+
+(;B[re];W[pf];B[pg];W[qf];B[qh];W[ph]
+(;B[rg];W[og];B[rf]
+C[RIGHT
+black forces white into a dumpling shape, and is strong on both sides
+])
+
+(;B[rf];W[rg]C[can't atari from this side
+];B[rh];W[sg])
+)
+
+(;B[pg];W[re];B[rf];W[qf]C[white connects underneath
+];B[pf];W[rg];
+B[rd];W[sf])
+
+)(;SZ[9]FF[4]GM[1]
+AP[GOWrite:1.99g]WR[19 kyu]HA[0]PB[Tim Brent]BR[19 kyu]KM[5.5]
+EV[go9.rt.2002.7.43]SO[http\://www.littlegolem.com]PW[Marc Oldenhof]
+GN[ ]
+;
+
+AW [gd][dg][df][cf][bf][ag][bh][ch][de][ci][ec][fc][db][gf][he][ge][ie][be][ea][ca][da];
+AB [gg][dd][ee][dh][di][eg][fh][ef][cc][bd][ei][ed][ce][cb][hf][ff][if][hh][dc][ba];
+
+C[Black to somehow win];
+
+B[fa];W[eb]
+;
+B[ae]
+;W[cd]
+;B[gc]
+;
+W[gb]
+;B[hc]
+;W[fd]
+;B[hb]
+;W[ga]
+;
+B[ha]
+;W[fb]
+;B[fe]
+;W[bb]
+;
+B[ab]
+;W[aa]
+;B[ac]
+;W[ba]
+;
+B[bc]
+;W[af]
+;B[id]
+;W[ad]
+;
+B[hd]C[RIGHT]
+C[And Black wins the capturing race and game :)]
+)(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[9]KM[0.00]TM[]
+PW[Weiß]PB[Schwarz]AW[ab][bb][bc][ad][cd][ce][de][ee][cf][ff][hf][fg][eh]AB[ba][cb][db][cc][ec][gc][dd][ed][fe][ge][df][ef][bg][cg][dg][dh]C[Black to move and kill the white stones on the left]PL[B]
+(;B[af]CR[af]
+(;W[ae]CR[ae]
+;B[be]CR[be]C[Now white can't play b4, so he is dead RIGHT CHOICE])
+(;W[be]CR[be]
+;B[ae]CR[ae]C[b6 is a false eye, so white is dead RIGHT CHOICE]))
+(;B[bf]CR[bf]
+;W[be]CR[be]
+;B[af]CR[af]
+;W[ae]CR[ae])
+(;B[be]CR[be]
+;W[bf]CR[bf]
+;B[af]CR[af]
+;W[bd]CR[bd])
+(;B[ae]CR[ae]
+;W[af]CR[af]
+;B[bf]CR[bf]
+;W[be]CR[be]))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[1.00]TM[]
+AW[cb][eb][fb][ac][bd][ed][fd][be][ce][de]AB[ca][ab][db][bc][dc][cd][dd]C[White to move!]PL[W]
+(;W[ba]CR[ba]
+;B[da]CR[da]
+;W[bb]CR[bb]C[Black is dead! RIGHT])
+(;W[bb]CR[bb]
+;B[ba]LB[cc:B][ad:A]CR[ba]C[White can't play B because of the snapback, so this is only a ko! B A or B B instead of B B19 would allow white to play B19 himself and kill black as in the solution.])
+(;W[ad]CR[ad]
+;B[bb]CR[bb]C[The A 17 stone is not important!])
+(;W[da]CR[da]
+;B[ea]CR[ea]
+(;W[ba]CR[ba]
+;B[bb]CR[bb]C[This is only a ko!])
+(;W[bb]CR[bb]
+;B[ba]CR[ba]C[Only ko!])))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[pq][rq][sq][nr][or][qr][sr][qs][ss]
+AB[ro][so][np][op][pp][qp][rp][mq][qq][mr][ms]C[black to kill
+]
+(;B[pr];W[ps]
+(;B[ns];W[oq]
+(;B[os]C[RIGHT
+])
+
+(;B[nq];W[os])
+)
+
+(;B[oq];W[ns]C[only ko
+])
+
+(;B[os];W[ns];B[oq];W[pr])
+)
+
+(;B[oq];W[pr]
+(;B[ns];W[os])
+
+(;B[os];W[ns])
+)
+
+(;B[ns];W[os]
+(;B[oq];W[pr])
+
+(;B[pr];W[oq])
+
+(;B[nq];W[pr])
+)
+
+(;B[os];W[ns]
+(;B[pr];W[ps])
+
+(;B[oq];W[pr])
+
+(;B[ps];W[pr])
+)
+
+(;B[ps];W[pr]
+(;B[ns];W[os])
+
+(;B[os];W[ns])
+)
+
+)(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[rc][od][rd][ne][oe][pe][re][nf][pf][rf][qg][rg]
+AB[nc][oc][qc][md][qd][me][qe][of][qf][og][pg][qh][rh][pi][ri]PL[2]
+C[white to connect her two weak groups
+]
+(;W[pc]
+(;B[qb]
+(;W[pb]C[RIGHT
+black dies first
+])
+
+(;W[rb];B[pb];W[ob];B[pd])
+)
+
+(;B[pb];W[qb]C[RIGHT
+white gets black in a snapback
+])
+)
+
+(;W[qb];B[pc]C[bad: white remains cut into two weak parts
+])
+
+(;W[rb];B[qb])
+
+(;W[pd];B[pc])
+
+(;W[mf];B[qb])
+
+(;W[ng];B[qb])
+
+(;W[mg];B[qb])
+
+)(;
+GM[1]FF[4]VW[]AP[Many Faces of Go:11.0]
+SZ[19]
+HA[0]
+ST[1]
+DT[2003-03-19]
+KM[0.0]
+RU[Japanese]
+AB[rb][rd][qd][pc][pb][pe][oe][ne][md][mc][lc][kb][jb]
+AW[pd][od][oc][ob][qe][re][of][pf][ld][kc][lb][mb]
+C[White to save her 6 stones.]
+
+PL[W]TR[pd][od][oc][ob][mb][lb]
+
+(;W[me];B[le];W[mf];B[kd];W[nd]
+C[RIGHT
+Black's 3 stones are captured.]
+SQ[pe][oe][ne]
+)
+(;W[le];B[nf];W[ng];B[mf];W[lg];B[jc];W[kd];B[nb]
+C[White is short one liberty.]
+)
+(;W[kd];B[mf];W[ic];B[ib];W[hc];B[nb];W[nc];B[oa];W[na]
+;B[pa]
+C[White is short one liberty.]
+)
+(;W[nb];B[le];W[kd];B[ic])
+(;W[nc];B[le];W[kd];B[ic]))(;GM[1]FF[3]
+RU[Chinese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[2000-09-20]
+SY[Cgoban 1.9.10]TM[30:00(5x1:00)];AW[an][bn][cn][bo][bq][br][cr][cs]
+AB[am][bm][cm][dm][dn][do][dp][dq][dr][as][ds]
+C[black to kill... be careful!
+]
+(;B[bp];W[cp]
+(;B[ap];W[aq]
+(;B[cq];W[ao]
+(;B[bp];W[ap];B[co]C[RIGHT
+])
+
+(;B[co];W[bp])
+
+(;B[ap];W[bp])
+)
+
+(;B[co];W[ao];B[bp];W[cq];B[ap];W[bo]C[oops, white lives
+])
+)
+
+(;B[co];W[ap])
+
+(;B[cq];W[ap])
+)
+
+(;B[ap];W[bp]
+(;B[ar];W[aq])
+
+(;B[aq];W[ar])
+)
+
+(;B[cp];W[bp])
+
+(;B[co];W[bp])
+
+(;B[cq];W[bp])
+
+(;B[ar];W[bp])
+
+(;B[aq];W[bp])
+
+)(
+
+;
+
+FF[1]
+
+GM[1]
+
+SZ[19]
+
+AP[Jago:Version 4.51]
+
+AB[dd][gd][hd][jd][jc][df]
+
+AW[ic][hc][gc][fc][cc]
+
+C[White has accedentally played at the 3-3 point. How should black punish white?]
+
+GN[prob3]
+
+;
+
+B[dc]
+
+(
+
+;
+
+W[db]
+
+;
+
+B[eb]
+
+;
+
+W[cb]
+
+;
+
+B[ec]
+
+;
+
+W[fb]
+
+;
+
+B[ea]
+
+;
+
+W[jb]
+
+;
+
+B[kb]
+
+;
+
+W[ia]
+
+;
+
+B[hb]
+
+C[RIGHT White looks fairly dead on the side here]
+
+)
+
+(
+
+;
+
+W[ec]
+
+(
+
+;
+
+B[ed]
+
+;
+
+W[db]
+
+;
+
+B[cb]
+
+;
+
+W[eb]
+
+;
+
+B[ca]
+
+;
+
+W[da]
+
+;
+
+B[bc]
+
+C[RIGHT Black gets the corner]
+
+)
+
+(
+
+;
+
+B[db]
+
+)
+
+)
+
+)(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[White]PB[Black]AW[dp][ep][fp][gp][hp][dq][hq][er][ds]AB[cp][cq][eq][fq][gq][br][cr][dr][fs]LB[fs:1]C[black just played 1. please refute.]PL[W]
+(;W[gr]CR[gr]
+;B[fr]CR[fr]
+(;W[gs]CR[gs]
+;B[es]CR[es]
+;W[er]CR[er]C[RIGHT])
+(;W[es]CR[es]
+;B[cs]CR[cs]))
+(;W[gs]CR[gs]
+;B[gr]CR[gr]
+(;W[hr]CR[hr]
+;B[hs]CR[hs]C[ko])
+(;W[es]CR[es]
+;B[hs]CR[hs]))
+(;W[fr]CR[fr]
+;B[gr]CR[gr]
+(;W[hr]CR[hr]
+;B[es]CR[es])
+(;W[es]CR[es]
+;B[cs]CR[cs]))
+(;W[es]CR[es]
+;B[fr]CR[fr])
+(;W[hr]CR[hr]
+;B[fr]CR[fr])
+(;W[hs]CR[hs]
+;B[fr]CR[fr])
+(;W[cs]CR[cs]
+;B[fr]CR[fr]))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.50]
+AW[po][qo][ro][op][oq][qq][or][rr]AB[pp][qp][sq][sr][qs][rs]C[Black to play and live!]
+(;B[pq]CR[pq]
+(;W[pr]CR[pr]
+(;B[qr]CR[qr]
+;W[rp]CR[rp]
+;B[rq]CR[rq]C[RIGHT CHOICE])
+(;B[rp]CR[rp]
+;W[qr]CR[qr]))
+(;W[rp]CR[rp]
+(;B[rq]CR[rq]
+;W[pr]CR[pr]
+;B[qr]CR[qr]C[RIGHT CHOICE])
+(;B[pr]CR[pr]
+;W[rq]CR[rq])))
+(;B[qr]CR[qr]
+;W[rq]CR[rq]
+(;B[rp]CR[rp]
+;W[pq]CR[pq])
+(;B[pq]CR[pq]
+;W[rp]CR[rp]))
+(;B[rq]CR[rq]
+;W[qr]CR[qr]
+(;B[pq]CR[pq]
+;W[pr]CR[pr])
+(;B[pr]CR[pr]
+;W[pq]CR[pq]))
+(;B[rp]CR[rp]
+;W[pq]CR[pq])
+(;B[pr]CR[pr]
+;W[pq]CR[pq]))(;AW[bo][co][do][eo][fo][gp][gq][gr][fs]AB[bp][cp][dp][ep][fp][fq][fr]
+;B[es]CR[es]
+;W[gs]CR[gs]
+(;B[br]CR[br]
+;W[er]CR[er]
+;B[ds]CR[ds]
+;W[dr]CR[dr]
+;B[cs]CR[cs]
+;W[bs]CR[bs]
+(;B[as]CR[as]
+;W[cr]CR[cr]
+;B[bs]CR[bs]
+;W[bq]CR[bq])
+(;B[cr]CR[cr]C[RIGHT]))
+(;B[dr]CR[dr]
+;W[ap]CR[ap]
+;B[aq]CR[aq]
+;W[ao]CR[ao]
+(;B[br]CR[br]C[Now white has been able to play at A4 in sente.])
+(;B[bq]CR[bq]C[Now white has been able to play at A4 in sente.]))
+(;B[er]CR[er]
+;W[ap]CR[ap]
+;B[aq]CR[aq]
+;W[ao]CR[ao]
+(;B[bq]CR[bq]C[Now white has been able to play at A4 in sente.])
+(;B[br]CR[br]C[Now white has been able to play A4 in sente.])))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[4]KM[0.00]
+PW[Weiß]PB[Schwarz]AW[ba][ca][db][ac][dc][cd]AB[ab][bb][cc]C[Black to play - what's the best he can do?!]
+(;B[bd]CR[bd]
+(;W[cb]CR[cb]
+(;B[bc]CR[bc]
+;W[dd]CR[dd]
+;B[ad]CR[ad]C[Seki, Black wins by one point (the prisoner)! RIGHT])
+(;B[dd]CR[dd]
+;W[bc]CR[bc]
+;B[ad]CR[ad]
+;W[bc]CR[bc]
+;B[ac]CR[ac]
+;W[cd]CR[cd]C[Black is lost!]))
+(;W[dd]CR[dd]
+;B[cb]CR[cb]C[This is not good for White :)]))
+(;B[bc]CR[bc]
+;W[bd]CR[bd]
+;B[ad]CR[ad]
+;W[dd]CR[dd]
+(;B[cb]CR[cb]
+;W[ac]CR[ac]C[and White wins.])
+(;B[ac]CR[ac]
+;W[cb]CR[cb]C[White wins.])))(;GM[1]
+FF[4]
+AP[Hibiscus:2.1]
+SZ[19]
+ST[3]
+;C[Black to save his 3 stones.]
+PL[B]
+VW[hj:ss]
+AB[ko][kp][kq][np][op][oq][pp][qn]
+AW[iq][ir][jl][jn][jo][jp][ll][mm][mo][mp][nq]
+(;B[lr]
+MN[1]
+VW[hj:ss]
+;W[mr]
+;B[nr]
+;W[mq]
+;B[ms]
+C[RIGHT
+White A is not dangerous.]
+LB[ms:5][or:A])(;B[mr]
+;W[lr]
+C[A nice counter-tesuji, isn't it?]
+(;B[lq]
+;W[mq]
+(;B[kr]
+;W[nr]
+;B[ls]
+)(;B[nr]
+;W[kr]
+))(;B[kr]
+;W[nr]
+;B[lq]
+;W[mq]
+))(;B[mq]
+;W[lq]
+(;B[nr]
+;W[lr]
+)(;B[mr]
+;W[lr]
+;B[nr]
+;W[kr]
+))(;B[nr]
+;W[lr]
+(;B[kr]
+;W[lq]
+)(;B[lq]
+;W[mq]
+;B[mr]
+;W[kr]
+)(;B[mq]
+;W[lq]
+;B[lp]
+;W[kr]
+)))(
+
+;
+
+FF[1]
+
+GM[1]
+
+SZ[19]
+
+AP[Jago:Version 4.53]
+
+AB[sa][sb][qa][pb][ob][nb][na][qc][rc]
+
+AW[sc][sd][rd][qd][pd][oc][nc][mc][mb][ma]
+
+C[How many points does black have in the corner?]
+
+LB[nf:4.0][pf:4.5][rf:5.0]
+
+GN[goproblem2577]
+
+(
+
+;
+
+W[rf]
+
+C[Note that black can tenuki after white A. Please use the navigate solution feature to see why.
+
+RIGHT]
+
+LB[pc:A]
+
+)
+
+(
+
+;
+
+W[rb]
+
+;
+
+B[qb]
+
+;
+
+W[ra]
+
+;
+
+B[sb]
+
+C[After removing dead stones, black has 5 points of territory. Note that white has 2 dead stones, black has two stones taken as prisoners, so these cancel out.]
+
+)
+
+)(;
+   AW[bs][br][bq][bo][cn][cp][dp][en][eo][eq]
+   AB[cs][cr][cq][dq][er][fo][fp][fq][go][gq][hr][hp];
+   C[How many points is A worth?]
+   LB[ep A][al 2][cl 4][el 3][gl 1]
+
+   (;B[el]C[RIGHT Correct! Black can win 2 points by playing A. If White plays A, then Black must defend the cut at F2 (triangle). 2 + 1 = 3. Please note that A is sente for White so strictly speaking this move is worth 3 points in reverse sente for Black.]LB[ep A]TR[fr])
+
+   (;B[al]C[Sorry, this is not quite right.]LB[ep A])
+   (;B[cl]C[Sorry, this is not quite right.]LB[ep A])
+   (;B[gl]C[Sorry, try counting again, please.]LB[ep A])
+)(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[4]KM[0.00]
+PW[Weiß]PB[Schwarz]AW[ba][bb][ac][cc][ad][cd]AB[ca][ab][cb][dc][dd]C[Black to play - what's the best he can do?]
+;B[bc]CR[bc]
+(;W[db]CR[db]
+;B[aa]CR[aa]
+(;W[bd]CR[bd]
+(;B[bb]CR[bb]
+;W[dc]CR[dc]C[Seki & Jigo (2 prisoners each)! RIGHT])
+(;B[dc]CR[dc]
+;W[bb]CR[bb]C[Uh oh... White wins!])
+(;B[da]CR[da]
+;W[bb]CR[bb]C[Uh oh... White wins!]))
+(;W[bb]CR[bb]
+;B[bd]CR[bd]
+;W[ac]CR[ac]C[Nice try, but since there is no stone at D4, Black can capture at B4.]))
+(;W[bd]CR[bd]
+;B[bc]CR[bc]C[This was easy :)])
+(;W[aa]CR[aa]
+;B[ab]CR[ab]C[This was easy :)]))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[4]KM[0.00]
+PW[Weiß]PB[Schwarz]AW[aa][ca][cb][db][dc]AB[bc][cc][bd][cd]C[Black to play - what's the best he can do?]PL[B]
+(;B[bb]CR[bb]
+(;W[ba]CR[ba]
+;B[ab]CR[ab]
+;W[ac]CR[ac]C[Now, please capture :)]
+;B[ad]CR[ad]C[Seki, Black wins by one point (the prisoner). RIGHT])
+(;W[ab]CR[ab]
+;B[ba]CR[ba]
+;W[ac]CR[ac]
+;B[ad]CR[ad]
+;W[ab]CR[ab]
+;B[dd]CR[dd]C[White is lost.]))
+(;B[ab]CR[ab]
+;W[bb]CR[bb]
+(;B[ba]CR[ba]
+;W[ac]CR[ac]C[White wins!])
+(;B[ac]CR[ac]
+;W[ba]CR[ba]C[Seki & jigo!]))
+(;B[ac]CR[ac]
+;W[bb]CR[bb]
+;B[ab]CR[ab]
+;W[ba]CR[ba]C[Seki & jigo.]))(;AB[ab]AB[bb]AW[ca]AW[cb]AB[cc]AB[db]AB[dc]AB[eb]AB[fc]AB[gc]AB[gb]AW[hb]AW[jb]AW[hc]AW[hd]AW[ge]AW[ed]AW[ec]AW[dd]AW[cd]AW[bc]AW[ac]AW[bd]AW[fe]C[let's be careful with those white stones]
+(;W[da];B[ea]
+(;W[ba];B[aa]
+(;W[ca];B[cb]
+(;W[ga]C[RIGHT])
+(;W[fa];B[ga]))
+(;W[ga];B[ca])
+(;W[fa];B[ca]))
+(;W[fa];B[ba])
+(;W[ga];B[ba]))
+(;W[ba];B[da]
+(;W[aa];B[fa])
+(;W[fa];B[aa];W[ca];B[ga])
+(;W[ga];B[fa]))
+(;W[fa];B[da]
+(;W[ba];B[aa];W[ca];B[ga])
+(;W[ga];B[ba])
+(;W[fb];B[ba]))
+(;W[ea];B[fa]
+(;W[da];B[ba])
+(;W[ba];B[da]))
+(;W[ga];B[da]
+(;W[ba];B[aa];W[ca];B[fa])
+(;W[fa];B[ba]))
+(;W[fb];B[fa])
+(;W[aa];B[da]
+(;W[ba];B[fa])
+(;W[fa];B[ba])))(;AB[dd]AB[ec]AB[hc]AB[ic]AB[hd]AW[jc]AW[kc]AW[mc]AW[lb]AW[nc]AB[lc]AB[ld]AB[kd]AB[jd]AW[id]AW[ie]AW[he]AW[ge]AW[gc]AW[fc]AW[fe]AB[ce]
+(;B[ha]
+(;W[jb];B[ea]C[CHOICERIGHT])
+(;W[gb];B[kb];W[jb];B[ja];W[ka];B[ib]C[CHOICERIGHT])
+(;W[ia]
+(;B[kb];W[jb];B[ib];W[ka];B[ja]C[CHOICERIGHT])
+(;B[ib];W[kb]
+(;B[gb];W[fb];B[ja])
+(;B[ea];W[ga];B[gb];W[hb]C[Black can do better]))
+(;B[ja];W[kb]
+(;B[gb];W[fb];B[ib];W[jb])
+(;B[fa];W[eb];B[db];W[ea];B[fb];W[gb]))))
+(;B[hb];W[fb])
+(;B[ib];W[kb])
+(;B[ia];W[jb])
+(;B[gb];W[fb];B[jb];W[kb])
+(;B[jb];W[kb];B[gb];W[fb])
+(;B[kb];W[jb];B[ha];W[ja];B[ea];W[gb];B[ga];W[hb];B[ib];W[gd]))(;GM[1]
+FF[4]
+AP[Hibiscus:2.1]
+SZ[19]
+ST[3]
+;AB[bl][bn][bo][cm][cp][do][dp][eq][er][fq][fs][gr][gs]
+AW[bp][cn][co][dn][em][eo][ep][fp][gq][hq][hr][hs]
+PL[W]
+C[Can white do something in the corner?]
+(;W[ds]
+MN[1]
+;B[dr]
+C[Surely it requires some imagination to 
+play here.]
+(;W[cr]
+;B[bq]
+(;W[cs]
+C[RIGHT
+]
+)(;W[cq]
+;B[dq]
+;W[cs]
+;B[br]
+))(;W[cq]
+;B[dq]
+;W[cr]
+;B[bq]
+(;W[cs]
+;B[br]
+)(;W[br]
+;B[ap]
+;W[cs]
+;B[es]
+)))(;W[cq]
+;B[dq]
+;W[ds]
+;B[dr]
+;W[cr]
+;B[bq]
+;W[cs]
+;B[br]
+)(;W[dq]
+;B[cq]
+;W[cr]
+;B[bq]
+;W[dr]
+;B[br]
+)(;W[cr]
+;B[bq]
+;W[ds]
+;B[dq]
+;W[es]
+;B[fr]
+)(;W[bq]
+;B[cr]
+))(;AW[cs][ds][cr][cq][cp][co][cn][dm][dl][el][fl][gm][gn][go][gp][fp][hq][hr]AB[fs][es][dr][dq][dp][do][dn][em][fm][fn][fo][eo][fq][gq]C[White to kill]SZ[19]
+
+(;W[gr];B[fr])
+(;W[gs];B[fr])
+(;W[ep];B[eq])
+(;W[er];B[fr];W[ep];B[eq])
+(;W[fr];B[gr];W[eq];B[er])
+(;W[eq]
+(;B[ep]C[CHOICE]
+(;W[fr];B[er];W[gr]C[RIGHT])
+(;W[gr];B[fr])
+(;W[er];B[fr])
+(;W[gs];B[fr]))
+(;B[er]C[CHOICE]
+(;W[gr];B[ep];W[fr]C[RIGHT])
+(;W[ep];B[gr])
+(;W[gs];B[ep]
+(;W[fr];B[gr])
+(;W[gr];B[fr]))
+(;W[fr];B[gr]))
+(;B[gr]C[CHOICE]
+(;W[er]C[RIGHT Double Damezumari, now black cannot atari])
+(;W[ep];B[er])
+(;W[fr];B[er])
+(;W[hs];B[er]))))(;SZ[6]AW[ae]AW[ce]AW[bf]AB[ad]AB[bc]AB[cd]AB[ba]AB[bb]AB[dd]AB[ed]AB[fd]AW[fc]AW[ec]AW[dc]AW[cc]AW[cb]AW[ca]AW[ea]AW[de]AB[ee]AW[df]AW[ff]C[black needs some smarts to win this one]
+(;B[eb];W[fb]
+(;B[be];W[bd]
+(;B[da]
+(;W[ac]
+(;B[fa]C[CHOICERIGHT])
+(;B[ab];W[aa]))
+(;W[db];B[be]C[white has no ko threatsRIGHT]))
+(;B[ac];W[be])
+(;B[db];W[ac])
+(;B[ab];W[be]))
+(;B[bd];W[be])
+(;B[da];W[db];B[be];W[bd])
+(;B[db];W[da])
+(;B[ab];W[be]))
+(;B[be];W[bd]
+(;B[eb];W[ac])
+(;B[db];W[ac])
+(;B[fb];W[ac]))
+(;B[fb];W[eb]
+(;B[be];W[bd])
+(;B[bd];W[be]))
+(;B[bd];W[be])
+(;B[db];W[be])
+(;B[da];W[db])
+(;B[fa];W[fb])
+(;B[ac];W[be])
+(;B[ab];W[be])
+(;B[ef];W[be]))(;GM[1]FF[3]
+RU[Japanese]SZ[9]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[2000-11-07]
+SY[Cgoban 1.9.8]TM[30:00(5x1:00)];;
+AW[ga][db][eb][fb][gb][dc][cd][dd][be][bf][bg][bh][ch][dh][fh][gh][ci][ei][hi]
+AB[ha][hb][ec][fc][gc][hc][ic][fd][de][ee][df][cg][dg][eg][fg][gg][hg][eh][hh][ih]
+C[black to win this game
+]
+(;B[fi];W[gi];B[ii]
+(;W[di];B[fi]C[RIGHT
+black catches some white stones at the bottom
+])
+
+(;W[fi];B[di])
+)
+
+(;B[gi];W[fi];B[ii];W[di])
+
+(;B[ii];W[fi];B[gi];W[di])
+
+(;B[ce];W[fi])
+
+(;B[cf];W[fi])
+
+(;B[ed];W[fi])
+
+(;B[bd];W[fi]
+(;B[bc];W[ce])
+
+(;B[ce];W[bc])
+)
+
+)(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[Vit]PB[Svart]AW[qc][qf]AB[pd][ph]C[Black to finish the joseki without mistakes.]
+(;B[qd]CR[qd]
+;W[pc]CR[pc]
+(;B[od]CR[od]
+;W[rd]CR[rd]
+;B[re]CR[re]
+;W[rc]CR[rc]
+;B[qe]CR[qe]
+;W[nc]LB[pf:A]CR[nc]C[This is bad for Black. He must play at A to take away all the aji of the White stone, but that will make him overconcentrated.])
+(;B[oc]CR[oc]
+;W[rd]CR[rd]
+;B[re]CR[re]
+;W[rc]CR[rc]
+;B[qe]CR[qe]
+;W[nc]CR[nc]
+;B[od]CR[od]
+;W[ob]LB[pf:A]CR[ob]))
+(;B[pc]CR[pc]
+;W[qd]CR[qd]
+;B[pe]CR[pe]
+;W[qb]CR[qb]
+;B[pf]CR[pf]
+;W[qg]CR[qg]
+;B[pg]CR[pg]C[RIGHT]))(;GM[1]FF[4]CA[UTF-8]
+SZ[19]RU[Japanese]KM[0]TM[1800,0,30,5]PW[]PB[]AB[cp][eq]AW[ep][fq]AB[dq]AW[fp]AB[cn]AW[jq]AB[lq]AE[pp][pq]AB[hq]LB[hq:1]PL[W]C[what's the best way to respond to 1?]
+(;W[dp]CR[dp]
+;B[do]CR[do]
+;W[fr]CR[fr]
+;B[er]CR[er]
+;W[ip]CR[ip]C[RIGHT
+threats in the corner let white play this move])
+(;W[ip]CR[ip]
+;B[hp]CR[hp]
+;W[ho]CR[ho]
+;B[hr]CR[hr]LB[fr:A][jr:B]C[black has A and B])
+(;W[jp]CR[jp]C[too easy on black])
+(;W[gr]CR[gr]C[too easy on black])
+(;W[hp]CR[hp]
+;B[iq]CR[iq]
+;W[ip]CR[ip]
+;B[jr]CR[jr]
+(;W[jp]CR[jp]
+;B[kr]CR[kr]C[easy for black])
+(;W[kr]CR[kr]
+;B[kq]CR[kq]
+;W[jp]CR[jp]
+;B[ir]CR[ir])))(;AB[bb]AB[cc]AB[dc]AB[ec]AB[fc]AB[fb]AW[eb]AW[db]AW[cb]AW[bc]AW[cd]AW[ad]AW[be]AW[cf]AP[goproblems]
+(;B[ba];W[ab]
+(;B[ea]C[RIGHT])
+(;B[ca]C[RIGHT])
+(;B[da]C[RIGHT])
+(;B[fa];W[ac]))
+(;B[ab];W[ba]
+(;B[ca];W[ac]
+(;B[ea];W[aa]
+(;B[bb];W[ab])
+(;B[ab];W[da])
+(;B[fa];W[da]))
+(;B[da];W[ea])
+(;B[aa];W[ba]))
+(;B[da];W[ac])
+(;B[aa];W[ac])
+(;B[ea];W[ac];B[ca];W[aa];B[bb];W[ab]))
+(;B[ea];W[ba]
+(;B[ca];W[ab])
+(;B[ab];W[ac]
+(;B[da];W[aa];B[bb];W[ab])
+(;B[ca];W[aa];B[bb];W[ab])))
+(;B[ca];W[ba]
+(;B[ab];W[ac])
+(;B[aa];W[ab]C[not good enough.])
+(;B[ac];W[ab]))
+(;B[aa];W[ac];B[ca];W[ab])
+(;B[da];W[ba]))(;AB[bb]AB[cc]AB[db]AB[ca]AB[ec]AB[fc]AB[gc]AB[jc]AB[jb]AW[jd]AW[kc]AW[ld]AW[md]AW[bc]AW[cd]AW[bd]AW[ed]AW[fd]AW[ae]AW[ac]AW[gd]AW[ie]AW[ic]AW[hd]C[B to connect.]AP[goproblems]
+(;B[hb];W[ib];B[ia];W[kb]C[B connected but he loses points.  Upper group has less than 7 points.])
+(;B[ib];W[hb];B[hc];W[kb]C[B doesn't mind this ko because he can G18 at any time.  The top is at least 9 points, plus whatever B gets out of the ko.RIGHT])
+(;B[hc];W[ib])
+(;B[ha];W[ib];B[ia];W[hb];B[gb];W[kb]C[B connected, but lost a lot on the top.])
+(;B[ia];W[hb];B[ha];W[gb];B[ga];W[fb];B[fa];W[eb];B[ea]C[B terrible.])
+(;B[kb];W[ib]))(;C[Black plays and lives.]AW[ac]AW[ab]AW[bd]AW[be]AW[ce]AW[de]AW[ed]AW[fd]AW[fc]AW[gb]AW[hb]AW[ha]AB[fb]AB[ec]AB[db]AB[cc]AB[cd]AW[bc]AB[bb]AB[ba]AW[ea]AP[goproblems]
+(;B[fa]C[Well done! :)RIGHT])
+(;B[eb];W[fa]C[Black's dead! (A and B are miai to live)]LB[ca:A]LB[da:A]LB[dd:B])
+(;B[da];W[fa]C[Black's dead! (A and B are miai to live)]LB[dd:A]LB[eb:B])
+(;B[ca];W[fa]C[Black's dead! (A and B are miai to live)]LB[dd:A]LB[eb:B])
+(;B[cb];W[fa]C[Black's dead! (A, B and C are miai to live)]LB[da:A]LB[dd:B]LB[eb:C])
+(;B[dd];W[fa]C[Black's dead! (A and B are miai to live)]LB[da:A]LB[eb:B]LB[ca:A])
+(;B[dc];W[fa]C[Black's dead!]))(;AB[rr]AB[sq]AB[qs]AB[ss]AW[ro]AW[qo]AW[pp]AW[or]AW[oq]AP[goproblems]
+(;B[qr];W[rq])
+(;B[qq];W[pr]
+(;B[qr];W[rp];B[rq]C[RIGHT])
+(;B[rp];W[qr]
+(;B[qp]C[RIGHT])
+(;B[sp];W[qp])
+(;B[so];W[qp]C[Black may or may not live, depending on what is further up the right side. You could have lived locally.]))
+(;B[pq];W[rp]
+(;B[qr];W[rq])
+(;B[rq];W[qr]))
+(;B[rq];W[qr])
+(;B[ps];W[rp]
+(;B[qr];W[rq])
+(;B[rq];W[qr])))
+(;B[rq];W[qr])
+(;B[pr];W[qq]
+(;B[qr];W[rq])
+(;B[rq];W[qr]))
+(;B[rp];W[qq]
+(;B[rq];W[qr])
+(;B[qr];W[rq]))
+(;B[pq];W[qq]
+(;B[qr];W[rq])
+(;B[rq];W[qr])
+(;B[pr];W[qr]))
+(;B[qp];W[qq]
+(;B[rq];W[qr])
+(;B[qr];W[rq])
+(;B[rp];W[rq])))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[White]PB[Black]AW[cg][bh][ci][fi][cj][ej][ek][fk][al][fl][gl][cm][dm][dn][en]
+[fn][gn][bo][co][do][ap][bq]AB[ai][bi][bj][bk][dk][cl][dl][el][bm][em][an][bn][c
+n][ao]TR[al]C[White has just played the marked stone. Black to play and live.]
+(;B[ak]CR[ak]
+;W[bl]CR[bl]
+(;B[am]CR[am]
+;W[bl]CR[bl]
+(;B[ck]CR[ck]
+;W[al]CR[al]
+;B[bm]CR[bm]
+;W[bn]CR[bn]
+(;B[am]CR[am]C[RIGHT])
+(;B[an]CR[an]
+;W[ao]CR[ao]
+;B[am]CR[am]C[RIGHT]))
+(;B[al]CR[al]
+;W[ck]CR[ck]))
+(;B[ck]CR[ck]
+;W[am]CR[am]))
+(;B[bl]CR[bl]
+;W[ak]CR[ak])
+(;B[ck]CR[ck]
+;W[ak]CR[ak]))(;AB[dd]AB[dj]AB[dp]AB[df]AB[cc]AB[dn]AW[fq]AW[fc]AW[db]AW[dl]AB[ek]AW[el]AB[fl]AW[cj]AB[ci]AW[bj]AB[bi]AW[fm]AB[em]C[Black just cut at a, that's wrong, Black needed to play F9.  Prove it to black it was wrong >_<]LB[dl:1]LB[ek:2]LB[el:3]LB[fl:4]LB[cj:5]LB[ci:6]LB[bj:7]LB[bi:8]LB[fm:9]LB[em:A]LB[fk:B]AP[goproblems]
+(;W[fk];B[gl]
+(;W[dm];B[en];W[ej];B[dk];W[di];B[ck];W[bk];B[cl];W[cm];B[bl];W[bm]C[Dats the way :) Good Job ^__^RIGHT])
+(;W[ej];B[dk];W[di];B[ck];W[bk];B[cl];W[dm];B[cm]C[White dies ~_~ dats a no no >_<]))
+(;W[dm];B[en];W[fk];B[gl];W[ej];B[dk];W[di];B[ck];W[bk];B[cl];W[cm];B[bl];W[bm]C[Good Job ^_^RIGHT]))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[7]KM[0.00]
+PW[Weiß]PB[Schwarz]AW[aa][ba][ab][ac][bc][dc][ec][fc][gc][bd][dd][be][de][af][cf][df][dg]AB[ca][fa][bb][cb][db][eb][fb][gb][cc][cd][ed][fd][ae][ce][ee][ef][gf][eg]C[White to play - will he win, lose or draw?]PL[W]
+(;W[gd]CR[gd]
+;B[ge]CR[ge]C[Jigo! This is best for both RIGHT])
+(;W[ff]CR[ff]
+;B[fg]CR[fg]
+(;W[ge]CR[ge]
+;B[gd]CR[gd]
+;W[gg]CR[gg]
+;B[bf]CR[bf]
+(;W[fe]CR[fe]
+;B[bg]CR[bg]C[Black wins by three points])
+(;W[bg]CR[bg]
+;B[gf]LB[fe:A]CR[gf]C[Next, Black captures at A and wins by one point]))
+(;W[gd]CR[gd]
+;B[ge]CR[ge]C[Jigo! RIGHT])))(
+;
+FF[1]
+GM[1]
+SZ[19]
+AP[Jago:Version 4.53]
+AB[rb][rd][qd][pc][pb][oc][nc][md][me][le][kd][jd]
+AW[qc][qb][pd][od][nd][qe][of][mc][lc][ld][ke][gi]
+GN[p508]
+(
+;
+W[lg]
+;
+B[kf]
+;
+W[je]
+;
+B[lf]
+;
+W[id]
+;
+B[kb]
+;
+W[nb]
+;
+B[rc]
+;
+W[jb]
+;
+B[ie]
+;
+W[jf]
+;
+B[ic]
+;
+W[hd]
+;
+B[kc]
+;
+W[lb]
+;
+B[la]
+;
+W[mb]
+;
+B[ib]
+;
+W[kg]
+;
+B[mg]
+;
+W[mf]
+;
+B[nf]
+;
+W[ne]
+;
+B[mf]
+;
+W[mh]
+C[RIGHT]
+)
+(
+;
+W[nb]
+;
+B[rc]
+;
+W[lg]
+;
+B[kf]
+;
+W[je]
+;
+B[lf]
+;
+W[id]
+;
+B[kb]
+;
+W[jb]
+;
+B[ie]
+;
+W[jf]
+;
+B[ic]
+;
+W[hd]
+;
+B[kc]
+;
+W[lb]
+;
+B[la]
+;
+W[mb]
+;
+B[ib]
+;
+W[kg]
+C[RIGHT]
+)
+)(;AB[pq]AB[qp]AB[rp]AB[po]AB[oo]AB[qm]AB[rm]AB[pl]AB[pk]AW[qj]AW[ql]AW[rl]AW[om]AW[pm]AW[pn]AW[qo]AW[ro]AP[goproblems]
+(;B[sn]
+(;W[qn];B[so]C[the white group is now floatingRIGHT])
+(;W[so];B[qn]C[RIGHT]))
+(;B[qn];W[sm])
+(;B[rn];W[qn])
+(;B[so];W[sn]
+(;B[sm];W[sp])
+(;B[rn];W[sp])
+(;B[qn];W[sp]
+(;B[sm];W[sl])
+(;B[rn];W[sm])))
+(;B[sm];W[qn]
+(;B[so];W[sn];B[rn];W[sl])
+(;B[qk];W[rk])
+(;B[sn];W[so]))
+(;B[qk];W[rk]C[good exchange for white])
+(;B[nk];W[qn])
+(;B[nl];W[qn])
+(;B[nn];W[qn])
+(;B[sp];W[qn])
+(;B[on];W[qn])
+(;B[rk];W[qk])
+(;B[pj];W[qi]C[this exchange is too early])
+(;B[sl];W[qk]C[good exchange for white]))(;AB[cg]AB[bd]AB[be]AB[ce]AB[de]AB[df]AB[bf]AW[bg]AW[bh]AW[ch]AB[dg]AW[dh]AW[eg]AW[ef]AW[ee]AW[dd]AW[cd]AW[cc]AB[bc]AW[db]AW[ec]AW[bb]AP[goproblems]
+(;B[af];W[ac]
+(;B[ad]C[RIGHT])
+(;B[ab];W[ad]
+(;B[ba];W[cb]
+(;B[ae];W[ac])
+(;B[aa];W[ca]))
+(;B[aa];W[ba])
+(;B[ae];W[ac]))
+(;B[aa];W[ab])
+(;B[ba];W[ad];B[ab];W[cb];B[ae];W[ac]))
+(;B[ac];W[af];B[ae]C[RIGHT])
+(;B[ad];W[af])
+(;B[ae];W[ac])
+(;B[ab];W[af]
+(;B[ba];W[cb]
+(;B[ac];W[ae])
+(;B[ae];W[ac]))
+(;B[ac];W[ae])
+(;B[ae];W[ac]))
+(;B[ag];W[ac]
+(;B[ad];W[af])
+(;B[af];W[ad]))
+(;B[ah];W[af]
+(;B[ac];W[ae])
+(;B[ae];W[ac];B[ag];W[ai])
+(;B[ag];W[ai]
+(;B[ac];W[ae])
+(;B[ae];W[ac]))))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)]PL[2];PL[1]C[black to try to kill
+]
+AW[pq][qq][rq][sq][pr][ps]AB[op][pp][qp][rp][sp][oq][nr][or]
+(;B[rr];W[rs]
+(;B[sr];W[qr])
+
+(;B[qr];W[sr])
+
+(;B[ss];W[sr])
+)
+
+(;B[rs];W[rr]
+(;B[qs];W[ss]C[RIGHT
+ko - this is the best you can do
+])
+
+(;B[ss];W[qs])
+)
+
+(;B[qr];W[rr];B[rs];W[qs])
+
+(;B[sr];W[rr]
+(;B[rs];W[qs];B[os];W[ss])
+
+(;B[ss];W[rs])
+)
+
+(;B[ss];W[rs]
+(;B[rr];W[sr])
+
+(;B[sr];W[rr])
+)
+
+(;B[qs];W[rs]
+(;B[qr];W[rr])
+
+(;B[rr];W[qr])
+
+(;B[sr];W[rr])
+)
+
+)(;SZ[9]AW[ba]AW[ca]AW[ga]AW[bb]AW[db]AW[eb]AW[hb]AW[cc]AW[dc]AW[hc]AW[ed]AW[fd]AW[gd]AW[hd]AW[ee]AW[ef]AW[ff]AW[gf]AW[eg]AW[gg]AW[eh]AW[gh]AW[hh]AW[hi]AB[aa]AB[ea]AB[ha]AB[ab]AB[fb]AB[gb]AB[ac]AB[bc]AB[ec]AB[fc]AB[bd]AB[cd]AB[dd]AB[de]AB[df]AB[dg]AB[fg]AB[dh]AB[fh]AB[di]AB[ei]AB[fi]AB[gi]LB[bf:B]C[No komi B to play - Who has won? If B has won, play at 'B', if W has won play at 'W'.]LB[hf:W]GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]RU[Japanese]KM[0.00]PW[White]PB[Black]
+(;B[hf];W[ad]C[Yes the top isn't a seki!RIGHT])
+(;B[bf];W[hf]C[OK, prove it (W adds a stone to his own area to compensate)];B[da]C[];W[fa];B[ea];W[gc]C[Now What?]))(;AB[id]AB[kd]AB[if]AB[kf]AB[ih]AB[kh]AB[ii]AB[ki]AB[jk]AB[jl]AB[im]AB[jm]AB[km]AB[jn]AB[io]AB[jo]AB[ko]AB[ip]AB[jp]AB[kp]AB[fh]AB[gh]AB[hh]AB[gf]AB[ff]AB[hf]AB[lf]AB[mf]AB[nf]AB[nh]AB[mh]AB[lh]AW[jd]AW[ie]AW[je]AW[ke]AW[jf]AW[jg]AW[jh]AW[ji]AW[jj]AW[ij]AW[ik]AW[il]AW[kj]AW[kk]AW[kl]AB[kn]AB[in]AW[kg]AW[lg]AW[ng]AW[ig]AW[hg]AW[fg]AB[gg]C[Easter 2004.  If you must answer incorrectly, please play P13.]AP[goproblems]
+(;B[mg]C[Correct.  Christ is secure fast to the cross.RIGHT])
+(;B[og]AW[lh]AW[mi]AW[nj]AB[lg]AB[mg]AB[ng]C[Oops.  Now Christ's arm is flopping around.  If he manages to get away, it's all your fault.]))(;AW[jb]AW[ib]AW[ic]AB[kb]AB[lb]AB[jc]AB[jd]AB[id]AW[kc]AW[ld]AB[nc]AB[hc]AB[gc]AB[fc]AW[hd]AW[he]AW[hf]AW[hg]AB[dd]AW[fd]AW[ed]AB[ec]AB[de]AW[ef]AW[ff]C[what can white do here?]AB[cg]AP[goproblems]
+(;W[je];B[kd]
+(;W[lc];B[ke]
+(;W[mb]C[RIGHT])
+(;W[le];B[kf];W[mb]C[RIGHT])
+(;W[kf];B[le])
+(;W[lf];B[hb]))
+(;W[ke];B[lc])
+(;W[ie];B[lc])
+(;W[le];B[lc])
+(;W[mb];B[lc]))
+(;W[lc];B[hb])
+(;W[ie];B[ke]C[depends on ladder... you can do better])
+(;W[kd];B[je])
+(;W[mb];B[hb])
+(;W[mc];B[hb])
+(;W[dc];B[hb])
+(;W[df];B[cf]C[this exchange doesn't help white])
+(;W[gd];B[hb])
+(;W[hb];B[ke])
+(;W[ke];B[hb])
+(;W[ka];B[hb]))(;SZ[13]AB[jl]AB[jk]AB[kj]AB[lj]AW[kk]AW[jj]AB[ki]AB[lh]AW[ji]AW[kh]AW[li]AW[jh]AB[lg]AB[kf]AW[ik]AW[il]AB[im]AB[hl]AB[gk]AW[hk]AW[hi]AW[hg]AW[gj]AB[fk]AB[gl]AB[dk]GM[1]FF[4]CA[UTF-8]RU[Japanese]KM[0]TM[]PW[]PB[]AE[gm]PL[W]
+(;W[lk];B[mi];W[jm];B[km];W[kl];B[jm];W[lm];B[hm];W[ml]C[];B[mk];W[mj]C[Well done, you found the ko.RIGHT])
+(;W[jm];B[km]
+(;W[kl];B[jm]
+(;W[lm];B[hm];W[lk];B[mi];W[ml]C[];B[mk];W[mj]C[Well done, you found the ko.RIGHT])
+(;W[lk];B[mi];W[lm];B[hm];W[ml]C[];B[mk];W[mj]C[Well done, you found the ko.RIGHT]))
+(;W[lk];B[mi];W[kl];B[jm];W[lm];B[hm];W[ml]C[];B[mk];W[mj]C[Well done, you found the ko.RIGHT])))(;C[It's another problem, have fun!]SZ[9]AB[ei]AB[fi]AB[fh]AB[eh]AB[eg]AB[dg]AB[cg]AB[bf]AB[bd]AB[bc]AB[bb]AB[eb]AB[ec]AB[ed]AB[dd]AB[de]AB[fd]AB[fe]AB[gc]AW[fc]AW[fb]AW[gb]AW[gd]AW[ge]AW[fg]AW[ff]AW[ef]AW[ee]AW[df]AW[gh]AW[gi]AW[dh]AW[ce]AW[be]AW[cd]AW[cc]AW[cb]
+(;B[cf];W[gg]
+(;B[ca];W[db];B[da];W[fa];B[ea]C[RIGHT Correct!.. This is actually what I did (I blame this site for that fluke - thank!)... Well done and good luck on the next problem])
+(;B[da];W[ca];B[ba];W[ae]C[Nope]))
+(;B[ca];W[cf];B[da];W[fa];B[ea]C[The technical term for this is jum-ping th e-g'un - lol, I kill me ;D - seriously tho, good luck on the next one]))(;AB[ar]AB[aq]AB[bp]AB[co]AB[do]AB[eo]AB[fo]AB[dp]AB[dq]AB[fp]AB[gq]AB[gr]AB[gs]AB[bn]AW[fs]AW[fr]AW[eq]AW[ep]AW[dr]AW[cq]AW[cp]AW[bq]AW[br]AW[bs]C[black to kill.]AP[goproblems]
+(;B[cs];W[ds]
+(;B[er];W[es]
+(;B[fq]C[RIGHT])
+(;B[as];W[ap]))
+(;B[ap];W[fq])
+(;B[fq];W[er])
+(;B[as];W[ap]))
+(;B[er];W[es]
+(;B[cs];W[fq])
+(;B[fq];W[cs];B[er];W[eq]))
+(;B[ds];W[cs]
+(;B[fq];W[er])
+(;B[es];W[er])
+(;B[er];W[es]))
+(;B[es];W[ds];B[fq];W[er])
+(;B[cr];W[cs]
+(;B[fq];W[er])
+(;B[er];W[es])
+(;B[es];W[er]))
+(;B[fq];W[er]
+(;B[cs];W[ds])
+(;B[ds];W[cs]))
+(;B[ap];W[fq]
+(;B[ds];W[cs])
+(;B[es];W[er])
+(;B[cs];W[ds])
+(;B[as];W[ds]))
+(;B[as];W[ap]))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];AW[op][oq][qq][nr][pr][qr][rr]
+AB[pn][no][oo][np][pp][qp][rp][lq][mq][nq][pq][rq]PL[2]
+C[white to play and live
+]
+(;W[os];B[sr];W[mr]C[RIGHT
+])
+
+(;W[or];B[sr]
+(;W[mr];B[lr]
+(;W[rs];B[ms];W[ns];B[ps])
+
+(;W[ms];B[rs];W[qs];B[os];W[ss];B[sq])
+)
+
+(;W[rs];B[mr];W[ns];B[ps])
+)
+
+(;W[sr];B[or]
+(;W[ps];B[rs])
+
+(;W[os];B[oq]
+(;W[ps];B[rs];W[mr];B[lr])
+
+(;W[mr];B[ps];W[qs];B[lr])
+)
+)
+
+(;W[mr];B[or];W[os];B[oq]
+(;W[lr];B[ns];W[ms];B[kr])
+
+(;W[sr];B[lr];W[ps];B[rs])
+)
+
+)(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[Blanc]PB[Noir]AW[oa][ob][rb][oc][nd][pd][pe][qe][re][se]AB[pa][qa][ra][pb][sb][sc][qd][rd][sd]C[White to play his best.]PL[W]
+(;W[qc]CR[qc]
+(;B[qb]CR[qb]C[CHOICE]
+;W[pc]CR[pc]
+;B[rc]CR[rc]C[RIGHT Black only get 3 points and the sequence is sente.])
+(;B[pc]CR[pc]C[CHOICE RIGHT If black makes the mistake to play Q17, it is a sente seki.]))
+(;W[pc]CR[pc]
+;B[qc]CR[qc]C[Black have 5 points, it is too much.])
+(;W[rc]CR[rc]
+;B[pc]CR[pc]C[Black have 7 points, it is too much.])
+(;W[qb]CR[qb]
+;B[pc]CR[pc]C[Black have 7 points, it is too much.]))(;AB[bs]AB[br]AB[bq]AB[cp]AB[dp]AB[ep]AB[eq]AW[dq]AW[cq]AW[cr]AW[cs]AW[ds]AW[er]AB[fr]AB[gr]AW[fq]AW[gp]AW[hq]AW[hr]MA[fr]MA[gr]C[Save these stones by starting ko that is favorable for you. A, B, or C?]AW[mp]LB[es:A]LB[fs:B]LB[gs:C]AP[goproblems]
+(;B[es];W[fs];B[gs];W[hs];B[es]C[Good. Force white to find the first ko threat.RIGHT])
+(;B[gs];W[hs];B[es];W[fs]C[Bad. You have to find the first ko threat.])
+(;B[fs];W[gq];B[hs];W[is]C[White shouldn't really play this... but let's see how it goes.];B[ir];W[gs]C[White can keep extending across the bottom to make up for a lack of threats.]MA[js]MA[ks]MA[ls]MA[ms]MA[ns]))(;AW[rb]AW[rc]AW[qc]AW[pc]AW[oc]AW[qd]AW[qe]AW[pe]AW[oe]AW[nd]AW[nf]AW[mf]AW[of]AB[qb]AB[pb]AB[ob]AB[nc]AB[mc]AB[md]AB[le]AB[lf]AB[lg]AB[mg]AB[ng]AB[og]AB[pg]AB[pf]AB[qf]AB[rf]AB[re]AB[rd]C[Play T (Tenuki at L17) if you think white's alive unconditionally.. Otherwise..]LB[kc:T]AP[goproblems]
+(;B[od]
+(;W[me]
+(;B[ne]MA[nd]C[Well done! :)RIGHT])
+(;B[ra];W[pd]C[:S])
+(;B[sc];W[pd]C[:S]))
+(;W[pd];B[me]C[:S]TR[ne]TR[ra])
+(;W[ne];B[ra]C[http://goproblems.com/prob.php3?id=4741&pths=1]))
+(;B[kc]C[];W[me]C[Black could get a ko!])
+(;B[me];W[ra]C[Got 2 eyes :S]LB[pd:1]LB[sa:2])
+(;B[ra];W[me]C[:S])
+(;B[sc];W[me]C[:S]))(;GM[1]FF[4]CA[UTF-8]
+SZ[19]RU[Japanese]KM[0]TM[1800,0,30,5]PW[]PB[]AB[rb][qc][pc]AW[rc]AE[sc]AW[qd][re]AB[sd][se]AW[rf][rg][qg][pf][pe][pd][sf]AB[rh][qh][pg][og][of][oe][od][oc]AE[rj]AB[sh]PL[B]C[black to kill]
+(;B[sb]CR[sb]
+(;W[rd]CR[rd]
+;B[sc]CR[sc]C[RIGHT])
+(;W[sc]CR[sc]
+;B[rd]CR[rd]))
+(;B[sc]CR[sc]
+;W[sb]CR[sb]
+(;B[sa]CR[sa]
+;W[rd]CR[rd]
+(;B[sb]CR[sb]
+;W[qb]CR[qb])
+(;B[qb]CR[qb]
+;W[sb]CR[sb]))
+(;B[rd]CR[rd]
+;W[rc]CR[rc])
+(;B[qb]CR[qb]
+;W[rd]CR[rd]))
+(;B[rd]CR[rd]
+;W[sc]CR[sc])
+(;B[sg]CR[sg]
+;W[sc]CR[sc])
+(;B[qf]CR[qf]
+;W[sc]CR[sc])
+(;B[qe]CR[qe]
+;W[sc]CR[sc])
+(;B[qb]CR[qb]
+;W[sc]CR[sc]))(;C[Black to play.]AB[ka]AB[kc]AB[jc]AB[je]AB[ke]AB[mf]AB[nf]AB[oe]AB[pe]AB[nc]AB[oc]AB[pd]AB[qd]AB[qc]AB[qb]AW[qa]AW[rb]AW[pc]AW[pb]AW[rc]AW[rd]AW[qe]AW[qf]AW[mb]AW[od]AW[nd]AW[md]AW[ld]AW[lc]SZ[19]
+(;B[oa];W[pa]
+(;B[ma];W[ob];B[nb];W[na]C[RIGHT])
+(;B[ob];W[ra];B[ma];W[na];B[nb];W[mc]))
+(;B[pa];W[oa]
+(;B[ob];W[pa];B[na];W[ra]
+(;B[ma];W[nb])
+(;B[nb];W[ma]))
+(;B[na];W[nb]))
+(;B[ob];W[pa]
+(;B[oa];W[ra]
+(;B[ma];W[na];B[nb];W[mc])
+(;B[na];W[ma]))
+(;B[na];W[ma])
+(;B[ma];W[na]
+(;B[nb];W[mc])
+(;B[oa];W[ra];B[nb];W[mc])))
+(;B[na];W[ma]
+(;B[ob];W[pa])
+(;B[oa];W[pa])
+(;B[pa];W[oa];B[ob];W[nb];B[pa];W[pb])))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[aa][ba][ga][ab][cb][gb][ac][gc][ad][fd][be][ee][fe][cf][df]
+AB[ca][da][fa][bb][db][fb][fc][cd][dd][ed]PL[2]C[white to kill
+]
+(;W[eb]
+(;B[ec];W[cc]C[RIGHT
+])
+
+(;B[cc];W[ec];B[ea];W[bc])
+
+(;B[dc];W[bc])
+)
+
+(;W[ec];B[eb]
+(;W[dc];B[cc])
+
+(;W[cc];B[dc])
+)
+
+(;W[cc];B[dc]
+(;W[bc];B[eb])
+
+(;W[eb];B[bc])
+)
+
+(;W[bc];B[eb]
+(;W[dc];B[cc])
+
+(;W[cc];B[dc])
+)
+
+(;W[dc];B[cc]
+(;W[ec];B[bc])
+
+(;W[eb];B[ec])
+
+(;W[bc];B[ec])
+)
+
+(;W[ea];B[eb])
+
+(;W[bd];B[cc])
+
+)(;AW[jd]AW[kd]AW[id]AW[ic]AW[ie]AW[ig]AW[hg]AW[gg]AB[jf]AB[je]AB[ke]AW[kf]AW[lf]AW[mf]AW[le]AW[ld]AW[lc]AW[lb]AB[kc]AB[jc]AB[jb]AB[ib]AB[hc]AB[gc]AB[gb]AB[he]AB[ge]AB[gf]AB[ff]AB[eg]AB[eh]AB[fh]AB[gh]AB[hh]AB[ih]AW[jh]AW[kh]AW[lh]AW[mh]AW[ki]AB[mg]AB[ng]AB[nh]AB[ni]AB[mi]AB[li]AB[jj]AB[ji]AB[kj]AB[lj]AB[nf]AB[ne]AB[nc]AB[nb]C[white should make life the best way he can]AP[goproblems]
+(;W[lg]
+(;B[if]
+(;W[hf]C[RIGHT])
+(;W[jg];B[hf]))
+(;B[jg];W[if]))
+(;W[jg];B[lg])
+(;W[if];B[lg])
+(;W[kg]C[dead])
+(;W[md];B[lg])
+(;W[nd];B[od]C[bad exchange])
+(;W[hf];B[lg];W[kg]C[this is only a seki -- white can live without seki, so that is better]))(;AB[ar]AB[bq]AB[cq]AB[dr]AB[er]AW[aq]AW[ap]AW[bp]AW[cp]AW[dp]AW[dq]AW[fq]AW[fr]AW[fs]AP[goproblems]
+(;B[br];W[cs]
+(;B[bs];W[es];B[ds]C[RIGHT])
+(;B[ds];W[bs])
+(;B[es];W[cr]
+(;B[bs];W[as])
+(;B[ds];W[eq])))
+(;B[bs];W[cr]
+(;B[br];W[ds]
+(;B[cs];W[es])
+(;B[es];W[eq]))
+(;B[cs];W[br])
+(;B[ds];W[br])
+(;B[es];W[br])
+(;B[as];W[br]))
+(;B[cr];W[bs]
+(;B[cs];W[es])
+(;B[br];W[es])
+(;B[es];W[cs])
+(;B[as];W[br])
+(;B[ds]))
+(;B[cs];W[br]
+(;B[cr];W[as])
+(;B[bs];W[cr])
+(;B[ds];W[cr])
+(;B[es];W[cr])
+(;B[as];W[cr]))
+(;B[es];W[cr]
+(;B[br];W[cs]
+(;B[bs];W[as])
+(;B[ds];W[eq]))
+(;B[cs];W[br])
+(;B[ds];W[br])
+(;B[bs];W[br])
+(;B[as];W[br])))(;GM[1]FF[4]SZ[19]AP[SmartGo:1.5]
+AB[pq][qq][qp][qo][pn][pm][ol][nl][kq][kr][ks][ls][ms][mr][lp][lo][ln][ll]
+AW[on][po][pp][mo][mp][mq][lq][lr][nr][ns][or][oq]
+C[Black to kill.]
+(;B[pr]
+C[RIGHT There is no way for white to make two eyes now.])
+(;B[oo];W[op]
+(;B[pr];W[nn]
+C[White is alive.])
+(;B[nn];W[pr]
+C[White lives.]))
+(;B[np];W[pr]
+(;B[oo];W[op]
+C[White lives.])
+(;B[qr];W[ps]
+C[White lives.]))
+(;B[op];W[oo];B[pr];W[np]
+C[Perhaps not the best way for white to live, but hey, it's simple.])
+(;B[qr]
+C[RIGHT I'll accept this, but Q2 is cleaner.])
+(;B[nn];W[pr]
+C[White lives.])
+(;B[no];W[pr]
+C[White lives.]))(;AW[ca]AW[da]AB[db]AW[cb]AW[cc]AW[dc]AW[ec]AB[eb]AB[fa]AB[gb]AB[hb]AB[ia]AW[fc]AB[fb]AW[gc]AW[hc]AW[ic]AW[ib]AB[jb]AB[kb]AB[ka]AB[jc]AB[lc]AW[hd]AW[ge]AW[mc]AB[mb]AB[ma]AB[je]AB[ke]AB[le]AB[kd]AW[md]AW[ld]AW[me]AW[lf]AW[kf]AW[jf]AW[if]AW[ie]AW[id]AW[jd]AB[nd]AB[ne]AW[mf]AB[nf]AB[ng]AB[mg]AB[lh]AB[mi]AB[nh]AW[lg]AW[kh]AW[jh]AW[ji]AW[jj]AW[kj]AW[lj]AW[mj]AB[li]AB[ni]AW[nj]AW[oi]AW[oh]AW[og]AW[of]AW[oe]AW[od]AW[oc]AB[nc]AB[nb]AW[ob]AW[ha]LB[fa:x]LB[fb:x]LB[db:x]LB[eb:x]LB[gb:x]LB[hb:x]LB[ia:x]LB[je:x]LB[ke:x]LB[le:x]LB[kd:x]AP[goproblems]
+(;W[ea];B[kc]
+(;W[ja])
+(;W[ga];B[ja]))
+(;W[ja];B[kc])
+(;W[kc];B[kd];W[ja]C[RIGHT]))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];;PL[2]
+AW[cl][el][fl][gm][hm][cn][dn][hn][bo][bp][ep][hp][ip][bq][dq][iq][br][dr][fr][ir][cs][is]
+AB[en][gn][do][eo][go][cp][dp][gp][cq][eq][fq][hq][cr][gr][hr][hs]
+C[white to kill
+]
+(;W[fs];B[er]
+(;W[es];B[ds];W[dr]C[RIGHT
+])
+
+(;W[ds];B[es])
+)
+
+(;W[er];B[ds]
+(;W[es];B[fs]C[ko
+])
+
+(;W[bs];B[fs];W[es];B[ds])
+)
+
+(;W[es];B[fs]C[ko
+])
+
+(;W[ds];B[er]
+(;W[fs];B[es])
+
+(;W[es];B[fs])
+)
+
+(;W[bs];B[er])
+
+(;W[fp];B[er])
+
+(;W[fn];B[er])
+
+(;W[fo];B[er])
+
+)(;AB[aq]AB[ar]AB[bo]AB[co]AB[dp]AB[ep]AB[fp]AB[gp]AB[gq]AB[hr]AB[hs]AW[ap]AW[br]AW[bs]AW[cp]AW[cq]AW[dq]AW[eq]AW[fq]AW[gr]AW[fs]AB[hp]AB[bp]AW[bq]AP[goproblems]
+(;B[fr];W[er]
+(;B[ds];W[dr]
+(;B[cs];W[gs]C[])
+(;B[gs];W[cs]C[]))
+(;B[gs];W[ds]TR[cr]TR[fr]C[]))
+(;B[gs];W[fr]C[Rectangular six is alive, without seki])
+(;B[ds];W[dr]
+(;B[es];W[cs]C[])
+(;B[cs]
+(;W[fr];B[es]C[Seki - that's the best black can doRIGHT])
+(;W[es];B[fr]
+(;W[gs];B[er])
+(;W[er];B[gs])))
+(;B[fr];W[cs];B[gs];W[es]C[]TR[er]TR[gr]))
+(;B[es];W[ds]C[])
+(;B[dr];W[ds]
+(;B[cr];W[er]C[])
+(;B[er];W[cr]C[]))
+(;B[ao];W[fr]C[Rectangular six is alive, without seki])
+(;B[er];W[dr]C[]))(;AB[an]AB[bn]AB[cn]AW[aq]AB[ap]AW[bp]AW[bo]AB[cp]AW[co]AB[do]AW[dp]AW[dq]AB[eo]AB[ep]AB[eq]AW[er]AW[dr]AB[gq]AW[fr]AW[gr]AB[hq]AB[hr]C[Black to play a nice endgame move.]AP[goproblems]
+(;B[bq]
+(;W[ao]C[CHOICE]
+(;B[ap]C[Well done! W is messed up!RIGHT])
+(;B[cq]C[Well done! W is messed up!RIGHT])
+(;B[ar];W[cq];B[ap];W[cp]))
+(;W[cq]C[CHOICE]
+(;B[br];W[ao])
+(;B[ar]C[];W[br]C[Well done! W is messed up! W must play this to live. (Thanks for Hans for showing me this and the continuations)]
+(;B[aq];W[bs]C[Nice!RIGHT])
+(;B[bs]C[Great!!! Ko for life!!!RIGHT])
+(;B[as]C[];W[bs]C[Oops.]))))
+(;B[ao];W[bq]C[There is something better.]))(;AB[ca]AB[cb]AB[dc]AB[dd]AB[de]AB[df]AB[bf]AB[bg]AB[cg]AB[ch]AW[cf]AW[ce]AW[be]AW[cd]AW[cc]AW[bb]AW[ba]AB[gc]AB[af]C[Okay, you may have my group...]AP[goproblems]
+(;B[bc]C[Well done! :)RIGHT])
+(;B[db];W[ae]C[:(])
+(;B[eb];W[ae]C[:(])
+(;B[da];W[ae]C[:(])
+(;B[ae];W[bc]C[:(]TR[ad]TR[db])
+(;B[ad];W[bc]TR[ae]TR[db]C[:(])
+(;B[bd];W[ad]C[:(])
+(;B[ac];W[bc]
+(;B[ae];W[ab]TR[ad]TR[db]C[:(])
+(;B[ad];W[ab]TR[ae]TR[db]C[:(])
+(;B[db];W[ae]TR[ad]TR[ab]C[:(])
+(;B[eb];W[ae]C[:(]TR[ad]TR[ab])
+(;B[da];W[ae]TR[ad]TR[ab]C[:(]))
+(;B[ab];W[ac]
+(;B[ae];W[bc]TR[ad]TR[db]C[:(])
+(;B[bc];W[bd]C[:(])
+(;B[ad];W[bc]TR[ae]TR[db]C[:(])))(;AB[br]AB[cr]AB[cq]AB[er]AB[fq]AB[gq]AB[gr]AB[gs]AW[hr]AW[hq]AW[hp]AW[gp]AW[fp]AW[eq]AW[ep]AW[dp]AW[cp]AW[bp]AW[bq]AW[ar]C[Black to live]AW[hs]AP[goproblems]
+(;B[dq]
+(;W[ds]
+(;B[es];W[bs];B[dr]C[CHOICERIGHT])
+(;B[bs];W[fs]
+(;B[fr];W[es])
+(;B[es];W[fr])))
+(;W[es];B[ds];W[bs];B[fs]C[RIGHT]))
+(;B[ds];W[dq]
+(;B[fs];W[dr])
+(;B[bs];W[dr])
+(;B[dr];W[fs]
+(;B[bs];W[fr])
+(;B[fr];W[bs])))
+(;B[es];W[bs]
+(;B[dr];W[cs])
+(;B[cs];W[dr]
+(;B[as];W[dq]
+(;B[aq];W[ds])
+(;B[ds];W[aq]))
+(;B[dq];W[ds])))
+(;B[fs];W[dr]
+(;B[dq];W[ds]C[Black cannot Atari])
+(;B[ds];W[dq]))
+(;B[dr];W[fs]
+(;B[es];W[fr])
+(;B[fr];W[es]
+(;B[bs];W[ds])
+(;B[ds];W[bs]))))(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[White]PB[Black]AW[qa][qb][sb][qc][sc][rd][re]AB[pb][rb][pc][rc][pd][qd][qf][rf][sf]C[Black to kill]
+(;B[ra]CR[ra]
+;W[sa]CR[sa]
+(;B[se]CR[se]
+(;W[sd]CR[sd]C[CHOICE]
+;B[rb]CR[rb]C[RIGHT])
+(;W[rb]CR[rb]C[CHOICE]
+;B[sd]CR[sd]C[RIGHT]))
+(;B[rb]CR[rb]
+;W[se]CR[se]))
+(;B[se]CR[se]
+;W[ra]CR[ra]
+(;B[rc]CR[rc]
+;W[sd]CR[sd])
+(;B[sd]CR[sd]
+;W[rc]CR[rc]))
+(;B[sd]CR[sd]
+;W[se]CR[se]
+(;B[ra]CR[ra]
+;W[sa]CR[sa])
+(;B[qe]CR[qe]
+;W[ra]CR[ra]))
+(;B[qe]CR[qe]
+;W[ra]CR[ra]
+(;B[se]CR[se]
+;W[sd]CR[sd])
+(;B[rc]CR[rc]
+;W[sd]CR[sd]))
+(;B[pa]CR[pa]
+;W[ra]CR[ra]))(;AW[ec]AW[dc]AW[fd]AW[gd]AB[ed]AB[fe]AB[gf]AB[de]AB[df]AB[cf]AW[ce]AW[cd]AB[if]AB[je]AB[jd]AB[ke]AB[kf]AB[ic]AB[jb]AB[hb]AW[jc]AW[kc]AW[kb]AW[lc]AW[kd]AW[le]AW[me]AW[mf]AW[mg]AW[nf]AW[gh]AW[ih]AW[jg]AW[jf]C[After the marked stone black should play ......]AW[he]AB[ie]AW[hf]AB[hd]AW[hg]AB[gc]AW[fb]TR[fb]AB[ch]AP[goproblems]
+(;B[gb];W[ja]
+(;B[ib];W[fc])
+(;B[fc];W[ge]
+(;B[ib];W[eb])
+(;B[eb];W[db];B[fa];W[ha];B[ib]C[RIGHT]))
+(;B[ia];W[ib];B[fc];W[ge]C[];B[jb]C[Ko fight.]))
+(;B[fc];W[ge];B[gb];W[ja]
+(;B[ib];W[eb])
+(;B[eb];W[db];B[fa];W[ha];B[ib]C[RIGHT])
+(;B[ia];W[ib];B[eb];W[ha];B[db];W[cb];B[fa];W[da]))
+(;B[ia];W[gb]))(;AW[ec]AW[dc]AW[fd]AW[gd]AB[ed]AB[fe]AB[gf]AB[de]AB[df]AB[cf]AW[ce]AW[cd]AB[if]AB[je]AB[jd]AB[ke]AB[kf]AB[ic]AB[jb]AB[hb]AW[jc]AW[kc]AW[kb]AW[lc]AW[kd]AW[le]AW[me]AW[mf]AW[mg]AW[gh]AW[ih]AW[jg]AW[jf]C[After the marked stone white should play ......]AW[he]AB[ie]AW[hf]AB[hd]AW[hg]AB[gc]TR[gc]AB[ch]AP[goproblems]
+(;W[ja];B[ia]C[];W[ib];B[fc];W[ge];B[jb];W[fb]
+(;B[gb];W[ib]C[Ko!RIGHT];B[eb]C[KO! but iF Black play the marked stone. Black die.];W[ha];B[db];W[cb];B[fa];W[da]C[RIGHT])
+(;B[ka];W[gb]C[RIGHT]))
+(;W[fb];B[fc];W[ge];B[gb]
+(;W[eb];B[ia])
+(;W[ja];B[eb]
+(;W[db];B[fa])
+(;W[ib];B[db])))
+(;W[fc];B[fb];W[ja];B[ib]))(
+;
+FF[1]
+GM[1]
+SZ[19]
+AP[Jago:Version 4.6]
+AB[cb][bb][bc][cd][be][bf][ag]
+AW[af][bg][bi][cg][cf][ce][ed][dc][cc][db][fc]
+GN[i.3]
+C[Problem I.3 from The Game of Go by Arthur Smith]
+(
+;
+B[ab]
+;
+W[ad]
+;
+B[bd]
+C[RIGHT
+
+]
+)
+(
+;
+B[ca]
+;
+W[ab]
+(
+;
+B[ac]
+;
+W[aa]
+(
+;
+B[ae]
+;
+W[bd]
+)
+(
+;
+B[bd]
+;
+W[ae]
+;
+B[ad]
+;
+W[af]
+)
+)
+(
+;
+B[ad]
+;
+W[ah]
+;
+B[aa]
+C[You can do better than ko.]
+)
+(
+;
+B[aa]
+C[RIGHT]
+)
+)
+(
+;
+B[ad]
+;
+W[ca]
+;
+B[ba]
+;
+W[ab]
+)
+(
+;
+B[aa]
+;
+W[ca]
+(
+;
+B[ae]
+;
+W[ad]
+;
+B[bd]
+;
+W[ac]
+)
+(
+;
+B[ad]
+;
+W[ac]
+)
+(
+;
+B[ac]
+;
+W[bd]
+)
+)
+)(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[White]PB[Black]AW[da][bb][cb][fb][cc][fc][cd][dd][ed]AB[ga][ab][gb][bc][gc][bd][fd][gd][ce][de][ee][fe]C[Black to play]
+(;B[eb]CR[eb]
+;W[ec]CR[ec]
+(;B[db]CR[db]
+;W[ba]CR[ba]
+(;B[fa]CR[fa]C[RIGHT Black connects out])
+(;B[ea]CR[ea]
+;W[fa]CR[fa]
+;B[ca]CR[ca]C[Ko. Black can do better.]))
+(;B[fa]CR[fa]
+;W[db]CR[db]TR[ba][ea]C[Miai for life]))
+(;B[fa]CR[fa]
+;W[eb]CR[eb]TR[ba][dc]C[Miai for life])
+(;B[dc]CR[dc]
+;W[eb]CR[eb]TR[ba][fa]C[Miai for life])
+(;B[ba]CR[ba]
+;W[eb]CR[eb]
+(;B[fa]CR[fa]
+;W[dc]CR[dc]C[Alive])
+(;B[dc]CR[dc]
+;W[fa]CR[fa]C[Alive])))(;AB[sg]AB[rg]AB[qg]AB[pg]AB[og]AB[oh]AB[oi]AB[pj]AB[ql]AB[qm]AB[qr]AB[pq]AB[pp]AB[qp]AB[oq]AB[or]AB[os]AB[ps]AB[ro]AB[qn]AB[pk]AW[qq]AW[rq]AW[rp]AW[rr]AW[rl]AW[rm]AW[qk]AW[qj]AW[qi]AW[rj]AW[rh]AW[pi]AW[ph]AW[rs]AP[goproblems]
+(;B[sk];W[sj]
+(;B[sh]
+(;W[rn]
+(;B[so];W[sn];B[sl];W[si];B[qh]C[RIGHT];W[sp];B[qo];W[sr]C[RIGHT])
+(;B[sn];W[si];B[qh]C[RIGHT]))
+(;W[sn]
+(;B[so];W[sl];B[rn];W[si];B[qh]C[RIGHT])
+(;B[sl];W[so]))
+(;W[so];B[sn];W[rn];B[sp];W[sm];B[so];W[sq];B[qo];W[si];B[qh]C[RIGHT]))
+(;B[sm];W[sh];B[sn];W[sl]))
+(;B[sh];W[sk];B[si];W[sm];B[sj];W[so];B[rn];W[sn])
+(;B[si];W[sk];B[ri];W[sj];B[sh];W[sm]))(;AW[pk]AW[pj]AW[ql]AW[pl]AW[rk]AB[rl]AB[sl]AB[sk]AB[qm]AB[pm]AB[om]AB[rn]AW[qj]AB[rj]AW[qk]AB[ri]AW[pi]AW[ph]AW[rm]AW[rh]AW[sh]AW[pg]TR[ri]TR[rj]C[How can white capture the marked stones?]AP[goproblems]
+(;W[sj]
+(;B[si]
+(;W[qi]
+(;B[sm]
+(;W[sj]C[RIGHT])
+(;W[sn];B[so];W[sj]C[RIGHT]))
+(;B[sj]
+(;W[sm]C[RIGHT])
+(;W[sn];B[sm];W[rm]C[RIGHT])))
+(;W[sm];B[sn];W[qi];B[sj])
+(;W[sn]
+(;B[sm];W[qi]C[RIGHT])
+(;B[sj];W[qi];B[sm];W[rm]C[RIGHT])))
+(;B[sm];W[si]C[RIGHT]))
+(;W[si];B[sj]
+(;W[sm];B[sn])
+(;W[qi];B[sm]))
+(;W[qi];B[sj]
+(;W[si];B[sm])
+(;W[sm];B[sn]))
+(;W[sm];B[sn]
+(;W[si];B[sj])
+(;W[qi];B[sj])
+(;W[sj];B[si];W[qi];B[sj])))(;AB[ka]AB[ja]AB[jb]AB[ib]AW[ha]AB[gb]AB[fb]AW[la]AW[kb]AW[mb]AW[mc]AW[md]AW[kc]AW[jc]AB[hc]AW[lb]AB[ma]AB[na]AB[nb]AB[ld]AW[me]AW[le]AB[nc]AB[nd]AB[ne]AB[nf]AB[mf]AW[ea]AW[eb]AB[fa]AW[ec]AB[gd]AW[fc]AW[fd]AW[fe]AB[he]AW[ge]AB[ie]AB[gf]AB[gg]AB[hg]AB[ig]AB[jg]AW[ff]AW[fg]AW[fh]AW[gh]AW[hh]AW[ih]AW[jh]AW[je]AW[ke]AW[lf]AW[jf]AB[if]AB[kg]AW[lg]AW[kh]AB[lh]AB[mg]AB[mh]AB[gc]AB[og]AW[li]AW[ki]C[White to save her stones.]AP[goproblems]
+(;W[kd];B[id])
+(;W[jd]C[death in gote :S])
+(;W[id];B[ic])
+(;W[hb];B[ic])
+(;W[ic]
+(;B[hb];W[id];B[hd];W[kd]C[:)RIGHT])
+(;B[id]
+(;W[jd];B[hb])
+(;W[hb]C[(black shouldn't do this!)RIGHT]))))(;AB[an]AB[bn]AB[cn]AB[bm]AB[cm]AB[ai]AB[bi]AB[bj]AB[cj]AB[ci]AW[ah]AW[bh]AW[ch]AW[dh]AW[di]AW[dj]AW[dm]AW[dn]AW[co]AW[bo]AW[ao]AW[do]AB[dk]AB[dl]AW[fl]AW[fk]C[w has just played the marked stones. How can b live?]AW[bl]TR[bl]AW[fi]AW[fn]AP[goproblems]
+(;B[cl];W[bk]
+(;B[ck];W[al]
+(;B[ak];W[aj]LB[jj:K]C[Play at K for a ko threat]
+(;B[am]C[RIGHT])
+(;B[jj]C[b could play a7 :(]))
+(;B[am];W[ak]))
+(;B[al];W[ak];B[ck];W[am]C[Play at K for a ko threat]LB[jj:K]
+(;B[aj]C[RIGHT])
+(;B[jj]C[u could play a10 :(]))
+(;B[ak];W[al]
+(;B[am];W[aj];B[ck]C[RIGHT])
+(;B[ck];W[aj];B[am]C[RIGHT])))
+(;B[ck];W[cl])
+(;B[bk];W[cl])
+(;B[al];W[cl]))(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-27]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];;PL[2]
+AW[cc][dd][df][dk][fp][dq][jq][br][cr]
+AB[db][fc][ic][pd][cm][do][cp][pp][cq]C[best point for white?
+]
+(;W[bl]C[
+];B[bm]
+(;W[cl]
+C[RIGHT
+pressure on this group helps white, and this helps protect the upper-left
+])
+
+(;W[bq];B[cl])
+
+(;W[bo];B[cl])
+)
+
+(;W[bk]C[good idea but slightly too slow
+])
+
+(;W[el];B[bk])
+
+(;W[bq];B[bk])
+
+(;W[nq];B[bk])
+
+(;W[qf];B[bk])
+
+(;W[fn];B[bk])
+
+(;W[jo];B[bk])
+
+(;W[gd];B[bk])
+
+(;W[nc];B[bk])
+
+(;W[qn];B[bk])
+
+)(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[aj][bj][cj][ck][cl][cm][cn][en][do][dp][dq][cr][dr][er][fr]
+AB[ak][bk][bl][am][bm][bn][ao][bo][co][cp][cq][br][cs]PL[2]
+C[white to play in the bottom left -- largest yose.
+]
+(;W[ds];B[bs])
+
+(;W[bs];B[as];W[ds]
+C[RIGHT
+black will eventually have to connect at B3
+])
+
+(;W[ar];B[bs];W[bq];B[bp];W[aq];B[ap]C[this does nothing for white.
+])
+
+(;W[bq];B[bs]
+(;W[ds];B[aq])
+
+(;W[ar];B[bp];W[aq];B[ap])
+
+(;W[aq];B[bp]
+(;W[ds];B[ap])
+
+(;W[ar];B[ap])
+)
+)
+
+)(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];AW[qb][rb][pc][qc][re]
+AB[ob][pb][oc][sc][od][pd][of][pf][qg][rg]PL[2]
+C[white to do his best to live
+]
+(;W[qa];B[se]
+(;W[sf];B[rf]
+(;W[sd];B[rd];W[qd]C[RIGHT
+ko
+])
+
+(;W[rd];B[sd])
+
+(;W[qd];B[sd])
+
+(;W[sb];B[sd])
+)
+
+(;W[rd];B[sd])
+
+(;W[rf];B[sf])
+)
+
+(;W[sb];B[qa];W[ra];B[rd]
+(;W[qd];B[qe]
+(;W[rc];B[sa])
+
+(;W[pa];B[rf])
+)
+
+(;W[rc];B[qd])
+)
+
+(;W[rd];B[qa];W[ra];B[sb])
+
+(;W[sd];B[qa];W[ra];B[qd];W[rd];B[sb])
+
+(;W[se];B[qa];W[ra];B[sb])
+
+)(;GM[1]
+FF[4]
+AP[Hibiscus:2.1]
+SZ[19]
+ST[3]
+;AB[dd][df][dp][fp][pd][pj][pp]
+AW[be][cn][di][fc]
+LB[yy:1][cc:A][cg:B][ce:C]PL[B]
+(;B[cc]
+MN[1]
+;W[cg]
+LB[cg:2][cg:2][jc:A][ck:B][jq:C](;B[jc]
+C[RIGHT]
+)(;B[ck]
+;W[dl]
+C[Invading here is too early. Als oit 
+starts some difficult fighting.]
+)(;B[jq]
+;W[ic]
+C[The marked black stones are not 
+yet settled.]
+LB[ic:4]TR[df][dd][cc]))(;B[cg]
+;W[dc]
+;B[cc]
+;W[cd]
+C[Black is in trouble.]
+)(;B[ce]
+C[This is bad for it allows White to 
+choose the side he would like to play. 
+It is also an empty move for it doesn't 
+attack, defend or make territory.]
+))(;GM[1]VW[]SZ[19]
+AW[bb][cb][cd][ce][df]AB[db][dc][dd][ed][gd][gc][hb][ha]AW[ib][ic][hc][he][ge][fe][ec][eb](;
+B[fa];
+W[da](;
+B[ea];
+W[fb](;
+B[gb];
+W[ga](;
+B[ea]C[RIGHT]
+)
+(;
+B[fa];
+W[ea])
+(;
+B[fc];
+W[ea])
+)
+(;
+B[ca];
+W[fc];
+B[fd];
+W[gb])
+(;
+B[fc];
+W[ga](;
+B[ea]C[RIGHT]
+)
+(;
+B[gb];
+W[ea])
+(;
+B[fa];
+W[ea])
+)
+)
+(;
+B[fb];
+W[ea])
+)
+(;
+B[da];
+W[gb](;
+B[fb];
+W[fc];
+B[fd];
+W[fa]C[Dead shape.]
+)
+(;
+B[ga];
+W[fc](;
+B[fd];
+W[fb])
+(;
+B[fb];
+W[fd])
+)
+(;
+B[fc];
+W[ga])
+)
+(;
+B[ea];
+W[fc](;
+B[fd];
+W[fb](;
+B[gb];
+W[fa])
+(;
+B[fa];
+W[gb])
+)
+(;
+B[fb];
+W[fd])
+)
+(;
+B[fb];
+W[da])
+)

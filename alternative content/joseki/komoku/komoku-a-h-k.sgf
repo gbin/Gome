@@ -1,0 +1,181 @@
+(;
+GM[1]FF[4]
+AB[qd][ld]
+AW[oc]
+C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]
+LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n]
+;W[pg]
+C[The choice between the low and high two-space counter pincer makes a big difference in later play. 
+
+Black can answer at 'a' or 'b'.]
+LB[od:a][pe:b]
+
+(;B[od]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[pd:a][nd:b]
+
+(;W[pd];B[pe];W[pc]
+C[Black continues with 'a' or 'b'. Black 'a' is unique with the high pincer (compared to the low, where Black must play 'b'). Black 'c' keeps the position simple at a cost.]
+LB[qc:a][re:b][oe:c]
+
+(;B[qc]
+C[White continues with 'a'. White 'b' is an old pattern.]
+LB[qb:a][oe:b]
+
+(;W[qb]
+C[Black continues with 'a'. Black 'b' is an overplay.]
+LB[qf:a][rb:b]
+
+(;B[qf];W[rb];B[nd];W[nb];B[rh])
+(;B[rb]
+C[Black 11 is a mistake.]
+;W[qe];B[oe];W[pb];B[re];W[qf];B[rf];W[rg];B[qh]
+;W[qg];B[ra]
+C[Black lives. Now White must settle his stones at top.]
+
+(;W[md];B[me];W[mc];B[lc];W[lb];B[kb];W[nb];B[la];W[mb]
+;B[le];W[jc];B[kc];W[nf];B[ne]
+C[White gets a slightly better result.]
+)
+(;W[mc]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[lc:a][md:b]
+
+(;B[lc];W[md];B[me];W[lb];B[kb];W[nb];B[la];W[mb];B[le]
+;W[jc];B[kc];W[nf];B[ne])
+(;B[md]
+C[Black 23 looks better than it is.]
+;W[lb]))))
+(;W[oe];B[pf];W[nd];B[of]
+C[White continues with 'a' or 'b'. White 'b' tries to avoid giving Black such great shape on the right side.]
+LB[nf:a][me:b]
+
+(;W[nf];B[og]
+C[This pattern is considered to favor Black.]
+)
+(;W[me];B[qg])))
+(;B[re]
+C[White continues with 'a' or 'b'.]
+LB[md:a][nd:b]
+
+(;W[md];B[le]
+C[White continues with 'a'. White 'b' is a mistake, failing to account for the high White pincer at 4.]
+LB[lc:a][oe:b]
+
+(;W[lc];B[kc];W[mc];B[jd])
+(;W[oe];B[of];W[ne];B[pf]))
+(;W[nd]
+C[White 10 is an exception - usually this atari is a mistake.]
+;B[oe];W[md]
+C[Black continues with 'a' or 'b'.]
+LB[le:a][me:b]
+
+(;B[le]
+C[White continues with 'a' or 'b'.]
+LB[mf:a][nf:b]
+
+(;W[mf];B[me];W[ne];B[nf]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[lc:a][mg:b]
+
+(;W[lc];B[kc];W[mb];B[jd]
+C[It is better not to give atari at 'a'.]
+LB[lb:a]
+)
+(;W[mg]
+C[White 18 is a mistake, as it is not sente.]
+;B[lc]
+C[If White 'a', Black 'c'. The result is terrible for White.]
+LB[of:a][nc:b]
+;W[mb]
+C[White must play 20.]
+;B[og];W[lb];B[kb];W[rb];B[ph]))
+(;W[nf];B[ne];W[me];B[mf];W[lc];B[lf];W[ng];B[qc];W[mb]))
+(;B[me]
+C[White continues with 'a' or 'b'.]
+LB[ne:a][lc:b]
+
+(;W[ne];B[nf];W[mf];B[le];W[lc];B[kc];W[mb];B[jd])
+(;W[lc];B[ne];W[kd];B[le];W[jc]
+C[If Black plays 'a', White replies 'b' and connects.]
+LB[qc:a][qb:b]
+))))
+(;B[oe];W[qe]
+(;B[qf];W[re];B[qg];W[rd];B[ph])
+(;B[qc];W[qb];B[rb];W[pb];B[re];W[qf];B[rf];W[rg];B[qh]
+;W[qg];B[ra]
+C[Black is settled in the corner. White continues with 'a' or 'b'. See variation 2-1-8-11-1-1-1-2.]
+LB[md:a][mc:b]
+)))
+(;W[nd]
+C[White 6 is pointless with the high pincer.]
+;B[oe];W[pc]
+C[Black continues with 'a' or 'b'.]
+LB[ne:a][qc:b]
+
+(;B[ne]
+C[White may try 'a' or 'b'. With White 6, the damage is already done.]
+LB[qc:a][pd:b]
+
+(;W[qc];B[qf];W[qg];B[nc];W[nb];B[mc];W[mb];B[lb];W[kc]
+;B[lc];W[dp]
+C[White plays elsewhere.]
+;B[rg];W[rh];B[rc];W[rb];B[re];W[sc]
+C[White 26 is absolutely necessary. If the ladder is favorable, Black cuts at 'a', otherwise can peep at 'b'.]
+LB[qh:a][qi:b]
+)
+(;W[pd];B[pe];W[qe];B[re];W[qf];B[qc];W[qb];B[rb];W[pb]
+;B[rf];W[rg];B[qh];W[qg];B[ra]
+C[This sequence so far is forced. Clearly White 6 would be better placed at 'a'. White has no good way to settle the top group of stones.]
+LB[md:a]
+;W[lb];B[kb];W[kc];B[lc];W[jb]
+;B[mb];W[ka];B[nc]
+C[The White stones are captured; the continuation shows Black's vain attempt to save them.]
+;W[nb];B[mc];W[ma];B[pa]
+C['a' and 'b' are miai; the White stones are history.]
+LB[na:a][ob:b]
+))
+(;B[qc];W[ne];B[qf]
+C[Black 11 is a possible continuation. Black later aims at 'a' and the cutting point 'b'.]
+LB[nf:a][nc:b]
+)))
+(;B[pe]
+C[White continues with 'a'. White 'b' is too slow.]
+LB[me:a][nd:b]
+
+(;W[me]
+C[White 6 is the tesuji for settling his stones.
+
+Black continues with 'a'. Black 'b' takes the bait. Black 'c' is not recommended either.]
+LB[le:a][nd:b][og:c]
+
+(;B[le];W[mf];B[pc];W[lf])
+(;B[nd]
+C[Black 7 is a mistake.]
+;W[md];B[nc];W[mc];B[nb];W[ne];B[mb];W[lc];B[oe]
+;W[ng]
+C[In the early game, White's strength exceeds Black's profit.]
+)
+(;B[og]
+C[Black 7 is not recommended.]
+;W[oh];B[of];W[md];B[ph];W[pi];B[qh];W[qi];B[rg]
+;W[rh];B[qg];W[nh]
+C[Black 'a' is possible, but provoking White 'b' is not good.]
+LB[mf:a][le:b]
+))
+(;W[nd]
+C[White 6 is slow.]
+;B[of]
+C[After Black 7, White 6 clearly would be better at 'a'.]
+LB[md:a]
+;W[le];B[ke];W[me];B[pc];W[kd];B[jd];W[kc]
+;B[jc];W[lb];B[kb];W[lc]
+C[This mirrors variation 2-1-8-11-2-3. White has not done well.]
+)))

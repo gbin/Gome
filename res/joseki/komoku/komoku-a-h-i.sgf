@@ -1,0 +1,38 @@
+(;
+GM[1]FF[4]AB[qd][ld]AW[oc]C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n];W[qf]C[The White pincer puts pressure on Black 1 to settle White 2. Black usually answers at 'a', but 'b' is possible.]LB[od:a][pe:b]
+(;B[od]C[White continues with 'a' or 'b'.]LB[pc:a][nd:b]
+(;W[pc];B[pd];W[qc]C[Black continues with 'a' to 'c'.]LB[nd:a][nc:b][rc:c]
+(;B[nd]C[White continues with 'a' or 'b'.]LB[mb:a][pj:b]
+(;W[mb];B[qj])
+(;W[pj]C[If White wants to prevent Black from extending on the right side, he plays 10.];B[nc];W[rd];B[re];W[rc];B[qe]))
+(;B[nc];W[nb];B[mb];W[mc];B[nd];W[lb];B[md];W[ma];B[qj])
+(;B[rc]C[Black takes a territory oriented approach, and gets a little thin in doing so.];W[rb];B[rd];W[lb]))
+(;W[nd]C[White gets a bit greedy with 6, as he aims at also living in the corner.];B[oe];W[pc];B[qe]C[White continues with 'a'. White 'b' leads to bad shape.]LB[qc:a][ne:b]
+(;W[qc]C[Black continues with 'a' or 'b'.]LB[ne:a][qj:b]
+(;B[ne]C[White extends to 'a', possibly 'b'.]LB[pj:a][pk:b]
+(;W[pj];B[nc]C[Continuation.];W[nb];B[mc];W[mb];B[lb];W[kc];B[lc])
+(;W[pk]AB[po][cp]AW[de][pq]C[1972 9th Pro Best Ten Playoff, Game 3 - White: Yoshio Ishida; Black: Iwata
+
+White played 12, stretching the extension from 4 to pincer the Black stone in the lower right corner.];B[pi]C[Black 13 surprised White, who expected Black to pincer around 'a'.]LB[nq:a];W[np]))
+(;B[qj];W[ne]C[Black 11 prevents White from making the first play down the right side.];B[og];W[nf];B[pg];W[id]))
+(;W[ne];B[nf];W[me];B[qc]C[Black 13 robs White of his base.])))
+(;B[pe];W[pf]C[Black continues with 'a'. Black 'b' is weak.]LB[of:a][oe:b]
+(;B[of];W[og];B[oe];W[ph]C[Black must decide how to tackle the corner. 'a' is solid, but lets White play under Black 3. Black 'b' is another possibility.]LB[pb:a][mc:b]
+(;B[pb];W[lb])
+(;B[mc];W[rc];B[rd];W[qb]C[Black continues with 'a' or 'b'. In either case, White can live in the corner (at least through ko) or get to the center.]LB[qc:a][nb:b]
+(;B[qc]C[White continues with 'a'. White 'b' and White dies.]LB[ra:a][rb:b]
+(;W[ra]C[Black 'a' for a ko. Black 'b' and White lives.]LB[sc:a][sb:b]
+(;B[sc];W[sb])
+(;B[sb]C[Black 17 is a mistake. White lives.];W[sc]))
+(;W[rb];B[nb]C[White dies.]))
+(;B[nb];W[ob];B[pc];W[pb];B[ra]C[Black 19 takes away eye shape, but White can play 'a', as 'b' and 'c' are sente for White. The position for fighting in the center determines the outcome.]LB[ne:a][nc:b][od:c])))
+(;B[oe]C[Black 7 shows a lack of fighting spirit.];W[of];B[ne]C[White can emphasize the side with 'a', or live in the corner with 'b'.]LB[qj:a][rc:b]
+(;W[qj];B[mc]C[White 'a' is sente, and White can reduce the corner with 'b'.]LB[kc:a][rd:b])
+(;W[rc];B[rd];W[qc];B[mc];W[nb];B[pj];W[mg]))))

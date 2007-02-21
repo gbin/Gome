@@ -1,0 +1,176 @@
+(;
+GM[1]FF[4]
+AB[oc][qg]
+AW[qd]
+C[White may respond at 'a' or 'b'. He must not permit Black 'a' by playing elsewhere.]
+LB[od:b][pe:a]
+
+(;W[pe]
+C[Black continues with 'a' or 'b', continuing to emphasize the right side. Black 'c' is playable, but shifts Black focus to the top.]
+LB[md:c][og:b][qj:a]
+
+(;B[qj]
+C[White continues with 'a' to 'c'. White 'd' is not recommended.]
+LB[nd:d][lc:c][of:b][pc:a]
+
+(;W[pc];B[od];W[pb])
+(;W[of];B[lc];W[pc])
+(;W[lc]
+C[Black continues with 'a'. Sliding into the corner with Black 'b' is premature.]
+LB[qb:b][nd:a]
+
+(;B[nd];W[of];B[me];W[pc];B[kd];W[jc])
+(;B[qb]
+C[The slide of Black 7 is premature.]
+;W[nd];B[nc];W[md];B[rc];W[og]))
+(;W[nd]
+C[White 6 is not recommended. There is no point giving away territory in this way.
+
+Black continues with 'a'. Black 'b' is not recommended.]
+LB[mc:b][nc:a]
+
+(;B[nc];W[ld];B[mc];W[ne];B[kc];W[pc]
+C[Grabbing the corner is small compensation.]
+)
+(;B[mc]
+C[Black 7 is not recommended.]
+;W[nc];B[nb];W[od]
+C[Black 'a' (a sacrifice play) and 'b' are possible continuations.]
+LB[ob:b][pc:a]
+
+(;B[pc];W[ob];B[mb];W[pb])
+(;B[ob];W[le]))))
+(;B[og]
+C[White continues with 'a' or 'b'. White 'c' is not recommended.]
+LB[ne:c][pc:b][nd:a]
+
+(;W[nd];B[nc];W[pc];B[od];W[oe];B[kc])
+(;W[pc];B[ne]
+C[White leaves until later how to attack Black's thinness.]
+)
+(;W[ne]
+C[White 6 is not recommended.]
+;B[md]
+C[Black 7 is a very effective move.
+
+White 'a' and 'b' are both unpleasant to White.]
+LB[pc:b][me:a]
+
+(;W[me]
+C[White 8, prompting Black to crawl along the fourth line, is painful.]
+;B[ld];W[pc];B[od];W[oe];B[mg]
+C[Black forces another push by White.]
+;W[le];B[kd])
+(;W[pc];B[od];W[oe];B[me];W[ng];B[mf];W[nf];B[oh]
+C[White has poor shape.]
+)))
+(;B[md]
+C[Black 5 is a bit inconsistent. In this case, Black 3 would be better placed one space higher (4th line).]
+;W[pc];B[od]
+C[White continues with 'a' or 'b'.]
+LB[of:b][pb:a]
+
+(;W[pb];B[ic])
+(;W[of])))
+(;W[od]
+C[The idea of White 4 is to settle shape quickly. Professionals shy away from such play, because while fortifying oneself, they also strengthen the opponent, foreclosing later options.]
+;B[nd];W[oe];B[pc];W[qc]
+C[Black continues with 'a' or 'b'. Black 'c' is a mistake.]
+LB[qb:c][qj:b][kc:a]
+
+(;B[kc]
+C[White continues with 1. White cannot afford to play elsewhere ('b'). If self-preservation of the White corner stones is not top priority, White 'c' may be feasible.]
+LB[pj:c][dp:b][qf:a]
+
+(;W[qf]
+C[White 10 is necessary.]
+;B[rf];W[re];B[pf];W[qe])
+(;
+C[White plays elsewhere, a mistake. Black continues with 'a', or the more sneaky 'b'.]
+LB[qb:b][rf:a]
+
+(;B[rf];W[qe];B[og];W[nf];B[md])
+(;B[qb]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[rb:b][qf:a]
+
+(;W[qf]
+C[Black continues with 'a' or 'b'.]
+LB[rb:b][rf:a]
+
+(;B[rf];W[re];B[pf];W[qe]
+C['a' and 'b' are miai. White lives.]
+LB[rg:b][rb:a]
+)
+(;B[rb];W[og]))
+(;W[rb]
+C[White has been tricked.]
+;B[pd];W[pe];B[qe]
+C[White continues with 'a' or 'b'.]
+LB[qf:b][pb:a]
+
+(;W[pb];B[nc]
+C[White still has to settle himself into a small corner. White prospects are dim.]
+)
+(;W[qf];B[re]))))
+(;W[pj];B[og];W[ph];B[pg];W[nf]
+C[Black may try 'a' or 'b'.]
+LB[qb:b][ng:a]
+
+(;B[ng];W[nc]
+C[The ensuing fight may take several directions.]
+)
+(;B[qb];W[rb];B[pd];W[pe];B[qe];W[re];B[qf];W[nc];B[nb]
+;W[mc];B[mb];W[lc];B[lb];W[me]
+C[White lives in the corner, and Black must find eye-shape for the Black stones on the right.]
+)))
+(;B[qj];W[kc];B[ne]
+C[White continues with 'a'. White 'b' is wrong.]
+LB[og:b][pg:a]
+
+(;W[pg]
+C[Black continues with 'a'. Black 'b' is not as good.]
+LB[ph:b][qh:a]
+
+(;B[qh];W[og];B[le];W[id])
+(;B[ph]
+C[Black 13 is not recommended: the move is not bad, but the other variation is slightly better.]
+;W[og]
+C[Since White is going to play 14 anyway, Black shouldn't help.]
+;B[qf];W[qe];B[le];W[id]))
+(;W[og]
+C[White 12 is a mistake.]
+;B[le];W[id];B[lb]
+C[Black 15 defends against the marked cutting point.
+
+White continues with 'a'. White cannot afford to defend at top with 'b'.]
+LB[kb:b][rf:a]
+CR[nc]
+
+(;W[rf];B[qf];W[qe];B[rg]
+C[Black 17 and 19 strengthen Black for which White has no compensation.]
+)
+(;W[kb]
+C[White 16 is a mistake.]
+;B[pd];W[pe];B[qe];W[qf];B[pf]
+C['a' and 'b' are miai, a terrible result for White.]
+LB[re:b][of:a]
+)))
+(;B[qb]
+C[Black 9 is a mistake.]
+;W[rb];B[pd];W[pe];B[qe]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[pb:b][nc:a]
+
+(;W[nc];B[nb];W[mc];B[mb];W[qf]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[re:b][lc:a]
+
+(;B[lc];W[re];B[md]
+C[White has played elsewhere once, Black 3 is now useless: the result favors White.]
+)
+(;B[re]
+C[Black 19 only makes Black's situation worse.]
+;W[pb];B[ob];W[qa];B[lc];W[rf];B[ne];W[pg];B[nf]
+;W[ph]))
+(;W[pb];B[ob];W[qa];B[mc]))))

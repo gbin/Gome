@@ -1,0 +1,8 @@
+jar:/joseki/hoshi/
+hoshi-a.txt,I,standard approach move,na;sh,pd,qf
+hoshi-b.sgf,J,alternative approach move,1,na;sh,pd,pf
+hoshi-c.sgf,J,alternative approach move,1,na;si,pd,pg
+hoshi-d.sgf,J,White playing elsewhere. These variations show White approaches when there are multiple Black stones locally,1,na;sh,pd,dp
+hoshi-e.sgf,J,shows invasion (which is not joseki),1,na;sf,pd,qc
+hoshi-f.sgf,J,shows a splitting move when Black has already played at top,1,na;sk,pd,qi
+hoshi-g.sgf,J,is feasible if strategically sensible,1,na;sf,pd,qd

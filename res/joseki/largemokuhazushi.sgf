@@ -1,0 +1,28 @@
+(;
+GM[1]FF[4]AB[nc]C[The large mokuhazushi point (6-3), a remnant of the "new fuseki" movement in Japan in the 1930's. As an initial corner point, its popular usage has not stood the test of time.];W[qd]C[Black continues with 'a' or 'b'.]LB[qb:b][qc:a]
+(;B[qc]C[White continues with 'a' or 'b'.]LB[pc:b][rc:a]
+(;W[rc]C[Black continues with 'a' or 'b'.]LB[pd:b][pc:a]
+(;B[pc]C[White continues with 'a' to 'c'.]LB[rb:c][pf:b][re:a]
+(;W[re])
+(;W[pf];B[rb];W[qi])
+(;W[rb];B[qf];W[qe];B[pf];W[od];B[mc];W[oc];B[ob];W[ne];B[kd]))
+(;B[pd]C[White continues with 'a'. White 'b' is not recommended.]LB[pc:b][qe:a]
+(;W[qe]C[Black continues with 'a' or 'b'.]LB[rb:b][pc:a]
+(;B[pc];W[rb])
+(;B[rb]C[White continues with 'a' (a forcing move). White 'b' is a change of direction that results in Black's favor.]LB[pc:b][qb:a]
+(;W[qb]C[White 8 is a simple forcing move.];B[pc];W[sb];B[pf])
+(;W[pc]C[White 8 aims to take the top, but is not recommended.];B[qb];W[od];B[pe];W[oc];B[oe];W[nd];B[qf];W[rf];B[rg]C[White continues with 'a' or 'b'.]LB[qg:b][pf:a]
+(;W[pf];B[qg];W[nf];B[of];W[og];B[pg];W[ne];B[pf];W[oh])
+(;W[qg]C[White plays 18 to fight for life with a ko.];B[pf];W[re];B[rh];W[sb];B[sd];W[sc];B[sf];W[rd];B[sg];W[se];B[sa];W[ra];B[qa]))))
+(;W[pc];B[qb];W[pe];B[od];W[re];B[rb];W[sb];B[pb];W[pg])))
+(;W[pc];B[pd]C[White continues with 'a'. White 'b' is not recommended.]LB[od:b][qb:a]
+(;W[qb];B[rc];W[od];B[pe];W[oc];B[rb];W[pg];B[of]C[White continues with 'a' or 'b'.]LB[og:b][nd:a]
+(;W[nd];B[og];W[kc];B[ph])
+(;W[og];B[nf];W[mc];B[qe];W[rf];B[re];W[qk]))
+(;W[od]C[White 6 is not recommended.];B[pe]C[White continues with 'a' or 'b'.]LB[oc:b][qb:a]
+(;W[qb];B[oc];W[rc];B[pb];W[qc];B[ne])
+(;W[oc];B[qe];W[qb];B[rd];W[rc];B[ld];W[nd];B[qi]))))
+(;B[qb]C[White continues with 'a' to 'c'.]LB[pd:c][ph:b][qg:a]
+(;W[qg];B[kc])
+(;W[ph];B[ne];W[pd];B[oc];W[rb];B[jc])
+(;W[pd];B[oc];W[qh];B[rc];W[rd])))

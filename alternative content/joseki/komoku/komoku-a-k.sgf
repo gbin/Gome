@@ -1,0 +1,168 @@
+(;
+GM[1]FF[4]
+AB[qd][nd]
+AW[oc]
+C[Black 3, a straight-forward attempt to build thickness, is generally regarded as a trick play, but White must be careful in answering.
+
+Black must have the ladder to play this way.
+
+White continues with 'a'. White 'b' and 'c' are not recommended.]
+LB[pd:c][qc:b][od:a]
+
+(;W[od];B[oe]
+C[White 'a' is correct. White 'b' is a mistake, though Black may make his own mistakes after White 'b'.]
+LB[pe:b][ne:a]
+
+(;W[ne]
+C[White 6 is the only move.
+
+Black may try 'a' or 'b'. Black 'c' is a mistake.]
+LB[md:c][pe:b][nc:a]
+
+(;B[nc]
+C[White continues with 'a' and 'b'.]
+LB[nb:b][pe:a]
+
+(;W[pe];B[of];W[pd];B[pf];W[qe];B[qf];W[re];B[me])
+(;W[nb];B[me];W[nf];B[of]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[ng:b][mf:a]
+
+(;W[mf];B[mb];W[pb];B[na];W[ob];B[mc];W[le]
+C[Black continues with 'a'. Black 'b' takes the five White stones and the corner, in the process giving White magnificant thickness. Black 'c' is also unreasonable.]
+LB[qb:c][qc:b][jc:a]
+
+(;B[jc];W[qc])
+(;B[qc]
+C[Black 19 is a mistake.]
+;W[kc];B[kb];W[jb]
+C[Black continues with 'a'. Black 'b' is a trick play difficult to counter.]
+LB[jc:b][lb:a]
+
+(;B[lb];W[ic];B[qb];W[og];B[qf];W[lc];B[pd];W[md];B[pa])
+(;B[jc]
+C[White continues with 'a'. White 'b' is a ridiculous mistake. White 'c' is also a mistake, worse than 'b', though seemingly much less ridiculous.]
+LB[lc:c][kd:b][og:a]
+
+(;W[og]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[pg:b][pd:a]
+
+(;B[pd];W[lc];B[lb];W[ib];B[qb];W[pg];B[qf];W[md];B[pa]
+;W[id]
+C[Black 23 retains some aji, but White has triumphed.]
+)
+(;B[pg]
+C[Black 25 is unreasonable.]
+;W[pf];B[pe];W[lc];B[lb];W[ib]
+C[Black cannot set up the ladder as in variation 2-1-11-1-2-1-2-2-3, so White wins.]
+))
+(;W[kd]
+C[White 24 is a mistake.]
+;B[ib];W[lb];B[ja];W[lc];B[la];W[md];B[ma])
+(;W[lc]
+C[White 24 is a mistake. White must play 'a' before 24, as it breaks a ladder. This sequence shows why.]
+LB[og:a]
+;B[lb];W[ib];B[ld];W[kd];B[ke];W[md];B[jd];W[ld]
+;B[lf];W[me];B[mg]
+C[White is captured in a ladder. If White had played 'a' first, the ladder would be broken.]
+LB[og:a]
+)))
+(;B[qb]
+C[White 19 is a mistake. 
+
+White continues with 'a'. White 'b', giving up the stones, is a mistake.]
+LB[kc:b][qc:a]
+;W[qc];B[rc];W[rb]
+C[White must not play 'a' first, as then Black takes the first ko, not White.]
+LB[pd:a]
+;B[pc];W[pd];B[qe];W[qc];B[qa]
+;W[ra];B[pc];W[pe];B[pf];W[qc]
+C[Black has no more ko threats.]
+))
+(;W[ng]
+C[White 12 is a mistake, too slack for the fight.]
+;B[pd];W[pb];B[lc];W[rc];B[rd];W[mb];B[ke];W[rb]
+;B[og];W[nh];B[pi]
+C[Black makes territory and White is left in an awkward position.]
+)))
+(;B[pe];W[md];B[nf];W[me])
+(;B[md];W[pe];B[of];W[pd];B[mf];W[qe]))
+(;W[pe]
+C[White 6 is bad.]
+;B[pd];W[ne];B[of];W[md];B[nf]
+C[White 'a' looks logical, but 'b' is better.]
+LB[nc:b][me:a]
+
+(;W[me];B[ob]
+C[Black 13 is the tesuji that makes Black 3 worth trying in the first place.
+
+White 'a' and 'b' both lead to losses (or should anyway).]
+LB[pc:b][nc:a]
+
+(;W[nc]
+C[White 14 is honte (the right move).]
+;B[pb])
+(;W[pc];B[nc]
+C[White 'a' looks promising, but 'b' is better. White 'c' is another opportunity for Black mistakes.]
+LB[qc:c][pb:b][nb:a]
+
+(;W[nb];B[mc];W[pb];B[lc];W[qe];B[rd];W[re];B[qb];W[oa]
+;B[rb]
+C['a' and 'b' are miai, and White is trapped.]
+LB[qg:b][ma:a]
+)
+(;W[pb];B[nb]
+C[White 'a' is a mistake. White 'b' is better, though the outcome favors Black.]
+LB[rc:b][qc:a]
+
+(;W[qc]
+C[White 18 is a mistake.
+
+Black continues with 'a'. Black 'b' is a mistake.]
+LB[rd:b][rc:a]
+
+(;B[rc];W[rd];B[qe];W[rb];B[lc];W[pf];B[re];W[pg];B[sd]
+;W[mg];B[pa];W[qb];B[sb]
+C[Black wins.]
+)
+(;B[rd]
+C[Black 19 is a mistake.]
+;W[mc];B[rc];W[pa];B[qa];W[rb]
+C[White wins.]
+))
+(;W[rc]
+C[White 18 is the correct move.]
+;B[rd];W[qc];B[lc];W[pf];B[pg];W[re];B[qg];W[rf]
+;B[nh]))
+(;W[qc]
+C[Black continues with the unlikely move 'a'.
+
+The extension of Black 'b' looks correct, but is a mistake.]
+LB[rd:b][rc:a]
+
+(;B[rc]
+C[Black 17 is better than it looks.]
+;W[rd];B[qe];W[rb];B[qb];W[sc];B[pb];W[rc];B[re]
+;W[nb];B[mc];W[mb];B[lc];W[lb];B[kc];W[qa];B[lf])
+(;B[rd]
+C[Though not obviously so, Black 17 is a mistake.]
+;W[mc];B[nb];W[pb];B[rc];W[pa];B[qb];W[rb];B[ra]
+;W[mb]))))
+(;W[nc]
+C[White 12 is the correct move.]
+;B[le];W[kd];B[qg])))
+(;W[qc]
+C[White 4 lacks fighting spirit.]
+;B[od]
+C[White continues with 'a' or 'b'.]
+LB[pd:b][rd:a]
+
+(;W[rd];B[pc];W[pb];B[pd];W[rb];B[re];W[nc];B[md])
+(;W[pd];B[pe];W[pc];B[re]))
+(;W[pd]
+C[White 4 helps Black build thickness.]
+;B[pe];W[qc];B[re];W[nc];B[md])
+(;W[nc]
+C[White 4 is passive.]
+;B[md];W[mc];B[ld];W[kc];B[pe]))

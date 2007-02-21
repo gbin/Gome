@@ -1,0 +1,36 @@
+(;
+GM[1]FF[4]AB[oc][jc]AW[qd]C[The choice between the three and four-space extension is mainly influenced by the position in the top-left corner. White has no particularly severe attack against the wider extension.
+
+White can answer at 'a' through 'e' or play elsewhere (f).]LB[dp:f][ld:e][md:d][qg:c][pf:b][pe:a]
+(;W[pe]C[White continues with 'a' or 'b', or plays elsewhere.]LB[dp:c][nd:b][md:a]
+(;B[md])
+(;B[nd])
+(;
+C[Black plays elsewhere. White attacks with 'a' or 'b'.]LB[lc:b][nd:a]
+(;W[nd];B[nc];W[ld];B[mc];W[ne];B[lc];W[qj])
+(;W[lc]C[White 6 is a sacrifice to fix up his shape in the corner.];B[oe];W[of];B[ne];W[pc];B[pb];W[qb];B[le])))
+(;W[pf]C[Black continues with 'a'. Black 'b' is too mild.]LB[md:b][qc:a]
+(;B[qc];W[rc];B[pd]C[White continues with 'a', possibly 'b'.]LB[qb:b][qe:a]
+(;W[qe];B[qb];W[qj])
+(;W[qb];B[qe];W[pc];B[rd];W[qc];B[pe];W[od];B[oe];W[nd];B[nc]C[Black's prospects in the ensuing fight are good.]))
+(;B[md]C[Black 5 is too defensive.];W[pc];B[od];W[qi]))
+(;W[qg]C[White 4 provides stability. It is played when White cannot expect to develop down the right side from the high diagonal or knight move. With this move the right side is played out. Black is in no hurry to respond.];B[pf];W[qf];B[qc];W[rc];B[pd];W[qe];B[qb])
+(;W[md];B[oe];W[pf]C[Black continues with 'a' or 'b'.]LB[ph:b][kd:a]
+(;B[kd];W[mf];B[mc];W[nd];B[nc];W[od];B[pc];W[qc];B[pd];W[pe])
+(;B[ph]C[White continues with 'a' or 'b'.]LB[pg:b][of:a]
+(;W[of];B[ne];W[pc];B[ob];W[ng];B[me];W[pk])
+(;W[pg]C[Black continues with 'a' or 'b'.]LB[qh:b][oh:a]
+(;B[oh];W[nf]C[Black continues with 'a' or 'b'.]LB[qc:b][mb:a]
+(;B[mb];W[pc];B[ob];W[ng])
+(;B[qc];W[rc];B[ne];W[ng];B[me];W[pc];B[ob]))
+(;B[qh];W[nf];B[mb];W[pc];B[ob];W[nh]))))
+(;W[ld]C[Black continues with 'a'to 'c'.]LB[pe:c][nd:b][of:a]
+(;B[of];W[qg])
+(;B[nd];W[pf];B[lc];W[qj])
+(;B[pe]C[White continues with 'a' or 'b'.]LB[qe:b][pd:a]
+(;W[pd];B[od];W[oe];B[ne];W[of];B[md];W[pf];B[lc])
+(;W[qe];B[pf];W[qg];B[je];W[lf];B[pg];W[qh];B[ph])))
+(;
+C[White plays elsewhere. Black continues with 'a' or 'b'.]LB[qg:b][qf:a]
+(;B[qf];W[pe];B[pf];W[ne];B[of];W[oe];B[md]C[White plays 'a' or 'b'.]LB[pj:b][pc:a])
+(;B[qg];W[pe];B[md];W[of];B[qj];W[pc];B[ob];W[pb]C[White 12 is necessary to secure his base in the corner, the price for paying elsewhere earlier.])))

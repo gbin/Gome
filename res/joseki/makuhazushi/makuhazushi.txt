@@ -1,0 +1,4 @@
+jar:/joseki/makuhazushi/
+makuhazushi-a.txt,I,,ma;sf,oc,qd
+makuhazushi-b.sgf,J,,1,ma;sg,oc,pe
+makuhazushi-c.sgf,J,,1,ma;se,oc,qc

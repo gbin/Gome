@@ -1,0 +1,29 @@
+(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-29]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[mb][nb][nc][oc][od][pd][qd][oe][qg]
+AB[lb][mc][ld][nd][ne][pe][qe][nf][of]LB[qg:1]
+C[white has just played one. what's the best response?
+]
+(;B[pf]C[not a good result for black
+])
+
+(;B[re];W[pf];B[pg];W[qf];B[qh];W[ph]
+(;B[rg];W[og];B[rf]
+C[RIGHT
+black forces white into a dumpling shape, and is strong on both sides
+])
+
+(;B[rf];W[rg]C[can't atari from this side
+];B[rh];W[sg])
+)
+
+(;B[pg];W[re];B[rf];W[qf]C[white connects underneath
+];B[pf];W[rg];
+B[rd];W[sf])
+
+)

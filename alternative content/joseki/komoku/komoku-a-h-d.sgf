@@ -1,0 +1,166 @@
+(;
+GM[1]FF[4]
+AB[qd][ld]
+AW[oc]
+C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]
+LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n]
+;W[pe]
+C[Black continues with 'a' or 'b'.]
+LB[pd:a][qe:b]
+
+(;B[pd];W[od];B[oe]
+C[White 'a' is joseki. White 'b' and 'c' are unreasonable, as Black lives in the corner and White is left with split groups. White 'd' is a mistake.]
+LB[md:a][qe:b][pf:c][ne:d]
+
+(;W[md]
+C[Black continues with 'a' to 'c'. Black 'd' is a mistake.]
+LB[of:a][le:b][ne:c][pf:d]
+
+(;B[of];W[me]
+C[Black continues with 'a'. Playing elsewhere is a mistake.]
+LB[qg:a][dp:b]
+
+(;B[qg]
+C[White continues at 'a'. White should not play elsewhere ('b').]
+LB[lc:a][dp:b]
+
+(;W[lc])
+(;
+C[White plays elsewhere, a mistake.]
+;B[lc]
+C[White continues with 'a'. Playing elsewhere ('b') is a mistake.]
+LB[mc:a][cq:b]
+
+(;W[mc]
+C[Black continues at 'a'. Black 'b' and White settles himself.]
+LB[pb:a][ic:b]
+
+(;B[pb])
+(;B[ic]
+C[Black 15 lets White settle himself in the corner.]
+;W[qb]))
+(;
+C[White plays elsewhere again, a mistake.]
+;B[mc]
+C[White is in serious trouble in this corner.]
+)))
+(;
+C[Black plays elsewhere.]
+;W[re]
+C[Black continues at 'a'. Black 'b' is a mistake.]
+LB[qg:a][qe:b]
+
+(;B[qg]
+C[White continues at 'a', not 'b'.]
+LB[rd:a][qe:b]
+
+(;W[rd];B[qe];W[qc])
+(;W[qe]
+C[White 14 is a mistake.]
+;B[rd]))
+(;B[qe]
+C[Black 13 is a mistake.]
+;W[pf])))
+(;B[le];W[of];B[ne];W[me];B[nf];W[mf];B[ng];W[lc];B[pf]
+;W[lf])
+(;B[ne];W[me];B[pf]
+C[White continues with 'a'. It is a serious mistake to play elsewhere ('b'). White 'c' is unreasonable.]
+LB[lc:a][dp:b][nf:c]
+
+(;W[lc]
+C[Black continues with 'a', or plays elsewhere 'b'.]
+LB[mf:a][dp:b]
+
+(;B[mf];W[lf];B[lg];W[kf];B[mg])
+(;
+C[Black plays elsewhere.]
+;W[nf];B[of];W[ng];B[ph];W[ni]))
+(;
+C[White plays elsewhere, a mistake.]
+;B[mc]
+C[White continues at 'a'. White 'b' is worse.]
+LB[nd:a][lc:b]
+
+(;W[nd];B[jd])
+(;W[lc];B[lb];W[kc];B[nd]))
+(;W[nf]
+C[White 12 is unreasonable.]
+;B[mf]
+C[Without the White stone at 'a', Black can cut.]
+LB[lc:a]
+;W[of];B[qe];W[nd];B[pe];W[lf];B[mg];W[le]
+;B[nh]
+C[Black could also play at 'a'.]
+LB[oh:a]
+))
+(;B[pf]
+C[Black 9 is a mistake, as it gives White good shape.]
+;W[ne];B[of];W[le]))
+(;W[qe]
+C[White 8 is unreasonable.]
+;B[re]
+C[White can try 'a' or 'b'.]
+LB[rf:a][rd:b]
+
+(;W[rf];B[rd];W[pg];B[pc])
+(;W[rd];B[rc];W[qc];B[sd];W[pc];B[rd];W[pg];B[ne]
+C[White may try 'a' or 'b'.]
+LB[qg:a][rb:b]
+
+(;W[qg];B[qb];W[pb];B[rb];W[lb];B[kb])
+(;W[rb];B[qg];W[pf];B[ph])))
+(;W[pf]
+C[White 8 is unreasonable.]
+;B[ne];W[qb];B[rf];W[qg];B[rb];W[pb];B[rg];W[qi]
+;B[rc];W[lb];B[kb]
+C[White tries to live with 'a' or gets captured with 'b'.]
+LB[lc:a][kc:b]
+
+(;W[lc];B[kc];W[nb];B[mc];W[mb];B[kd];W[la];B[og])
+(;W[kc];B[mb];W[lc];B[mc];W[kd];B[le]))
+(;W[ne]
+C[White 8 is a mistake.]
+;B[of];W[md];B[le]
+C[White continues with 'a' to settle himself. White 'b' is a mistake.]
+LB[lc:a][nf:b]
+
+(;W[lc])
+(;W[nf]
+C[White 12 is a mistake.]
+;B[og];W[ng];B[oh];W[id];B[lg]
+C[After Black 17, White must play 'a', making matters worse.]
+LB[nh:a]
+;W[nh];B[oi])))
+(;B[qe]
+C[White continues with 'a' or 'b'.]
+LB[pf:a][pg:b]
+
+(;W[pf];B[qg];W[jd]
+C[Black continues with 'a' or 'b'.]
+LB[lf:a][ne:b]
+
+(;B[lf];W[nf])
+(;B[ne];W[pd]
+C[Black continues with 'a' for thickness, 'b' for territory.]
+LB[pg:a][qc:b]
+
+(;B[pg];W[qf];B[rf];W[qc];B[og];W[rc])
+(;B[qc];W[pg];B[qh]
+C[White continues by attacking the two black stones.]
+)))
+(;W[pg];B[pf];W[of];B[qf];W[ng];B[pc];W[nd]
+C[Black continues with 'a' or 'b'.]
+LB[id:a][oh:b]
+
+(;B[id];W[qg])
+(;B[oh]
+C[Black 13 prevents White from block on the right side, at the expense of being thin from Black 3.]
+;W[og];B[qh];W[jd];B[lf];W[jf];B[lh];W[ph];B[qi]
+;W[oj]))))

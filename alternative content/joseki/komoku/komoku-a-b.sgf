@@ -1,0 +1,85 @@
+(;
+GM[1]FF[4]
+AB[qd][pf]
+AW[oc]
+C[The knight's move of Black 3 is a quiet response to White's kakari. It is not as solid as the diagonal play but it is more flexible, since Black can make a wider extension along the right side.
+
+The main difference between the diagonal play and the knight's move is that White has the option of attaching at 'a'. White 'b' through 'd' are other options, depending upon strategic considerations.
+
+Variation 5 illustrates White playing elsewhere.
+
+e5, d4, c3, b2, a1]
+LB[dp:e][qh:d][kc:c][lc:b][qc:a]
+
+(;W[qc];B[rc];W[pd]
+C[Black continues with 'a' or 'b'.]
+LB[qb:b][qe:a]
+
+(;B[qe];W[qb];B[qj])
+(;B[qb]
+C[White continues with 'a'. White 'b' creates bad shape.]
+LB[pc:b][qe:a]
+
+(;W[qe];B[pc];W[rd]
+C[Black continues with 'a'. Black 'b', provoking a ko, is unreasonable.]
+LB[od:b][qc:a]
+
+(;B[qc];W[pe];B[od];W[oe];B[nd];W[lc];B[ne];W[of];B[nc])
+(;B[od]
+C[Black 11 is unreasonable. There is no ko threat big enough.]
+;W[qc]))
+(;W[pc]
+C[White 8 is not recommended.]
+;B[qe];W[lc])))
+(;W[lc]
+C[Black continues with 'a'. There is no reason to immediately play 'b'.]
+LB[qj:b][pc:a]
+
+(;B[pc];W[od];B[ph])
+(;B[qj]
+C[Black 5 is premature.]
+;W[qc];B[rc];W[pd];B[qe]
+C[White can play elsewhere or 'a'. If Black 'a', White 'b'.]
+LB[pb:b][qb:a]
+))
+(;W[kc]
+C[Black continues with 'a' or 'b'.]
+LB[mc:b][ic:a]
+
+(;B[ic];W[qc];B[rc];W[pd];B[qe];W[qb];B[qj])
+(;B[mc]
+C[Black continues with 'a', or may try 'b'.]
+LB[qc:b][mb:a]
+
+(;W[mb];B[lb];W[lc];B[nb];W[md];B[nc];W[nd];B[od];W[ob]
+;B[ma];W[oa];B[na];W[kb];B[pc];W[oe];B[pd])
+(;W[qc];B[rc];W[pd]
+C[Black continues with 'a'. Black 'b' is weak.]
+LB[qe:b][qb:a]
+
+(;B[qb];W[qe];B[pc];W[rd];B[qc];W[pe];B[od];W[oe];B[nd])
+(;B[qe]
+C[Black 9 is weak.]
+;W[mb]))))
+(;W[qh]
+C[White plays this way when the right is important.]
+;B[kc]
+C[Black plays 2 or 'a', depending on whole board strategy.]
+LB[pk:a]
+)
+(;
+C[White plays elsewhere (tenuki). Black 'a' and 'b' are possible follow-ups.]
+LB[pc:b][kc:a]
+
+(;B[kc]
+C[White continues with 'a' to 'c'.]
+LB[ld:c][mc:b][qc:a]
+)
+(;B[pc]
+C[White 'a' is a light move; White could also play elsewhere. White 'b' is a mistake.]
+LB[od:b][kc:a]
+
+(;W[kc])
+(;W[od]
+C[White 6 is a mistake. White creates a target for attack.]
+;B[ld]))))

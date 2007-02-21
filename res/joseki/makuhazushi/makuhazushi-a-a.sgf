@@ -1,0 +1,86 @@
+(;
+GM[1]FF[4]AB[oc][pe]AW[qd]C[A direct attempt to make the most of Black's superior influence.
+
+Joseki continues with White 'a'. 
+
+White 'b' may be reasonable given support at top. 
+White suffers a terrible loss locally to play elsewhere ('c').
+
+White 'd' is a mistake.]LB[qf:d][dp:c][pd:b][qe:a]
+(;W[qe]C[Black continues with 'a' or 'b'.]LB[pg:b][pf:a]
+(;B[pf]C[White continues with 'a', possibly 'b'.]LB[qf:b][qg:a]
+(;W[qg]C[Black continues with 'a' to 'e'.
+
+e5, d4, c3, b2, a1]LB[ic:e][qc:d][pg:c][qf:b][jc:a]
+(;B[jc];W[pg];B[og];W[oh];B[ng];W[nh];B[mg];W[qf]C['a' is a key point for both players.]LB[od:a];B[je]C[A post-joseki extension.]
+;W[od];B[pd];W[pc];B[pb];W[qc];B[nd];W[ob];B[nc];W[nb];B[mb];W[qb];B[na];W[pa]C[Black continues with 'a'. Black cannot afford to play elsewhere ('b').]LB[dp:b][lc:a]
+(;B[lc])
+(;
+C[Black plays elsewhere, a mistake.
+
+White continues with 'a' or 'b'. Both lead to the same result.]LB[mc:b][ne:a]
+(;W[ne];B[oe];W[mc];B[md];W[lc];B[lb];W[ld]C['a' and 'b' are miai.]LB[kb:b][me:a])
+(;W[mc];B[md];W[ne];B[oe];W[lc];B[lb];W[ld]C['a' and 'b' are miai.]LB[kb:b][me:a])))
+(;B[qf];W[rf];B[rg];W[rh];B[pg];W[qh];B[re];W[sg];B[qc];W[rd];B[jc])
+(;B[pg];W[qh];B[ph];W[pi]C[Black continues with 'a' or 'b'.]LB[qf:b][oi:a]
+(;B[oi];W[oj];B[qf];W[rf];B[re];W[rg];B[qc];W[rd];B[pj];W[qi];B[ni])
+(;B[qf];W[rf];B[qi]C[White continues with 'a' to 'c'.]LB[qj:c][pc:b][oi:a]
+(;W[oi];B[ri];W[rh];B[sh];W[rg];B[qk];W[qc];B[ne])
+(;W[pc];B[pb];W[qb];B[pd];W[qc];B[ri]C[White continues with 'a' or 'b'.]LB[rh:b][rg:a]
+(;W[rg];B[pj];W[oi];B[oj];W[ni];B[nd])
+(;W[rh];B[si];W[rg];B[pj];W[oi];B[oj];W[ni];B[nd]))
+(;W[qj];B[ri];W[rh];B[sh];W[rg];B[rj];W[qk];B[rk];W[ql];B[rl];W[qm];B[rm];W[qn]C[Black continues with 'a' and 'b'.]LB[rc:b][rn:a]
+(;B[rn]C[White continues with 'a'. White 'b' is a fatal mistake.]LB[qo:b][pc:a]
+(;W[pc];B[pb];W[qb];B[pd];W[qc];B[oi];W[pj];B[qo];W[po];B[pp];W[qp];B[ro];W[op];B[pq];W[oq];B[oo];W[pn];B[pr];W[no])
+(;W[qo]C[White 28 is a mistake.];B[oi];W[pj];B[qb]C[White 'a' is the obvious response, but does not work. Neither does the more promising looking 'b'.]LB[rb:b][ro:a]
+(;W[ro];B[rc]C[Black wins the capture race.])
+(;W[rb];B[qc];W[rc];B[ra];W[se];B[rd]C[Neither 'a' nor 'b' work for White.]LB[sd:b][sb:a]
+(;W[sb];B[sd];W[sg];B[pd])
+(;W[sd];B[sb];W[re];B[sg];W[ro];B[so];W[sn];B[sp];W[rp];B[sm];W[sq];B[si];W[sk];B[pd];W[sn];B[so];W[sp];B[qa];W[sn];B[sa]))))
+(;B[rc]C[White continues with 'a'. White 'b' is a mistake.]LB[rn:b][qc:a]
+(;W[qc]C[The following sequence, from White 28 to Black 37, is a one-way street.];B[qb];W[pb];B[rb];W[pc];B[ob];W[pa];B[rd];W[re];B[qa]C[White continues with 'a'.  White 'b', leads to a ko White can win. White 'c' is a mistake.]LB[sd:c][od:b][sb:a]
+(;W[od]C[Black may try the obvious 'a', or 'b'.]LB[nd:b][pd:a]
+(;B[pd];W[nc];B[nb];W[mb];B[mc];W[na];B[nd];W[oa];B[oe];W[lb]C[Now, the captures at 'a' and 'b' are miai.]LB[rn:b][sd:a])
+(;B[nd];W[mb]C[White threatens escape as in the other variation.];B[oa];W[pd];B[mc];W[oe]C[White cannot be caught.]))
+(;W[sb];B[sa];W[ra];B[pd];W[sd];B[sa];W[oa]C[White hates to make this play, reinforcing Black, but has no choice, lacking other other ko threats.];B[mb];W[ra];B[oi];W[pj];B[sa];W[nb];B[nc];W[ra];B[rn];W[sc];B[qo];W[po];B[pp];W[qp];B[ro];W[op];B[pq];W[oq];B[oo];W[pn];B[pr];W[no])
+(;W[sd]C[White 38 is a mistake. White loses.];B[sc];W[sa];B[se];W[sf];B[oa];W[sd];B[pd]))
+(;W[rn]C[White 28 is a mistake.];B[rd];W[re];B[qc]C[White cannot evade capture.])))))
+(;B[qc];W[pg];B[pd];W[ng];B[qf];W[rf];B[rc]C[White may play elsewhere, sacrificing the two stones.])
+(;B[ic]C[Black can make an extra wide extension. In this situation, White is reluctant to push at the marked location, as in variation 1, as Black builds even better thickness towards the wide extension.]CR[pg];W[qc]C[White 8 aims at an invasion at the marked location, where link-up or escape are possibilities.]CR[mc]))
+(;W[qf]C[White 6 is a special strategy, intending to make a splitting play between Black strength at the top left and right. Black continues with 'a', or, anticipating White playing at 'b', Black plays there first. In other words, 'a' and 'b' are miai.]LB[jc:b][pg:a]
+(;B[pg];W[jc]C[White 8 makes sense as a splitting attack if Black has strength in the upper left as well as the upper right as shown.];B[qg];W[qb]C[White 10 allows White to live in the corner.])
+(;B[jc];W[pg];B[og];W[oh];B[ph];W[qg];B[ng];W[oi])))
+(;B[pg]C[Black plays 5 for rapid devlopment.
+
+White continues with 'a'. White 'b' and 'c' are mistakes.]LB[pd:c][qf:b][pf:a]
+(;W[pf]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qf:b][of:a]
+(;B[of];W[qf]C[Black continues with 'a' to 'c'.]LB[qg:c][ng:b][og:a]
+(;B[og]C[White continues with 'a'. White 'b' is not recommended.]LB[qh:b][pc:a]
+(;W[pc]C[Black continues with 'a'. Black 'b' is too mild.]LB[nd:b][ob:a]
+(;B[ob]C[Black 11 threatens encroachment into the corner.];W[qh];B[jc]C['a' is now a good point for both players.]LB[pi:a])
+(;B[nd]C[Black 11 is not recommended. White can easily make life in the corner.];W[ic]C[Being secure in the corner, White plays the extension at top first, spoiling Black's thickness.
+
+The marked location is gote for Black.]CR[qg]))
+(;W[qh]C[White 10 is premature.];B[qc];W[rc];B[qg];W[rg];B[pd];W[qb];B[pc];W[re];B[jd]))
+(;B[ng];W[oh];B[og];W[pc];B[ob];W[qh];B[jc];
+C[White plays elsewhere.];B[ph]C[Black continues with 16 to build further thickness.]
+;W[qi];B[oj])
+(;B[qg];W[og];B[oe];W[pc];B[ob];W[oh];B[rg];W[pb];B[qj]))
+(;B[qf]C[Black 7 is a mistake.];W[of];B[qg];W[pd];B[oe];W[od];B[ne];W[nd]))
+(;W[qf]C[White 6 is a mistake.];B[pf];W[qh])
+(;W[pd]C[White 6 is vulgar.];B[od];W[pf];B[of];W[oe];B[ne]C[Neither White 'a' nor 'b' are good.]LB[pe:b][og:a]
+(;W[og];B[pe];W[qf];B[oe])
+(;W[pe]C[White has terrible shape.];B[ng]))))
+(;W[pd]C[White 4 only makes sense with surrounding support.];B[od];W[oe];B[pf];W[ne]C[Black continues with 'a' or 'b'. Black 'b' if White does not have a pincer at top (giving Black room to make life).]LB[re:b][qb:a]
+(;B[qb];W[rf];B[qg];W[rb];B[pb];W[rc]C[Black continues with 'a' or 'b'.]LB[rg:b][lc:a]
+(;B[lc])
+(;B[rg];W[re]))
+(;B[re];W[rd];B[og];W[qe]C[If White tries pushing through.];B[rf];W[qf];B[qg]))
+(;
+C[White plays elsewhere. This is conceivable only when Black 3 is a ko threat.];B[qe];W[qi]C[Black must play 'a' to capture White 2. White can live in the corner if Black plays elsewhere ('b').]LB[cq:b][qg:a]
+(;B[qg])
+(;
+C[Black plays elsewhere. White can live in the corner.];W[pd];B[od];W[re];B[rf];W[rd];B[qg]C[Black must defend.];W[pb]C[Allowing White life in the corner.];B[ob];W[rb]))
+(;W[qf]C[White 4 is a mistake, perhaps from confusion with 3-4 variation 2-1-1-5-1-1.];B[qe];W[re]C[Black continues with 'a' or 'b'.]LB[rf:b][pd:a]
+(;B[pd];W[rd];B[og];W[qg];B[jd]C[Black gets good position with a shape having no defects. White is too low.])
+(;B[rf];W[rg];B[rd];W[sf];B[pd]C[Black gets corner profit.])))

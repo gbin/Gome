@@ -1,0 +1,107 @@
+(;
+GM[1]FF[4]AB[qd]C[White plays elsewhere.];B[oc]C[White continues with 'a' to 'd'.]LB[cq:a][ql:b][qk:c][qj:d]
+(;
+C[White plays elsewhere again.];B[qj]C[White continues with 'a'. Variation 'b' shows White playing elsewhere again.]LB[rd:a][br:b]
+(;W[rd]C[Black continues with 'a' to 'e'. Black 'a' yields the corner for the outside.  The idea of Black 'b' is to settle the shape. The aim of Black 'c' is to avoid giving White any help in making shape. Black 'd' gives Black the corner.  Black 'e' avoids helping White make shape.
+
+e5, d4, c3, b2, a1]LB[qe:a][re:b][pd:c][rc:d][qc:e]
+(;B[qe]C[White continues with 'a' or 'b'. With 'b', White is prepared to fight.]LB[qc:a][re:b]
+(;W[qc]C[Black continues with 'a' or 'b'.]LB[pc:a][re:b]
+(;B[pc]C[White continues with 'a' or 'b'.]LB[qb:a][re:b]
+(;W[qb];B[re];W[sc])
+(;W[re];B[rc]C[White continues with 'a' or 'b'.]LB[qf:a][qb:b]
+(;W[qf];B[pf];W[qg];B[pg];W[ri];B[qi];W[qh];B[ph];W[rj];B[qk])
+(;W[qb];B[rb];W[qf];B[pf];W[pg];B[of];W[rg])))
+(;B[re];W[pc];B[od];W[ob];B[nb];W[pb];B[mc];W[rc]))
+(;W[re]C[If Black 'a', White 'b'.]LB[rc:a][qf:b]))
+(;B[re];W[qe];B[rc];W[pd];B[qc];W[rf];B[sd];W[og]C[Playing White 14 at 'a' or 'b' would be too heavy.]LB[pf:a][qf:b];B[qf];W[qg];B[pe];W[oe];B[rg];W[pf];B[sf];W[qh])
+(;B[pd];W[qe];B[rc];W[qh])
+(;B[rc];W[pd];B[qc];W[pf];B[qe];W[nf])
+(;B[qc];W[qe]C[Black continues with 'a' to 'c'.]LB[qg:a][rc:b][pe:c]
+(;B[qg];W[rc]C[Black continues with 'a' or 'b'.]LB[rb:a][pe:b]
+(;B[rb]C[White continues with 'a' or 'b'.]LB[qf:a][pe:b]
+(;W[qf];B[pg];W[pd];B[pc];W[sb];B[qb];W[of])
+(;W[oe]))
+(;B[pe];W[qf];B[pf];W[rg];B[rh];W[rf];B[pg];W[rb]))
+(;B[rc];W[qh])
+(;B[pe];W[qf];B[pf];W[rc];B[rb];W[pd]C[There may be a ladder associated with White 14. Black continues with 'a' or 'b'.]LB[pc:a][qb:b]
+(;B[pc];W[sb];B[qb];W[qg];B[pg];W[ri])
+(;B[qb];W[pg];B[qg];W[ph]C['a' and 'b' are miai.]LB[oe:a][rg:b]))))
+(;
+C[White plays elsewhere again. 
+
+
+White is actually busy playing another game. ;-)];B[jd];W[oe]C[White has to make a light invasion. Black continues with 'a' or 'b'.]LB[pf:a][nd:b]
+(;B[pf];W[nc]C[Black continues with 'a' or 'b'.]LB[nb:a][nd:b]
+(;B[nb];W[ob]C[Black continues with 'a' to 'c'. In 'c', Black yields the corner in return for thickness.]LB[pb:a][mc:b][nd:c]
+(;B[pb];W[od];B[pc];W[mb];B[oa];W[le]C[White must play lightly.];B[mc];W[lc];B[nd];W[ne];B[lb];W[kc])
+(;B[mc];W[nd];B[pb];W[pi]C[White must play sabaki; the ladder to capture Black 13 doesn't work.];B[of]C[White continues with 'a'. Depending on circumstances, White can put pressure on Black 5 and build a wall next to Black 7 with 'b'.]LB[nf:a][qi:b]
+(;W[nf];B[oh];W[mb];B[oa];W[lc];B[md];W[le])
+(;W[qi];B[nf];W[mb];B[oa];W[lc];B[md];W[me];B[ld];W[kd];B[le];W[ke];B[lf];W[kc]))
+(;B[nd];W[mc];B[od]C[White continues with 'a' or 'b'.]LB[pb:a][md:b]
+(;W[pb];B[lc];W[mb]C[Black 18 at 'a' is unreasonable; White loses his base.]LB[md:a];B[md];W[lb];B[kc])
+(;W[md];B[pb];W[me])))
+(;B[nd];W[od]C[Black continues with 'a' or 'b'. Whether Black 'b' works depends on White having the ladder to catch Black 11.]LB[mc:a][pc:b]
+(;B[mc];W[pc];B[nb];W[ob];B[nc];W[pd];B[qe];W[qc]C[After this, Black has to decide between taking away White's potential eye shape in the corner and blocking White out of the center.])
+(;B[pc])))
+(;B[nd]C[Black 9 starts a fight on the right. White continues with 'a' to 'c'. White 'c' can be tricky.]LB[qe:a][pd:b][rd:c]
+(;W[qe];B[pd];W[pe];B[qg];W[pg];B[ph];W[oh]C[Black continues with 'a' or 'b'. Regardless, White makes good.]LB[pi:a][og:b]
+(;B[pi];W[ng]C[White's invasion is a success.])
+(;B[og];W[ng];B[pf];W[of];B[pg];W[mf]C[If anything, White's position is stronger than Black's on the right.]))
+(;W[pd];B[pc];W[qe];B[rd];W[qh])
+(;W[rd]C[Black continues with 'a' to 'd'. Black 'c' attempts to  give White a hard time in making shape. Black 'd' yields the corner for thickness.]LB[rc:a][re:b][pd:c][qe:d]
+(;B[rc]C[White continues with 'a' or 'b'.]LB[pd:a][qc:b]
+(;W[pd];B[qe];W[pc];B[qc];W[ob];B[nb];W[qb];B[ne];W[of];B[pg])
+(;W[qc];B[qb];W[qe];B[pd];W[sc];B[rb];W[rf]))
+(;B[re];W[qe];B[rc];W[pd];B[qc];W[rf];B[sd];W[qg])
+(;B[pd];W[qg];B[re];W[rf];B[qe];W[og])
+(;B[qe](;W[qc];B[re];W[pc];B[pd];W[rb];B[od])
+(;W[re];B[qf];W[qc];B[pc];W[qb];B[rf];W[sc]))))))
+(;W[ql];B[qj];W[qh]C[Black continues with 'a' or 'b'.]LB[oj:a][pi:b]
+(;B[oj];W[oh];B[ol];W[mh])
+(;B[pi]C[White continues with 'a' or 'b'.]LB[og:a][qe:b]
+(;W[og];B[qf];W[ph];B[oi];W[mg];B[mi])
+(;W[qe]C[Black continues with 'a' to 'c'.]LB[pd:a][pe:b][re:c]
+(;B[pd];W[rd];B[rc];W[og];B[ni];W[mg])
+(;B[pe]C[White continues with 'a' to 'c'.]LB[qf:a][pf:b][rd:c]
+(;W[qf];B[rd];W[og])
+(;W[pf]C[Black continues with 'a'. Black 'b' does not work, as it gives White a large corner.]LB[oe:a][qf:b]
+(;B[oe];W[rd]C[Black continues with 'a'. Black 'b' lets White live in the corner, a less satisfactory result for Black.]LB[re:a][qf:b]
+(;B[re];W[qf];B[rc];W[of])
+(;B[qf]C[White lives in the corner; a success for White.];W[re];B[pg];W[qc]))
+(;B[qf]C[Black 10 gives White the corner in a big way.];W[re];B[pg];W[of];B[qg];W[og];B[oh];W[nh];B[ph];W[pd];B[oe];W[od];B[ne];W[nd];B[me];W[qc];B[md];W[nc];B[mc];W[nb]))
+(;W[rd]C[Black continues with 'a' or 'b'.]LB[pd:a][re:b]
+(;B[pd];W[qf];B[rc];W[og])
+(;B[re];W[qf]C[Black continues with 'a' or 'b'.]LB[rc:a][rf:b]
+(;B[rc];W[pd];B[qc];W[rf]C[White continues with 'a' or 'b'.]LB[sd:a][oe:b]
+(;B[sd];W[oe];B[pf];W[og])
+(;B[oe];W[og]))
+(;B[rf]C[White continues with 'a' or 'b'.]LB[pd:a][pf:b]
+(;W[pd];B[qc];W[oe]C[Black continues with 'a' or 'b'.]LB[pf:a][qg:b]
+(;B[pf];W[qg];B[pc]C[White continues with 'a' or 'b'.]LB[of:a][og:b]
+(;W[of];B[pg];W[ph];B[og];W[oh];B[ng];W[pk])
+(;W[og];B[of];W[nf];B[od];W[oh]))
+(;B[qg];W[pf];B[pg];W[og];B[ph];W[pc];B[qb];W[pb]))
+(;W[pf];B[pd];W[ph];B[rc];W[oi];B[oj];W[nj];B[ok];W[nk];B[ol];W[qi];B[pj];W[ni])))))
+(;B[re];W[rd]C[Black continues with 'a' or 'b'.]LB[rf:a][rc:b]
+(;B[rf];W[pd];B[qc];W[pc];B[qb];W[od];B[qf];W[md])
+(;B[rc];W[pd];B[qc];W[rf];B[sd];W[og];B[qf];W[qg];B[pe];W[oe])))))
+(;W[qk];B[qi];W[qg];B[ph];W[qe]C[Black continues with 'a' to 'd'.]LB[pd:a][pe:b][rd:c][re:d]
+(;B[pd];W[of];B[nh];W[mf])
+(;B[pe];W[rd]C[Black continues with 'a' or 'b'. 'b' may create a ko.]LB[re:a][qc:b]
+(;B[re];W[qf];B[rc];W[pd];B[qc];W[oe]C[Black continues with 'a' or 'b'. Black 'a' is better.]LB[pf:a][og:b]
+(;B[og];W[of];B[mg];W[me])
+(;B[pf];W[pg];B[of];W[og];B[nf]))
+(;B[qc]C[White continues with 'a' or 'b'. 'a' creates a ko. With 'b', White sacrifices to get out to the center.]LB[pf:a][rc:b]
+(;W[pf];B[re];W[rf])
+(;W[rc];B[rb];W[qf];B[sc];W[og];B[re];W[of])))
+(;B[rd];W[oe];B[nd];W[mf])
+(;B[re];W[rd];B[rc];W[pd];B[qc];W[rf];B[sd];W[pg];B[oh];W[nf]))
+(;W[qj];B[qh];W[qf];B[pg];W[pe]C[Black continues with 'a' or 'b'. In either variation, White gets out to the center.
+
+White breaks through, unfavorable to Black, if Black plays 'c'.]LB[pd:a][of:b][ne:c]
+(;B[pd];W[oe];B[ng];W[me];B[mc];W[lf])
+(;B[of]C[Black 8 does not capture White.];W[pd];B[pc];W[qc]C[Black continues with 'a' or 'b'.]LB[rd:a][rc:b]
+(;B[rd];W[ne]C[Black cannot cut at 'a' because of White 'b', Black 'c', White 'd'. White aims at 'e' later.]LB[oe:a][od:b][nd:c][nc:d][qb:e])
+(;B[rc];W[qb];B[rd];W[qe];B[rb];W[nd]))
+(;B[ne];W[of];B[mg];W[od];B[nd];W[pc];B[pd];W[oe];B[pb];W[nc];B[qc];W[ob];B[pc];W[og];B[oh];W[mf];B[le];W[nh];B[ng];W[nf];B[lf];W[me];B[md];W[ld];B[mc];W[lg])))

@@ -1,0 +1,178 @@
+(;
+GM[1]FF[4]
+AB[qd][ld]
+AW[oc]
+C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]
+LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n]
+;
+C[White plays elsewhere. 
+
+Black continues with 'a' or 'b'.]
+LB[pc:a][od:b]
+
+(;B[pc]
+C[White continues with 'a' or 'b'.]
+LB[od:a][pe:b]
+
+(;W[od];B[pf]
+C[White continues with 'a' or 'b'.]
+LB[ne:a][me:b]
+
+(;W[ne]
+C[Black continues with 'a' to 'c'.]
+LB[ph:a][mf:b][qi:c]
+
+(;B[ph]
+C[White plays 'a' if a ladder to the lower left is not favorable. If White has a favorable ladder to the lower left, White continues with 'b'.]
+LB[mf:a][le:b]
+
+(;W[mf];B[id])
+(;W[le]
+C[White must have the ladder to play this way.]
+;B[ke];W[kd];B[lc];W[je];B[kf];W[lf];B[jd];W[kc]
+C[Black continues with 'a' if the ladder to capture Black 11, 15 is favorable to Black, or 'b' if the ladder is unfavorable.]
+LB[jc:a][mb:b]
+
+(;B[jc]
+C[Black must have the ladder to play this way.]
+;W[kb];B[lb];W[jb];B[ib];W[ic];B[id];W[ie];B[hd]
+;W[kg])
+(;B[mb];W[jc];B[ob];W[lg]
+C[Black has failed.]
+)))
+(;B[mf]
+C[White continues with 'a'. White 'b' leaves Black a step ahead.]
+LB[og:a][nf:b]
+
+(;W[og];B[pg]
+C[White continues with 'a'. White 'b' can leave White with bad shape or a ko.]
+LB[oh:a][mg:b]
+
+(;W[oh];B[qi];W[mg];B[lg];W[mh])
+(;W[mg]
+C[White 11 is not recommended.]
+;B[lg]
+C[White 'a' leads to bad shape, White 'b' to ko.]
+LB[mh:a][nf:b]
+
+(;W[mh];B[nf];W[of];B[pe];W[oe];B[oh];W[ng];B[lf])
+(;W[nf]
+C[White must fight a ko.]
+;B[mh];W[nh])))
+(;W[nf]
+C[White 9 is hopeless.]
+;B[mg];W[ng];B[mh]
+C[If now White 'a', Black 'b'.]
+LB[qe:a][qf:b]
+))
+(;B[qi]
+C[Black 8 is a bit loose, but playable.]
+;W[id];B[lf];W[ng]))
+(;W[me];B[le];W[mg]
+C[Black continues with 'a'. Black 'b' lets White settle his stones.]
+LB[lf:a][ph:b]
+
+(;B[lf];W[mf];B[md];W[of];B[pe];W[oe];B[ph];W[lg])
+(;B[ph]
+C[Black 10 is not recommended.]
+;W[lf])))
+(;W[pe]
+C[Black continues with 'a'. Black 'b' lacks fighting spirit.]
+LB[pd:a][qe:b]
+
+(;B[pd];W[oe]
+C[Black continues at 'a' or 'b'.]
+LB[od:a][qe:b]
+
+(;B[od];W[qe];B[nd];W[qi])
+(;B[qe]
+C['a' and 'b' are miai.]
+LB[od:a][pg:b]
+
+(;W[od];B[pg])
+(;W[pg];B[od])))
+(;B[qe]
+C[Black 6 is a mistake.]
+;W[pb];B[qb];W[pd];B[qc];W[pf])))
+(;B[od]
+C[White can respond with 'a' or 'b'. A favorable ladder is required for 'b'.
+
+White 'c' is not recommended.]
+LB[pc:a][pd:b][nd:c]
+
+(;W[pc];B[pd];W[qc];B[nc];W[nb]
+C[Black continues with 'a' or 'b'.]
+LB[mc:a][mb:b]
+
+(;B[mc];W[mb];B[lb];W[kc];B[lc])
+(;B[mb]
+C[Black plays this way to get sente.]
+;W[mc];B[nd];W[lb]
+C['a' and 'b' are Black's continuations, but playing this way immediately is a waste (use the other variation if Black doesn't want sente).]
+LB[lc:a][rc:b]
+))
+(;W[pd]
+C[White must have the ladder to play this way.]
+;B[pe];W[pc]
+C[Black continues with 'a' or 'b'.]
+LB[nd:a][qc:b]
+
+(;B[nd]
+C[White continues with 'a' or 'b'. White plays 'b' to sacrifice the three stones for a position on the right side.]
+LB[qc:a][qe:b]
+
+(;W[qc];B[re];W[rb]
+C[If White plays 12 at 'a', Black 'b' is sente, which is painful. Giving atari at 'c' destroys the future potential here.]
+LB[rc:a][nc:b][rd:c]
+)
+(;W[qe]
+C[The idea is to sacrifice the three White stones in order to settle on the right.]
+;B[qc];W[qb];B[rb];W[re];B[pb];W[rc];B[qa];W[rd]
+;B[qb];W[pf];B[oe];W[qi]))
+(;B[qc]
+C[White plays 'a' to save the three stones, or 'b' to sacrifice the three stones for position on the right side.]
+LB[mc:a][qe:b]
+
+(;W[mc]
+C[White saves his three stones with 10.]
+;B[ne];W[lc];B[kd];W[kc];B[jd];W[ic];B[qj]
+C[Black builds a large framework, but has played two extra moves to do so.]
+)
+(;W[qe]
+C[White sacrifices his three stones with 10.]
+;B[oe];W[qb];B[rb];W[re];B[pb];W[rc];B[qa];W[rd]
+;B[qb];W[qh];B[nc])))
+(;W[nd]
+C[White 6 leads to bad shape.]
+;B[oe];W[pc];B[qc];W[ne];B[nf]
+C[White must play 'a'. White 'b' is unreasonable.]
+LB[me:a][mf:b]
+
+(;W[me];B[of])
+(;W[mf]
+C[White 11 is unreasonable.]
+;B[me]
+C[White can only play 'a'. White 'b' doesn't work.]
+LB[nc:a][of:b]
+
+(;W[nc];B[of];W[lc];B[lf];W[kc];B[mg]
+C[Black's outward strength is winning.]
+)
+(;W[of]
+C[White 13 is reckless.]
+;B[ng];W[pd];B[pe];W[qe];B[pf];W[qf];B[pg];W[qb]
+;B[rb];W[pb];B[qg];W[re];B[sd]
+C[Black 27 is the tesuji to save the stones, along with 29.]
+;W[rg];B[sf]
+C['a' and 'b' are miai.]
+LB[rf:a][rh:b]
+
+(;W[rf];B[rh])
+(;W[rh];B[rf]))))))

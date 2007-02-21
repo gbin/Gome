@@ -1,0 +1,32 @@
+(;GM[1]
+FF[4]
+AP[Hibiscus:2.1]
+SZ[19]
+ST[3]
+;AB[dd][df][dp][fp][pd][pj][pp]
+AW[be][cn][di][fc]
+LB[yy:1][cc:A][cg:B][ce:C]PL[B]
+(;B[cc]
+MN[1]
+;W[cg]
+LB[cg:2][cg:2][jc:A][ck:B][jq:C](;B[jc]
+C[RIGHT]
+)(;B[ck]
+;W[dl]
+C[Invading here is too early. Als oit 
+starts some difficult fighting.]
+)(;B[jq]
+;W[ic]
+C[The marked black stones are not 
+yet settled.]
+LB[ic:4]TR[df][dd][cc]))(;B[cg]
+;W[dc]
+;B[cc]
+;W[cd]
+C[Black is in trouble.]
+)(;B[ce]
+C[This is bad for it allows White to 
+choose the side he would like to play. 
+It is also an empty move for it doesn't 
+attack, defend or make territory.]
+))

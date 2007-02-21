@@ -1,0 +1,17 @@
+(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[7]KM[0.00]
+PW[Weiß]PB[Schwarz]AW[aa][ba][ab][ac][bc][dc][ec][fc][gc][bd][dd][be][de][af][cf][df][dg]AB[ca][fa][bb][cb][db][eb][fb][gb][cc][cd][ed][fd][ae][ce][ee][ef][gf][eg]C[White to play - will he win, lose or draw?]PL[W]
+(;W[gd]CR[gd]
+;B[ge]CR[ge]C[Jigo! This is best for both RIGHT])
+(;W[ff]CR[ff]
+;B[fg]CR[fg]
+(;W[ge]CR[ge]
+;B[gd]CR[gd]
+;W[gg]CR[gg]
+;B[bf]CR[bf]
+(;W[fe]CR[fe]
+;B[bg]CR[bg]C[Black wins by three points])
+(;W[bg]CR[bg]
+;B[gf]LB[fe:A]CR[gf]C[Next, Black captures at A and wins by one point]))
+(;W[gd]CR[gd]
+;B[ge]CR[ge]C[Jigo! RIGHT])))

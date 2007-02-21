@@ -1,0 +1,70 @@
+(;
+GM[1]FF[4]
+AB[oc][pg]
+AW[qd]
+C[The aim of Black 3 is to take advantage of White's response to play at the top.
+
+White 'a' is more common. White 'b' is the same as the one-space pincer variations.]
+LB[od:b][pe:a]
+
+(;W[pe]
+C[Black continues with 'a' or 'b'.]
+LB[oe:b][md:a]
+
+(;B[md];W[pc];B[od]
+C[White continues with 'a'. A checking extension such as 'b' is not possible.]
+LB[jd:b][pb:a]
+
+(;W[pb];B[ic])
+(;W[jd]
+C[White 8 is a mistake.]
+;B[pd];W[qc];B[qe];W[qf];B[re];W[pf];B[rf];W[qg]
+;B[rg];W[qh];B[rd]))
+(;B[oe];W[of];B[pf];W[od];B[ne];W[nd];B[me]
+C[White continues with 'a'. White 'b' is an overplay.]
+LB[md:b][nc:a]
+
+(;W[nc];B[lc];W[lb]
+C[White 14 helps strengthen Black, but secures White's position in sente.]
+;B[kb];W[mb];B[kd])
+(;W[md]
+C[White 12 is an overplay; White cannot make territory so easily.]
+;B[le];W[ld];B[ke];W[jc];B[qc];W[rc];B[rb]
+C[The two-step hane is the tesuji.]
+;W[pc]
+;B[qb]
+C[White 'b' looks obviously right, but is wrong. White must play 'a' and concede the corner.]
+LB[rd:b][pb:a]
+
+(;W[pb];B[rd];W[re];B[sc])
+(;W[rd]
+C[White 22 is a mistake.]
+;B[pb];W[pd];B[nb]
+(;W[mb];B[sb])
+(;W[sb]
+C[White 26 is a mistake.]
+;B[mb];W[lb];B[lc]
+C[White must play 'a'; 'b' and 'c' are unreasonable.]
+LB[mc:c][kc:b][kd:a]
+
+(;W[kd];B[kb])
+(;W[kc]
+C[White 30 is a mistake.]
+;B[mc];W[kd];B[kb])
+(;W[mc]
+C[White 30 is a mistake.]
+;B[kc];W[kd];B[kb]))))))
+(;W[od]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[pd:b][nd:a]
+
+(;B[nd];W[oe]
+C[See variation 4-1-5-3-1 for other continuations.]
+;B[pc];W[qc];B[qf];W[qe]
+C[See variation 4-1-5-3-1 for continuations.]
+)
+(;B[pd]
+C[Regardless of the ladder, Black 5 is a mistake.]
+;W[pe];B[pc];W[re];B[oe];W[of];B[nd];W[pf]
+C[Black 3 has lost all power, which is not compensated for by Black's ponnuki.]
+)))

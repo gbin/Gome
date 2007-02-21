@@ -1,0 +1,38 @@
+(;
+GM[1]FF[4]AB[pd]AW[qf]C[Black plays elsewhere.
+
+White continues with 'a'. White 'b' is a trick. White 'c' is also possible.]LB[qc:c][qd:b][nc:a]
+(;W[nc]C[Black continues with 'a'. 'b' shows Black playing elsewhere.]LB[cq:b][oe:a]
+(;B[oe])
+(;
+C[Black plays elsewhere.];W[oe]C[A go proverb states: "in a symmetrical position, play in the center", but that is not the case here.
+
+Go Seigen insists Black 'a' is the best move. Black 'b' also gives life.]LB[qc:b][oc:a]
+(;B[oc]C[White 'a' seals Black in. White 'b' results in an exchange, with Black getting out on the right.]LB[od:b][nb:a]
+(;W[nb];B[re];W[rf];B[od];W[nd];B[ob])
+(;W[od];B[qe];W[pc];B[qc];W[ob];B[rf];W[rg];B[qg];W[pf];B[rh];W[re];B[sg];W[rd]))
+(;B[qc];W[pb]C[Black continues with 'a'. Black 'b' is less favorable.]LB[qb:b][qe:a]
+(;B[qe];W[re];B[pe];W[pf];B[rd];W[rf];B[pc];W[ob];B[qb])
+(;B[qb];W[pc];B[re];W[qe];B[qd];W[rf];B[od];W[nd];B[pa];W[mb];B[oc];W[ob];B[oa];W[nb];B[sd];W[qa];B[rb];W[sb];B[sc];W[na];B[ra])))
+(;B[pf];W[pg];B[qe];W[of];B[pe];W[qg];B[nd];W[md];B[ne];W[ob];B[pb];W[pc];B[qc];W[oc]C[Black continues with 'a', possibly 'b'.]LB[kd:b][qb:a]
+(;B[qb]C[White 19 is the obvious continuation for a solid base in the corner.];W[re];B[rd];W[jc])
+(;B[kd]C[Black 19 is feasible with support at the top left.];W[qb];B[rb];W[pa];B[rd];W[kc]C[White 24 is one possible continuation. White must play locally to settle the group.];B[jc]C[White continues with 'a' or 'b'.]LB[lc:b][kb:a]
+(;W[kb])
+(;W[lc]))))
+(;W[qd]C[White 3 is a trick play.];B[qc];W[pc]C[White continues with 'a'. Black 'b' is not good enough. Black 'c' is a mistake.]LB[od:c][qe:b][oc:a]
+(;B[oc];W[pb];B[qe];W[rd];B[od]C[White continues with 'a' or 'b'.]LB[rc:b][ob:a]
+(;W[ob];B[re];W[rc];B[pf])
+(;W[rc];B[ob];W[qb];B[kc]))
+(;B[qe]C[Black 6 is not recommended. White gets good shape on top.];W[rd];B[od];W[qb];B[re];W[rc];B[pf];W[nc])
+(;B[od]C[Without supporting stones nearby, Black 6 is a mistake.];W[qb];B[rc];W[rd];B[pb];W[oc];B[rb];W[nc]))
+(;W[qc]C[Black continues with 'a' or 'b'.]LB[pc:b][qd:a]
+(;B[qd];W[pc]C[Black continues with 'a'. Black 'b' is an overplay.]LB[oc:b][od:a]
+(;B[od];W[rd];B[re];W[rc];B[qe];W[nc])
+(;B[oc]C[Black 6 is a mistake.];W[rc]C[White 7 is the only move.
+
+Black continues with 'a', but, given the initial overplay, the mistake of 'b' may be expected.]LB[rd:b][od:a]
+(;B[od];W[rd]C[White connects, and has no wasted stones.])
+(;B[rd]C[White 8 is a mistake.];W[od]C[Black continues with 'a'. A Black extension, such as 'b' (or 'c') is a mistake.]LB[ob:c][nc:b][oe:a]
+(;B[oe];W[nd];B[pf];W[nc])
+(;B[nc]C[Black 10 is a mistake. White captures the three Black stones.];W[pe];B[rf];W[re]))))
+(;B[pc]AB[jd]C[Black plays 4 with support as shown.];W[qd];B[pe];W[qe];B[og];W[ph]C[The continuation from here depends upon strategic considerations.])))

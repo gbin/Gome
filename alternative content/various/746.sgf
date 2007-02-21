@@ -1,0 +1,44 @@
+(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-27]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];;PL[2]
+AW[cc][dd][df][dk][fp][dq][jq][br][cr]
+AB[db][fc][ic][pd][cm][do][cp][pp][cq]C[best point for white?
+]
+(;W[bl]C[
+];B[bm]
+(;W[cl]
+C[RIGHT
+pressure on this group helps white, and this helps protect the upper-left
+])
+
+(;W[bq];B[cl])
+
+(;W[bo];B[cl])
+)
+
+(;W[bk]C[good idea but slightly too slow
+])
+
+(;W[el];B[bk])
+
+(;W[bq];B[bk])
+
+(;W[nq];B[bk])
+
+(;W[qf];B[bk])
+
+(;W[fn];B[bk])
+
+(;W[jo];B[bk])
+
+(;W[gd];B[bk])
+
+(;W[nc];B[bk])
+
+(;W[qn];B[bk])
+
+)

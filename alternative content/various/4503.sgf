@@ -1,0 +1,14 @@
+(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[19]KM[0.00]
+PW[Blanc]PB[Noir]AW[oa][ob][rb][oc][nd][pd][pe][qe][re][se]AB[pa][qa][ra][pb][sb][sc][qd][rd][sd]C[White to play his best.]PL[W]
+(;W[qc]CR[qc]
+(;B[qb]CR[qb]C[CHOICE]
+;W[pc]CR[pc]
+;B[rc]CR[rc]C[RIGHT Black only get 3 points and the sequence is sente.])
+(;B[pc]CR[pc]C[CHOICE RIGHT If black makes the mistake to play Q17, it is a sente seki.]))
+(;W[pc]CR[pc]
+;B[qc]CR[qc]C[Black have 5 points, it is too much.])
+(;W[rc]CR[rc]
+;B[pc]CR[pc]C[Black have 7 points, it is too much.])
+(;W[qb]CR[qb]
+;B[pc]CR[pc]C[Black have 7 points, it is too much.]))

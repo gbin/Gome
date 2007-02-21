@@ -1,0 +1,79 @@
+(;
+GM[1]FF[4]
+AB[pd][ph]
+AW[qf]
+C[Unknown in classical Go, Black 3 shows a modern approach to fuseki.
+
+White plays 'a' or 'b'.
+
+With an extension the marked spot, Black would welcome the invasion of 'b'.]
+LB[qc:b][of:a]
+MA[jd]
+
+(;W[of]
+C[White 4 is the most common response.]
+;B[nd]
+C[White continues with 'a'. White 'b' is not recommended.]
+LB[qc:b][rd:a]
+
+(;W[rd]
+C[Black continues with 'a' or 'b'.]
+LB[qg:b][qc:a]
+
+(;B[qc];W[rh];B[jc])
+(;B[qg];W[rf];B[qc]
+C[White continues with 'a', 'b' or 'c'.]
+LB[oh:c][pk:b][mf:a]
+))
+(;W[qc]
+C[White 6 is not recommended.]
+;B[qd];W[rd];B[re];W[rc]
+C[Black continues with 'a'. Black 'b' is a mistake.]
+LB[qe:b][rf:a]
+
+(;B[rf]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[qg:b][ob:a]
+
+(;W[ob];B[qg])
+(;W[qg]
+C[White 12 is a mistake.]
+;B[qh];W[rg];B[qe];W[ob];B[rh]
+(;W[sg];B[og])
+(;W[og];B[sg])))
+(;B[qe]
+C[Black 11 is a mistake.]
+;W[ob];B[qg]
+C[White has the aji of 'a' later.]
+LB[rf:a]
+)))
+(;W[qc]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[qd:b][pc:a]
+
+(;B[pc];W[qd];B[pe]
+C[White continues with 'a' or 'b'.]
+LB[qb:b][qe:a]
+
+(;W[qe];B[pf]
+C[White continues with 'a'. White 'b' is a bit unreasonable.]
+LB[pg:b][qg:a]
+
+(;W[qg];B[pg])
+(;W[pg]
+C[White 10 is an overplay.
+
+Black continues with 'a'. Black 'b' is too mild.]
+LB[og:b][qg:a]
+
+(;B[qg];W[og];B[rg];W[pb];B[ob];W[qb];B[nc])
+(;B[og]
+C[Black 11 is too kind to White.]
+;W[qg];B[oh])))
+(;W[qb];B[pf];W[qg];B[pg]))
+(;B[qd]
+C[Black 5 is not recommended, as Black 3 is not in good position.]
+;W[pc];B[od];W[rd];B[re];W[rc];B[qe];W[nc]
+C[Black 'a' would make Black somewhat over-concentrated, but doing nothing leaves White open to setting White 2 in motion.]
+LB[pf:a]
+)))

@@ -1,0 +1,3 @@
+jar:/problems/
+easy.sgf,P,Easy,40
+hard.sgf,P,Intermediate,40

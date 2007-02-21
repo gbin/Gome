@@ -1,0 +1,36 @@
+(;
+GM[1]FF[4]
+AB[qd][ld]
+AW[oc]
+C[The two-space high pincer is most common. This pincer typifies modern Go, as it maintains balance between territory and influence, offers a plethora of options, and has few weaknesses.
+
+White responses range from 'a' to 'k'. White plays elsewhere with 'l'.
+White 'm' shows White trying to live at top.
+
+White 'n' is not joseki.
+
+m13, l12, k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1]
+LB[qc:a][nd:b][pd:c][pe:d][of:e][oe:f][me:g][md:h][qf:i][qg:j][pg:k][dp:l][lb:m][ne:n]
+;W[ne]
+C[White 4 is not recommended.
+
+Black replies with 'a'. Black 'b' is loose.]
+LB[pe:a][pf:b]
+
+(;B[pe]
+C[Black 5 aims to cut.
+
+White must play 'a' to ensure connection. White 'b' is a mistake.]
+LB[oe:a][qb:b]
+
+(;W[oe]
+C[White must ensure connection by playing 6, showing White 4 as slow.]
+;B[pg])
+(;W[qb]
+C[White 6 is a mistake.]
+;B[nd];W[od];B[oe];W[md];B[me];W[nc];B[nf]
+C[Black has wonderful thickness.]
+))
+(;B[pf]
+C[Black 5 gives away too much.]
+;W[qc];B[rc];W[pd];B[qe];W[qb]))

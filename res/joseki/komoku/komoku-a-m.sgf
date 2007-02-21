@@ -1,0 +1,6 @@
+(;
+GM[1]FF[4]AB[qd][oe]AW[oc]C[Black 3 is a trick play. White continues with 'a'. White 'b' is not good.]LB[md:b][qc:a]
+(;W[qc]C[Black continues with 'a'. Black 'b' is unreasonable.]LB[rc:b][pd:a]
+(;B[pd];W[pc];B[me];W[lc])
+(;B[rc]C[Black 5 is an overplay.];W[pd];B[pe];W[rd];B[qe];W[rb]))
+(;W[md]C[White 4 is not recommended.];B[pc];W[od];B[pd]))

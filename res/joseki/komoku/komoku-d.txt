@@ -1,0 +1,12 @@
+jar:/joseki/komoku/
+komoku-d-a.sgf,J,,1,ma;sh,qd;pf,od
+komoku-d-b.sgf,J,,1,ma;sh,qd;qf,od
+komoku-d-c.sgf,J,,1,ma;sf,qd;oc,od
+komoku-d-d.sgf,J,,1,ma;sg,qd;oe,od
+komoku-d-e.sgf,J,,1,ka;sf,qd;mc,od
+komoku-d-f.sgf,J,,1,ia;sf,qd;ld,od
+komoku-d-g.sgf,J,,1,ka;sf,qd;md,od
+komoku-d-h.sgf,J,,1,ia;sf,qd;kd,od
+komoku-d-i.sgf,J,,1,ma;sf,qd;pd,od
+komoku-d-j.sgf,J,,1,ma;sf,qd;pc,od
+komoku-d-k.sgf,J,,1,ma;sf,qd;pe,od

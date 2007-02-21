@@ -1,0 +1,13 @@
+(;
+GM[1]FF[4]
+AB[qd][dd][kc]
+AW[pg]
+C[White 2 represents a special strategy when Black has a Chinese-style fuseki at top.
+
+Black continues with 'a' or 'b'.]
+LB[od:a][pj:b]
+
+(;B[od];W[pj])
+(;B[pj]
+(;W[od])
+(;W[pd])))

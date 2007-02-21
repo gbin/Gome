@@ -1,0 +1,24 @@
+(;GM[1]FF[4]CA[UTF-8]AP[CGoban:2]ST[2]
+RU[Japanese]SZ[4]KM[0.00]
+PW[Weiß]PB[Schwarz]AW[ba][ca][db][ac][dc][cd]AB[ab][bb][cc]C[Black to play - what's the best he can do?!]
+(;B[bd]CR[bd]
+(;W[cb]CR[cb]
+(;B[bc]CR[bc]
+;W[dd]CR[dd]
+;B[ad]CR[ad]C[Seki, Black wins by one point (the prisoner)! RIGHT])
+(;B[dd]CR[dd]
+;W[bc]CR[bc]
+;B[ad]CR[ad]
+;W[bc]CR[bc]
+;B[ac]CR[ac]
+;W[cd]CR[cd]C[Black is lost!]))
+(;W[dd]CR[dd]
+;B[cb]CR[cb]C[This is not good for White :)]))
+(;B[bc]CR[bc]
+;W[bd]CR[bd]
+;B[ad]CR[ad]
+;W[dd]CR[dd]
+(;B[cb]CR[cb]
+;W[ac]CR[ac]C[and White wins.])
+(;B[ac]CR[ac]
+;W[cb]CR[cb]C[White wins.])))

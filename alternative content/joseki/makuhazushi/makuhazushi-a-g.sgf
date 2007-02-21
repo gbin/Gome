@@ -1,0 +1,36 @@
+(;
+GM[1]FF[4]
+AB[oc][qh]
+AW[qd]
+C[Black 1 is mainly influenced by the position in the bottom right corner. It indicates a special strategy and is not seen often. In the local context it is a slack move.
+
+White continues with 'a' or 'b'.]
+LB[pe:b][pc:a]
+
+(;W[pc];B[od]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[pe:b][qf:a]
+
+(;W[qf];B[og])
+(;W[pe]
+C[White 6 is a mistake.]
+;B[qf]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[pb:b][qe:a]
+
+(;W[qe];B[kc])
+(;W[pb];B[ld];
+C[White plays elsewhere.]
+;B[rd]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[rc:b][re:a]
+
+(;W[re];B[qe];W[rc];B[pd];W[sd])
+(;W[rc]
+C[White 11 is a mistake. White cannot make two eyes in the corner.]
+;B[re];W[ob];B[nb];W[ra];B[sb];W[sc];B[oa];W[pa]
+;B[pd];W[qe];B[qb]
+AB[pg][nf]
+C[If White is sealed in the corner, such as with the extra Black stones as shown, White dies when Black plays 22.]
+;W[rb];B[qc];W[qa];B[qc]))))
+(;W[pe];B[lc];W[pc];B[od]))

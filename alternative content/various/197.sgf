@@ -1,0 +1,39 @@
+(;GM[1]FF[3]
+RU[Japanese]SZ[19]HA[0]KM[5.5]
+PW[White]
+PB[Black]
+GN[White (W) vs. Black (B)]
+DT[1999-07-28]
+SY[Cgoban 1.9.2]TM[30:00(5x1:00)];
+AW[rc][od][rd][ne][oe][pe][re][nf][pf][rf][qg][rg]
+AB[nc][oc][qc][md][qd][me][qe][of][qf][og][pg][qh][rh][pi][ri]PL[2]
+C[white to connect her two weak groups
+]
+(;W[pc]
+(;B[qb]
+(;W[pb]C[RIGHT
+black dies first
+])
+
+(;W[rb];B[pb];W[ob];B[pd])
+)
+
+(;B[pb];W[qb]C[RIGHT
+white gets black in a snapback
+])
+)
+
+(;W[qb];B[pc]C[bad: white remains cut into two weak parts
+])
+
+(;W[rb];B[qb])
+
+(;W[pd];B[pc])
+
+(;W[mf];B[qb])
+
+(;W[ng];B[qb])
+
+(;W[mg];B[qb])
+
+)

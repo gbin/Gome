@@ -1,0 +1,58 @@
+(;
+GM[1]FF[4]AB[pd][qh]AW[qf]C[White continues with 'a'. 
+
+White 'b' is not recommended, but covered in variation 2. There are of course positions in which White is reluctant to invade at the 3-3 point, and so has no choice but to jump to 'b'.
+
+White 'c' is possible given White support in the lower right or center.]LB[ph:c][of:b][qc:a]
+(;W[qc]C[White enters at the 3-3 point in the overwhelming majority of cases. The one-space jump common with amatuers is not recommended.
+
+Black continues with 'a' or 'b'. Black needs support at the top to play 'b'.]LB[pc:b][qd:a]
+(;B[qd];W[pc]C[Black continues with 'a'. Black 'b' represents a change in strategy from influence to territory. Black 'c' is a mistake, leaving one or more cutting points in Black's shape.]LB[oc:c][rc:b][od:a]
+(;B[od];W[rd];B[re];W[rc];B[qe];W[nc];B[me];W[mc])
+(;B[rc]C[Black 7 emphasizes territory, a change in original strategy.];W[rb];B[rd]C[White continues with 'a' or 'b'.]LB[nc:b][oc:a]
+(;W[oc];B[pf];W[lc])
+(;W[nc];B[od];W[mb];B[pg]))
+(;B[oc]C[Black 7 is a mistake. See variation 3-1-7-1-1-2 for continuations.]))
+(;B[pc]AB[jd]C[Black 5 when a supporting stone at top exists.];W[qd];B[pe]C[White continues with 'a' to 'c'.]LB[pf:c][qb:b][rf:a]
+(;W[rf];B[og])
+(;W[qb]C[Black continues with 'a'. Black 'b' is not recommended.]LB[og:b][pf:a]
+(;B[pf];W[rf]C[Black continues with 'a' or 'b'.]LB[pb:b][oh:a]
+(;B[oh];W[pb];B[nc];W[nb];B[mb];W[oc];B[od];W[ob];B[mc])
+(;B[pb]))
+(;B[og]C[Black 9 is not recommended. White continues with 'a'. Playing elsewhere is not recommended.]LB[dp:b][pb:a]
+(;W[pb])
+(;
+C[White plays elsewhere, not recommended.];B[pb];W[rf]C[White 12 is submissive, but now necessary.])))
+(;W[pf]C[White 8 was common when this pattern first appeared.];B[qe];W[re]C[Black continues with 'a'. Black 'b' is not recommended.]LB[rf:b][rd:a]
+(;B[rd]C[Black 11 is the tesuji for this situation.
+
+White continues with 'a'. White 'b', letting Black capture the two stones, is insufferable.]LB[rf:b][rc:a]
+(;W[rc]C[White 12 is the only move.];B[rf];W[sd]C[Black continues with 'a' or 'b'.]LB[rg:b][of:a]
+(;B[of];W[rg];B[pg];W[sf];B[qg];W[rf];B[ng])
+(;B[rg]C[Black 15 is a strong move.];W[of];B[pb];W[qb];B[md];W[oh];B[pj]))
+(;W[rf]C[White 12 is a mistake.];B[rc]))
+(;B[rf]C[Under ordinary circumstances, Black 11 is a mistake.];W[rg];B[rd];W[sf]C[White gladly abandons the two corner stones.];B[rc];W[nf]C[Black 3 not looks silly.]))))
+(;W[of]C[In principle, jumping out at 4 is not recommended.];B[nd]C[White continues with 'a' or 'b'.]LB[pi:b][oh:a]
+(;W[oh];B[qe];W[rf];B[qj];W[mf])
+(;W[pi]C[The sequence from White 6 on is the same as with the one-space pincer in conjunction with the 3-4 stone.];B[qe];W[rf];B[qi];W[pj];B[ph];W[oh];B[qj];W[pk];B[ql]C[Black' s result is adequate.];W[pg]))
+(;W[ph]C[White 4 attacks Black 3. Black continues with 'a' or 'b'.]LB[qi:b][pi:a]
+(;B[pi]C[White continues with 'a' or 'b'.]LB[oh:b][pg:a]
+(;W[pg];B[oi]C[Black 7 may not be the best move, depending upon circumstances, as it leave White the marked cutting point.]CR[qi];W[nd]C[Given the circumstances, the severity of White 8 brings into question the wisdom of the original pincer of Black 3.];B[ne];W[qc]C[White 10 is nice timing. Black continues with 'a' or 'b'.]LB[qd:b][pc:a]
+(;B[pc];W[qd];B[pe]C[White continues with 'a'. White 'b' is an overplay.]LB[qb:b][qi:a]
+(;W[qb];B[me];W[pb]C[White is satisfied that Black blocking at 'a' has lost value.]LB[rl:a])
+(;W[qi]C[White 14 is an overplay. But the outcome is not necessarily disavantageous to White.];B[qe];W[re];B[rd];W[rc];B[rf];W[sd];B[rg];W[me];B[oh];W[kc]C[Black settles his top stones.];B[nf];W[fq]C[And White ends in sente to play elsewhere.]))
+(;B[qd];W[od];B[pc];W[oe];B[nb];W[mc]))
+(;W[oh];B[qg];W[pf]C[Black continues with 'a' or 'b'. Black 'b' is territory oriented.]LB[nc:b][nd:a]
+(;B[nd];W[oe]C[White 10 protects against the cut.
+
+Black continues with 'a' or 'b'.]LB[qc:b][od:a]
+(;B[od];W[rf]C[White later aims at the cut of 'a' or invasion of 'b'.]LB[qc:b][qi:a])
+(;B[qc]C[Black 11 protects against later invasion.];W[pk];B[oi];W[ni];B[oj]C[Black 13 is a suji for getting access to the center.];W[mh]))
+(;B[nc];W[qd];B[qc];W[od];B[oc];W[pe];B[pc];W[pk])))
+(;B[qi]C[Black plays 5 with support down the right side.
+
+White continues with 'a' or 'b'.]LB[nd:b][of:a]
+(;W[of]C[This variation is from Cho Chikun vs. Yoda Norimoto, 1999 Meijin title game 1.];B[nd];W[pi];B[pj];W[qj]C[Depending on the situation, other moves are possible besides White 10.];B[rj]AB[qn]C[For Black 11 to make sense, Black must have support such as shown.];W[qk];B[rk];W[ql];B[oj];W[ni];B[rl];W[nj];B[pl];W[qc];B[qd];W[rd];B[pc];W[rb];B[qb];W[rc];B[kc])
+(;W[nd]C[White 6 looks a bit inconsistent, a seeming change of direction toward the top from the emphasis on the right of White 4.
+
+This variation is from Wang Lei vs. Zhou Heyang, 1996 All Chinese Championship.];B[pf];W[pg];B[of];W[qg];B[qe];W[pi];B[qj];W[pj];B[qk];W[mi];B[me];W[kc];B[ke];W[ki];B[mc];W[hc]))))

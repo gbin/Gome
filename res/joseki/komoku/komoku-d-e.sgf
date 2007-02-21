@@ -1,0 +1,261 @@
+(;
+GM[1]FF[4]AB[qd][mc]AW[od]C[White responds with 'a' to 'd'. White rarely ignores the pincer (variation 'e'). 
+
+White 'f', the outside attachment, is not playable.
+
+To play at 'a', White needs the ladder to play joseki.
+
+f6,e5, d4, c3, b2, a1
+
+Outcomes:
+a1 - Black choice of corner, top or right, plus trick plays
+b2 - Black choice of top or right
+c3 - Black choice of top or corner
+d4 - Black corner & choice of top or left
+e5 - Black choice of top or right
+f5 - Black large corner, White right]LB[qe:f][dp:e][ob:d][md:c][ne:b][qc:a]
+(;W[qc]C[The aim of White 4 is to settle the position promptly, but Black may have other plans.
+
+Black responds with 'a' to 'c'.
+
+Black 'a' offers trick plays for Black.
+
+Black 'b' does settle the position, with Black taking the right, White out to the center toward the top (but with Black aji from the pincer).
+
+Black 'c' is a tough move, traditionally regarded as a trick play. Black must have the ladder to play this way.
+
+White 'd' is at best a special strategy, but not joseki.]LB[jc:d][pd:c][rc:b][pc:a]
+(;B[pc];W[pd]C[Black 'a' is joseki. 
+
+Black 'b' is a trick play, but Black comes out well from it.]LB[qb:b][oc:a]
+(;B[oc];W[nc]C[Black continues with 'a' or 'b'.]LB[nb:b][nd:a]
+(;B[nd]C[White continues with 'a'. White 'b' is strange, and has numerous variations.]LB[qe:b][nb:a]
+(;W[nb];B[qb];W[rc];B[ob]C[White continues with 'a' or 'b'. White must have the ladder to play 'b'.]LB[mb:b][qe:a]
+(;W[qe]C[Black continues with 'a' or 'b'.]LB[rb:b][mb:a]
+(;B[mb];W[ne];B[md])
+(;B[rb]C[Black tries a forcing move. White continues with 'a'. For White to play 'b' is too submissive.]LB[rd:b][oa:a]
+(;W[oa];B[pb];W[mb];B[rd];W[re];B[sc];W[lc];B[pe];W[oe];B[pf];W[ne];B[qg])
+(;W[rd]C[White 14 is submissive and not joseki.];B[md])))
+(;W[mb]C[White must have the ladder to play this way.
+
+Black plays 'a' if the ladder favors White, 'b' if Black has the ladder (and the game is over).]LB[md:b][qe:a]
+(;B[qe];W[pf];B[rb];W[lc]C[Black continues with 'a' or 'b'. 'a' leads to fighting, while 'b' gives settled shapes.]LB[pe:b][md:a]
+(;B[md];W[ld];B[mf]C[White continues with 'a' or 'b'.]LB[oa:b][pe:a]
+(;W[pe];B[le];W[oa];B[pb];W[qf];B[rd];W[re];B[sc];W[jd];B[ke];W[hc];B[pi];W[oh])
+(;W[oa]AB[gn][in][kn][ep][fp][fq][gp][bn][co][do][dk][dl][dm][cc][dh]
+AW[lp][jp][eo][en][em][el][gl][il][bo][bp][cp][dp][dq][eq][pq][po]C[This variation is from Sakata Eio (White) against Fujisawa Shuko (Black) in the 4th game of the 1963 Meijin Title. The joseki in the lower right is variation 2-4-3-1-1-1-4-2.];B[pb];W[pe];B[le];W[qf];B[rd];W[re];B[sc];W[jd];B[ke];W[hd];B[pi];W[oh];B[ph];W[og];B[qm];W[oi];B[pj];W[kh];B[if];W[ih];B[fc];W[gf];B[hg];W[fh];B[gg];W[fg];B[ff];W[he];B[ji];W[ed];B[ef];W[dg];B[eg];W[eh];B[cg];W[di];B[df];W[ch]))
+(;B[pe];W[oe];B[of];W[ne];B[nf];W[me]))
+(;B[md]C[Black has the ladder and White has lost.];W[oa];B[pb];W[rb];B[pe])))
+(;W[qe]C[White 10 is odd.
+
+Black can keep things simple with 'a', though perhaps giving White a slightly favorable result. Alternately, Black extends at 'b'.]LB[rd:b][nb:a]
+(;B[nb]C[Black 11 is simple.];W[rd])
+(;B[rd]C[White continues with 'a' or 'b'.]LB[qb:b][rc:a]
+(;W[rc];B[nb]C[White 'a' or 'b' are possible continuations.]LB[pe:b][re:a]
+(;W[re]C[Black 'a' or 'b' are possible continuations that improve Blacks local position.]LB[pe:b][oe:a])
+(;W[pe]C[White 14 gives bad shape.]))
+(;W[qb];B[nb]C[White continues with 'a'. White 'b' and 'c' are not recommended.]LB[pf:c][qf:b][re:a]
+(;W[re];B[ne];W[pe]C[White 16 is the most solid continuation. The result favors Black.])
+(;W[qf]C[White 14 gives terrible aji.];B[pe];W[oe];B[pf];W[of];B[pg])
+(;W[pf]C[White 14 gives bad shape and leaves aji.])))))
+(;B[nb]C[White continues with 'a'. White 'b' if the ladder doesn't work, but that is not joseki.]LB[nd:b][qe:a]
+(;W[qe]C[The exchange of Black 'a', White 'b' is alright for White.]LB[rd:b][nd:a];B[rd];W[nd];B[pb];W[re];B[rc];W[md];B[lc];W[qj])
+(;W[nd](;B[qe]C[White continues with 'a'. White 'b' is unreasonable.]LB[qb:b][mb:a]
+(;W[mb];B[ob];W[lb];B[qb];W[ld]C[If White could catch Black 3 in a ladder, the ponnuki shape would be an equal result. The geta is less favorable.])
+(;W[qb]C[White 12 is a mistake. White cannot live in the corner.];B[ob];W[rd];B[re];W[sc];B[rb]C[Withe the tesuji of 17, White dies in the corner.]))
+(;B[pb]C[Black 11 is not recommended. White gets great thickness.];W[qe];B[rd];W[md];B[lc];W[re];B[rc];W[pj]))))
+(;B[qb]C[Black 7 is a trick play, but Black gets a reasonable result even if White is not tricked.];W[rc]C[Black 'a' and 'b' are both possible.]LB[rd:b][qe:a]
+(;B[qe]C[White 'a' is correct. White takes the top, Black the corner and right.
+
+White 'b' is a mistake, and White 'c' only slightly better.]LB[nc:c][oc:b][pb:a]
+(;W[pb];B[oc]C[White 'a' is correct. White 'b', grimly clinging to the corner, is a mistake.]LB[rb:b][nc:a]
+(;W[nc];B[ob];W[nb];B[pa];W[md];B[oe];W[jd]C[Black must continue at 'a'. Playing elsewhere ('b') results in a "flower-viewing" two-step ko for White.]LB[dp:b][rb:a]
+(;B[rb]C[Black 19 is necessary.])
+(;
+C[Black plays elsewhere. The Black corner stones can only live by ko.];W[rb];B[ra];W[na];B[oa];W[sa];B[sb];W[sc]C[A ko ensues.]))
+(;W[rb]C[White 12 is a mistake.];B[ob];W[qa]C[Black may try 'a' or 'b'. 
+
+Black 'a' gives black two groups (right and top).
+
+Black 'b' give thickness at the expense of the two Black stones (1,9).]LB[ne:b][nd:a]
+(;B[nd];W[pf]C[ Black 'a' is tesuji. Black 'b' is a mistake.]LB[pe:b][pg:a]
+(;B[pg]C[White 'a' is correct. White 'b' is a mistake.]LB[qf:b][of:a]
+(;W[of];B[qf])
+(;W[qf]C[White 18 is a mistake.];B[pe];W[oe];B[of];W[ne];B[rf];W[nf];B[og];W[md];B[nc];W[ld];B[lc];W[kd];B[kc];W[jd]C[The loss of the two White stones (16,18) makes this a loss for White.]))
+(;B[pe]C[Black 17 is no good.];W[oe];B[of];W[ne];B[pg];W[nf];B[og];W[md];B[nc];W[ld];B[lc];W[kd];B[kc];W[jd]C[White can aim at 'a'.]LB[rg:a]))
+(;B[ne];W[nd];B[md];W[oe];B[of];W[nf];B[me];W[pf];B[og];W[pe];B[pg];W[qf];B[qg];W[rf])))
+(;W[oc]C[White 10 is a mistake.];B[pb];W[ob];B[rb];W[of];B[jc])
+(;W[nc]C[White 10 is not recommended.];B[ob];W[nb];B[rb];W[md]))
+(;B[rd];W[pb];B[oc]C[White 'a', clinging to the corner, is a mistake.
+
+White best continue with 'b'.]LB[nc:b][rb:a]
+(;W[rb]C[White 12 is a mistake.];B[ob];W[qa];B[nd]C[White 'a' is the best White can do.
+
+White 'b' gets White sealed in (but White gets the corner), in White gote.]LB[qe:b][pf:a]
+(;W[pf];B[qg];W[pg];B[qh];W[ph];B[qi]C[The result favors Black.])
+(;W[qe]C[White 16 is a mistake.];B[re];W[qf];B[of];W[pe];B[qg];W[rf];B[rg];W[se]))
+(;W[nc];B[ob];W[nb];B[pa];W[md];B[qf]))))
+(;B[rc];W[pc];B[re]C[Joseki continues with White 'a'. 
+
+White 'b' is a bit unreasonable.]LB[pf:b][ne:a]
+(;W[ne]C[Black continues with 'a'. 
+
+Black 'b' is not joseki, as Black is pressed down on the right.]LB[kd:b][pg:a]
+(;B[pg];W[ld];B[kc];W[lc]C[Continuation.];B[lb]C[White continues with 'a' or 'b'. White needs the ladder to capture Black 11 to play 'b'.]LB[mb:b][md:a]
+(;W[md]C[Black 'a' next is bad, as White cuts at 'b'. Black 'b' is also bad, as White plays 'c'. As he has no good continuation, Black plays elsewhere and waits to see what White does.]LB[je:c][mb:b][nc:a])
+(;W[mb]C[Fujisawa Hosai 9-dan invented this. If Black 'a', White 'b' and 'c', assuming White has the ladder. This way of playing is frightening.]LB[jc:c][kb:b][nb:a]))
+(;B[kd]C[Black 9 puts Black's right side stones under pressure.];W[qf];B[qg]C[White continues with 'a' or 'b'.  White 'b' starts local fighting.]LB[rf:b][pg:a]
+(;W[pg];B[rg];W[ph];B[qi];W[id])
+(;W[rf];B[rg];W[se])))
+(;W[pf]C[Black 'a' and 'b' are possible continuations.
+
+White leaves himself open to be cut later.]LB[qg:b][rb:a]
+(;B[rb])
+(;B[qg])))
+(;B[pd]C[Black 5 is a tough move, traditionally regarded as a trick play.];W[pc];B[oc]C[White 'a' is joseki. 
+
+White 'b' and 'c' are not joseki. White 'b' gives Black favorable thickness. 
+
+White 'c' gives Black an option to fight (at Black's advantage) or settle (to Black's slight advantage) with Black in the corner and on the right, White taking the top.]LB[oe:c][ob:b][rd:a]
+(;W[rd]C[Black 'a' is joseki.
+
+Black 'b' starts a fight.
+
+Black 'c' has various outcomes.]LB[re:c][qe:b][oe:a]
+(;B[oe];W[nd];B[nc]C[White 'a' is joseki. White 'b' starts a fight (rather needlessly).]LB[ne:b][re:a]
+(;W[re]C[Black plays 'a' if the ladder is unfavorable, 'b' if the ladder works.]LB[qf:c][ne:b][me:a]
+(;B[me];W[pe];B[md])
+(;B[ne])
+(;B[qf]C[Black 13 is not recommended.];W[qg]C[White 14 is a tesuji to get White out and up.
+
+Black continues with 'a'. Black cannot resist with 'b'.]
+(;B[pe];W[rf])
+(;B[rf]C[Black 15 is unreasonable. 
+
+White may play 'a' or 'b'.]LB[qe:b][pe:a]
+(;W[pe];B[qe];W[pf])
+(;W[qe];B[pe];W[pf]))))
+(;W[ne]C[Black 12 needlessly starts a fight.];B[re];W[rc];B[qe];W[of]C[Black 'a' give Black top and right, White corner and center, a complicated but equal result.
+
+Black 'b' takes the corner (20 points) while giving White superior thickness.]LB[pb:b][qh:a]
+(;B[qh];W[ob];B[nb];W[pa];B[jc])
+(;B[pb];W[qb];B[ob];W[qg]C[Black 'a' and 'b' lead to the same outcome.]LB[rg:b][sd:a]
+(;B[sd];W[rf];B[sb];W[qf];B[sc];W[pe];B[se]C[Black's territory is 20 points, but White has superior thickness.])
+(;B[rg];W[rh];B[rf];W[qi];B[sb];W[qf];B[sd];W[pe];B[sc]C[Same outcome as 'a': Black has 20 corner points, White superior thickness.]))))
+(;B[qe];W[re];B[qf];W[ob];B[nc];W[oe]C[The White stone takes flight.])
+(;B[re]C[White 'a' has various outcomes. 
+
+White 'b' favors the top, but gives Black great thickness on the right.]LB[qe:b][nc:a]
+(;W[nc];B[ob];W[nb]C[Black 'a' is better than 'b'.]LB[oe:b][nd:a]
+(;B[nd];W[oe];B[mb]C[White 'a' takes the top favorably. White 'b' gives Black a choice of top or right, but White still has a favorable result.]LB[ne:b][qe:a]
+(;W[qe]C[White is slightly better off.])
+(;W[ne]C[Black 'a' takes the corner, but gives White advantageous thickness. Black 'b' takes the top with White at an advantage again.]LB[na:b][rc:a]
+(;B[rc];W[qe];B[sd];W[pe];B[rd];W[na];B[qb];W[md]C[The result favors White.])
+(;B[na];W[qe]C[Black still has the endgame attachment at the red dot.]CR[qb])))
+(;B[oe];W[nd];B[rc]C[Black 3 is terribly weakened.]))
+(;W[qe];B[pe];W[oe];B[pf];W[nc];B[ob];W[nb];B[of]C[White 'a' takes the right while giving Black thickness. White 'b' takes the corner, but White gets sealed in (bad for White).]LB[rc:b][md:a]
+(;W[md];B[rc];W[pb])
+(;W[rc];B[nd];W[ne];B[md];W[pb];B[mf]C[Black fences White in, which is terrible for White.]))))
+(;W[ob]C[White 8 is wrong.];B[nc];W[rd];B[re];W[rc];B[qf]C[If White 'a', Black 'b'. Moving out White 2 only creates a burden for White.]LB[pf:b][oe:a])
+(;W[oe]C[Black 'a' starts a fight at which Black has an advantage.
+
+Black 'b' yields a settled result slightly to Black's favor; Black has the corner and right, White the top.]LB[rc:b][ob:a]
+(;B[ob];W[rd];B[qe];W[re];B[qf];W[rb];B[pg];W[me];B[kd]C[White faces a disadvantageous fight.])
+(;B[rc];W[nc];B[ob];W[nb];B[qb];W[md];B[pf]C[The result is rougly equal.])))
+(;B[jc]C[Black 5 is not joseki.
+
+White continues with 'a'. Black 'b' is a mistake.]LB[rd:b][pd:a]
+(;W[pd];B[qe]C[White 'a' makes good shape. White 'b' is a mistake.]LB[rc:b][pb:a]
+(;W[pb])
+(;W[rc]C[White 8 is a mistake, as Black profitably forces White in solid shape.];B[ob];W[pb];B[oc];W[pc];B[pg]))
+(;W[rd]C[White 6 is wrong in this situation.];B[pc];W[pd];B[qe]C[White has two weaknesses: 'a' and 'b'.]LB[rc:b][oc:a])))
+(;W[ne]C[Black continues with 'a' to 'c'. Black 'd', attempting to connect underneath, does not work.
+
+With Black 'a and 'b', outcomes vary depending on White's play.
+
+With Black 'c', Black takes the top, White the right.
+
+With Black 'd', Black takes the corner, giving up on Black 3, the pincer.]LB[oc:d][kd:c][me:b][qg:a]
+(;B[qg]C[White continues with 'a' or 'b'.]LB[ld:b][qc:a]
+(;W[qc]C[Black 'a' is joseki. Black 'b' is a strange move, giving Black a low position.]LB[rc:b][pc:a]
+(;B[pc];W[pd];B[oc];W[qe];B[rd];W[qf];B[rc];W[pg];B[dp]C[Suppose Black plays elsewhere.]
+;W[nc]C[Later, White can aim for ko.];B[nb];W[md]C[Black 'a' and 'b' result in ko, neither favorable to Black.]LB[pb:b][lc:a]
+(;B[lc]C[If Black 19, White gets a ko in the corner.];W[qb];B[pb];W[pa];B[ob];W[rb];B[sb];W[ra]C[If Black 'a', White 'b' makes ko. Cutting at 'c' is no good for White as this becomes a double ko.]LB[mb:c][re:b][oa:a])
+(;B[pb];W[lc];B[mb]C[This is a great success for White.]))
+(;B[rc]C[Black 7 is not good.];W[pc];B[re];W[ld]))
+(;W[ld]C[Joseki continues with Black 'a'. Black 'b' is also possible, depending on the global situation.]LB[pc:b][oc:a]
+(;B[oc]C[White continues with 'a' (joseki). White 'b', trying to prevent Black connection, is unreasonable.]LB[nc:b][lc:a]
+(;W[lc];B[pd])
+(;W[nc]C[White 8 is unreasonable.];B[nb];W[pc];B[nd];W[pd];B[oe]))
+(;B[pc]C[Takagawa introduced this play in the 1956 Honinbo title match. In that match, White continued at 'a'. White 'b' is also possible.]LB[lc:b][oc:a]
+(;W[oc];B[ic])
+(;W[lc];B[nb]C[Black connects with 9, and threatens Black 'a' and 'b'. White has no good answer to Black 9.]LB[me:b][md:a]))))
+(;B[me]C[Black plays 5 to prevent White from pressing down on his pincer.];W[mf];B[md]C[White continues with 'a' to take the right or 'b' to take the corner and center.]LB[pc:b][lf:a]
+(;W[lf];B[oc]C[The position is usually left like this for the time being. White's continuations in the corner are 'a' and 'b'.]LB[pc:b][pd:a];W[pd];B[pc];W[qe];B[rd];W[qg]C[White may continue here.])
+(;W[pc]C[White 8 forestalls the connection Black was hoping for. Black continues with 'a'. Black 'b' is submissive.]LB[qc:b][lf:a]
+(;B[lf];W[ng];B[qg];W[lg];B[kf];W[qc];B[qj])
+(;B[qc]C[Black 9 is submissive];W[lf])))
+(;B[kd]C[Black 5 is a trick play.  White continues with 'a'. White must not attach at 'b'.]LB[qc:b][qf:a]
+(;W[qf];B[pe];W[pf];B[oe];W[of];B[nd];W[rc]C[White 12 is a tesuji to steal the corner. 
+
+Black continues with 'a', possibly 'b'.
+
+Black 'c' is a mistake. Black cannot prevent White from crossing under.]LB[rd:c][oc:b][me:a]
+(;B[me];W[nf];B[oc];W[rd])
+(;B[oc];W[rd])
+(;B[rd]C[Black 13 is unreasonable.];W[pd]C[White 14 kills the Black stones.]))
+(;W[qc]C[White has been tricked.];B[pc];W[pd];B[oc];W[qe];B[rd]C[White continues with 'a' or 'b'.]LB[re:b][nc:a]
+(;W[nc];B[nb];W[nd];B[pb];W[re];B[rc];W[qi]C[White's moves appear reasonable, but compare the result to variation 2-4-5-1-1-1-2-1.])
+(;W[re];B[rc])))
+(;B[oc]C[Black 5 attempts to connect underneath, to no avail.
+
+White continues with the sacrifice of 'a'.
+White 'b' is premature (the sacrifice of 'a' is prerequisite).
+White 'c' is passive.]LB[pd:c][nc:b][pc:a]
+(;W[pc]C[White 6 is a sacrifice to separate Black 3 from 5.];B[pd];W[nc];B[ob];W[nb];B[pb])
+(;W[nc]C[White 6 is out of sequence.];B[pc];W[nb];B[md];W[nd];B[qg])
+(;W[pd]C[White 6 gives Black the corner and lets Black stay connected.];B[pc];W[qe];B[rd])))
+(;W[md]C[Black 'a' is usual; 'b' and 'c' are also possible. Black must have the ladder to play 'c'.]LB[nd:c][nc:b][ld:a]
+(;B[ld];W[me];B[nc];W[oc])
+(;B[nc]C[White continues with 'a'. White 'b' is a mistake.]LB[nd:b][oc:a]
+(;W[oc];B[nd]C[White 'a' is joseki. White 'b' is unreasonable.]LB[ne:b][pe:a]
+(;W[pe]C[Black 'a' is joseki. Black 'b' is not; the outcomes are favorable to White.
+
+Black 'c' is a slow version of 'a'.
+
+Black 'd' is not recommended.]LB[rf:d][ne:c][qe:b][nf:a]
+(;B[nf];W[qe])
+(;B[qe]C[Black 9 is not recommended.];W[ne]C[Black may try 'a' to 'e'. 'a' and 'b' are miai for White.]LB[pf:e][me:d][ld:c][qf:b][lc:a]
+(;B[lc];W[qf])
+(;B[qf];W[lc])
+(;B[ld];W[me]C['a' and 'b' are miai for White.]LB[qf:b][lc:a];B[kc]C[Black may also connect solidly at 'a'.]LB[lc:a];W[qf];B[rf];W[qg];B[rg];W[qh])
+(;B[me];W[ld]C[The continuation depends on the ladder and strategic considerations.])
+(;B[pf];W[lc]))
+(;B[ne]C[Black 9 is solid and a bit slow.];W[qe])
+(;B[rf]C[Black 9 is not recommended.];W[ne];B[ld];W[me];B[jc];W[qg]C[White 14 makes an ideal squeeze move. Black lives only by helping White build thickness.]))
+(;W[ne]C[White 8 is an overplay.];B[oe];W[pe];B[of];W[pd];B[me];W[nf];B[og]))
+(;W[nd]C[White 6 gives away a lot of territory for thickness that is less than wonderful.];B[oc];W[pd];B[pc];W[qe];B[ld]))
+(;B[nd]C[Black must have the ladder to play this way.];W[nc];B[ne]C[White continues with 'a' or 'b'. 'a' gives White the corner, 'b' gives White influence to the top.]LB[lc:b][oc:a]
+(;W[oc];B[lc];W[pe];B[le];W[qe])
+(;W[lc]C[Joseki continues with Black 'a'. Black 'b' has been used professionally.]LB[mb:b][oc:a]
+(;B[oc];W[mb];B[nb];W[mc];B[ob];W[mf];B[oe])
+(;B[mb]C[Black 9 was played by Takagawa Shukaku against Kitani Minoru in the 1st Saikyo Title in March 1958.];W[oc];B[ld];W[me];B[mf];W[le];B[kd];W[lf];B[kc];W[pe];B[nf];W[lg];B[nh];W[qe];B[mi];W[if];B[hd];W[ki];B[qg];W[nb];B[lb];W[re]))))
+(;W[ob];B[pf];W[ne]C[Black continues with 'a' or 'b'.]LB[kd:b][qj:a]
+(;B[qj];W[kc])
+(;B[kd];W[qh]C[Black continues with 'a' or 'b'.]LB[ph:b][og:a]
+(;B[og]C[White continues with 'a' or 'b'.]LB[pj:b][qe:a]
+(;W[qe];B[pe];W[pd];B[re];W[qc];B[qf];W[rc];B[pi])
+(;W[pj];B[pc];W[oc];B[qb]))
+(;B[ph];W[pi];B[oh];W[qe];B[pe];W[pd];B[re];W[qc];B[qf];W[rc]C[Black continues with 'a', White with 'b'.]LB[id:b][pk:a])))
+(;
+C[White plays elsewhere. 
+
+Black continues with 'a' or 'b'.]LB[pf:b][oc:a]
+(;B[oc];W[nd];B[nc];W[pd];B[pc];W[qe];B[rd])
+(;B[pf];W[ne];B[pc];W[oc]))
+(;W[qe]C[White 4 cannot be played with this pincer.
+
+Black continues with 'a'. Black 'b' and 'c' are mistakes.]LB[pe:c][re:b][pd:a]
+(;B[pd]C[Sometimes the simple move is the best.];W[pe];B[oc];W[oe];B[nd])
+(;B[re]C[Black 5 is passive.];W[pe];B[rf];W[qc];B[rd];W[oc])
+(;B[pe]C[Black 5 starts a complex battle that Black has no way to win.];W[pd];B[qf];W[re];B[qc];W[rf];B[oe];W[nd])))

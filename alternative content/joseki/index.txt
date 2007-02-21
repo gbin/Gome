@@ -1,0 +1,9 @@
+jar:/joseki/
+sansan.sgf,J,San-San,1,ma;sf,qc,
+hoshi/hoshi.txt,I,Hoshi : emphasizing influence at the potential expense of territory,ma;sf,pd,
+komoku/komoku.txt,I,Komoku,ma;sf,qd,
+makuhazushi/makuhazushi.txt,I,Makuhazushi,ma;sf,oc,
+takamoku/takamoku.txt,I,Takamoku,ma;sf,od,
+largemokuhazushi.sgf,J,Large Mokuhazushi,1,ma;sf,nc,
+largetakamoku.sgf,J,Large Takamoku,1,ma;sf,nd,
+gogo.sgf,J,Go-Go,1,ma;sf,oe,

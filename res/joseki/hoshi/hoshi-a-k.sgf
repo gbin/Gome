@@ -1,0 +1,87 @@
+(;
+GM[1]FF[4]AB[pd][pj]AW[qf]C[Black may play this way with a san-ren-sei at top, in which case White may enter the corner at 'a'. 
+
+The double approach move of 'b' or 'c' is also possible.]LB[nd:c][nc:b][qc:a]
+(;W[qc]C[Black continues with 'a' or 'b'.]LB[qd:b][pc:a]
+(;B[pc]AB[jd][dd]C[Black 5 is appropriate given Black support at top.];W[qd];B[pe];W[rg])
+(;B[qd];W[pc];B[od];W[rd];B[re];W[rc];B[qe];W[nc]))
+(;W[nc]C[Traditional joseki continues with Black 'a'. Black 'b' and 'c' may be playable as well.]LB[nd:c][oe:b][pf:a]
+(;B[pf]C[White 'a' is traditional joseki. White 'b' is a new line of play.]LB[qc:b][pg:a]
+(;W[pg];B[of]C[White continues with 'a' to 'd'.]LB[re:d][qe:c][qc:b][qd:a]
+(;W[qd];B[qe];W[re];B[pe]C[White continues with 'a'. White 'b' is not recommended.]LB[rg:b][rd:a]
+(;W[rd]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qc:b][qg:a]
+(;B[qg];W[rf]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qh:b][oc:a]
+(;B[oc]C[Black 15 is the best way to keep White from connecting.
+
+White continues with 'a'. White 'b' is an overplay in the face of Black thickness.]LB[nd:b][qh:a]
+(;W[qh];B[og];W[ph]C[Black has influence, White territory. The result is considered equal.
+
+Black continues with an extension at top.
+
+Black can later exchange 'a' for 'b'.]LB[ri:b][qi:a])
+(;W[nd]C[White 16 is a mistake. The two White stones are heavy in front of such Black thickness.]))
+(;B[qh]C[Black 15 is a mistake.];W[pc]C[White is connnected, and White's profit exceeds Black influence.]))
+(;B[qc]C[Black 13 is a mistake. White can even later cut at the X.]MA[pc];W[qg];B[og];W[rj]C[Black 3 has lost effectiveness.]))
+(;W[rg]C[White 12 is not recommended.];B[qc];W[rd];B[og];W[ph];B[oh]C[Black 3 is well placed.]))
+(;W[qc];B[qe];W[pc]C[Locally, Black continues with 'a' to 'c'. Black may also play elsewhere.]LB[lc:c][og:b][rf:a]
+(;B[rf])
+(;B[og])
+(;B[lc]))
+(;W[qe];B[qd]C[White continues with 'a' or 'b'.]LB[oi:b][qh:a]
+(;W[qh];B[oc];W[nd];B[od]C[Black has follow-up moves at 'a' to 'c', but White should first extend on the top.]LB[jd:c][jc:b][ri:a];W[kd]C[White 14 is a likely continuation.])
+(;W[oi];B[oc];W[oj];B[pk]C[White still lacks settled shape.]))
+(;W[re]C[This gives the same result as variation 'a', but with a different order of moves.];B[qe];W[qd];B[pe]C[See variation 3-1-11-2-1-1-1 for continuations.]))
+(;W[qc]C[Black continues with 'a'. Black 'b' is a mistake.]LB[qe:b][pc:a]
+(;B[pc];W[qd]C[Black continues with 'a' or 'b'.]LB[pe:b][qe:a]
+(;B[qe];W[re];B[pe];W[rf]C[Black has imperfect thickness (the pincer is too far, and White 4 has considerable aji), while White has meager territory.])
+(;B[pe];W[qe];B[qg];W[jc]C[White may prefer a two-space extension instead of three, depending on the board position.]))
+(;B[qe]C[Black 7 is a mistake in direction.];W[pc];B[qg])))
+(;B[oe];W[qc]C[White 6 is the only move.];B[qd];W[pc]C[Just looking at the current position (tewari analysis), Black 5 would be better placed at the 'x'. Further, a White play at 'x' presents a problem for Black.
+
+Black continues with 'a'. Black 'b' is too mild.]LB[me:b][md:a]MA[od]
+(;B[md]C[White continues with 'a' to 'd'.]LB[mc:d][rd:c][nd:b][od:a]
+(;W[od]C[Black continues with 'a', or, to create thickness in sente (by sacrifice), 'b'.]LB[pf:b][pe:a]
+(;B[pe]C[White continues with 'a' or 'b'.]LB[ne:b][rd:a]
+(;W[rd];B[re];W[rc]C[Black continues with 'a'. Black 'b' makes a bad shape.]LB[qe:b][pg:a]
+(;B[pg]C[Black has thickness, keeping to the original strategy.])
+(;B[qe]C[Black 15 is a mistake. Black has bad shape.];W[ne];B[nd];W[oc];B[le];W[nf];B[pg];W[og];B[qg]))
+(;W[ne]C[White 12 displays an aggressive style.];B[nd];W[oc]C[Black continues with 'a'. Black 'b' is an overplay.]LB[le:b][pg:a]
+(;B[pg];W[nf]C[The fight begins.
+
+Black continues with 'a'. Black 'b' is also seen in professional play.]LB[rc:b][le:a]
+(;B[le];W[nh]C[White 18 is a possible continuation. The fight continues from here.])
+(;B[rc]C[Black 17 is a greedy move.];W[rd];B[re];W[ld];B[mc];W[lc];B[me];W[mb];B[le];W[mg];B[sd];W[kb];B[kf];W[kh];B[if]))
+(;B[le]C[Black 15 is an overplay.];W[rd];B[pg];W[re];B[nf]C[White has undermined Black's position in sente. This is a White success.])))
+(;B[pg]C[Black 11 initiates a sacrifice sequence to build thickness in sente.];W[pe];B[nd];W[oc];B[pf];W[qe];B[qg];W[rg];B[rd];W[re];B[se];W[rf];B[rh];W[rc]))
+(;W[nd];B[ne];W[me]C[Black continues with 'a' or 'b'.]LB[mc:b][kd:a]
+(;B[kd]C[White continues with 'a'. White 'b' is a mistake.]LB[ld:b][mf:a]
+(;W[mf];B[mc];W[mb];B[lb];W[nb];B[og];W[kf];B[id])
+(;W[ld]C[White 14 is a mistake.];B[le];W[mc];B[mf];W[ke];B[md];W[lc]C[White is not likely to have a large enough ko threat, so must submit.];B[id]))
+(;B[mc];W[mb];B[kd];W[le];B[lb];W[nb];B[jd];W[mg];B[og]))
+(;W[rd]C[White 10 leaves the shape at top unresolved.];B[re];W[rc];B[pg]AB[jp][pp]AW[dd][dp][hq]C[This shows a position in a professional game between Rin Kaiho (Black) and Kobatashi Koichi (White).
+
+White could play 'a', forcing Black 'b', but that would preclude pushing at c and cutting. White may reserve further play locally. The possibility of Black 'd' remains, so there is a tradeoff to White playing elsewhere.]LB[oc:d][nd:c][pe:b][od:a])
+(;W[mc]C[White 10 is submissive, but may be acceptable from a whole-board perspective.];B[ld]C[Black's shape still has defects at 'a' and 'b' that White may exploit later.]LB[od:b][nd:a]))
+(;B[me]C[Black 9 is too mild; Black should press White.]))
+(;B[nd]C[Black 5 is not traditional joseki, and so is best considered a special strategy, but may be playable with a Black position at the upper left.];W[md];B[ne];W[oc]C[Black continues with 'a'. Black 'b' is not recommended, as it gives away too much territory.]LB[pe:b][pc:a]
+(;B[pc]C[White continues with 'a'. White 'b' and 'c' are not recommended.]LB[pg:c][od:b][jc:a]
+(;W[jc];B[pf])
+(;W[od]C[Without support at top, White 10 is at best premature.];B[pe];W[oe];B[pf];W[of];B[pg]C[White must now extend towards the top, but the aji of the two Black stones and the cutting point present problems for White.]MA[mc])
+(;W[pg]C[White 10 is not recommended, as White is thin in two places.
+
+Black continues with a sacrifice play at 'a'. Black 'b' is weak.]LB[qe:b][mc:a]
+(;B[mc]C[Black 11 is a sacrifice to build strength to attack the two White stones at right.];W[lc];B[mb];W[lb];B[me];W[ld];B[od];W[nb];B[ob];W[ma];B[oh]C[White can only try to live underneath, giving Black great strength on the outside.])
+(;B[qe]C[Black 11 allows White's splitting maneuver to work.
+
+White continues with 'a'. White 'b' is a bit slow, but puts more pressure on Black 3.
+
+White 'c' is not recommended as being too low, and giving Black influence unnecessarily.]LB[re:c][oh:b][ng:a]
+(;W[ng])
+(;W[oh]C[White 12 is a bit slow, but may be effective given the whole board situation. White 12 puts a bit more pressure on Black 3 than jumping up from White 10.])
+(;W[re]C[White 12 is not recommended, even though White can easily live.];B[pf]C[White continues with 'a'. White 'b' is a mistake.]LB[rf:b][qd:a]
+(;W[qd];B[pe];W[rg]C[Black cannot capture White 14.];B[og];W[ph];B[oh];W[pi];B[oi];W[qj];B[qk];W[pk];B[oj];W[rj]C[White 26 ends in White sente, as Black must do something about the cut of White 24.];B[ql];W[kc])
+(;W[rf]C[White 14 is cowardly.];B[rd];W[of];B[pe];W[og]C[White is at a significant disadvantage as Black torments White while making territory and influence.];B[mg];W[nh];B[nj];W[mh];B[me];W[ld];B[kf])))))
+(;B[pe]C[Black 9 leaves the corner open, which Black must then defend in gote.];W[qb];B[qc];W[rb];B[rc];W[pc];B[qd];W[ic]C[White 16 may also be played one line closer to White's stones.];B[oh])))
+(;W[nd];B[pf];W[pg];B[of];W[qe];B[od]C[White continues with 'a', possibly 'b'.]LB[rc:b][og:a]
+(;W[og]C[White 10 pushes to the center so as not to give too much thickness.];B[qd]C[The only move.];W[mg];B[ng];W[nh];B[nf];W[oi])
+(;W[rc]C[White 10 is a classic move, but yields much thickness to Black.];B[og];W[ph];B[oh]C[Black 3 and 13 are working well together.])))

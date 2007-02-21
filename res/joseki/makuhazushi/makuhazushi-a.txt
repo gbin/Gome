@@ -1,0 +1,11 @@
+jar:/joseki/makuhazushi/
+makuhazushi-a-a.sgf,J,,1,ma;sg,oc;pe,qd
+makuhazushi-a-b.sgf,J,,1,ia;sf,oc;kc,qd
+makuhazushi-a-c.sgf,J,,1,ha;sf,oc;jc,qd
+makuhazushi-a-d.sgf,J,,1,ga;sf,oc;ic,qd
+makuhazushi-a-e.sgf,J,,1,ma;sh,oc;qf,qd
+makuhazushi-a-f.sgf,J,,1,ma;si,oc;qg,qd
+makuhazushi-a-g.sgf,J,,1,ma;sj,oc;qh,qd
+makuhazushi-a-h.sgf,J,,1,ma;si,oc;pg,qd
+makuhazushi-a-i.sgf,J,,1,ma;sh,oc;pf,qd
+makuhazushi-a-j.sgf,J,,1,ma;sj,oc;ph,qd

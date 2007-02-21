@@ -1,0 +1,12 @@
+(;
+   AW[bs][br][bq][bo][cn][cp][dp][en][eo][eq]
+   AB[cs][cr][cq][dq][er][fo][fp][fq][go][gq][hr][hp];
+   C[How many points is A worth?]
+   LB[ep A][al 2][cl 4][el 3][gl 1]
+
+   (;B[el]C[RIGHT Correct! Black can win 2 points by playing A. If White plays A, then Black must defend the cut at F2 (triangle). 2 + 1 = 3. Please note that A is sente for White so strictly speaking this move is worth 3 points in reverse sente for Black.]LB[ep A]TR[fr])
+
+   (;B[al]C[Sorry, this is not quite right.]LB[ep A])
+   (;B[cl]C[Sorry, this is not quite right.]LB[ep A])
+   (;B[gl]C[Sorry, try counting again, please.]LB[ep A])
+)

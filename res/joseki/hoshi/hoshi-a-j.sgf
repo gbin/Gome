@@ -1,0 +1,18 @@
+(;
+GM[1]FF[4]AB[pd][of]AW[qf]C[Black 3 is played with an extension at top, such as marked.
+
+White continues with 'a', 'b', or possibly 'd'.
+
+White 'c' is a trick play.]LB[rd:d][nc:c][ph:b][qc:a]MA[jc]
+(;W[qc]AB[jc];B[pc];W[qd];B[pe];W[rg];B[je])
+(;W[ph];B[qe];W[pf];B[oe])
+(;W[nc]C[White 4 is a trick.
+
+Black 'a' is best. Black 'b' gives an equal result.
+Black 'c', 'd', and 'e' are mistakes.]LB[nd:e][oe:d][pe:c][qe:b][qc:a]
+(;B[qc]C[Regardless of White's next move, Black 'a' or 'b' are good follow-up moves.]LB[ph:b][md:a])
+(;B[qe];W[qc];B[pc];W[pb];B[rf];W[rb];B[qg])
+(;B[pe]C[Black 5 is a mistake. If Black was worred about being overextended, the capping move of Black 3 was not a good idea.];W[qc];B[pc];W[pb];B[ob];W[qb];B[oc];W[re])
+(;B[oe]C[Black 5 is the same mistake as the previous variation (c).];W[qc];B[pc];W[qd])
+(;B[nd]C[Black 5 is a mistake.];W[md];B[oc];W[ne];B[od];W[mc];B[ph]C[Black 11 is a possible continuation.];W[qh]C[White can also slide into the corner at the marked spot.]CR[rd]))
+(;W[rd]AB[jc]C[White slides to settle his shape.];B[qc];W[ph];B[je]))

@@ -1,0 +1,9 @@
+jar:/joseki/
+sansan.sgf,J,,1,ma;sf,qc,
+hoshi/hoshi.txt,I,,ma;sf,pd,
+komoku/komoku.txt,I,,ma;sf,qd,
+makuhazushi/makuhazushi.txt,I,,ma;sf,oc,
+takamoku/takamoku.txt,I,,ma;sf,od,
+largemokuhazushi.sgf,J,,1,ma;sf,nc,
+largetakamoku.sgf,J,,1,ma;sf,nd,
+gogo.sgf,J,,1,ma;sf,oe,

@@ -1,0 +1,65 @@
+(;
+GM[1]FF[4]
+AB[qd][qf]
+AW[od]
+C[Black 3 is a restrained, steady move.]
+;W[qc]
+C[Black continues with 'a' or 'b'.]
+LB[pc:b][rc:a]
+
+(;B[rc];W[pc];B[rb];W[kc])
+(;B[pc]
+C[Black 5 looks like a trick play, and to the extent that White must answer carefully, it is.]
+;W[pd];B[qb]
+C[White continues with 'a'. White 'b' is not recommended. White must have the ladder to play 'b'.]
+LB[qe:b][rc:a]
+
+(;W[rc]
+C[White continues with 'a', possibly 'b'.]
+LB[pe:b][rd:a]
+
+(;B[rd]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[pb:b][oc:a]
+
+(;W[oc];B[pb];W[ob];B[rb];W[kc])
+(;W[pb]
+C[White 10 is a mistake.
+
+White can be confined to small life in the corner.]
+;B[oc];W[rb]
+C[Black continues with 'a' to confine White to the corner, or 'b' to string White out.]
+LB[nc:b][ob:a]
+
+(;B[ob];W[qa];B[mc])
+(;B[nc];W[nd];B[mc];W[md];B[lc]
+C[White continues with 'a'. White 'b' is a mistake.]
+LB[ke:b][sd:a]
+
+(;W[sd]
+C[White 18 is necessary to make life in the corner.]
+;B[ld])
+(;W[ke]
+C[White 18 is a mistake.]
+;B[qa];W[ra];B[sc]
+C[White dies. White cannot block at the mark, so cannot make two eyes.]
+CR[sb]
+))))
+(;B[pe];W[oc];B[pb]
+C[White continues with 'a'. White 'b', attempting to capture the three Black stones, does not work.]
+LB[rd:b][ob:a]
+
+(;W[ob];B[rb];W[kc])
+(;W[rd]
+C[White 12 is a mistake. White cannot capture the three Black corner stones.]
+;B[qe];W[rb];B[ob];W[nb];B[nc];W[mb];B[nd];W[oe]
+;B[nf]
+C[Black 21 is the tesuji that kills White.]
+)))
+(;W[qe]
+C[White 8 is not recommended. White must have the ladder to play this way.]
+;B[rc];W[rd];B[qc];W[pe];B[re];W[rf];B[sd];W[qg]
+C[The result must be consider unfavorable to White.
+
+Black has a large corner. Black gets to play a ladder block. The four White stones do not make a good shape.]
+)))

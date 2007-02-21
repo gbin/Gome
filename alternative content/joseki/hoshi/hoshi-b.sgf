@@ -1,0 +1,149 @@
+(;
+GM[1]FF[4]
+AB[pd]
+AW[pf]
+C[Black typically responds at 'a'. Black 'b' is played when Black finds play on the right side advantageous. Black 'c' or 'd' may be played when Black has support at top.
+
+Black 'e' shows White follow-up if Black plays elsewhere.
+
+Black 'f' shows a special strategy.
+
+f6, e5, d4, c3, b2, a1]
+LB[nd:a][pj:b][ph:c][qh:d][dp:e][qf:f]
+
+(;B[nd]
+C[White continues with 'a'. White 'b' and 'c' are not recommended.]
+LB[qd:a][qc:b][pj:c]
+
+(;W[qd];B[qc];W[qe];B[rc];W[qj];B[jc])
+(;W[qc]
+C[White 4 contradicts the strategy of enphasizing the center with the high approach move.]
+;B[qd];W[rd];B[re];W[rc];B[qf];W[ob])
+(;W[pj]
+C[White 4 (or below on the 3rd line) prior to taking part of the corner is not recommended.]
+;B[qf]
+C[Black solidifies the corner.]
+;W[qg];B[qe]))
+(;B[pj];W[nd]
+C[Black responds with 'a' to 'c'.]
+LB[oe:a][pc:b][qc:c]
+
+(;B[oe];W[qc]
+C[Black continues with 'a'. Black 'b' is not recommended.]
+LB[qd:a][pc:b]
+
+(;B[qd];W[pc];B[of];W[od]
+C[Black continues with 'a' or 'b'.]
+LB[pg:a][pe:b]
+
+(;B[pg])
+(;B[pe];W[mf]))
+(;B[pc]
+C[Black 7 is the wrong direction.]
+;W[qd];B[qe];W[pe];B[re];W[pb];B[ob];W[od];B[oc]
+;W[nb];B[qb];W[nc];B[pa];W[nf]))
+(;B[pc];W[nf];B[nb])
+(;B[qc]))
+(;B[ph]
+AB[lc]
+C[This situation arises when White has support at top.]
+;W[qd];B[qc];W[pc]
+C[White must have the ladder to play this way (especially for d4).
+
+Black has various continuations.]
+LB[od:a][pe:b][qb:c][rc:d]
+
+(;B[od];W[qb];B[rc];W[rb];B[qe];W[rd];B[re];W[sc])
+(;B[pe];W[rc];B[qb];W[rb]
+C[Black continues at 'a' or 'b'. 
+
+Black 'a' is more sensible, as Black yields the corner for thickness.]
+LB[oc:a][pb:b]
+
+(;B[oc];W[pb];B[qe];W[rd];B[ob];W[qa])
+(;B[pb]
+C[Black crawls along the second line (the line of defeat).]
+;W[oc];B[ob];W[nc];B[nb];W[qe]))
+(;B[qb];W[od];B[pb];W[oc];B[rd];W[qe];B[ob])
+(;B[rc]
+C[White must have the ladder to play this way.]
+;W[od]
+C[White 8 at 'a' does not work.]
+LB[pb:a]
+))
+(;B[qh]
+C[Black 3 was played by Kitani Minoru against Iwamoto Kaoru in game 3 of the 4th Honinbo title in November, 1947.]
+;W[nd];B[pc];W[ph];B[qg];W[qf];B[pg];W[of];B[og]
+;W[nf];B[nc];W[ld];B[mc];W[kf])
+(;
+C[Black plays elsewhere.
+
+White continues with 'a' or 'b'.]
+LB[nd:a][ne:b]
+
+(;W[nd];B[qc];W[nf]
+C[Black continues locally with 'a', or plays elsewhere (b).]
+LB[oe:a][cq:b]
+
+(;B[oe]
+C[White 6 aims to take more corner territory. Black cannot hope to break into the center.]
+;W[of];B[ne];W[me];B[md];W[ld];B[mc];W[lc];B[nb]
+;W[mb];B[nc];W[lf])
+(;
+C[Black plays elsewhere again.]
+;W[oc]
+C[Black continues with 'a' or 'b'. 
+
+Black 'a' risks abandoning the corner stones (White's choice).]
+LB[rf:a][qf:b]
+
+(;B[rf]
+C[White continues with 'a' or 'b'.]
+LB[qg:a][rg:b]
+
+(;W[qg]
+C[White gains further influence.]
+;B[rg];W[qe];B[re];W[qd];B[rd];W[pc];B[qb];W[qh])
+(;W[rg]
+C[White takes the corner.]
+;B[qg];W[qf];B[rh];W[re];B[sg];W[qe];B[oh]))
+(;B[qf];W[qg];B[qe];W[rg];
+C[Black plays elsewhere.]
+;W[rd]
+C[White 11 is the vital point.]
+;B[re];W[qb];B[rb]
+;W[pb];B[ra])))
+(;W[ne];B[nc];W[mc];B[mb];W[nb]
+C[Black continues with 'a' to take the corner, or 'b' to get out to the center.]
+LB[ob:a][nd:b]
+
+(;B[ob];W[nd];B[oc];W[lb];B[na];W[ld])
+(;B[nd]
+C[White continues with 'a'. White 'b' is unreasonable.]
+LB[ob:a][md:b]
+
+(;W[ob];B[pc];W[lc];B[md];W[kd];B[ke];W[je];B[kf])
+(;W[md]
+C[White 9 is unreasonable.]
+;B[lb];W[pc];B[ob];W[od];B[oc];W[oe];B[qd];W[pb]
+;B[na];W[rc];B[qc];W[qb];B[rb];W[ra];B[sb];W[sc];B[pa];W[sa]
+;B[rb];W[sb];B[rd];W[re];B[oa];W[sd];B[qa];W[qe];B[rb];W[qb]))))
+(;B[qf]
+C[Black 3 is territorial.
+
+White continues with 'a'. With a favorable ladder to the lower left, White may consider 'b'.]
+LB[qg:a][qe:b]
+
+(;W[qg];B[qe];W[ph];B[nc];W[qk]
+C[White may extend further toward the corner.]
+)
+(;W[qe]
+C[White must have the ladder to the lower left to play this way.]
+;B[pe];W[qg];B[rf];W[rg]
+C[Black continues with 'a'. If White has a favorable ladder, Black 'b' is a mistake.]
+LB[of:a][pg:b]
+
+(;B[of];W[pg];B[re];W[pk])
+(;B[pg]
+C[If White has a favorable ladder to catch Black 9, Black 9 is a mistake. Otherwise, White 4 was a mistake.]
+;W[of];B[re];W[ph]))))

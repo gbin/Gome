@@ -1,0 +1,3 @@
+jar:/joseki/takamoku/
+takamoku-a.sgf,J,,1,ma;sf,od,qd
+takamoku-b.sgf,J,,1,ma;sf,od,qc

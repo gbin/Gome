@@ -1,0 +1,25 @@
+(;
+GM[1]FF[4]AB[qd]AW[od]C[The 5-4 approach move has become more popular in modern times, as modern Go emphasizes speed and influence.
+
+Black responds at 'a' to 'j', or plays elsewhere.
+Black k is slow.
+
+k11, j10, i9, h8, g7, f6, e5, d4, c3, b2, a1
+
+outcomes:
+a1, b2 - Black right; White top
+c3 - Black corner & right; (small, large) Avalanche
+d4, e5 - Black choice
+f6 - Black choice; Magic Sword of Muramasa
+g7, h8 - Black right; White top
+i9 - Black corner & right; White top
+j10 - Black corner & sente; White top
+k11 - various]LB[pe:k][pc:j][pd:i][kd:h][md:g][ld:f][mc:e][oe:d][oc:c][qf:b][pf:a];B[pd]C[The thrust was an invention of Kitani Minoru and was one of his favorite moves. 'a' and 'b' are miai.]LB[oc:b][oe:a]
+(;W[oe];B[oc];W[nc]C[Black continues with 'a'. Black 'b' was the first professional experiment with this joseki.]LB[pb:b][ob:a]
+(;B[ob];W[nb];B[pf];W[jc])
+(;B[pb]AB[ed][dc][cd][ce][qn][pj]AW[de][df][cf][dp][cj][pp][np]C[Kitani played Black 7 against Go Seigen in game 9 of their 1941 Jubango in Kamakura. The colors are reversed from actual play.
+
+The aim of Black 7 is to make White lose sente with succeeding plays 8 & 10.];W[ob];B[pc];W[md];B[ic]C[Black gets the good extension.];W[pf]C[White 12 is the only move.]))
+(;W[oc];B[oe];W[ne];B[of]C[White continues with 'a' or 'b'.]LB[kc:b][md:a]
+(;W[md])
+(;W[kc]C[White can play 8 here, but the possibility of Black 'a' is distasteful.]LB[ld:a])))

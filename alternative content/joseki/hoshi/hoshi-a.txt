@@ -1,0 +1,16 @@
+jar:/joseki/hoshi/
+hoshi-a-a.sgf,J,standard response,1,la;sh,pd;nd,qf
+hoshi-a-b.sgf,J,standard response,1,ka;sh,pd;mc,qf
+hoshi-a-c.sgf,J,standard response,1,la;sh,pd;nc,qf
+hoshi-a-d.sgf,J,standard response,1,na;sh,pd;pf,qf
+hoshi-a-e.sgf,J,standard response,1,na;sj,pd;qh,qf
+hoshi-a-f.sgf,J,standard response,1,na;sj,pd;ph,qf
+hoshi-a-g.sgf,J,standard response,1,na;sk,pd;pi,qf
+hoshi-a-h.sgf,J,standard response,1,na;sl,pd;qj,qf
+hoshi-a-i.sgf,J,standard response,1,ha;sh,pd;jd,qf
+hoshi-a-j.sgf,J,special strategy based upon fuseki,1,ma;sh,pd;of,qf
+hoshi-a-k.sgf,J,special strategy based upon fuseki,1,na;sl,pd;pj,qf
+hoshi-a-l.sgf,J,shows Black ignoring the approach move (White 2),1,na;sh,pd,qf
+hoshi-a-m.sgf,J,shows the greedy play of using the star point immediately for territory,1,na;sh,pd;re,qf
+hoshi-a-n.sgf,J,special strategy based upon fuseki,1,ma;sh,pd;oe,qf
+hoshi-a-o.sgf,J,is not generally favorable for Black (not joseki),1,na;sk,pd;qi,qf

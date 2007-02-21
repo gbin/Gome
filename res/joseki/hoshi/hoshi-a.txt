@@ -1,0 +1,16 @@
+jar:/joseki/hoshi/
+hoshi-a-a.sgf,J,,1,la;sh,pd;nd,qf
+hoshi-a-b.sgf,J,,1,ka;sh,pd;mc,qf
+hoshi-a-c.sgf,J,,1,la;sh,pd;nc,qf
+hoshi-a-d.sgf,J,,1,na;sh,pd;pf,qf
+hoshi-a-e.sgf,J,,1,na;sj,pd;qh,qf
+hoshi-a-f.sgf,J,,1,na;sj,pd;ph,qf
+hoshi-a-g.sgf,J,,1,na;sk,pd;pi,qf
+hoshi-a-h.sgf,J,,1,na;sl,pd;qj,qf
+hoshi-a-i.sgf,J,,1,ha;sh,pd;jd,qf
+hoshi-a-j.sgf,J,,1,ma;sh,pd;of,qf
+hoshi-a-k.sgf,J,,1,na;sl,pd;pj,qf
+hoshi-a-l.sgf,J,,1,na;sh,pd,qf
+hoshi-a-m.sgf,J,,1,na;sh,pd;re,qf
+hoshi-a-n.sgf,J,,1,ma;sh,pd;oe,qf
+hoshi-a-o.sgf,J,,1,na;sk,pd;qi,qf
