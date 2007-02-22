@@ -3,6 +3,8 @@
  */
 package com.indigonauts.gome;
 
+import java.io.IOException;
+
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Canvas;
@@ -11,6 +13,7 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.Util;
@@ -20,8 +23,22 @@ import com.indigonauts.gome.ui.Options;
 
 public class Loader extends Canvas implements Runnable, CommandListener {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Loader");
+    private Image gomoku;
 
+    public Loader()
+    {
+        super();
+        try {
+            gomoku = Image.createImage("/gomoku.png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     protected void paint(Graphics g) {
+        g.setColor(0xccccff);
+        g.fillRect(0, 0, getWidth(), getHeight());
+        g.drawImage(gomoku,  getWidth() / 2, getHeight() / 2 - gomoku.getHeight(), Graphics.HCENTER | Graphics.VCENTER);
         g.setColor(Util.COLOR_BLACK);
         Font f = g.getFont();
         g.drawString("Gome v" + Gome.VERSION, getWidth() / 2, getHeight() / 2, Graphics.BASELINE | Graphics.HCENTER);
