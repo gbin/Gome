@@ -9,7 +9,6 @@ import java.io.IOException;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.GamesIOManager;
 import com.indigonauts.gome.sgf.SgfModel;
-import com.indigonauts.gome.sgf.SgfParsingException;
 
 /**
  * this class is run as a background thread. It loads the GameController.board,
@@ -19,12 +18,12 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
 {
     private int fileIndex;
 
-    private FileLoaderCallback callback;
+    private GameController callback;
 
     private SgfModel model;
     private char mode;
 
-    public FileLoader(FileLoaderCallback callback, FileEntry file, int fileIndex) {
+    public FileLoader(GameController callback, FileEntry file, int fileIndex) {
         super(file.getPath());
         this.fileIndex = fileIndex;
         this.callback = callback;
@@ -34,7 +33,7 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
     protected void download() throws IOException {
         try {
             model = GamesIOManager.extractGameFromCollection(url, fileIndex, this);
-        } catch (SgfParsingException e) {
+        } catch (IllegalArgumentException e) {
             new IOException(e.getMessage());
         }
     }

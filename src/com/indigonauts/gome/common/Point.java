@@ -7,13 +7,10 @@ package com.indigonauts.gome.common;
 public class Point {
     public static final byte NO_POINT = -2;
     public static final byte PASS = -1;
-    protected byte x;
-
-    protected byte y;
+    public byte x= NO_POINT;
+    public byte y= NO_POINT;
 
     public Point() {
-        x = NO_POINT;
-        y = NO_POINT;
     }
 
     public Point(Point pt) {
@@ -27,22 +24,6 @@ public class Point {
     public void setLocation(byte nx, byte ny) {
         x = nx;
         y = ny;
-    }
-
-    public final byte getX() {
-        return x;
-    }
-
-    public final void setX(byte x) {
-        this.x = x;
-    }
-
-    public final byte getY() {
-        return y;
-    }
-
-    public final void setY(byte y) {
-        this.y = y;
     }
 
     public void move(byte dx, byte dy) {

@@ -5,7 +5,7 @@ package com.indigonauts.gome.sgf;
 
 import com.indigonauts.gome.common.Point;
 
-public class TextAnnotation extends Annotation {
+public class TextAnnotation extends Point {
     private String text;
 
     TextAnnotation(Point p, String text) {

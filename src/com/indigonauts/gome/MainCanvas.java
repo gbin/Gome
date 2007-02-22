@@ -27,8 +27,6 @@ import com.indigonauts.gome.ui.Showable;
 
 public class MainCanvas extends Canvas implements CommandListener, Showable, Runnable {
 
-    //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MainCanvas");
-
     private GameController gc;
 
     public static final int ACTION_UNDO = Canvas.GAME_A;
@@ -64,8 +62,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
     private String currentComment;
 
     private String splashInfo;
-
-    private static final Font INFO_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_ITALIC, Font.SIZE_MEDIUM);
 
     private ClockController clockControl;
 
@@ -387,7 +383,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
 
     private void drawSplashInfo(Graphics g) {
 
-        Util.renderSplash(g, splashInfo, getWidth(), getHeight(), INFO_FONT, Util.COLOR_BLACK, 0xDCFF84);
+        Util.renderSplash(g, splashInfo, getWidth(), getHeight(), Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_ITALIC, Font.SIZE_MEDIUM), Util.COLOR_BLACK, 0xDCFF84);
     }
 
     public void drawStatusBar(Graphics g) {
@@ -420,8 +416,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
     }
 
     private void startScroller() {
-        // log.debug("Start scroller with comment = " + currentComment);
-        Font scrollerFont = Gome.singleton.options.scrollerFont;
+        Font scrollerFont = Gome.singleton.options.getScrollerFont();
 
         scroller.setSpeed(Gome.singleton.options.getScrollerSpeed());
         scroller.setBigStep(scrollerFont.getHeight() / 2);

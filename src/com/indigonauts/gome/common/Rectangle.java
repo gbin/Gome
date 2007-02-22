@@ -5,13 +5,13 @@
 package com.indigonauts.gome.common;
 
 public class Rectangle {
-    byte x0;
+    public byte x0;
 
-    byte y0;
+    public byte y0;
 
-    byte x1;
+    public byte x1;
 
-    byte y1;
+    public byte y1;
 
     public Rectangle(byte nx0, byte ny0, byte nx1, byte ny1) {
         x0 = nx0;
@@ -21,10 +21,10 @@ public class Rectangle {
     }
 
     public Rectangle(Point a, Point b) {
-        x0 = a.getX();
-        y0 = a.getY();
-        x1 = b.getX();
-        y1 = b.getY();
+        x0 = a.x;
+        y0 = a.y;
+        x1 = b.x;
+        y1 = b.y;
     }
 
     public Rectangle() {
@@ -44,39 +44,7 @@ public class Rectangle {
     }
 
     public void resizeForPoint(Point pt) {
-        resizeForPoint(pt.getX(), pt.getY());
-    }
-
-    public final byte getX0() {
-        return x0;
-    }
-
-    public final void setX0(byte x0) {
-        this.x0 = x0;
-    }
-
-    public final byte getX1() {
-        return x1;
-    }
-
-    public final void setX1(byte x1) {
-        this.x1 = x1;
-    }
-
-    public final byte getY0() {
-        return y0;
-    }
-
-    public final void setY0(byte y0) {
-        this.y0 = y0;
-    }
-
-    public final byte getY1() {
-        return y1;
-    }
-
-    public final void setY1(byte y1) {
-        this.y1 = y1;
+        resizeForPoint(pt.x, pt.y);
     }
 
     public boolean isValid() {
@@ -138,7 +106,7 @@ public class Rectangle {
     }
 
     public boolean contains(Point pt) {
-        if (pt.getX() >= x0 && pt.getX() <= x1 && pt.getY() >= y0 && pt.getY() <= y1)
+        if (pt.x >= x0 && pt.x <= x1 && pt.y >= y0 && pt.y <= y1)
             return true;
 
         return false;

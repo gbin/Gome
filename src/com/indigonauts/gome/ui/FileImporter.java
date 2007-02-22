@@ -15,10 +15,10 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.URLFileEntry;
 
 public class FileImporter extends Fetcher {
-    private ImportCallback callback;
+    private FileBrowser callback;
     private FileEntry selectedFile;
 
-    public FileImporter(ImportCallback callback, FileEntry selectedFile) {
+    public FileImporter(FileBrowser callback, FileEntry selectedFile) {
         super(selectedFile.getPath());
         this.callback = callback;
         this.selectedFile = selectedFile;

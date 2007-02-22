@@ -87,11 +87,11 @@ public class Board {
     }
 
     private boolean isItAKo(Point playedMove, Point capturedStone, int player) {
-        int x = playedMove.getX();
-        int y = playedMove.getY();
+        int x = playedMove.x;
+        int y = playedMove.y;
 
-        int captx = capturedStone.getX();
-        int capty = capturedStone.getY();
+        int captx = capturedStone.x;
+        int capty = capturedStone.y;
 
         // System.out.println("player =" + player );
         // System.out.println("x=" +x );
@@ -128,8 +128,8 @@ public class Board {
         if (point == null)
             return;
 
-        int x = point.getX();
-        int y = point.getY();
+        int x = point.x;
+        int y = point.y;
         if (x >= board.length || y >= board.length)
             return;
         board[x][y] = color;
@@ -139,7 +139,7 @@ public class Board {
         if (this.getPosition(pt) != EMPTY)
             return false;
 
-        if (ko != null && pt.getX() == ko.getX() && pt.getY() == ko.getY())
+        if (ko != null && pt.x == ko.x && pt.y == ko.y)
             return false;
 
         boolean result = false;
@@ -174,7 +174,7 @@ public class Board {
     }
 
     public int getPosition(Point pt) {
-        return board[pt.getX()][pt.getY()];
+        return board[pt.x][pt.y];
     }
 
     public Rectangle getBoardArea() {
@@ -201,7 +201,7 @@ public class Board {
             nextpt.move(direction[i][0], direction[i][1]);
 
             if (area.contains(nextpt) && (this.getPosition(nextpt) * lastplayer == -1)
-                    && history[nextpt.getX()][nextpt.getY()] == 0) {
+                    && history[nextpt.x][nextpt.y] == 0) {
                 Vector tempVec = this.findDeadGroup(nextpt, history);
 
                 // vec.addAll(tempVec);
@@ -242,11 +242,11 @@ public class Board {
         Rectangle area = this.getBoardArea();
 
         stack.push(pt);
-        history[pt.getX()][pt.getY()] = 1;
+        history[pt.x][pt.y] = 1;
 
         while (!stack.isEmpty()) {
             Point curpt = (Point) stack.peek();
-            int status = history[curpt.getX()][curpt.getY()];
+            int status = history[curpt.x][curpt.y];
 
             // if all 4 directions are searched, mark dead stone, pop the stack,
             // and skip the loop
@@ -259,14 +259,14 @@ public class Board {
             // calc next point
             Point nextpt = new Point(curpt);
             if (status >= 1 && status <= 4) {
-                history[curpt.getX()][curpt.getY()] = status + 1;
+                history[curpt.x][curpt.y] = status + 1;
                 nextpt.move(direction[status - 1][0], direction[status - 1][1]);
             }
 
             if (!area.contains(nextpt))
                 continue;
 
-            if (history[nextpt.getX()][nextpt.getY()] > 0)
+            if (history[nextpt.x][nextpt.y] > 0)
                 continue;
 
             int nextcolor = this.getPosition(nextpt);
@@ -274,18 +274,18 @@ public class Board {
                 continue;
             if (nextcolor == deadcolor) {
                 stack.push(nextpt);
-                history[nextpt.getX()][nextpt.getY()] = 1;
+                history[nextpt.x][nextpt.y] = 1;
                 continue;
             }
             // here, nextcolor==0
             {
                 for (Enumeration e = deadStones.elements(); e.hasMoreElements();) {
                     Point deadpt = (Point) (e.nextElement());
-                    history[deadpt.getX()][deadpt.getY()] = 0;
+                    history[deadpt.x][deadpt.y] = 0;
                 }
                 for (Enumeration e = stack.elements(); e.hasMoreElements();) {
                     Point stackpt = (Point) (e.nextElement());
-                    history[stackpt.getX()][stackpt.getY()] = 0;
+                    history[stackpt.x][stackpt.y] = 0;
                 }
                 deadStones.removeAllElements();
                 break;

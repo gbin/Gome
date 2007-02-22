@@ -10,7 +10,7 @@ import com.indigonauts.gome.sgf.Board;
 
 public class ClockTimerTask extends TimerTask {
 
-    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("ClockTimerTask");    
+    //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("ClockTimerTask");    
 
     private int remainingMaintimeBlack;
 
@@ -106,7 +106,7 @@ public class ClockTimerTask extends TimerTask {
                     remainingByoTimeBlack--;
             }
             if (remainingByoTimeBlack == 0 && remainingMaintimeBlack == 0) {
-                log.debug("Black time is up");
+                //log.debug("Black time is up");
                 cc.timeIsUP(Board.BLACK);
             }
             break;
@@ -120,7 +120,7 @@ public class ClockTimerTask extends TimerTask {
             }
 
             if (remainingByoTimeWhite == 0 && remainingMaintimeWhite == 0) {
-                log.debug("White time is up");
+                //log.debug("White time is up");
                 cc.timeIsUP(Board.WHITE);
             }
             break;
@@ -191,11 +191,11 @@ public class ClockTimerTask extends TimerTask {
 
     public void synchronizeOnlineBlackClock(int time, int stones) {
         if (stones == -1) {
-            log.debug("previous black remaining time is: " + remainingMaintimeBlack + " new is:" + time);
+            //log.debug("previous black remaining time is: " + remainingMaintimeBlack + " new is:" + time);
             remainingMaintimeBlack = time;
         } else {
-            log.debug("previous black remaining time is: " + remainingByoTimeBlack + " new is:" + time);
-            log.debug("previous black remaining stone is: " + nbRemainingByoStonesBlack + " new is:" + stones);
+            //log.debug("previous black remaining time is: " + remainingByoTimeBlack + " new is:" + time);
+            //log.debug("previous black remaining stone is: " + nbRemainingByoStonesBlack + " new is:" + stones);
             remainingMaintimeBlack = 0;
             remainingByoTimeBlack = time;
             nbRemainingByoStonesBlack = stones;
@@ -204,11 +204,11 @@ public class ClockTimerTask extends TimerTask {
 
     public void synchronizeOnlineWhiteClock(int time, int stones) {
         if (stones == -1) {
-            log.debug("previous white remaining time is: " + remainingMaintimeWhite + " new is:" + time);
+            //log.debug("previous white remaining time is: " + remainingMaintimeWhite + " new is:" + time);
             remainingMaintimeWhite = time;
         } else {
-            log.debug("previous white remaining time is: " + remainingByoTimeWhite + " new is:" + time);
-            log.debug("previous white remaining stone is: " + nbRemainingByoStonesWhite + " new is:" + stones);
+            //log.debug("previous white remaining time is: " + remainingByoTimeWhite + " new is:" + time);
+            //log.debug("previous white remaining stone is: " + nbRemainingByoStonesWhite + " new is:" + stones);
             remainingMaintimeWhite = 0;
             remainingByoTimeWhite = time;
             nbRemainingByoStonesWhite = stones;

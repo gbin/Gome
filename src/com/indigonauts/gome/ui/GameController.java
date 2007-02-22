@@ -27,8 +27,9 @@ import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.sgf.SgfPoint;
+import com.indigonauts.gome.sgf.SymbolAnnotation;
 
-public class GameController implements FileLoaderCallback, ServerCallback {
+public class GameController implements ServerCallback {
 
     //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GameController");
 
@@ -116,8 +117,8 @@ public class GameController implements FileLoaderCallback, ServerCallback {
         moveNb = 0;
 
         playArea = null;
-        cursor.setX((byte) 0);
-        cursor.setY((byte) 0);
+        cursor.x = (byte) 0;
+        cursor.y = (byte) 0;
         fileLoader = null;
 
         bShowHint = false;
@@ -224,7 +225,7 @@ public class GameController implements FileLoaderCallback, ServerCallback {
         Point ko = currentNode.getKo();
         if (ko != null) {
             int color = Util.COLOR_GREY;
-            painter.drawSquareAnnotation(g,ko, color);
+            painter.drawSymbolAnnotation(g, new SymbolAnnotation(ko,SymbolAnnotation.SQUARE), color);
         }
         //log.debug("paintBackBuffer done");
     }
@@ -262,8 +263,8 @@ public class GameController implements FileLoaderCallback, ServerCallback {
                     .getBoardSize() - 1));
         }
 
-        cursor.setX(playArea.getX0());
-        cursor.setY(playArea.getY0());
+        cursor.x = playArea.x0;
+        cursor.y = playArea.y0;
         switchCurrentNode(model.getFirstNode());
         playNode(currentNode);
         initPainter();
@@ -296,21 +297,21 @@ public class GameController implements FileLoaderCallback, ServerCallback {
 
         byte w = (byte) (canvas.getBoardPainter().getWidth() / (normalDelta * 2));
         byte h = (byte) (canvas.getBoardPainter().getHeight() / (normalDelta * 2));
-        byte left = (byte) (cursor.getX() - w / 2);
-        byte top = (byte) (cursor.getY() - h / 2);
+        byte left = (byte) (cursor.x - w / 2);
+        byte top = (byte) (cursor.y - h / 2);
         Rectangle pArea = new Rectangle(left, top, (byte) (left + w), (byte) (top + h));
 
-        if (pArea.getX0() < 0) {
-            pArea.move(0 - pArea.getX0(), 0);
+        if (pArea.x0 < 0) {
+            pArea.move(0 - pArea.x0, 0);
         }
-        if (pArea.getY0() < 0) {
-            pArea.move(0, 0 - pArea.getY0());
+        if (pArea.y0 < 0) {
+            pArea.move(0, 0 - pArea.y0);
         }
-        if (pArea.getX1() > board.getBoardArea().getX1()) {
-            pArea.move(board.getBoardArea().getX1() - pArea.getX1(), 0);
+        if (pArea.x1 > board.getBoardArea().x1) {
+            pArea.move(board.getBoardArea().x1 - pArea.x1, 0);
         }
-        if (pArea.getY1() > board.getBoardArea().getY1()) {
-            pArea.move(0, board.getBoardArea().getY1() - pArea.getY1());
+        if (pArea.y1 > board.getBoardArea().y1) {
+            pArea.move(0, board.getBoardArea().y1 - pArea.y1);
         }
         Rectangle zoomedPlayArea = Rectangle.intersect(pArea, board.getBoardArea());
 
@@ -321,16 +322,16 @@ public class GameController implements FileLoaderCallback, ServerCallback {
     public boolean doMoveCursor(int keyCode) {
         boolean refreshPainter = false;
         Rectangle area = canvas.getBoardPainter().getPlayArea();
-        byte x = cursor.getX();
-        byte y = cursor.getY();
+        byte x = cursor.x;
+        byte y = cursor.y;
         switch (canvas.getGameAction(keyCode)) {
         case MainCanvas.ACTION_UP:
 
             if (y > 0) {
                 y--;
-                if (y < area.getY0()) {
-                    area.setY0(y);
-                    area.setY1((byte) (area.getY1() - 1));
+                if (y < area.y0) {
+                    area.y0 = y;
+                    area.y1--;
                     refreshPainter = true;
                 }
             }
@@ -339,9 +340,9 @@ public class GameController implements FileLoaderCallback, ServerCallback {
 
             if (y < board.getBoardSize() - 1) {
                 y++;
-                if (y > area.getY1()) {
-                    area.setY1(y);
-                    area.setY0((byte) (area.getY0() + 1));
+                if (y > area.y1) {
+                    area.y1= y;
+                    area.y0++;
                     refreshPainter = true;
                 }
             }
@@ -350,9 +351,9 @@ public class GameController implements FileLoaderCallback, ServerCallback {
         case MainCanvas.ACTION_LEFT:
             if (x > 0) {
                 x--;
-                if (x < area.getX0()) {
-                    area.setX0(x);
-                    area.setX1((byte) (area.getX1() - 1));
+                if (x < area.x0) {
+                    area.x0 = x;
+                    area.x1--;
                     refreshPainter = true;
                 }
             }
@@ -360,9 +361,9 @@ public class GameController implements FileLoaderCallback, ServerCallback {
         case MainCanvas.ACTION_RIGHT:
             if (x < board.getBoardSize() - 1) {
                 x++;
-                if (x > area.getX1()) {
-                    area.setX1(x);
-                    area.setX0((byte) (area.getX0() + 1));
+                if (x > area.x1) {
+                    area.x1 = x;
+                    area.x0 ++;
                     refreshPainter = true;
                 }
             }
@@ -373,9 +374,9 @@ public class GameController implements FileLoaderCallback, ServerCallback {
             paintBackBuffer();
         }
 
-        boolean refreshNeeded = (x != cursor.getX()) || (y != cursor.getY());
-        cursor.setX(x);
-        cursor.setY(y);
+        boolean refreshNeeded = (x != cursor.x) || (y != cursor.y);
+        cursor.x = x;
+        cursor.y = y;
         return refreshNeeded;
     }
 
@@ -441,8 +442,8 @@ public class GameController implements FileLoaderCallback, ServerCallback {
                 if (playMode == ONLINE_MODE) {
                     try {
                         if (!(board.isValidMove(cursor, Board.BLACK) | board.isValidMove(cursor, Board.WHITE))
-                                && !board.hasBeenRemove(cursor.getX(), cursor.getY())) {
-                            igs.removeDeadStone(cursor.getX(), cursor.getY());
+                                && !board.hasBeenRemove(cursor.x, cursor.y)) {
+                            igs.removeDeadStone(cursor.x, cursor.y);
                             doMarkDearStone();
                         }
                     } catch (Exception e) {
@@ -521,8 +522,8 @@ public class GameController implements FileLoaderCallback, ServerCallback {
     }
 
     public void moveCursor(byte x, byte y) {
-        cursor.setX(x);
-        cursor.setY(y);
+        cursor.x = x;
+        cursor.y = y;
     }
 
     public void pass() {
@@ -556,9 +557,9 @@ public class GameController implements FileLoaderCallback, ServerCallback {
     public void doMarkDearStone() {
         //log.debug("doMarkDearStone");
         if (playMode == ONLINE_MODE)
-            board.onlineMarkDeadGroup(cursor.getX(), cursor.getY());
+            board.onlineMarkDeadGroup(cursor.x, cursor.y);
         else
-            board.markDeadGroup(cursor.getX(), cursor.getY());
+            board.markDeadGroup(cursor.x, cursor.y);
     }
 
     public void doClick() {
@@ -571,7 +572,7 @@ public class GameController implements FileLoaderCallback, ServerCallback {
                 if (color == onlineColor && board.isValidMove(cursor, color)) {
                     // next = playNewMove(color, cursor.getX(), cursor.getY());
                     try {
-                        igs.playMove(new ServerMove(moveNb, color, cursor.getX(), cursor.getY()));
+                        igs.playMove(new ServerMove(moveNb, color, cursor.x, cursor.y));
                     } catch (Exception e) {
                         Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
                     }
@@ -589,7 +590,7 @@ public class GameController implements FileLoaderCallback, ServerCallback {
                 if (next != null) {
                     playNode(next);
                 } else if (board.isValidMove(cursor, color)) {
-                    next = playNewMove(color, cursor.getX(), cursor.getY());
+                    next = playNewMove(color, cursor.x, cursor.y);
                 }
             } else if (connectToIgs) {
                 canvas.setSplashInfo(Gome.singleton.bundle.getString("online.noStartedGame"));

@@ -6,6 +6,7 @@ package com.indigonauts.gome.sgf;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Enumeration;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 
 import com.indigonauts.gome.Gome;
@@ -16,9 +17,10 @@ import com.indigonauts.gome.common.Util;
 /**
  * SgfModel is used to parse a sgf string and save the game in memory as a tree
  * structure.
+ * The enumeration is used to have all the node in preorder
  * 
  */
-public class SgfModel extends GameInfo {
+public class SgfModel extends GameInfo implements Enumeration {
     private final static byte DEFAULT_BOARD_SIZE = 19;
 
     private SgfNode root = new SgfNode();
@@ -37,6 +39,8 @@ public class SgfModel extends GameInfo {
 
     private static boolean reinjectlast = false;
 
+    private Stack nodeStack; // used for the preorder
+    
     private static char readAndMark(Reader src) throws IOException {
         char toreturn;
         if (reinjectlast) {
@@ -106,7 +110,7 @@ public class SgfModel extends GameInfo {
         }
     }
 
-    public static SgfModel parse(Reader src) throws SgfParsingException {
+    public static SgfModel parse(Reader src) throws IllegalArgumentException {
         SgfModel newModel = new SgfModel();
         try {
             // skip potential garbage before the games
@@ -213,7 +217,7 @@ public class SgfModel extends GameInfo {
                     } else if (c == '\n' || c == '\r') {
                         // System.out.println(" CR ignored");
                     } else {
-                        throw new SgfParsingException(
+                        throw new IllegalArgumentException(
                                                       Gome.singleton.bundle.getString("ui.error.sgfParsing") + " at chr " + index); //$NON-NLS-1$
                     }
                 } else if (c != ']') {
@@ -365,7 +369,7 @@ public class SgfModel extends GameInfo {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new SgfParsingException(Gome.singleton.bundle.getString("ui.error.sgfParsing") + e.getMessage()); //$NON-NLS-1$
+            throw new IllegalArgumentException(Gome.singleton.bundle.getString("ui.error.sgfParsing") + e.getMessage()); //$NON-NLS-1$
         }
         // upon successful parse, disconnect the root node from the sfg tree
         SgfNode son = newModel.root.getSon();
@@ -386,9 +390,38 @@ public class SgfModel extends GameInfo {
     }
 
     public Enumeration elements() {
-        return new SgfPreorderIterator(root.getSon());
+    	nodeStack = new Stack();
+
+        if (root.getSon() != null) {
+            nodeStack.push(root.getSon());
+        }
+        return this;
+    }
+    
+    public boolean hasMoreElements() {
+        return nodeStack.size() > 0;
     }
 
+    public Object nextElement() {
+        if (!hasMoreElements())
+            throw new NoSuchElementException("empty stack"); //$NON-NLS-1$
+
+        SgfNode top = (SgfNode) nodeStack.pop();
+        SgfNode son = top.getSon(); // left
+        SgfNode younger = top.getYounger(); // left
+
+        /*
+         * younger is pushed first so that it's poped up later. the access is
+         * top-son-younger in a recursive way
+         */
+        if (younger != null)
+            nodeStack.push(younger);
+
+        if (son != null)
+            nodeStack.push(son);
+
+        return top;
+    }
     /**
      * Check all the nodes to find out the max and min x,y of all the stones
      * merge with the view area as well i.e. returned = max (ABAW points,
@@ -416,6 +449,7 @@ public class SgfModel extends GameInfo {
                 rect.resizeForPoint(pt);
             }
         }
+        nodeStack = null; // free up some memory after the preorder
         return rect;
     }
 
@@ -427,10 +461,10 @@ public class SgfModel extends GameInfo {
         Rectangle rect = getInvalidRect();
 
         if (VW != null && VW.length() == 5) {
-            rect.setX0(SgfPoint.coordFromSgf(VW.charAt(0)));
-            rect.setY0(SgfPoint.coordFromSgf(VW.charAt(1)));
-            rect.setX1(SgfPoint.coordFromSgf(VW.charAt(3)));
-            rect.setY1(SgfPoint.coordFromSgf(VW.charAt(4)));
+            rect.x0=SgfPoint.coordFromSgf(VW.charAt(0));
+            rect.y0 = SgfPoint.coordFromSgf(VW.charAt(1));
+            rect.x1 = SgfPoint.coordFromSgf(VW.charAt(3));
+            rect.y1 = SgfPoint.coordFromSgf(VW.charAt(4));
         }
         return rect;
     }
@@ -552,9 +586,9 @@ public class SgfModel extends GameInfo {
         Rectangle view = getViewArea();
         if (view.isValid()) {
             buf.append("VW["); //$NON-NLS-1$
-            buf.append(new SgfPoint(view.getX0(), view.getY0()));
+            buf.append(new SgfPoint(view.x0, view.y0));
             buf.append(':');
-            buf.append(new SgfPoint(view.getX1(), view.getY1()));
+            buf.append(new SgfPoint(view.x1, view.y1));
             buf.append(']');
         }
         if (handicap!= 0) {

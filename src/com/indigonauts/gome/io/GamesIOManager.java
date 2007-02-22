@@ -13,7 +13,6 @@ import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.sgf.SgfModel;
-import com.indigonauts.gome.sgf.SgfParsingException;
 
 public class GamesIOManager extends IOManager {
     private static final String SGF = ".sgf"; //$NON-NLS-1$
@@ -67,7 +66,7 @@ public class GamesIOManager extends IOManager {
      * @throws IOException
      */
     public static SgfModel extractGameFromCollection(String url, int gameIndex, DownloadStatus status)
-            throws SgfParsingException, IOException {
+            throws IllegalArgumentException, IOException {
         SgfModel game = null;
         DataInputStream readFileAsStream = null;
         InputStreamReader inputStreamReader = null;

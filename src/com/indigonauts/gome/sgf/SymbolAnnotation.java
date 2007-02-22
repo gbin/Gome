@@ -5,7 +5,7 @@ package com.indigonauts.gome.sgf;
 
 import com.indigonauts.gome.common.Point;
 
-public class SymbolAnnotation extends Annotation {
+public class SymbolAnnotation extends Point {
     public static final byte CIRCLE = 1;
 
     public static final byte CROSS = 2;
@@ -16,7 +16,12 @@ public class SymbolAnnotation extends Annotation {
 
     private int type;
 
-    SymbolAnnotation(Point p, int type) {
+    public SymbolAnnotation(int type) {
+        super();
+        this.type = type;
+    }
+    
+    public SymbolAnnotation(Point p, int type) {
         super(p);
         this.type = type;
     }

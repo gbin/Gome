@@ -10,10 +10,10 @@ import com.indigonauts.gome.io.IOManager;
 
 public class IndexLoader extends Fetcher {
 
-    IndexLoaderCallback callback;
+	FileBrowser callback;
     Vector fileList;
 
-    public IndexLoader(String url, IndexLoaderCallback callback) {
+    public IndexLoader(String url, FileBrowser callback) {
         super(url);
         this.callback = callback;
         start();

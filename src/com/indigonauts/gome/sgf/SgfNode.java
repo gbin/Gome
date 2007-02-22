@@ -7,10 +7,8 @@ import java.util.Vector;
 
 import com.indigonauts.gome.common.Point;
 
-public class SgfNode {
+public class SgfNode extends Point{
 
-    private byte x = Point.NO_POINT;
-    private byte y = Point.NO_POINT; // minimalistic in RAM
     private byte playerColor;
 
     private SgfNode father;
@@ -27,8 +25,8 @@ public class SgfNode {
     private Vector AW; // a vector of SgfPoints White positions
 
     public void setPoint(SgfPoint newPoint) {
-        x = newPoint.getX();
-        y = newPoint.getY();
+        x = newPoint.x;
+        y = newPoint.y;
     }
 
     public SgfNode getOlder() {
@@ -212,7 +210,7 @@ public class SgfNode {
         return annotations;
     }
 
-    public void addAnnotation(Annotation a) {
+    public void addAnnotation(Point a) {
         if (annotations == null) {
             annotations = new Vector();
         }

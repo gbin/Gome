@@ -31,7 +31,7 @@ import com.indigonauts.gome.io.StoreFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
-public class FileBrowser implements CommandListener, Showable, IndexLoaderCallback {
+public class FileBrowser implements CommandListener, Showable {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
 
     private Vector entries = new Vector(10);
@@ -349,7 +349,7 @@ public class FileBrowser implements CommandListener, Showable, IndexLoaderCallba
             return;
         }
 
-        FileImporter fileLoader = new FileImporter(new ImportCallback(this), selectedFile);
+        FileImporter fileLoader = new FileImporter(this, selectedFile);
         fileLoader.show(display);
         fileLoader.start();
     }
@@ -363,5 +363,15 @@ public class FileBrowser implements CommandListener, Showable, IndexLoaderCallba
 
     public void downloadFailure(Exception reason) {
         Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
+    }
+    
+    void done() {
+        listener.commandAction(MenuEngine.LOAD, Gome.singleton.mainCanvas);
+    }
+
+    public void failed(Exception reason) {
+        Util
+                .messageBox(
+                            Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
     }
 }

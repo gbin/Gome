@@ -32,21 +32,22 @@ public class ClockPainterTask extends TimerTask {
     private static final int HIGHLIGHTED_COLOR = Util.COLOR_RED;
     private static final int NORMAL_COLOR = Util.COLOR_BLUE;
 
-    private static final Font BIG_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_LARGE);
-
-    private static final Font SMALL_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-
-    private static final Font MEDIUM_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
-
-    private Font textFont = SMALL_FONT;
-
-    private Font byoFont = SMALL_FONT;
+    
+    private static final int LARGE_HEIGHT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_LARGE).getHeight();
+    private static final int MEDIUM_HEIGHT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_MEDIUM).getHeight();
+    private static final int SMALL_HEIGHT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL).getHeight();
+    
+    private int textFontSize = Font.SIZE_SMALL;
+    private int byoFontSize = Font.SIZE_SMALL;
 
     public ClockPainterTask(Canvas c) {
         this.canvas = c;
     }
 
     public void drawClock(Graphics g, ClockController clock) {
+    	Font textFont = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, textFontSize);
+    	Font byoFont = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, byoFontSize);
+
 
         g.setColor(Util.COLOR_LIGHT_BACKGROUND);
         g.fillRect(x, y, width, height);
@@ -118,17 +119,17 @@ public class ClockPainterTask extends TimerTask {
         this.width = width;
         this.height = height;
 
-        if (height >= BIG_FONT.getHeight())
-            textFont = BIG_FONT;
-        else if ((height < BIG_FONT.getHeight()) && (height >= MEDIUM_FONT.getHeight()))
-            textFont = MEDIUM_FONT;
+        if (height >= LARGE_HEIGHT)
+            textFontSize = Font.SIZE_LARGE;
+        else if ((height < LARGE_HEIGHT) && (height >= MEDIUM_HEIGHT))
+        	textFontSize = Font.SIZE_MEDIUM;
         else
-            textFont = SMALL_FONT;
+        	textFontSize = Font.SIZE_SMALL;
 
-        if (height >= ((3 * SMALL_FONT.getHeight())) / 2) {
-            byoFont = SMALL_FONT;
+        if (height >= ((3 * SMALL_HEIGHT)) / 2) {
+            byoFontSize = Font.SIZE_SMALL;
         } else {
-            byoFont = textFont;
+        	byoFontSize = textFontSize;
         }
     }
 
@@ -164,6 +165,6 @@ public class ClockPainterTask extends TimerTask {
     }
 
     public int getMinimumHeight() {
-        return SMALL_FONT.getHeight() + 1;
+        return SMALL_HEIGHT + 1;
     }
 }

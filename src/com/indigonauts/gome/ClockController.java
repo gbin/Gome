@@ -10,8 +10,6 @@ import com.indigonauts.gome.ui.GameController;
 
 public class ClockController {
 
-    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("ClockController");
-
     private boolean enable;
 
     private ClockTimerTask clock;
@@ -159,8 +157,6 @@ public class ClockController {
     }
 
     public void synTime(int whiteTime, int whiteByoStone, int blackTime, int blackByoStone) {
-
-        log.debug("Synchronize clocks");
         if (clock != null) {
             clock.synchronizeOnlineWhiteClock(whiteTime, whiteByoStone);
             clock.synchronizeOnlineBlackClock(blackTime, blackByoStone);
