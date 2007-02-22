@@ -21,15 +21,11 @@ import com.indigonauts.gome.common.Util;
 public class SgfModel extends GameInfo {
     private final static byte DEFAULT_BOARD_SIZE = 19;
 
-    // private final static Rectangle INVALID_RECT= new
-    // Rectangle(999,999,-999,-999);
-    // int firstPlayer;
-
     private SgfNode root = new SgfNode();
 
     private byte boardSize = DEFAULT_BOARD_SIZE;
 
-    private boolean handicapGame = false;
+    private int handicap;
 
     private String VW;
 
@@ -55,7 +51,7 @@ public class SgfModel extends GameInfo {
     public static SgfModel createNewModel(byte size, int handi, String white, String black) {
         SgfModel model = new SgfModel();
         model.boardSize = size;
-        model.handicapGame = handi != 0;
+        model.handicap = handi;
         model.whitePlayer = white.replace(']', '|');
         model.blackPlayer = black.replace(']', '|');
         model.application = "Gome:1.0"; //$NON-NLS-1$
@@ -218,7 +214,7 @@ public class SgfModel extends GameInfo {
                         // System.out.println(" CR ignored");
                     } else {
                         throw new SgfParsingException(
-                                Gome.singleton.bundle.getString("ui.error.sgfParsing") + " at chr " + index); //$NON-NLS-1$
+                                                      Gome.singleton.bundle.getString("ui.error.sgfParsing") + " at chr " + index); //$NON-NLS-1$
                     }
                 } else if (c != ']') {
                     if (property.equals("C") || (c != -1)) { //$NON-NLS-1$
@@ -293,20 +289,18 @@ public class SgfModel extends GameInfo {
                         latestNode.addAnnotation(new TextAnnotation(SgfPoint.createFromSgf(coords), annotation));
                     } else if (property.equals("CR")) { //$NON-NLS-1$
                         latestNode.addAnnotation(new SymbolAnnotation(SgfPoint.createFromSgf(content),
-                                SymbolAnnotation.CIRCLE));
+                                                                      SymbolAnnotation.CIRCLE));
                     } else if (property.equals("MA")) { //$NON-NLS-1$
                         latestNode.addAnnotation(new SymbolAnnotation(SgfPoint.createFromSgf(content),
-                                SymbolAnnotation.CROSS));
+                                                                      SymbolAnnotation.CROSS));
                     } else if (property.equals("SQ")) { //$NON-NLS-1$
                         latestNode.addAnnotation(new SymbolAnnotation(SgfPoint.createFromSgf(content),
-                                SymbolAnnotation.SQUARE));
+                                                                      SymbolAnnotation.SQUARE));
                     } else if (property.equals("TR")) { //$NON-NLS-1$
                         latestNode.addAnnotation(new SymbolAnnotation(SgfPoint.createFromSgf(content),
-                                SymbolAnnotation.TRIANGLE));
+                                                                      SymbolAnnotation.TRIANGLE));
                     } else if (property.equals("HA")) { //$NON-NLS-1$
-                        if (!content.equals("0")) { //$NON-NLS-1$
-                            newModel.handicapGame = true;
-                        }
+                        newModel.handicap = Integer.parseInt(content);
                     } else if (property.equals("PL")) { //$NON-NLS-1$
                         if (content.equals("B")) { //$NON-NLS-1$
                             newModel.PL = 1;
@@ -496,10 +490,11 @@ public class SgfModel extends GameInfo {
             node = node.getSon();
         }
 
-        return handicapGame ? (byte) -1 : (byte) 1; // No move has been player,
+        return handicap != 0 ? (byte) -1 : (byte) 1; // No move has been player,
         // respect the
         // starting convention
     }
+    
 
     public String toString() {
         StringBuffer buf = new StringBuffer();
@@ -562,41 +557,61 @@ public class SgfModel extends GameInfo {
             buf.append(new SgfPoint(view.getX1(), view.getY1()));
             buf.append(']');
         }
+        if (handicap!= 0) {
+            buf.append("HA[");
+            buf.append(handicap);
+            buf.append(']');
+        }
 
     }
 
     private static final String[][] HANDI_PLACEMENTS_19 = { { "dd", "pp" }, //$NON-NLS-1$ //$NON-NLS-2$
-            { "pp", "dp", "dd" }, // 3 stones //$NON-NLS-1$ //$NON-NLS-2$
-            // //$NON-NLS-3$
-            { "dd", "pd", "dp", "pp" }, // 4 stones //$NON-NLS-1$ //$NON-NLS-2$
-            // //$NON-NLS-3$ //$NON-NLS-4$
-            { "dd", "pd", "jj", "dp", "pp" }, // 5 stones //$NON-NLS-1$
-            // //$NON-NLS-2$ //$NON-NLS-3$
-            // //$NON-NLS-4$ //$NON-NLS-5$
-            { "dd", "pd", "dj", "pj", "dp", "pp" }, // 6 stones //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            { "dd", "pd", "dj", "jj", "pj", "dp", "pp" }, // 7 stones
-            // //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            // //$NON-NLS-7$
-            { "dd", "jd", "pd", "dj", "pj", "dp", "jp", "pp" }, // 8 stones
-            // //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            // //$NON-NLS-7$
-            // //$NON-NLS-8$
-            { "dd", "jd", "pd", "dj", "jj", "pj", "dp", "jp", "pp" } // 9
+                                                           { "pp", "dp", "dd" }, // 3
+                                                                                    // stones
+                                                                                    // //$NON-NLS-1$
+                                                                                    // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           { "dd", "pd", "dp", "pp" }, // 4
+                                                                                        // stones
+                                                                                        // //$NON-NLS-1$
+                                                                                        // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                            // //$NON-NLS-4$
+                                                           { "dd", "pd", "jj", "dp", "pp" }, // 5
+                                                                                                // stones
+                                                                                                // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                            // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                            // //$NON-NLS-5$
+                                                           { "dd", "pd", "dj", "pj", "dp", "pp" }, // 6
+                                                                                                    // stones
+                                                                                                    // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                           // //$NON-NLS-5$
+                                                           // //$NON-NLS-6$
+                                                           { "dd", "pd", "dj", "jj", "pj", "dp", "pp" }, // 7
+                                                                                                            // stones
+                                                           // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                           // //$NON-NLS-5$
+                                                           // //$NON-NLS-6$
+                                                           // //$NON-NLS-7$
+                                                           { "dd", "jd", "pd", "dj", "pj", "dp", "jp", "pp" }, // 8
+                                                                                                                // stones
+                                                           // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                           // //$NON-NLS-5$
+                                                           // //$NON-NLS-6$
+                                                           // //$NON-NLS-7$
+                                                           // //$NON-NLS-8$
+                                                           { "dd", "jd", "pd", "dj", "jj", "pj", "dp", "jp", "pp" } // 9
     // stones
     // //$NON-NLS-1$
     // //$NON-NLS-2$
@@ -610,37 +625,52 @@ public class SgfModel extends GameInfo {
     };
 
     private static final String[][] HANDI_PLACEMENTS_13 = { { "dd", "jj" }, //$NON-NLS-1$ //$NON-NLS-2$
-            { "dd", "dj", "jj" }, // 3 stones //$NON-NLS-1$ //$NON-NLS-2$
-            // //$NON-NLS-3$
-            { "dd", "jd", "dj", "jj" }, // 4 stones //$NON-NLS-1$ //$NON-NLS-2$
-            // //$NON-NLS-3$ //$NON-NLS-4$
-            { "dd", "jd", "gg", "dj", "jj" }, // 5 stones //$NON-NLS-1$
-            // //$NON-NLS-2$ //$NON-NLS-3$
-            // //$NON-NLS-4$ //$NON-NLS-5$
-            { "dd", "jd", "dg", "jg", "dj", "jj" }, // 6 stones //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            { "dd", "jd", "dg", "gg", "jg", "dj", "jj" }, // 7 stones
-            // //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            // //$NON-NLS-7$
-            { "dd", "gd", "jd", "dg", "jg", "dj", "gj", "jj" }, // 8 stones
-            // //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            // //$NON-NLS-7$
-            // //$NON-NLS-8$
-            { "dd", "gd", "jd", "dg", "gg", "jg", "dj", "gj", "jj" } // 9
+                                                           { "dd", "dj", "jj" }, // 3
+                                                                                    // stones
+                                                                                    // //$NON-NLS-1$
+                                                                                    // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           { "dd", "jd", "dj", "jj" }, // 4
+                                                                                        // stones
+                                                                                        // //$NON-NLS-1$
+                                                                                        // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                            // //$NON-NLS-4$
+                                                           { "dd", "jd", "gg", "dj", "jj" }, // 5
+                                                                                                // stones
+                                                                                                // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                            // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                            // //$NON-NLS-5$
+                                                           { "dd", "jd", "dg", "jg", "dj", "jj" }, // 6
+                                                                                                    // stones
+                                                                                                    // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                           // //$NON-NLS-5$
+                                                           // //$NON-NLS-6$
+                                                           { "dd", "jd", "dg", "gg", "jg", "dj", "jj" }, // 7
+                                                                                                            // stones
+                                                           // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                           // //$NON-NLS-5$
+                                                           // //$NON-NLS-6$
+                                                           // //$NON-NLS-7$
+                                                           { "dd", "gd", "jd", "dg", "jg", "dj", "gj", "jj" }, // 8
+                                                                                                                // stones
+                                                           // //$NON-NLS-1$
+                                                           // //$NON-NLS-2$
+                                                           // //$NON-NLS-3$
+                                                           // //$NON-NLS-4$
+                                                           // //$NON-NLS-5$
+                                                           // //$NON-NLS-6$
+                                                           // //$NON-NLS-7$
+                                                           // //$NON-NLS-8$
+                                                           { "dd", "gd", "jd", "dg", "gg", "jg", "dj", "gj", "jj" } // 9
     // stones
     // //$NON-NLS-1$
     // //$NON-NLS-2$
@@ -654,37 +684,52 @@ public class SgfModel extends GameInfo {
     };
 
     private static final String[][] HANDI_PLACEMENTS_9 = { { "cc", "gg" }, //$NON-NLS-1$ //$NON-NLS-2$
-            { "cc", "cg", "gg" }, // 3 stones //$NON-NLS-1$ //$NON-NLS-2$
-            // //$NON-NLS-3$
-            { "cc", "gc", "cg", "gg" }, // 4 stones //$NON-NLS-1$ //$NON-NLS-2$
-            // //$NON-NLS-3$ //$NON-NLS-4$
-            { "cc", "gc", "ee", "cg", "gg" }, // 5 stones //$NON-NLS-1$
-            // //$NON-NLS-2$ //$NON-NLS-3$
-            // //$NON-NLS-4$ //$NON-NLS-5$
-            { "cc", "gc", "ce", "ge", "cg", "gg" }, // 6 stones //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            { "cc", "gc", "ce", "ee", "ge", "cg", "gg" }, // 7 stones
-            // //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            // //$NON-NLS-7$
-            { "cc", "ec", "gc", "ce", "ge", "cg", "eg", "gg" }, // 8 stones
-            // //$NON-NLS-1$
-            // //$NON-NLS-2$
-            // //$NON-NLS-3$
-            // //$NON-NLS-4$
-            // //$NON-NLS-5$
-            // //$NON-NLS-6$
-            // //$NON-NLS-7$
-            // //$NON-NLS-8$
-            { "cc", "ec", "gc", "ce", "ee", "ge", "cg", "eg", "gg" } // 9
+                                                          { "cc", "cg", "gg" }, // 3
+                                                                                // stones
+                                                                                // //$NON-NLS-1$
+                                                                                // //$NON-NLS-2$
+                                                          // //$NON-NLS-3$
+                                                          { "cc", "gc", "cg", "gg" }, // 4
+                                                                                        // stones
+                                                                                        // //$NON-NLS-1$
+                                                                                        // //$NON-NLS-2$
+                                                          // //$NON-NLS-3$
+                                                            // //$NON-NLS-4$
+                                                          { "cc", "gc", "ee", "cg", "gg" }, // 5
+                                                                                            // stones
+                                                                                            // //$NON-NLS-1$
+                                                          // //$NON-NLS-2$
+                                                            // //$NON-NLS-3$
+                                                          // //$NON-NLS-4$
+                                                            // //$NON-NLS-5$
+                                                          { "cc", "gc", "ce", "ge", "cg", "gg" }, // 6
+                                                                                                    // stones
+                                                                                                    // //$NON-NLS-1$
+                                                          // //$NON-NLS-2$
+                                                          // //$NON-NLS-3$
+                                                          // //$NON-NLS-4$
+                                                          // //$NON-NLS-5$
+                                                          // //$NON-NLS-6$
+                                                          { "cc", "gc", "ce", "ee", "ge", "cg", "gg" }, // 7
+                                                                                                        // stones
+                                                          // //$NON-NLS-1$
+                                                          // //$NON-NLS-2$
+                                                          // //$NON-NLS-3$
+                                                          // //$NON-NLS-4$
+                                                          // //$NON-NLS-5$
+                                                          // //$NON-NLS-6$
+                                                          // //$NON-NLS-7$
+                                                          { "cc", "ec", "gc", "ce", "ge", "cg", "eg", "gg" }, // 8
+                                                                                                                // stones
+                                                          // //$NON-NLS-1$
+                                                          // //$NON-NLS-2$
+                                                          // //$NON-NLS-3$
+                                                          // //$NON-NLS-4$
+                                                          // //$NON-NLS-5$
+                                                          // //$NON-NLS-6$
+                                                          // //$NON-NLS-7$
+                                                          // //$NON-NLS-8$
+                                                          { "cc", "ec", "gc", "ce", "ee", "ge", "cg", "eg", "gg" } // 9
     // stones
     // //$NON-NLS-1$
     // //$NON-NLS-2$
@@ -699,7 +744,7 @@ public class SgfModel extends GameInfo {
 
     private void addHandicapStones(String[] placements) {
         for (int i = 0; i < placements.length; i++) {
-            root.addABElement(SgfPoint.createFromSgf(placements[i]));
+            getFirstNode().addABElement(SgfPoint.createFromSgf(placements[i]));
         }
     }
 
