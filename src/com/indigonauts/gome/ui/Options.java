@@ -59,21 +59,21 @@ public class Options extends Form {
                 .renderOffScreenText("abc", 32, GomeOptions.FONT_LARGE, Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
 
         lang = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.lang"), Choice.EXCLUSIVE); //$NON-NLS-1$
-        lang.append("", Image.createImage("/en.png"));
+        lang.append(Gome.singleton.bundle.getString("ui.option.en"), Image.createImage("/en.png"));
 
-        lang.append("", Image.createImage("/fr.png")); //$NON-NLS-1$ //$NON-NLS-2$
-        lang.append("", Image.createImage("/jp.png")); //$NON-NLS-1$ //$NON-NLS-2$
+        lang.append(Gome.singleton.bundle.getString("ui.option.fr"), Image.createImage("/fr.png")); //$NON-NLS-1$ //$NON-NLS-2$
+        lang.append(Gome.singleton.bundle.getString("ui.option.jp"), Image.createImage("/jp.png")); //$NON-NLS-1$ //$NON-NLS-2$
         lang.setSelectedIndex(Gome.singleton.options.getLocaleByte(), true);
 
         scrollerFont = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerFont"), Choice.EXCLUSIVE); //$NON-NLS-1$
-        scrollerFont.append("", smallLetter); //$NON-NLS-1$
-        scrollerFont.append("", mediumLetter); //$NON-NLS-1$
-        scrollerFont.append("", largeLetter); //$NON-NLS-1$
+        scrollerFont.append(Gome.singleton.bundle.getString("ui.option.small"), smallLetter); //$NON-NLS-1$
+        scrollerFont.append(Gome.singleton.bundle.getString("ui.option.medium"), mediumLetter); //$NON-NLS-1$
+        scrollerFont.append(Gome.singleton.bundle.getString("ui.option.large"), largeLetter); //$NON-NLS-1$
         scrollerFont.setSelectedIndex(Gome.singleton.options.getScrollerFontByte(), true);
         gobanColor = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.gobanColor"), Choice.EXCLUSIVE); //$NON-NLS-1$
-        gobanColor.append("", Image.createImage("/glight.png")); //$NON-NLS-1$//$NON-NLS-2$
-        gobanColor.append("", Image.createImage("/gmedium.png")); //$NON-NLS-1$ //$NON-NLS-2$
-        gobanColor.append("", Image.createImage("/gdark.png")); //$NON-NLS-1$ //$NON-NLS-2$
+        gobanColor.append(Gome.singleton.bundle.getString("ui.option.light"), Image.createImage("/glight.png")); //$NON-NLS-1$//$NON-NLS-2$
+        gobanColor.append(Gome.singleton.bundle.getString("ui.option.medium"), Image.createImage("/gmedium.png")); //$NON-NLS-1$ //$NON-NLS-2$
+        gobanColor.append(Gome.singleton.bundle.getString("ui.option.dark"), Image.createImage("/gdark.png")); //$NON-NLS-1$ //$NON-NLS-2$
         gobanColor.setSelectedIndex(Gome.singleton.options.getGobanColorByte(), true);
         scrollerSpeed = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerSpeed"), Choice.EXCLUSIVE); //$NON-NLS-1$
         scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.slow"), null); //$NON-NLS-1$ //$NON-NLS-2$

@@ -21,9 +21,9 @@ import com.indigonauts.gome.ui.MenuEngine;
 public class Gome extends MIDlet {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Gome");
 
-    public static final String VERSION = "1.0"; //$NON-NLS-1$
+    public static final String VERSION = "1.1"; //$NON-NLS-1$
 
-    private static final String OPTIONS_FILE = "o.opt"; //$NON-NLS-1$
+    private static final String OPTIONS_FILE = VERSION + ".opt"; //$NON-NLS-1$
 
     public ResourceBundle bundle;
 
@@ -76,10 +76,10 @@ public class Gome extends MIDlet {
             splash.serviceRepaints();
         }
     }
-    
+
     public void pauseApp() {
-        log.info("Application paused");
-        mainCanvas.stopScroller(); // don't use any CPU.
+        if (mainCanvas != null)
+            mainCanvas.stopScroller(); // don't use any CPU.
 
     }
 
