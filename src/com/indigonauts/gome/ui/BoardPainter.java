@@ -160,7 +160,8 @@ public class BoardPainter {
 				Point point = node.getPoint();
 
 				if (point != null)
-					drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.CIRCLE), color);
+					drawSymbolAnnotation(g, new SymbolAnnotation(point,
+							SymbolAnnotation.CIRCLE), color);
 			}
 
 			// draw other children
@@ -168,7 +169,8 @@ public class BoardPainter {
 				SgfNode node = (SgfNode) (enume.nextElement());
 				Point point = node.getPoint();
 				if (point != null)
-					drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.CIRCLE), Util.COLOR_BLACK);
+					drawSymbolAnnotation(g, new SymbolAnnotation(point,
+							SymbolAnnotation.CIRCLE), Util.COLOR_BLACK);
 			}
 		}
 
@@ -216,7 +218,7 @@ public class BoardPainter {
 				Util.COLOR_DARKGREY, Util.COLOR_WHITE);
 		int whiteTerritoryColorOnBlackStone = Util.blendColors(
 				Util.COLOR_WHITE, Util.COLOR_LIGHTGREY);
-		
+
 		for (int i = 0; i < boardSize; i++) {
 			for (int j = 0; j < boardSize; j++) {
 				p.x = (byte) i;
@@ -293,11 +295,15 @@ public class BoardPainter {
 	}
 
 	private void drawCell(Graphics g, Point pt) {
-		if (board.getPosition(pt) == Board.BLACK) {
+		int position = board.getPosition(pt);
+		switch (position) {
+		case Board.BLACK:
 			drawBlack(g, pt);
-		} else if (board.getPosition(pt) == Board.WHITE) {
+			break;
+		case Board.WHITE:
 			drawWhite(g, pt);
-		} else if (board.getPosition(pt) == 0) {
+			break;
+		default:
 			drawEmpty(g, pt);
 		}
 	}
@@ -458,35 +464,36 @@ public class BoardPainter {
 		int cy = getCellY(annotation.y);
 		g.setColor(color);
 		int proportion;
-		
+
 		switch (annotation.getType()) {
-        case SymbolAnnotation.CIRCLE:
-        	proportion = delta / 4;
-    		g.drawArc(cx - (proportion), cy - (proportion), proportion * 2 + 1,
-    				proportion * 2 + 1, 0, 360);
-            break;
-        case SymbolAnnotation.CROSS:
-    		proportion = delta / 3;
-    		g.drawLine(cx - proportion, cy - proportion, cx + proportion, cy
-    				+ proportion);
-    		g.drawLine(cx - proportion, cy + proportion, cx + proportion, cy
-    				- proportion);
-            break;
-        case SymbolAnnotation.SQUARE:
-        	proportion = delta / 4;
-    		g.fillRect(cx - (proportion), cy - (proportion), proportion * 2 + 1,
-    				proportion * 2 + 1);
-            break;
-        case SymbolAnnotation.TRIANGLE:
-        	proportion = (delta * 2) / 5;
-    		g.drawLine(cx, cy - (proportion), cx - (proportion), cy + (proportion));
-    		g.drawLine(cx - (proportion), cy + (proportion), cx + (proportion), cy
-    				+ (proportion));
-    		g.drawLine(cx + (proportion), cy + (proportion), cx, cy - (proportion));
-            break;
+		case SymbolAnnotation.CIRCLE:
+			proportion = delta / 4;
+			g.drawArc(cx - (proportion), cy - (proportion), proportion * 2 + 1,
+					proportion * 2 + 1, 0, 360);
+			break;
+		case SymbolAnnotation.CROSS:
+			proportion = delta / 3;
+			g.drawLine(cx - proportion, cy - proportion, cx + proportion, cy
+					+ proportion);
+			g.drawLine(cx - proportion, cy + proportion, cx + proportion, cy
+					- proportion);
+			break;
+		case SymbolAnnotation.SQUARE:
+			proportion = delta / 4;
+			g.fillRect(cx - (proportion), cy - (proportion),
+					proportion * 2 + 1, proportion * 2 + 1);
+			break;
+		case SymbolAnnotation.TRIANGLE:
+			proportion = (delta * 2) / 5;
+			g.drawLine(cx, cy - (proportion), cx - (proportion), cy
+					+ (proportion));
+			g.drawLine(cx - (proportion), cy + (proportion), cx + (proportion),
+					cy + (proportion));
+			g.drawLine(cx + (proportion), cy + (proportion), cx, cy
+					- (proportion));
+			break;
 
-        }
-
+		}
 
 	}
 
