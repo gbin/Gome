@@ -15,7 +15,6 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.TextField;
 
 import com.indigonauts.gome.Gome;
-import com.indigonauts.gome.GomeOptions;
 import com.indigonauts.gome.common.Util;
 
 public class Options extends Form {

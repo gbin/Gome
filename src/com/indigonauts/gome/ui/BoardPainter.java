@@ -9,7 +9,6 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Point;
@@ -35,13 +34,13 @@ public class BoardPainter {
 
 	// private Image backBuffer;
 
-	private Image black;
+	//private Image black;
 
-	private Image white;
+	//private Image white;
 
-	private Image empty;
+	//private Image empty;
 
-	private Image point;
+	//private Image point;
 
 	// draw positions
 	private int delta;

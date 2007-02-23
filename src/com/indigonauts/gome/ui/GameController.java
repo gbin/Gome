@@ -8,7 +8,6 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Display;
-import javax.microedition.lcdui.Graphics;
 
 import com.indigonauts.gome.ClockController;
 import com.indigonauts.gome.Gome;
@@ -27,7 +26,6 @@ import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.sgf.SgfPoint;
-import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 public class GameController implements ServerCallback {
 
