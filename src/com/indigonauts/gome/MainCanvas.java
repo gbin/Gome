@@ -593,7 +593,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
         }
         if (boardPainter != null) {
             boardPainter.setDrawArea(new GraphicRectangle(0, 0, getWidth(), boardHeight));
-            gc.paintBackBuffer();
+            gc.tuneBoardPainter();
         }
     }
 

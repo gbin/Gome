@@ -231,7 +231,7 @@ public class Options extends Form {
 			// proportions
 			Gome.singleton.gameController.refreshPainter(); // the painter can
 			// affected
-			Gome.singleton.gameController.paintBackBuffer();// to change the
+			Gome.singleton.gameController.tuneBoardPainter();// to change the
 			// color
 			if (!Gome.singleton.options.locale.equals(prev_locale)) {
 				Util

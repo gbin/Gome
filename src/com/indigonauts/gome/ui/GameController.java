@@ -31,7 +31,7 @@ import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 public class GameController implements ServerCallback {
 
-    //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GameController");
+    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GameController");
 
     public static final char GAME_MODE = 'G';
 
@@ -208,26 +208,12 @@ public class GameController implements ServerCallback {
         return model;
     }
 
-    public void paintBackBuffer() {
+    public void tuneBoardPainter() {
         //log.debug("paintBackBuffer");
         BoardPainter painter = canvas.getBoardPainter();
-        Graphics g = painter.getBackBuffer().getGraphics();
-        painter.drawBoard(g);
-        if (countMode) {
-            painter.drawTerritory(g);
-            return; // nothing else
-        }
-
-        Vector annotations = currentNode.getAnnotations();
-        if (annotations != null)
-            painter.drawAnnotations(g,annotations);
-
-        Point ko = currentNode.getKo();
-        if (ko != null) {
-            int color = Util.COLOR_GREY;
-            painter.drawSymbolAnnotation(g, new SymbolAnnotation(ko,SymbolAnnotation.SQUARE), color);
-        }
-        //log.debug("paintBackBuffer done");
+        painter.setCountingMode(countMode);
+        painter.setAnnotations(currentNode.getAnnotations());
+        painter.setKo(currentNode.getKo());       
     }
 
     public void notifyLoadReady() {
@@ -282,19 +268,18 @@ public class GameController implements ServerCallback {
         GraphicRectangle drawArea = new GraphicRectangle(0, 0, canvas.getWidth(), canvas.getHeight());
         BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea);
         canvas.setBoardPainter(boardPainter);
+        tuneBoardPainter();
         boardPainter.setGameController(this);
-        paintBackBuffer();
+        normalDelta = boardPainter.getDelta();
     }
 
     void switchToNormalPainter() {
-        //log.debug("switchToNormalPainter");
+        log.debug("switchToNormalPainter");
         canvas.getBoardPainter().setPlayArea(playArea);
-        normalDelta = canvas.getBoardPainter().getDelta();
-        paintBackBuffer();
+        //tuneBoardPainter();
     }
 
     void switchToZoomedPainter() {
-
         byte w = (byte) (canvas.getBoardPainter().getWidth() / (normalDelta * 2));
         byte h = (byte) (canvas.getBoardPainter().getHeight() / (normalDelta * 2));
         byte left = (byte) (cursor.x - w / 2);
@@ -316,7 +301,7 @@ public class GameController implements ServerCallback {
         Rectangle zoomedPlayArea = Rectangle.intersect(pArea, board.getBoardArea());
 
         canvas.getBoardPainter().setPlayArea(zoomedPlayArea);
-        paintBackBuffer();
+        //tuneBoardPainter();
     }
 
     public boolean doMoveCursor(int keyCode) {
@@ -371,7 +356,7 @@ public class GameController implements ServerCallback {
         default:
         }
         if (refreshPainter) {
-            paintBackBuffer();
+            tuneBoardPainter();
         }
 
         boolean refreshNeeded = (x != cursor.x) || (y != cursor.y);
@@ -403,7 +388,6 @@ public class GameController implements ServerCallback {
         default:
             refreshNeeded = false;
         }
-
         if (refreshNeeded) {
 
             if (currentNode.getPoint() != null) {
@@ -411,8 +395,15 @@ public class GameController implements ServerCallback {
                 // move
                 cursor = currentNode.getPoint();
             }
-            paintBackBuffer();
+            tuneBoardPainter();
         }
+        Rectangle displayArea = canvas.getBoardPainter().getPlayArea();
+        if(bZoomIn && (cursor.x>displayArea.x1 || cursor.x<displayArea.x0 || cursor.y<displayArea.y0 || cursor.y>displayArea.y1))
+        {
+        	
+        	switchToZoomedPainter();
+        }
+        
         return refreshNeeded;
     }
 
@@ -420,12 +411,12 @@ public class GameController implements ServerCallback {
         if (keyCode == canvas.KEY_10PREVMOVES) {
             for (int i = 0; i < 10; i++)
                 doGoBack();
-            paintBackBuffer();
+            tuneBoardPainter();
             return true;
         } else if (keyCode == canvas.KEY_10NEXTMOVES) {
             for (int i = 0; i < 10; i++)
                 doGoNext();
-            paintBackBuffer();
+            tuneBoardPainter();
             return true;
         }
         return false;
@@ -481,7 +472,7 @@ public class GameController implements ServerCallback {
         }
         
         if (refreshNeeded) {
-            paintBackBuffer();
+            tuneBoardPainter();
         }
         return refreshNeeded;
     }
@@ -517,7 +508,7 @@ public class GameController implements ServerCallback {
             doMarkDearStone();
         else
             doClick();
-        paintBackBuffer();
+        tuneBoardPainter();
         canvas.refresh();
     }
 
@@ -1095,7 +1086,7 @@ public class GameController implements ServerCallback {
         //log.debug("GC: IGS Login Successful");
         stopClockAndStopPainingClock();
         Gome.singleton.mainCanvas.switchToIGSOnlineMenu();
-        paintBackBuffer();
+        tuneBoardPainter();
         canvas.setSplashInfo(Gome.singleton.bundle.getString("online.connectedToIgs"));
         Gome.singleton.menuEngine.switchToOnline();
         connectToIgs = true;
@@ -1114,7 +1105,7 @@ public class GameController implements ServerCallback {
                 move = moves[i];
                 playNewMove(move.color, move.x, move.y);
             }
-            paintBackBuffer();
+            tuneBoardPainter();
             Gome.singleton.mainCanvas.setSplashInfo(null);
             canvas.refresh();
         } catch (Exception e) {
@@ -1138,7 +1129,7 @@ public class GameController implements ServerCallback {
         }
 
         playNewMove(move.color, move.x, move.y);
-        paintBackBuffer();
+        tuneBoardPainter();
         canvas.refresh();
     }
 
@@ -1231,7 +1222,7 @@ public class GameController implements ServerCallback {
         while (doGoBack()) {
             // do nothing
         }
-        paintBackBuffer();
+        tuneBoardPainter();
         canvas.refresh();
     }
 
@@ -1239,7 +1230,7 @@ public class GameController implements ServerCallback {
         while (doGoNext()) {
             // do nothing
         }
-        paintBackBuffer();
+        tuneBoardPainter();
         canvas.refresh();
     }
 
@@ -1337,7 +1328,7 @@ public class GameController implements ServerCallback {
             board.switchToCounting(false);
             setPlayMode(playMode); // reput the menu as normal
         }
-        paintBackBuffer();
+        tuneBoardPainter();
     }
 
     public boolean isCountMode() {
@@ -1402,7 +1393,7 @@ public class GameController implements ServerCallback {
             if (!board.hasBeenRemove(x, y)) {
                 board.onlineMarkDeadGroup(x, y);
                 //log.debug("opp has mark dead stone x: " + x + " y:" + y);
-                paintBackBuffer();
+                tuneBoardPainter();
                 canvas.refresh();
             }
         }

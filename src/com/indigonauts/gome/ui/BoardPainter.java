@@ -33,7 +33,15 @@ public class BoardPainter {
 
 	private GraphicRectangle drawArea;
 
-	private Image backBuffer;
+	// private Image backBuffer;
+
+	private Image black;
+
+	private Image white;
+
+	private Image empty;
+
+	private Image point;
 
 	// draw positions
 	private int delta;
@@ -62,6 +70,12 @@ public class BoardPainter {
 
 	private GameController gc;
 
+	private Vector annotations;
+
+	private Point ko;
+
+	private boolean counting;
+
 	public BoardPainter(Board newBoard, GraphicRectangle imageArea,
 			Rectangle newBoardArea) {
 		board = newBoard;
@@ -72,6 +86,18 @@ public class BoardPainter {
 		calcDrawingPosition();
 
 		resetBackBuffer();
+	}
+
+	public void setAnnotations(Vector annotations) {
+		this.annotations = annotations;
+	}
+
+	public void setKo(Point ko) {
+		this.ko = ko;
+	}
+	public void setCountingMode(boolean counting)
+	{
+		this.counting = counting;
 	}
 
 	public void setPlayArea(Rectangle playArea) {
@@ -95,10 +121,13 @@ public class BoardPainter {
 	}
 
 	private void resetBackBuffer() {
-		if (backBuffer == null || backBuffer.getWidth() != drawArea.getWidth()
-				|| backBuffer.getHeight() != drawArea.getHeight())
-			backBuffer = Image.createImage(drawArea.getWidth(), drawArea
-					.getHeight());
+		/*
+		 * if (backBuffer == null || backBuffer.getWidth() !=
+		 * drawArea.getWidth() || backBuffer.getHeight() !=
+		 * drawArea.getHeight()) backBuffer =
+		 * Image.createImage(drawArea.getWidth(), drawArea .getHeight());
+		 */
+
 	}
 
 	public void drawBoard(Graphics graphics) {
@@ -127,6 +156,16 @@ public class BoardPainter {
 				drawCell(graphics, new Point(x, y));
 			}
 		}
+		if (counting) {
+            drawTerritory(graphics);
+            return; // nothing else
+        }
+		if (ko != null)
+			drawSymbolAnnotation(graphics, new SymbolAnnotation(ko,
+					SymbolAnnotation.SQUARE), Util.COLOR_GREY);
+
+		if (annotations != null)
+			drawAnnotations(graphics, annotations);
 
 	}
 
@@ -138,7 +177,8 @@ public class BoardPainter {
 		SgfModel model = gc.getSgfModel();
 
 		// clone the latest buffer
-		g.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
+		// g.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
+		drawBoard(g);
 
 		// draw cursor
 		drawCursor(g, cursor, playerColor); // guess the
@@ -522,9 +562,9 @@ public class BoardPainter {
 		return delta;
 	}
 
-	public Image getBackBuffer() {
-		return backBuffer;
-	}
+	// public Image getBackBuffer() {
+	// return backBuffer;
+	// }
 
 	public int getEffectiveHeight(int width, int height) {
 

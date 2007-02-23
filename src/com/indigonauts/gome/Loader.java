@@ -24,7 +24,8 @@ import com.indigonauts.gome.ui.Options;
 public class Loader extends Canvas implements Runnable, CommandListener {
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Loader");
     private Image gomoku;
-
+    private Options optionsForm;
+    
     public Loader()
     {
         super();
@@ -47,7 +48,7 @@ public class Loader extends Canvas implements Runnable, CommandListener {
 
     }
 
-    private Options optionsForm;
+    
 
     public void run() {
         try {
@@ -80,6 +81,8 @@ public class Loader extends Canvas implements Runnable, CommandListener {
             bootGome();
 
         } catch (Throwable t) {
+        	log.error("Load error",t);
+        	t.printStackTrace();
             Util
                     .messageBox(
                                 Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
