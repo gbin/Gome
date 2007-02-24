@@ -5,14 +5,16 @@
 <!-- Modifications may be made to this file and to the user-build.properties files.    -->
 <!-- Do not alter eclipseme-build.xml or eclipseme-build.properties.                   -->
 <!-- ================================================================================= -->
-<project name="gome" default="minimal" basedir=".">
+<project name="gome" default="all" basedir=".">
+	<taskdef resource="net/sf/antcontrib/antlib.xml" />
+	
 	<!-- User build properties come first so that they can override -->
 	<!-- the generated properties file.  Be careful with these      -->
 	<!-- overrides.                                                 -->
 	<property file="user-build.properties" />
 
 	<!-- Import the low-level targets -->
-	<import file="eclipseme-build.xml" />
+	<import file="eclipseme-custom.xml" />
 
 	<!-- The primary target of the build file.  The end result is   -->
 	<!-- the deployed jar and jad files.                            -->
@@ -23,7 +25,7 @@
 		<include name="index.txt" />
 		<include name="gome.png" />
 	</fileset>
-	
+
 	<patternset id="gomoku">
 		<include name="gomoku.png" />
 	</patternset>
@@ -52,17 +54,35 @@
 	<patternset id="games">
 		<include name="games/*.*" />
 	</patternset>
+
 	<patternset id="problems">
 		<include name="problems/*.*" />
 	</patternset>
 
-	<target name="minimal">
-		<property name="midlet.name" value="gome-minimal" />
-		<property name="symbols" value="DEBUG" />
+	<patternset id="joseki">
+		<include name="joseki/**/*.*" />
+	</patternset>
 
-		<fileset id="extra" dir="${project.root.gome}/sources">
-			<!--patternset refid="file-icons" /-->
-			<!--patternset refid="gomoku"/-->
+	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,VMIDP2,Vjoseki" />
+
+	<target name="Vminimal" description="Minimal">
+		<var name="midlet.name" value="gome-minimal" />
+		<var name="symbols" value="DEBUG" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+		<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
+			<exclude name="**/*.*" />
+		</fileset>
+		<antcall target="deployable" />
+	</target>
+
+	<target name="Vminimal-bundle" description="Minimal bundle">
+		<var name="midlet.name" value="gome-minimal-bundle" />
+		<var name="symbols" value="" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+
+		<fileset id="gome-minimal-bundle-files" dir="${project.root.gome}/sources">
 			<patternset refid="games" />
 			<patternset refid="problems" />
 		</fileset>
@@ -70,9 +90,100 @@
 		<antcall target="deployable" />
 	</target>
 
+	<target name="MIDP2">
+		<var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi20.jar:/opt/wtk2.2/lib/cldcapi11.jar:/opt/wtk2.2/lib/wma20.jar:/opt/wtk2.2/lib/mmapi.jar:/opt/wtk2.2/lib/j2me-ws.jar:/opt/wtk2.2/lib/jsr75.jar:/opt/wtk2.2/lib/jsr082.jar:/opt/wtk2.2/lib/jsr184.jar"/>
+		<var name="wtk.cldc.version" value="1.1" />
+		<var name="wtk.midp.version" value="2.0" />
+	</target>
+
+	<target name="MIDP1">
+		<var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi10.jar" />
+		<var name="wtk.cldc.version" value="1.0" />
+		<var name="wtk.midp.version" value="1.0" />
+	</target>
+
+
+	<target name="Vonline" depends="MIDP1" description="Online version">
+		<var name="midlet.name" value="gome-online" />
+		<var name="symbols" value="IGS" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+		<fileset id="gome-online-files" dir="${project.root.gome}/sources">
+			<patternset refid="games" />
+			<patternset refid="problems" />
+		</fileset>
+
+		<antcall target="deployable" />
+	</target>
+
+	<target name="Vi18n" depends="MIDP1" description="I18N version">
+		<var name="midlet.name" value="gome-i18n" />
+		<var name="symbols" value="IGS,I18N" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+		<fileset id="gome-i18n-files" dir="${project.root.gome}/sources">
+			<patternset refid="i18n" />
+			<patternset refid="games" />
+			<patternset refid="problems" />
+		</fileset>
+
+		<antcall target="deployable" />
+	</target>
+
+	<target name="Vnormal" depends="MIDP1" description="Normal version">
+		<var name="midlet.name" value="gome-normal" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+		<fileset id="gome-normal-files" dir="${project.root.gome}/sources">
+			<patternset refid="file-icons" />
+			<patternset refid="gomoku" />
+			<patternset refid="i18n" />
+			<patternset refid="games" />
+			<patternset refid="problems" />
+		</fileset>
+
+		<antcall target="deployable" />
+	</target>
+
+	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
+		<var name="midlet.name" value="gome-MIDP2" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
+
+		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+		<fileset id="gome-MIDP2-files" dir="${project.root.gome}/sources">
+			<patternset refid="file-icons" />
+			<patternset refid="gomoku" />
+			<patternset refid="i18n" />
+			<patternset refid="games" />
+			<patternset refid="problems" />
+			<!--patternset refid="joseki" /-->
+		</fileset>
+
+		<antcall target="deployable" />
+	</target>
+
+	<target name="Vjoseki" depends="MIDP1" description="Joseki version">
+		<var name="midlet.name" value="gome-joseki" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+
+		<fileset id="gome-joseki-files" dir="${project.root.gome}/sources">
+			<patternset refid="file-icons" />
+			<patternset refid="gomoku" />
+			<patternset refid="i18n" />
+			<patternset refid="games" />
+			<patternset refid="problems" />
+			<patternset refid="joseki" />
+		</fileset>
+
+		<antcall target="deployable" />
+	</target>
+
 
 	<!-- Initialize the build environment as necessary -->
-	<target name="-initialize" description="Initializes the build environment">
+	<target name="-initialize">
 		<echo message="Initializing build environment..." />
 
 		<!-- Create the build directories -->
@@ -86,7 +197,7 @@
 		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols}" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
-			<fileset refid="extra" />
+			<fileset refid="${midlet.name}-files" />
 		</copy>
 	</target>
 
@@ -100,6 +211,8 @@
 
 	<!-- Package up the compiled code with obfuscation -->
 	<target name="deployable" depends="build,-eclipseme-deployable" description="Packages the midlet jar, with obfuscation">
+		<move file="${project.root.gome}/deployed/${midlet.name}.jad" tofile="${project.root.gome}/dist/${midlet.name}-${gome.version}.jad" />
+		<move file="${project.root.gome}/deployed/${midlet.name}.jar" tofile="${project.root.gome}/dist/${midlet.name}-${gome.version}.jar" />
 	</target>
 
 	<!-- Run the packaged code -->
@@ -110,13 +223,18 @@
 	<target name="makeprc" depends="deployable,-eclipseme-makeprc" description="Generates a deployable Palm PRC file">
 	</target>
 
+	<target name="cleandist" depends="-eclipseme-initialize">
+		<delete dir="${project.root.gome}/dist" />
+		<mkdir dir="${project.root.gome}/dist" />
+	</target>
+
 	<!-- Clean the output of a previous execution -->
 	<target name="clean" depends="-eclipseme-initialize">
 		<delete dir="${project.root.gome}/src" />
 		<delete dir="${path.build.classes}" />
-		<delete dir="${project.root.gome}/deployed" />
+		<!--delete dir="${project.root.gome}/deployed" /-->
 		<mkdir dir="${project.root.gome}/src" />
 		<mkdir dir="${path.build.classes}" />
-		<mkdir dir="${project.root.gome}/deployed" />
+		<!--mkdir dir="${project.root.gome}/deployed" /-->
 	</target>
 </project>

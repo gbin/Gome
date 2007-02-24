@@ -1,0 +1,8 @@
+MIDlet-Icon: /gome.png
+MIDlet-Version: 1.1
+MIDlet-Vendor: Indigonauts
+MIDlet-Jar-URL: http://www.indigonauts.com/gome/releases/gome-1.1.jar
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-1: Gome,/gome.png,com.indigonauts.gome.Gome
+MicroEdition-Profile: MIDP-2.0
+MIDlet-Name: Gome
