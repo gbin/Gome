@@ -1,4 +1,0 @@
-
-jar:/games/index.txt,I,Bundled Games
-jar:/problems/index.txt,I,Bundled Problems
-http://www.indigonauts.com/gome/library/index.txt,I,Indigonauts Collection

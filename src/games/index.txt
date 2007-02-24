@@ -1,3 +1,0 @@
-jar:/games/
-50kr-gs-jn-caoli.sgf,R,Korea Guksu 50th year anniversary round 2: Lee Changho vs Cho Hunhyun. (2006-05-22)
-6nong-11.sgf,R,CJK 6th Nong Shim Cup Ring Contest game 11: Cho U vs Lee Changho. 
