@@ -1,4 +1,5 @@
 
 jar:/games/index.txt,I,Bundled Games
 jar:/problems/index.txt,I,Bundled Problems
-http://www.indigonauts.com/gome/library/index.txt,I,Indigonauts Collection
+jar:/joseki/index.txt,I,Kogo Joseki dictionary (http://waterfire.us/joseki.htm)
+http://www.indigonauts.com/gome/library/index.txt,I,Indigonauts Online Collection

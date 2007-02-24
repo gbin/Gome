@@ -86,8 +86,12 @@ public class IOManager {
     return singleton;
   }
 
-  private DataInputStream readBundledFile(String filename) {
-    return new DataInputStream(getClass().getResourceAsStream(filename));
+  private DataInputStream readBundledFile(String filename) throws IOException {
+    InputStream resourceAsStream = getClass().getResourceAsStream(filename);
+    if (resourceAsStream == null) {
+      throw new IOException(Gome.singleton.bundle.getString("ui.noBundle"));
+    }
+    return new DataInputStream(resourceAsStream);
   }
 
   public DataInputStream readFileFromHttp(String url, DownloadStatus status) throws IOException {

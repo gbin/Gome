@@ -349,7 +349,7 @@ public class FileBrowser implements CommandListener, Showable {
   }
 
   public void downloadFailure(Exception reason) {
-    Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
+    Util.messageBox(Gome.singleton.bundle.getString("ui.error"), reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
   }
 
   void done() {
