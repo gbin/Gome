@@ -33,7 +33,7 @@ import com.indigonauts.gome.sgf.SgfPoint;
 //#ifdef IGS
 public class GameController implements ServerCallback
 //#else
-//#public class GameController
+//# public class GameController
 //#endif
 {
   //#ifdef DEBUG

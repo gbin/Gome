@@ -26,7 +26,10 @@ import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Showable;
 
 public class MainCanvas extends Canvas implements CommandListener, Showable, Runnable {
-
+  //#ifdef DEBUG
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MainCanvas");
+  //#endif
+  
   private GameController gc;
 
   public static final int ACTION_UNDO = Canvas.GAME_A;
@@ -102,7 +105,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
     //#endif
     
     addCommand(MenuEngine.OPTIONS);
-    // addCommand(MenuEngine.CONSOLE);
+    //#ifdef DEBUG
+    addCommand(MenuEngine.CONSOLE);
+    //#endif
     addCommand(MenuEngine.HELP);
     addCommand(MenuEngine.ABOUT);
     addCommand(MenuEngine.LIBRARY);
@@ -111,7 +116,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
     scroller = new Scroller(this);
     clockPainter = new ClockPainterTask(this);
     bottomMode = NOTHING_TO_DISPLAY_MODE;
-    // log.debug("Main Canvas Loaded");
+    //#ifdef DEBUG
+    log.debug("Main Canvas Loaded");
+    //#endif
   }
 
   public void assignClockController(ClockController c) {

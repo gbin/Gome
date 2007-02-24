@@ -1,7 +1,7 @@
-#Fri Feb 23 16:53:01 SAST 2007
+#Sat Feb 24 15:03:05 SAST 2007
 eclipse.preferences.version=1
 obfuscate_use_project=true
 pkg_use_project=true
-preverify_config_location=jad
 preverify_config_value=CLDC-1.1
+preverify_use_built_in=false
 proguard_options=-dontusemixedcaseclassnames -dontnote -defaultpackage '' -allowaccessmodification

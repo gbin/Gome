@@ -107,10 +107,14 @@ public class Util {
         Vector lines = lineSplitter(text, width, font);
         int textHeight = lines.size() * font.getHeight();
         Image imagedComment;
-        // log.debug("scrollHeight = " + scrollHeight);
-        // log.debug("font height = " + font.getHeight());
+        //#ifdef DEBUG
+        log.debug("scrollHeight = " + scrollHeight);
+        log.debug("font height = " + font.getHeight());
+        //#endif
         int extraLines = scrollHeight / font.getHeight() + 1;
-        // log.debug("Extralines = " + extraLines);
+        //#ifdef DEBUG
+        log.debug("Extralines = " + extraLines);
+        //#endif
         if (lines.size() >= extraLines) {
             imagedComment = Image.createImage(width, textHeight + scrollHeight);
             // read the beginning at the end of the scroller
@@ -161,7 +165,6 @@ public class Util {
             }
 
             String line = new String(commentChars, lineBeginIndex, lastSpace - lineBeginIndex + 1).trim();
-            // System.out.println(line);
             if (line.length() != 0)
                 lines.addElement(line);
         }

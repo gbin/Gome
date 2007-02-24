@@ -13,39 +13,28 @@ import javax.microedition.lcdui.Font;
 public class GomeOptions {
 
 	private static final byte ENGLISH = 0;
-
 	private static final byte FRENCH = 1;
-
 	private static final byte JAPANESE = 2;
 
 	private static final byte SMALL = 0;
-
 	public static final byte MEDIUM = 1;
-
 	private static final byte LIGHT = 0;
 
 	private static final byte DARK = 2;
-
 	private static final byte LARGE = 2;
-
 	private static final byte EXTRA_LARGE = 3;
 
 	public static final byte MANUAL = 3;
-
 	public static final byte SLOW = 0;
 
 	public static final byte FAST = 2;
 
 	public static final int COLOR_LIGHT = 0x00FFDD00;
-
 	public static final int COLOR_MEDIUM = 0x00F0CC00;
-
 	public static final int COLOR_DARK = 0x00E0BB00;
 
 	public static final String EN_US = "en_US";
-
 	public static final String FR_FR = "fr_FR";
-
 	public static final String JP_JP = "jp_JP";
 
 	public String locale = EN_US;
@@ -59,7 +48,6 @@ public class GomeOptions {
 	public byte scrollerSize = SMALL;
 
 	public String igsLogin = "";
-
 	public String igsPassword = "";
 
 	public byte igsSize = 19;

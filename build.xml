@@ -5,72 +5,118 @@
 <!-- Modifications may be made to this file and to the user-build.properties files.    -->
 <!-- Do not alter eclipseme-build.xml or eclipseme-build.properties.                   -->
 <!-- ================================================================================= -->
-<project name="gome" default="deployedSuite" basedir=".">
+<project name="gome" default="minimal" basedir=".">
 	<!-- User build properties come first so that they can override -->
 	<!-- the generated properties file.  Be careful with these      -->
 	<!-- overrides.                                                 -->
 	<property file="user-build.properties" />
-	
-	<!-- Generated properties come next.  The properties in this    -->
-	<!-- file drive the build process and should not be changed.    -->
-	<property file="eclipseme-build.properties" />
-	
+
 	<!-- Import the low-level targets -->
 	<import file="eclipseme-build.xml" />
-	
+
 	<!-- The primary target of the build file.  The end result is   -->
 	<!-- the deployed jar and jad files.                            -->
 	<target name="deployedSuite" depends="deployable" />
 
+	<fileset id="base" dir="${project.root.gome}/sources">
+		<include name="com/indigonauts/gome/i18n/main_en_US.properties" />
+		<include name="index.txt" />
+		<include name="gome.png" />
+	</fileset>
+	
+	<patternset id="gomoku">
+		<include name="gomoku.png" />
+	</patternset>
+
+	<patternset id="file-icons">
+		<include name="dir.png" />
+		<include name="file.png" />
+		<include name="rdir.png" />
+		<include name="rfile.png" />
+	</patternset>
+
+	<patternset id="menu-icons">
+		<include name="gdark.png" />
+		<include name="glight.png" />
+		<include name="gmedium.png" />
+		<include name="en.png" />
+		<include name="fr.png" />
+		<include name="jp.png" />
+	</patternset>
+
+	<patternset id="i18n">
+		<include name="com/indigonauts/gome/i18n/main_fr_FR.properties" />
+		<include name="com/indigonauts/gome/i18n/main_jp_JP.properties" />
+	</patternset>
+
+	<patternset id="games">
+		<include name="games/*.*" />
+	</patternset>
+	<patternset id="problems">
+		<include name="problems/*.*" />
+	</patternset>
+
+	<target name="minimal">
+		<property name="midlet.name" value="gome-minimal" />
+		<property name="symbols" value="DEBUG" />
+
+		<fileset id="extra" dir="${project.root.gome}/sources">
+			<!--patternset refid="file-icons" /-->
+			<!--patternset refid="gomoku"/-->
+			<patternset refid="games" />
+			<patternset refid="problems" />
+		</fileset>
+
+		<antcall target="deployable" />
+	</target>
+
+
 	<!-- Initialize the build environment as necessary -->
 	<target name="-initialize" description="Initializes the build environment">
 		<echo message="Initializing build environment..." />
-		
+
 		<!-- Create the build directories -->
 		<mkdir dir="${path.build}" />
 		<mkdir dir="${path.build.classes}" />
 		<mkdir dir="${path.build.classes}/_no_export" />
 		<mkdir dir="${path.build.output}" />
 	</target>
-	
-	<target name="preprocess" depends="-eclipseme-initialize, -initialize">
-		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src"/>
+
+	<target name="preprocess" depends="clean, -eclipseme-initialize, -initialize">
+		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols}" />
 		<copy todir="${project.root.gome}/src">
-			<fileset dir="${project.root.gome}/sources">
-	            <exclude name="**/*.java"/>
-	            <exclude name="build/"/>
-	         </fileset>
+			<fileset refid="base" />
+			<fileset refid="extra" />
 		</copy>
 	</target>
-	
+
 	<!-- Build the classes that make up the midlet -->
-	<target name="build" depends="-initialize, preprocess, -eclipseme-build"
-		description="Builds the classes that make up the project">
+	<target name="build" depends="-initialize, preprocess, -eclipseme-build" description="Builds the classes that make up the project">
 	</target>
-	
+
 	<!-- Package up the compiled code without obfuscation -->
-	<target name="jar" depends="build,-eclipseme-jar"
-		description="Packages the midlet jar without obfuscation">
+	<target name="jar" depends="build,-eclipseme-jar" description="Packages the midlet jar without obfuscation">
 	</target>
-	
+
 	<!-- Package up the compiled code with obfuscation -->
-	<target name="deployable" depends="build,-eclipseme-deployable" 
-		description="Packages the midlet jar, with obfuscation">
+	<target name="deployable" depends="build,-eclipseme-deployable" description="Packages the midlet jar, with obfuscation">
 	</target>
-	
+
 	<!-- Run the packaged code -->
-	<target name="run" depends="deployable,-eclipseme-run" 
-		description="Runs the deployed package in the emulator">
+	<target name="run" depends="deployable,-eclipseme-run" description="Runs the deployed package in the emulator">
 	</target>
-	
+
 	<!-- Build a Palm PRC file -->
-	<target name="makeprc" depends="deployable,-eclipseme-makeprc" 
-		description="Generates a deployable Palm PRC file">
+	<target name="makeprc" depends="deployable,-eclipseme-makeprc" description="Generates a deployable Palm PRC file">
 	</target>
-		
+
 	<!-- Clean the output of a previous execution -->
-	<target name="clean" description="Cleans the output from previous builds">
-		<echo message="Cleaning project files..." />
-		<antcall target="-eclipseme-clean" />
+	<target name="clean" depends="-eclipseme-initialize">
+		<delete dir="${project.root.gome}/src" />
+		<delete dir="${path.build.classes}" />
+		<delete dir="${project.root.gome}/deployed" />
+		<mkdir dir="${project.root.gome}/src" />
+		<mkdir dir="${path.build.classes}" />
+		<mkdir dir="${project.root.gome}/deployed" />
 	</target>
 </project>

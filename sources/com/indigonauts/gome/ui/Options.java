@@ -65,21 +65,25 @@ public class Options extends Form {
     smallLetter = Image.createImage(Util.renderOffScreenText("abc", 32, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
     mediumLetter = Image.createImage(Util.renderOffScreenText("abc", 32, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
     largeLetter = Image.createImage(Util.renderOffScreenText("abc", 32, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
+    
+    //#ifdef I18N
     en = Image.createImage("/en.png");
     fr = Image.createImage("/fr.png");
     jp = Image.createImage("/jp.png");
-
+    //#endif
+    
     light = Image.createImage("/glight.png");
     medium = Image.createImage("/gmedium.png");
     dark = Image.createImage("/gdark.png");
     //#endif
 
+    //#ifdef I18N
     lang = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.lang"), Choice.EXCLUSIVE); //$NON-NLS-1$
     lang.append(Gome.singleton.bundle.getString("ui.option.en"), en);
-
     lang.append(Gome.singleton.bundle.getString("ui.option.fr"), fr); //$NON-NLS-1$ //$NON-NLS-2$
     lang.append(Gome.singleton.bundle.getString("ui.option.jp"), jp); //$NON-NLS-1$ //$NON-NLS-2$
     lang.setSelectedIndex(Gome.singleton.options.getLocaleByte(), true);
+    //#endif
 
     scrollerFont = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerFont"), Choice.EXCLUSIVE); //$NON-NLS-1$
     scrollerFont.append(Gome.singleton.bundle.getString("ui.option.small"), smallLetter); //$NON-NLS-1$
@@ -130,7 +134,9 @@ public class Options extends Form {
     key = new TextField(Gome.singleton.bundle.getString("ui.option.key"), Gome.singleton.options.key, 32, TextField.ANY);
 
     if (!registrationOnly) {
+      //#ifdef I18N
       append(lang);
+      //#endif
       append(scrollerFont);
       append(gobanColor);
       append(scrollerSpeed);
@@ -156,7 +162,9 @@ public class Options extends Form {
 
   public boolean save() {
     String prev_locale = Gome.singleton.options.locale;
+    //#ifdef I18N
     Gome.singleton.options.setLocaleFromByte((byte) lang.getSelectedIndex());
+    //#endif
     Gome.singleton.options.setGobanColorFromByte((byte) gobanColor.getSelectedIndex());
     Gome.singleton.options.setScrollerFontFromByte((byte) scrollerFont.getSelectedIndex());
     Gome.singleton.options.scrollerSize = (byte) scrollerSize.getSelectedIndex();

@@ -30,11 +30,11 @@ public final class Logger {
         if (level.isGreaterOrEqual(priority)) {
             String entry = Long.toString(System.currentTimeMillis() - start) + " " + level.toString() + " "
                     + className + " - " + msg;
-            //logCanvas.addEntry(entry);
+            logCanvas.addEntry(entry);
             System.out.println(entry);
             if (ex != null) {
                 String message = ex.getMessage();
-                //logCanvas.addEntry(message);
+                logCanvas.addEntry(message);
                 System.out.println(message);
             }
         }
