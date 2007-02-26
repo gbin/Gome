@@ -7,7 +7,7 @@
 <!-- ================================================================================= -->
 <project name="gome" default="all" basedir=".">
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
-	
+
 	<!-- User build properties come first so that they can override -->
 	<!-- the generated properties file.  Be careful with these      -->
 	<!-- overrides.                                                 -->
@@ -63,104 +63,103 @@
 		<include name="joseki/**/*.*" />
 	</patternset>
 
-	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,VMIDP2,Vjoseki" />
-
-	<target name="Vminimal" description="Minimal">
-		<var name="midlet.name" value="gome-minimal" />
-		<var name="symbols" value="DEBUG" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-		<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
-			<exclude name="**/*.*" />
-		</fileset>
-		<antcall target="deployable" />
-	</target>
-
-	<target name="Vminimal-bundle" description="Minimal bundle">
-		<var name="midlet.name" value="gome-minimal-bundle" />
-		<var name="symbols" value="" />
-		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-
-		<fileset id="gome-minimal-bundle-files" dir="${project.root.gome}/sources">
-			<patternset refid="games" />
-			<patternset refid="problems" />
-		</fileset>
-
-		<antcall target="deployable" />
-	</target>
-
 	<target name="MIDP2">
-		<var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi20.jar:/opt/wtk2.2/lib/cldcapi11.jar:/opt/wtk2.2/lib/wma20.jar:/opt/wtk2.2/lib/mmapi.jar:/opt/wtk2.2/lib/j2me-ws.jar:/opt/wtk2.2/lib/jsr75.jar:/opt/wtk2.2/lib/jsr082.jar:/opt/wtk2.2/lib/jsr184.jar"/>
+		<var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi20.jar:/opt/wtk2.2/lib/cldcapi11.jar:/opt/wtk2.2/lib/wma20.jar:/opt/wtk2.2/lib/mmapi.jar:/opt/wtk2.2/lib/j2me-ws.jar:/opt/wtk2.2/lib/jsr75.jar:/opt/wtk2.2/lib/jsr082.jar:/opt/wtk2.2/lib/jsr184.jar" />
 		<var name="wtk.cldc.version" value="1.1" />
 		<var name="wtk.midp.version" value="2.0" />
 	</target>
 
 	<target name="MIDP1">
-		<var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi10.jar" />
+		<var name="wtk.midpapi" value="/opt/wtk104/lib/midpapi.zip" />
 		<var name="wtk.cldc.version" value="1.0" />
 		<var name="wtk.midp.version" value="1.0" />
 	</target>
+	
+	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2"/>
 
+	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
+				<exclude name="**/*.*" />
+	</fileset>
+	
+	<target name="Vminimal" depends="MIDP1" description="Minimal">
+	    <echo message="Minimal"/>
+		<var name="midlet.name" value="gome-minimal" />
+		<var name="symbols" value="" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<antcall target="deployable" />
+	</target>
+
+	<fileset id="gome-minimal-bundle-files" dir="${project.root.gome}/sources">
+		<patternset refid="games" />
+		<patternset refid="problems" />
+	</fileset>
+	
+	<target name="Vminimal-bundle" depends="MIDP1" description="Minimal bundle">
+    	<echo message="Minimal-bundle"/>
+		<var name="midlet.name" value="gome-minimal-bundle" />
+		<var name="symbols" value="" />
+		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<antcall target="deployable" />
+	</target>
+
+	<fileset id="gome-online-files" dir="${project.root.gome}/sources">
+		<patternset refid="games" />
+		<patternset refid="problems" />
+	</fileset>
 
 	<target name="Vonline" depends="MIDP1" description="Online version">
+	    <echo message="Online"/>
 		<var name="midlet.name" value="gome-online" />
 		<var name="symbols" value="IGS" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-		<fileset id="gome-online-files" dir="${project.root.gome}/sources">
-			<patternset refid="games" />
-			<patternset refid="problems" />
-		</fileset>
-
 		<antcall target="deployable" />
 	</target>
 
+	<fileset id="gome-i18n-files" dir="${project.root.gome}/sources">
+				<patternset refid="i18n" />
+				<patternset refid="games" />
+				<patternset refid="problems" />
+	</fileset>
+	
 	<target name="Vi18n" depends="MIDP1" description="I18N version">
+    	<echo message="I18n"/>
 		<var name="midlet.name" value="gome-i18n" />
 		<var name="symbols" value="IGS,I18N" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-		<fileset id="gome-i18n-files" dir="${project.root.gome}/sources">
-			<patternset refid="i18n" />
-			<patternset refid="games" />
-			<patternset refid="problems" />
-		</fileset>
-
 		<antcall target="deployable" />
 	</target>
 
+	<fileset id="gome-normal-files" dir="${project.root.gome}/sources">
+				<patternset refid="file-icons" />
+				<patternset refid="menu-icons" />
+				<patternset refid="gomoku" />
+				<patternset refid="i18n" />
+				<patternset refid="games" />
+				<patternset refid="problems" />
+	</fileset>
+	
 	<target name="Vnormal" depends="MIDP1" description="Normal version">
+		<echo message="Normal"/>
 		<var name="midlet.name" value="gome-normal" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-		<fileset id="gome-normal-files" dir="${project.root.gome}/sources">
-			<patternset refid="file-icons" />
-			<patternset refid="gomoku" />
-			<patternset refid="i18n" />
-			<patternset refid="games" />
-			<patternset refid="problems" />
-		</fileset>
-
 		<antcall target="deployable" />
 	</target>
 
+	<fileset id="gome-MIDP2-files" dir="${project.root.gome}/sources">
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
+		<patternset refid="gomoku" />
+		<patternset refid="i18n" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
+	</fileset>
+
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
+		<echo message="MIDP2"/>
 		<var name="midlet.name" value="gome-MIDP2" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
-
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-
-		<fileset id="gome-MIDP2-files" dir="${project.root.gome}/sources">
-			<patternset refid="file-icons" />
-			<patternset refid="gomoku" />
-			<patternset refid="i18n" />
-			<patternset refid="games" />
-			<patternset refid="problems" />
-			<!--patternset refid="joseki" /-->
-		</fileset>
-
 		<antcall target="deployable" />
 	</target>
 
@@ -171,6 +170,7 @@
 
 		<fileset id="gome-joseki-files" dir="${project.root.gome}/sources">
 			<patternset refid="file-icons" />
+			<patternset refid="menu-icons" />
 			<patternset refid="gomoku" />
 			<patternset refid="i18n" />
 			<patternset refid="games" />
