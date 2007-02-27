@@ -31,7 +31,6 @@ public class Loader extends Canvas implements Runnable, CommandListener {
   private Image gomoku;
   //#endif
   private Options optionsForm;
-  
 
   public Loader() {
     super();
@@ -54,7 +53,7 @@ public class Loader extends Canvas implements Runnable, CommandListener {
     Font f = g.getFont();
     g.drawString("Gome v" + Gome.VERSION, getWidth() / 2, getHeight() / 2, Graphics.BASELINE | Graphics.HCENTER);
     g.drawString("(c) 2005-2007 Indigonauts", getWidth() / 2, getHeight() / 2 + f.getHeight(), Graphics.BASELINE | Graphics.HCENTER);
-    
+
   }
 
   public void run() {
@@ -79,9 +78,10 @@ public class Loader extends Canvas implements Runnable, CommandListener {
           Gome.singleton.display.setCurrent(al, optionsForm);
           return;
         }
-        Gome.singleton.options.expiration = System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000L; // a
-        // week
-        Gome.singleton.saveOptions();
+        if (Gome.singleton.options.expiration == 0) {
+          Gome.singleton.options.expiration = System.currentTimeMillis() + 24 * 60 * 60 * 1000L;
+          Gome.singleton.saveOptions();
+        }
       }
       //#ifdef DEBUG
       else {
@@ -112,7 +112,9 @@ public class Loader extends Canvas implements Runnable, CommandListener {
     if (Gome.singleton.options.user.length() != 0) {
       message = Gome.singleton.bundle.getString("ui.registeredTo", new String[] { Gome.singleton.options.user });
     } else {
-      message = Gome.singleton.bundle.getString("ui.daysLeft", new String[] { String.valueOf((Gome.singleton.options.expiration - System.currentTimeMillis()) / (24 * 60 * 60 * 1000L)) });
+      long msLeft = Gome.singleton.options.expiration - System.currentTimeMillis();
+      long HOUR = 60 * 60 * 1000L;
+      message = Gome.singleton.bundle.getString("ui.hoursLeft", new String[] { String.valueOf(msLeft / HOUR),String.valueOf((msLeft % HOUR)/(60*1000L))  });
     }
 
     Gome.singleton.mainCanvas.setSplashInfo(message);

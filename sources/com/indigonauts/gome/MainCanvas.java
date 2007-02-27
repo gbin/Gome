@@ -25,7 +25,7 @@ import com.indigonauts.gome.ui.GraphicRectangle;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Showable;
 
-public class MainCanvas extends Canvas implements CommandListener, Showable, Runnable {
+public class MainCanvas extends Canvas implements CommandListener, Showable {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MainCanvas");
   //#endif
@@ -604,15 +604,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable, Run
     }
   }
 
-  public void run() {
-    // log.debug("Repaint");
-    repaint();
-    serviceRepaints();
-  }
 
   public void refresh() {
-    // log.debug("Refresh global");
-    Gome.singleton.display.callSerially(this);
+    repaint();
+    serviceRepaints();
   }
 
   public BoardPainter getBoardPainter() {
