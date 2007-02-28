@@ -32,7 +32,9 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
 
   public static final String VERSION = "1.1"; //$NON-NLS-1$
 
-  private static final String OPTIONS_FILE = VERSION + ".options"; //$NON-NLS-1$
+  private static final String OPTIONS_FILE = VERSION + ".o"; //$NON-NLS-1$
+  private static long HOUR = 60 * 60 * 1000L;
+  private static long EXPIRATION_PERIOD = 48 * HOUR;
 
   public ResourceBundle bundle;
 
@@ -105,7 +107,10 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
     notifyDestroyed();
   }
 
-  public void checkLicense() {
+  public boolean checkLicense() {
+    //#ifdef DEBUG
+    log.debug("Check License");
+    //#endif
     try {
       if (options.user.length() == 0 || !Util.keygen(options.user).equals(options.key)) {
         //#ifdef DEBUG
@@ -114,15 +119,24 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
         //#endif
 
         if (options.expiration != 0 && System.currentTimeMillis() > options.expiration) {
+          //#ifdef DEBUG
+          log.debug("License EXPIRED");
+          //#endif
+
           Alert al = new Alert(bundle.getString("ui.expired"), bundle.getString("ui.expiredExplanation"), null, AlertType.ERROR);
           al.setTimeout(Alert.FOREVER);
           optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, true);
           display.setCurrent(al, optionsForm);
-          return;
+          return false;
         }
+
         if (Gome.singleton.options.expiration == 0) {
-          options.expiration = System.currentTimeMillis() + 24 * 60 * 60 * 1000L;
+          options.expiration = System.currentTimeMillis() + EXPIRATION_PERIOD;
           saveOptions();
+          //#ifdef DEBUG
+          log.debug("Initiated new license period");
+          //#endif
+
         }
       }
       //#ifdef DEBUG
@@ -130,24 +144,31 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
         log.info("Software licensed to " + Gome.singleton.options.user);
       }
       //#endif
+      return true;
     } catch (Throwable t) {
       Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR);
+      return false;
     }
 
   }
 
   public void commandAction(Command command, Displayable displayable) {
+    //#ifdef DEBUG
+    log.debug("commandAction for license");
+    log.debug("optionsForm = " + optionsForm);
+    log.debug("options = " + options);
+    //#endif
     boolean save = optionsForm.save();
-    if (Gome.singleton.options.user.length() == 0) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.option.invalidKey"), Gome.singleton.bundle.getString("ui.option.invalidKeyExplanation"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+    if (options.user.length() == 0) {
+      Util.messageBox(bundle.getString("ui.option.invalidKey"), bundle.getString("ui.option.invalidKeyExplanation"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       return;
     }
     if (save) {
       try {
-        optionsForm = null;
         bootGome();
+        
       } catch (Throwable t) {
-        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+        Util.messageBox(bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       }
 
     }
@@ -155,19 +176,19 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
 
   private void bootGome() {
     if (gameController == null)
-      gameController = new GameController(Gome.singleton.display);
+      gameController = new GameController(display);
     if (mainCanvas == null)
       mainCanvas = new MainCanvas();
     if (menuEngine == null) {
       menuEngine = new MenuEngine();
-      menuEngine.startNewGame();
     }
+    menuEngine.startNewGame();
     String message;
     if (options.user.length() != 0) {
       message = bundle.getString("ui.registeredTo", new String[] { Gome.singleton.options.user });
     } else {
       long msLeft = options.expiration - System.currentTimeMillis();
-      long HOUR = 60 * 60 * 1000L;
+
       message = bundle.getString("ui.hoursLeft", new String[] { String.valueOf(msLeft / HOUR), String.valueOf((msLeft % HOUR) / (60 * 1000L)) });
     }
 
@@ -177,15 +198,14 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   public void run() {
     try {
       try {
-        Gome.singleton.loadOptions();
+        loadOptions();
       } catch (Throwable t) {
-        Gome.singleton.options = new GomeOptions();
+        options = new GomeOptions();
       }
-      Gome.singleton.bundle = new ResourceBundle("main", Gome.singleton.options.locale); //$NON-NLS-1$
-      Gome.singleton.checkLicense();
-
+      bundle = new ResourceBundle("main", Gome.singleton.options.locale); //$NON-NLS-1$
+      if (!checkLicense())
+        return;
       bootGome();
-
     } catch (Throwable t) {
       //#ifdef DEBUG
       log.error("Load error", t);

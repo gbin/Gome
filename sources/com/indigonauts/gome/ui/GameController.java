@@ -1,4 +1,3 @@
-
 /*
  * (c) 2006  Indigonauts
  */
@@ -209,8 +208,6 @@ public class GameController implements ServerCallback
   }
 
   public void downloadFinished(SgfModel m, char mode) {
-    // log.debug("downloadFinished ");
-    Gome.singleton.checkLicense();
     countMode = false;
     this.model = m;
     setPlayMode(mode);

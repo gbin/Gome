@@ -183,6 +183,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   private void clearOptionalItems() {
+
+    // log.debug("downloadFinished ");
+
     removeCommand(MenuEngine.REVIEW_MODE);
     removeCommand(MenuEngine.PLAY_MODE);
     removeCommand(MenuEngine.PASS);
@@ -314,12 +317,15 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void show(Display dis) {
     // log.debug("show");
+    
+
     if (gc.hasNextInCollection()) {
       this.addCommand(MenuEngine.NEXT);
     } else {
       this.removeCommand(MenuEngine.NEXT);
     }
 
+    if (!Gome.singleton.checkLicense()) return;
     dis.setCurrent(this);
   }
 

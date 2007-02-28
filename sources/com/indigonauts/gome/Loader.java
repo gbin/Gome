@@ -44,7 +44,7 @@ public class Loader extends Canvas {
     g.drawString("Gome v" + Gome.VERSION, getWidth() / 2, getHeight() / 2, Graphics.BASELINE | Graphics.HCENTER);
     g.drawString("(c) 2005-2007 Indigonauts", getWidth() / 2, getHeight() / 2 + f.getHeight(), Graphics.BASELINE | Graphics.HCENTER);
     //#ifdef DEBUG
-    log.debug("Splah showed");
+    log.debug("Splash showed");
     //#endif
 
   }
