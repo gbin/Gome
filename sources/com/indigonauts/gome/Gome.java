@@ -9,89 +9,190 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import javax.microedition.lcdui.Alert;
+import javax.microedition.lcdui.AlertType;
+import javax.microedition.lcdui.Command;
+import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.common.ResourceBundle;
+import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
+import com.indigonauts.gome.ui.Options;
 
-public class Gome extends MIDlet {
+public class Gome extends MIDlet implements CommandListener, Runnable {
+  //#ifdef DEBUG
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Gome");
+  //#endif
+
+  public static final String VERSION = "1.1"; //$NON-NLS-1$
+
+  private static final String OPTIONS_FILE = VERSION + ".options"; //$NON-NLS-1$
+
+  public ResourceBundle bundle;
+
+  public MenuEngine menuEngine;
+
+  public GameController gameController;
+
+  public MainCanvas mainCanvas;
+
+  public Display display;
+
+  public static Gome singleton;
+
+  public GomeOptions options;
+
+  private Options optionsForm;
+
+  public Gome() {
+    singleton = this;
+  }
+
+  void loadOptions() throws IOException {
+    DataInputStream input = null;
+    try {
+      input = IOManager.getSingleton().readFromLocalStore(OPTIONS_FILE);
+      options = new GomeOptions(input);
+    } finally {
+      if (input != null)
+        input.close();
+    }
+  }
+
+  public void saveOptions() throws RecordStoreException, IOException {
+    ByteArrayOutputStream outba = new ByteArrayOutputStream();
+    DataOutputStream os = new DataOutputStream(outba);
+    options.marshalOut(os);
+    IOManager.getSingleton().saveLocalStore(OPTIONS_FILE, outba.toByteArray());
+    os.close();
+  }
+
+  public void startApp() {
     //#ifdef DEBUG
-    private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Gome");
+    log.info("Application start");
     //#endif
 
-    public static final String VERSION = "1.1"; //$NON-NLS-1$
+    if (display == null) {
+      display = Display.getDisplay(this);
 
-    private static final String OPTIONS_FILE = VERSION + ".options"; //$NON-NLS-1$
+      Loader splash = new Loader();
+      display.setCurrent(splash);
 
-    public ResourceBundle bundle;
-
-    public MenuEngine menuEngine;
-
-    public GameController gameController;
-
-    public MainCanvas mainCanvas;
-
-    public Display display;
-
-    public static Gome singleton;
-
-    public GomeOptions options;
-
-    public Gome() {
-        singleton = this;
+      Thread t = new Thread(this);
+      t.start();
+      splash.serviceRepaints();
     }
+  }
 
-    void loadOptions() throws IOException {
-        DataInputStream input = null;
-        try {
-            input = IOManager.getSingleton().readFromLocalStore(OPTIONS_FILE);
-            options = new GomeOptions(input);
-        } finally {
-            if (input != null)
-                input.close();
-        }
-    }
+  public void pauseApp() {
+    if (mainCanvas != null)
+      mainCanvas.stopScroller(); // don't use any CPU.
 
-    public void saveOptions() throws RecordStoreException, IOException {
-        ByteArrayOutputStream outba = new ByteArrayOutputStream();
-        DataOutputStream os = new DataOutputStream(outba);
-        options.marshalOut(os);
-        IOManager.getSingleton().saveLocalStore(OPTIONS_FILE, outba.toByteArray());
-        os.close();
-    }
+  }
 
-    public void startApp() {
+  public void destroyApp(boolean unconditional) {
+    // nothing
+  }
+
+  public void exit() {
+    destroyApp(false);
+    notifyDestroyed();
+  }
+
+  public void checkLicense() {
+    try {
+      if (options.user.length() == 0 || !Util.keygen(options.user).equals(options.key)) {
         //#ifdef DEBUG
-        log.info("Application start");
+        log.debug("Current expiration date = " + Gome.singleton.options.expiration);
+        log.debug("Current time = " + System.currentTimeMillis());
         //#endif
 
-        if (display == null) {
-            display = Display.getDisplay(this);
-            Loader splash = new Loader();
-            display.setCurrent(splash);
-
-            Thread t = new Thread(splash);
-            t.start();
-            splash.serviceRepaints();
+        if (options.expiration != 0 && System.currentTimeMillis() > options.expiration) {
+          Alert al = new Alert(bundle.getString("ui.expired"), bundle.getString("ui.expiredExplanation"), null, AlertType.ERROR);
+          al.setTimeout(Alert.FOREVER);
+          optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, true);
+          display.setCurrent(al, optionsForm);
+          return;
         }
+        if (Gome.singleton.options.expiration == 0) {
+          options.expiration = System.currentTimeMillis() + 24 * 60 * 60 * 1000L;
+          saveOptions();
+        }
+      }
+      //#ifdef DEBUG
+      else {
+        log.info("Software licensed to " + Gome.singleton.options.user);
+      }
+      //#endif
+    } catch (Throwable t) {
+      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR);
     }
 
-    public void pauseApp() {
-        if (mainCanvas != null)
-            mainCanvas.stopScroller(); // don't use any CPU.
+  }
+
+  public void commandAction(Command command, Displayable displayable) {
+    boolean save = optionsForm.save();
+    if (Gome.singleton.options.user.length() == 0) {
+      Util.messageBox(Gome.singleton.bundle.getString("ui.option.invalidKey"), Gome.singleton.bundle.getString("ui.option.invalidKeyExplanation"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      return;
+    }
+    if (save) {
+      try {
+        optionsForm = null;
+        bootGome();
+      } catch (Throwable t) {
+        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      }
 
     }
+  }
 
-    public void destroyApp(boolean unconditional) {
-        // nothing
+  private void bootGome() {
+    if (gameController == null)
+      gameController = new GameController(Gome.singleton.display);
+    if (mainCanvas == null)
+      mainCanvas = new MainCanvas();
+    if (menuEngine == null) {
+      menuEngine = new MenuEngine();
+      menuEngine.startNewGame();
+    }
+    String message;
+    if (options.user.length() != 0) {
+      message = bundle.getString("ui.registeredTo", new String[] { Gome.singleton.options.user });
+    } else {
+      long msLeft = options.expiration - System.currentTimeMillis();
+      long HOUR = 60 * 60 * 1000L;
+      message = bundle.getString("ui.hoursLeft", new String[] { String.valueOf(msLeft / HOUR), String.valueOf((msLeft % HOUR) / (60 * 1000L)) });
     }
 
-    public void exit() {
-        destroyApp(false);
-        notifyDestroyed();
+    mainCanvas.setSplashInfo(message);
+  }
+
+  public void run() {
+    try {
+      try {
+        Gome.singleton.loadOptions();
+      } catch (Throwable t) {
+        Gome.singleton.options = new GomeOptions();
+      }
+      Gome.singleton.bundle = new ResourceBundle("main", Gome.singleton.options.locale); //$NON-NLS-1$
+      Gome.singleton.checkLicense();
+
+      bootGome();
+
+    } catch (Throwable t) {
+      //#ifdef DEBUG
+      log.error("Load error", t);
+      t.printStackTrace();
+      //#endif
+      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }
+  }
+
 }

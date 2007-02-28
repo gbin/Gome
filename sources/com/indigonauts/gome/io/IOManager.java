@@ -114,6 +114,7 @@ public class IOManager {
       }
       currentHttpConnection.setRequestProperty("Cache-Control", "no-store"); //$NON-NLS-1$ //$NON-NLS-2$
       currentHttpConnection.setRequestProperty("Pragma", "no-cache"); //$NON-NLS-1$ //$NON-NLS-2$
+      currentHttpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
       if (ident != null) {
         currentHttpConnection.setRequestProperty("Authorization", "Basic " + ident);
       }
@@ -163,6 +164,7 @@ public class IOManager {
           httpConnection.setRequestProperty("Cache-Control", "no-store"); //$NON-NLS-1$ //$NON-NLS-2$
           httpConnection.setRequestProperty("Pragma", "no-cache"); //$NON-NLS-1$ //$NON-NLS-2$
           httpConnection.setRequestProperty("Content-Type", "application/x-go-sgf");
+          httpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
           os = httpConnection.openDataOutputStream();
           byte[] game = loadLocalStore(filename, null);
           int l = game.length;
