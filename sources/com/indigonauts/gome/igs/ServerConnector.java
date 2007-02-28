@@ -9,8 +9,10 @@ import java.io.IOException;
 
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
+import javax.microedition.lcdui.AlertType;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.common.Util;
 
 public class ServerConnector extends Thread {
   private static final String SERVER_INCOMING = "socket://gome.indigonauts.com:1402";
@@ -244,9 +246,9 @@ public class ServerConnector extends Thread {
       log.debug("Read version " + version);
       //#endif
       if (version != SERVER_VERSION) {
-        Gome.singleton.mainCanvas.setSplashInfo(Gome.singleton.bundle.getString("online.versionError"));
+        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("online.versionError"), AlertType.ERROR);
         connectionIncoming.close();
-        throw new IllegalArgumentException();
+        return;
       }
       //#ifdef DEBUG
       log.debug("Open outgoing stream ...");
