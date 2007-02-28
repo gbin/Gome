@@ -36,7 +36,7 @@ public class ServerConnector extends Thread {
 
   private ServerCallback callback;
 
-  private static final byte SERVER_VERSION = 2;
+  private static final byte SERVER_VERSION = 3;
 
   private static final byte LOGIN = 0x00;
 
