@@ -28,7 +28,7 @@ public class IOManager {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("IOManager");
   //#endif
 
-  protected static IOManager singleton = new IOManager();
+  public static IOManager singleton = new IOManager();
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
   private static final int BUFF_SIZE = 1024;

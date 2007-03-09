@@ -35,6 +35,7 @@
 		<include name="file.png" />
 		<include name="rdir.png" />
 		<include name="rfile.png" />
+		<include name="text.png" />
 	</patternset>
 
 	<patternset id="menu-icons">

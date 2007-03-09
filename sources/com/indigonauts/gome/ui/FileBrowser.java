@@ -53,26 +53,28 @@ public class FileBrowser implements CommandListener, Showable {
   public static Command IMPORT;
   public static Command SEND_BY_EMAIL;
   private static Command RANDOM;
- 
+
   //#ifdef MENU_IMAGES
   private static Image DIR;
   private static Image REMOTE_DIR;
   private static Image FILE;
   private static Image REMOTE_FILE;
+  private static Image TEXT_FILE;
   static {
     try {
       DIR = Image.createImage("/dir.png"); //$NON-NLS-1$
       REMOTE_DIR = Image.createImage("/rdir.png"); //$NON-NLS-1$
       FILE = Image.createImage("/file.png"); //$NON-NLS-1$
       REMOTE_FILE = Image.createImage("/rfile.png"); //$NON-NLS-1$
+      TEXT_FILE = Image.createImage("/text.png"); //$NON-NLS-1$
     } catch (IOException e) {
       // ignore, we can't do anything
     }
   }
   private static final int ILLUSTRATIVE_SIZE = 64;
   private static final GraphicRectangle ILLUSTRATIVE_RECTANGLE = new GraphicRectangle(1, 1, ILLUSTRATIVE_SIZE - 2, ILLUSTRATIVE_SIZE - 2);
-  //#endif
 
+  //#endif
 
   public FileBrowser(Showable parent, MenuEngine listener, boolean managementMode) {
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
@@ -128,6 +130,8 @@ public class FileBrowser implements CommandListener, Showable {
         //#ifdef MENU_IMAGES
         if (file.hasAnIllustration()) {
           image = generateIllustrativePosition(file.getIllustrativeBoardArea(), file.getIllustrativeBlackPosition(), file.getIllustrativeWhitePosition());
+        } else if (file.getPlayMode() == 'T') {
+          image = TEXT_FILE;
         } else {
           image = file.isRemote() ? REMOTE_FILE : FILE;
         }
@@ -164,6 +168,7 @@ public class FileBrowser implements CommandListener, Showable {
     display = disp;
     display.setCurrent(uiFolder);
   }
+
   //#ifdef MENU_IMAGES
   private Image generateIllustrativePosition(String boardArea, String black, String white) {
     StringVector blackPoints = new StringVector(black, ';');
@@ -191,6 +196,7 @@ public class FileBrowser implements CommandListener, Showable {
     return Image.createImage(generated);
 
   }
+
   //#endif
 
   public void commandAction(Command c, Displayable s) {

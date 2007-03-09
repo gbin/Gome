@@ -50,6 +50,8 @@ public class GameController implements ServerCallback
   public static final char ONLINE_MODE = 'O';
 
   public static final char OBSERVE_MODE = 'B';
+  
+  public static final char TEXT_MODE = 'T';
 
   private SgfModel model;
 

@@ -6,8 +6,14 @@ package com.indigonauts.gome.ui;
 
 import java.io.IOException;
 
+import javax.microedition.lcdui.Alert;
+import javax.microedition.lcdui.AlertType;
+
+import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.GamesIOManager;
+import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.SgfModel;
 
 /**
@@ -16,34 +22,48 @@ import com.indigonauts.gome.sgf.SgfModel;
  */
 public class FileLoader extends Fetcher // schedule for one-time run only!
 {
-    private int fileIndex;
+  private int fileIndex;
 
-    private GameController callback;
+  private GameController callback;
 
-    private SgfModel model;
-    private char mode;
+  private SgfModel model;
+  private String text;
+  private char mode;
 
-    public FileLoader(GameController callback, FileEntry file, int fileIndex) {
-        super(file.getPath());
-        this.fileIndex = fileIndex;
-        this.callback = callback;
-        this.mode = file.getPlayMode();
+  public FileLoader(GameController callback, FileEntry file, int fileIndex) {
+    super(file.getPath());
+    this.fileIndex = fileIndex;
+    this.callback = callback;
+    this.mode = file.getPlayMode();
+  }
+
+  protected void download() throws IOException {
+    try {
+      if (mode == GameController.TEXT_MODE) {
+        text = new String(IOManager.singleton.loadFile(url, this));
+        return;
+      }
+
+      model = GamesIOManager.extractGameFromCollection(url, fileIndex, this);
+    } catch (IllegalArgumentException e) {
+      new IOException(e.getMessage());
     }
+  }
 
-    protected void download() throws IOException {
-        try {
-            model = GamesIOManager.extractGameFromCollection(url, fileIndex, this);
-        } catch (IllegalArgumentException e) {
-            new IOException(e.getMessage());
-        }
-    }
+  protected void downloadFinished() {
+    if (mode == GameController.TEXT_MODE) {
 
-    protected void downloadFinished() {
-        callback.downloadFinished(model, mode);
+      Alert al = new Alert(url, text, null, AlertType.INFO);
+      al.setTimeout(Alert.FOREVER);
+      al.setCommandListener(this);
+      Gome.singleton.display.setCurrent(al);
+      return;
     }
+    callback.downloadFinished(model, mode);
+  }
 
-    protected void downloadFailed(Exception reason) {
-        callback.downloadFailure(reason);
-    }
+  protected void downloadFailed(Exception reason) {
+    callback.downloadFailure(reason);
+  }
 
 }
