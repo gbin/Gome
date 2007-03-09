@@ -10,7 +10,6 @@ import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 
 import com.indigonauts.gome.Gome;
-import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.GamesIOManager;
 import com.indigonauts.gome.io.IOManager;
