@@ -192,7 +192,7 @@ public class BoardPainter {
 			if (enume.hasMoreElements()) {
 				int color = Util.COLOR_BLACK;
 				SgfNode node = (SgfNode) (enume.nextElement());
-				if (model.isMainBranch(node)) {
+				if (model.isCorrectNode(node)) {
 					color = Util.COLOR_RED;
 				}
 

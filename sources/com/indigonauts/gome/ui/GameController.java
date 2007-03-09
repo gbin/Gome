@@ -625,7 +625,7 @@ public class GameController implements ServerCallback
       }
       if (currentNode.getSon() == null) // no more move
       {
-        if (model.isMainBranch(currentNode)) {
+        if (model.isCorrectNode(currentNode)) {
           canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.rightMove"));
         } else {
           canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.wrongMove"));

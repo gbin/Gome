@@ -39,6 +39,8 @@ public class SgfModel extends GameInfo implements Enumeration {
 
   private boolean commented = false; // should we prepared to show a comment
 
+  private boolean markedSolution = false; // does the sgf specifically mark a problem with "CORRECT" nodes
+
   private static char lastRead = (char) -1;
 
   private static boolean reinjectlast = false;
@@ -232,7 +234,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             content = Util.EMPTY_STRING;
           } else if (Character.isUpperCase(c)) {
             property = property + c;
-          } else if ( c == '\n' || c == '\r' || c == ' ' || c == '\t') {
+          } else if (c == '\n' || c == '\r' || c == ' ' || c == '\t') {
             // System.out.println(" CR ignored");
           } else {
             //#ifdef DEBUG
@@ -272,6 +274,28 @@ public class SgfModel extends GameInfo implements Enumeration {
           } else if (property.equals("C")) // comment //$NON-NLS-1$
           {
             newModel.commented = true;
+            int r = -1;
+            if ((r = content.indexOf("RIGHT")) != -1) {
+              // Remove the ugly word
+              content = content.substring(0, r) + content.substring(r + 5);
+              // switch the model into "marked solution mode"
+              newModel.markedSolution = true;
+              //#ifdef DEBUG
+              System.out.println("Marked solution !");
+              //#endif
+              SgfNode current = latestNode;
+              // mark all the path correct
+              while (current != null) {
+                current.setCorrect(true);
+                //System.out.println("Marked " + current);
+                current = current.getFather();
+              }
+
+            }
+            if ((r = content.indexOf("CHOICE")) != -1) {
+              // Remove the ugly word
+              content = content.substring(0, r) + content.substring(r + 6);
+            }
             latestNode.setComment(content);
           } else if (property.equals("AB")) // add black
           {
@@ -511,6 +535,10 @@ public class SgfModel extends GameInfo implements Enumeration {
 
   private Rectangle getInvalidRect() {
     return new Rectangle(Byte.MAX_VALUE, Byte.MAX_VALUE, Byte.MIN_VALUE, Byte.MIN_VALUE);
+  }
+
+  public boolean isCorrectNode(SgfNode node) {
+    return markedSolution ? node.isCorrect() :isMainBranch(node);  
   }
 
   /**
