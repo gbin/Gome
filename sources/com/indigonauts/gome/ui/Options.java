@@ -112,9 +112,9 @@ public class Options extends Form {
     scrollerSize.append(Gome.singleton.bundle.getString("ui.option.twoHalf"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSize.setSelectedIndex(Gome.singleton.options.scrollerSize, true);
     //#ifdef IGS
-    igsLogin = new TextField(Gome.singleton.bundle.getString("ui.option.igsLogin"), Gome.singleton.options.igsLogin, 10, TextField.ANY);
+    igsLogin = new TextField(Gome.singleton.bundle.getString("ui.login"), Gome.singleton.options.igsLogin, 10, TextField.ANY);
 
-    igsPassword = new TextField(Gome.singleton.bundle.getString("ui.option.igsPassword"), Gome.singleton.options.igsPassword, 10, TextField.ANY);
+    igsPassword = new TextField(Gome.singleton.bundle.getString("ui.password"), Gome.singleton.options.igsPassword, 10, TextField.ANY);
 
     igsSize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.igsSize"), Choice.EXCLUSIVE); //$NON-NLS-1$
     igsSize.append("9x9", null); //$NON-NLS-1$ //$NON-NLS-2$

@@ -2,4 +2,8 @@
 jar:/games/index.txt,I,Bundled Games
 jar:/problems/index.txt,I,Bundled Problems
 jar:/joseki/index.txt,I,Kogo Joseki dictionary (http://waterfire.us/joseki.htm)
-http://www.indigonauts.com/gome/library/index.php,I,Indigonauts Online Collection
+http://www.indigonauts.com/gome/library/gobase.org/index.php,I,Gobase.org online Collection current tournaments games updated daily
+http://www.goproblems.com/thirdparty/gome/index.txt,I,Goproblems.com online Collection around 5000 problems updated daily
+http://www.indigonauts.com/gome/library/index.php,I,Indigonauts online Collection
+
+

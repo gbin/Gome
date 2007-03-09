@@ -95,6 +95,9 @@ public class IOManager {
   }
 
   public DataInputStream readFileFromHttp(String url, DownloadStatus status) throws IOException {
+    //#ifdef DEBUG
+    log.debug("readFileFromHttp " + url);
+    //#endif
     if (currentHttpConnection != null) {
       currentHttpConnection.close();
     }
@@ -121,6 +124,9 @@ public class IOManager {
 
       is = currentHttpConnection.openDataInputStream();
       if (currentHttpConnection.getResponseCode() == 401 && currentHttpConnection.getHeaderField("WWW-Authenticate").startsWith("Basic")) {
+        //#ifdef DEBUG
+        log.debug("401 response, try to get the login/password");
+        //#endif
         status.requestLoginPassword();
         synchronized (status) {
           try {
@@ -137,6 +143,10 @@ public class IOManager {
 
     if (ident != null) {
       try {
+        //#ifdef DEBUG
+        log.debug("Store password");
+        //#endif
+
         saveLocalStore(pwdFile, ident.getBytes());
       } catch (RecordStoreException e) {
         // ignores it, too bad the paswrod will not be stored

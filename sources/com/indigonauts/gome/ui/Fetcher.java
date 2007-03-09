@@ -65,9 +65,9 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
     protected abstract void downloadFinished();
 
     public void requestLoginPassword() {
-        ok = new Command(Gome.singleton.bundle.getString("ui.download.login"), Command.OK, 1);
-        login = new TextField(Gome.singleton.bundle.getString("ui.download.login"), "", 32, TextField.ANY);
-        password = new TextField(Gome.singleton.bundle.getString("ui.download.password"), "", 32, TextField.PASSWORD);
+        ok = new Command(Gome.singleton.bundle.getString("ui.login"), Command.OK, 1);
+        login = new TextField(Gome.singleton.bundle.getString("ui.login"), "", 32, TextField.ANY);
+        password = new TextField(Gome.singleton.bundle.getString("ui.password"), "", 32, TextField.PASSWORD);
         this.delete(0);
         this.addCommand(ok);
         this.append(login);
