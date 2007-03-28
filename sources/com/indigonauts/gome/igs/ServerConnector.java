@@ -11,6 +11,8 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.lcdui.AlertType;
 
+import org.apache.log4j.Logger;
+
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Util;
 
@@ -124,7 +126,7 @@ public class ServerConnector extends Thread {
     output.writeByte(LOGIN);
     output.writeUTF(login);
     output.writeUTF(password);
-    output.flush();    
+    output.flush();
   }
 
   public void getGames() throws IOException {
@@ -267,141 +269,189 @@ public class ServerConnector extends Thread {
       login();
       noneErrorDisconnect = false;
       while (true) {
-        byte event = input.readByte();
-        switch (event) {
-        case LOGGED_EVENT:
-          byte reason = input.readByte();
-          //#ifdef DEBUG
-          log.debug("IGS Logged event " + reason);
+        //#ifdef DEBUG
+        try {
           //#endif
-          callback.loggedEvent();
-          break;
-        case GAME_LIST_EVENT:
-          int nbGames = input.readInt();
-          gameList = new ServerGame[nbGames];
-          for (int i = 0; i < nbGames; i++) {
-            gameList[i] = ServerGame.unmarshal(input);
-          }
-          callback.gameListEvent(gameList);
-          break;
-        case OBSERVE_EVENT:
-          int nbMoves = input.readInt();
-          ServerMove[] moveList = new ServerMove[nbMoves];
-          for (int i = 0; i < nbMoves; i++) {
-            moveList[i] = ServerMove.unmarshal(input);
-          }
-          callback.observeEvent(moveList);
-          break;
+          byte event = input.readByte();
+          switch (event) {
+          case LOGGED_EVENT:
+            byte reason = input.readByte();
+            //#ifdef DEBUG
+            log.debug("IGS Logged event " + reason);
+            //#endif
+            callback.loggedEvent();
+            break;
+          case GAME_LIST_EVENT:
+            int nbGames = input.readInt();
+            gameList = new ServerGame[nbGames];
+            for (int i = 0; i < nbGames; i++) {
+              gameList[i] = ServerGame.unmarshal(input);
+            }
+            callback.gameListEvent(gameList);
+            break;
+          case OBSERVE_EVENT:
+            int nbMoves = input.readInt();
+            ServerMove[] moveList = new ServerMove[nbMoves];
+            for (int i = 0; i < nbMoves; i++) {
+              moveList[i] = ServerMove.unmarshal(input);
+            }
+            callback.observeEvent(moveList);
+            break;
 
-        case MOVE_EVENT:
-          ServerMove move = ServerMove.unmarshal(input);
-          callback.moveEvent(move);
-          break;
+          case MOVE_EVENT:
+            ServerMove move = ServerMove.unmarshal(input);
+            callback.moveEvent(move);
+            break;
 
-        case USER_LIST_EVENT:
-          int nbUsers = input.readInt();
-          userList = new ServerUser[nbUsers];
-          for (int i = 0; i < nbUsers; i++) {
-            userList[i] = ServerUser.unmarshal(input);
+          case USER_LIST_EVENT:
+            int nbUsers = input.readInt();
+            userList = new ServerUser[nbUsers];
+            for (int i = 0; i < nbUsers; i++) {
+              userList[i] = ServerUser.unmarshal(input);
+            }
+            callback.userListEvent(userList);
+            break;
+          case CHALLENGE_EVENT:
+            //#ifdef DEBUG
+            log.debug("Challenge");
+            //#endif
+            ServerChallenge challenge = new ServerChallenge();
+
+            challenge.nick = input.readUTF();
+            //#ifdef DEBUG
+            log.debug("Nick = " + challenge.nick);
+            //#endif
+            challenge.color = input.readByte();
+            challenge.size = input.readByte();
+            challenge.time_minutes = input.readInt();
+            challenge.min_per25moves = input.readInt();
+            callback.challenge(challenge);
+            break;
+          case MESSAGE_EVENT:
+            //#ifdef DEBUG
+            log.debug("Incoming message event");
+            //#endif
+            byte type = input.readByte();
+            String nick = input.readUTF();
+            String message = input.readUTF();
+            callback.message(type, nick, message);
+            break;
+          case GAME_EVENT:
+            //#ifdef DEBUG
+            log.debug("Start game event");
+            //#endif
+            challenge = new ServerChallenge();
+            challenge.nick = input.readUTF();
+            //#ifdef DEBUG
+            log.debug("Nick = " + challenge.nick);
+            //#endif
+            challenge.color = input.readByte();
+            challenge.size = input.readByte();
+            challenge.time_minutes = input.readInt();
+            challenge.min_per25moves = input.readInt();
+            callback.startGame(challenge);
+            break;
+          case TIME_EVENT:
+            //#ifdef DEBUG
+            log.debug("time event");
+            //#endif
+            int whiteTime = input.readInt();
+            int whiteByoStone = input.readInt();
+            int blackTime = input.readInt();
+            int blackByoStone = input.readInt();
+            callback.synOnlineTime(whiteTime, whiteByoStone, blackTime, blackByoStone);
+            break;
+          case TIMES_UP_EVENT:
+            //#ifdef DEBUG
+            log.debug("times up event");
+            //#endif
+            String name = input.readUTF();
+            callback.timesUP(name);
+            break;
+          case END_GAME_EVENT:
+            //#ifdef DEBUG
+            log.debug("end game event");
+            //#endif
+            callback.endGame();
+            break;
+          case MARK_STONE_EVENT:
+            //#ifdef DEBUG
+            log.debug("mark stone event");
+            //#endif
+            byte x = input.readByte();
+            byte y = input.readByte();
+            callback.oppRemoveDeadStone(x, y);
+            break;
+          case RESTORE_GAME_FOR_COUNING_EVENT:
+            //#ifdef DEBUG
+            log.debug("restore game for counting event");
+            //#endif
+            callback.restoreGameForCounting();
+            break;
+          case GAME_IS_DONE_EVENT:
+            //#ifdef DEBUG
+            log.debug("game is done event");
+            //#endif
+            String name1 = input.readUTF();
+            int value1 = input.readInt();
+            String name2 = input.readUTF();
+            int value2 = input.readInt();
+            callback.gameIsDone(name1, value1, name2, value2);
+            break;
+          case HANDICAP_EVENT:
+            //#ifdef DEBUG
+            log.debug("handicap event");
+            //#endif
+            byte value = input.readByte();
+            callback.oppSetHandicap(value);
+            break;
+          case OPP_WANT_KOMI_EVENT:
+            //#ifdef DEBUG
+            log.debug("opp want komi event");
+            //#endif
+            byte komi = input.readByte();
+            callback.oppWantToSetNewKomi(komi);
+            break;
+          case SET_KOMI_EVENT:
+            //#ifdef DEBUG
+            log.debug("set komi event event");
+            //#endif
+            byte k = input.readByte();
+            callback.setKomi(k);
+            break;
+          case IGS_RESIGNED_EVENT:
+            //#ifdef DEBUG
+            log.debug("resigned event");
+            //#endif
+            String resignedName = input.readUTF();
+            callback.onlineResigned(resignedName);
+            break;
+          case SCORE_EVENT:
+            //#ifdef DEBUG
+            log.debug("score event");
+            //#endif
+            int whiteScore = input.readInt();
+            int blackScore = input.readInt();
+            callback.onlineScore(whiteScore, blackScore);
+            break;
+          case IGS_LOST_MESSAGE_EVENT:
+            //#ifdef DEBUG
+            log.debug("igs lost message event");
+            //#endif
+            String winnerName = input.readUTF();
+            int winValue = input.readInt();
+            callback.winByValue(winnerName, winValue);
+            break;
           }
-          callback.userListEvent(userList);
-          break;
-        case CHALLENGE_EVENT:
           //#ifdef DEBUG
-          log.debug("Challenge");
-          //#endif
-          ServerChallenge challenge = new ServerChallenge();
-
-          challenge.nick = input.readUTF();
-          //#ifdef DEBUG
-          log.debug("Nick = " + challenge.nick);
-          //#endif
-          challenge.color = input.readByte();
-          challenge.size = input.readByte();
-          challenge.time_minutes = input.readInt();
-          challenge.min_per25moves = input.readInt();
-          callback.challenge(challenge);
-          break;
-        case MESSAGE_EVENT:
-          //#ifdef DEBUG
-          log.debug("Incoming message");
-          //#endif
-          byte type = input.readByte();
-          String nick = input.readUTF();
-          String message = input.readUTF();
-          callback.message(type, nick, message);
-          break;
-        case GAME_EVENT:
-          //#ifdef DEBUG
-          log.debug("Start game event");
-          //#endif
-          challenge = new ServerChallenge();
-          challenge.nick = input.readUTF();
-          //#ifdef DEBUG
-          log.debug("Nick = " + challenge.nick);
-          //#endif
-          challenge.color = input.readByte();
-          challenge.size = input.readByte();
-          challenge.time_minutes = input.readInt();
-          challenge.min_per25moves = input.readInt();
-          callback.startGame(challenge);
-          break;
-        case TIME_EVENT:
-          int whiteTime = input.readInt();
-          int whiteByoStone = input.readInt();
-          int blackTime = input.readInt();
-          int blackByoStone = input.readInt();
-          callback.synOnlineTime(whiteTime, whiteByoStone, blackTime, blackByoStone);
-          break;
-        case TIMES_UP_EVENT:
-          String name = input.readUTF();
-          callback.timesUP(name);
-          break;
-        case END_GAME_EVENT:
-          callback.endGame();
-          break;
-        case MARK_STONE_EVENT:
-          byte x = input.readByte();
-          byte y = input.readByte();
-          callback.oppRemoveDeadStone(x, y);
-          break;
-        case RESTORE_GAME_FOR_COUNING_EVENT:
-          callback.restoreGameForCounting();
-          break;
-        case GAME_IS_DONE_EVENT:
-          String name1 = input.readUTF();
-          int value1 = input.readInt();
-          String name2 = input.readUTF();
-          int value2 = input.readInt();
-          callback.gameIsDone(name1, value1, name2, value2);
-          break;
-        case HANDICAP_EVENT:
-          byte value = input.readByte();
-          callback.oppSetHandicap(value);
-          break;
-        case OPP_WANT_KOMI_EVENT:
-          byte komi = input.readByte();
-          callback.oppWantToSetNewKomi(komi);
-          break;
-        case SET_KOMI_EVENT:
-          byte k = input.readByte();
-          callback.setKomi(k);
-          break;
-        case IGS_RESIGNED_EVENT:
-          String resignedName = input.readUTF();
-          callback.onlineResigned(resignedName);
-          break;
-        case SCORE_EVENT:
-          int whiteScore = input.readInt();
-          int blackScore = input.readInt();
-          callback.onlineScore(whiteScore, blackScore);
-          break;
-        case IGS_LOST_MESSAGE_EVENT:
-          String winnerName = input.readUTF();
-          int winValue = input.readInt();
-          callback.winByValue(winnerName, winValue);
-          break;
         }
+
+        catch (Throwable t) {
+          log.error("server loop error", t);
+          Util.messageBox("Uncaught exception ", "Uncaught exception " + t.getClass().getName() + ":" + t.getMessage(), AlertType.ERROR);
+          Gome.singleton.display.setCurrent(Logger.getLogCanvas());
+        }
+        //#endif
       }
 
     } catch (java.io.InterruptedIOException iie) {
@@ -409,8 +459,10 @@ public class ServerConnector extends Thread {
       log.error("Diconnected ", iie);
       //#endif
     } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
+      // let the disconnected message go
+    }
+
+    finally {
       if (output != null) {
         try {
           output.close();

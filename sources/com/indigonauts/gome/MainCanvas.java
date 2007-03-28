@@ -402,7 +402,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   private void drawSplashInfo(Graphics g) {
 
-    Util.renderSplash(g, splashInfo, getWidth(), getHeight(), Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_ITALIC, Font.SIZE_MEDIUM), Util.COLOR_BLACK, 0xDCFF84);
+    Util.renderSplash(g, splashInfo, getWidth(), getHeight(), Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_ITALIC, Font.SIZE_SMALL), Util.COLOR_BLACK, 0xDCFF84);
   }
 
   public void drawStatusBar(Graphics g) {
@@ -452,7 +452,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       scroller.stop();
 
     scroller.start();
-    // refresh();
   }
 
   public void stopScroller() {

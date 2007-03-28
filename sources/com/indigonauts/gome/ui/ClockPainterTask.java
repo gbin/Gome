@@ -55,12 +55,15 @@ public class ClockPainterTask extends TimerTask {
         if (clock.thereIsClock()) {
             int sizeOfCircle = textFont.getHeight() / 2;
 
-            if (clock.isBlackOnByo() && (clock.remainingTimeBlack() / clock.getByoStoneBlack() < 5)
+            int byoStoneBlack = clock.getByoStoneBlack();
+            int byoStoneWhite = clock.getByoStoneWhite();
+            if (clock.isBlackOnByo() && (byoStoneBlack==0 || (clock.remainingTimeBlack() / byoStoneBlack < 5))
                     && clock.getColor() == Board.BLACK)
                 blinkingColorForBlack = blinkColor(blinkingColorForBlack);
             else
                 blinkingColorForBlack = NORMAL_COLOR;
-            if ((clock.isWhiteOnByo()) && (clock.remainingTimeWhite() / clock.getByoStoneWhite() < 5)
+            
+            if ((clock.isWhiteOnByo()) && (byoStoneWhite == 0 || (clock.remainingTimeWhite() / byoStoneWhite < 5))
                     && clock.getColor() == Board.WHITE)
                 blinkingColorForWhite = blinkColor(blinkingColorForWhite);
             else
@@ -68,8 +71,8 @@ public class ClockPainterTask extends TimerTask {
 
             String blackTime = clock.getBlackTime();
             String whiteTime = clock.getWhiteTime();
-            String blackByoStones = String.valueOf(clock.getByoStoneBlack());
-            String whiteByoStones = String.valueOf(clock.getByoStoneWhite());
+            String blackByoStones = String.valueOf(byoStoneBlack);
+            String whiteByoStones = String.valueOf(byoStoneWhite);
 
             g.setColor(blinkingColorForBlack);
 

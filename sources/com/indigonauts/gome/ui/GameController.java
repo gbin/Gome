@@ -1212,10 +1212,10 @@ public class GameController implements ServerCallback
       } else {
         buffer = new StringBuffer(comment);
       }
+      buffer.append('\n');
       buffer.append(nick);
       buffer.append(": ");
       buffer.append(message);
-      buffer.append('\n');
       currentNode.setComment(buffer.toString());
       switchCurrentNode(currentNode);
       break;
