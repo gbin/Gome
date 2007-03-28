@@ -12,9 +12,11 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Gauge;
 import javax.microedition.lcdui.TextField;
+import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.io.DownloadStatus;
+import com.indigonauts.gome.io.IOManager;
 
 public abstract class Fetcher extends Form implements CommandListener, DownloadStatus {
   public static final byte TERMINATED = -100;
@@ -29,7 +31,7 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   protected Gauge gauge;
 
-  int status = -1;
+  protected int status = -1;
 
   protected String url;
 
@@ -40,6 +42,8 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   private Command ok;
   private TextField login;
   private TextField password;
+  private String pwdFile;
+  protected FetcherDownloadThread thread;
 
   public Fetcher(String url) {
     super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
@@ -53,7 +57,8 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   }
 
   protected void start() {
-    new FetcherDownloadThread(this).start();
+    thread = new FetcherDownloadThread(this);
+    thread.start();
   }
 
   public void setPercent(int percent) {
@@ -64,14 +69,16 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   protected abstract void downloadFinished();
 
-  public void requestLoginPassword() {
+  public void requestLoginPassword(String pwdFile) {
     ok = new Command(Gome.singleton.bundle.getString("ui.login"), Command.OK, 1);
     login = new TextField(Gome.singleton.bundle.getString("ui.login"), "", 32, TextField.ANY);
     password = new TextField(Gome.singleton.bundle.getString("ui.password"), "", 32, TextField.PASSWORD);
+    this.pwdFile = pwdFile;
     this.delete(0);
     this.addCommand(ok);
     this.append(login);
     this.append(password);
+    
 
   }
 
@@ -87,10 +94,17 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   public void commandAction(Command c, Displayable d) {
     if (c == ok) {
-      synchronized (this) {
-        this.notify();
-        return;
+      try {
+        IOManager.singleton.storeLoginPassword(pwdFile, login.getString(), password.getString());
+      } catch (RecordStoreException e) {
+       // nothing to do it will loop
       }
+      this.delete(0);
+      this.delete(0);
+      this.append(gauge);
+      this.removeCommand(ok);
+      start();  
+      return;
     }
     status = TERMINATED;
     hide();
@@ -105,5 +119,4 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   public void hide() {
     display.setCurrent(prevWindow);
   }
-
 }

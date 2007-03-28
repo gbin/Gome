@@ -32,8 +32,7 @@ public class IOManager {
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
   private static final int BUFF_SIZE = 1024;
-
-  private HttpConnection currentHttpConnection;
+ 
   private static char[] map1 = new char[64];
   static {
     int i = 0;
@@ -94,67 +93,67 @@ public class IOManager {
     return new DataInputStream(resourceAsStream);
   }
 
+  /*
+   * if this returns null, we should ignore it, it is supposed to be recalled (for example with a login/passwd correctly set
+   */
   public DataInputStream readFileFromHttp(String url, DownloadStatus status) throws IOException {
     //#ifdef DEBUG
     log.debug("readFileFromHttp " + url);
     //#endif
-    if (currentHttpConnection != null) {
-      currentHttpConnection.close();
-    }
+
     DataInputStream is = null;
     String ident = null;
     String pwdFile = null;
 
-    while (true) {
-      currentHttpConnection = (HttpConnection) Connector.open(url);
-      pwdFile = currentHttpConnection.getHost() + ".pwd";
-      try {
-        ident = new String(loadLocalStore(pwdFile, null));
-      } catch (RecordStoreException e1) {
-        //#ifdef DEBUG
-        log.debug("No ident is stored for " + pwdFile);
-        //#endif
-      }
-      currentHttpConnection.setRequestProperty("Cache-Control", "no-store"); //$NON-NLS-1$ //$NON-NLS-2$
-      currentHttpConnection.setRequestProperty("Pragma", "no-cache"); //$NON-NLS-1$ //$NON-NLS-2$
-      currentHttpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
-      if (ident != null) {
-        currentHttpConnection.setRequestProperty("Authorization", "Basic " + ident);
-      }
+    HttpConnection currentHttpConnection = (HttpConnection) Connector.open(url);
+    //#ifdef DEBUG
+    log.debug("opened");
+    //#endif
 
-      is = currentHttpConnection.openDataInputStream();
-      if (currentHttpConnection.getResponseCode() == 401 && currentHttpConnection.getHeaderField("WWW-Authenticate").startsWith("Basic")) {
-        //#ifdef DEBUG
-        log.debug("401 response, try to get the login/password");
-        //#endif
-        status.requestLoginPassword();
-        synchronized (status) {
-          try {
-            status.wait();
-            ident = base64Encode((status.getLogin() + ":" + status.getPassword()).getBytes());
-            currentHttpConnection.close();
-          } catch (InterruptedException e) {
-            break;
-          }
-        }
-      } else
-        break;
+    pwdFile = currentHttpConnection.getHost() + ".pwd";
+
+    try {
+      if (ident == null)
+        ident = new String(loadLocalStore(pwdFile, null));
+    } catch (RecordStoreException e1) {
+      //#ifdef DEBUG
+      log.debug("No ident is stored for " + pwdFile);
+      //#endif
+    }
+    currentHttpConnection.setRequestProperty("Cache-Control", "no-store"); //$NON-NLS-1$ //$NON-NLS-2$
+    currentHttpConnection.setRequestProperty("Pragma", "no-cache"); //$NON-NLS-1$ //$NON-NLS-2$
+    currentHttpConnection.setRequestProperty("Content-Length", "0");
+    currentHttpConnection.setRequestProperty("Connection", "close");
+    currentHttpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
+    if (ident != null) {
+      //#ifdef DEBUG
+      log.debug("Put ident header" + ident);
+      //#endif
+      currentHttpConnection.setRequestProperty("Authorization", "Basic " + ident);
     }
 
-    if (ident != null) {
-      try {
-        //#ifdef DEBUG
-        log.debug("Store password");
-        //#endif
+    is = currentHttpConnection.openDataInputStream();
 
-        saveLocalStore(pwdFile, ident.getBytes());
-      } catch (RecordStoreException e) {
-        // ignores it, too bad the paswrod will not be stored
-      }
+    if (currentHttpConnection.getResponseCode() == 401 && currentHttpConnection.getHeaderField("WWW-Authenticate").startsWith("Basic")) {
 
+      //#ifdef DEBUG
+      log.debug("401 response, try to get the login/password");
+      //#endif
+      status.requestLoginPassword(pwdFile);
+      return null;
+
+    } else {
+      //#ifdef DEBUG
+      log.debug("no ident required");
+      //#endif
     }
 
     return is;
+  }
+
+  public void storeLoginPassword(String pwdFile, String login, String passwd) throws RecordStoreException {
+    String ident = base64Encode((login + ":" + passwd).getBytes());
+    saveLocalStore(pwdFile, ident.getBytes());
   }
 
   public static void sendFileByMail(FileEntry selectedFile, String email) {
@@ -267,7 +266,7 @@ public class IOManager {
 
   public Vector getFileEntriesFromIndex(String indexFile) {
     //#ifdef DEBUG
-    log.debug("getFileEntriesFromIndex :" + indexFile);
+    //log.debug("getFileEntriesFromIndex :" + indexFile);
     //#endif
     Vector answer = new Vector();
     StringVector list = new StringVector(indexFile, '\n');
@@ -341,6 +340,8 @@ public class IOManager {
 
   public Vector getFileList(String url, DownloadStatus status) throws IOException {
     byte[] data = loadFile(url, status);
+    if(data==null)
+      return new Vector();
     return getFileEntriesFromIndex(new String(data));
   }
 
@@ -360,6 +361,8 @@ public class IOManager {
 
     try {
       InputStream is = readFileAsStream(url, status);
+      if(is == null)
+        return null;
       dis = new DataInputStream(is);
       byte[] buffer = new byte[512];
       int nbread = 0;
@@ -384,17 +387,7 @@ public class IOManager {
         e.printStackTrace();
 
       }
-      try {
-        if (currentHttpConnection != null) {
-          currentHttpConnection.close();
-          currentHttpConnection = null;
-
-        }
-
-      } catch (IOException e) {
-        e.printStackTrace();
-
-      }
+      
     }
 
     return baos.toByteArray();

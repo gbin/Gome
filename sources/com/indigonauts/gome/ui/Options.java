@@ -9,6 +9,7 @@ import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
@@ -60,21 +61,26 @@ public class Options extends Form {
     Image medium = null;
     Image dark = null;
     Image jp = null;
+    int bestImageWidth = 32;
+    int bestImageHeight = 32;
 
     //#ifdef MENU_IMAGES
-    smallLetter = Image.createImage(Util.renderOffScreenText("abc", 32, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
-    mediumLetter = Image.createImage(Util.renderOffScreenText("abc", 32, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
-    largeLetter = Image.createImage(Util.renderOffScreenText("abc", 32, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND)); //$NON-NLS-1$
+    //#ifdef MIDP2
+    bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
+    bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
+    //#endif MIDP2
+    smallLetter = Util.renderOffScreenTextIcon("abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
+    mediumLetter = Util.renderOffScreenTextIcon("abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
+    largeLetter = Util.renderOffScreenTextIcon("abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
     
     //#ifdef I18N
-    en = Image.createImage("/en.png");
-    fr = Image.createImage("/fr.png");
-    jp = Image.createImage("/jp.png");
+    en = Util.renderIcon(Image.createImage("/en.png"), bestImageWidth, bestImageHeight);
+    fr = Util.renderIcon(Image.createImage("/fr.png"), bestImageWidth, bestImageHeight);
+    jp = Util.renderIcon(Image.createImage("/jp.png"), bestImageWidth, bestImageHeight);
     //#endif
-    
-    light = Image.createImage("/glight.png");
-    medium = Image.createImage("/gmedium.png");
-    dark = Image.createImage("/gdark.png");
+    light = Util.renderIcon(Image.createImage("/glight.png"), bestImageWidth, bestImageHeight);
+    medium = Util.renderIcon(Image.createImage("/gmedium.png"), bestImageWidth, bestImageHeight);
+    dark = Util.renderIcon(Image.createImage("/gdark.png"), bestImageWidth, bestImageHeight);
     //#endif
 
     //#ifdef I18N

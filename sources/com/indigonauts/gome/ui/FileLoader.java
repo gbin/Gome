@@ -44,6 +44,8 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
       }
 
       model = GamesIOManager.extractGameFromCollection(url, fileIndex, this);
+      if (model == null)
+        status = Fetcher.TERMINATED; // stop loading and wait for the reload
     } catch (IllegalArgumentException e) {
       new IOException(e.getMessage());
     }

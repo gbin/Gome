@@ -185,13 +185,23 @@ public class Util {
         }
     }
 
-    public static Image renderOffScreenText(String text, int width, Font font, int fgColor, int bgcolor) {
-        Vector lines = lineSplitter(text, width, font);
-        Image imagedComment = Image.createImage(width, (lines.size()) * font.getHeight());
-        drawText(imagedComment.getGraphics(), 0, 0, imagedComment.getWidth(), imagedComment.getHeight(), lines, font,
-                 fgColor, bgcolor);
-        return imagedComment;
+    public static Image renderOffScreenTextIcon(String text, int width, int height, Font font, int fgColor, int bgcolor) {
+        Image imagedComment = Image.createImage(width, height);
+        Graphics graphics = imagedComment.getGraphics();
+        graphics.setColor(bgcolor);
+        graphics.fillRect(0, 0, width, height);
+        graphics.setFont(font);
+        graphics.setColor(fgColor);
+        graphics.drawString(text, 0, 0, Graphics.LEFT | Graphics.TOP);        
+        return Image.createImage(imagedComment);
     }
+    
+    public static Image renderIcon(Image icon, int width, int height) {
+      Image imagedComment = Image.createImage(width, height);
+      imagedComment.getGraphics().drawImage(icon, 0,0, Graphics.LEFT | Graphics.TOP);
+      return Image.createImage(imagedComment);
+    }
+    
 
     // public static Image
     // renderOffScreenScrollableTextWithGraphicPreambule(Image start, String

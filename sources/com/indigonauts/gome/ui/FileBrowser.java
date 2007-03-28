@@ -33,7 +33,7 @@ import com.indigonauts.gome.sgf.SgfPoint;
 
 public class FileBrowser implements CommandListener, Showable {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
+  //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
 
   private Vector entries = new Vector(10);
@@ -55,24 +55,16 @@ public class FileBrowser implements CommandListener, Showable {
   private static Command RANDOM;
 
   //#ifdef MENU_IMAGES
-  private static Image DIR;
-  private static Image REMOTE_DIR;
-  private static Image FILE;
-  private static Image REMOTE_FILE;
-  private static Image TEXT_FILE;
-  static {
-    try {
-      DIR = Image.createImage("/dir.png"); //$NON-NLS-1$
-      REMOTE_DIR = Image.createImage("/rdir.png"); //$NON-NLS-1$
-      FILE = Image.createImage("/file.png"); //$NON-NLS-1$
-      REMOTE_FILE = Image.createImage("/rfile.png"); //$NON-NLS-1$
-      TEXT_FILE = Image.createImage("/text.png"); //$NON-NLS-1$
-    } catch (IOException e) {
-      // ignore, we can't do anything
-    }
-  }
-  private static final int ILLUSTRATIVE_SIZE = 64;
-  private static final GraphicRectangle ILLUSTRATIVE_RECTANGLE = new GraphicRectangle(1, 1, ILLUSTRATIVE_SIZE - 2, ILLUSTRATIVE_SIZE - 2);
+  private Image dirImg;
+  private Image remoteDirImg;
+  private Image fileImg;
+  private Image remoteFileImg;
+  private Image textFileImg;
+
+  private static final int DEFAULT_ILLUSTRATIVE_SIZE = 32;
+  int bestImageWidth = DEFAULT_ILLUSTRATIVE_SIZE;
+  int bestImageHeight = DEFAULT_ILLUSTRATIVE_SIZE;
+  private GraphicRectangle illustrativeRectangle;
 
   //#endif
 
@@ -86,7 +78,25 @@ public class FileBrowser implements CommandListener, Showable {
     this.managementMode = managementMode;
     this.parent = parent;
     this.listener = listener;
+    
 
+    //#ifdef MENU_IMAGES
+    //#ifdef MIDP2
+    bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
+    bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
+    //#endif
+    illustrativeRectangle = new GraphicRectangle(1, 1, bestImageWidth, bestImageHeight);
+
+    try {
+      dirImg = Util.renderIcon(Image.createImage("/dir.png"), bestImageWidth, bestImageHeight);
+      remoteDirImg = Util.renderIcon(Image.createImage("/rdir.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+      fileImg = Util.renderIcon(Image.createImage("/file.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+      remoteFileImg = Util.renderIcon(Image.createImage("/rfile.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+      textFileImg = Util.renderIcon(Image.createImage("/text.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+    } catch (IOException e) {
+      // Nothing we can do
+    }
+    //#endif
     reset();
   }
 
@@ -112,9 +122,6 @@ public class FileBrowser implements CommandListener, Showable {
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
-      //#ifdef DEBUG
-      log.debug("Current Element = " + current.getPath());
-      //#endif
       if (managementMode && !(current instanceof StoreFileEntry))
         continue;
       Image image = null;
@@ -123,17 +130,13 @@ public class FileBrowser implements CommandListener, Showable {
         int fileNum = file.getCollectionSize();
 
         String description = file.getDescription();
-        //#ifdef DEBUG
-        log.debug("Description = " + description);
-        log.debug("Collection Size = " + fileNum);
-        //#endif
         //#ifdef MENU_IMAGES
         if (file.hasAnIllustration()) {
           image = generateIllustrativePosition(file.getIllustrativeBoardArea(), file.getIllustrativeBlackPosition(), file.getIllustrativeWhitePosition());
         } else if (file.getPlayMode() == 'T') {
-          image = TEXT_FILE;
+          image = textFileImg;
         } else {
-          image = file.isRemote() ? REMOTE_FILE : FILE;
+          image = file.isRemote() ? remoteFileImg : fileImg;
         }
         //#endif
         uiFolder.append(description + (fileNum != 1 ? " [" + fileNum + "]" : ""), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -144,7 +147,7 @@ public class FileBrowser implements CommandListener, Showable {
         if (file.hasAnIllustration()) {
           image = generateIllustrativePosition(file.getIllustrativeBoardArea(), file.getIllustrativeBlackPosition(), file.getIllustrativeWhitePosition());
         } else {
-          image = file.isRemote() ? REMOTE_DIR : DIR;
+          image = file.isRemote() ? remoteDirImg : dirImg;
         }
         //#endif
 
@@ -173,7 +176,7 @@ public class FileBrowser implements CommandListener, Showable {
   private Image generateIllustrativePosition(String boardArea, String black, String white) {
     StringVector blackPoints = new StringVector(black, ';');
     StringVector whitePoints = new StringVector(white, ';');
-    Image generated = Image.createImage(ILLUSTRATIVE_SIZE, ILLUSTRATIVE_SIZE);
+    Image generated = Image.createImage(bestImageWidth, bestImageHeight);
     Board position = new Board();
     Enumeration bpoints = blackPoints.elements();
     while (bpoints.hasMoreElements()) {
@@ -185,12 +188,12 @@ public class FileBrowser implements CommandListener, Showable {
     }
 
     StringVector boardAreaSplitted = new StringVector(boardArea, ';');
-    BoardPainter bp = new BoardPainter(position, ILLUSTRATIVE_RECTANGLE, new Rectangle(SgfPoint.createFromSgf((String) boardAreaSplitted.elementAt(0)), SgfPoint
+    BoardPainter bp = new BoardPainter(position, illustrativeRectangle, new Rectangle(SgfPoint.createFromSgf((String) boardAreaSplitted.elementAt(0)), SgfPoint
             .createFromSgf((String) boardAreaSplitted.elementAt(1))));
 
     Graphics g = generated.getGraphics();
     g.setColor(Util.COLOR_LIGHTGREY);
-    g.drawRect(0, 0, ILLUSTRATIVE_SIZE - 1, ILLUSTRATIVE_SIZE - 1);
+    g.drawRect(0, 0, bestImageWidth, bestImageHeight);
     bp.drawBoard(g);
 
     return Image.createImage(generated);
@@ -347,9 +350,6 @@ public class FileBrowser implements CommandListener, Showable {
   }
 
   public void downloadFinished(Vector files) {
-    //#ifdef DEBUG
-    log.debug("Index Download finished");
-    //#endif
     FileBrowser son = new FileBrowser(this, listener, files, managementMode);
     son.show(Gome.singleton.display);
   }

@@ -94,6 +94,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public MainCanvas() {
+    //#ifdef MIDP2
+    setFullScreenMode(true);
+    //#endif
+
     assignUnassignedKey();
     addCommand(MenuEngine.NEW);
     addCommand(MenuEngine.LOAD);

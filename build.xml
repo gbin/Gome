@@ -159,7 +159,7 @@
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
 		<echo message="MIDP2"/>
 		<var name="midlet.name" value="gome-MIDP2" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
 	</target>

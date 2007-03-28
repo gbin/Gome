@@ -10,27 +10,27 @@ import com.indigonauts.gome.io.IOManager;
 
 public class IndexLoader extends Fetcher {
 
-	FileBrowser callback;
-    Vector fileList;
+  FileBrowser callback;
+  Vector fileList;
 
-    public IndexLoader(String url, FileBrowser callback) {
-        super(url);
-        this.callback = callback;
-        start();
-    }
+  public IndexLoader(String url, FileBrowser callback) {
+    super(url);
+    this.callback = callback;
+    start();
+  }
 
-    protected void downloadFinished() {
-        callback.downloadFinished(fileList);
-    }
+  protected void downloadFinished() {
+    callback.downloadFinished(fileList);
+  }
 
-    protected void download() throws IOException {
+  protected void download() throws IOException {
 
-        fileList = IOManager.getSingleton().getFileList(url, this);
+    fileList = IOManager.getSingleton().getFileList(url, this);
 
-    }
+  }
 
-    protected void downloadFailed(Exception reason) {
-        callback.downloadFailure(reason);
-    }
+  protected void downloadFailed(Exception reason) {
+    callback.downloadFailure(reason);
+  }
 
 }

@@ -5,7 +5,7 @@ package com.indigonauts.gome.io;
 
 public interface DownloadStatus {
     void setPercent(int percent);
-    void requestLoginPassword();
+    void requestLoginPassword(String pwdFile);
     String getLogin();
     String getPassword();
 }

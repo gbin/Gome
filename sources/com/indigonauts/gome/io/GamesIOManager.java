@@ -79,6 +79,8 @@ public class GamesIOManager extends IOManager {
     InputStreamReader inputStreamReader = null;
     try {
       readFileAsStream = singleton.readFileAsStream(url, status);
+      if(readFileAsStream == null) // it is supposed to be recalled
+        return null;
       inputStreamReader = new InputStreamReader(readFileAsStream);
       for (int i = 1; i < gameIndex; i++) {
         if (!skipAGame(inputStreamReader))

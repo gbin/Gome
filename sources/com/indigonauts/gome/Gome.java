@@ -84,6 +84,7 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
       display = Display.getDisplay(this);
 
       Loader splash = new Loader();
+      
       display.setCurrent(splash);
 
       Thread t = new Thread(this);
