@@ -187,9 +187,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   private void clearOptionalItems() {
-
-    // log.debug("downloadFinished ");
-
     removeCommand(MenuEngine.REVIEW_MODE);
     removeCommand(MenuEngine.PLAY_MODE);
     removeCommand(MenuEngine.PASS);

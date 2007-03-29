@@ -335,13 +335,14 @@ public class BoardPainter {
     g.setColor(color);
 
     //#ifdef MIDP2
-    //# g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
+    g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
     //#else
-    g.fillArc(x, y, w, w, 0, 360);
+    //# g.fillArc(x, y, w, w, 0, 360);
     //#endif 
 
     g.setColor(Util.COLOR_GREY);
     g.drawArc(x, y, w, w, 0, 360);
+    
   }
 
   private void drawEmpty(Graphics g, Point pt) {
