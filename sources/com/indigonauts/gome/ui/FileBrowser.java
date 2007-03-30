@@ -14,6 +14,7 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
@@ -78,7 +79,6 @@ public class FileBrowser implements CommandListener, Showable {
     this.managementMode = managementMode;
     this.parent = parent;
     this.listener = listener;
-    
 
     //#ifdef MENU_IMAGES
     //#ifdef MIDP2
@@ -156,6 +156,7 @@ public class FileBrowser implements CommandListener, Showable {
       }
 
     }
+
     uiFolder.addCommand(MenuEngine.BACK);
 
     if (managementMode) {
@@ -169,6 +170,15 @@ public class FileBrowser implements CommandListener, Showable {
     }
     uiFolder.setCommandListener(this);
     display = disp;
+
+    //#ifdef MIDP2 
+    Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+    int size = uiFolder.size();
+    for (int i = 0; i < size; i++) {
+      uiFolder.setFont(i, font);
+    }
+    //#endif
+
     display.setCurrent(uiFolder);
   }
 

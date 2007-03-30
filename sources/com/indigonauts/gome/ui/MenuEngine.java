@@ -145,7 +145,8 @@ public class MenuEngine implements CommandListener {
     BACK = new Command(Gome.singleton.bundle.getString("ui.back"), Command.BACK, 0); //$NON-NLS-1$
     ABOUT = new Command(Gome.singleton.bundle.getString("ui.about"), Command.SCREEN, 9); //$NON-NLS-1$
     START = new Command(Gome.singleton.bundle.getString("ui.start"), Command.SCREEN, 10); //$NON-NLS-1$
-    EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.SCREEN, 9); //$NON-NLS-1$
+    EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); //$NON-NLS-1$
+
     FINISHED_COUNTING = new Command(Gome.singleton.bundle.getString("count.endCounting"), Command.SCREEN, 5); //$NON-NLS-1$
     ACCEPT = new Command(Gome.singleton.bundle.getString("ui.accept"), Command.SCREEN, 5); //$NON-NLS-1$
     DECLINE = new Command(Gome.singleton.bundle.getString("ui.decline"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -260,7 +261,12 @@ public class MenuEngine implements CommandListener {
 
           Util.messageBox(Gome.singleton.bundle.getString("ui.about") + "...", info, AlertType.INFO); //$NON-NLS-1$//$NON-NLS-2$
 
-        } else if (c == EXIT) {
+        } else if (c == HELP) {
+          Help help = new Help(Gome.singleton.mainCanvas);
+          help.show(Gome.singleton.display);
+        }
+
+        else if (c == EXIT) {
           Gome.singleton.notifyDestroyed();
         } else if (c == RESIGN) {
           gc.resign();

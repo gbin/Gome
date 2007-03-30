@@ -14,6 +14,7 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
+import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
@@ -42,8 +43,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public static final int ACTION_RIGHT = Canvas.RIGHT;
   public static final int ACTION_FIRE = Canvas.FIRE;
 
-  private int KEY_SCROLLUP;
-  private int KEY_SCROLLDOWN;
+  public int KEY_SCROLLUP;
+  public int KEY_SCROLLDOWN;
   public int KEY_10NEXTMOVES;
   public int KEY_10PREVMOVES;
   private Scroller scroller;
@@ -344,9 +345,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void commandAction(Command c, Displayable d) {
-    if (c == MenuEngine.HELP) {
-      displayHelp();
-    } else if (c == MenuEngine.GAME_STATUS) {
+    if (c == MenuEngine.GAME_STATUS) {
       displayGameStatus();
     } else if (c == MenuEngine.PLAY_MODE) {
       gc.setPlayMode(GameController.GAME_MODE);
@@ -399,7 +398,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   private void drawSplashInfo(Graphics g) {
 
-    Util.renderSplash(g, splashInfo, getWidth(), getHeight(), Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_ITALIC, Font.SIZE_SMALL), Util.COLOR_BLACK, 0xDCFF84);
+    Util.renderSplash(g, splashInfo, getWidth(), getHeight(), Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, 0xDCFF84);
   }
 
   public void drawStatusBar(Graphics g) {
@@ -474,58 +473,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       up = !up;
 
     }
-  }
-
-  public void displayHelp() {
-    StringBuffer buf = new StringBuffer();
-    char playMode = gc.getPlayMode();
-    if (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) {
-      buf.append(Gome.singleton.bundle.getString("ui.help.pointerReview1")); //$NON-NLS-1$
-      buf.append('\n');
-      buf.append(Gome.singleton.bundle.getString("ui.help.pointerReview2")); //$NON-NLS-1$
-      buf.append('\n');
-      buf.append(Gome.singleton.bundle.getString("ui.help.pointerReview3")); //$NON-NLS-1$
-      buf.append('\n');
-      buf.append(Gome.singleton.bundle.getString("ui.help.pointerReview4")); //$NON-NLS-1$
-    } else {
-      buf.append(Gome.singleton.bundle.getString("ui.help.pointer")); //$NON-NLS-1$
-    }
-    buf.append('\n');
-    buf.append(Util.getActionKeyName(this, getKeyCode(ACTION_COMMENT)));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.comment")); //$NON-NLS-1$
-    buf.append('\n');
-    buf.append(Util.getActionKeyName(this, getKeyCode(ACTION_ZOOM)));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.zoom")); //$NON-NLS-1$
-    buf.append('\n');
-    buf.append(Util.getActionKeyName(this, getKeyCode(ACTION_UNDO)));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.undo")); //$NON-NLS-1$
-    buf.append('\n');
-    buf.append(Util.getActionKeyName(this, getKeyCode(ACTION_HINT)));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.hint")); //$NON-NLS-1$
-
-    buf.append('\n');
-    buf.append(getKeyName(KEY_SCROLLUP));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.scrollUp")); //$NON-NLS-1$
-    buf.append('\n');
-    buf.append(getKeyName(KEY_SCROLLDOWN));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.scrollDown")); //$NON-NLS-1$
-    buf.append('\n');
-    buf.append(getKeyName(KEY_10NEXTMOVES));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.next10Moves")); //$NON-NLS-1$
-    buf.append('\n');
-    buf.append(getKeyName(KEY_10PREVMOVES));
-    buf.append(' ');
-    buf.append(Gome.singleton.bundle.getString("ui.help.prev10Moves")); //$NON-NLS-1$
-
-    Util.messageBox(Gome.singleton.bundle.getString("ui.help"), buf.toString(), AlertType.INFO); //$NON-NLS-1$
-
   }
 
   private void displayGameStatus() {
