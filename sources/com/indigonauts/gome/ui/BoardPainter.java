@@ -128,7 +128,7 @@ public class BoardPainter {
   public void drawBoard(Graphics graphics) {
     graphics.setColor(Gome.singleton.options.gobanColor);
 
-    graphics.fillRect(0, 0, drawArea.getWidth(), drawArea.getHeight());
+    graphics.fillRect(0, 0, drawArea.getWidth()+2, drawArea.getHeight()+2); //FIXME: ca va pas
 
     int ox = getCellX(0);
     int oy = getCellY(0);
@@ -139,7 +139,7 @@ public class BoardPainter {
     int uy = getCellY(boardArea.y0);
     graphics.setClip(ux - halfdelta, uy - halfdelta, getCellX(boardArea.x1 + 1) - ux + 1, getCellY(boardArea.y1 + 1) - uy + 1);
     graphics.setColor(Util.COLOR_WHITE);
-    graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta, oyy - oy + halfdelta + halfdelta);
+    graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta -1 , oyy - oy + halfdelta + halfdelta -1);
 
     graphics.setClip(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
     graphics.setColor(Util.COLOR_BLACK);

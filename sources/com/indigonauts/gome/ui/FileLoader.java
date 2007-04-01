@@ -11,7 +11,6 @@ import javax.microedition.lcdui.AlertType;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.io.FileEntry;
-import com.indigonauts.gome.io.GamesIOManager;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.SgfModel;
 
@@ -43,7 +42,7 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
         return;
       }
 
-      model = GamesIOManager.extractGameFromCollection(url, fileIndex, this);
+      model = IOManager.singleton.extractGameFromCollection(url, fileIndex, this);
       if (model == null)
         status = Fetcher.TERMINATED; // stop loading and wait for the reload
     } catch (IllegalArgumentException e) {

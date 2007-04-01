@@ -34,7 +34,7 @@ import com.indigonauts.gome.sgf.SgfPoint;
 
 public class FileBrowser implements CommandListener, Showable {
   //#ifdef DEBUG
-  //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
 
   private Vector entries = new Vector(10);
@@ -47,7 +47,6 @@ public class FileBrowser implements CommandListener, Showable {
   private int indexFolder;
   private int indexBlock;
   private int selectedNum;
-  private boolean managementMode;
   private Display display;
   public static Command OPEN;
   public static Command DELETE;
@@ -69,14 +68,13 @@ public class FileBrowser implements CommandListener, Showable {
 
   //#endif
 
-  public FileBrowser(Showable parent, MenuEngine listener, boolean managementMode) {
+  public FileBrowser(Showable parent, MenuEngine listener) {
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
     DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
     IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
     SEND_BY_EMAIL = new Command(Gome.singleton.bundle.getString("ui.sendByEmail"), Command.SCREEN, 2); //$NON-NLS-1$
     RANDOM = new Command(Gome.singleton.bundle.getString("ui.random"), Command.SCREEN, 2); //$NON-NLS-1$
 
-    this.managementMode = managementMode;
     this.parent = parent;
     this.listener = listener;
 
@@ -100,8 +98,8 @@ public class FileBrowser implements CommandListener, Showable {
     reset();
   }
 
-  public FileBrowser(Showable parent, MenuEngine listener, Vector entries, boolean managementMode) {
-    this(parent, listener, managementMode);
+  public FileBrowser(Showable parent, MenuEngine listener, Vector entries) {
+    this(parent, listener);
     this.entries = entries;
   }
 
@@ -122,8 +120,6 @@ public class FileBrowser implements CommandListener, Showable {
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
-      if (managementMode && !(current instanceof StoreFileEntry))
-        continue;
       Image image = null;
       if (current instanceof CollectionEntry) {
         CollectionEntry file = (CollectionEntry) current;
@@ -158,17 +154,14 @@ public class FileBrowser implements CommandListener, Showable {
     }
 
     uiFolder.addCommand(MenuEngine.BACK);
-
-    if (managementMode) {
-      uiFolder.addCommand(DELETE);
-      String email = Gome.singleton.options.email;
-      if (email != null && email.length() != 0)
-        uiFolder.addCommand(SEND_BY_EMAIL);
-    } else {
-      uiFolder.addCommand(OPEN);
-      uiFolder.addCommand(IMPORT);
-    }
+    uiFolder.addCommand(OPEN);
+    uiFolder.addCommand(IMPORT);
+    uiFolder.addCommand(DELETE);
+    String email = Gome.singleton.options.email;
+    if (email != null && email.length() != 0)
+      uiFolder.addCommand(SEND_BY_EMAIL);
     uiFolder.setCommandListener(this);
+
     display = disp;
 
     //#ifdef MIDP2 
@@ -213,10 +206,10 @@ public class FileBrowser implements CommandListener, Showable {
   //#endif
 
   public void commandAction(Command c, Displayable s) {
-
+    log.debug("command " + c);
     if (s == uiFolder) {
 
-      if (c == OPEN || (!managementMode && c == List.SELECT_COMMAND)) {
+      if (c == OPEN || c == List.SELECT_COMMAND) {
 
         indexFolder = uiFolder.getSelectedIndex();
         Object entry = entries.elementAt(indexFolder);
@@ -241,6 +234,10 @@ public class FileBrowser implements CommandListener, Showable {
       } else if (c == DELETE) {
         indexFolder = uiFolder.getSelectedIndex();
         Object obj = entries.elementAt(indexFolder);
+        if (!(obj instanceof StoreFileEntry)) {
+          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.onlyLocal"), AlertType.ERROR);
+          return;
+        }
         StoreFileEntry entry = (StoreFileEntry) obj;
         listener.deleteFile(entry);
         entries.removeElementAt(indexFolder);
@@ -350,7 +347,7 @@ public class FileBrowser implements CommandListener, Showable {
         typeok = false;
     }
     if (!typeok) {
-      Util.messageBox("ui.error", Gome.singleton.bundle.getString("ui.error.onlyOnline"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.onlyOnline"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       return;
     }
 
@@ -360,7 +357,7 @@ public class FileBrowser implements CommandListener, Showable {
   }
 
   public void downloadFinished(Vector files) {
-    FileBrowser son = new FileBrowser(this, listener, files, managementMode);
+    FileBrowser son = new FileBrowser(this, listener, files);
     son.show(Gome.singleton.display);
   }
 
@@ -369,7 +366,7 @@ public class FileBrowser implements CommandListener, Showable {
   }
 
   void done() {
-    listener.commandAction(MenuEngine.LOAD, Gome.singleton.mainCanvas);
+    listener.commandAction(MenuEngine.FILES, Gome.singleton.mainCanvas);
   }
 
   public void failed(Exception reason) {

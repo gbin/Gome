@@ -24,7 +24,6 @@ import com.indigonauts.gome.igs.ServerGame;
 import com.indigonauts.gome.igs.ServerUser;
 import com.indigonauts.gome.io.CollectionEntry;
 import com.indigonauts.gome.io.FileEntry;
-import com.indigonauts.gome.io.GamesIOManager;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.io.StoreFileEntry;
 import com.indigonauts.gome.sgf.Board;
@@ -39,8 +38,7 @@ public class MenuEngine implements CommandListener {
   // constants
   public static Command NEXT;
   public static Command NEW;
-  public static Command LOAD;
-  public static Command LIBRARY;
+  public static Command FILES;
   public static Command SAVE;
   public static Command PLAY_MODE;
   public static Command PASS;
@@ -111,8 +109,7 @@ public class MenuEngine implements CommandListener {
   static {
     NEXT = new Command(Gome.singleton.bundle.getString("ui.nextInCollection"), Command.SCREEN, 1); //$NON-NLS-1$
     NEW = new Command(Gome.singleton.bundle.getString("ui.new"), Command.SCREEN, 2); //$NON-NLS-1$
-    LOAD = new Command(Gome.singleton.bundle.getString("ui.loadSGF"), Command.SCREEN, 2); //$NON-NLS-1$
-    LIBRARY = new Command(Gome.singleton.bundle.getString("ui.library"), Command.SCREEN, 2); //$NON-NLS-1$
+    FILES = new Command(Gome.singleton.bundle.getString("ui.fileselect"), Command.SCREEN, 2); //$NON-NLS-1$
     SAVE = new Command(Gome.singleton.bundle.getString("ui.saveSGF"), Command.SCREEN, 2); //$NON-NLS-1$
     PLAY_MODE = new Command(Gome.singleton.bundle.getString("ui.playMode"), Command.SCREEN, 5); //$NON-NLS-1$
     PASS = new Command(Gome.singleton.bundle.getString("ui.pass"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -197,21 +194,14 @@ public class MenuEngine implements CommandListener {
             newGameForm = createNewGameMenu();
             Gome.singleton.display.setCurrent(newGameForm);
           }
-        } else if (c == LOAD) {
+        } else if (c == FILES) {
           try {
-            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, GamesIOManager.getAllLocallyAccessibleGamesList(), false);
+            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList());
             fileBrowser.show(Gome.singleton.display);
           } catch (IOException e1) {
             Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e1.getMessage()), AlertType.ERROR); //$NON-NLS-1$
           }
-        } else if (c == LIBRARY) {
-          try {
-            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, GamesIOManager.getAllLocallyAccessibleGamesList(), true);
-            fileBrowser.show(Gome.singleton.display);
-          } catch (IOException e1) {
-            Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e1.getMessage()), AlertType.ERROR); //$NON-NLS-1$
-          }
-        }
+        } 
         //#ifdef IGS
         else if (c == IGS_CONNECT) {
           gc.connectToServer();
@@ -298,7 +288,7 @@ public class MenuEngine implements CommandListener {
       } else if (d == saveGameForm) {
         if (c == SAVE) {
           try {
-            GamesIOManager.saveLocalGame(gameFileName.getString(), gc.getSgfModel());
+            IOManager.singleton.saveLocalGame(gameFileName.getString(), gc.getSgfModel());
           } catch (RecordStoreException e) {
             Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
           }
@@ -427,7 +417,7 @@ public class MenuEngine implements CommandListener {
   public void deleteFile(FileEntry file) {
     if (file instanceof StoreFileEntry) {
       try {
-        IOManager.getSingleton().deleteLocalStore(file.getPath());
+        IOManager.singleton.deleteLocalStore(file.getPath());
       } catch (RecordStoreException e) {
         Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       }

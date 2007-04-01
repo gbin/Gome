@@ -24,8 +24,10 @@ public class IndexLoader extends Fetcher {
   }
 
   protected void download() throws IOException {
-
-    fileList = IOManager.getSingleton().getFileList(url, this);
+    if (url.equals(IOManager.LOCAL_NAME))
+      fileList = IOManager.singleton.getLocalGamesList();
+    else
+      fileList = IOManager.singleton.getFileList(url, this);
 
   }
 

@@ -59,7 +59,7 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   void loadOptions() throws IOException {
     DataInputStream input = null;
     try {
-      input = IOManager.getSingleton().readFromLocalStore(OPTIONS_FILE);
+      input = IOManager.singleton.readFromLocalStore(OPTIONS_FILE);
       options = new GomeOptions(input);
     } finally {
       if (input != null)
@@ -71,7 +71,7 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
     ByteArrayOutputStream outba = new ByteArrayOutputStream();
     DataOutputStream os = new DataOutputStream(outba);
     options.marshalOut(os);
-    IOManager.getSingleton().saveLocalStore(OPTIONS_FILE, outba.toByteArray());
+    IOManager.singleton.saveLocalStore(OPTIONS_FILE, outba.toByteArray());
     os.close();
   }
 

@@ -26,7 +26,7 @@ public class FileImporter extends Fetcher {
 
     protected void download() throws IOException {
         if (selectedFile instanceof IndexEntry) {
-            Vector fileList = IOManager.getSingleton().getFileList(selectedFile.getPath(), this);
+            Vector fileList = IOManager.singleton.getFileList(selectedFile.getPath(), this);
             Enumeration allFiles = fileList.elements();
             while (allFiles.hasMoreElements() && status != TERMINATED) {
                 Object toDownload = allFiles.nextElement();
@@ -42,11 +42,11 @@ public class FileImporter extends Fetcher {
      * @throws IOException
      */
     private void downloadFile(String fileUrl) throws IOException {
-        byte[] file = IOManager.getSingleton().loadFile(fileUrl, this);
+        byte[] file = IOManager.singleton.loadFile(fileUrl, this);
         String name = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
         gauge.setLabel(name);
         try {
-            IOManager.getSingleton().saveLocalStore(name, file);
+            IOManager.singleton.saveLocalStore(name, file);
         } catch (RecordStoreException e) {
             throw new IOException("ui.error.recordStore"); //$NON-NLS-1$
         }

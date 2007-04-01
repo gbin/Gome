@@ -101,7 +101,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
     assignUnassignedKey();
     addCommand(MenuEngine.NEW);
-    addCommand(MenuEngine.LOAD);
+    addCommand(MenuEngine.FILES);
     addCommand(MenuEngine.SAVE);
     addCommand(MenuEngine.GAME_STATUS);
     
@@ -115,7 +115,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#endif
     addCommand(MenuEngine.HELP);
     addCommand(MenuEngine.ABOUT);
-    addCommand(MenuEngine.LIBRARY);
     addCommand(MenuEngine.EXIT);
     setCommandListener(this);
     scroller = new Scroller(this);
