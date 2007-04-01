@@ -32,15 +32,17 @@ public class IOManager {
   private static final String SGF = ".sgf"; //$NON-NLS-1$
 
   private static final String INDEX_NAME = "index.txt"; //$NON-NLS-1$
-  public  static final String LOCAL_NAME = "file:/"; //$NON-NLS-1$
+  public static final String LOCAL_NAME = "file:/"; //$NON-NLS-1$
 
   public static IOManager singleton = new IOManager();
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
   private static final int BUFF_SIZE = 1024;
- 
-  private static char[] map1 = new char[64];
-  static {
+
+  private static char[] map1;
+
+  private static void initMap() {
+    map1 = new char[64];
     int i = 0;
     for (char c = 'A'; c <= 'Z'; c++) {
       map1[i++] = c;
@@ -56,6 +58,8 @@ public class IOManager {
   }
 
   public static String base64Encode(byte[] in) {
+    if (map1 == null)
+      initMap();
     int iLen = in.length;
     int oDataLen = (iLen * 4 + 2) / 3;// output length without padding
     int oLen = ((iLen + 2) / 3) * 4;// output length including padding
@@ -342,7 +346,7 @@ public class IOManager {
 
   public Vector getFileList(String url, DownloadStatus status) throws IOException {
     byte[] data = loadFile(url, status);
-    if(data==null)
+    if (data == null)
       return new Vector();
     return getFileEntriesFromIndex(new String(data));
   }
@@ -363,7 +367,7 @@ public class IOManager {
 
     try {
       InputStream is = readFileAsStream(url, status);
-      if(is == null)
+      if (is == null)
         return null;
       dis = new DataInputStream(is);
       byte[] buffer = new byte[512];
@@ -389,7 +393,7 @@ public class IOManager {
         e.printStackTrace();
 
       }
-      
+
     }
 
     return baos.toByteArray();
@@ -406,16 +410,16 @@ public class IOManager {
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);
   }
-  
-    /*public static Vector getAllLocallyAccessibleGamesList() throws IOException {
-    Vector answer = getLocalGamesList();
-    Vector others = getRootBundledGamesList();
-    Enumeration all = others.elements();
-    while (all.hasMoreElements()) {
-      answer.addElement(all.nextElement());
-    }
-    return answer;
-  }*/
+
+  /*public static Vector getAllLocallyAccessibleGamesList() throws IOException {
+   Vector answer = getLocalGamesList();
+   Vector others = getRootBundledGamesList();
+   Enumeration all = others.elements();
+   while (all.hasMoreElements()) {
+   answer.addElement(all.nextElement());
+   }
+   return answer;
+   }*/
 
   public Vector getLocalGamesList() {
     Vector answer = new Vector();
@@ -462,7 +466,7 @@ public class IOManager {
     InputStreamReader inputStreamReader = null;
     try {
       readFileAsStream = singleton.readFileAsStream(url, status);
-      if(readFileAsStream == null) // it is supposed to be recalled
+      if (readFileAsStream == null) // it is supposed to be recalled
         return null;
       inputStreamReader = new InputStreamReader(readFileAsStream);
       for (int i = 1; i < gameIndex; i++) {
