@@ -15,6 +15,7 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
+import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
@@ -28,7 +29,7 @@ import com.indigonauts.gome.io.CollectionEntry;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.io.IndexEntry;
-import com.indigonauts.gome.io.StoreFileEntry;
+import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
@@ -65,10 +66,14 @@ public class FileBrowser implements CommandListener, Showable {
   int bestImageWidth = DEFAULT_ILLUSTRATIVE_SIZE;
   int bestImageHeight = DEFAULT_ILLUSTRATIVE_SIZE;
   private GraphicRectangle illustrativeRectangle;
-
   //#endif
 
-  public FileBrowser(Showable parent, MenuEngine listener) {
+  private boolean saveMode;
+
+  private String currentDirectory;
+  private Form saveGame;
+
+  private FileBrowser(Showable parent, MenuEngine listener, boolean saveMode) {
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
     DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
     IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
@@ -77,6 +82,7 @@ public class FileBrowser implements CommandListener, Showable {
 
     this.parent = parent;
     this.listener = listener;
+    this.saveMode = saveMode;
 
     //#ifdef MENU_IMAGES
     //#ifdef MIDP2
@@ -98,9 +104,10 @@ public class FileBrowser implements CommandListener, Showable {
     reset();
   }
 
-  public FileBrowser(Showable parent, MenuEngine listener, Vector entries) {
-    this(parent, listener);
+  public FileBrowser(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
+    this(parent, listener, saveMode);
     this.entries = entries;
+    this.currentDirectory = path;
   }
 
   public void addFile(FileEntry entry) {
@@ -115,7 +122,7 @@ public class FileBrowser implements CommandListener, Showable {
   }
 
   public void show(Display disp) {
-    uiFolder = new List(Gome.singleton.bundle.getString("ui.fileselect"), Choice.IMPLICIT);
+    uiFolder = new List(Gome.singleton.bundle.getString("ui.filesIn", new String[] { currentDirectory }), Choice.IMPLICIT);
 
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
@@ -154,14 +161,15 @@ public class FileBrowser implements CommandListener, Showable {
     }
 
     uiFolder.addCommand(MenuEngine.BACK);
-    uiFolder.addCommand(OPEN);
-    uiFolder.addCommand(IMPORT);
-    uiFolder.addCommand(DELETE);
-    String email = Gome.singleton.options.email;
-    if (email != null && email.length() != 0)
+    if (saveMode) {
+      uiFolder.addCommand(MenuEngine.SAVE);
+    } else {
+      uiFolder.addCommand(OPEN);
+      uiFolder.addCommand(IMPORT);
+      uiFolder.addCommand(DELETE);
       uiFolder.addCommand(SEND_BY_EMAIL);
+    }
     uiFolder.setCommandListener(this);
-
     display = disp;
 
     //#ifdef MIDP2 
@@ -215,11 +223,14 @@ public class FileBrowser implements CommandListener, Showable {
         Object entry = entries.elementAt(indexFolder);
 
         if (entry instanceof IndexEntry) {
-          IndexEntry index = (IndexEntry) entry;
-          new IndexLoader(index.getPath(), this).show(Gome.singleton.display);
+
+          new IndexLoader((IndexEntry) entry, this).show(Gome.singleton.display);
           return;
 
-        } else if (entry instanceof CollectionEntry && ((CollectionEntry) entry).getCollectionSize() == 1) {
+        }
+        if (saveMode)
+          return; //don't load any file in save mode
+        if (entry instanceof CollectionEntry && ((CollectionEntry) entry).getCollectionSize() == 1) {
           indexBlock = 0;
           selectedNum = 0;
 
@@ -228,17 +239,22 @@ public class FileBrowser implements CommandListener, Showable {
         }
         showFileBlock();
 
-      } else if (c == MenuEngine.BACK) {
+      } else if (c == MenuEngine.SAVE) {
+        saveGame = listener.createSaveGameMenu(this, currentDirectory);
+        Gome.singleton.display.setCurrent(saveGame);
+      }
+
+      else if (c == MenuEngine.BACK) {
         parent.show(display);
         parent = null;
       } else if (c == DELETE) {
         indexFolder = uiFolder.getSelectedIndex();
         Object obj = entries.elementAt(indexFolder);
-        if (!(obj instanceof StoreFileEntry)) {
+        if (!(obj instanceof LocalFileEntry)) {
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.onlyLocal"), AlertType.ERROR);
           return;
         }
-        StoreFileEntry entry = (StoreFileEntry) obj;
+        LocalFileEntry entry = (LocalFileEntry) obj;
         listener.deleteFile(entry);
         entries.removeElementAt(indexFolder);
 
@@ -279,6 +295,12 @@ public class FileBrowser implements CommandListener, Showable {
         selectedNum = indexBlock * BLOCK_SIZE + indexFile + 1;
         FileEntry selectedFile = getSelectedFile();
         listener.loadFile((CollectionEntry) selectedFile, selectedNum);
+      }
+    } else if (s == saveGame) {
+      if (c == MenuEngine.SAVE) {
+        //#ifdef DEBUG
+        log.debug("save game");
+        //#endif
       }
     }
   }
@@ -339,7 +361,7 @@ public class FileBrowser implements CommandListener, Showable {
 
   public void importFile(FileEntry selectedFile) {
     boolean typeok = true;
-    if (selectedFile instanceof StoreFileEntry || selectedFile instanceof BundledFileEntry) {
+    if (selectedFile instanceof LocalFileEntry || selectedFile instanceof BundledFileEntry) {
       typeok = false;
     } else if (selectedFile instanceof IndexEntry) {
       IndexEntry ie = (IndexEntry) selectedFile;
@@ -356,8 +378,8 @@ public class FileBrowser implements CommandListener, Showable {
     fileLoader.start();
   }
 
-  public void downloadFinished(Vector files) {
-    FileBrowser son = new FileBrowser(this, listener, files);
+  public void downloadFinished(String path, Vector files) {
+    FileBrowser son = new FileBrowser(this, listener, files, path, saveMode);
     son.show(Gome.singleton.display);
   }
 

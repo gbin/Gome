@@ -19,7 +19,7 @@ public class FileImporter extends Fetcher {
     private FileEntry selectedFile;
 
     public FileImporter(FileBrowser callback, FileEntry selectedFile) {
-        super(selectedFile.getPath());
+        super(selectedFile);
         this.callback = callback;
         this.selectedFile = selectedFile;
     }

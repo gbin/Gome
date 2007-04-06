@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eclipsemeMetadata jad="" version="1.6.5">
+<eclipsemeMetadata jad="" version="1.6.6">
    <device group="J2ME Wireless Toolkit 2.2" name="DefaultColorPhone"/>
-   <signing signProject="false"/>
+   <signing signProject="true">
+      <keystore>$/indigonauts.keystore</keystore>
+      <alias>mykey</alias>
+      <provider/>
+      <keystoreType/>
+      <passwords storePasswords="2">
+         <keystore>Vx3J1VLp</keystore>
+         <key>Vx3J1VLp</key>
+      </passwords>
+   </signing>
 </eclipsemeMetadata>

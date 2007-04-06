@@ -7,14 +7,12 @@ package com.indigonauts.gome;
 import java.util.Timer;
 import java.util.Vector;
 
-import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
-import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
@@ -114,7 +112,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.CONSOLE);
     //#endif
     addCommand(MenuEngine.HELP);
-    addCommand(MenuEngine.ABOUT);
     addCommand(MenuEngine.EXIT);
     setCommandListener(this);
     scroller = new Scroller(this);
@@ -344,9 +341,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void commandAction(Command c, Displayable d) {
-    if (c == MenuEngine.GAME_STATUS) {
-      displayGameStatus();
-    } else if (c == MenuEngine.PLAY_MODE) {
+     if (c == MenuEngine.PLAY_MODE) {
       gc.setPlayMode(GameController.GAME_MODE);
       setSplashInfo(Gome.singleton.bundle.getString("ui.switchToPlayEditMode"));
       if (clockControl != null) {
@@ -474,9 +469,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     }
   }
 
-  private void displayGameStatus() {
-    gc.doPopGameStatus();
-  }
 
   private static final Object SCROLLER_SYNC = new Object();
 

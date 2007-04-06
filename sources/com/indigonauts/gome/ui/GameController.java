@@ -8,12 +8,14 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Form;
 
 import com.indigonauts.gome.ClockController;
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
+import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.Util;
 
 import com.indigonauts.gome.igs.ServerCallback;
@@ -867,110 +869,7 @@ public class GameController implements ServerCallback
   boolean isZoomIn() {
     return bZoomIn;
   }
-
-  public void doPopGameStatus() {
-    StringBuffer info = new StringBuffer();
-    info.append(Gome.singleton.bundle.getString("game.captured")); //$NON-NLS-1$
-    info.append(board.getNbCapturedBlack());
-    info.append('/');
-    info.append(board.getNbCapturedWhite());
-    info.append('\n');
-    if (model.getName() != null) {
-      info.append(Gome.singleton.bundle.getString("game.name")); //$NON-NLS-1$
-      info.append(model.getName());
-      info.append('\n');
-    }
-    if (model.getEvent() != null) {
-      info.append(Gome.singleton.bundle.getString("game.event")); //$NON-NLS-1$
-      info.append(model.getEvent());
-      info.append('\n');
-    }
-    if (model.getRound() != null) {
-      info.append(Gome.singleton.bundle.getString("game.round")); //$NON-NLS-1$
-      info.append(model.getRound());
-      info.append('\n');
-    }
-    if (model.getDate() != null) {
-      info.append(" "); //$NON-NLS-1$
-      info.append(model.getDate());
-    }
-    if (model.getBlackPlayer() != null && model.getWhitePlayer() != null) {
-      info.append('\n');
-      info.append(model.getWhitePlayer());
-      if (model.getWhiteRank() != null) {
-        info.append(Gome.singleton.bundle.getString("game.whiteShort")); //$NON-NLS-1$
-        info.append('[');
-        info.append(model.getWhiteRank());
-        info.append(']');
-      }
-      info.append(' ');
-      info.append(Gome.singleton.bundle.getString("game.versus")); //$NON-NLS-1$
-      info.append(' ');
-      info.append(model.getBlackPlayer());
-      if (model.getBlackRank() != null) {
-        info.append(Gome.singleton.bundle.getString("game.blackShort")); //$NON-NLS-1$
-        info.append('[');
-        info.append(model.getBlackRank());
-        info.append(']');
-      }
-      info.append('\n');
-    }
-    if (model.getBlackTeam() != null & model.getWhiteTeam() != null) {
-      info.append(model.getWhiteTeam());
-      info.append(' ');
-      info.append(Gome.singleton.bundle.getString("game.versus")); //$NON-NLS-1$
-      info.append(' ');
-      info.append(model.getBlackTeam());
-      info.append('\n');
-    }
-    if (model.getKomi() != null) {
-      info.append(Gome.singleton.bundle.getString("game.komi")); //$NON-NLS-1$
-      info.append(model.getKomi());
-      info.append('\n');
-    }
-    if (model.getResult() != null) {
-      info.append(Gome.singleton.bundle.getString("game.result")); //$NON-NLS-1$
-      info.append(model.getResult());
-      info.append('\n');
-    }
-    if (model.getOpening() != null) {
-      info.append(Gome.singleton.bundle.getString("game.opening")); //$NON-NLS-1$
-      info.append(model.getOpening());
-      info.append('\n');
-    }
-    if (model.getPlace() != null) {
-      info.append(Gome.singleton.bundle.getString("game.place")); //$NON-NLS-1$
-      info.append(model.getPlace());
-      info.append('\n');
-    }
-    if (model.getContext() != null) {
-      info.append(Gome.singleton.bundle.getString("game.context")); //$NON-NLS-1$
-      info.append(model.getContext());
-      info.append('\n');
-    }
-    if (model.getScribe() != null) {
-      info.append(Gome.singleton.bundle.getString("game.scribe")); //$NON-NLS-1$
-      info.append(model.getScribe());
-      info.append('\n');
-    }
-    if (model.getSource() != null) {
-      info.append(Gome.singleton.bundle.getString("game.source")); //$NON-NLS-1$
-      info.append(model.getSource());
-      info.append('\n');
-    }
-    if (model.getApplication() != null) {
-      info.append(Gome.singleton.bundle.getString("game.application")); //$NON-NLS-1$
-      info.append(model.getApplication());
-      info.append('\n');
-    }
-    if (model.getCopyright() != null) {
-      info.append(Gome.singleton.bundle.getString("game.copyright")); //$NON-NLS-1$
-      info.append(model.getCopyright());
-      info.append('\n');
-    }
-    Util.messageBox(Gome.singleton.bundle.getString("game.info"), info.toString(), AlertType.INFO); //$NON-NLS-1$
-  }
-
+  
   /**
    * @return Returns the currentNode.
    */
@@ -1668,6 +1567,10 @@ public class GameController implements ServerCallback
     v1 = v1.substring(0, v1.length() - 1) + "." + v1.substring(v1.length() - 1);
 
     canvas.setSplashInfo(name + Gome.singleton.bundle.getString("game.winBy") + v1);
+  }
+
+  public Board getBoard() {
+    return board;
   }
 
 }

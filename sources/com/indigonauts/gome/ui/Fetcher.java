@@ -16,6 +16,7 @@ import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.io.DownloadStatus;
+import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
 
 public abstract class Fetcher extends Form implements CommandListener, DownloadStatus {
@@ -33,7 +34,7 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   protected int status = -1;
 
-  protected String url;
+  protected FileEntry entry;
 
   private Displayable prevWindow;
 
@@ -45,15 +46,15 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   private String pwdFile;
   protected FetcherDownloadThread thread;
 
-  public Fetcher(String url) {
+  public Fetcher(FileEntry entry) {
     super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
-    gauge = new Gauge(url, false, 100, 0);
+    gauge = new Gauge(entry.getPath(), false, 100, 0);
     status = READY;
 
     this.append(gauge);
     this.addCommand(MenuEngine.BACK);
     this.setCommandListener(this);
-    this.url = url;
+    this.entry = entry;
   }
 
   protected void start() {

@@ -25,7 +25,8 @@ import com.indigonauts.gome.igs.ServerUser;
 import com.indigonauts.gome.io.CollectionEntry;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
-import com.indigonauts.gome.io.StoreFileEntry;
+import com.indigonauts.gome.io.IndexEntry;
+import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 
 public class MenuEngine implements CommandListener {
@@ -69,7 +70,6 @@ public class MenuEngine implements CommandListener {
   //#endif
   public static Command HELP;
   public static Command BACK;
-  public static Command ABOUT;
   public static Command START;
   public static Command EXIT;
   public static Command FINISHED_COUNTING;
@@ -89,7 +89,7 @@ public class MenuEngine implements CommandListener {
   ChoiceGroup newGameSize, setKomi;
   TextField newGameHandicap, newGameKomi;
   TextField url;
-  TextField gameFileName;
+  public TextField gameFileName;
 
   //#ifdef DEBUG
   LogCanvas logCanvas;
@@ -110,7 +110,7 @@ public class MenuEngine implements CommandListener {
     NEXT = new Command(Gome.singleton.bundle.getString("ui.nextInCollection"), Command.SCREEN, 1); //$NON-NLS-1$
     NEW = new Command(Gome.singleton.bundle.getString("ui.new"), Command.SCREEN, 2); //$NON-NLS-1$
     FILES = new Command(Gome.singleton.bundle.getString("ui.fileselect"), Command.SCREEN, 2); //$NON-NLS-1$
-    SAVE = new Command(Gome.singleton.bundle.getString("ui.saveSGF"), Command.SCREEN, 2); //$NON-NLS-1$
+    SAVE = new Command(Gome.singleton.bundle.getString("ui.save"), Command.SCREEN, 2); //$NON-NLS-1$
     PLAY_MODE = new Command(Gome.singleton.bundle.getString("ui.playMode"), Command.SCREEN, 5); //$NON-NLS-1$
     PASS = new Command(Gome.singleton.bundle.getString("ui.pass"), Command.SCREEN, 5); //$NON-NLS-1$
     LAST_MOVE = new Command(Gome.singleton.bundle.getString("ui.lastMove"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -140,7 +140,6 @@ public class MenuEngine implements CommandListener {
 
     HELP = new Command(Gome.singleton.bundle.getString("ui.help"), Command.SCREEN, 9); //$NON-NLS-1$
     BACK = new Command(Gome.singleton.bundle.getString("ui.back"), Command.BACK, 0); //$NON-NLS-1$
-    ABOUT = new Command(Gome.singleton.bundle.getString("ui.about"), Command.SCREEN, 9); //$NON-NLS-1$
     START = new Command(Gome.singleton.bundle.getString("ui.start"), Command.SCREEN, 10); //$NON-NLS-1$
     EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); //$NON-NLS-1$
 
@@ -171,14 +170,14 @@ public class MenuEngine implements CommandListener {
     return game;
   }
 
-  public Form createSaveGameMenu() {
-    Form createForm = new Form(Gome.singleton.bundle.getString("ui.saveSGF")); //$NON-NLS-1$
+  public Form createSaveGameMenu(CommandListener cmd, String name) {
+    Form createForm = new Form(Gome.singleton.bundle.getString("ui.saveIn", new String[] { name })); //$NON-NLS-1$
     gameFileName = new TextField(Gome.singleton.bundle.getString("ui.filename"), Gome.singleton.bundle //$NON-NLS-1$
             .getString("ui.defaultFilename"), 28, TextField.ANY); //$NON-NLS-1$
     createForm.append(gameFileName);
     createForm.addCommand(BACK);
     createForm.addCommand(SAVE);
-    createForm.setCommandListener(this);
+    createForm.setCommandListener(cmd);
     return createForm;
   }
 
@@ -196,12 +195,12 @@ public class MenuEngine implements CommandListener {
           }
         } else if (c == FILES) {
           try {
-            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList());
+            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
             fileBrowser.show(Gome.singleton.display);
           } catch (IOException e1) {
             Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e1.getMessage()), AlertType.ERROR); //$NON-NLS-1$
           }
-        } 
+        }
         //#ifdef IGS
         else if (c == IGS_CONNECT) {
           gc.connectToServer();
@@ -230,8 +229,12 @@ public class MenuEngine implements CommandListener {
         } else if (c == PASS) {
           gc.pass();
         } else if (c == SAVE) {
-          saveGameForm = createSaveGameMenu();
-          Gome.singleton.display.setCurrent(saveGameForm);
+          if (IOManager.jsr75Mode) {
+            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
+            new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, "", true), fileBrowser).show(Gome.singleton.display);
+          } else {
+            Gome.singleton.display.setCurrent(createSaveGameMenu(this, "Local"));
+          }
         } else if (c == OPTIONS) {
           optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, false);
           Gome.singleton.display.setCurrent(optionsForm);
@@ -245,18 +248,13 @@ public class MenuEngine implements CommandListener {
           Gome.singleton.display.setCurrent(logCanvas);
         }
         //#endif
-
-        else if (c == ABOUT) {
-          String info = "GOME v" + Gome.VERSION + "\n\n" + "(c) 2005 Indigonauts\n\nwww.indigonauts.com/gome"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-
-          Util.messageBox(Gome.singleton.bundle.getString("ui.about") + "...", info, AlertType.INFO); //$NON-NLS-1$//$NON-NLS-2$
-
-        } else if (c == HELP) {
-          Help help = new Help(Gome.singleton.mainCanvas);
+        else if (c == HELP) {
+          Info help = new Info(Gome.singleton.mainCanvas);
           help.show(Gome.singleton.display);
-        }
-
-        else if (c == EXIT) {
+        } else if (c == MenuEngine.GAME_STATUS) {
+          Info help = new Info(Gome.singleton.mainCanvas, MenuEngine.GAME_STATUS);
+          help.show(Gome.singleton.display);
+        } else if (c == EXIT) {
           Gome.singleton.notifyDestroyed();
         } else if (c == RESIGN) {
           gc.resign();
@@ -415,7 +413,7 @@ public class MenuEngine implements CommandListener {
   }
 
   public void deleteFile(FileEntry file) {
-    if (file instanceof StoreFileEntry) {
+    if (file instanceof LocalFileEntry) {
       try {
         IOManager.singleton.deleteLocalStore(file.getPath());
       } catch (RecordStoreException e) {

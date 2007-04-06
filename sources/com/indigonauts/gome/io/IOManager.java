@@ -15,6 +15,8 @@ import java.util.Vector;
 
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
+import javax.microedition.io.file.FileConnection;
+import javax.microedition.io.file.FileSystemRegistry;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
@@ -24,6 +26,7 @@ import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.sgf.SgfModel;
+import com.indigonauts.gome.ui.GameController;
 
 public class IOManager {
   //#ifdef DEBUG
@@ -32,7 +35,7 @@ public class IOManager {
   private static final String SGF = ".sgf"; //$NON-NLS-1$
 
   private static final String INDEX_NAME = "index.txt"; //$NON-NLS-1$
-  public static final String LOCAL_NAME = "file:/"; //$NON-NLS-1$
+  public static final String LOCAL_NAME = "file:///"; //$NON-NLS-1$
 
   public static IOManager singleton = new IOManager();
 
@@ -40,6 +43,17 @@ public class IOManager {
   private static final int BUFF_SIZE = 1024;
 
   private static char[] map1;
+
+  public static boolean jsr75Mode = false;
+
+  static {
+    if (System.getProperty("microedition.io.file.FileConnection.version") != null) {
+      jsr75Mode = true;
+      //#ifdef DEBUG
+      log.info("JSR75 Mode");
+      //#endif
+    }
+  }
 
   private static void initMap() {
     map1 = new char[64];
@@ -312,7 +326,7 @@ public class IOManager {
           //#endif
           entry = new IndexEntry(name, description, boardArea, black, white);
         } else {
-          entry = new IndexEntry(name, description);
+          entry = new IndexEntry(name, description, false);
         }
 
       } else {
@@ -411,16 +425,6 @@ public class IOManager {
     return readBundledFile(url);
   }
 
-  /*public static Vector getAllLocallyAccessibleGamesList() throws IOException {
-   Vector answer = getLocalGamesList();
-   Vector others = getRootBundledGamesList();
-   Enumeration all = others.elements();
-   while (all.hasMoreElements()) {
-   answer.addElement(all.nextElement());
-   }
-   return answer;
-   }*/
-
   public Vector getLocalGamesList() {
     Vector answer = new Vector();
     String[] listRecordStores = RecordStore.listRecordStores();
@@ -429,7 +433,7 @@ public class IOManager {
     for (int i = 0; i < listRecordStores.length; i++) {
       String filename = listRecordStores[i];
       if (filename.toLowerCase().endsWith(SGF))
-        answer.addElement(new StoreFileEntry("store:" + filename, filename)); //$NON-NLS-1$
+        answer.addElement(new LocalFileEntry("store:" + filename, filename, false)); //$NON-NLS-1$
     }
     return answer;
 
@@ -532,6 +536,40 @@ public class IOManager {
       }
     } while (level != 0 && c != -1);
     return c != -1;
+  }
+
+  public Vector getJSR75Roots() {
+    Vector roots = new Vector();
+    Enumeration listRoots = FileSystemRegistry.listRoots();
+    while (listRoots.hasMoreElements()) {
+      String url = (String) listRoots.nextElement();
+      roots.addElement(new IndexEntry("file:///" + url, url, true));
+    }
+    return roots;
+  }
+  
+  private FileConnection fc;
+
+  public Vector loadJSR75Index(String baseRep) throws IOException {
+    //#ifdef DEBUG
+    log.debug("Base rep = " + baseRep);
+    //#endif
+    Vector list = new Vector();
+    if(fc == null)
+      fc = (FileConnection) Connector.open(baseRep);
+    else
+      fc.setFileConnection(baseRep);
+    
+    Enumeration content = fc.list();
+    String current;
+    while (content.hasMoreElements()) {
+      current = (String) content.nextElement();
+      if (current.endsWith("/")) {
+        list.addElement(new IndexEntry(baseRep +current, current, true));
+      } else
+        list.addElement(new LocalFileEntry(baseRep +current, current, true));
+    }
+    return list;
   }
 
 }
