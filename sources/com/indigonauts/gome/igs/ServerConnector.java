@@ -11,8 +11,6 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.lcdui.AlertType;
 
-import org.apache.log4j.Logger;
-
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Util;
 

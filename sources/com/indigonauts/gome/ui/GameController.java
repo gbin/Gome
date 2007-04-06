@@ -8,23 +8,19 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Display;
-import javax.microedition.lcdui.Form;
 
 import com.indigonauts.gome.ClockController;
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
-import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.Util;
-
 import com.indigonauts.gome.igs.ServerCallback;
 import com.indigonauts.gome.igs.ServerChallenge;
 import com.indigonauts.gome.igs.ServerConnector;
 import com.indigonauts.gome.igs.ServerGame;
 import com.indigonauts.gome.igs.ServerMove;
 import com.indigonauts.gome.igs.ServerUser;
-
 import com.indigonauts.gome.io.CollectionEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;

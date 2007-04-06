@@ -1,6 +1,5 @@
 package com.indigonauts.gome.ui;
 
-import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;

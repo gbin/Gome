@@ -26,7 +26,6 @@ import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.sgf.SgfModel;
-import com.indigonauts.gome.ui.GameController;
 
 public class IOManager {
   //#ifdef DEBUG
