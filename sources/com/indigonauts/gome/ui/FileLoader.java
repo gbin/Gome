@@ -38,11 +38,11 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
   protected void download() throws IOException {
     try {
       if (mode == GameController.TEXT_MODE) {
-        text = new String(IOManager.singleton.loadFile(entry.getPath(), this));
+        text = new String(IOManager.singleton.loadFile(entry.getUrl(), this));
         return;
       }
 
-      model = IOManager.singleton.extractGameFromCollection(entry.getPath(), fileIndex, this);
+      model = IOManager.singleton.extractGameFromCollection(entry.getUrl(), fileIndex, this);
       if (model == null)
         status = Fetcher.TERMINATED; // stop loading and wait for the reload
     } catch (IllegalArgumentException e) {
@@ -53,7 +53,7 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
   protected void downloadFinished() {
     if (mode == GameController.TEXT_MODE) {
 
-      Alert al = new Alert(entry.getPath(), text, null, AlertType.INFO);
+      Alert al = new Alert(entry.getUrl(), text, null, AlertType.INFO);
       al.setTimeout(Alert.FOREVER);
       al.setCommandListener(this);
       Gome.singleton.display.setCurrent(al);

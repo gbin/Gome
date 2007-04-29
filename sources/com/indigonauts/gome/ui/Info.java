@@ -6,6 +6,8 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.StringItem;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
@@ -86,18 +88,27 @@ public class Info implements CommandListener, Showable {
     Form help = new Form(bundle.getString("ui.help"));
     Image img = Image.createImage(53, 53);
     bp.drawBoard(img.getGraphics());
-    help
-            .append("The board is a grid of horizontal and vertical lines.\n The board used here is small (5x5) compared to the sizes you will find in clubs, tournaments and online (typically 19x19), but the rules are the same.");
+    appendText(
+            help,
+            "\nThe board is a grid of horizontal and vertical lines.\n The board used here is small (5x5) compared to the sizes you will find in clubs, tournaments and online (typically 19x19), but the rules are the same.");
     help.append(Image.createImage(img));
-
-    help
-            .append("The lines of the board have intersections wherever they cross or touch each other. Each intersection is called a point. That includes the four corners, and the edges of the board.\nThe example board has 25 points. The red circle shows one particular point. The red square in the corner shows another point.");
+    appendText(
+            help,
+            "\nThe lines of the board have intersections wherever they cross or touch each other. Each intersection is called a point. That includes the four corners, and the edges of the board.\nThe example board has 25 points. The red circle shows one particular point. The red square in the corner shows another point.");
     SymbolAnnotation sa = new SymbolAnnotation(new Point((byte) 4, (byte) 0), SymbolAnnotation.SQUARE);
     bp.drawSymbolAnnotation(img.getGraphics(), sa, 0xFF0000);
     SymbolAnnotation sa2 = new SymbolAnnotation(new Point((byte) 1, (byte) 2), SymbolAnnotation.CIRCLE);
     bp.drawSymbolAnnotation(img.getGraphics(), sa2, 0xFF0000);
     help.append(Image.createImage(img));
     return help;
+  }
+
+  private void appendText(Form form, String text) {
+    StringItem si = new StringItem("", text);
+    //#ifdef MIDP2
+    si.setFont(MainCanvas.SMALL_FONT);
+    //#endif
+    form.append(si);
   }
 
   public void show(Display destination) {
@@ -151,7 +162,11 @@ public class Info implements CommandListener, Showable {
     buf.append(canvas.getKeyName(canvas.KEY_10PREVMOVES));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.prev10Moves")); //$NON-NLS-1$
-    help.append(buf.toString());
+    StringItem si = new StringItem("", buf.toString());
+    //#ifdef MIDP2
+    si.setFont(MainCanvas.SMALL_FONT);
+    //#endif
+    help.append(si);
     return help;
   }
 
@@ -260,16 +275,31 @@ public class Info implements CommandListener, Showable {
       info.append(model.getCopyright());
       info.append('\n');
     }
-    form.append(info.toString());
+    StringItem si = new StringItem("", info.toString());
+    //#ifdef MIDP2
+    si.setFont(MainCanvas.SMALL_FONT);
+    //#endif
+    form.append(si);
     return form;
   }
 
   private Form getAbout() {
     ResourceBundle bundle = Gome.singleton.bundle;
     Form form = new Form(bundle.getString("ui.about"));
-    form.append("GOME v" + Gome.VERSION);
-    form.append("(c) 2005-2007 Indigonauts");
-    form.append("www.indigonauts.com/gome");
+    StringBuffer buf = new StringBuffer("GOME v");
+    buf.append(Gome.VERSION);
+    buf.append("\n\n");
+    buf.append("(c) 2005-2007 Indigonauts");
+    buf.append("\n\n");
+    //#ifdef MIDP2
+    StringItem url = new StringItem("", "http://www.indigonauts.com/gome", Item.HYPERLINK);
+    url.setFont(MainCanvas.SMALL_FONT);
+    //#else
+    //# StringItem url = new StringItem("", "http://www.indigonauts.com/gome");
+    //#endif
+    form.append(buf.toString());
+    form.append(url);
+
     return form;
 
   }

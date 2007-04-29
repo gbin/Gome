@@ -8,20 +8,14 @@ public class IndexEntry extends FileEntry {
   private String illustrativeBoardArea;
   private String illustrativeBlackPosition;
   private String illustrativeWhitePosition;
-  private boolean jsr75;
 
-  public IndexEntry(String path, String description, boolean jsr75) {
-    super(path, 'I');
+  public IndexEntry(String path, String name, String description) {
+    super(path,name, 'I');
     this.description = description;
-    this.jsr75 = jsr75;
   }
 
-  public boolean isJsr75() {
-    return jsr75;
-  }
-
-  public IndexEntry(String path, String description, String illustrativeBoardArea, String illustrativeBlackPosition, String illustrativeWhitePosition) {
-    this(path, description, false);
+  public IndexEntry(String path, String name, String description, String illustrativeBoardArea, String illustrativeBlackPosition, String illustrativeWhitePosition) {
+    this(path, name, description);
     this.illustrativeBoardArea = illustrativeBoardArea;
     this.illustrativeBlackPosition = illustrativeBlackPosition;
     this.illustrativeWhitePosition = illustrativeWhitePosition;
@@ -56,5 +50,4 @@ public class IndexEntry extends FileEntry {
   public boolean hasAnIllustration() {
     return illustrativeBoardArea != null;
   }
-
 }

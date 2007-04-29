@@ -10,13 +10,16 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
+//#ifdef JSR75
 import javax.microedition.io.file.FileConnection;
 import javax.microedition.io.file.FileSystemRegistry;
+//#endif
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
@@ -42,17 +45,6 @@ public class IOManager {
   private static final int BUFF_SIZE = 1024;
 
   private static char[] map1;
-
-  public static boolean jsr75Mode = false;
-
-  static {
-    if (System.getProperty("microedition.io.file.FileConnection.version") != null) {
-      jsr75Mode = true;
-      //#ifdef DEBUG
-      log.info("JSR75 Mode");
-      //#endif
-    }
-  }
 
   private static void initMap() {
     map1 = new char[64];
@@ -176,8 +168,7 @@ public class IOManager {
   }
 
   public static void sendFileByMail(FileEntry selectedFile, String email) {
-    String url = selectedFile.getPath();
-    String filename = url.substring(url.indexOf(':') + 1);
+    String filename = selectedFile.getName();
     postStoreFileToHttp(filename, EMAIL_SEND_BASE + "email=" + URLEncode(email) + "&game=" + filename);
 
   }
@@ -285,25 +276,25 @@ public class IOManager {
 
   public Vector getFileEntriesFromIndex(String indexFile) {
     //#ifdef DEBUG
-    //log.debug("getFileEntriesFromIndex :" + indexFile);
+    log.debug("getFileEntriesFromIndex :" + indexFile);
     //#endif
     Vector answer = new Vector();
     StringVector list = new StringVector(indexFile, '\n');
     Enumeration elements = list.elements();
-    String rep = ((String) elements.nextElement()).trim();
+    String path = ((String) elements.nextElement()).trim();
     while (elements.hasMoreElements()) {
       String triplet = (String) elements.nextElement();
       if (triplet.trim().length() == 0)
         continue;
       StringVector fileEntry = new StringVector(triplet, ',');
 
-      String name = rep + fileEntry.stringElementAt(0).trim();
+      String name = fileEntry.stringElementAt(0).trim();
       char mode = fileEntry.stringElementAt(1).trim().charAt(0);
       String description;
       if (fileEntry.size() > 2)
-        description = fileEntry.stringElementAt(2);
+        description = fileEntry.stringElementAt(2).trim();
       else
-        description = fileEntry.stringElementAt(0); // if there is no
+        description = fileEntry.stringElementAt(0).trim(); // if there is no
       FileEntry entry;
 
       if (mode == 'I') { //$NON-NLS-1$
@@ -323,9 +314,9 @@ public class IOManager {
           //#ifdef DEBUG
           log.debug("white =" + white);
           //#endif
-          entry = new IndexEntry(name, description, boardArea, black, white);
+          entry = new IndexEntry(path, name, description, boardArea, black, white);
         } else {
-          entry = new IndexEntry(name, description, false);
+          entry = new IndexEntry(path, name, description);
         }
 
       } else {
@@ -336,16 +327,16 @@ public class IOManager {
           if (collSize.length() != 0)
             collectionSize = Integer.parseInt(collSize);
         }
-        if (name.startsWith("http://")) { //$NON-NLS-1$
-          entry = new URLFileEntry(name, mode, description, collectionSize);
+        if (path.startsWith("http://")) { //$NON-NLS-1$
+          entry = new URLFileEntry(path, name, mode, description, collectionSize);
         } else {
           if (fileEntry.size() > 4) {
             String boardArea = fileEntry.stringElementAt(4).trim();
             String black = fileEntry.stringElementAt(5).trim();
             String white = fileEntry.stringElementAt(6).trim();
-            entry = new BundledFileEntry(name, mode, description, collectionSize, boardArea, black, white);
+            entry = new BundledFileEntry(path, name, mode, description, collectionSize, boardArea, black, white);
           } else {
-            entry = new BundledFileEntry(name, mode, description, collectionSize);
+            entry = new BundledFileEntry(path, name, mode, description, collectionSize);
           }
         }
       }
@@ -373,7 +364,8 @@ public class IOManager {
         throw new IOException("ui.error.recordStore"); //$NON-NLS-1$
       }
     }
-    int bidon = 0;
+    
+    int percent = 0;
 
     DataInputStream dis = null;
     ByteArrayOutputStream baos = new ByteArrayOutputStream(200);
@@ -389,8 +381,8 @@ public class IOManager {
 
       while (nbread != -1) {
         if (status != null) {
-          bidon = (bidon + 10) % 100;
-          status.setPercent(bidon);
+          percent = (percent + 10) % 100;
+          status.setPercent(percent);
         }
         baos.write(buffer, 0, nbread);
         nbread = dis.read(buffer);
@@ -418,8 +410,12 @@ public class IOManager {
     } else if (url.startsWith("store:")) { //$NON-NLS-1$
       url = url.substring(url.indexOf(':') + 1);
       return readFromLocalStore(url);
-
     }
+    //#ifdef JSR75
+    else if (url.startsWith("file:")) {
+      return loadJSR75(url, status);
+    }
+    //#endif
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);
   }
@@ -432,7 +428,7 @@ public class IOManager {
     for (int i = 0; i < listRecordStores.length; i++) {
       String filename = listRecordStores[i];
       if (filename.toLowerCase().endsWith(SGF))
-        answer.addElement(new LocalFileEntry("store:" + filename, filename, false)); //$NON-NLS-1$
+        answer.addElement(new LocalFileEntry("store:" + filename, null, filename, false)); //$NON-NLS-1$
     }
     return answer;
 
@@ -447,7 +443,7 @@ public class IOManager {
       fileName += SGF;
     String gameStr = gameToSave.toString();
     byte[] game = gameStr.getBytes();
-    singleton.saveLocalStore(fileName, game);
+    saveLocalStore(fileName, game);
   }
 
   /**
@@ -537,38 +533,84 @@ public class IOManager {
     return c != -1;
   }
 
+  //#ifdef JSR75
   public Vector getJSR75Roots() {
     Vector roots = new Vector();
     Enumeration listRoots = FileSystemRegistry.listRoots();
     while (listRoots.hasMoreElements()) {
       String url = (String) listRoots.nextElement();
-      roots.addElement(new IndexEntry("file:///" + url, url, true));
+      roots.addElement(new IndexEntry(LOCAL_NAME + url, null, url));
     }
     return roots;
   }
-  
+
   private FileConnection fc;
 
-  public Vector loadJSR75Index(String baseRep) throws IOException {
+  public Vector loadJSR75Index(String baseRep, String subRep) throws IOException {
+    String fcRep = baseRep.substring(LOCAL_NAME.length() - 1); // -1 because it needs a / at the beginning ...
     //#ifdef DEBUG
     log.debug("Base rep = " + baseRep);
+    log.debug("Sub rep = " + subRep);
     //#endif
     Vector list = new Vector();
-    if(fc == null)
-      fc = (FileConnection) Connector.open(baseRep);
-    else
-      fc.setFileConnection(baseRep);
-    
+    String fullPath = baseRep + ((subRep != null) ? subRep : "");
+    //#ifdef DEBUG
+    log.debug("fullPath = " + fullPath);
+    log.debug("fcRep = " + fcRep);
+    if (fc != null) {
+      log.debug("current fc Path " + fc.getPath());
+    }
+    //#endif
+
+    if (fc != null && subRep != null && fc.getPath().equals(fcRep)) {
+      //#ifdef DEBUG
+      log.debug("reuse fc = " + baseRep);
+      //#endif
+      fc.setFileConnection(subRep);
+    } else if (fc != null && subRep == null && fc.getPath().equals(fcRep)) {
+      // ok do nothing
+      //#ifdef DEBUG
+      log.debug("Plain reuse");
+      //#endif
+    } else {
+
+      //#ifdef DEBUG
+      log.debug("Open new fc = " + fullPath);
+      //#endif
+      fc = (FileConnection) Connector.open(fullPath);
+    }
+
     Enumeration content = fc.list();
     String current;
     while (content.hasMoreElements()) {
       current = (String) content.nextElement();
       if (current.endsWith("/")) {
-        list.addElement(new IndexEntry(baseRep +current, current, true));
+        list.addElement(new IndexEntry(fullPath, current, current));
       } else
-        list.addElement(new LocalFileEntry(baseRep +current, current, true));
+        list.addElement(new LocalFileEntry(fullPath, current, current, true));
     }
     return list;
   }
 
+  public DataInputStream loadJSR75(String fullPath, DownloadStatus status) throws IOException {
+    fc = (FileConnection) Connector.open(fullPath);
+    return fc.openDataInputStream();
+  }
+
+  public void saveJSR75(String currentDirectory, String fileName, SgfModel gameToSave) throws IOException {
+
+    if (!fileName.toLowerCase().endsWith(SGF))
+      fileName += SGF;
+    //#ifdef DEBUG
+    log.debug("Tried to save in " + currentDirectory + " " + fileName);
+    //#endif
+    String gameStr = gameToSave.toString();
+    byte[] game = gameStr.getBytes();
+    fc.setFileConnection(currentDirectory + fileName);
+    OutputStream outputStream = fc.openOutputStream();
+    outputStream.write(game);
+    outputStream.close();
+
+  }
+  //#endif 
 }

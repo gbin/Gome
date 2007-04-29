@@ -21,21 +21,23 @@ public class IndexLoader extends Fetcher {
   }
 
   protected void downloadFinished() {
-    callback.downloadFinished(entry.getPath(), fileList);
+    callback.downloadFinished(entry.getUrl(), fileList);
   }
 
   protected void download() throws IOException {
 
-    if (entry.getPath().equals(IOManager.LOCAL_NAME)) {
-      if (IOManager.jsr75Mode) {
-        fileList = IOManager.singleton.getJSR75Roots();
-      } else
-        fileList = IOManager.singleton.getLocalGamesList();
+    if (entry.getUrl().equals(IOManager.LOCAL_NAME)) {
+      //#ifdef JSR75
+      fileList = IOManager.singleton.getJSR75Roots();
+      //#else
+      //# fileList = IOManager.singleton.getLocalGamesList();
+      //#endif
     } else {
-      if (((IndexEntry) entry).isJsr75())
-        fileList = IOManager.singleton.loadJSR75Index(((IndexEntry) entry).getPath());
-      else
-        fileList = IOManager.singleton.getFileList(((IndexEntry) entry).getPath(), this);
+      //#ifdef JSR75
+      fileList = IOManager.singleton.loadJSR75Index(((IndexEntry) entry).getPath(), ((IndexEntry) entry).getName());
+      //#else
+      //# fileList = IOManager.singleton.getFileList(((IndexEntry) entry).getUrl(), this);
+      //#endif
 
     }
   }

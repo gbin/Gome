@@ -48,7 +48,7 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   public Fetcher(FileEntry entry) {
     super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
-    gauge = new Gauge(entry.getPath(), false, 100, 0);
+    gauge = new Gauge(entry.getUrl(), false, 100, 0);
     status = READY;
 
     this.append(gauge);

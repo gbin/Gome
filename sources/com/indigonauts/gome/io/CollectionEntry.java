@@ -14,15 +14,15 @@ public class CollectionEntry extends FileEntry {
 
     private String illustrativeWhitePosition;
 
-    public CollectionEntry(String path, char playMode, String description, int collectionSize) {
-        super(path, playMode);
+    public CollectionEntry(String path, String name, char playMode, String description, int collectionSize) {
+        super(path, name, playMode);
         this.collectionSize = collectionSize;
         this.description = description;
     }
 
-    public CollectionEntry(String path, char playMode, String description, int collectionSize,
+    public CollectionEntry(String path, String name, char playMode, String description, int collectionSize,
             String illustrativeBoardArea, String illustrativeBlackPosition, String illustrativeWhitePosition) {
-        this(path, playMode, description, collectionSize);
+        this(path, name, playMode, description, collectionSize);
         this.illustrativeBoardArea = illustrativeBoardArea;
         this.illustrativeBlackPosition = illustrativeBlackPosition;
         this.illustrativeWhitePosition = illustrativeWhitePosition;

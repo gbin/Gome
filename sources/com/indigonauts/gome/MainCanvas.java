@@ -28,6 +28,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MainCanvas");
   //#endif
+  public static final Font SMALL_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL);
   
   private GameController gc;
 
@@ -392,7 +393,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   private void drawSplashInfo(Graphics g) {
 
-    Util.renderSplash(g, splashInfo, getWidth(), getHeight(), Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, 0xDCFF84);
+    
+    Util.renderSplash(g, splashInfo, getWidth(), getHeight(), SMALL_FONT, Util.COLOR_BLACK, 0xDCFF84);
   }
 
   public void drawStatusBar(Graphics g) {

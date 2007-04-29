@@ -229,12 +229,12 @@ public class MenuEngine implements CommandListener {
         } else if (c == PASS) {
           gc.pass();
         } else if (c == SAVE) {
-          if (IOManager.jsr75Mode) {
+          //#ifdef JSR75
             fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
-            new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, "", true), fileBrowser).show(Gome.singleton.display);
-          } else {
-            Gome.singleton.display.setCurrent(createSaveGameMenu(this, "Local"));
-          }
+            new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fileBrowser).show(Gome.singleton.display);
+          //#else
+          //# Gome.singleton.display.setCurrent(createSaveGameMenu(this, "Local"));
+          //#endif
         } else if (c == OPTIONS) {
           optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, false);
           Gome.singleton.display.setCurrent(optionsForm);
@@ -415,7 +415,7 @@ public class MenuEngine implements CommandListener {
   public void deleteFile(FileEntry file) {
     if (file instanceof LocalFileEntry) {
       try {
-        IOManager.singleton.deleteLocalStore(file.getPath());
+        IOManager.singleton.deleteLocalStore(file.getUrl());
       } catch (RecordStoreException e) {
         Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       }

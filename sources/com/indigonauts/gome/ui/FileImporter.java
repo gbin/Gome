@@ -26,16 +26,16 @@ public class FileImporter extends Fetcher {
 
     protected void download() throws IOException {
         if (selectedFile instanceof IndexEntry) {
-            Vector fileList = IOManager.singleton.getFileList(selectedFile.getPath(), this);
+            Vector fileList = IOManager.singleton.getFileList(selectedFile.getUrl(), this);
             Enumeration allFiles = fileList.elements();
             while (allFiles.hasMoreElements() && status != TERMINATED) {
                 Object toDownload = allFiles.nextElement();
                 if (toDownload instanceof URLFileEntry) {
-                    downloadFile(((URLFileEntry) toDownload).getPath());
+                    downloadFile(((URLFileEntry) toDownload).getUrl());
                 }
             }
         } else
-            downloadFile(selectedFile.getPath());
+            downloadFile(selectedFile.getUrl());
     }
 
     /**

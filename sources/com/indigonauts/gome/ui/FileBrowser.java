@@ -214,7 +214,6 @@ public class FileBrowser implements CommandListener, Showable {
   //#endif
 
   public void commandAction(Command c, Displayable s) {
-    log.debug("command " + c);
     if (s == uiFolder) {
 
       if (c == OPEN || c == List.SELECT_COMMAND) {
@@ -296,13 +295,20 @@ public class FileBrowser implements CommandListener, Showable {
         FileEntry selectedFile = getSelectedFile();
         listener.loadFile((CollectionEntry) selectedFile, selectedNum);
       }
-    } else if (s == saveGame) {
+    }
+    //#ifdef JSR75
+    else if (s == saveGame) {
       if (c == MenuEngine.SAVE) {
-        //#ifdef DEBUG
-        log.debug("save game");
-        //#endif
+        try {
+          IOManager.singleton.saveJSR75(currentDirectory, Gome.singleton.menuEngine.gameFileName.getString(), Gome.singleton.gameController.getSgfModel());
+        } catch (IOException e) {
+          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+        }
+      } else if (c == MenuEngine.BACK) {
+        Gome.singleton.display.setCurrent(uiFolder);
       }
     }
+    //#endif
   }
 
   /**
@@ -310,7 +316,7 @@ public class FileBrowser implements CommandListener, Showable {
    */
   private void showFileBlock() {
 
-    uiFileBlock = new List(getSelectedFile().getPath(), Choice.IMPLICIT);
+    uiFileBlock = new List(getSelectedFile().getUrl(), Choice.IMPLICIT);
 
     uiFileBlock.addCommand(MenuEngine.BACK);
     uiFileBlock.setCommandListener(this);
@@ -335,7 +341,7 @@ public class FileBrowser implements CommandListener, Showable {
   }
 
   private void showFile() {
-    uiFile = new List(getSelectedFile().getPath(), Choice.IMPLICIT);
+    uiFile = new List(getSelectedFile().getUrl(), Choice.IMPLICIT);
     uiFile.addCommand(MenuEngine.BACK);
     uiFile.addCommand(OPEN);
     uiFile.setCommandListener(this);
