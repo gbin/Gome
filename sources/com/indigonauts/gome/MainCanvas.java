@@ -29,7 +29,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MainCanvas");
   //#endif
   public static final Font SMALL_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-  
+
   private GameController gc;
 
   public static final int ACTION_UNDO = Canvas.GAME_A;
@@ -103,11 +103,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.FILES);
     addCommand(MenuEngine.SAVE);
     addCommand(MenuEngine.GAME_STATUS);
-    
+
     //#ifdef IGS
     switchToIGSOfflineMenu();
     //#endif
-    
+
     addCommand(MenuEngine.OPTIONS);
     //#ifdef DEBUG
     addCommand(MenuEngine.CONSOLE);
@@ -202,6 +202,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.IGS_DONE_SCORE);
     removeOnlineSetKomiAndHandicapMenuItem();
     //#endif
+
+    removeCommand(MenuEngine.COMMENT);
+    removeCommand(MenuEngine.ZOOM);
+    removeCommand(MenuEngine.UNDO);
+    removeCommand(MenuEngine.HINT);
   }
 
   public void switchToPlayMenu() {
@@ -212,7 +217,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       addCommand(MenuEngine.IGS_CONNECT);
     }
     //#endif
-
+    addCommand(MenuEngine.ZOOM);
+    addCommand(MenuEngine.UNDO);
     addCommand(MenuEngine.REVIEW_MODE);
     addCommand(MenuEngine.PASS);
     addCommand(MenuEngine.RESIGN);
@@ -227,6 +233,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.PASS);
     addCommand(MenuEngine.RESIGN);
     addCommand(MenuEngine.IGS_MESSAGE);
+    addCommand(MenuEngine.ZOOM);
   }
 
   //#endif
@@ -253,17 +260,23 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#endif
     addCommand(MenuEngine.FIRST_MOVE);
     addCommand(MenuEngine.LAST_MOVE);
+    addCommand(MenuEngine.COMMENT);
+    addCommand(MenuEngine.ZOOM);
     addCommand(MenuEngine.PLAY_MODE);
   }
 
   public void switchToJosekiMenu() {
     clearOptionalItems();
     addCommand(MenuEngine.FIRST_MOVE);
+    addCommand(MenuEngine.HINT);
   }
 
   public void switchToProblemMenu() {
     clearOptionalItems();
     addCommand(MenuEngine.FIRST_MOVE);
+    addCommand(MenuEngine.COMMENT);
+    addCommand(MenuEngine.HINT);
+
   }
 
   //#ifdef IGS
@@ -271,6 +284,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     clearOptionalItems();
     addCommand(MenuEngine.FIRST_MOVE);
     addCommand(MenuEngine.LAST_MOVE);
+    addCommand(MenuEngine.ZOOM);
+    addCommand(MenuEngine.COMMENT);
     addCommand(MenuEngine.IGS_GAMELIST);
     addCommand(MenuEngine.IGS_USERLIST);
     addCommand(MenuEngine.IGS_DISCONNECT);
@@ -316,7 +331,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void show(Display dis) {
     // log.debug("show");
-    
 
     if (gc.hasNextInCollection()) {
       this.addCommand(MenuEngine.NEXT);
@@ -324,7 +338,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       this.removeCommand(MenuEngine.NEXT);
     }
 
-    if (!Gome.singleton.checkLicense()) return;
+    if (!Gome.singleton.checkLicense())
+      return;
     dis.setCurrent(this);
   }
 
@@ -342,7 +357,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void commandAction(Command c, Displayable d) {
-     if (c == MenuEngine.PLAY_MODE) {
+    if (c == MenuEngine.PLAY_MODE) {
       gc.setPlayMode(GameController.GAME_MODE);
       setSplashInfo(Gome.singleton.bundle.getString("ui.switchToPlayEditMode"));
       if (clockControl != null) {
@@ -374,10 +389,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     } else {
       // log.debug("Refresh all");
       if (boardPainter != null) {
-        boardPainter.drawMe(g);
+        boardPainter.drawMe(g, gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), gc.getCurrentNode(), gc.getSgfModel());
       } /*
-         * else { log.debug("Board is null "); }
-         */
+       * else { log.debug("Board is null "); }
+       */
 
       if (splashInfo != null) {
         drawSplashInfo(g);
@@ -393,7 +408,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   private void drawSplashInfo(Graphics g) {
 
-    
     Util.renderSplash(g, splashInfo, getWidth(), getHeight(), SMALL_FONT, Util.COLOR_BLACK, 0xDCFF84);
   }
 
@@ -470,7 +484,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
     }
   }
-
 
   private static final Object SCROLLER_SYNC = new Object();
 
@@ -549,7 +562,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       gc.tuneBoardPainter();
     }
   }
-
 
   public void refresh() {
     repaint();

@@ -205,7 +205,7 @@ public class FileBrowser implements CommandListener, Showable {
     Graphics g = generated.getGraphics();
     g.setColor(Util.COLOR_LIGHTGREY);
     g.drawRect(0, 0, bestImageWidth, bestImageHeight);
-    bp.drawBoard(g);
+    bp.drawBoard(g, null);
 
     return Image.createImage(generated);
 

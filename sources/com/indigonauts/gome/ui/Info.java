@@ -1,5 +1,12 @@
 package com.indigonauts.gome.ui;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Enumeration;
+
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
@@ -14,22 +21,31 @@ import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.ResourceBundle;
+import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
+import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 public class Info implements CommandListener, Showable {
+  //#ifdef DEBUG
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
+  //#endif
+
   private Showable parent;
   private Form current = getKeys();
 
   private static final Command RULES;
   private static final Command KEYS;
+  private static final Command HELP;
   private static final Command ABOUT;
   private boolean inSubMenu = false;
 
   static {
     RULES = new Command(Gome.singleton.bundle.getString("ui.help.rules"), Command.SCREEN, 1); //$NON-NLS-1$
+    HELP = new Command(Gome.singleton.bundle.getString("ui.help.help"), Command.SCREEN, 1); //$NON-NLS-1$
     KEYS = new Command(Gome.singleton.bundle.getString("ui.help.key"), Command.SCREEN, 1); //$NON-NLS-1$
     ABOUT = new Command(Gome.singleton.bundle.getString("ui.about"), Command.SCREEN, 9); //$NON-NLS-1$
   }
@@ -48,6 +64,7 @@ public class Info implements CommandListener, Showable {
 
   private void setUpCurrent() {
     current.addCommand(KEYS);
+    current.addCommand(HELP);
     current.addCommand(RULES);
     current.addCommand(MenuEngine.GAME_STATUS);
     current.addCommand(ABOUT);
@@ -66,6 +83,9 @@ public class Info implements CommandListener, Showable {
       }
     } else if (command == RULES) {
       current = getRules();
+      inSubMenu = true;
+    } else if (command == HELP) {
+      current = getHelp();
       inSubMenu = true;
     } else if (command == MenuEngine.GAME_STATUS) {
       current = getGameInfo();
@@ -87,7 +107,7 @@ public class Info implements CommandListener, Showable {
     ResourceBundle bundle = Gome.singleton.bundle;
     Form help = new Form(bundle.getString("ui.help"));
     Image img = Image.createImage(53, 53);
-    bp.drawBoard(img.getGraphics());
+    bp.drawBoard(img.getGraphics(), null);
     appendText(
             help,
             "\nThe board is a grid of horizontal and vertical lines.\n The board used here is small (5x5) compared to the sizes you will find in clubs, tournaments and online (typically 19x19), but the rules are the same.");
@@ -303,4 +323,51 @@ public class Info implements CommandListener, Showable {
     return form;
 
   }
+
+  private Image generatePosition(String sgf) {
+    SgfModel model = SgfModel.parse(new InputStreamReader(new ByteArrayInputStream(sgf.getBytes())));
+    Rectangle viewArea = model.getViewArea();
+    byte boardSize = model.getBoardSize();
+    Board board = new Board(boardSize);
+    int grsize = boardSize * 10 + 1;
+    GraphicRectangle imgArea = new GraphicRectangle(1, 1, grsize, grsize);
+    BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null);
+    Image img = Image.createImage(grsize + 2, grsize + 2);
+    SgfNode firstNode = model.getFirstNode();
+    board.placeStones(firstNode.getAB(), Board.BLACK);
+    board.placeStones(firstNode.getAW(), Board.WHITE);
+    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false, firstNode, model);
+    return Image.createImage(img);
+  }
+
+  private Form formatHelp(String name, String url) {
+
+    Form form = new Form(name);
+
+    try {
+      byte[] file = IOManager.singleton.loadFile(url, null);
+      StringVector list = new StringVector(new String(file), '\n');
+      Enumeration all = list.elements();
+      while (all.hasMoreElements()) {
+        String element = (String) all.nextElement();
+        if (element.startsWith("(;")) {
+          form.append(generatePosition(element));
+          form.append("\n");
+        } else {
+          StringItem si = new StringItem("", element);
+          //#ifdef MIDP2
+          si.setFont(MainCanvas.SMALL_FONT);
+          //#endif
+          form.append(si);
+        }
+      }
+    } catch (IOException ioe) {// TODO: error handling
+    }
+    return form;
+  }
+
+  private Form getHelp() {
+    return formatHelp(Gome.singleton.bundle.getString("ui.about"), "jar:/com/indigonauts/gome/i18n/help/general_US.hlp");
+  }
+
 }

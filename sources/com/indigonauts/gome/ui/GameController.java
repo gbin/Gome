@@ -48,7 +48,7 @@ public class GameController implements ServerCallback
   public static final char ONLINE_MODE = 'O';
 
   public static final char OBSERVE_MODE = 'B';
-  
+
   public static final char TEXT_MODE = 'T';
 
   private SgfModel model;
@@ -226,8 +226,8 @@ public class GameController implements ServerCallback
   public void tuneBoardPainter() {
     // log.debug("paintBackBuffer");
     BoardPainter painter = canvas.getBoardPainter();
-    painter.setCountingMode(countMode);
-    painter.setAnnotations(currentNode.getAnnotations());
+    painter.setCountingMode(countMode, playMode != ONLINE_MODE);
+    //painter.setAnnotations(currentNode.getAnnotations());
     painter.setKo(currentNode.getKo());
   }
 
@@ -244,7 +244,7 @@ public class GameController implements ServerCallback
     case REVIEW_MODE:
     case ONLINE_MODE:
     case OBSERVE_MODE:
-      playArea = board.getBoardArea();
+      playArea = board.getFullBoardArea();
       break;
     case JOSEKI_MODE:
     case PROBLEM_MODE:
@@ -257,7 +257,7 @@ public class GameController implements ServerCallback
     if (playArea == null || model.getViewArea().isValid()) {
       playArea = Rectangle.union(playArea, model.getViewArea());
     }
-    playArea = Rectangle.intersect(playArea, board.getBoardArea());
+    playArea = Rectangle.intersect(playArea, board.getFullBoardArea());
 
     if (playArea == null || !playArea.isValid()) {
       playArea = new Rectangle((byte) 0, (byte) 0, (byte) (board.getBoardSize() - 1), (byte) (board.getBoardSize() - 1));
@@ -283,7 +283,6 @@ public class GameController implements ServerCallback
     BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea);
     canvas.setBoardPainter(boardPainter);
     tuneBoardPainter();
-    boardPainter.setGameController(this);
     normalDelta = boardPainter.getDelta();
   }
 
@@ -308,13 +307,14 @@ public class GameController implements ServerCallback
     if (pArea.y0 < 0) {
       pArea.move(0, 0 - pArea.y0);
     }
-    if (pArea.x1 > board.getBoardArea().x1) {
-      pArea.move(board.getBoardArea().x1 - pArea.x1, 0);
+    Rectangle fullBoardArea = board.getFullBoardArea();
+    if (pArea.x1 > fullBoardArea.x1) {
+      pArea.move(fullBoardArea.x1 - pArea.x1, 0);
     }
-    if (pArea.y1 > board.getBoardArea().y1) {
-      pArea.move(0, board.getBoardArea().y1 - pArea.y1);
+    if (pArea.y1 > fullBoardArea.y1) {
+      pArea.move(0, fullBoardArea.y1 - pArea.y1);
     }
-    Rectangle zoomedPlayArea = Rectangle.intersect(pArea, board.getBoardArea());
+    Rectangle zoomedPlayArea = Rectangle.intersect(pArea, fullBoardArea);
 
     canvas.getBoardPainter().setPlayArea(zoomedPlayArea);
     // tuneBoardPainter();
@@ -568,11 +568,8 @@ public class GameController implements ServerCallback
   public void doMarkDearStone() {
     // log.debug("doMarkDearStone");
     //#ifdef IGS
-    if (playMode == ONLINE_MODE)
-      board.onlineMarkDeadGroup(cursor.x, cursor.y);
-    else
-      //#endif
-      board.markDeadGroup(cursor.x, cursor.y);
+    board.markDeadGroup(cursor.x, cursor.y, playMode != ONLINE_MODE);
+    //#endif
   }
 
   public void doClick() {
@@ -865,7 +862,7 @@ public class GameController implements ServerCallback
   boolean isZoomIn() {
     return bZoomIn;
   }
-  
+
   /**
    * @return Returns the currentNode.
    */
@@ -1354,7 +1351,7 @@ public class GameController implements ServerCallback
   public void oppRemoveDeadStone(byte x, byte y) {
     if (countMode == true) {
       if (!board.hasBeenRemove(x, y)) {
-        board.onlineMarkDeadGroup(x, y);
+        board.markDeadGroup(x, y, false);
         // log.debug("opp has mark dead stone x: " + x + " y:" + y);
         tuneBoardPainter();
         canvas.refresh();

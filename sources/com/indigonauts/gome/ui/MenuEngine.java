@@ -77,6 +77,11 @@ public class MenuEngine implements CommandListener {
   public static Command DECLINE;
   public static Command RESIGN;
 
+  public static Command COMMENT;
+  public static Command ZOOM;
+  public static Command UNDO;
+  public static Command HINT;
+  
   MainCanvas mainCanvas;
 
   FileBrowser fileBrowser;
@@ -149,6 +154,11 @@ public class MenuEngine implements CommandListener {
     RESIGN = new Command(Gome.singleton.bundle.getString("ui.resign"), Command.SCREEN, 5); //$NON-NLS-1$
     REQUEST = new Command(Gome.singleton.bundle.getString("ui.request"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_RESET_DEADS_TONE = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
+    
+    COMMENT = new Command(Gome.singleton.bundle.getString("ui.comment"), Command.SCREEN, 5); //$NON-NLS-1$
+    ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
+    UNDO = new Command(Gome.singleton.bundle.getString("ui.undo"), Command.SCREEN, 5); //$NON-NLS-1$
+    HINT = new Command(Gome.singleton.bundle.getString("ui.hint"), Command.SCREEN, 5); //$NON-NLS-1$
   }
 
   public Form createNewGameMenu() {

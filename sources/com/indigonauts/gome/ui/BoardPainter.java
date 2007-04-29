@@ -31,17 +31,7 @@ public class BoardPainter {
   private Rectangle boardArea;
 
   private GraphicRectangle drawArea;
-
-  // private Image backBuffer;
-
-  //private Image black;
-
-  //private Image white;
-
-  //private Image empty;
-
-  //private Image point;
-
+  
   // draw positions
   private int delta;
 
@@ -64,17 +54,15 @@ public class BoardPainter {
 
   private Font currentAnnotationFont;
 
-  private GameController gc;
-
-  private Vector annotations;
-
   private Point ko;
 
   private boolean counting;
+  private boolean smartCounting;
 
   public BoardPainter(Board newBoard, GraphicRectangle imageArea, Rectangle newBoardArea) {
     board = newBoard;
-    boardArea = newBoardArea;
+    
+    boardArea = newBoardArea != null ? newBoardArea : newBoard.getFullBoardArea();
     drawArea = imageArea;
 
     // calc the size of each cell
@@ -83,16 +71,17 @@ public class BoardPainter {
     resetBackBuffer();
   }
 
-  public void setAnnotations(Vector annotations) {
+  /*public void setAnnotations(Vector annotations) {
     this.annotations = annotations;
-  }
+  }*/
 
   public void setKo(Point ko) {
     this.ko = ko;
   }
 
-  public void setCountingMode(boolean counting) {
+  public void setCountingMode(boolean counting, boolean smartCounting) {
     this.counting = counting;
+    this.smartCounting = smartCounting;
   }
 
   public void setPlayArea(Rectangle playArea) {
@@ -111,9 +100,9 @@ public class BoardPainter {
    * 
    * @param gc
    */
-  public void setGameController(GameController gc) {
+  /*public void setGameController(GameController gc) {
     this.gc = gc;
-  }
+  }*/
 
   private void resetBackBuffer() {
     /*
@@ -125,7 +114,7 @@ public class BoardPainter {
 
   }
 
-  public void drawBoard(Graphics graphics) {
+  public void drawBoard(Graphics graphics, Vector annotations) {
     graphics.setColor(Gome.singleton.options.gobanColor);
 
     graphics.fillRect(0, 0, drawArea.getWidth()+2, drawArea.getHeight()+2); //FIXME: ca va pas
@@ -160,19 +149,23 @@ public class BoardPainter {
 
   }
 
-  public void drawMe(Graphics g) {
+  
+  /*public void drawMe(Graphics g) {
     Point cursor = gc.getCursor();
     int playerColor = gc.getCurrentPlayerColor();
     boolean showHints = gc.getShowHints();
     SgfNode currentNode = gc.getCurrentNode();
     SgfModel model = gc.getSgfModel();
-
+   }*/
+    
+  public void drawMe(Graphics g, Point cursor, int playerColor, boolean showHints, SgfNode currentNode, SgfModel model) {
     // clone the latest buffer
     // g.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
-    drawBoard(g);
+    drawBoard(g, currentNode.getAnnotations());
 
     // draw cursor
-    drawCursor(g, cursor, playerColor); // guess the
+    if(cursor != null)
+      drawCursor(g, cursor, playerColor); // guess the
     // next color
 
     // draw hints
@@ -234,7 +227,7 @@ public class BoardPainter {
   }
 
   public void drawTerritory(Graphics g) {
-    byte[][] territory = board.guessTerritory((byte) gc.getPlayMode());
+    byte[][] territory = board.guessTerritory(smartCounting);
     byte boardSize = board.getBoardSize();
     SymbolAnnotation p = new SymbolAnnotation(SymbolAnnotation.SQUARE);
     int whiteTerritoryColor = Util.blendColors(Gome.singleton.options.gobanColor, Util.COLOR_WHITE);

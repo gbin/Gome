@@ -22,6 +22,7 @@
 
 	<fileset id="base" dir="${project.root.gome}/sources">
 		<include name="com/indigonauts/gome/i18n/main_en_US.properties" />
+		<include name="com/indigonauts/gome/i18n/help/*.*" />
 		<include name="index.txt" />
 		<include name="gome.png" />
 	</fileset>
@@ -75,15 +76,15 @@
 		<var name="wtk.cldc.version" value="1.0" />
 		<var name="wtk.midp.version" value="1.0" />
 	</target>
-	
-	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75"/>
+
+	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75" />
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
-				<exclude name="**/*.*" />
+		<exclude name="**/*.*" />
 	</fileset>
-	
+
 	<target name="Vminimal" depends="MIDP1" description="Minimal">
-	    <echo message="Minimal"/>
+		<echo message="Minimal" />
 		<var name="midlet.name" value="gome-minimal" />
 		<var name="symbols" value="" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
@@ -94,9 +95,9 @@
 		<patternset refid="games" />
 		<patternset refid="problems" />
 	</fileset>
-	
+
 	<target name="Vminimal-bundle" depends="MIDP1" description="Minimal bundle">
-    	<echo message="Minimal-bundle"/>
+		<echo message="Minimal-bundle" />
 		<var name="midlet.name" value="gome-minimal-bundle" />
 		<var name="symbols" value="" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
@@ -109,7 +110,7 @@
 	</fileset>
 
 	<target name="Vonline" depends="MIDP1" description="Online version">
-	    <echo message="Online"/>
+		<echo message="Online" />
 		<var name="midlet.name" value="gome-online" />
 		<var name="symbols" value="IGS" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
@@ -117,13 +118,13 @@
 	</target>
 
 	<fileset id="gome-i18n-files" dir="${project.root.gome}/sources">
-				<patternset refid="i18n" />
-				<patternset refid="games" />
-				<patternset refid="problems" />
+		<patternset refid="i18n" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
 	</fileset>
-	
+
 	<target name="Vi18n" depends="MIDP1" description="I18N version">
-    	<echo message="I18n"/>
+		<echo message="I18n" />
 		<var name="midlet.name" value="gome-i18n" />
 		<var name="symbols" value="IGS,I18N" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
@@ -131,16 +132,16 @@
 	</target>
 
 	<fileset id="gome-normal-files" dir="${project.root.gome}/sources">
-				<patternset refid="file-icons" />
-				<patternset refid="menu-icons" />
-				<patternset refid="gomoku" />
-				<patternset refid="i18n" />
-				<patternset refid="games" />
-				<patternset refid="problems" />
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
+		<patternset refid="gomoku" />
+		<patternset refid="i18n" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
 	</fileset>
-	
+
 	<target name="Vnormal" depends="MIDP1" description="Normal version">
-		<echo message="Normal"/>
+		<echo message="Normal" />
 		<var name="midlet.name" value="gome-normal" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
@@ -166,19 +167,19 @@
 	</fileset>
 
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
-		<echo message="MIDP2"/>
+		<echo message="MIDP2" />
 		<var name="midlet.name" value="gome-MIDP2" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
 	</target>
-	
+
 	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
-			<echo message="MIDP2 JSR75"/>
-			<var name="midlet.name" value="gome-MIDP2-JSR75" />
-			<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
-			<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-			<antcall target="deployable" />
+		<echo message="MIDP2 JSR75" />
+		<var name="midlet.name" value="gome-MIDP2-JSR75" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
+		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<antcall target="deployable" />
 	</target>
 
 	<target name="Vjoseki" depends="MIDP1" description="Joseki version">
