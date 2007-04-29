@@ -81,8 +81,6 @@ public class MenuEngine implements CommandListener {
   public static Command ZOOM;
   public static Command UNDO;
   public static Command HINT;
-  
-  MainCanvas mainCanvas;
 
   FileBrowser fileBrowser;
 
@@ -154,7 +152,7 @@ public class MenuEngine implements CommandListener {
     RESIGN = new Command(Gome.singleton.bundle.getString("ui.resign"), Command.SCREEN, 5); //$NON-NLS-1$
     REQUEST = new Command(Gome.singleton.bundle.getString("ui.request"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_RESET_DEADS_TONE = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
-    
+
     COMMENT = new Command(Gome.singleton.bundle.getString("ui.comment"), Command.SCREEN, 5); //$NON-NLS-1$
     ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
     UNDO = new Command(Gome.singleton.bundle.getString("ui.undo"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -221,7 +219,7 @@ public class MenuEngine implements CommandListener {
         } else if (c == IGS_DISCONNECT) {
           gc.disconnectFromServer();
         } else if (c == IGS_MESSAGE) {
-          chat.sendMessage(currentChallenge.nick, null, null, mainCanvas);
+          chat.sendMessage(currentChallenge.nick, null, null, Gome.singleton.mainCanvas);
         } else if (c == REQUEST_KOMI) {
           gomeOnlineWantKomi();
         } else if (c == CHANGE_ONLINE_HANDICAP) {
@@ -240,8 +238,8 @@ public class MenuEngine implements CommandListener {
           gc.pass();
         } else if (c == SAVE) {
           //#ifdef JSR75
-            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
-            new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fileBrowser).show(Gome.singleton.display);
+          fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
+          new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fileBrowser).show(Gome.singleton.display);
           //#else
           //# Gome.singleton.display.setCurrent(createSaveGameMenu(this, "Local"));
           //#endif
@@ -258,6 +256,25 @@ public class MenuEngine implements CommandListener {
           Gome.singleton.display.setCurrent(logCanvas);
         }
         //#endif
+        else if (c == COMMENT) {
+          gc.doCycleBottom();
+          gc.tuneBoardPainter();
+          Gome.singleton.mainCanvas.refresh();
+        } else if (c == ZOOM) {
+          gc.setZoomIn(!gc.isZoomIn());
+          gc.tuneBoardPainter();
+          Gome.singleton.mainCanvas.refresh();
+        } else if (c == UNDO) {
+          if (gc.doUndo()) {
+            gc.tuneBoardPainter();
+            Gome.singleton.mainCanvas.refresh();
+          }
+        } else if (c == HINT) {
+          gc.reverseShowHint();
+          gc.tuneBoardPainter();
+          Gome.singleton.mainCanvas.refresh();
+        }
+
         else if (c == HELP) {
           Info help = new Info(Gome.singleton.mainCanvas);
           help.show(Gome.singleton.display);
@@ -317,7 +334,7 @@ public class MenuEngine implements CommandListener {
           igsUserList = null;
 
         } else if (c == IGS_MESSAGE) {
-          chat.sendMessage(gc.getNick(igsUserList.getSelectedIndex()), "", "", mainCanvas);
+          chat.sendMessage(gc.getNick(igsUserList.getSelectedIndex()), "", "", Gome.singleton.mainCanvas);
           return;
         }
         Gome.singleton.mainCanvas.show(Gome.singleton.display);

@@ -34,10 +34,12 @@ public class IndexLoader extends Fetcher {
       //#endif
     } else {
       //#ifdef JSR75
-      fileList = IOManager.singleton.loadJSR75Index(((IndexEntry) entry).getPath(), ((IndexEntry) entry).getName());
-      //#else
-      //# fileList = IOManager.singleton.getFileList(((IndexEntry) entry).getUrl(), this);
-      //#endif
+      if (entry.getUrl().startsWith(IOManager.LOCAL_NAME)) {
+        fileList = IOManager.singleton.loadJSR75Index(((IndexEntry) entry).getPath(), ((IndexEntry) entry).getName());
+      } else
+        //#endif
+        fileList = IOManager.singleton.getFileList(((IndexEntry) entry).getUrl(), this);
+      // watch out  the weird conditional compilation here !
 
     }
   }

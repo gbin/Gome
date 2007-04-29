@@ -467,14 +467,7 @@ public class GameController implements ServerCallback
         doClick();
       break;
     case MainCanvas.ACTION_UNDO:
-      if (playMode != ONLINE_MODE && playMode != OBSERVE_MODE) {
-        doGoBack();
-        if (playMode == PROBLEM_MODE && model.getFirstPlayer() == currentNode.getPlayerColor()) {
-          doGoBack();
-        }
-      } else {
-        refreshNeeded = false;
-      }
+      refreshNeeded = doUndo();
       break;
     case MainCanvas.ACTION_HINT:
       reverseShowHint();
@@ -495,10 +488,22 @@ public class GameController implements ServerCallback
     return refreshNeeded;
   }
 
+  /* return refreshNeded */
+  public boolean doUndo() {
+    if (playMode != ONLINE_MODE && playMode != OBSERVE_MODE) {
+      doGoBack();
+      if (playMode == PROBLEM_MODE && model.getFirstPlayer() == currentNode.getPlayerColor()) {
+        doGoBack();
+      }
+      return true;
+    }
+    return false;
+  }
+
   /**
    * 
    */
-  private void doCycleBottom() {
+  void doCycleBottom() {
     switch (playMode) {
 
     case GAME_MODE:
