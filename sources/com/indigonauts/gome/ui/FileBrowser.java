@@ -301,6 +301,14 @@ public class FileBrowser implements CommandListener, Showable {
       if (c == MenuEngine.SAVE) {
         try {
           IOManager.singleton.saveJSR75(currentDirectory, Gome.singleton.menuEngine.gameFileName.getString(), Gome.singleton.gameController.getSgfModel());
+          Showable root = this;
+
+          do {
+            FileBrowser fileBrowser = ((FileBrowser) root);
+            root = fileBrowser.parent;
+            fileBrowser.parent = null;
+          } while (root instanceof FileBrowser);
+          root.show(display);
         } catch (IOException e) {
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
         }

@@ -364,7 +364,7 @@ public class IOManager {
         throw new IOException("ui.error.recordStore"); //$NON-NLS-1$
       }
     }
-    
+
     int percent = 0;
 
     DataInputStream dis = null;
@@ -597,20 +597,54 @@ public class IOManager {
     return fc.openDataInputStream();
   }
 
-  public void saveJSR75(String currentDirectory, String fileName, SgfModel gameToSave) throws IOException {
+  byte[] game;
+  String fn;
+  String cd;
 
-    if (!fileName.toLowerCase().endsWith(SGF))
-      fileName += SGF;
+  public void saveJSR75(String currentDirectory, String fileName, SgfModel gameToSave) throws IOException {
+    fn = fileName;
+    cd = currentDirectory;
+    if (!fn.toLowerCase().endsWith(SGF))
+      fn += SGF;
     //#ifdef DEBUG
     log.debug("Tried to save in " + currentDirectory + fileName);
     //#endif
     String gameStr = gameToSave.toString();
-    byte[] game = gameStr.getBytes();
-    fc.setFileConnection(fileName);
-    OutputStream outputStream = fc.openOutputStream();
-    outputStream.write(game);
-    outputStream.close();
+    game = gameStr.getBytes();
 
+    Thread t = new Thread() {
+      public void run() {
+        OutputStream outputStream = null;
+        try {
+          fc = (FileConnection) Connector.open(cd + fn);
+          if (!fc.exists()) {
+            fc.create();
+          }
+          outputStream = fc.openOutputStream();
+          outputStream.write(game);
+
+        } catch (IOException e) {
+          //#ifdef DEBUG
+          log.error(e);
+          //#endif
+        } finally {
+          if (outputStream != null)
+            try {
+              outputStream.close();
+              fc.close();
+              fc = null;
+            } catch (IOException e) {
+            }
+        }
+
+        game = null;
+        fn = null;
+        //#ifdef DEBUG
+        log.debug("Save done");
+        //#endif
+      }
+    };
+    t.start();
   }
   //#endif 
 }

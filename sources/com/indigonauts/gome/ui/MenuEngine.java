@@ -186,7 +186,7 @@ public class MenuEngine implements CommandListener {
     int y = cal.get(Calendar.YEAR);
     int m = cal.get(Calendar.MONTH)+1;
     int d = cal.get(Calendar.DAY_OF_MONTH);
-    String defaultFN = Gome.singleton.bundle.getString("ui.defaultFilename") + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d));
+    String defaultFN = Gome.singleton.bundle.getString("ui.defaultFilename") + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d)) + ".sgf";
 
     Form createForm = new Form(Gome.singleton.bundle.getString("ui.saveIn", new String[] { name })); //$NON-NLS-1$
     gameFileName = new TextField(Gome.singleton.bundle.getString("ui.filename"), defaultFN, 28, TextField.ANY); //$NON-NLS-1$
