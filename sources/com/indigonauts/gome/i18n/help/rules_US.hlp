@@ -1,0 +1,7 @@
+*Basics
+
+The board is a grid of horizontal and vertical lines.
+The board used here is small (5x5) compared to the sizes you will find in clubs, tournaments and online (typically 19x19), but the rules are the same.
+(;SZ[5])
+The lines of the board have intersections wherever they cross or touch each other. Each intersection is called a point. That includes the four corners, and the edges of the board.\nThe example board has 25 points. The red circle shows one particular point. The red square in the corner shows another point.
+(;SZ[5]SQ[ea]CR[bc])

@@ -602,11 +602,11 @@ public class IOManager {
     if (!fileName.toLowerCase().endsWith(SGF))
       fileName += SGF;
     //#ifdef DEBUG
-    log.debug("Tried to save in " + currentDirectory + " " + fileName);
+    log.debug("Tried to save in " + currentDirectory + fileName);
     //#endif
     String gameStr = gameToSave.toString();
     byte[] game = gameStr.getBytes();
-    fc.setFileConnection(currentDirectory + fileName);
+    fc.setFileConnection(fileName);
     OutputStream outputStream = fc.openOutputStream();
     outputStream.write(game);
     outputStream.close();

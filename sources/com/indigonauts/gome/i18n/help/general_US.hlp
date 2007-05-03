@@ -1,3 +1,25 @@
+*What is Gome ?
+Gome is a Go game software that allows you to review recorded games, record your own games, train yourself on problems (tsumegos), play online against other players.   
+
+*Play/record a simple Game
+You can start a new game by selecting New in the menu. You will have the chance to setup the size and the handicap of the game.
+If you select 0 stone as handicap, the game will be scratch. 
+Otherwise it will place the specified number of stone at the "standard" placements.
+Gome also sets automatically a "standard" komi as follow :
+19x19 -> 6.5
+13x13 -> 8.5
+9x9   -> 5.5
+Handi -> 0.5
+
+The color of the cursor (Black or White) indicades which player plays next. You can move the cursor with the arrows (or 2, 8, 4, 6 on some platforms). 
+You can place the move by pressing the "Fire" key, clicking on the goban (if it is available on your platform) or pressing 5 on some others.  
+If you made a mistake, you can always take back the last move by either selecting undo in the menu or by pressing the corresponding assigned key (see the Shortcuts help section).
+ 
+*Review a Game
+You can go in the Files menu and select either a bundle game or one of the internet indexes to access online game databases and newly played games in major tournaments.
+You can use the right arrow (or 6 on some platforms) to display the next move in the game. You can jump straight away to the first or last move from the menu.  
+
+
 This is an help example with a diagram here 
 (;SZ[5]AB[bb][cc]AW[dd]LB[ab:z]CR[ac]MA[bc]SQ[ca]TR[ba])
 the continuation of the help file

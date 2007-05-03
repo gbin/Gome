@@ -66,7 +66,8 @@
 	</patternset>
 
 	<target name="MIDP2">
-		<var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi20.jar:/opt/wtk2.2/lib/cldcapi11.jar:/opt/wtk2.2/lib/wma20.jar:/opt/wtk2.2/lib/mmapi.jar:/opt/wtk2.2/lib/j2me-ws.jar:/opt/wtk2.2/lib/jsr75.jar:/opt/wtk2.2/lib/jsr082.jar:/opt/wtk2.2/lib/jsr184.jar" />
+		<!--var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi20.jar:/opt/wtk2.2/lib/cldcapi11.jar:/opt/wtk2.2/lib/wma20.jar:/opt/wtk2.2/lib/mmapi.jar:/opt/wtk2.2/lib/j2me-ws.jar:/opt/wtk2.2/lib/jsr75.jar:/opt/wtk2.2/lib/jsr082.jar:/opt/wtk2.2/lib/jsr184.jar" /-->
+		<var name="wtk.midpapi" value="/opt/wtk251/lib/midpapi20.jar:/opt/wtk251/lib/cldcapi11.jar:/opt/wtk251/lib/wma20.jar:/opt/wtk251/lib/mmapi.jar:/opt/wtk251/lib/j2me-ws.jar:/opt/wtk251/lib/jsr75.jar:/opt/wtk251/lib/jsr082.jar:/opt/wtk251/lib/jsr184.jar" />
 		<var name="wtk.cldc.version" value="1.1" />
 		<var name="wtk.midp.version" value="2.0" />
 	</target>

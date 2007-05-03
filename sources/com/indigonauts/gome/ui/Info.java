@@ -2,15 +2,14 @@ package com.indigonauts.gome.ui;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.Enumeration;
 
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.Item;
@@ -97,30 +96,6 @@ public class Info implements CommandListener, Showable {
 
     setUpCurrent();
     show(Gome.singleton.display);
-  }
-
-  private Form getRules() {
-    Board illustrativeBoard = new Board((byte) 5);
-    GraphicRectangle imgArea = new GraphicRectangle(1, 1, 51, 51);
-    Rectangle boardArea = new Rectangle((byte) 0, (byte) 0, (byte) 4, (byte) 4);
-    BoardPainter bp = new BoardPainter(illustrativeBoard, imgArea, boardArea);
-    ResourceBundle bundle = Gome.singleton.bundle;
-    Form help = new Form(bundle.getString("ui.help"));
-    Image img = Image.createImage(53, 53);
-    bp.drawBoard(img.getGraphics(), null);
-    appendText(
-            help,
-            "\nThe board is a grid of horizontal and vertical lines.\n The board used here is small (5x5) compared to the sizes you will find in clubs, tournaments and online (typically 19x19), but the rules are the same.");
-    help.append(Image.createImage(img));
-    appendText(
-            help,
-            "\nThe lines of the board have intersections wherever they cross or touch each other. Each intersection is called a point. That includes the four corners, and the edges of the board.\nThe example board has 25 points. The red circle shows one particular point. The red square in the corner shows another point.");
-    SymbolAnnotation sa = new SymbolAnnotation(new Point((byte) 4, (byte) 0), SymbolAnnotation.SQUARE);
-    bp.drawSymbolAnnotation(img.getGraphics(), sa, 0xFF0000);
-    SymbolAnnotation sa2 = new SymbolAnnotation(new Point((byte) 1, (byte) 2), SymbolAnnotation.CIRCLE);
-    bp.drawSymbolAnnotation(img.getGraphics(), sa2, 0xFF0000);
-    help.append(Image.createImage(img));
-    return help;
   }
 
   private void appendText(Form form, String text) {
@@ -340,19 +315,26 @@ public class Info implements CommandListener, Showable {
     return Image.createImage(img);
   }
 
+  private static final Font TITLE_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
+
   private Form formatHelp(String name, String url) {
-
     Form form = new Form(name);
-
     try {
       byte[] file = IOManager.singleton.loadFile(url, null);
       StringVector list = new StringVector(new String(file), '\n');
       Enumeration all = list.elements();
+
       while (all.hasMoreElements()) {
         String element = (String) all.nextElement();
         if (element.startsWith("(;")) {
           form.append(generatePosition(element));
           form.append("\n");
+        } else if (element.startsWith("*")) {
+          StringItem si = new StringItem("", element.substring(1));
+          //#ifdef MIDP2
+          si.setFont(TITLE_FONT);
+          //#endif
+          form.append(si);
         } else {
           StringItem si = new StringItem("", element);
           //#ifdef MIDP2
@@ -367,7 +349,11 @@ public class Info implements CommandListener, Showable {
   }
 
   private Form getHelp() {
-    return formatHelp(Gome.singleton.bundle.getString("ui.about"), "jar:/com/indigonauts/gome/i18n/help/general_US.hlp");
+    return formatHelp(Gome.singleton.bundle.getString("ui.help.help"), "jar:/com/indigonauts/gome/i18n/help/general_US.hlp");
+  }
+
+  private Form getRules() {
+    return formatHelp(Gome.singleton.bundle.getString("ui.help.rules"), "jar:/com/indigonauts/gome/i18n/help/rules_US.hlp");
   }
 
 }
