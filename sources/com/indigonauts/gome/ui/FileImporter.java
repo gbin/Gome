@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import javax.microedition.rms.RecordStoreException;
+//#ifndef JSR75
+//# import javax.microedition.rms.RecordStoreException;
+//#endif
 
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
@@ -42,13 +44,14 @@ public class FileImporter extends Fetcher {
    * @throws IOException
    */
   private void downloadFile(String fileUrl) throws IOException {
-    byte[] file = IOManager.singleton.loadFile(fileUrl, this);
-    String name = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
-    gauge.setLabel(name);
+    
     //#ifdef JSR75
     new IOException("ui.error.recordStore"); // TODO: implement
     //#else
     //# try {
+    //# byte[] file = IOManager.singleton.loadFile(fileUrl, this);
+    //# String name = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
+    //# gauge.setLabel(name);
     //# IOManager.singleton.saveLocalStore(name, file);
     //# } catch (RecordStoreException e) {
     //# throw new IOException("ui.error.recordStore"); //$NON-NLS-1$

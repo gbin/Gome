@@ -28,7 +28,7 @@ import com.indigonauts.gome.sgf.SgfNode;
 
 public class Info implements CommandListener, Showable {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
+  //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
   //#endif
 
   private Showable parent;
@@ -95,15 +95,7 @@ public class Info implements CommandListener, Showable {
     setUpCurrent();
     show(Gome.singleton.display);
   }
-
-  private void appendText(Form form, String text) {
-    StringItem si = new StringItem("", text);
-    //#ifdef MIDP2
-    si.setFont(MainCanvas.SMALL_FONT);
-    //#endif
-    form.append(si);
-  }
-
+  
   public void show(Display destination) {
 
     destination.setCurrent(current);
