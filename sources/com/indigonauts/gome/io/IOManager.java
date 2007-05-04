@@ -646,5 +646,31 @@ public class IOManager {
     };
     t.start();
   }
-  //#endif 
+
+  public void deleteJSR75(String url) {
+    fn = url;
+    Thread t = new Thread() {
+      public void run() {
+        try {
+          fc = (FileConnection) Connector.open(fn);
+          if (fc.exists()) {
+            fc.delete();
+          }
+
+        } catch (IOException e) {
+          //#ifdef DEBUG
+          log.error(e);
+          //#endif
+        } finally {
+          try {
+            fc.close();
+            fc = null;
+          } catch (IOException e) {
+          }
+        }
+      }
+    };
+    t.start();
+  }
+  //#endif
 }

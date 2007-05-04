@@ -199,7 +199,15 @@ public class Util {
 
   public static Image renderIcon(Image icon, int width, int height) {
     Image imagedComment = Image.createImage(width, height);
-    imagedComment.getGraphics().drawImage(icon, 0, 0, Graphics.LEFT | Graphics.TOP);
+    Graphics graphics = imagedComment.getGraphics();
+    //#ifdef MIDP2
+    int[] is = new int[width * height];
+    for (int i = 0; i < is.length; i++) {
+      is[i] = 0xffffffff;
+    }
+    graphics.drawRGB(is, 0, width, 0, 0, width, height, true);
+    //#endif
+    graphics.drawImage(icon, (width - icon.getWidth()) / 2, (height - icon.getHeight()) / 2, Graphics.LEFT | Graphics.TOP);
     return Image.createImage(imagedComment);
   }
 

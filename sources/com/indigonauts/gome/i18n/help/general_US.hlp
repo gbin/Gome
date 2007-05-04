@@ -4,8 +4,12 @@ Gome is a Go game software that allows you to review recorded games, record your
 *Play/record a simple Game
 You can start a new game by selecting New in the menu. You will have the chance to setup the size and the handicap of the game.
 If you select 0 stone as handicap, the game will be scratch. 
-Otherwise it will place the specified number of stone at the "standard" placements.
-Gome also sets automatically a "standard" komi as follow :
+Otherwise it will place the specified number of stone at the "standard" placements as follows : 
+(;SZ[19]AB[dd][jd][pd][dj][jj][pj][dp][jp][pp])
+(;SZ[13]AB[dd][gd][jd][dg][gg][jg][dj][gj][jj])
+(;SZ[9]AB[cc][ec][gc][ce][ee][ge][cg][eg][gg])
+
+and automatically a "standard" komi as follows :
 19x19 -> 6.5
 13x13 -> 8.5
 9x9   -> 5.5
@@ -18,9 +22,23 @@ If you made a mistake, you can always take back the last move by either selectin
 *Review a Game
 You can go in the Files menu and select either a bundle game or one of the internet indexes to access online game databases and newly played games in major tournaments.
 You can use the right arrow (or 6 on some platforms) to display the next move in the game. You can jump straight away to the first or last move from the menu.  
+If a comment is attached to a move you will see it on the bottom. You can collapse this space by selecting "comments" in the menu or by pressing the coresponding key (see the Shortcuts help section to find out which one).
+ 
+ 
+*Solve a tsumego (exercice)
+Still in the files menu you can find a selection of bundled or online problems. 
+Some problems are part of a collection (an sgf file regrouping several problems).
+Once you have selected a problem, you can try to solve it directly on playing on the board, gome will tell you if the move is correct either right away or at the end of a documented variation.
+If you made a mistake you can "undo" your last move (either by menu or the corresponding key, see the Shortcuts help section).
+You can also ask gome the next possible moves with "hints". It will show on the goban a red circle for the correct answer and a black circle for a documented wrong answer.
+  
+*Play online
+You need to register first on the IGS server (http://www.pandanet.co.jp/English/sintro1.html)
+Once you get your login/password, please check with a client that they are valid and enter them in the "Options" form of Gome.
+You will see a new "Connect to IGS" option in the main menu.
+Once you are connected, you can ask for the lists of current games with "Online Gamelist", and observe one. 
+You can also ask the lists of users to challenge one with "Online Users"  
 
-
-This is an help example with a diagram here 
 (;SZ[5]AB[bb][cc]AW[dd]LB[ab:z]CR[ac]MA[bc]SQ[ca]TR[ba])
 the continuation of the help file
 (;SZ[9]AB[ed][ec]AW[da]LB[ab:z]CR[ac]MA[bc]SQ[ca]TR[ba])

@@ -227,7 +227,6 @@ public class GameController implements ServerCallback
     // log.debug("paintBackBuffer");
     BoardPainter painter = canvas.getBoardPainter();
     painter.setCountingMode(countMode, playMode != ONLINE_MODE);
-    //painter.setAnnotations(currentNode.getAnnotations());
     painter.setKo(currentNode.getKo());
   }
 
@@ -1167,9 +1166,10 @@ public class GameController implements ServerCallback
   //#endif
 
   public void goToFirstMove() {
-    while (doGoBack()) {
-      // do nothing
-    }
+    notifyLoadReady();
+    // while (doGoBack()) {
+    // do nothing
+    //}
     tuneBoardPainter();
     canvas.refresh();
   }

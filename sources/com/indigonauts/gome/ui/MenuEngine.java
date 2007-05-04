@@ -2,7 +2,6 @@ package com.indigonauts.gome.ui;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Choice;
@@ -19,7 +18,6 @@ import org.apache.log4j.LogCanvas;
 import org.apache.log4j.Logger;
 
 import com.indigonauts.gome.Gome;
-import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.igs.ServerChallenge;
 import com.indigonauts.gome.igs.ServerGame;
@@ -184,7 +182,7 @@ public class MenuEngine implements CommandListener {
 
     Calendar cal = Calendar.getInstance();
     int y = cal.get(Calendar.YEAR);
-    int m = cal.get(Calendar.MONTH)+1;
+    int m = cal.get(Calendar.MONTH) + 1;
     int d = cal.get(Calendar.DAY_OF_MONTH);
     String defaultFN = Gome.singleton.bundle.getString("ui.defaultFilename") + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d)) + ".sgf";
 
@@ -449,11 +447,16 @@ public class MenuEngine implements CommandListener {
 
   public void deleteFile(FileEntry file) {
     if (file instanceof LocalFileEntry) {
-      try {
-        IOManager.singleton.deleteLocalStore(file.getUrl());
-      } catch (RecordStoreException e) {
-        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
-      }
+      //#ifdef JSR75
+      IOManager.singleton.deleteJSR75(file.getUrl());
+      //#else
+
+      //#try {
+      //# IOManager.singleton.deleteLocalStore(file.getUrl());
+      //#} catch (RecordStoreException e) {
+      //#Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      //#}
+      //#endif
     } else {
       Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.wrongType"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }

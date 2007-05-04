@@ -50,6 +50,7 @@ public class FileBrowser implements CommandListener, Showable {
   private int selectedNum;
   private Display display;
   public static Command OPEN;
+  public static Command OPEN_REVIEW;
   public static Command DELETE;
   public static Command IMPORT;
   public static Command SEND_BY_EMAIL;
@@ -75,6 +76,7 @@ public class FileBrowser implements CommandListener, Showable {
 
   private FileBrowser(Showable parent, MenuEngine listener, boolean saveMode) {
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
+    OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
     DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
     IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
     SEND_BY_EMAIL = new Command(Gome.singleton.bundle.getString("ui.sendByEmail"), Command.SCREEN, 2); //$NON-NLS-1$
@@ -136,7 +138,7 @@ public class FileBrowser implements CommandListener, Showable {
         //#ifdef MENU_IMAGES
         if (file.hasAnIllustration()) {
           image = generateIllustrativePosition(file.getIllustrativeBoardArea(), file.getIllustrativeBlackPosition(), file.getIllustrativeWhitePosition());
-        } else if (file.getPlayMode() == 'T') {
+        } else if (file.getPlayMode() == GameController.TEXT_MODE) {
           image = textFileImg;
         } else {
           image = file.isRemote() ? remoteFileImg : fileImg;
@@ -165,10 +167,16 @@ public class FileBrowser implements CommandListener, Showable {
       uiFolder.addCommand(MenuEngine.SAVE);
     } else {
       uiFolder.addCommand(OPEN);
-      uiFolder.addCommand(IMPORT);
-      uiFolder.addCommand(DELETE);
-      uiFolder.addCommand(SEND_BY_EMAIL);
+      if (currentDirectory.startsWith(IOManager.LOCAL_NAME)) {
+        uiFolder.addCommand(OPEN_REVIEW);
+        uiFolder.addCommand(DELETE);
+        uiFolder.addCommand(SEND_BY_EMAIL);
+      } else {
+        uiFolder.addCommand(IMPORT);
+      }
+
     }
+
     uiFolder.setCommandListener(this);
     display = disp;
 
@@ -216,7 +224,7 @@ public class FileBrowser implements CommandListener, Showable {
   public void commandAction(Command c, Displayable s) {
     if (s == uiFolder) {
 
-      if (c == OPEN || c == List.SELECT_COMMAND) {
+      if (c == OPEN || c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
 
         indexFolder = uiFolder.getSelectedIndex();
         Object entry = entries.elementAt(indexFolder);
@@ -232,6 +240,9 @@ public class FileBrowser implements CommandListener, Showable {
         if (entry instanceof CollectionEntry && ((CollectionEntry) entry).getCollectionSize() == 1) {
           indexBlock = 0;
           selectedNum = 0;
+          if (c == OPEN_REVIEW) {
+            ((CollectionEntry) entry).setPlayMode(GameController.REVIEW_MODE);
+          }
 
           listener.loadFile((CollectionEntry) entry, 0);
           return;

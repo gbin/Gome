@@ -17,7 +17,6 @@ import javax.microedition.lcdui.StringItem;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
-import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.StringVector;
@@ -26,7 +25,6 @@ import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
-import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 public class Info implements CommandListener, Showable {
   //#ifdef DEBUG
@@ -316,6 +314,7 @@ public class Info implements CommandListener, Showable {
   }
 
   private static final Font TITLE_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
+  private static final Font UNDERLINED_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_UNDERLINED, Font.SIZE_MEDIUM);
 
   private Form formatHelp(String name, String url) {
     Form form = new Form(name);
@@ -330,9 +329,17 @@ public class Info implements CommandListener, Showable {
           form.append(generatePosition(element));
           form.append("\n");
         } else if (element.startsWith("*")) {
+          form.append("\n");
           StringItem si = new StringItem("", element.substring(1));
           //#ifdef MIDP2
           si.setFont(TITLE_FONT);
+          //#endif
+          form.append(si);
+        } else if (element.startsWith("_")) {
+          form.append("\n");
+          StringItem si = new StringItem("", element.substring(1));
+          //#ifdef MIDP2
+          si.setFont(UNDERLINED_FONT);
           //#endif
           form.append(si);
         } else {

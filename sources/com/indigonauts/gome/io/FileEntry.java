@@ -36,6 +36,10 @@ public class FileEntry {
     return playMode;
   }
 
+  public void setPlayMode(char mode) {
+    playMode=mode;
+  }
+  
   public String getName() {
     return name;
   }
