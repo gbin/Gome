@@ -451,11 +451,11 @@ public class MenuEngine implements CommandListener {
       IOManager.singleton.deleteJSR75(file.getUrl());
       //#else
 
-      //#try {
+      //# try {
       //# IOManager.singleton.deleteLocalStore(file.getUrl());
-      //#} catch (RecordStoreException e) {
-      //#Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
-      //#}
+      //# } catch (RecordStoreException e) {
+      //# Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      //# }
       //#endif
     } else {
       Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.wrongType"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$

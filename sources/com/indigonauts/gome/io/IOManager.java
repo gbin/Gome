@@ -428,7 +428,7 @@ public class IOManager {
     for (int i = 0; i < listRecordStores.length; i++) {
       String filename = listRecordStores[i];
       if (filename.toLowerCase().endsWith(SGF))
-        answer.addElement(new LocalFileEntry("store:" + filename, null, filename, false)); //$NON-NLS-1$
+        answer.addElement(new LocalFileEntry("store:" + filename, null, filename)); //$NON-NLS-1$
     }
     return answer;
 
@@ -587,7 +587,7 @@ public class IOManager {
       if (current.endsWith("/")) {
         list.addElement(new IndexEntry(fullPath, current, current));
       } else
-        list.addElement(new LocalFileEntry(fullPath, current, current, true));
+        list.addElement(new LocalFileEntry(fullPath, current, current));
     }
     return list;
   }

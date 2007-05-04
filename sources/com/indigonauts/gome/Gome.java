@@ -30,7 +30,7 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Gome");
   //#endif
 
-  public static final String VERSION = "1.2pre2"; //$NON-NLS-1$
+  public static final String VERSION = "1.2pre3"; //$NON-NLS-1$
 
   private static final String OPTIONS_FILE = VERSION + ".o"; //$NON-NLS-1$
   private static long HOUR = 60 * 60 * 1000L;
