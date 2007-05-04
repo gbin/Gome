@@ -37,8 +37,9 @@ public class IOManager {
   private static final String SGF = ".sgf"; //$NON-NLS-1$
 
   private static final String INDEX_NAME = "index.txt"; //$NON-NLS-1$
+  
   public static final String LOCAL_NAME = "file:///"; //$NON-NLS-1$
-
+  
   public static IOManager singleton = new IOManager();
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
@@ -271,7 +272,7 @@ public class IOManager {
   }
 
   public void deleteLocalStore(String url) throws RecordStoreException {
-    RecordStore.deleteRecordStore(url.substring(url.indexOf(':') + 1));
+    RecordStore.deleteRecordStore(url.substring(url.indexOf(':') + 4));
   }
 
   public Vector getFileEntriesFromIndex(String indexFile) {
@@ -356,8 +357,8 @@ public class IOManager {
   }
 
   public byte[] loadFile(String url, DownloadStatus status) throws IOException {
-    if (url.startsWith("store:")) { //$NON-NLS-1$
-      url = url.substring(url.indexOf(":") + 1); //$NON-NLS-1$
+    if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
+      url = url.substring(url.indexOf(':') + 4); //$NON-NLS-1$
       try {
         return loadLocalStore(url, status);
       } catch (RecordStoreException e) {
@@ -407,14 +408,16 @@ public class IOManager {
   public DataInputStream readFileAsStream(String url, DownloadStatus status) throws IOException {
     if (url.startsWith("http://")) { //$NON-NLS-1$
       return readFileFromHttp(url, status);
-    } else if (url.startsWith("store:")) { //$NON-NLS-1$
-      url = url.substring(url.indexOf(':') + 1);
-      return readFromLocalStore(url);
-    }
+    } 
     //#ifdef JSR75
-    else if (url.startsWith("file:")) {
+    else if (url.startsWith(LOCAL_NAME)) {
       return loadJSR75(url, status);
     }
+    //#else
+    //# else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
+    //#  url = url.substring(url.indexOf(':') + 4);
+    //#  return readFromLocalStore(url);
+    //# }
     //#endif
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);
@@ -428,7 +431,7 @@ public class IOManager {
     for (int i = 0; i < listRecordStores.length; i++) {
       String filename = listRecordStores[i];
       if (filename.toLowerCase().endsWith(SGF))
-        answer.addElement(new LocalFileEntry("store:" + filename, null, filename)); //$NON-NLS-1$
+        answer.addElement(new LocalFileEntry(LOCAL_NAME + filename, null, filename)); //$NON-NLS-1$
     }
     return answer;
 
