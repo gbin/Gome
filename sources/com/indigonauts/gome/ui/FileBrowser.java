@@ -326,8 +326,16 @@ public class FileBrowser implements CommandListener, Showable {
         //#  Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
         //# }
         //#endif
-
-        addFile(new LocalFileEntry(currentDirectory, name, name));
+        boolean alreadyThere = false;
+        Enumeration elements = entries.elements();
+        while (elements.hasMoreElements()) {
+          if (((FileEntry) elements.nextElement()).getName().equals(name)) {
+            alreadyThere = true;
+            break;
+          }
+        }
+        if (!alreadyThere)
+          addFile(new LocalFileEntry(currentDirectory, name, name));
         this.show(display);
 
       } else if (c == MenuEngine.BACK) {
