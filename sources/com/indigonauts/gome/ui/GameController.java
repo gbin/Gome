@@ -77,6 +77,7 @@ public class GameController implements ServerCallback
   private boolean bZoomIn;
 
   private boolean countMode = false;
+  private boolean evaluationMode = false;
 
   private CollectionEntry currentCollection;
 
@@ -449,17 +450,14 @@ public class GameController implements ServerCallback
           try {
             if (!(board.isValidMove(cursor, Board.BLACK) | board.isValidMove(cursor, Board.WHITE)) && !board.hasBeenRemove(cursor.x, cursor.y)) {
               igs.removeDeadStone(cursor.x, cursor.y);
-              doMarkDearStone();
             }
           } catch (Exception e) {
             e.printStackTrace();
           }
-        } else {
-          //#endif
-          doMarkDearStone();
-          //#ifdef IGS
         }
         //#endif
+        board.markDeadGroup(cursor.x, cursor.y);
+
       } else if (playMode == REVIEW_MODE || playMode == JOSEKI_MODE)
         doCycleBottom();
       else
@@ -527,7 +525,7 @@ public class GameController implements ServerCallback
     canvas.setSplashInfo(null);
     moveCursor(canvas.getBoardPainter().getBoardX(x), canvas.getBoardPainter().getBoardY(y));
     if (countMode && !gameHasEnded)
-      doMarkDearStone();
+      board.markDeadGroup(cursor.x, cursor.y);
     else
       doClick();
     tuneBoardPainter();
@@ -561,19 +559,12 @@ public class GameController implements ServerCallback
     case GAME_MODE:
       // warnPassed(color);
       if (currentNode.isPass() && !gameHasEnded) {
-        setCountMode(true);
+        startCountMode(false); // exact mode
       }
       playNewMove(color, Point.PASS, Point.PASS);
       break;
     }
 
-  }
-
-  public void doMarkDearStone() {
-    // log.debug("doMarkDearStone");
-    //#ifdef IGS
-    board.markDeadGroup(cursor.x, cursor.y, playMode != ONLINE_MODE);
-    //#endif
   }
 
   public void doClick() {
@@ -743,8 +734,10 @@ public class GameController implements ServerCallback
   }
 
   public boolean doGoBack() {
-    if (countMode && !gameHasEnded)
-      setCountMode(false);
+    if (countMode && !gameHasEnded) {
+      resumeFromCounting();
+      return true;
+    }
     SgfNode prev = currentNode.searchFather();
     if (prev != null) {
       board.placeStone(currentNode.getPoint(), Board.EMPTY);
@@ -777,7 +770,7 @@ public class GameController implements ServerCallback
       if (next.isPass() && !countMode) {
         warnPassed(next.getPlayerColor());
         if (currentNode.isPass())
-          setCountMode(true);
+          startCountMode(false);
       }
       playNode(next);
       return true;
@@ -1198,8 +1191,10 @@ public class GameController implements ServerCallback
   //#endif
   public void doScore() {
     if (playMode == GAME_MODE || playMode == REVIEW_MODE) {
-      gameHasEnded = true;
-      stopClockAndStopPainingClock();
+      if (!evaluationMode) {
+        gameHasEnded = true;
+        stopClockAndStopPainingClock();
+      }
       countMode = false;
 
       // log.debug("white captures = " + board.getNbCapturedBlack());
@@ -1236,7 +1231,7 @@ public class GameController implements ServerCallback
       if (dotfivedKomi) {
         scoreSentence.append(".5");
       }
-
+      setPlayMode(playMode);
       canvas.setSplashInfo(scoreSentence.toString());
     }
     //#ifdef IGS
@@ -1268,24 +1263,35 @@ public class GameController implements ServerCallback
 
   //#endif
 
-  public void setCountMode(boolean b) {
+  public void startCountMode(boolean evaluationMode) {
     clock.pauseClock();
     canvas.stopClockPainting();
-    countMode = b;
-    if (countMode) {
-      board.switchToCounting(true);
-      Gome.singleton.mainCanvas.setClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
-      canvas.setSplashInfo(Gome.singleton.bundle.getString("count.markDeadStone"));
-      //#ifdef IGS
-      if (playMode == ONLINE_MODE)
-        canvas.switchToOnlineCountingMenu();
-      else
-        //#endif
-        canvas.switchToCountingMenu();
-    } else {
-      board.switchToCounting(false);
-      setPlayMode(playMode); // reput the menu as normal
-    }
+    countMode = true;
+    this.evaluationMode = evaluationMode;
+    board.startCounting(evaluationMode, (playMode != ONLINE_MODE) && !evaluationMode);
+    Gome.singleton.mainCanvas.setClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
+    canvas.setSplashInfo(Gome.singleton.bundle.getString("count.markDeadStone"));
+    //#ifdef IGS
+    if (playMode == ONLINE_MODE)
+      canvas.switchToOnlineCountingMenu();
+    else
+      //#endif
+      canvas.switchToCountingMenu();
+    tuneBoardPainter();
+  }
+
+  public void resumeFromCounting() {
+    countMode = false;
+    clock.resumeClock();
+    canvas.recalculateLayout();
+    setPlayMode(playMode); // reput the menu as normal 
+    tuneBoardPainter();
+  }
+
+  public void endCounting() {
+    countMode = false;
+    board.endCounting();
+    setPlayMode(playMode); // reput the menu as normal 
     tuneBoardPainter();
   }
 
@@ -1337,14 +1343,13 @@ public class GameController implements ServerCallback
   }
 
   public void endGame() {
-    setCountMode(true);
+    startCountMode(false);
     canvas.setSplashInfo(Gome.singleton.bundle.getString("count.endGameMarkStone"));
     // setPlayMode(ONLINE_MODE);
   }
 
   public void restoreGameForCounting() {
-    setCountMode(false);
-    setCountMode(true);
+    startCountMode(false);
     gameHasEnded = false;
     //#ifdef IGS
     canvas.removeOnlineSetKomiAndHandicapMenuItem();
@@ -1356,7 +1361,7 @@ public class GameController implements ServerCallback
   public void oppRemoveDeadStone(byte x, byte y) {
     if (countMode == true) {
       if (!board.hasBeenRemove(x, y)) {
-        board.markDeadGroup(x, y, false);
+        board.markDeadGroup(x, y);
         // log.debug("opp has mark dead stone x: " + x + " y:" + y);
         tuneBoardPainter();
         canvas.refresh();
@@ -1366,7 +1371,7 @@ public class GameController implements ServerCallback
 
   //#ifdef IGS
   public void gameIsDone(String name1, int value1, String name2, int value2) {
-    setCountMode(false);
+    endCounting();
     String out = "";
     gameHasEnded = true;
 

@@ -61,7 +61,7 @@ public class MenuEngine implements CommandListener {
   public static Command REQUEST;
   public static Command REQUEST_KOMI;
   public static Command CHANGE_ONLINE_HANDICAP;
-  public static Command IGS_RESET_DEADS_TONE;
+  public static Command IGS_RESET_DEAD_STONES;
   public static Command IGS_DONE_SCORE;
   public static Command GAME_STATUS;
   public static Command OPTIONS;
@@ -72,6 +72,8 @@ public class MenuEngine implements CommandListener {
   public static Command BACK;
   public static Command START;
   public static Command EXIT;
+
+  public static Command EVALUATE;
   public static Command FINISHED_COUNTING;
   public static Command ACCEPT;
   public static Command DECLINE;
@@ -147,11 +149,12 @@ public class MenuEngine implements CommandListener {
     EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); //$NON-NLS-1$
 
     FINISHED_COUNTING = new Command(Gome.singleton.bundle.getString("count.endCounting"), Command.SCREEN, 5); //$NON-NLS-1$
+    EVALUATE = new Command(Gome.singleton.bundle.getString("count.evaluate"), Command.SCREEN, 5); //$NON-NLS-1$
     ACCEPT = new Command(Gome.singleton.bundle.getString("ui.accept"), Command.SCREEN, 5); //$NON-NLS-1$
     DECLINE = new Command(Gome.singleton.bundle.getString("ui.decline"), Command.SCREEN, 5); //$NON-NLS-1$
     RESIGN = new Command(Gome.singleton.bundle.getString("ui.resign"), Command.SCREEN, 5); //$NON-NLS-1$
     REQUEST = new Command(Gome.singleton.bundle.getString("ui.request"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_RESET_DEADS_TONE = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
+    IGS_RESET_DEAD_STONES = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
 
     COMMENT = new Command(Gome.singleton.bundle.getString("ui.comment"), Command.SCREEN, 5); //$NON-NLS-1$
     ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -238,15 +241,17 @@ public class MenuEngine implements CommandListener {
           gc.goToFirstMove();
         } else if (c == LAST_MOVE) {
           gc.goToLastMove();
+        } else if (c == EVALUATE) {
+          gc.startCountMode(true);
         } else if (c == FINISHED_COUNTING) {
           gc.doScore();
         } else if (c == PASS) {
           gc.pass();
         } else if (c == SAVE) {
-          
+
           fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
           new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fileBrowser).show(Gome.singleton.display);
-          
+
         } else if (c == OPTIONS) {
           optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, false);
           Gome.singleton.display.setCurrent(optionsForm);
@@ -291,7 +296,7 @@ public class MenuEngine implements CommandListener {
           gc.resign();
         }
         //#ifdef IGS
-        else if (c == IGS_RESET_DEADS_TONE) {
+        else if (c == IGS_RESET_DEAD_STONES) {
           gc.gomeRestoreGameForCounting();
         } else if (c == IGS_DONE_SCORE) {
           gc.doneWithScore();

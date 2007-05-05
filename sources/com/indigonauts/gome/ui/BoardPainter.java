@@ -21,8 +21,9 @@ import com.indigonauts.gome.sgf.SymbolAnnotation;
 import com.indigonauts.gome.sgf.TextAnnotation;
 
 public class BoardPainter {
-  // private static final org.apache.log4j.Logger log =
-  // org.apache.log4j.Logger.getLogger("BoardPainter");
+  //#ifdef DEBUG
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BoardPainter");
+  //#endif
 
   private static final int MARGIN = 0;
 
@@ -31,7 +32,7 @@ public class BoardPainter {
   private Rectangle boardArea;
 
   private GraphicRectangle drawArea;
-  
+
   // draw positions
   private int delta;
 
@@ -61,7 +62,7 @@ public class BoardPainter {
 
   public BoardPainter(Board newBoard, GraphicRectangle imageArea, Rectangle newBoardArea) {
     board = newBoard;
-    
+
     boardArea = newBoardArea != null ? newBoardArea : newBoard.getFullBoardArea();
     drawArea = imageArea;
 
@@ -72,8 +73,8 @@ public class BoardPainter {
   }
 
   /*public void setAnnotations(Vector annotations) {
-    this.annotations = annotations;
-  }*/
+   this.annotations = annotations;
+   }*/
 
   public void setKo(Point ko) {
     this.ko = ko;
@@ -101,8 +102,8 @@ public class BoardPainter {
    * @param gc
    */
   /*public void setGameController(GameController gc) {
-    this.gc = gc;
-  }*/
+   this.gc = gc;
+   }*/
 
   private void resetBackBuffer() {
     /*
@@ -117,7 +118,7 @@ public class BoardPainter {
   public void drawBoard(Graphics graphics, Vector annotations) {
     graphics.setColor(Gome.singleton.options.gobanColor);
 
-    graphics.fillRect(0, 0, drawArea.getWidth()+2, drawArea.getHeight()+2); //FIXME: ca va pas
+    graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
 
     int ox = getCellX(0);
     int oy = getCellY(0);
@@ -128,7 +129,7 @@ public class BoardPainter {
     int uy = getCellY(boardArea.y0);
     graphics.setClip(ux - halfdelta, uy - halfdelta, getCellX(boardArea.x1 + 1) - ux + 1, getCellY(boardArea.y1 + 1) - uy + 1);
     graphics.setColor(Util.COLOR_WHITE);
-    graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta -1 , oyy - oy + halfdelta + halfdelta -1);
+    graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta - 1, oyy - oy + halfdelta + halfdelta - 1);
 
     graphics.setClip(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
     graphics.setColor(Util.COLOR_BLACK);
@@ -149,22 +150,21 @@ public class BoardPainter {
 
   }
 
-  
   /*public void drawMe(Graphics g) {
-    Point cursor = gc.getCursor();
-    int playerColor = gc.getCurrentPlayerColor();
-    boolean showHints = gc.getShowHints();
-    SgfNode currentNode = gc.getCurrentNode();
-    SgfModel model = gc.getSgfModel();
+   Point cursor = gc.getCursor();
+   int playerColor = gc.getCurrentPlayerColor();
+   boolean showHints = gc.getShowHints();
+   SgfNode currentNode = gc.getCurrentNode();
+   SgfModel model = gc.getSgfModel();
    }*/
-    
+
   public void drawMe(Graphics g, Point cursor, int playerColor, boolean showHints, SgfNode currentNode, SgfModel model) {
     // clone the latest buffer
     // g.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
     drawBoard(g, currentNode.getAnnotations());
 
     // draw cursor
-    if(cursor != null)
+    if (cursor != null)
       drawCursor(g, cursor, playerColor); // guess the
     // next color
 
@@ -227,7 +227,7 @@ public class BoardPainter {
   }
 
   public void drawTerritory(Graphics g) {
-    byte[][] territory = board.guessTerritory(smartCounting);
+    byte[][] territory = board.getTerritory();
     byte boardSize = board.getBoardSize();
     SymbolAnnotation p = new SymbolAnnotation(SymbolAnnotation.SQUARE);
     int whiteTerritoryColor = Util.blendColors(Gome.singleton.options.gobanColor, Util.COLOR_WHITE);
@@ -319,6 +319,18 @@ public class BoardPainter {
     }
   }
 
+  private static boolean S60_BUG = false;
+
+  static {
+    String version = System.getProperty("microedition.platform");
+    //#ifdef DEBUG
+    log.debug("Version = " + version);
+    //#endif
+    if (version != null && version.startsWith("NokiaE60")) {
+      S60_BUG = true;
+    }
+  }
+
   private void drawStone(Graphics g, Point pt, int color) {
     int cx = getCellX(pt.x);
     int cy = getCellY(pt.y);
@@ -327,15 +339,14 @@ public class BoardPainter {
     int y = cy - halfdelta;
     g.setColor(color);
 
-    //#ifdef MIDP2
-    g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
-    //#else
-    //# g.fillArc(x, y, w, w, 0, 360);
-    //#endif 
+    if (S60_BUG)
+      g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
+    else
+      g.fillArc(x, y, w, w, 0, 360);
 
     g.setColor(Util.COLOR_GREY);
     g.drawArc(x, y, w, w, 0, 360);
-    
+
   }
 
   private void drawEmpty(Graphics g, Point pt) {

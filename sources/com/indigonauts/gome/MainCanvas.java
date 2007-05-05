@@ -191,6 +191,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.LAST_MOVE);
     removeCommand(MenuEngine.FIRST_MOVE);
     removeCommand(MenuEngine.FINISHED_COUNTING);
+    removeCommand(MenuEngine.EVALUATE);
     removeCommand(MenuEngine.RESIGN);
     //#ifdef IGS
     removeCommand(MenuEngine.IGS_MESSAGE);
@@ -198,7 +199,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.IGS_USERLIST);
     removeCommand(MenuEngine.IGS_DISCONNECT);
     removeCommand(MenuEngine.IGS_CONNECT);
-    removeCommand(MenuEngine.IGS_RESET_DEADS_TONE);
+    removeCommand(MenuEngine.IGS_RESET_DEAD_STONES);
     removeCommand(MenuEngine.IGS_DONE_SCORE);
     removeOnlineSetKomiAndHandicapMenuItem();
     //#endif
@@ -211,27 +212,30 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void switchToPlayMenu() {
     clearOptionalItems();
+    addCommand(MenuEngine.PASS);
+    addCommand(MenuEngine.RESIGN);
+    addCommand(MenuEngine.ZOOM);
+    addCommand(MenuEngine.UNDO);
+    addCommand(MenuEngine.EVALUATE);
     //#ifdef IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
 
       addCommand(MenuEngine.IGS_CONNECT);
     }
     //#endif
-    addCommand(MenuEngine.ZOOM);
-    addCommand(MenuEngine.UNDO);
+    
     addCommand(MenuEngine.REVIEW_MODE);
-    addCommand(MenuEngine.PASS);
-    addCommand(MenuEngine.RESIGN);
+    
   }
 
   //#ifdef IGS
   public void switchToOnlinePlayMenu() {
     clearOptionalItems();
+    addCommand(MenuEngine.PASS);
+    addCommand(MenuEngine.RESIGN);
     removeCommand(MenuEngine.IGS_CONNECT);
     addCommand(MenuEngine.REQUEST_KOMI);
     addCommand(MenuEngine.CHANGE_ONLINE_HANDICAP);
-    addCommand(MenuEngine.PASS);
-    addCommand(MenuEngine.RESIGN);
     addCommand(MenuEngine.IGS_MESSAGE);
     addCommand(MenuEngine.ZOOM);
   }
@@ -253,16 +257,19 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void switchToReviewMenu() {
 
     clearOptionalItems();
+    addCommand(MenuEngine.COMMENT);
+    addCommand(MenuEngine.ZOOM);
+    addCommand(MenuEngine.FIRST_MOVE);
+    addCommand(MenuEngine.LAST_MOVE);
+    addCommand(MenuEngine.PLAY_MODE);
+    addCommand(MenuEngine.EVALUATE);
+
     //#ifdef IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
       addCommand(MenuEngine.IGS_CONNECT);
     }
     //#endif
-    addCommand(MenuEngine.FIRST_MOVE);
-    addCommand(MenuEngine.LAST_MOVE);
-    addCommand(MenuEngine.COMMENT);
-    addCommand(MenuEngine.ZOOM);
-    addCommand(MenuEngine.PLAY_MODE);
+
   }
 
   public void switchToJosekiMenu() {
@@ -316,6 +323,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void switchToCountingMenu() {
     removeCommand(MenuEngine.PASS);
+    removeCommand(MenuEngine.EVALUATE);
     addCommand(MenuEngine.FINISHED_COUNTING);
   }
 
@@ -324,7 +332,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.PASS);
     addCommand(MenuEngine.FINISHED_COUNTING);
     addCommand(MenuEngine.IGS_DONE_SCORE);
-    addCommand(MenuEngine.IGS_RESET_DEADS_TONE);
+    addCommand(MenuEngine.IGS_RESET_DEAD_STONES);
   }
 
   //#endif

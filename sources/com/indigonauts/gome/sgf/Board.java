@@ -23,15 +23,16 @@ public class Board {
   public static final char ONLINE_MODE = 'O';
 
   public static final char GAME_MODE = 'G';
+  private static final byte UNDETERMINED_TERRITORY = -2;
 
-  public static final byte[][] direction = { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
+  public static final byte[][] DIRECTIONS = { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
 
   private byte[][] board; // use as board[x][y]
 
   private byte boardSize;
 
   private Rectangle fullBoardArea;
-  
+
   private int nbCapturedBlack;
 
   private int nbCapturedWhite;
@@ -41,6 +42,17 @@ public class Board {
   private boolean[][] dead;
 
   private boolean[][] markers;
+
+  /**
+   * When evaluationCountingMode is true, 
+   * It will use an evaluation algo for the territory and not an exact counting
+   */
+  private boolean evaluationCountingMode = false;
+
+  /**
+   * When smartmarking is true, it will find the entire dead stones within a territory when marking
+   */
+  private boolean smartMarking = false;
 
   private boolean ressucite = false;
 
@@ -57,9 +69,8 @@ public class Board {
    * @param newBoardSize
    */
   public void reset(byte newBoardSize) {
-    // firstPlayer=currentPlayer=BLACK;
     boardSize = newBoardSize;
-    fullBoardArea = new Rectangle((byte)0,(byte)0,(byte)(boardSize-1), (byte)(boardSize-1));
+    fullBoardArea = new Rectangle((byte) 0, (byte) 0, (byte) (boardSize - 1), (byte) (boardSize - 1));
     board = new byte[boardSize][boardSize];
   }
 
@@ -101,18 +112,6 @@ public class Board {
 
     int captx = capturedStone.x;
     int capty = capturedStone.y;
-
-    // System.out.println("player =" + player );
-    // System.out.println("x=" +x );
-    // System.out.println("y=" +y );
-    // System.out.println("cx=" +captx );
-    // System.out.println("cy=" +capty );
-    //        
-    // System.out.println("board[x+1][y]=" +board[x+1][y] );
-    // System.out.println("board[x-1][y]=" +board[x-1][y] );
-    //        
-    // System.out.println("board[x][y+1]=" +board[x][y+1] );
-    // System.out.println("board[x][y-1]=" +board[x][y-1] );
 
     if (!(x + 1 == captx && y == capty) && x + 1 < boardSize && board[x + 1][y] != -player) {
       return false;
@@ -201,28 +200,18 @@ public class Board {
     Rectangle area = fullBoardArea;
 
     int[][] history = new int[boardSize][boardSize];
-    for (int i = 0; i < direction.length; ++i) {
+    for (int i = 0; i < DIRECTIONS.length; ++i) {
       Point nextpt = new Point(lastmove);
-      nextpt.move(direction[i][0], direction[i][1]);
+      nextpt.move(DIRECTIONS[i][0], DIRECTIONS[i][1]);
 
       if (area.contains(nextpt) && (this.getPosition(nextpt) * lastplayer == -1) && history[nextpt.x][nextpt.y] == 0) {
         Vector tempVec = this.findDeadGroup(nextpt, history);
-
-        // vec.addAll(tempVec);
         for (Enumeration e = tempVec.elements(); e.hasMoreElements();) {
           vec.addElement(e.nextElement());
         }
       }
 
     }
-
-    // if no opponent is killed, check if it's a suicide
-    // not implemented
-    // if (vec.size()==0)
-    // {
-
-    // }
-
     return vec;
   }
 
@@ -264,7 +253,7 @@ public class Board {
       Point nextpt = new Point(curpt);
       if (status >= 1 && status <= 4) {
         history[curpt.x][curpt.y] = status + 1;
-        nextpt.move(direction[status - 1][0], direction[status - 1][1]);
+        nextpt.move(DIRECTIONS[status - 1][0], DIRECTIONS[status - 1][1]);
       }
 
       if (!area.contains(nextpt))
@@ -343,49 +332,50 @@ public class Board {
     return ko;
   }
 
-  
   /**
    * Recursively mark all unmarked places with the given color & empty
    */
-  private void recurseMarkDead(int i, int j, byte color) {
+  private void recurseSmartMarkDead(int i, int j, byte color) {
     if (markers[i][j] || (board[i][j] == -color))
       return;
     markers[i][j] = true;
     if (board[i][j] == color)
       dead[i][j] = !ressucite;
     if (i > 0)
-      recurseMarkDead(i - 1, j, color);
+      recurseSmartMarkDead(i - 1, j, color);
     if (j > 0)
-      recurseMarkDead(i, j - 1, color);
+      recurseSmartMarkDead(i, j - 1, color);
     if (i < boardSize - 1)
-      recurseMarkDead(i + 1, j, color);
+      recurseSmartMarkDead(i + 1, j, color);
     if (j < boardSize - 1)
-      recurseMarkDead(i, j + 1, color);
+      recurseSmartMarkDead(i, j + 1, color);
   }
 
-  private void recurseOnlineMarkDead(int i, int j, byte color) {
+  private void recurseDumbMarkDead(int i, int j, byte color) {
     if (markers[i][j] || (board[i][j] == -color))
       return;
     markers[i][j] = true;
     if (board[i][j] == color)
       dead[i][j] = !ressucite;
     if (i > 0 && board[i - 1][j] == color)
-      recurseOnlineMarkDead(i - 1, j, color);
+      recurseDumbMarkDead(i - 1, j, color);
     if (j > 0 && board[i][j - 1] == color)
-      recurseOnlineMarkDead(i, j - 1, color);
+      recurseDumbMarkDead(i, j - 1, color);
     if (i < boardSize - 1 && board[i + 1][j] == color)
-      recurseOnlineMarkDead(i + 1, j, color);
+      recurseDumbMarkDead(i + 1, j, color);
     if (j < boardSize - 1 && board[i][j + 1] == color)
-      recurseOnlineMarkDead(i, j + 1, color);
+      recurseDumbMarkDead(i, j + 1, color);
   }
 
-  public void switchToCounting(boolean b) {
-    if (b)
-      dead = new boolean[boardSize][boardSize];
-    else {
-      dead = null;
-      markers = null;
-    }
+  public void startCounting(boolean evaluationMode, boolean smartMarking) {
+    dead = new boolean[boardSize][boardSize];
+    evaluationCountingMode = evaluationMode;
+    this.smartMarking = smartMarking;
+  }
+
+  public void endCounting() {
+    dead = null;
+    markers = null;
   }
 
   /**
@@ -396,15 +386,15 @@ public class Board {
   }
 
   /**
-   * Mark a group at (n,m)
+   * mark/unmark a group at (x,y)
    */
-  public void markDeadGroup(int n, int m, boolean smart) {
+  public void markDeadGroup(int x, int y) {
     unMark();
-    ressucite = dead[n][m];
-    if (smart) {
-      recurseMarkDead(n, m, board[n][m]);
+    ressucite = dead[x][y];
+    if (smartMarking) {
+      recurseSmartMarkDead(x, y, board[x][y]);
     } else {
-      recurseOnlineMarkDead(n, m, board[n][m]);
+      recurseDumbMarkDead(x, y, board[x][y]);
     }
   }
 
@@ -449,29 +439,13 @@ public class Board {
     return recurseMarkTest(x, y, board[x][y], ct);
   }
 
-  // /**
-  // * mark and count
-  // */
-  // public int count(int i, int j) {
-  // unMark();
-  // markDeadGroup(i, j);
-  // int count = 0;
-  // for (i = 0; i < boardSize; i++)
-  // for (j = 0; j < boardSize; j++)
-  // if (markers[i][j])
-  // count++;
-  // return count;
-  // }
-
-  private static final byte UNDETERMINED_TERRITORY = -2;
-
   /**
    * Find all B and W territory. Sets the territory flags to 0, 1 or -1. -2 is
    * an intermediate state for unchecked points.
    * Smart territory marks the entire region as territory when you select a stone
    * otherwise it is a group by group remove (useful for IGS compatibility) 
    */
-  public byte[][] guessTerritory(boolean smartTerritory) {
+  public byte[][] calculateTerritory() {
     byte[][] territory = new byte[boardSize][boardSize];
 
     int i, j, ii, jj;
@@ -499,7 +473,7 @@ public class Board {
                 }
               }
             } else {
-                markDeadGroup(i, j, smartTerritory);
+              markDeadGroup(i, j);
               for (ii = 0; ii < boardSize; ii++) {
                 for (jj = 0; jj < boardSize; jj++) {
                   if (markers[ii][jj])
@@ -518,7 +492,7 @@ public class Board {
     int[] scores = new int[2];
     int white = nbCapturedBlack;
     int black = nbCapturedWhite;
-    byte[][] territory = guessTerritory((byte) GAME_MODE != ONLINE_MODE);
+    byte[][] territory = getTerritory();
     for (int i = 0; i < boardSize; i++) {
       for (int j = 0; j < boardSize; j++) {
         if (territory[i][j] == WHITE) {
@@ -541,10 +515,141 @@ public class Board {
   public boolean hasBeenRemove(byte x, byte y) {
     return dead[x][y];
   }
-  
-  public Rectangle getFullBoardArea()
-  {
+
+  public Rectangle getFullBoardArea() {
     return fullBoardArea;
   }
-  
+
+  public byte[][] guessTerritory() {
+    return guessTerritory(5, 5);
+  }
+
+  /**
+   * Evaluate Bousy map.
+   * @param delate   number of delations
+   * @param erode    number of erosions
+   */
+  public byte[][] guessTerritory(int delate, int erode) {
+    int size = boardSize;
+    int[][] data = new int[size][size];
+    int[][] buffer = new int[size][size];
+    for (int x = 0; x < size; x++)
+      for (int y = 0; y < size; y++)
+        if (!dead[x][y]) {
+          switch (board[x][y]) {
+          case WHITE:
+            data[x][y] = -128;
+            break;
+          case BLACK:
+            data[x][y] = 128;
+            break;
+          }
+        }
+
+    while (delate-- > 0) {
+      for (int x = 0; x < size; x++)
+        for (int y = 0; y < size; y++) {
+          int w = 0;
+          int b = 0;
+
+          if (x > 0)
+            if (data[x - 1][y] > 0)
+              b++;
+            else if (data[x - 1][y] < 0)
+              w++;
+          if (x < size - 1)
+            if (data[x + 1][y] > 0)
+              b++;
+            else if (data[x + 1][y] < 0)
+              w++;
+          if (y > 0)
+            if (data[x][y - 1] > 0)
+              b++;
+            else if (data[x][y - 1] < 0)
+              w++;
+          if (y < size - 1)
+            if (data[x][y + 1] > 0)
+              b++;
+            else if (data[x][y + 1] < 0)
+              w++;
+
+          if (w == 0 && data[x][y] >= 0)
+            buffer[x][y] += b;
+          else if (b == 0 && data[x][y] <= 0)
+            buffer[x][y] -= w;
+        }
+      for (int x = 0; x < size; x++)
+        for (int y = 0; y < size; y++) {
+          data[x][y] += buffer[x][y];
+          buffer[x][y] = 0;
+        }
+    }
+
+    while (erode-- > 0) {
+      for (int x = 0; x < size; x++)
+        for (int y = 0; y < size; y++) {
+          int w = 0;
+          int b = 0;
+
+          if (x > 0) {
+            if (data[x - 1][y] >= 0)
+              b++;
+            if (data[x - 1][y] <= 0)
+              w++;
+          }
+          if (x < size - 1) {
+            if (data[x + 1][y] >= 0)
+              b++;
+            if (data[x + 1][y] <= 0)
+              w++;
+          }
+          if (y > 0) {
+            if (data[x][y - 1] >= 0)
+              b++;
+            if (data[x][y - 1] <= 0)
+              w++;
+          }
+          if (y < size - 1) {
+            if (data[x][y + 1] >= 0)
+              b++;
+            if (data[x][y + 1] <= 0)
+              w++;
+          }
+
+          if (data[x][y] > 0)
+            buffer[x][y] -= w;
+          else if (data[x][y] < 0)
+            buffer[x][y] += b;
+        }
+      for (int x = 0; x < size; x++)
+        for (int y = 0; y < size; y++) {
+          int newVal = data[x][y] + buffer[x][y];
+          if (data[x][y] > 0)
+            data[x][y] = Math.max(newVal, 0);
+          else if (data[x][y] < 0)
+            data[x][y] = Math.min(newVal, 0);
+          buffer[x][y] = 0;
+        }
+    }
+    byte[][] result = new byte[size][size];
+    for (int x = 0; x < size; x++)
+      for (int y = 0; y < size; y++) {
+        if (board[x][y] == EMPTY || dead[x][y]) {
+          if (data[x][y] > 0)
+            result[x][y] = BLACK;
+          else if (data[x][y] < 0)
+            result[x][y] = WHITE;
+        }
+      }
+
+    return result;
+  }
+
+  public byte[][] getTerritory() {
+    if (evaluationCountingMode)
+      return guessTerritory();
+    else
+      return calculateTerritory();
+  }
+
 }
