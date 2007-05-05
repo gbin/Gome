@@ -325,6 +325,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.PASS);
     removeCommand(MenuEngine.EVALUATE);
     addCommand(MenuEngine.FINISHED_COUNTING);
+    
   }
 
   //#ifdef IGS

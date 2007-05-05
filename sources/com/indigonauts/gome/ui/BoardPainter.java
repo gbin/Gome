@@ -58,7 +58,6 @@ public class BoardPainter {
   private Point ko;
 
   private boolean counting;
-  private boolean smartCounting;
 
   public BoardPainter(Board newBoard, GraphicRectangle imageArea, Rectangle newBoardArea) {
     board = newBoard;
@@ -80,9 +79,8 @@ public class BoardPainter {
     this.ko = ko;
   }
 
-  public void setCountingMode(boolean counting, boolean smartCounting) {
+  public void setCountingMode(boolean counting) {
     this.counting = counting;
-    this.smartCounting = smartCounting;
   }
 
   public void setPlayArea(Rectangle playArea) {
@@ -116,10 +114,11 @@ public class BoardPainter {
   }
 
   public void drawBoard(Graphics graphics, Vector annotations) {
+    //Image temp = Image.createImage(drawArea.getWidth() + 2, drawArea.getHeight() + 2);
+    //Graphics graphics = temp.getGraphics();
+
     graphics.setColor(Gome.singleton.options.gobanColor);
-
     graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
-
     int ox = getCellX(0);
     int oy = getCellY(0);
     int oxx = getCellX(board.getBoardSize() - 1);
@@ -147,8 +146,62 @@ public class BoardPainter {
 
     if (annotations != null)
       drawAnnotations(graphics, annotations);
-
+    //subpixelPostProcess(temp, finalgraphics);
   }
+
+  /*private void subpixelPostProcess(Image source, Graphics destination) {
+    int OUTL = 1;
+    int MIDL = 2;
+    int IN = 3;
+    int MIDR = 2;
+    int OUTR = 1;
+    int SUM = OUTL + MIDL + IN + MIDR + OUTR;
+    int width = source.getWidth();
+    int height = source.getHeight();
+    int[] srcRaster = new int[width * height];
+    int[] dstRaster = new int[width * height];
+    source.getRGB(srcRaster, 0, width, 0, 0, width, height);
+
+    for (int y = 1; y < height - 1; y++) {
+      int offset = y * width;
+      for (int x = 1; x < width - 1; x++) {
+
+        int left = srcRaster[(x - 1) + offset];
+        int mid = srcRaster[x + offset];
+        int right = srcRaster[(x + 1) + offset];
+        if (left != mid || mid != right)
+        //System.out.println(Integer.toHexString(red(mid)) + " / " + Integer.toHexString(green(mid))+ " / " + Integer.toHexString(blue(mid)));
+        {
+          int r = (OUTL * green(left) + MIDL * blue(left) + IN * red(mid) + MIDR * green(mid) + OUTR * blue(mid)) / SUM;
+          int g = (OUTL * blue(left) + MIDL * red(mid) + IN * green(mid) + MIDR * blue(mid) + OUTR * red(right)) / SUM;
+          int b = (OUTL * red(mid) + MIDL * green(mid) + IN * blue(mid) + MIDR * red(right) + OUTR * green(right)) / SUM;
+          //System.out.println(Integer.toHexString(r) + " / " + Integer.toHexString(g)+ " / " + Integer.toHexString(b));
+          dstRaster[x + offset] = merge(r, g, b);
+        } else
+          dstRaster[x + offset] = srcRaster[x + offset];
+        //System.out.println(Integer.toHexString(dstRaster[x + offset]));
+
+      }
+    }
+
+    destination.drawRGB(dstRaster, 0, width, 0, 0, width, height, false);
+  }
+
+  private int merge(int red, int green, int blue) {
+    return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
+  }
+
+  private int red(int color) {
+    return (0x00FF0000 & color) >> 16;
+  }
+
+  private int green(int color) {
+    return (0x0000FF00 & color) >> 8;
+  }
+
+  private int blue(int color) {
+    return (0x000000FF & color);
+  }*/
 
   /*public void drawMe(Graphics g) {
    Point cursor = gc.getCursor();
@@ -251,7 +304,7 @@ public class BoardPainter {
             drawSymbolAnnotation(g, p, blackTerritoryColor);
         }
         if (board.hasBeenRemove(p.x, p.y) && ((territory[i][j] != Board.BLACK) && territory[i][j] != Board.WHITE)) {
-          drawSymbolAnnotation(g, p, Util.COLOR_RED);
+          drawSymbolAnnotation(g, p, Util.COLOR_LIGHTGREY);
         }
 
       }

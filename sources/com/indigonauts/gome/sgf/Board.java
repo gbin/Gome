@@ -20,9 +20,6 @@ public class Board {
 
   public static final byte EMPTY = 0;
 
-  public static final char ONLINE_MODE = 'O';
-
-  public static final char GAME_MODE = 'G';
   private static final byte UNDETERMINED_TERRITORY = -2;
 
   public static final byte[][] DIRECTIONS = { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } };
@@ -374,6 +371,7 @@ public class Board {
   }
 
   public void endCounting() {
+    cachedTerritory = null;
     dead = null;
     markers = null;
   }
@@ -389,6 +387,7 @@ public class Board {
    * mark/unmark a group at (x,y)
    */
   public void markDeadGroup(int x, int y) {
+    cachedTerritory = null;
     unMark();
     ressucite = dead[x][y];
     if (smartMarking) {
@@ -489,6 +488,7 @@ public class Board {
   }
 
   public int[] getScore() {
+    cachedTerritory = null;
     int[] scores = new int[2];
     int white = nbCapturedBlack;
     int black = nbCapturedWhite;
@@ -645,11 +645,16 @@ public class Board {
     return result;
   }
 
+  private byte[][] cachedTerritory;
+
   public byte[][] getTerritory() {
-    if (evaluationCountingMode)
-      return guessTerritory();
-    else
-      return calculateTerritory();
+    if (cachedTerritory == null) {
+      if (evaluationCountingMode)
+        cachedTerritory = guessTerritory();
+      else
+        cachedTerritory = calculateTerritory();
+    }
+    return cachedTerritory;
   }
 
 }
