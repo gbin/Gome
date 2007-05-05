@@ -521,7 +521,7 @@ public class Board {
   }
 
   public byte[][] guessTerritory() {
-    return guessTerritory(5, 5);
+    return guessTerritory(5, 11);
   }
 
   /**
