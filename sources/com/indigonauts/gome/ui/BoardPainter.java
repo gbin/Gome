@@ -260,7 +260,7 @@ public class BoardPainter {
         int position = board.getPosition(annotation);
 
         int color = Util.COLOR_BLUE;
-        if (position == 1) // if black draw in white
+        if (position == Board.BLACK) // if black draw in white
         {
           color = 0x0092D3A0;
         }
@@ -268,7 +268,7 @@ public class BoardPainter {
         if (annotation instanceof TextAnnotation) {
           TextAnnotation textAnnotation = (TextAnnotation) annotation;
 
-          drawTextAnnotation(g, annotation, textAnnotation.getText(), position == 0, color);
+          drawTextAnnotation(g, annotation, textAnnotation.getText(), position == Board.EMPTY, color);
         } else // so it is a symbol
         {
           drawSymbolAnnotation(g, (SymbolAnnotation) annotation, color);
