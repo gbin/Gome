@@ -13,7 +13,7 @@ public interface ServerCallback {
 
     void gameListEvent(ServerGame[] games);
 
-    void userListEvent(ServerUser[] users);
+    void userListEvent();
 
     void observeEvent(ServerMove[] moves);
 

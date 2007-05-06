@@ -13,6 +13,7 @@ import com.indigonauts.gome.ClockController;
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
 import com.indigonauts.gome.common.Point;
+import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.igs.ServerCallback;
@@ -86,7 +87,7 @@ public class GameController implements ServerCallback
   private int moveNb = 0;
 
   //#ifdef IGS
-  private ServerConnector igs;
+  ServerConnector igs;
   //#endif
 
   //#ifdef IGS
@@ -1063,9 +1064,11 @@ public class GameController implements ServerCallback
 
   //#endif
   //#ifdef IGS
-  public void userListEvent(ServerUser[] users) {
+  public void userListEvent() {
     Gome.singleton.mainCanvas.setSplashInfo(null);
-    Gome.singleton.menuEngine.showIgsUserList(users);
+    ServerUser[] userList = igs.getUserList();
+    QuickSortable.quicksort(userList); //inplace sort, external criteria
+    Gome.singleton.menuEngine.showIgsUserList(userList);
   }
 
   //#endif

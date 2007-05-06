@@ -9,8 +9,10 @@ import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.List;
+import javax.microedition.lcdui.StringItem;
 import javax.microedition.lcdui.TextField;
 import javax.microedition.rms.RecordStoreException;
 
@@ -18,6 +20,7 @@ import org.apache.log4j.LogCanvas;
 import org.apache.log4j.Logger;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.igs.ServerChallenge;
 import com.indigonauts.gome.igs.ServerGame;
@@ -56,6 +59,9 @@ public class MenuEngine implements CommandListener {
   public static Command IGS_CHALLENGE;
   public static Command IGS_DECLINE;
   public static Command IGS_MESSAGE;
+  public static Command IGS_SORT_BY_RANK;
+  public static Command IGS_SORT_BY_NICK;
+  public static Command IGS_SORT_BY_WATCH;
   //#endif
 
   public static Command REQUEST;
@@ -83,6 +89,10 @@ public class MenuEngine implements CommandListener {
   public static Command ZOOM;
   public static Command UNDO;
   public static Command HINT;
+
+  //#ifdef MIDP2 
+  private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+  //#endif
 
   FileBrowser fileBrowser;
 
@@ -131,6 +141,10 @@ public class MenuEngine implements CommandListener {
     IGS_CHALLENGE = new Command(Gome.singleton.bundle.getString("online.challenge"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_DECLINE = new Command(Gome.singleton.bundle.getString("online.decline"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_MESSAGE = new Command(Gome.singleton.bundle.getString("online.message"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_SORT_BY_RANK = new Command(Gome.singleton.bundle.getString("online.sortRank"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_SORT_BY_NICK = new Command(Gome.singleton.bundle.getString("online.sortNick"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_SORT_BY_WATCH = new Command(Gome.singleton.bundle.getString("online.sortWatch"), Command.SCREEN, 5); //$NON-NLS-1$
+
     IGS_DONE_SCORE = new Command(Gome.singleton.bundle.getString("ui.done"), Command.SCREEN, 5);
     REQUEST_KOMI = new Command(Gome.singleton.bundle.getString("online.requestKomi"), Command.SCREEN, 5); //$NON-NLS-1$
     CHANGE_ONLINE_HANDICAP = new Command(Gome.singleton.bundle.getString("online.changeHandicap"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -345,7 +359,32 @@ public class MenuEngine implements CommandListener {
         } else if (c == IGS_MESSAGE) {
           chat.sendMessage(gc.getNick(igsUserList.getSelectedIndex()), "", "", Gome.singleton.mainCanvas);
           return;
+        } else if (c == IGS_SORT_BY_RANK) {
+          if (ServerUser.sortCriteria == ServerUser.RANK) {
+            ServerUser.sortOrder = !ServerUser.sortOrder;
+          } else {
+            ServerUser.sortCriteria = ServerUser.RANK;
+          }
+          refreshUserList(gc.igs.getUserList());
+          return;
+        } else if (c == IGS_SORT_BY_NICK) {
+          if (ServerUser.sortCriteria == ServerUser.NICK) {
+            ServerUser.sortOrder = !ServerUser.sortOrder;
+          } else {
+            ServerUser.sortCriteria = ServerUser.NICK;
+          }
+          refreshUserList(gc.igs.getUserList());
+          return;
+        } else if (c == IGS_SORT_BY_WATCH) {
+          if (ServerUser.sortCriteria == ServerUser.WATCH) {
+            ServerUser.sortOrder = !ServerUser.sortOrder;
+          } else {
+            ServerUser.sortCriteria = ServerUser.WATCH;
+          }
+          refreshUserList(gc.igs.getUserList());
+          return;
         }
+
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
 
       } else if (d == challengeForm) {
@@ -410,17 +449,37 @@ public class MenuEngine implements CommandListener {
     //#endif
   }
 
+  public void refreshUserList(ServerUser[] users) {
+    //#ifdef DEBUG
+    log.debug("refreshUserList");
+    //#endif
+    QuickSortable.quicksort(users);
+    if (igsUserList != null) {
+      igsUserList.deleteAll();
+      for (int i = 0; i < users.length; i++) {
+        igsUserList.append(users[i].toString(), null);
+
+      }
+      //#ifdef MIDP2
+      for (int i = 0; i < igsUserList.size(); i++)
+        igsUserList.setFont(i, FIXED_FONT);
+      //#endif
+    }
+
+  }
+
   public void showIgsUserList(ServerUser[] users) {
     //#ifdef DEBUG
     log.debug("Show igs userlist");
     //#endif
     igsUserList = new List(Gome.singleton.bundle.getString("online.userlist"), Choice.IMPLICIT);
-    for (int i = 0; i < users.length; i++) {
-      igsUserList.append(users[i].toString(), null);
-    }
+    refreshUserList(users);
     igsUserList.addCommand(BACK);
     igsUserList.addCommand(IGS_CHALLENGE);
     igsUserList.addCommand(IGS_MESSAGE);
+    igsUserList.addCommand(IGS_SORT_BY_RANK);
+    igsUserList.addCommand(IGS_SORT_BY_NICK);
+    igsUserList.addCommand(IGS_SORT_BY_WATCH);
     igsUserList.setCommandListener(this);
     Gome.singleton.display.setCurrent(igsUserList);
   }

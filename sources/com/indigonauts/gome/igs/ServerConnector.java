@@ -305,7 +305,7 @@ public class ServerConnector extends Thread {
           for (int i = 0; i < nbUsers; i++) {
             userList[i] = ServerUser.unmarshal(input);
           }
-          callback.userListEvent(userList);
+          callback.userListEvent();
           break;
         case CHALLENGE_EVENT:
           //#ifdef DEBUG
@@ -448,9 +448,13 @@ public class ServerConnector extends Thread {
       //#endif
     } catch (IOException e) {
       // let the disconnected message go
+      //#ifdef DEBUG
+      log.error("IOException", e);
+      //#endif
     } catch (Throwable t) {
       //#ifdef DEBUG
-      log.error("server loop error", t);
+      log.error("server loop error " + t.getClass() , t);
+      t.printStackTrace();
       //#endif
       //Util.messageBox("Uncaught exception ", "Uncaught exception " + t.getClass().getName() + ":" + t.getMessage(), AlertType.ERROR);
       //Gome.singleton.display.setCurrent(Logger.getLogCanvas());
@@ -506,4 +510,5 @@ public class ServerConnector extends Thread {
     }
     noneErrorDisconnect = true;
   }
+
 }
