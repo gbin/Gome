@@ -81,6 +81,9 @@ public class Info implements CommandListener, Showable {
     } else if (command == RULES) {
       current = getRules();
       inSubMenu = true;
+    } else if (command == KEYS) {
+      current = getKeys();
+      inSubMenu = false;
     } else if (command == HELP) {
       current = getHelp();
       inSubMenu = true;
@@ -95,7 +98,7 @@ public class Info implements CommandListener, Showable {
     setUpCurrent();
     show(Gome.singleton.display);
   }
-  
+
   public void show(Display destination) {
 
     destination.setCurrent(current);
