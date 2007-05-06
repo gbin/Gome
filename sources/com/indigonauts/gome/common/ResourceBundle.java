@@ -72,7 +72,7 @@ public class ResourceBundle {
   private void parseAndStoreLine(StringBuffer line) {
     String lineStr = line.toString();
     //#ifdef DEBUG
-    log.debug("Read bundle line " + line);
+    //# log.debug("Read bundle line " + line);
     //#endif
     int equalIndex = lineStr.indexOf("="); //$NON-NLS-1$
     if (equalIndex == -1)

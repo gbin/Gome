@@ -260,6 +260,9 @@ public class IOManager {
   }
 
   public void saveLocalStore(String fileName, byte[] content) throws RecordStoreException {
+    //#ifdef DEBUG
+    log.debug("fileName" + fileName);
+    //#endif
     try {
       deleteLocalStore(fileName);
     } catch (RecordStoreNotFoundException rnfe) {
@@ -271,8 +274,8 @@ public class IOManager {
     rs.closeRecordStore();
   }
 
-  public void deleteLocalStore(String url) throws RecordStoreException {
-    RecordStore.deleteRecordStore(url.substring(url.indexOf(':') + 4));
+  public void deleteLocalStore(String name) throws RecordStoreException {
+    RecordStore.deleteRecordStore(name);
   }
 
   public Vector getFileEntriesFromIndex(String indexFile) {

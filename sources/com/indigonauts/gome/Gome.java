@@ -57,10 +57,17 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   }
 
   void loadOptions() throws IOException {
+    //#ifdef DEBUG
+    log.info("Load options");
+    //#endif
     DataInputStream input = null;
     try {
       input = IOManager.singleton.readFromLocalStore(OPTIONS_FILE);
       options = new GomeOptions(input);
+      //#ifdef DEBUG
+      log.info("Load options OK");
+      //#endif
+
     } finally {
       if (input != null)
         input.close();
@@ -68,11 +75,17 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   }
 
   public void saveOptions() throws RecordStoreException, IOException {
+    //#ifdef DEBUG
+    //# log.info("Save options");
+    //#endif
     ByteArrayOutputStream outba = new ByteArrayOutputStream();
     DataOutputStream os = new DataOutputStream(outba);
     options.marshalOut(os);
     IOManager.singleton.saveLocalStore(OPTIONS_FILE, outba.toByteArray());
     os.close();
+    //#ifdef DEBUG
+    //# log.info("Save options done OK");
+    //#endif
   }
 
   public void startApp() {
@@ -84,7 +97,7 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
       display = Display.getDisplay(this);
 
       Loader splash = new Loader();
-      
+
       display.setCurrent(splash);
 
       Thread t = new Thread(this);
@@ -167,7 +180,7 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
     if (save) {
       try {
         bootGome();
-        
+
       } catch (Throwable t) {
         Util.messageBox(bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       }
