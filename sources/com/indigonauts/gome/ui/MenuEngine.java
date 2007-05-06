@@ -455,7 +455,12 @@ public class MenuEngine implements CommandListener {
     //#endif
     QuickSortable.quicksort(users);
     if (igsUserList != null) {
+      //#ifdef MIDP2
       igsUserList.deleteAll();
+      //#else
+      //# setUpUserList(); // Under midp1 you have to reset everything
+      //# Gome.singleton.display.setCurrent(igsUserList);
+      //#endif
       for (int i = 0; i < users.length; i++) {
         igsUserList.append(users[i].toString(), null);
 
@@ -468,12 +473,9 @@ public class MenuEngine implements CommandListener {
 
   }
 
-  public void showIgsUserList(ServerUser[] users) {
-    //#ifdef DEBUG
-    log.debug("Show igs userlist");
-    //#endif
+  private void setUpUserList()
+  {
     igsUserList = new List(Gome.singleton.bundle.getString("online.userlist"), Choice.IMPLICIT);
-    refreshUserList(users);
     igsUserList.addCommand(BACK);
     igsUserList.addCommand(IGS_CHALLENGE);
     igsUserList.addCommand(IGS_MESSAGE);
@@ -481,6 +483,13 @@ public class MenuEngine implements CommandListener {
     igsUserList.addCommand(IGS_SORT_BY_NICK);
     igsUserList.addCommand(IGS_SORT_BY_WATCH);
     igsUserList.setCommandListener(this);
+  }
+  public void showIgsUserList(ServerUser[] users) {
+    //#ifdef DEBUG
+    log.debug("Show igs userlist");
+    //#endif
+    setUpUserList();
+    refreshUserList(users);
     Gome.singleton.display.setCurrent(igsUserList);
   }
 

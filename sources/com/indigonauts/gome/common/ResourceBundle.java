@@ -40,7 +40,12 @@ public class ResourceBundle {
     if (in == null) {
       return;
     }
-    reader = new InputStreamReader(in, "UTF-8");
+    try {
+      reader = new InputStreamReader(in, "UTF-8");
+    } catch (Throwable t) {
+      // utf8 not supported, it will be weird for some chrs but at least it will work in english
+      reader = new InputStreamReader(in);
+    }
 
     char c;
     int ct;

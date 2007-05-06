@@ -78,8 +78,8 @@
 		<var name="wtk.midp.version" value="1.0" />
 	</target>
 
-	<target name="all" depends="cleandist,VMIDP2, VMIDP2_JSR75" />
-	<!--target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75" /-->
+	<!-- target name="all" depends="cleandist,VMIDP2, VMIDP2_JSR75" /-->
+	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75" />
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
 		<exclude name="**/*.*" />

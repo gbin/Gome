@@ -31,4 +31,32 @@ Games played with handicaps start with some stones already in place for Black, o
 _Captures
 Rule of Capture: If a play surrounds the opponent's stone or stones completely, the player captures them and removes them from the board.
 (;SZ[5]AB[bc][dc][cd]AW[cc]SQ[cb]CR[bb][db][bd][dd])
+Black surround completely white :
+(;SZ[5]AB[bc][dc][cd][cb]AW[cc])
+thus capturing it and removing it from the board :
+(;SZ[5]AB[bc][dc][cd][cb])
+_Captures with the help of the borders
+(;SZ[5]AW[aa][ab][ba]AB[ca][bb])
+The three white stones WC are connected along the lines of the board, and stand or fall together. 
+ Black's move 1 occupies their last liberty and captures them, removing them from the board to leave the third position.
+(;SZ[5]AW[aa][ab][ba]AB[ca][bb][ac]CR[aa][ab][ba]LB[ac:1])
+After the play :
+(;SZ[5]AB[ca][bb][ac])
+
+It does not matter that temporarily a capturing stone does not have a liberty; after execution of White's play, all stones on the board have at least one liberty again, leaving a legal position.
+_Suicide moves
+A player is not allowed to make a play that removes the last liberty of any of his own stones without doing the same to opposing stones (so-called suicide).
+(;SZ[5]AB[aa][ba][ca][ad][cd][dc][eb]AW[ab][bb][cb][db][da]LB[ba:1])
+Suicide isn't useful in general, so this rule doesn't have a big practical effect on play.
+_No Repetition
+Rule of No Repetition: One may not play a move which repeats a previous board position. 
+ This rule prevents endless repetition.
+(;SZ[5]AB[cb][bc][cd][dc]AW[db][dd][ec])
+This first move is a legal move :
+(;SZ[5]AB[cb][bc][cd]AW[db][dd][ec][cc]LB[cc:1])
+White's move 1 removes a stone and Black's move 2 would remove the stone W1. However, Black would also repeat an earlier position - the position just before move 1.
+(;SZ[5]AB[cb][bc][cd][dc]AW[db][dd][ec]LB[dc:2])
+Since repetition of the board position is prohibited by this rule, Black cannot play at the point 2 now in the example. Currently Black must play on a different point. 
+ Note that on subsequent turns, the same play may be available as a legal move, because it will not be repeating the same board position.
+
 [This is from the sensei library : http://senseis.xmp.net/?RulesOfGoIntroductory]

@@ -322,16 +322,13 @@ public class Info implements CommandListener, Showable {
         String element = (String) all.nextElement();
         if (element.startsWith("(;")) {
           form.append(generatePosition(element));
-          form.append("\n");
         } else if (element.startsWith("*")) {
-          form.append("\n");
           StringItem si = new StringItem("", element.substring(1));
           //#ifdef MIDP2
           si.setFont(TITLE_FONT);
           //#endif
           form.append(si);
         } else if (element.startsWith("_")) {
-          form.append("\n");
           StringItem si = new StringItem("", element.substring(1));
           //#ifdef MIDP2
           si.setFont(UNDERLINED_FONT);
@@ -344,6 +341,7 @@ public class Info implements CommandListener, Showable {
           //#endif
           form.append(si);
         }
+        form.append("\n");
       }
     } catch (IOException ioe) {// TODO: error handling
     }
