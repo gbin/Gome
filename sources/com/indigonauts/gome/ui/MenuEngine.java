@@ -440,6 +440,10 @@ public class MenuEngine implements CommandListener {
     for (int i = 0; i < games.length; i++) {
       igsGameList.append(games[i].toString(), null);
     }
+    //#ifdef MIDP2
+    for (int i = 0; i < igsGameList.size(); i++)
+      igsGameList.setFont(i, FIXED_FONT);
+    //#endif
     igsGameList.addCommand(BACK);
     igsGameList.addCommand(IGS_OBSERVE);
     igsGameList.setCommandListener(this);
@@ -473,8 +477,7 @@ public class MenuEngine implements CommandListener {
 
   }
 
-  private void setUpUserList()
-  {
+  private void setUpUserList() {
     igsUserList = new List(Gome.singleton.bundle.getString("online.userlist"), Choice.IMPLICIT);
     igsUserList.addCommand(BACK);
     igsUserList.addCommand(IGS_CHALLENGE);
@@ -484,6 +487,7 @@ public class MenuEngine implements CommandListener {
     igsUserList.addCommand(IGS_SORT_BY_WATCH);
     igsUserList.setCommandListener(this);
   }
+
   public void showIgsUserList(ServerUser[] users) {
     //#ifdef DEBUG
     log.debug("Show igs userlist");

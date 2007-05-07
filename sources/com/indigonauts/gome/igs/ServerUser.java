@@ -7,6 +7,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import com.indigonauts.gome.common.QuickSortable;
+import com.indigonauts.gome.common.Util;
 
 public class ServerUser extends QuickSortable {
   public String nick;
@@ -77,6 +78,6 @@ public class ServerUser extends QuickSortable {
   }
 
   public String toString() {
-    return (nick + "         ").substring(0,10) + " [" + ("    ".substring(rank.length()) + rank) + "] " + ((play != -1) ? " Playing #" + play : "") + ((watch != -1) ? " Watching #" + watch : "");
+    return Util.padd(nick,10,true)+ " [" + Util.padd(rank,4,true) + "] " + ((play != -1) ? " Playing #" + play : "") + ((watch != -1) ? " Watching #" + watch : "");
   }
 }

@@ -289,4 +289,19 @@ public class Util {
     }
     return sb.toString();
   }
+
+  public static String padd(String str, int width, boolean left) {
+    StringBuffer buff = new StringBuffer();
+    int l = str.length();
+    if (!left) {
+      buff.append(str);
+    }
+    for (int i = l; i <= width; i++) {
+      buff.append(' ');
+    }
+    if (left) {
+      buff.append(str);
+    }
+    return buff.toString();
+  }
 }
