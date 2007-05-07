@@ -60,7 +60,7 @@ public class ClockPainterTask extends TimerTask {
       else
         blinkingColorForBlack = NORMAL_COLOR;
 
-      if ((clock.isWhiteOnByo()) && byoStoneWhite != 0 & (clock.remainingTimeWhite() / byoStoneWhite < 5) && clock.getColor() == Board.WHITE)
+      if ((clock.isWhiteOnByo()) && byoStoneWhite != 0 && (clock.remainingTimeWhite() / byoStoneWhite < 5) && clock.getColor() == Board.WHITE)
         blinkingColorForWhite = blinkColor(blinkingColorForWhite);
       else
         blinkingColorForWhite = NORMAL_COLOR;
