@@ -28,7 +28,7 @@ import com.indigonauts.gome.sgf.SgfNode;
 
 public class Info implements CommandListener, Showable {
   //#ifdef DEBUG
-  //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
   //#endif
 
   private Showable parent;
@@ -48,9 +48,17 @@ public class Info implements CommandListener, Showable {
   }
 
   public Info(Showable parent) {
+    //#ifdef DEBUG
+    log.debug("help");
+    //#endif
+
     this.parent = parent;
     current = getKeys();
     setUpCurrent();
+    //#ifdef DEBUG
+    log.debug("end if constructor");
+    //#endif
+
   }
 
   public Info(MainCanvas mainCanvas, Command def) {
@@ -104,9 +112,10 @@ public class Info implements CommandListener, Showable {
     destination.setCurrent(current);
   }
 
+
   private Form getKeys() {
-    ResourceBundle bundle = Gome.singleton.bundle;
     MainCanvas canvas = Gome.singleton.mainCanvas;
+    ResourceBundle bundle = Gome.singleton.bundle;
     Form help = new Form(bundle.getString("ui.help"));
     StringBuffer buf = new StringBuffer();
     buf.append(bundle.getString("ui.help.pointerReview1")); //$NON-NLS-1$
@@ -118,36 +127,35 @@ public class Info implements CommandListener, Showable {
     buf.append(bundle.getString("ui.help.pointerReview4")); //$NON-NLS-1$
     buf.append(bundle.getString("ui.help.pointer")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(Util.getActionKeyName(canvas, canvas.getKeyCode(MainCanvas.ACTION_COMMENT)));
+    buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_COMMENT));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.comment")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(Util.getActionKeyName(canvas, canvas.getKeyCode(MainCanvas.ACTION_ZOOM)));
+    buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_ZOOM));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.zoom")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(Util.getActionKeyName(canvas, canvas.getKeyCode(MainCanvas.ACTION_UNDO)));
+    buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_UNDO));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.undo")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(Util.getActionKeyName(canvas, canvas.getKeyCode(MainCanvas.ACTION_HINT)));
+    buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_HINT));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.hint")); //$NON-NLS-1$
-
     buf.append('\n');
-    buf.append(canvas.getKeyName(canvas.KEY_SCROLLUP));
+    buf.append(Util.safeGetKeyName(canvas, canvas.KEY_SCROLLUP));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.scrollUp")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(canvas.getKeyName(canvas.KEY_SCROLLDOWN));
+    buf.append(Util.safeGetKeyName(canvas, canvas.KEY_SCROLLDOWN));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.scrollDown")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(canvas.getKeyName(canvas.KEY_10NEXTMOVES));
+    buf.append(Util.safeGetKeyName(canvas, canvas.KEY_10NEXTMOVES));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.next10Moves")); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(canvas.getKeyName(canvas.KEY_10PREVMOVES));
+    buf.append(Util.safeGetKeyName(canvas, canvas.KEY_10PREVMOVES));
     buf.append(' ');
     buf.append(bundle.getString("ui.help.prev10Moves")); //$NON-NLS-1$
     StringItem si = new StringItem("", buf.toString());

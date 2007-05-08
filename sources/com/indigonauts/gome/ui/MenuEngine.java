@@ -298,6 +298,9 @@ public class MenuEngine implements CommandListener {
         }
 
         else if (c == HELP) {
+          //#ifdef DEBUG
+          log.debug("help");
+          //#endif
           Info help = new Info(Gome.singleton.mainCanvas);
           help.show(Gome.singleton.display);
         } else if (c == MenuEngine.GAME_STATUS) {

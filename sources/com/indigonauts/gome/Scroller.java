@@ -10,7 +10,7 @@ import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.common.Util;
 
-class Scroller implements Runnable {
+class Scroller extends Thread {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Scroller");
   //#endif
@@ -25,13 +25,11 @@ class Scroller implements Runnable {
   private int speed;
   private int bigStep;
   private boolean reachTheEnd = false;
-  private Thread scrolling;
-
   boolean waitingRepaint = true;
 
-  public Scroller(Canvas target) {
+  public Scroller(Canvas target, int x, int y, int width, int height) {
     this.target = target;
-    //log.debug("Instanciate scroller");
+    setPosition(x, y, width, height);
   }
 
   public void run() {
@@ -43,7 +41,6 @@ class Scroller implements Runnable {
         synchronized (this) {
           this.wait(speed);
           stepUp();
-
         }
       }
     } catch (InterruptedException e) {
@@ -59,7 +56,6 @@ class Scroller implements Runnable {
 
   public void drawMe(Graphics g) // should be callbacked from the paint
   {
-
     waitingRepaint = false;
     g.setClip(x, y, width, height);
     g.drawImage(img, 0, y - offset, Graphics.LEFT | Graphics.TOP);
@@ -99,19 +95,10 @@ class Scroller implements Runnable {
   }
 
   public void stop() {
-    //try {
-      running = false;
-      if (scrolling != null) {
-        synchronized (scrolling) {
-          scrolling.notifyAll();
-          //scrolling.join();
-          scrolling = null;
-        }
-      }
-    //} catch (InterruptedException e) {
-    //  e.printStackTrace();
-   // }
-
+    running = false;
+    synchronized (this) {
+      notifyAll();
+    }
   }
 
   public int getHeight() {
@@ -130,7 +117,7 @@ class Scroller implements Runnable {
     return y;
   }
 
-  public void setPosition(int x, int y, int width, int height) {
+  private void setPosition(int x, int y, int width, int height) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -142,19 +129,22 @@ class Scroller implements Runnable {
   }
 
   public void setImg(Image img) {
+    //#ifdef DEBUG
+    log.debug("set img " + img);
+    //#endif
     this.img = img;
   }
 
   public synchronized void start() {
+  
     reachTheEnd = false;
 
     offset = 0;
-    if (img.getHeight() > height) {
-      scrolling = new Thread(this);
-      scrolling.setPriority(Thread.MIN_PRIORITY);
-      scrolling.start();
-    }
     running = true;
+    if (img.getHeight() > height) {
+      setPriority(Thread.MIN_PRIORITY);
+      super.start();
+    }
   }
 
   public void setBigStep(int bigStep) {

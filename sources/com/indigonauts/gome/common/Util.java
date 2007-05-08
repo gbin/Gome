@@ -55,17 +55,21 @@ public class Util {
    * returns the key name string for a action code. Note that an action may be
    * mapped to multiple keys, this function can only retrieve one of them.
    * 
-   * @param can
-   *            a canvas instance
-   * @param act
-   *            the action code, i.e. canvas.GAME_A
-   * @return
    */
   public static final String getActionKeyName(Canvas can, int keyCode) {
     try {
-      return can.getKeyName(keyCode);
+      return can.getKeyName(can.getKeyCode(keyCode));
     } catch (Throwable t) {
-      return "Not Assigned";
+      return " ";
+    }
+  }
+
+  public static final String safeGetKeyName(Canvas can, int key) {
+    try {
+      log.debug("can = " + can);
+      return can.getKeyName(key);
+    } catch (Throwable t) {
+      return " ";
     }
   }
 

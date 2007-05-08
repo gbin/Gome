@@ -53,6 +53,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   private ClockController clockControl;
   private ClockPainterTask clockPainter;
   private int bottomMode = NOTHING_TO_DISPLAY_MODE;
+  private int scrollx;
+  private int scrolly;
+  private int scrollWidth;
+  private int scrollHeight;
 
   public static final byte NOTHING_TO_DISPLAY_MODE = 0;
   public static final byte COMMENT_MODE = 1;
@@ -115,7 +119,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.HELP);
     addCommand(MenuEngine.EXIT);
     setCommandListener(this);
-    scroller = new Scroller(this);
     clockPainter = new ClockPainterTask(this);
     bottomMode = NOTHING_TO_DISPLAY_MODE;
     //#ifdef DEBUG
@@ -128,7 +131,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   private void scroll(int keyCode) {
-    if (keyCode == KEY_SCROLLUP && scroller.isStarted()) {
+    if (keyCode == KEY_SCROLLUP && scroller != null) {
       scroller.bigStepUp();
     } else if (keyCode == KEY_SCROLLDOWN && scroller != null) {
       scroller.bigStepDown();
@@ -223,9 +226,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       addCommand(MenuEngine.IGS_CONNECT);
     }
     //#endif
-    
+
     addCommand(MenuEngine.REVIEW_MODE);
-    
+
   }
 
   //#ifdef IGS
@@ -325,7 +328,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.PASS);
     removeCommand(MenuEngine.EVALUATE);
     addCommand(MenuEngine.FINISHED_COUNTING);
-    
+
   }
 
   //#ifdef IGS
@@ -388,7 +391,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     // log.debug("Paint " + g.getClipX() + "/" + g.getClipY() + "/" +
     // g.getClipWidth() + "/" + g.getClipHeight());
 
-    if (scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
+    if (scroller != null && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
       // log.debug("Refresh only the bottom");
       drawStatusBar(g);
     } else if (bottomMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
@@ -449,29 +452,49 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
+  public void scrollerPosition(int x, int y, int width, int height) {
+    //#ifdef DEBUG
+    log.debug("set position " + x + "," + y + " , " + width + "," + height);
+    //#endif
+    this.scrollx = x;
+    this.scrolly = y;
+    this.scrollWidth = width;
+    this.scrollHeight = height;
+  }
+
   private void startScroller() {
-    Font scrollerFont = Gome.singleton.options.getScrollerFont();
+    //#ifdef DEBUG
+    log.debug("Start scroller");
+    //#endif
+    synchronized (SCROLLER_SYNC) {
+      Font scrollerFont = Gome.singleton.options.getScrollerFont();
+      if (scroller != null && scroller.isStarted())
+        scroller.stop();
 
-    scroller.setSpeed(Gome.singleton.options.getScrollerSpeed());
-    scroller.setBigStep(scrollerFont.getHeight() / 2);
+      scroller = new Scroller(this, scrollx, scrolly, scrollWidth, scrollHeight);
+      scroller.setSpeed(Gome.singleton.options.getScrollerSpeed());
+      scroller.setBigStep(scrollerFont.getHeight() / 2);
 
-    // log.debug("Scroller height = " + scroller.getHeight());
+      // log.debug("Scroller height = " + scroller.getHeight());
 
-    Image img;
+      Image img;
 
-    img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
-            Util.COLOR_LIGHT_BACKGROUND);
-
-    scroller.setImg(img);
-    if (scroller.isStarted())
-      scroller.stop();
-
-    scroller.start();
+      img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
+              Util.COLOR_LIGHT_BACKGROUND);
+      scroller.setImg(img);
+      scroller.start();
+    }
   }
 
   public void stopScroller() {
+    //#ifdef DEBUG
+    log.debug("Stop scroller");
+    //#endif
     synchronized (SCROLLER_SYNC) {
-      scroller.stop();
+      if (scroller != null) {
+        scroller.stop();
+        scroller = null;
+      }
     }
   }
 
@@ -489,10 +512,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       int x0 = x + squiggleSize;
       if (up) {
         g.drawLine(x, height, x0, height - squiggleSize);
-        g.drawLine(x+1, height, x0+1, height - squiggleSize);
+        g.drawLine(x + 1, height, x0 + 1, height - squiggleSize);
       } else {
         g.drawLine(x, height - squiggleSize, x0, height);
-        g.drawLine(x+1, height - squiggleSize, x0+1, height);
+        g.drawLine(x + 1, height - squiggleSize, x0 + 1, height);
       }
       up = !up;
 
@@ -530,7 +553,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void recalculateLayout() {
     int minimalBottomHeight = 0;
     if (bottomMode == COMMENT_MODE) {
-      minimalBottomHeight += scroller.getMinimumHeight();
+      if (scroller != null)
+        minimalBottomHeight += scroller.getMinimumHeight();
     }
     if (bottomMode == CLOCK_MODE) {
       if (clockPainter != null) {
@@ -567,7 +591,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     } else if (bottomMode == COMMENT_MODE) {
       // log.debug("scroller height = " + (scroller.getMinimumHeight() +
       // extraSpace));
-      scroller.setPosition(0, boardHeight, getWidth(), extraSpace);
+      scrollx = 0;
+      scrolly = boardHeight;
+      scrollHeight = extraSpace;
+      scrollWidth = getWidth();
     } else {
       // log.debug("Board height = " + getHeight());
       boardHeight = getHeight();

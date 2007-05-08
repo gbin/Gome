@@ -1168,9 +1168,27 @@ public class GameController implements ServerCallback
   }
 
   public void goToLastMove() {
-    while (doGoNext()) {
-      // do nothing
+
+    SgfNode node = currentNode;
+    SgfPoint point;
+    while ((node = node.getSon()) != null) {
+      if (node.getSon() == null)
+        break; //zap the last one to play it fully
+      point = node.getPoint();
+      if (point != null) {
+        Vector vec = board.play(point, node.getPlayerColor());
+        if (vec.size() == 0)
+          vec = null;
+        node.setDeadStones(vec); // the player color is reversed inside
+        node.setKo(board.getKo());
+        moveNb++;
+      }
+
+      if (node.isPass())
+        moveNb++;
     }
+    if (node != null)
+      playNode(node);// play correctly the last one
     tuneBoardPainter();
     canvas.refresh();
   }
