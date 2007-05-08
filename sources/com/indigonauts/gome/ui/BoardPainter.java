@@ -97,36 +97,46 @@ public class BoardPainter {
 
     if (backBuffer == null || backBuffer.getWidth() != drawArea.getWidth() || backBuffer.getHeight() != drawArea.getHeight())
       backBuffer = Image.createImage(drawArea.getWidth(), drawArea.getHeight());
-    if (board != null)
+    if (board != null) {
       board.setChanged(true); // force a redraw
-
+      board.setResetted(true); // force a redraw
+    }
   }
 
   public void drawBoard(Graphics graphicsScreen, Vector annotations) {
-long timing = System.currentTimeMillis();
-    if (board.isChanged()) {
-      Graphics graphics = backBuffer.getGraphics();
+    long timing = System.currentTimeMillis();
+    Graphics graphics = backBuffer.getGraphics();
 
+    if (board.isResetted()) {
+      //redraw everything
       graphics.setColor(Gome.singleton.options.gobanColor);
       graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
-      int ox = getCellX(0);
-      int oy = getCellY(0);
-      int oxx = getCellX(board.getBoardSize() - 1);
-      int oyy = getCellY(board.getBoardSize() - 1);
+      board.setResetted(false);
+    }
 
-      int ux = getCellX(boardArea.x0);
-      int uy = getCellY(boardArea.y0);
-      graphics.setClip(ux - halfdelta, uy - halfdelta, getCellX(boardArea.x1 + 1) - ux + 1, getCellY(boardArea.y1 + 1) - uy + 1);
-      graphics.setColor(Util.COLOR_WHITE);
-      graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta - 1, oyy - oy + halfdelta + halfdelta - 1);
-
-      graphics.setClip(0, 0, drawArea.getWidth(), drawArea.getHeight());
-      graphics.setColor(Util.COLOR_BLACK);
+    if (board.isChanged()) {
+      boolean[][] changeMask = board.getChangeMask();
+      // draw the empty first
       for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
         for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
-          drawCell(graphics, new Point(x, y));
+          if (!changeMask[x][y] &&  board.getPosition(x,y)==Board.EMPTY ) {
+            drawCell(graphics,x,y);
+            changeMask[x][y] = true;
+            System.out.print("[" + x + ", " + y + "]");
+          }
         }
       }
+
+      for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
+        for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
+          if (!changeMask[x][y]) {
+            drawCell(graphics,x,y);
+            changeMask[x][y] = true;
+            System.out.print("[" + x + ", " + y + "]");
+          }
+        }
+      }
+      System.out.println();
       board.setChanged(false);
     }
     graphicsScreen.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
@@ -139,75 +149,10 @@ long timing = System.currentTimeMillis();
 
     if (annotations != null)
       drawAnnotations(graphicsScreen, annotations);
-System.out.println(System.currentTimeMillis()- timing);
-    //subpixelPostProcess(temp, finalgraphics);
+    System.out.println(System.currentTimeMillis() - timing);
   }
 
-  /*private void subpixelPostProcess(Image source, Graphics destination) {
-   int OUTL = 1;
-   int MIDL = 2;
-   int IN = 3;
-   int MIDR = 2;
-   int OUTR = 1;
-   int SUM = OUTL + MIDL + IN + MIDR + OUTR;
-   int width = source.getWidth();
-   int height = source.getHeight();
-   int[] srcRaster = new int[width * height];
-   int[] dstRaster = new int[width * height];
-   source.getRGB(srcRaster, 0, width, 0, 0, width, height);
-
-   for (int y = 1; y < height - 1; y++) {
-   int offset = y * width;
-   for (int x = 1; x < width - 1; x++) {
-
-   int left = srcRaster[(x - 1) + offset];
-   int mid = srcRaster[x + offset];
-   int right = srcRaster[(x + 1) + offset];
-   if (left != mid || mid != right)
-   //System.out.println(Integer.toHexString(red(mid)) + " / " + Integer.toHexString(green(mid))+ " / " + Integer.toHexString(blue(mid)));
-   {
-   int r = (OUTL * green(left) + MIDL * blue(left) + IN * red(mid) + MIDR * green(mid) + OUTR * blue(mid)) / SUM;
-   int g = (OUTL * blue(left) + MIDL * red(mid) + IN * green(mid) + MIDR * blue(mid) + OUTR * red(right)) / SUM;
-   int b = (OUTL * red(mid) + MIDL * green(mid) + IN * blue(mid) + MIDR * red(right) + OUTR * green(right)) / SUM;
-   //System.out.println(Integer.toHexString(r) + " / " + Integer.toHexString(g)+ " / " + Integer.toHexString(b));
-   dstRaster[x + offset] = merge(r, g, b);
-   } else
-   dstRaster[x + offset] = srcRaster[x + offset];
-   //System.out.println(Integer.toHexString(dstRaster[x + offset]));
-
-   }
-   }
-
-   destination.drawRGB(dstRaster, 0, width, 0, 0, width, height, false);
-   }
-
-   private int merge(int red, int green, int blue) {
-   return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
-   }
-
-   private int red(int color) {
-   return (0x00FF0000 & color) >> 16;
-   }
-
-   private int green(int color) {
-   return (0x0000FF00 & color) >> 8;
-   }
-
-   private int blue(int color) {
-   return (0x000000FF & color);
-   }*/
-
-  /*public void drawMe(Graphics g) {
-   Point cursor = gc.getCursor();
-   int playerColor = gc.getCurrentPlayerColor();
-   boolean showHints = gc.getShowHints();
-   SgfNode currentNode = gc.getCurrentNode();
-   SgfModel model = gc.getSgfModel();
-   }*/
-
   public void drawMe(Graphics g, Point cursor, int playerColor, boolean showHints, SgfNode currentNode, SgfModel model) {
-    // clone the latest buffer
-    // g.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
     drawBoard(g, currentNode.getAnnotations());
 
     // draw cursor
@@ -352,17 +297,17 @@ System.out.println(System.currentTimeMillis()- timing);
 
   }
 
-  private void drawCell(Graphics g, Point pt) {
-    int position = board.getPosition(pt);
+  private void drawCell(Graphics g, int x,int y) {
+    int position = board.getPosition(x,y);
     switch (position) {
     case Board.BLACK:
-      drawStone(g, pt, Util.COLOR_BLACK);
+      drawStone(g, x,y, Util.COLOR_BLACK);
       break;
     case Board.WHITE:
-      drawStone(g, pt, Util.COLOR_WHITE);
+      drawStone(g, x,y, Util.COLOR_WHITE);
       break;
     default:
-      drawEmpty(g, pt);
+      drawEmpty(g, x,y);
     }
   }
 
@@ -378,9 +323,9 @@ System.out.println(System.currentTimeMillis()- timing);
     }
   }
 
-  private void drawStone(Graphics g, Point pt, int color) {
-    int cx = getCellX(pt.x);
-    int cy = getCellY(pt.y);
+  private void drawStone(Graphics g, int xx, int yy, int color) {
+    int cx = getCellX(xx);
+    int cy = getCellY(yy);
     int w = delta;
     int x = cx - halfdelta;
     int y = cy - halfdelta;
@@ -396,59 +341,74 @@ System.out.println(System.currentTimeMillis()- timing);
 
   }
 
-  private void drawEmpty(Graphics g, Point pt) {
-    int cx = getCellX(pt.x);
-    int cy = getCellY(pt.y);
-
-    int k = pt.x;
-    int l = pt.y;
-    int k2 = cx - halfdelta; // top left
-    int l2 = cy - halfdelta;
+  private void drawEmpty(Graphics g, int x, int y) {
+    int cx = getCellX(x);
+    int cy = getCellY(y);
+    
+    int tlx = cx - halfdelta; // top left
+    int tly = cy - halfdelta;
     int i3 = cx; // center
     int j3 = cy;
-    int k3 = cx + halfdelta; // bottom right
-    int l3 = cy + halfdelta;
+    int brx = cx + halfdelta; // bottom right
+    int bry = cy + halfdelta;
 
-    g.setColor(Util.COLOR_DARKGREY); // master.fcolorP);
+    g.setColor(Gome.singleton.options.gobanColor);
+    g.fillRect(tlx, tly, delta + 1, delta + 1);
 
     // draw up
-    if (l > 0) {
-      g.drawLine(i3, j3, i3, l2);
+    if (y > 0) {
+      g.setColor(Util.COLOR_DARKGREY);
+      g.drawLine(i3, j3, i3, tly);
+    } else {
+      g.setColor(Util.COLOR_WHITE);
+      g.drawLine(tlx, tly, tlx + delta, tly);
     }
 
     // draw left
-    if (k > 0) {
-      g.drawLine(i3, j3, k2, j3);
+    if (x > 0) {
+      g.setColor(Util.COLOR_DARKGREY);
+      g.drawLine(i3, j3, tlx, j3);
+    } else {
+      g.setColor(Util.COLOR_WHITE);
+      g.drawLine(tlx, tly, tlx, tly + delta);
     }
 
     // draw down
-    if (l < (board.getBoardSize() - 1)) {
-      g.drawLine(i3, j3, i3, l3);
+    if (y < (board.getBoardSize() - 1)) {
+      g.setColor(Util.COLOR_DARKGREY);
+      g.drawLine(i3, j3, i3, bry);
+    } else {
+      g.setColor(Util.COLOR_WHITE);
+      g.drawLine(tlx, tly + delta, tlx + delta, tly + delta);
     }
 
     // draw right
-    if (k < (board.getBoardSize() - 1)) {
-      g.drawLine(i3, j3, k3, j3);
+    if (x < (board.getBoardSize() - 1)) {
+      g.setColor(Util.COLOR_DARKGREY);
+      g.drawLine(i3, j3, brx, j3);
+    } else {
+      g.setColor(Util.COLOR_WHITE);
+      g.drawLine(tlx + delta, tly, tlx + delta, tly + delta);
     }
 
     boolean isPoint = false;
 
     if (board.getBoardSize() == 19) {
-      if (((k == 3) || (k == 15) || (k == 9)) && ((l == 3) || (l == 15) || (l == 9))) {
+      if (((x == 3) || (x == 15) || (x == 9)) && ((y == 3) || (y == 15) || (y == 9))) {
         isPoint = true;
       }
     }
 
     if (board.getBoardSize() == 13) {
-      if (((k == 3) || (k == 6) || (k == 9)) && ((l == 3) || (l == 6) || (l == 9))) {
+      if (((x == 3) || (x == 6) || (x == 9)) && ((y == 3) || (y == 6) || (y == 9))) {
         isPoint = true;
       }
     }
 
     if (board.getBoardSize() == 9) {
-      if (((k == 2) || (k == 6)) && ((l == 2) || (l == 6))) {
+      if (((x == 2) || (x == 6)) && ((y == 2) || (y == 6))) {
         isPoint = true;
-      } else if ((k == 4) && (l == 4)) {
+      } else if ((x == 4) && (y == 4)) {
         isPoint = true;
       }
     }

@@ -26,6 +26,8 @@ public class Board {
 
   private byte[][] board; // use as board[x][y]
 
+  private boolean[][] changeMask; // reverse mask : true = don't paint
+
   private byte boardSize;
 
   private Rectangle fullBoardArea;
@@ -52,8 +54,10 @@ public class Board {
   private boolean smartMarking = false;
 
   private boolean ressucite = false;
-  
+
   private boolean changed = true;
+
+  private boolean resetted;
 
   public Board() {
     reset((byte) 19);
@@ -68,14 +72,14 @@ public class Board {
    * @param newBoardSize
    */
   public void reset(byte newBoardSize) {
-    changed = true;
     boardSize = newBoardSize;
     fullBoardArea = new Rectangle((byte) 0, (byte) 0, (byte) (boardSize - 1), (byte) (boardSize - 1));
     board = new byte[boardSize][boardSize];
+    changeMask = new boolean[boardSize][boardSize];
+    changed = true;
+    resetted = true;
   }
-  
-  
-  
+
   /**
    * place the stone as current player on given point, it will not check if
    * this move legal, the caller should guarentee to call isLegalMove before.
@@ -137,12 +141,29 @@ public class Board {
   public void placeStone(Point point, byte color) {
     if (point == null)
       return;
-    
+
     int x = point.x;
     int y = point.y;
     if (x >= board.length || y >= board.length)
       return;
     board[x][y] = color;
+    changeMask[x][y] = false; // this is reversed (to optimize the new)
+
+    // The stones are slightly larger than the moku so redraw the adjacent stones
+    if (color == EMPTY) {
+      if (x > 0 && board[x - 1][y] != EMPTY)
+        changeMask[x - 1][y] = false;
+
+      if (y > 0 && board[x][y - 1] != EMPTY)
+        changeMask[x][y - 1] = false;
+
+      if (x < boardSize - 1 && board[x + 1][y] != EMPTY)
+        changeMask[x + 1][y] = false;
+
+      if (y < boardSize - 1 && board[x][y + 1] != EMPTY)
+        changeMask[x][y + 1] = false;
+
+    }
     changed = true;
   }
 
@@ -186,6 +207,10 @@ public class Board {
 
   public int getPosition(Point pt) {
     return board[pt.x][pt.y];
+  }
+
+  public int getPosition(int x, int y) {
+    return board[x][y];
   }
 
   /**
@@ -675,4 +700,16 @@ public class Board {
     this.changed = changed;
   }
 
+  public boolean isResetted() {
+    return resetted;
+  }
+
+  public void setResetted(boolean resetted) {
+    this.resetted = resetted;
+    this.changeMask = new boolean[boardSize][boardSize];
+  }
+
+  public boolean[][] getChangeMask() {
+    return changeMask;
+  }
 }

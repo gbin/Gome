@@ -99,18 +99,18 @@ class Scroller implements Runnable {
   }
 
   public void stop() {
-    try {
+    //try {
       running = false;
       if (scrolling != null) {
         synchronized (scrolling) {
           scrolling.notifyAll();
-          scrolling.join();
+          //scrolling.join();
           scrolling = null;
         }
       }
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+    //} catch (InterruptedException e) {
+    //  e.printStackTrace();
+   // }
 
   }
 
@@ -151,6 +151,7 @@ class Scroller implements Runnable {
     offset = 0;
     if (img.getHeight() > height) {
       scrolling = new Thread(this);
+      scrolling.setPriority(Thread.MIN_PRIORITY);
       scrolling.start();
     }
     running = true;
