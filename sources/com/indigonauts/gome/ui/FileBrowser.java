@@ -57,6 +57,17 @@ public class FileBrowser implements CommandListener, Showable {
   public static Command IMPORT;
   public static Command SEND_BY_EMAIL;
   private static Command RANDOM;
+  
+  static 
+  {
+    OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
+    OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
+    DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
+    IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
+    SEND_BY_EMAIL = new Command(Gome.singleton.bundle.getString("ui.sendByEmail"), Command.SCREEN, 2); //$NON-NLS-1$
+    RANDOM = new Command(Gome.singleton.bundle.getString("ui.random"), Command.SCREEN, 2); //$NON-NLS-1$
+
+  }
 
   //#ifdef MENU_IMAGES
   private Image dirImg;
@@ -77,13 +88,7 @@ public class FileBrowser implements CommandListener, Showable {
   private Form saveGame;
 
   private FileBrowser(Showable parent, MenuEngine listener, boolean saveMode) {
-    OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
-    OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
-    DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
-    IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
-    SEND_BY_EMAIL = new Command(Gome.singleton.bundle.getString("ui.sendByEmail"), Command.SCREEN, 2); //$NON-NLS-1$
-    RANDOM = new Command(Gome.singleton.bundle.getString("ui.random"), Command.SCREEN, 2); //$NON-NLS-1$
-
+    
     this.parent = parent;
     this.listener = listener;
     this.saveMode = saveMode;
@@ -169,10 +174,10 @@ public class FileBrowser implements CommandListener, Showable {
       uiFolder.addCommand(MenuEngine.SAVE);
     } else {
       uiFolder.addCommand(OPEN);
+      uiFolder.addCommand(SEND_BY_EMAIL);
       if (currentDirectory.startsWith(IOManager.LOCAL_NAME)) {
         uiFolder.addCommand(OPEN_REVIEW);
         uiFolder.addCommand(DELETE);
-        uiFolder.addCommand(SEND_BY_EMAIL);
       } else {
         uiFolder.addCommand(IMPORT);
       }
@@ -277,7 +282,7 @@ public class FileBrowser implements CommandListener, Showable {
       } else if (c == SEND_BY_EMAIL) {
         indexFolder = uiFolder.getSelectedIndex();
         Object obj = entries.elementAt(indexFolder);
-        IOManager.sendFileByMail((FileEntry) obj, Gome.singleton.options.email);
+        IOManager.singleton.sendFileByMail((FileEntry) obj, Gome.singleton.options.email);
       }
 
     } else if (s == uiFileBlock) {

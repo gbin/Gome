@@ -37,9 +37,9 @@ public class IOManager {
   private static final String SGF = ".sgf"; //$NON-NLS-1$
 
   private static final String INDEX_NAME = "index.txt"; //$NON-NLS-1$
-  
+
   public static final String LOCAL_NAME = "file:///"; //$NON-NLS-1$
-  
+
   public static IOManager singleton = new IOManager();
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
@@ -168,13 +168,16 @@ public class IOManager {
     saveLocalStore(pwdFile, ident.getBytes());
   }
 
-  public static void sendFileByMail(FileEntry selectedFile, String email) {
-    String filename = selectedFile.getName();
-    postStoreFileToHttp(filename, EMAIL_SEND_BASE + "email=" + URLEncode(email) + "&game=" + filename);
+  public void sendFileByMail(FileEntry selectedFile, String email) {
+    String url = selectedFile.getUrl();
+    //#ifdef DEBUG
+    log.debug("Send by email url = " + url);
+    //#endif
+    postFileToHttp(url, EMAIL_SEND_BASE + "email=" + URLEncode(email) + "&game=" + selectedFile.getName());
 
   }
 
-  public static void postStoreFileToHttp(final String filename, final String urlWithParams) {
+  public void postFileToHttp(final String url, final String urlWithParams) {
     Runnable send = new Runnable() {
       public void run() {
         DataOutputStream os = null;
@@ -186,18 +189,13 @@ public class IOManager {
           httpConnection.setRequestProperty("Content-Type", "application/x-go-sgf");
           httpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
           os = httpConnection.openDataOutputStream();
-          byte[] game = loadLocalStore(filename, null);
+          byte[] game = singleton.loadFile(url, null);
           int l = game.length;
           int i = 0;
           for (; i < l - BUFF_SIZE; i += BUFF_SIZE) {
             os.write(game, i, BUFF_SIZE);
           }
           os.write(game, i, l - i);
-
-        } catch (RecordStoreException e) {
-
-          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.recordStored"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
-          return;
 
         } catch (IOException e) {
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.posting"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
@@ -360,15 +358,6 @@ public class IOManager {
   }
 
   public byte[] loadFile(String url, DownloadStatus status) throws IOException {
-    if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
-      url = url.substring(url.indexOf(':') + 4); //$NON-NLS-1$
-      try {
-        return loadLocalStore(url, status);
-      } catch (RecordStoreException e) {
-        throw new IOException("ui.error.recordStore"); //$NON-NLS-1$
-      }
-    }
-
     int percent = 0;
 
     DataInputStream dis = null;
@@ -411,7 +400,7 @@ public class IOManager {
   public DataInputStream readFileAsStream(String url, DownloadStatus status) throws IOException {
     if (url.startsWith("http://")) { //$NON-NLS-1$
       return readFileFromHttp(url, status);
-    } 
+    }
     //#ifdef JSR75
     else if (url.startsWith(LOCAL_NAME)) {
       return loadJSR75(url, status);
@@ -550,42 +539,15 @@ public class IOManager {
     return roots;
   }
 
-  private FileConnection fc;
-
   public Vector loadJSR75Index(String baseRep, String subRep) throws IOException {
-    String fcRep = baseRep.substring(LOCAL_NAME.length() - 1); // -1 because it needs a / at the beginning ...
+    //String fcRep = baseRep.substring(LOCAL_NAME.length() - 1); // -1 because it needs a / at the beginning ...
     //#ifdef DEBUG
     log.debug("Base rep = " + baseRep);
     log.debug("Sub rep = " + subRep);
     //#endif
     Vector list = new Vector();
     String fullPath = baseRep + ((subRep != null) ? subRep : "");
-    //#ifdef DEBUG
-    log.debug("fullPath = " + fullPath);
-    log.debug("fcRep = " + fcRep);
-    if (fc != null) {
-      log.debug("current fc Path " + fc.getPath());
-    }
-    //#endif
-
-    if (fc != null && subRep != null && fc.getPath().equals(fcRep)) {
-      //#ifdef DEBUG
-      log.debug("reuse fc = " + baseRep);
-      //#endif
-      fc.setFileConnection(subRep);
-    } else if (fc != null && subRep == null && fc.getPath().equals(fcRep)) {
-      // ok do nothing
-      //#ifdef DEBUG
-      log.debug("Plain reuse");
-      //#endif
-    } else {
-
-      //#ifdef DEBUG
-      log.debug("Open new fc = " + fullPath);
-      //#endif
-      fc = (FileConnection) Connector.open(fullPath);
-    }
-
+    FileConnection fc = (FileConnection) Connector.open(fullPath);
     Enumeration content = fc.list();
     String current;
     while (content.hasMoreElements()) {
@@ -599,7 +561,7 @@ public class IOManager {
   }
 
   public DataInputStream loadJSR75(String fullPath, DownloadStatus status) throws IOException {
-    fc = (FileConnection) Connector.open(fullPath);
+    FileConnection fc = (FileConnection) Connector.open(fullPath);
     return fc.openDataInputStream();
   }
 
@@ -621,6 +583,7 @@ public class IOManager {
     Thread t = new Thread() {
       public void run() {
         OutputStream outputStream = null;
+        FileConnection fc = null;
         try {
           fc = (FileConnection) Connector.open(cd + fn);
           if (!fc.exists()) {
@@ -634,13 +597,14 @@ public class IOManager {
           log.error(e);
           //#endif
         } finally {
-          if (outputStream != null)
-            try {
+          try {
+            if (outputStream != null)
               outputStream.close();
+            if (fc != null)
               fc.close();
-              fc = null;
-            } catch (IOException e) {
-            }
+            fc = null;
+          } catch (IOException e) {
+          }
         }
 
         game = null;
@@ -657,6 +621,7 @@ public class IOManager {
     fn = url;
     Thread t = new Thread() {
       public void run() {
+        FileConnection fc = null;
         try {
           fc = (FileConnection) Connector.open(fn);
           if (fc.exists()) {
@@ -669,8 +634,10 @@ public class IOManager {
           //#endif
         } finally {
           try {
-            fc.close();
-            fc = null;
+            if (fc != null) {
+              fc.close();
+              fc = null;
+            }
           } catch (IOException e) {
           }
         }

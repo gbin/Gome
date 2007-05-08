@@ -479,15 +479,20 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
    * @param g
    */
   private void drawSquiggles(Graphics g) {
-    int squiggleSize = 4;
-    int nbSquiggles = getWidth() / squiggleSize;
+    int height = getHeight();
+    int squiggleSize = height / 30;
+    int nbSquiggles = getWidth() / squiggleSize + 1;
     boolean up = true;
     g.setColor(Util.COLOR_GREEN);
     for (int i = 0; i < nbSquiggles; i++) {
+      int x = i * squiggleSize;
+      int x0 = x + squiggleSize;
       if (up) {
-        g.drawLine(i * squiggleSize, getHeight(), i * squiggleSize + squiggleSize, getHeight() - squiggleSize);
+        g.drawLine(x, height, x0, height - squiggleSize);
+        g.drawLine(x+1, height, x0+1, height - squiggleSize);
       } else {
-        g.drawLine(i * squiggleSize, getHeight() - squiggleSize, i * squiggleSize + squiggleSize, getHeight());
+        g.drawLine(x, height - squiggleSize, x0, height);
+        g.drawLine(x+1, height - squiggleSize, x0+1, height);
       }
       up = !up;
 
