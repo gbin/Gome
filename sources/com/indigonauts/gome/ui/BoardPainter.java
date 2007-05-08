@@ -9,6 +9,7 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Point;
@@ -67,13 +68,8 @@ public class BoardPainter {
 
     // calc the size of each cell
     calcDrawingPosition();
-
     resetBackBuffer();
   }
-
-  /*public void setAnnotations(Vector annotations) {
-   this.annotations = annotations;
-   }*/
 
   public void setKo(Point ko) {
     this.ko = ko;
@@ -86,6 +82,7 @@ public class BoardPainter {
   public void setPlayArea(Rectangle playArea) {
     boardArea = playArea;
     calcDrawingPosition();
+    resetBackBuffer();
   }
 
   public void setDrawArea(GraphicRectangle imageArea) {
@@ -94,114 +91,111 @@ public class BoardPainter {
     resetBackBuffer();
   }
 
-  /**
-   * Attach this drawing tool to a live game
-   * 
-   * @param gc
-   */
-  /*public void setGameController(GameController gc) {
-   this.gc = gc;
-   }*/
+  Image backBuffer;
 
   private void resetBackBuffer() {
-    /*
-     * if (backBuffer == null || backBuffer.getWidth() !=
-     * drawArea.getWidth() || backBuffer.getHeight() !=
-     * drawArea.getHeight()) backBuffer =
-     * Image.createImage(drawArea.getWidth(), drawArea .getHeight());
-     */
+
+    if (backBuffer == null || backBuffer.getWidth() != drawArea.getWidth() || backBuffer.getHeight() != drawArea.getHeight())
+      backBuffer = Image.createImage(drawArea.getWidth(), drawArea.getHeight());
+    if (board != null)
+      board.setChanged(true); // force a redraw
 
   }
 
-  public void drawBoard(Graphics graphics, Vector annotations) {
-    //Image temp = Image.createImage(drawArea.getWidth() + 2, drawArea.getHeight() + 2);
-    //Graphics graphics = temp.getGraphics();
+  public void drawBoard(Graphics graphicsScreen, Vector annotations) {
+long timing = System.currentTimeMillis();
+    if (board.isChanged()) {
+      Graphics graphics = backBuffer.getGraphics();
 
-    graphics.setColor(Gome.singleton.options.gobanColor);
-    graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
-    int ox = getCellX(0);
-    int oy = getCellY(0);
-    int oxx = getCellX(board.getBoardSize() - 1);
-    int oyy = getCellY(board.getBoardSize() - 1);
+      graphics.setColor(Gome.singleton.options.gobanColor);
+      graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
+      int ox = getCellX(0);
+      int oy = getCellY(0);
+      int oxx = getCellX(board.getBoardSize() - 1);
+      int oyy = getCellY(board.getBoardSize() - 1);
 
-    int ux = getCellX(boardArea.x0);
-    int uy = getCellY(boardArea.y0);
-    graphics.setClip(ux - halfdelta, uy - halfdelta, getCellX(boardArea.x1 + 1) - ux + 1, getCellY(boardArea.y1 + 1) - uy + 1);
-    graphics.setColor(Util.COLOR_WHITE);
-    graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta - 1, oyy - oy + halfdelta + halfdelta - 1);
+      int ux = getCellX(boardArea.x0);
+      int uy = getCellY(boardArea.y0);
+      graphics.setClip(ux - halfdelta, uy - halfdelta, getCellX(boardArea.x1 + 1) - ux + 1, getCellY(boardArea.y1 + 1) - uy + 1);
+      graphics.setColor(Util.COLOR_WHITE);
+      graphics.drawRect(ox - halfdelta, oy - halfdelta, oxx - ox + halfdelta + halfdelta - 1, oyy - oy + halfdelta + halfdelta - 1);
 
-    graphics.setClip(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-    graphics.setColor(Util.COLOR_BLACK);
-    for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
-      for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
-        drawCell(graphics, new Point(x, y));
+      graphics.setClip(0, 0, drawArea.getWidth(), drawArea.getHeight());
+      graphics.setColor(Util.COLOR_BLACK);
+      for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
+        for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
+          drawCell(graphics, new Point(x, y));
+        }
       }
+      board.setChanged(false);
     }
+    graphicsScreen.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
     if (counting) {
-      drawTerritory(graphics);
+      drawTerritory(graphicsScreen);
       return; // nothing else
     }
     if (ko != null)
-      drawSymbolAnnotation(graphics, new SymbolAnnotation(ko, SymbolAnnotation.SQUARE), Util.COLOR_GREY);
+      drawSymbolAnnotation(graphicsScreen, new SymbolAnnotation(ko, SymbolAnnotation.SQUARE), Util.COLOR_GREY);
 
     if (annotations != null)
-      drawAnnotations(graphics, annotations);
+      drawAnnotations(graphicsScreen, annotations);
+System.out.println(System.currentTimeMillis()- timing);
     //subpixelPostProcess(temp, finalgraphics);
   }
 
   /*private void subpixelPostProcess(Image source, Graphics destination) {
-    int OUTL = 1;
-    int MIDL = 2;
-    int IN = 3;
-    int MIDR = 2;
-    int OUTR = 1;
-    int SUM = OUTL + MIDL + IN + MIDR + OUTR;
-    int width = source.getWidth();
-    int height = source.getHeight();
-    int[] srcRaster = new int[width * height];
-    int[] dstRaster = new int[width * height];
-    source.getRGB(srcRaster, 0, width, 0, 0, width, height);
+   int OUTL = 1;
+   int MIDL = 2;
+   int IN = 3;
+   int MIDR = 2;
+   int OUTR = 1;
+   int SUM = OUTL + MIDL + IN + MIDR + OUTR;
+   int width = source.getWidth();
+   int height = source.getHeight();
+   int[] srcRaster = new int[width * height];
+   int[] dstRaster = new int[width * height];
+   source.getRGB(srcRaster, 0, width, 0, 0, width, height);
 
-    for (int y = 1; y < height - 1; y++) {
-      int offset = y * width;
-      for (int x = 1; x < width - 1; x++) {
+   for (int y = 1; y < height - 1; y++) {
+   int offset = y * width;
+   for (int x = 1; x < width - 1; x++) {
 
-        int left = srcRaster[(x - 1) + offset];
-        int mid = srcRaster[x + offset];
-        int right = srcRaster[(x + 1) + offset];
-        if (left != mid || mid != right)
-        //System.out.println(Integer.toHexString(red(mid)) + " / " + Integer.toHexString(green(mid))+ " / " + Integer.toHexString(blue(mid)));
-        {
-          int r = (OUTL * green(left) + MIDL * blue(left) + IN * red(mid) + MIDR * green(mid) + OUTR * blue(mid)) / SUM;
-          int g = (OUTL * blue(left) + MIDL * red(mid) + IN * green(mid) + MIDR * blue(mid) + OUTR * red(right)) / SUM;
-          int b = (OUTL * red(mid) + MIDL * green(mid) + IN * blue(mid) + MIDR * red(right) + OUTR * green(right)) / SUM;
-          //System.out.println(Integer.toHexString(r) + " / " + Integer.toHexString(g)+ " / " + Integer.toHexString(b));
-          dstRaster[x + offset] = merge(r, g, b);
-        } else
-          dstRaster[x + offset] = srcRaster[x + offset];
-        //System.out.println(Integer.toHexString(dstRaster[x + offset]));
+   int left = srcRaster[(x - 1) + offset];
+   int mid = srcRaster[x + offset];
+   int right = srcRaster[(x + 1) + offset];
+   if (left != mid || mid != right)
+   //System.out.println(Integer.toHexString(red(mid)) + " / " + Integer.toHexString(green(mid))+ " / " + Integer.toHexString(blue(mid)));
+   {
+   int r = (OUTL * green(left) + MIDL * blue(left) + IN * red(mid) + MIDR * green(mid) + OUTR * blue(mid)) / SUM;
+   int g = (OUTL * blue(left) + MIDL * red(mid) + IN * green(mid) + MIDR * blue(mid) + OUTR * red(right)) / SUM;
+   int b = (OUTL * red(mid) + MIDL * green(mid) + IN * blue(mid) + MIDR * red(right) + OUTR * green(right)) / SUM;
+   //System.out.println(Integer.toHexString(r) + " / " + Integer.toHexString(g)+ " / " + Integer.toHexString(b));
+   dstRaster[x + offset] = merge(r, g, b);
+   } else
+   dstRaster[x + offset] = srcRaster[x + offset];
+   //System.out.println(Integer.toHexString(dstRaster[x + offset]));
 
-      }
-    }
+   }
+   }
 
-    destination.drawRGB(dstRaster, 0, width, 0, 0, width, height, false);
-  }
+   destination.drawRGB(dstRaster, 0, width, 0, 0, width, height, false);
+   }
 
-  private int merge(int red, int green, int blue) {
-    return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
-  }
+   private int merge(int red, int green, int blue) {
+   return ((red & 0xFF) << 16) | ((green & 0xFF) << 8) | (blue & 0xFF);
+   }
 
-  private int red(int color) {
-    return (0x00FF0000 & color) >> 16;
-  }
+   private int red(int color) {
+   return (0x00FF0000 & color) >> 16;
+   }
 
-  private int green(int color) {
-    return (0x0000FF00 & color) >> 8;
-  }
+   private int green(int color) {
+   return (0x0000FF00 & color) >> 8;
+   }
 
-  private int blue(int color) {
-    return (0x000000FF & color);
-  }*/
+   private int blue(int color) {
+   return (0x000000FF & color);
+   }*/
 
   /*public void drawMe(Graphics g) {
    Point cursor = gc.getCursor();

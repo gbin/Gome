@@ -52,6 +52,8 @@ public class Board {
   private boolean smartMarking = false;
 
   private boolean ressucite = false;
+  
+  private boolean changed = true;
 
   public Board() {
     reset((byte) 19);
@@ -66,11 +68,14 @@ public class Board {
    * @param newBoardSize
    */
   public void reset(byte newBoardSize) {
+    changed = true;
     boardSize = newBoardSize;
     fullBoardArea = new Rectangle((byte) 0, (byte) 0, (byte) (boardSize - 1), (byte) (boardSize - 1));
     board = new byte[boardSize][boardSize];
   }
-
+  
+  
+  
   /**
    * place the stone as current player on given point, it will not check if
    * this move legal, the caller should guarentee to call isLegalMove before.
@@ -132,12 +137,13 @@ public class Board {
   public void placeStone(Point point, byte color) {
     if (point == null)
       return;
-
+    
     int x = point.x;
     int y = point.y;
     if (x >= board.length || y >= board.length)
       return;
     board[x][y] = color;
+    changed = true;
   }
 
   public boolean isValidMove(Point pt, byte color) {
@@ -381,6 +387,7 @@ public class Board {
    */
   private void unMark() {
     markers = new boolean[boardSize][boardSize];
+    changed = true;
   }
 
   /**
@@ -395,6 +402,7 @@ public class Board {
     } else {
       recurseDumbMarkDead(x, y, board[x][y]);
     }
+    changed = true;
   }
 
   /**
@@ -403,6 +411,7 @@ public class Board {
    * yes abandon the mark and return true.
    */
   private boolean recurseMarkTest(int i, int j, byte c, byte ct) {
+    changed = true;
     if (markers[i][j])
       return false;
     byte realColor = dead[i][j] ? EMPTY : board[i][j];
@@ -521,6 +530,7 @@ public class Board {
   }
 
   public byte[][] guessTerritory() {
+    changed = true;
     return guessTerritory(5, 11);
   }
 
@@ -529,7 +539,7 @@ public class Board {
    * @param delate   number of delations
    * @param erode    number of erosions
    */
-  public byte[][] guessTerritory(int delate, int erode) {
+  private byte[][] guessTerritory(int delate, int erode) {
     int size = boardSize;
     int[][] data = new int[size][size];
     int[][] buffer = new int[size][size];
@@ -655,6 +665,14 @@ public class Board {
         cachedTerritory = calculateTerritory();
     }
     return cachedTerritory;
+  }
+
+  public boolean isChanged() {
+    return changed;
+  }
+
+  public void setChanged(boolean changed) {
+    this.changed = changed;
   }
 
 }

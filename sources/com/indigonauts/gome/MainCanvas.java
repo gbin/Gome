@@ -179,7 +179,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       }
     }
     if (refreshNeeded) {
-      // log.debug("repaint() called from keyPressed");
+      //log.debug("repaint() called from keyPressed");
       refresh();
     }
   }
@@ -513,11 +513,12 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void setSplashInfo(String splash) {
     this.splashInfo = splash;
+    //log.debug("repaint() called from setSplashInfo");
     refresh();
   }
 
   protected void showNotify() {
-    // log.debug("Show notify");
+    //log.debug("repaint() called from showNotify");
     refresh();
   }
 
@@ -573,6 +574,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void refresh() {
+    //log.debug("refresh called");
     repaint();
     serviceRepaints();
   }
@@ -585,6 +587,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     // log.debug("Set Board Painter - redo the layout");
     this.boardPainter = boardPainter;
     recalculateLayout();
+    //log.debug("repaint() called from setBoardPainter");
     refresh();
   }
 

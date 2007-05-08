@@ -374,6 +374,7 @@ public class GameController implements ServerCallback
     }
     if (refreshPainter) {
       tuneBoardPainter();
+      canvas.getBoardPainter().setPlayArea(area); // Otherwise it will not be notified of the change
     }
 
     boolean refreshNeeded = (x != cursor.x) || (y != cursor.y);
@@ -529,8 +530,6 @@ public class GameController implements ServerCallback
       board.markDeadGroup(cursor.x, cursor.y);
     else
       doClick();
-    tuneBoardPainter();
-    canvas.refresh();
   }
 
   public void moveCursor(byte x, byte y) {
@@ -625,6 +624,7 @@ public class GameController implements ServerCallback
       }
       break;
     }
+    //log.debug("repaint() called from doClick");
     canvas.refresh();
   }
 
@@ -781,7 +781,7 @@ public class GameController implements ServerCallback
 
   private void warnPassed(byte color) {
     if (!countMode)
-      canvas.setSplashInfo((color == 1 ? Gome.singleton.bundle.getString("game.blackLong") : Gome.singleton.bundle.getString("game.whiteLong")) + Gome.singleton.bundle.getString("game.passed"));
+      canvas.setSplashInfo((color == 1 ? Gome.singleton.bundle.getString("game.blackLong") : Gome.singleton.bundle.getString("game.whiteLong")) + " " + Gome.singleton.bundle.getString("game.passed"));
     // System.out.println("take a look at this: "
     // + (color == 1 ? "Black" : "White") + " passed");
   }
@@ -1163,9 +1163,6 @@ public class GameController implements ServerCallback
 
   public void goToFirstMove() {
     notifyLoadReady();
-    // while (doGoBack()) {
-    // do nothing
-    //}
     tuneBoardPainter();
     canvas.refresh();
   }
