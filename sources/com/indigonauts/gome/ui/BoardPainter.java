@@ -12,6 +12,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.GomeOptions;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
@@ -109,7 +110,7 @@ public class BoardPainter {
 
     if (board.isResetted()) {
       //redraw everything
-      graphics.setColor(Gome.singleton.options.gobanColor);
+      graphics.setColor(Util.TATAMI);
       graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
       board.setResetted(false);
     }
@@ -119,8 +120,8 @@ public class BoardPainter {
       // draw the empty first
       for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
         for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
-          if (!changeMask[x][y] &&  board.getPosition(x,y)==Board.EMPTY ) {
-            drawCell(graphics,x,y);
+          if (!changeMask[x][y] && board.getPosition(x, y) == Board.EMPTY) {
+            drawCell(graphics, x, y);
             changeMask[x][y] = true;
             System.out.print("[" + x + ", " + y + "]");
           }
@@ -130,7 +131,7 @@ public class BoardPainter {
       for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
         for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
           if (!changeMask[x][y]) {
-            drawCell(graphics,x,y);
+            drawCell(graphics, x, y);
             changeMask[x][y] = true;
             System.out.print("[" + x + ", " + y + "]");
           }
@@ -297,17 +298,29 @@ public class BoardPainter {
 
   }
 
-  private void drawCell(Graphics g, int x,int y) {
-    int position = board.getPosition(x,y);
+  private void drawCell(Graphics g, int x, int y) {
+    int position = board.getPosition(x, y);
+    int cx = getCellX(x);
+    int cy = getCellY(y);
+
+    int tlx = cx - halfdelta; // top left
+    int tly = cy - halfdelta;
+    
+    g.setColor(Gome.singleton.options.gobanColor);
+    g.fillRect(tlx, tly, delta + 1, delta + 1);
+    
     switch (position) {
     case Board.BLACK:
-      drawStone(g, x,y, Util.COLOR_BLACK);
+      drawBorder(g, x, y, Util.COLOR_WHITE);
+      drawStone(g, x, y, Util.COLOR_BLACK);
       break;
     case Board.WHITE:
-      drawStone(g, x,y, Util.COLOR_WHITE);
+      drawBorder(g, x, y, Util.COLOR_WHITE);
+      drawStone(g, x, y, Util.COLOR_WHITE);
       break;
     default:
-      drawEmpty(g, x,y);
+      drawEmpty(g, x, y);
+      drawBorder(g, x, y, Util.COLOR_WHITE);
     }
   }
 
@@ -341,10 +354,31 @@ public class BoardPainter {
 
   }
 
+  private void drawBorder(Graphics g, int x, int y, int color) {
+    g.setColor(color);
+    int cx = getCellX(x);
+    int cy = getCellY(y);
+
+    int tlx = cx - halfdelta; // top left
+    int tly = cy - halfdelta;
+
+    if (y == 0) {
+      g.drawLine(tlx, tly, tlx + delta, tly);
+    } else if (y == board.getBoardSize()-1) {
+      g.drawLine(tlx, tly + delta, tlx + delta, tly + delta);
+    }
+    if (x == 0) {
+      g.drawLine(tlx, tly, tlx, tly + delta);
+    } else if (x == board.getBoardSize()-1) {
+      g.drawLine(tlx + delta, tly, tlx + delta, tly + delta);
+    }
+
+  }
+
   private void drawEmpty(Graphics g, int x, int y) {
     int cx = getCellX(x);
     int cy = getCellY(y);
-    
+
     int tlx = cx - halfdelta; // top left
     int tly = cy - halfdelta;
     int i3 = cx; // center
@@ -352,44 +386,27 @@ public class BoardPainter {
     int brx = cx + halfdelta; // bottom right
     int bry = cy + halfdelta;
 
-    g.setColor(Gome.singleton.options.gobanColor);
-    g.fillRect(tlx, tly, delta + 1, delta + 1);
-
+    g.setColor(Util.COLOR_DARKGREY);
+    
     // draw up
     if (y > 0) {
-      g.setColor(Util.COLOR_DARKGREY);
       g.drawLine(i3, j3, i3, tly);
-    } else {
-      g.setColor(Util.COLOR_WHITE);
-      g.drawLine(tlx, tly, tlx + delta, tly);
-    }
+    } 
 
     // draw left
     if (x > 0) {
-      g.setColor(Util.COLOR_DARKGREY);
       g.drawLine(i3, j3, tlx, j3);
-    } else {
-      g.setColor(Util.COLOR_WHITE);
-      g.drawLine(tlx, tly, tlx, tly + delta);
-    }
+    } 
 
     // draw down
     if (y < (board.getBoardSize() - 1)) {
-      g.setColor(Util.COLOR_DARKGREY);
       g.drawLine(i3, j3, i3, bry);
-    } else {
-      g.setColor(Util.COLOR_WHITE);
-      g.drawLine(tlx, tly + delta, tlx + delta, tly + delta);
-    }
+    } 
 
     // draw right
     if (x < (board.getBoardSize() - 1)) {
-      g.setColor(Util.COLOR_DARKGREY);
       g.drawLine(i3, j3, brx, j3);
-    } else {
-      g.setColor(Util.COLOR_WHITE);
-      g.drawLine(tlx + delta, tly, tlx + delta, tly + delta);
-    }
+    } 
 
     boolean isPoint = false;
 

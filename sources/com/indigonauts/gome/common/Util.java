@@ -31,6 +31,12 @@ public class Util {
   public static final int COLOR_GREEN = 0x0000FF00;
   public static final int COLOR_BLUE = 0x000000FF;
   public static final int COLOR_LIGHT_BACKGROUND = 0x00FFEE00;
+  public static final int TATAMI = 0x00A09940;
+  public static final int GOBAN_COLOR_LIGHT = 0x00FFDD00;
+  public static final int GOBAN_COLOR_MEDIUM = 0x00F0CC00;
+  public static final int GOBAN_COLOR_DARK = 0x00E0BB00;
+
+  
   public static final String EMPTY_STRING = ""; //$NON-NLS-1$
   private static Random rnd = new Random();
 

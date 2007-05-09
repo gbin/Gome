@@ -10,6 +10,8 @@ import java.io.IOException;
 
 import javax.microedition.lcdui.Font;
 
+import com.indigonauts.gome.common.Util;
+
 public class GomeOptions {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GomeOptions");
@@ -30,18 +32,14 @@ public class GomeOptions {
   public static final byte SLOW = 0;
 
   public static final byte FAST = 2;
-
-  public static final int COLOR_LIGHT = 0x00FFDD00;
-  public static final int COLOR_MEDIUM = 0x00F0CC00;
-  public static final int COLOR_DARK = 0x00E0BB00;
-
+  
   public static final String EN_US = "en_US";
   public static final String FR_FR = "fr_FR";
   public static final String JP_JP = "jp_JP";
 
   public String locale = EN_US;
 
-  public int gobanColor = COLOR_MEDIUM;
+  public int gobanColor = Util.GOBAN_COLOR_MEDIUM;
 
   public int fontSize = Font.SIZE_MEDIUM;
 
@@ -130,13 +128,13 @@ public class GomeOptions {
     // goban Color
     switch (colorByte) {
     case LIGHT:
-      gobanColor = COLOR_LIGHT;
+      gobanColor = Util.GOBAN_COLOR_LIGHT;
       break;
     case MEDIUM:
-      gobanColor = COLOR_MEDIUM;
+      gobanColor = Util.GOBAN_COLOR_MEDIUM;
       break;
     case DARK:
-      gobanColor = COLOR_DARK;
+      gobanColor = Util.GOBAN_COLOR_DARK;
       break;
     }
   }
@@ -185,13 +183,13 @@ public class GomeOptions {
 
   public byte getGobanColorByte() {
     switch (gobanColor) {
-    case COLOR_LIGHT:
+    case Util.GOBAN_COLOR_LIGHT:
       return LIGHT;
 
-    case COLOR_MEDIUM:
+    case Util.GOBAN_COLOR_MEDIUM:
       return MEDIUM;
 
-    case COLOR_DARK:
+    case Util.GOBAN_COLOR_DARK:
       return DARK;
     }
     return -1;
