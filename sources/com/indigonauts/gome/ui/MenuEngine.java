@@ -133,7 +133,7 @@ public class MenuEngine implements CommandListener {
 
     //#ifdef IGS
     IGS_CONNECT = new Command(Gome.singleton.bundle.getString("online.connect"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_GAMELIST = new Command(Gome.singleton.bundle.getString("online.gamelist"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_GAMELIST = new Command(Gome.singleton.bundle.getString("online.gameList"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_USERLIST = new Command(Gome.singleton.bundle.getString("online.userlist"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_DISCONNECT = new Command(Gome.singleton.bundle.getString("online.disconnect"), Command.SCREEN, 5); //$NON-NLS-1$
     IGS_OBSERVE = new Command(Gome.singleton.bundle.getString("online.observe"), Command.SCREEN, 5); //$NON-NLS-1$

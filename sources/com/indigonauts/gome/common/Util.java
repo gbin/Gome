@@ -72,7 +72,6 @@ public class Util {
 
   public static final String safeGetKeyName(Canvas can, int key) {
     try {
-      log.debug("can = " + can);
       return can.getKeyName(key);
     } catch (Throwable t) {
       return " ";
