@@ -28,6 +28,8 @@ public class BoardPainter {
 
   private static final int MARGIN = 0;
 
+  public static boolean S60_BUG = false;
+
   private Board board;
 
   private Rectangle boardArea;
@@ -48,6 +50,8 @@ public class BoardPainter {
   // for performance
   private int halfdelta;
 
+  private Image backBuffer;
+
   private static final Font ANNOTATION_FONT_SMALL = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_SMALL);
 
   private static final Font ANNOTATION_FONT_MEDIUM = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
@@ -60,7 +64,9 @@ public class BoardPainter {
 
   private boolean counting;
 
-  public BoardPainter(Board newBoard, GraphicRectangle imageArea, Rectangle newBoardArea) {
+  private boolean doubleBuffered;
+
+  public BoardPainter(Board newBoard, GraphicRectangle imageArea, Rectangle newBoardArea, boolean doubleBuffered) {
     board = newBoard;
 
     boardArea = newBoardArea != null ? newBoardArea : newBoard.getFullBoardArea();
@@ -68,7 +74,10 @@ public class BoardPainter {
 
     // calc the size of each cell
     calcDrawingPosition();
-    resetBackBuffer();
+    this.doubleBuffered = doubleBuffered;
+    if (this.doubleBuffered)
+      resetBackBuffer();
+
   }
 
   public void setKo(Point ko) {
@@ -91,8 +100,6 @@ public class BoardPainter {
     resetBackBuffer();
   }
 
-  Image backBuffer;
-
   private void resetBackBuffer() {
 
     if (backBuffer == null || backBuffer.getWidth() != drawArea.getWidth() || backBuffer.getHeight() != drawArea.getHeight())
@@ -105,16 +112,21 @@ public class BoardPainter {
 
   public void drawBoard(Graphics graphicsScreen, Vector annotations) {
     long timing = System.currentTimeMillis();
-    Graphics graphics = backBuffer.getGraphics();
+    Graphics graphics = null;
 
-    if (board.isResetted()) {
+    if (doubleBuffered)
+      graphics = backBuffer.getGraphics();
+    else
+      graphics = graphicsScreen;
+
+    if (!doubleBuffered || board.isResetted()) {
       //redraw everything
       graphics.setColor(Util.TATAMI);
       graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
       board.setResetted(false);
     }
 
-    if (board.isChanged()) {
+    if (!doubleBuffered || board.isChanged()) {
       boolean[][] changeMask = board.getChangeMask();
       // draw the empty first
       for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
@@ -139,7 +151,8 @@ public class BoardPainter {
       System.out.println();
       board.setChanged(false);
     }
-    graphicsScreen.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
+    if (doubleBuffered)
+      graphicsScreen.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
     if (counting) {
       drawTerritory(graphicsScreen);
       return; // nothing else
@@ -304,10 +317,10 @@ public class BoardPainter {
 
     int tlx = cx - halfdelta; // top left
     int tly = cy - halfdelta;
-    
+
     g.setColor(Gome.singleton.options.gobanColor);
     g.fillRect(tlx, tly, delta + 1, delta + 1);
-    
+
     switch (position) {
     case Board.BLACK:
       drawBorder(g, x, y, 0xCCCCCC);
@@ -322,8 +335,6 @@ public class BoardPainter {
       drawBorder(g, x, y, 0xCCCCCC);
     }
   }
-
-  private static boolean S60_BUG = false;
 
   static {
     String version = System.getProperty("microedition.platform");
@@ -363,12 +374,12 @@ public class BoardPainter {
 
     if (y == 0) {
       g.drawLine(tlx, tly, tlx + delta, tly);
-    } else if (y == board.getBoardSize()-1) {
+    } else if (y == board.getBoardSize() - 1) {
       g.drawLine(tlx, tly + delta, tlx + delta, tly + delta);
     }
     if (x == 0) {
       g.drawLine(tlx, tly, tlx, tly + delta);
-    } else if (x == board.getBoardSize()-1) {
+    } else if (x == board.getBoardSize() - 1) {
       g.drawLine(tlx + delta, tly, tlx + delta, tly + delta);
     }
 
@@ -386,26 +397,26 @@ public class BoardPainter {
     int bry = cy + halfdelta;
 
     g.setColor(Util.COLOR_DARKGREY);
-    
+
     // draw up
     if (y > 0) {
       g.drawLine(i3, j3, i3, tly);
-    } 
+    }
 
     // draw left
     if (x > 0) {
       g.drawLine(i3, j3, tlx, j3);
-    } 
+    }
 
     // draw down
     if (y < (board.getBoardSize() - 1)) {
       g.drawLine(i3, j3, i3, bry);
-    } 
+    }
 
     // draw right
     if (x < (board.getBoardSize() - 1)) {
       g.drawLine(i3, j3, brx, j3);
-    } 
+    }
 
     boolean isPoint = false;
 
@@ -464,17 +475,17 @@ public class BoardPainter {
     g.drawLine(upx, downy, upx, downy - q);
 
     //if (color == -1) {
-      g.drawLine(upx, upy + 1, upx + q, upy + 1);
-      g.drawLine(upx + 1, upy, upx + 1, upy + q);
+    g.drawLine(upx, upy + 1, upx + q, upy + 1);
+    g.drawLine(upx + 1, upy, upx + 1, upy + q);
 
-      g.drawLine(downx, upy + 1, downx - q, upy + 1);
-      g.drawLine(downx - 1, upy, downx - 1, upy + q);
+    g.drawLine(downx, upy + 1, downx - q, upy + 1);
+    g.drawLine(downx - 1, upy, downx - 1, upy + q);
 
-      g.drawLine(downx, downy - 1, downx - q, downy - 1);
-      g.drawLine(downx - 1, downy, downx - 1, downy - q);
+    g.drawLine(downx, downy - 1, downx - q, downy - 1);
+    g.drawLine(downx - 1, downy, downx - 1, downy - q);
 
-      g.drawLine(upx, downy - 1, upx + q, downy - 1);
-      g.drawLine(upx + 1, downy, upx + 1, downy - q);
+    g.drawLine(upx, downy - 1, upx + q, downy - 1);
+    g.drawLine(upx + 1, downy, upx + 1, downy - q);
     //}
 
   }

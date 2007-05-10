@@ -284,7 +284,7 @@ public class GameController implements ServerCallback
   void initPainter() {
     // log.debug("initPainter");
     GraphicRectangle drawArea = new GraphicRectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-    BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea);
+    BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea, true);
     canvas.setBoardPainter(boardPainter);
     tuneBoardPainter();
     normalDelta = boardPainter.getDelta();

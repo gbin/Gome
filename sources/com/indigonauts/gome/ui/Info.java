@@ -315,10 +315,11 @@ public class Info implements CommandListener, Showable {
     Rectangle viewArea = model.getViewArea();
     byte boardSize = model.getBoardSize();
     Board board = new Board(boardSize);
-    int grsize = boardSize * 10 + 1;
+    int grsize = boardSize * MainCanvas.SMALL_FONT.getHeight() + 1;
     GraphicRectangle imgArea = new GraphicRectangle(0, 0, grsize, grsize);
-    BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null);
-    Image img = Image.createImage(grsize + 2, grsize + 2);
+    BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
+    int total = grsize + (BoardPainter.S60_BUG ? 0 : 2);
+    Image img = Image.createImage(total, total);
     SgfNode firstNode = model.getFirstNode();
     board.placeStones(firstNode.getAB(), Board.BLACK);
     board.placeStones(firstNode.getAW(), Board.WHITE);
