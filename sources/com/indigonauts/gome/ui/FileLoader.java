@@ -25,7 +25,6 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
   private GameController callback;
 
   private SgfModel model;
-  private String text;
   private char mode;
 
   public FileLoader(GameController callback, FileEntry file, int fileIndex) {
@@ -37,11 +36,6 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
 
   protected void download() throws IOException {
     try {
-      if (mode == GameController.TEXT_MODE) {
-        text = new String(IOManager.singleton.loadFile(entry.getUrl(), this));
-        return;
-      }
-
       model = IOManager.singleton.extractGameFromCollection(entry.getUrl(), fileIndex, this);
       if (model == null)
         status = Fetcher.TERMINATED; // stop loading and wait for the reload
@@ -51,14 +45,6 @@ public class FileLoader extends Fetcher // schedule for one-time run only!
   }
 
   protected void downloadFinished() {
-    if (mode == GameController.TEXT_MODE) {
-
-      Alert al = new Alert(entry.getUrl(), text, null, AlertType.INFO);
-      al.setTimeout(Alert.FOREVER);
-      al.setCommandListener(this);
-      Gome.singleton.display.setCurrent(al);
-      return;
-    }
     callback.downloadFinished(model, mode);
   }
 

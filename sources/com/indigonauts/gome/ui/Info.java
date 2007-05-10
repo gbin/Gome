@@ -47,14 +47,20 @@ public class Info implements CommandListener, Showable {
     ABOUT = new Command(Gome.singleton.bundle.getString("ui.about"), Command.SCREEN, 9); //$NON-NLS-1$
   }
 
-  public Info(Showable parent) {
+  public Info(Showable parent, Form current) {
     //#ifdef DEBUG
     log.debug("help");
     //#endif
 
     this.parent = parent;
-    current = getKeys();
-    setUpCurrent();
+    if (current == null) {
+      this.current = getKeys();
+      setUpCurrentHelp();
+    } else {
+      this.current = current;
+      setUpCurrentExternal();
+    }
+
     //#ifdef DEBUG
     log.debug("end if constructor");
     //#endif
@@ -62,12 +68,17 @@ public class Info implements CommandListener, Showable {
   }
 
   public Info(MainCanvas mainCanvas, Command def) {
-    this(mainCanvas);
+    this(mainCanvas, (Form) null);
     commandAction(def, null);
     inSubMenu = false; // so it jumps back directly
   }
 
-  private void setUpCurrent() {
+  private void setUpCurrentExternal() {
+    current.addCommand(MenuEngine.BACK);
+    current.setCommandListener(this);
+  }
+
+  private void setUpCurrentHelp() {
     current.addCommand(KEYS);
     current.addCommand(HELP);
     current.addCommand(RULES);
@@ -103,7 +114,7 @@ public class Info implements CommandListener, Showable {
       inSubMenu = true;
     }
 
-    setUpCurrent();
+    setUpCurrentHelp();
     show(Gome.singleton.display);
   }
 
@@ -111,7 +122,6 @@ public class Info implements CommandListener, Showable {
 
     destination.setCurrent(current);
   }
-
 
   private Form getKeys() {
     MainCanvas canvas = Gome.singleton.mainCanvas;
@@ -300,13 +310,13 @@ public class Info implements CommandListener, Showable {
 
   }
 
-  private Image generatePosition(String sgf) {
+  private static Image generatePosition(String sgf) {
     SgfModel model = SgfModel.parse(new InputStreamReader(new ByteArrayInputStream(sgf.getBytes())));
     Rectangle viewArea = model.getViewArea();
     byte boardSize = model.getBoardSize();
     Board board = new Board(boardSize);
     int grsize = boardSize * 10 + 1;
-    GraphicRectangle imgArea = new GraphicRectangle(1, 1, grsize, grsize);
+    GraphicRectangle imgArea = new GraphicRectangle(0, 0, grsize, grsize);
     BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null);
     Image img = Image.createImage(grsize + 2, grsize + 2);
     SgfNode firstNode = model.getFirstNode();
@@ -319,7 +329,7 @@ public class Info implements CommandListener, Showable {
   private static final Font TITLE_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
   private static final Font UNDERLINED_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_UNDERLINED, Font.SIZE_MEDIUM);
 
-  private Form formatHelp(String name, String url) {
+  public static Form formatHelp(String name, String url) {
     Form form = new Form(name);
     try {
       byte[] file = IOManager.singleton.loadFile(url, null);

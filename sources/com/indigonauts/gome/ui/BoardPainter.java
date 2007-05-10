@@ -310,16 +310,16 @@ public class BoardPainter {
     
     switch (position) {
     case Board.BLACK:
-      drawBorder(g, x, y, Util.COLOR_WHITE);
+      drawBorder(g, x, y, 0xCCCCCC);
       drawStone(g, x, y, Util.COLOR_BLACK);
       break;
     case Board.WHITE:
-      drawBorder(g, x, y, Util.COLOR_WHITE);
+      drawBorder(g, x, y, 0xCCCCCC);
       drawStone(g, x, y, Util.COLOR_WHITE);
       break;
     default:
       drawEmpty(g, x, y);
-      drawBorder(g, x, y, Util.COLOR_WHITE);
+      drawBorder(g, x, y, 0xCCCCCC);
     }
   }
 
@@ -463,7 +463,7 @@ public class BoardPainter {
     g.drawLine(upx, downy, upx + q, downy);
     g.drawLine(upx, downy, upx, downy - q);
 
-    if (color == -1) {
+    //if (color == -1) {
       g.drawLine(upx, upy + 1, upx + q, upy + 1);
       g.drawLine(upx + 1, upy, upx + 1, upy + q);
 
@@ -475,7 +475,7 @@ public class BoardPainter {
 
       g.drawLine(upx, downy - 1, upx + q, downy - 1);
       g.drawLine(upx + 1, downy, upx + 1, downy - q);
-    }
+    //}
 
   }
 
@@ -504,7 +504,7 @@ public class BoardPainter {
     switch (annotation.getType()) {
     case SymbolAnnotation.CIRCLE:
       proportion = delta / 4;
-      g.drawArc(cx - (proportion), cy - (proportion), proportion * 2 + 1, proportion * 2 + 1, 0, 360);
+      g.drawArc(cx - (proportion), cy - (proportion), proportion * 2, proportion * 2, 0, 360);
       break;
     case SymbolAnnotation.CROSS:
       proportion = delta / 3;

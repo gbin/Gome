@@ -35,7 +35,12 @@ import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
-public class FileBrowser implements CommandListener, Showable {
+/**
+ * Fetcher extention is just for the text files
+ * @author gbin
+ *
+ */
+public class FileBrowser extends Fetcher implements CommandListener, Showable {
   //#ifdef DEBUG
   //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
@@ -57,9 +62,8 @@ public class FileBrowser implements CommandListener, Showable {
   public static Command IMPORT;
   public static Command SEND_BY_EMAIL;
   private static Command RANDOM;
-  
-  static 
-  {
+
+  static {
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
     OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
     DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
@@ -88,7 +92,7 @@ public class FileBrowser implements CommandListener, Showable {
   private Form saveGame;
 
   private FileBrowser(Showable parent, MenuEngine listener, boolean saveMode) {
-    
+
     this.parent = parent;
     this.listener = listener;
     this.saveMode = saveMode;
@@ -232,7 +236,6 @@ public class FileBrowser implements CommandListener, Showable {
     if (s == uiFolder) {
 
       if (c == OPEN || c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
-
         indexFolder = uiFolder.getSelectedIndex();
         Object entry = entries.elementAt(indexFolder);
 
@@ -244,13 +247,22 @@ public class FileBrowser implements CommandListener, Showable {
         }
         if (saveMode)
           return; //don't load any file in save mode
+
         if (entry instanceof CollectionEntry && ((CollectionEntry) entry).getCollectionSize() == 1) {
+          CollectionEntry collectionEntry = ((CollectionEntry) entry);
+          if (collectionEntry.getPlayMode() == GameController.TEXT_MODE) {
+            this.entry = collectionEntry;
+            this.setup();
+            super.show(Gome.singleton.display);
+            this.start();
+            return;
+          }
+
           indexBlock = 0;
           selectedNum = 0;
           if (c == OPEN_REVIEW) {
-            ((CollectionEntry) entry).setPlayMode(GameController.REVIEW_MODE);
+            collectionEntry.setPlayMode(GameController.REVIEW_MODE);
           }
-
           listener.loadFile((CollectionEntry) entry, 0);
           return;
         }
@@ -438,5 +450,26 @@ public class FileBrowser implements CommandListener, Showable {
 
   public void failed(Exception reason) {
     Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+  }
+
+  private Form toShow;
+
+  /**
+   * For text files only
+   * @see com.indigonauts.gome.ui.Fetcher#download()
+   */
+  protected void download() throws IOException {
+    CollectionEntry collectionEntry = (CollectionEntry) entries.elementAt(indexFolder);
+    toShow = Info.formatHelp(collectionEntry.getName(), collectionEntry.getUrl());
+
+  }
+
+  protected void downloadFailed(Exception reason) {
+    // TODO Auto-generated method stub
+
+  }
+
+  protected void downloadFinished() {
+    new Info(this, toShow).show(display);
   }
 }

@@ -46,15 +46,25 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   private String pwdFile;
   protected FetcherDownloadThread thread;
 
+  public Fetcher()
+  {
+    super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
+  }
+  
   public Fetcher(FileEntry entry) {
     super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
+    this.entry = entry;
+    setup();
+  }
+  
+  protected void setup()
+  {
     gauge = new Gauge(entry.getUrl(), false, 100, 0);
     status = READY;
 
     this.append(gauge);
     this.addCommand(MenuEngine.BACK);
     this.setCommandListener(this);
-    this.entry = entry;
   }
 
   protected void start() {
