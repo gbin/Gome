@@ -553,8 +553,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void recalculateLayout() {
     int minimalBottomHeight = 0;
     if (bottomMode == COMMENT_MODE) {
-      if (scroller != null)
-        minimalBottomHeight += scroller.getMinimumHeight();
+        minimalBottomHeight +=  Gome.singleton.options.getScrollerSize();
     }
     if (bottomMode == CLOCK_MODE) {
       if (clockPainter != null) {

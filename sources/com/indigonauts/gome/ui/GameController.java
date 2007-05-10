@@ -268,12 +268,15 @@ public class GameController implements ServerCallback
     cursor.y = playArea.y0;
     switchCurrentNode(model.getFirstNode());
     playNode(currentNode);
-    initPainter();
     if (model.isCommented()) {
       commentMode = MainCanvas.COMMENT_MODE;
-      Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
     }
-
+    else
+    {
+      commentMode = MainCanvas.NOTHING_TO_DISPLAY_MODE;
+    }
+    Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
+    initPainter();
   }
 
   private int normalDelta;
@@ -665,6 +668,8 @@ public class GameController implements ServerCallback
       if (clock != null) {
         clock.clockOnlineSwitcher(color);
       }
+      
+
     }
 
     SgfNode next = currentNode.addBranch(new SgfPoint(x, y));

@@ -24,7 +24,7 @@ public class ServerUser extends QuickSortable {
   public static boolean sortOrder = false;
 
   private boolean isDan;
-  private boolean isStar;
+  //private boolean isStar;
   private int numRank;
 
   public static ServerUser unmarshal(DataInputStream in) throws IOException {
@@ -34,7 +34,7 @@ public class ServerUser extends QuickSortable {
     user.play = in.readInt();
     user.watch = in.readInt();
     user.isDan = user.rank.indexOf('d') != -1;
-    user.isStar = user.rank.indexOf('*') != -1;
+    //user.isStar = user.rank.indexOf('*') != -1;
     char second = user.rank.charAt(1);
     char first = user.rank.charAt(0);
     if (!Character.isDigit(second)) {

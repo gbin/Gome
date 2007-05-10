@@ -124,10 +124,6 @@ class Scroller extends Thread {
     this.height = height;
   }
 
-  public int getMinimumHeight() {
-    return Gome.singleton.options.getScrollerSize();
-  }
-
   public void setImg(Image img) {
     //#ifdef DEBUG
     log.debug("set img " + img);

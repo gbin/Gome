@@ -12,7 +12,6 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
-import com.indigonauts.gome.GomeOptions;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
