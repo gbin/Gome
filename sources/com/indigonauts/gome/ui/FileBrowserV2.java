@@ -35,10 +35,10 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
+
 //#ifndef JSR75
 //# import javax.microedition.rms.RecordStoreException;
 //#endif
-
 
 /**
  * Fetcher extention is just for the text files
@@ -72,7 +72,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private static final Font ITEM_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
   //#endif
 
-  //#ifdef MENU_IMAGES
   private static Image dirImg;
   private static Image remoteDirImg;
   private static Image fileImg;
@@ -80,11 +79,8 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private static Image textFileImg;
   private static final int DEFAULT_ILLUSTRATIVE_SIZE = 48;
   private static GraphicRectangle illustrativeRectangle;
-  //#endif
 
   static {
-    //#ifdef MENU_IMAGES
-
     illustrativeRectangle = new GraphicRectangle(0, 0, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
 
     try {
@@ -97,7 +93,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     } catch (IOException e) {
       // Nothing we can do
     }
-    //#endif
 
     OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
     OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
@@ -153,7 +148,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         int fileNum = file.getCollectionSize();
 
         String description = file.getDescription();
-        //#ifdef MENU_IMAGES
         if (file.hasAnIllustration()) {
           image = generateIllustrativePosition(file.getIllustrativeBoardArea(), file.getIllustrativeBlackPosition(), file.getIllustrativeWhitePosition());
         } else if (file.getPlayMode() == GameController.TEXT_MODE) {
@@ -161,28 +155,17 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         } else {
           image = file.isRemote() ? remoteFileImg : fileImg;
         }
-        //#endif
-        //uiFolder.append(description + (fileNum != 1 ? " [" + fileNum + "]" : ""),
-        //      image);
-
         IllustratedItem illustratedItem = new IllustratedItem(current, image, description + (fileNum != 1 ? " [" + fileNum + "]" : ""));
         uiFolder.append(illustratedItem);
-        uiFolder.append("\n");
       } else if (current instanceof IndexEntry) {
         IndexEntry file = (IndexEntry) current;
-        //#ifdef MENU_IMAGES
         if (file.hasAnIllustration()) {
           image = generateIllustrativePosition(file.getIllustrativeBoardArea(), file.getIllustrativeBlackPosition(), file.getIllustrativeWhitePosition());
         } else {
           image = file.isRemote() ? remoteDirImg : dirImg;
         }
-        //#endif
-
-        //uiFolder.append(file.getDescription(), image);
         IllustratedItem illustratedItem = new IllustratedItem(current, image, file.getDescription());
         uiFolder.append(illustratedItem);
-        uiFolder.append("\n");
-
       }
 
     }
@@ -204,18 +187,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
     uiFolder.setCommandListener(this);
     display = disp;
-
-    //#ifdef MIDP2 
-    //int size = uiFolder.size();
-    //for (int i = 0; i < size; i++) {
-    //  uiFolder.setFont(i, ITEM_FONT);
-    //}
-    //#endif
-
     display.setCurrent(uiFolder);
   }
 
-  //#ifdef MENU_IMAGES
   private Image generateIllustrativePosition(String boardArea, String black, String white) {
     StringVector blackPoints = new StringVector(black, ';');
     StringVector whitePoints = new StringVector(white, ';');
@@ -242,8 +216,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     return Image.createImage(generated);
 
   }
-
-  //#endif
 
   public void commandAction(Command c, Displayable s) {
     ended = true;
@@ -285,15 +257,11 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         parent.show(display);
         parent = null;
       } else if (c == DELETE) {
-        //indexFolder = uiFolder.getSelectedIndex();
-        //Object obj = entries.elementAt(indexFolder);
         FileEntry entry = currentItem.getEntry();
-
         if (!(entry instanceof LocalFileEntry)) {
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.onlyLocal"), AlertType.ERROR);
           return;
         }
-        //LocalFileEntry entry = (LocalFileEntry) obj;
         listener.deleteFile(entry);
         int nb = uiFolder.size();
         for (int i = 0; i < nb; i++) {
@@ -304,7 +272,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         }
         show(Gome.singleton.display);
       } else if (c == IMPORT) {
-        FileEntry selectedFile = getSelectedFile();
+        FileEntry selectedFile =currentItem.getEntry();
         importFile(selectedFile);
       } else if (c == SEND_BY_EMAIL) {
         IOManager.singleton.sendFileByMail(currentItem.getEntry(), Gome.singleton.options.email);
@@ -336,7 +304,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
         int indexFile = uiFile.getSelectedIndex();
         selectedNum = indexBlock * BLOCK_SIZE + indexFile + 1;
-        FileEntry selectedFile = getSelectedFile();
+        FileEntry selectedFile = currentItem.getEntry();
         listener.loadFile((CollectionEntry) selectedFile, selectedNum);
       }
     }
@@ -381,7 +349,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
    */
   private void showFileBlock() {
 
-    uiFileBlock = new List(getSelectedFile().getUrl(), Choice.IMPLICIT);
+    uiFileBlock = new List(currentItem.getEntry().getUrl(), Choice.IMPLICIT);
 
     uiFileBlock.addCommand(MenuEngine.BACK);
     uiFileBlock.setCommandListener(this);
@@ -406,7 +374,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   }
 
   private void showFile() {
-    uiFile = new List(getSelectedFile().getUrl(), Choice.IMPLICIT);
+    uiFile = new List(currentItem.getEntry().getUrl(), Choice.IMPLICIT);
     uiFile.addCommand(MenuEngine.BACK);
     uiFile.addCommand(OPEN);
     uiFile.setCommandListener(this);
@@ -420,10 +388,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       uiFile.append(String.valueOf(i), null);
     display.setCurrent(uiFile);
 
-  }
-
-  public final FileEntry getSelectedFile() {
-    return (FileEntry) entries.elementAt(indexFolder);
   }
 
   public final int getSelectedNum() {
@@ -466,7 +430,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
   }
 
-
   private IllustratedItem currentItem;
 
   //#ifdef MIDP2
@@ -487,14 +450,18 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     // }
 
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
-
+      //log.debug("traverse " + text);
+      //log.debug("dir = " + dir);
+      if (currentItem == this)
+        return false;
       currentItem = this;
       tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
-      this.repaint();
-      return false;
+      return true;
+
     }
 
     protected void traverseOut() {
+      //log.debug("traverse out" + text);
       ticked = -2;
       this.repaint();
     }
@@ -504,7 +471,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected int getMinContentWidth() {
-      return icon.getWidth();
+      return uiFolder.getWidth();
     }
 
     protected int getPrefContentHeight(int arg0) {
@@ -512,7 +479,8 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected int getPrefContentWidth(int arg0) {
-      return icon.getHeight() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text);
+      return uiFolder.getWidth();
+      //return icon.getHeight() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text);
     }
 
     protected void paint(Graphics g, int w, int h) {

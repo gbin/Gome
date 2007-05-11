@@ -363,7 +363,7 @@ public class GameInfo {
      * @return Returns the komi.
      */
     public String getKomi() {
-        return komi;
+      return komi;
     }
 
 }

@@ -270,9 +270,7 @@ public class GameController implements ServerCallback
     playNode(currentNode);
     if (model.isCommented()) {
       commentMode = MainCanvas.COMMENT_MODE;
-    }
-    else
-    {
+    } else {
       commentMode = MainCanvas.NOTHING_TO_DISPLAY_MODE;
     }
     Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
@@ -668,7 +666,6 @@ public class GameController implements ServerCallback
       if (clock != null) {
         clock.clockOnlineSwitcher(color);
       }
-      
 
     }
 
@@ -1216,23 +1213,14 @@ public class GameController implements ServerCallback
         stopClockAndStopPainingClock();
       }
       countMode = false;
-
-      // log.debug("white captures = " + board.getNbCapturedBlack());
-      // log.debug("black captures = " + board.getNbCapturedWhite());
       int[] scores = board.getScore();
       int white = scores[0];
       int black = scores[1];
-      // log.debug("white without Komi = " + white);
-      // log.debug("black without Komi = " + black);
-      // log.debug("Komi = " + model.getKomi());
       byte komi = model.getByteKomi();
-      // log.debug("Integer Komi = " + komi);
       white += komi / 2;
       boolean dotfivedKomi = (komi % 2) != 0;
       int diff = white - black;
-
       StringBuffer scoreSentence = new StringBuffer(Gome.singleton.bundle.getString("game.score"));
-
       if (diff > 0 || (diff == 0 && dotfivedKomi)) {
         scoreSentence.append(Gome.singleton.bundle.getString("game.whiteWin"));
         scoreSentence.append(diff);

@@ -41,7 +41,6 @@ public class Info extends Fetcher implements CommandListener, Showable {
   private static final Command HELP;
   private static final Command ABOUT;
   private boolean inSubMenu = false;
-  private boolean external = false;
   static {
     RULES = new Command(Gome.singleton.bundle.getString("ui.help.rules"), Command.SCREEN, 1); //$NON-NLS-1$
     HELP = new Command(Gome.singleton.bundle.getString("ui.help.help"), Command.SCREEN, 1); //$NON-NLS-1$
@@ -56,7 +55,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
    * @param urlToFetch
    */
   public Info(Showable parent, String title, String urlToFetch) {
-    external = true;
+    setUpCurrentExternal();
     this.title = title;
     this.urlToFetch = urlToFetch;
     this.parent = parent;
@@ -404,14 +403,10 @@ public class Info extends Fetcher implements CommandListener, Showable {
   }
 
   protected void downloadFailed(Exception reason) {
-
+    parent.show(Gome.singleton.display);
   }
 
   protected void downloadFinished() {
-    if (external)
-      setUpCurrentExternal();
-    else
-      setUpCurrentHelp();
     show(Gome.singleton.display);
 
   }

@@ -133,7 +133,6 @@ public class BoardPainter {
           if (!changeMask[x][y] && board.getPosition(x, y) == Board.EMPTY) {
             drawCell(graphics, x, y);
             changeMask[x][y] = true;
-            System.out.print("[" + x + ", " + y + "]");
           }
         }
       }

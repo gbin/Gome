@@ -628,7 +628,11 @@ public class SgfModel extends GameInfo implements Enumeration {
     buf.append("SZ["); //$NON-NLS-1$
     buf.append(String.valueOf(boardSize));
     buf.append(']');
+    buf.append("KM["); //$NON-NLS-1$
+    buf.append(getKomi());
+    buf.append(']');
 
+    
     Rectangle view = getViewArea();
     if (view.isValid()) {
       buf.append("VW["); //$NON-NLS-1$
