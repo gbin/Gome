@@ -35,6 +35,10 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
+//#ifndef JSR75
+//# import javax.microedition.rms.RecordStoreException;
+//#endif
+
 
 /**
  * Fetcher extention is just for the text files
