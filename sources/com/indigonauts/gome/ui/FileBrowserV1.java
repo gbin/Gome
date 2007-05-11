@@ -98,8 +98,8 @@ public class FileBrowserV1 extends Fetcher implements CommandListener, Showable,
     try {
       dirImg = Util.renderIcon(Image.createImage("/dir.png"), bestImageWidth, bestImageHeight);
       remoteDirImg = Util.renderIcon(Image.createImage("/rdir.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
-      fileImg = Util.renderIcon(Image.createImage("/file.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
-      remoteFileImg = Util.renderIcon(Image.createImage("/rfile.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+      fileImg = Util.renderIcon(Image.createImage("/game.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+      remoteFileImg = Util.renderIcon(Image.createImage("/rgame.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
       textFileImg = Util.renderIcon(Image.createImage("/text.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
     } catch (IOException e) {
       // Nothing we can do

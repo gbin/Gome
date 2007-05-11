@@ -90,8 +90,8 @@ public class FileBrowserV2 extends Fetcher implements CommandListener, Showable,
     try {
       dirImg = Image.createImage("/dir.png");
       remoteDirImg = Image.createImage("/rdir.png");
-      fileImg = Image.createImage("/file.png");
-      remoteFileImg = Image.createImage("/rfile.png");
+      fileImg = Image.createImage("/game.png");
+      remoteFileImg = Image.createImage("/rgame.png");
       textFileImg = Image.createImage("/text.png");
 
     } catch (IOException e) {
