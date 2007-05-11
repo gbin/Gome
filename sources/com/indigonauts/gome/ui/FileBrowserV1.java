@@ -72,8 +72,6 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
   private Image textFileImg;
 
   private static final int DEFAULT_ILLUSTRATIVE_SIZE = 32;
-  int bestImageWidth = DEFAULT_ILLUSTRATIVE_SIZE;
-  int bestImageHeight = DEFAULT_ILLUSTRATIVE_SIZE;
   private GraphicRectangle illustrativeRectangle;
   //#endif
 
@@ -89,18 +87,14 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
     this.saveMode = saveMode;
 
     //#ifdef MENU_IMAGES
-    //#ifdef MIDP2
-    bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
-    bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
-    //#endif
-    illustrativeRectangle = new GraphicRectangle(1, 1, bestImageWidth, bestImageHeight);
+    illustrativeRectangle = new GraphicRectangle(1, 1, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
 
     try {
-      dirImg = Util.renderIcon(Image.createImage("/dir.png"), bestImageWidth, bestImageHeight);
-      remoteDirImg = Util.renderIcon(Image.createImage("/rdir.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
-      fileImg = Util.renderIcon(Image.createImage("/game.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
-      remoteFileImg = Util.renderIcon(Image.createImage("/rgame.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
-      textFileImg = Util.renderIcon(Image.createImage("/text.png"), bestImageWidth, bestImageHeight); //$NON-NLS-1$
+      dirImg = Util.renderIcon(Image.createImage("/dir.png"), DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
+      remoteDirImg = Util.renderIcon(Image.createImage("/rdir.png"), DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE); //$NON-NLS-1$
+      fileImg = Util.renderIcon(Image.createImage("/game.png"), DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE); //$NON-NLS-1$
+      remoteFileImg = Util.renderIcon(Image.createImage("/rgame.png"), DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE); //$NON-NLS-1$
+      textFileImg = Util.renderIcon(Image.createImage("/text.png"), DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE); //$NON-NLS-1$
     } catch (IOException e) {
       // Nothing we can do
     }
@@ -181,15 +175,6 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
 
     uiFolder.setCommandListener(this);
     display = disp;
-
-    //#ifdef MIDP2 
-    Font font = Font.getFont(Font.FACE_SYSTEM, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-    int size = uiFolder.size();
-    for (int i = 0; i < size; i++) {
-      uiFolder.setFont(i, font);
-    }
-    //#endif
-
     display.setCurrent(uiFolder);
   }
 
@@ -197,7 +182,7 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
   private Image generateIllustrativePosition(String boardArea, String black, String white) {
     StringVector blackPoints = new StringVector(black, ';');
     StringVector whitePoints = new StringVector(white, ';');
-    Image generated = Image.createImage(bestImageWidth, bestImageHeight);
+    Image generated = Image.createImage(DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
     Board position = new Board();
     Enumeration bpoints = blackPoints.elements();
     while (bpoints.hasMoreElements()) {
@@ -214,7 +199,7 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
 
     Graphics g = generated.getGraphics();
     g.setColor(Util.COLOR_LIGHTGREY);
-    g.drawRect(0, 0, bestImageWidth, bestImageHeight);
+    g.drawRect(0, 0, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
     bp.drawBoard(g, null);
 
     return Image.createImage(generated);
