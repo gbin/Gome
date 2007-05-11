@@ -33,9 +33,9 @@
 
 	<patternset id="file-icons">
 		<include name="dir.png" />
-		<include name="file.png" />
+		<include name="game.png" />
 		<include name="rdir.png" />
-		<include name="rfile.png" />
+		<include name="rgame.png" />
 		<include name="text.png" />
 	</patternset>
 

@@ -31,7 +31,7 @@ import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
-public class FileBrowserV1 extends Fetcher implements CommandListener, Showable, DownloadCallback {
+public class FileBrowserV1 implements CommandListener, Showable, DownloadCallback {
   //#ifdef DEBUG
   //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
@@ -242,10 +242,7 @@ public class FileBrowserV1 extends Fetcher implements CommandListener, Showable,
         if (entry instanceof CollectionEntry && ((CollectionEntry) entry).getCollectionSize() == 1) {
           CollectionEntry collectionEntry = ((CollectionEntry) entry);
           if (collectionEntry.getPlayMode() == GameController.TEXT_MODE) {
-            this.entry = collectionEntry;
-            this.setup();
-            super.show(Gome.singleton.display);
-            this.start();
+            new Info(this, collectionEntry.getName(), collectionEntry.getUrl());
             return;
           }
 
@@ -437,26 +434,5 @@ public class FileBrowserV1 extends Fetcher implements CommandListener, Showable,
 
   public void done() {
     listener.commandAction(MenuEngine.FILES, Gome.singleton.mainCanvas);
-  }
-
-  private Form toShow;
-
-  /**
-   * For text files only
-   * @see com.indigonauts.gome.ui.Fetcher#download()
-   */
-  protected void download() throws IOException {
-    CollectionEntry collectionEntry = (CollectionEntry) entries.elementAt(indexFolder);
-    toShow = Info.formatHelp(collectionEntry.getName(), collectionEntry.getUrl());
-
-  }
-
-  protected void downloadFailed(Exception reason) {
-    // TODO Auto-generated method stub
-
-  }
-
-  protected void downloadFinished() {
-    new Info(this, toShow).show(display);
   }
 }

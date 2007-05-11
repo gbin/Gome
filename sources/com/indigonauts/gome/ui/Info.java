@@ -26,20 +26,22 @@ import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
 
-public class Info implements CommandListener, Showable {
+public class Info extends Fetcher implements CommandListener, Showable {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
   //#endif
 
   private Showable parent;
   private Form current = getKeys();
+  private String urlToFetch;
+  private String title;
 
   private static final Command RULES;
   private static final Command KEYS;
   private static final Command HELP;
   private static final Command ABOUT;
   private boolean inSubMenu = false;
-
+  private boolean external = false;
   static {
     RULES = new Command(Gome.singleton.bundle.getString("ui.help.rules"), Command.SCREEN, 1); //$NON-NLS-1$
     HELP = new Command(Gome.singleton.bundle.getString("ui.help.help"), Command.SCREEN, 1); //$NON-NLS-1$
@@ -47,19 +49,31 @@ public class Info implements CommandListener, Showable {
     ABOUT = new Command(Gome.singleton.bundle.getString("ui.about"), Command.SCREEN, 9); //$NON-NLS-1$
   }
 
-  public Info(Showable parent, Form current) {
+  /**
+   * For external entities
+   * @param parent
+   * @param title
+   * @param urlToFetch
+   */
+  public Info(Showable parent, String title, String urlToFetch) {
+    external = true;
+    this.title = title;
+    this.urlToFetch = urlToFetch;
+    this.parent = parent;
+    inSubMenu = false;
+    super.show(Gome.singleton.display);
+    super.start();
+
+  }
+
+  public Info(Showable parent) {
     //#ifdef DEBUG
     log.debug("help");
     //#endif
 
     this.parent = parent;
-    if (current == null) {
-      this.current = getKeys();
-      setUpCurrentHelp();
-    } else {
-      this.current = current;
-      setUpCurrentExternal();
-    }
+    this.current = getKeys();
+    setUpCurrentHelp();
 
     //#ifdef DEBUG
     log.debug("end if constructor");
@@ -68,7 +82,7 @@ public class Info implements CommandListener, Showable {
   }
 
   public Info(MainCanvas mainCanvas, Command def) {
-    this(mainCanvas, (Form) null);
+    this(mainCanvas);
     commandAction(def, null);
     inSubMenu = false; // so it jumps back directly
   }
@@ -95,17 +109,25 @@ public class Info implements CommandListener, Showable {
         inSubMenu = false;
       } else {
         parent.show(Gome.singleton.display);
+        parent = null; // some help for the garbage collector
         return;
       }
     } else if (command == RULES) {
-      current = getRules();
+      fetchRules();
       inSubMenu = true;
+      super.show(Gome.singleton.display);
+      super.start();
+      return;
     } else if (command == KEYS) {
       current = getKeys();
       inSubMenu = false;
     } else if (command == HELP) {
-      current = getHelp();
+      fetchHelp();
       inSubMenu = true;
+      super.show(Gome.singleton.display);
+      super.start();
+      return;
+
     } else if (command == MenuEngine.GAME_STATUS) {
       current = getGameInfo();
       inSubMenu = true;
@@ -367,12 +389,31 @@ public class Info implements CommandListener, Showable {
     return form;
   }
 
-  private Form getHelp() {
-    return formatHelp(Gome.singleton.bundle.getString("ui.help.help"), "jar:/com/indigonauts/gome/i18n/help/general_US.hlp");
+  private void fetchHelp() {
+    title = Gome.singleton.bundle.getString("ui.help.help");
+    urlToFetch = "jar:/com/indigonauts/gome/i18n/help/general_US.hlp";
   }
 
-  private Form getRules() {
-    return formatHelp(Gome.singleton.bundle.getString("ui.help.rules"), "jar:/com/indigonauts/gome/i18n/help/rules_US.hlp");
+  private void fetchRules() {
+    title = Gome.singleton.bundle.getString("ui.help.rules");
+    urlToFetch = "http://www.indigonauts.com/gome/library/help/rules_" + Gome.singleton.options.locale + ".hlp";
+  }
+
+  protected void download() throws IOException {
+    current = formatHelp(title, urlToFetch);
+  }
+
+  protected void downloadFailed(Exception reason) {
+
+  }
+
+  protected void downloadFinished() {
+    if (external)
+      setUpCurrentExternal();
+    else
+      setUpCurrentHelp();
+    show(Gome.singleton.display);
+
   }
 
 }

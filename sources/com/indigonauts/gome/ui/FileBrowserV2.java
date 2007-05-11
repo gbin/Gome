@@ -45,7 +45,7 @@ import com.indigonauts.gome.sgf.SgfPoint;
  * @author gbin
  *
  */
-public class FileBrowserV2 extends Fetcher implements CommandListener, Showable, Runnable, DownloadCallback {
+public class FileBrowserV2 implements CommandListener, Showable, Runnable, DownloadCallback {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
@@ -262,10 +262,7 @@ public class FileBrowserV2 extends Fetcher implements CommandListener, Showable,
         if (entry instanceof CollectionEntry && ((CollectionEntry) entry).getCollectionSize() == 1) {
           CollectionEntry collectionEntry = ((CollectionEntry) entry);
           if (collectionEntry.getPlayMode() == GameController.TEXT_MODE) {
-            this.entry = collectionEntry;
-            this.setup();
-            super.show(Gome.singleton.display);
-            this.start();
+            new Info(this, collectionEntry.getName(), collectionEntry.getUrl());
             return;
           }
 
@@ -300,8 +297,8 @@ public class FileBrowserV2 extends Fetcher implements CommandListener, Showable,
         listener.deleteFile(entry);
         int nb = uiFolder.size();
         for (int i = 0; i < nb; i++) {
-          if (get(i) == currentItem) {
-            delete(i);
+          if (uiFolder.get(i) == currentItem) {
+            uiFolder.delete(i);
             break;
           }
         }
@@ -469,26 +466,6 @@ public class FileBrowserV2 extends Fetcher implements CommandListener, Showable,
     Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
   }
 
-  private Form toShow;
-
-  /**
-   * For text files only
-   * @see com.indigonauts.gome.ui.Fetcher#download()
-   */
-  protected void download() throws IOException {
-    FileEntry entry = currentItem.getEntry();
-    toShow = Info.formatHelp(entry.getName(), entry.getUrl());
-
-  }
-
-  protected void downloadFailed(Exception reason) {
-    // TODO Auto-generated method stub
-
-  }
-
-  protected void downloadFinished() {
-    new Info(this, toShow).show(display);
-  }
 
   private IllustratedItem currentItem;
 
@@ -512,7 +489,7 @@ public class FileBrowserV2 extends Fetcher implements CommandListener, Showable,
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
 
       currentItem = this;
-      tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > getWidth();
+      tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
       this.repaint();
       return false;
     }
@@ -541,7 +518,7 @@ public class FileBrowserV2 extends Fetcher implements CommandListener, Showable,
     protected void paint(Graphics g, int w, int h) {
       if (currentItem == this) {
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_BACKGROUND));
-        g.fillRect(0, 0, getWidth(), getHeight());
+        g.fillRect(0, 0, uiFolder.getWidth(), uiFolder.getHeight());
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_FOREGROUND));
       } else {
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_FOREGROUND));
