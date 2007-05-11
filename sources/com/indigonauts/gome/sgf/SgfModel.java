@@ -23,7 +23,7 @@ import com.indigonauts.gome.common.Util;
 public class SgfModel extends GameInfo implements Enumeration {
 
   //#ifdef DEBUG
-  //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("SgfModel");
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("SgfModel");
   //#endif
   private final static byte DEFAULT_BOARD_SIZE = 19;
 
@@ -208,15 +208,13 @@ public class SgfModel extends GameInfo implements Enumeration {
 
           } else if (c1 == (char) -1) {
             //#ifdef DEBUG
-            //log.debug("EOF");
+            log.debug("EOF");
             //#endif
             brotherStack.pop();
             break;
           } else if (c == ')') {
             level--;
-            // System.out.print("\nd.Level " + level +"-");
             if (level == 0) {
-              // System.out.println("Level == 0 end of file");
               brotherStack.pop();
               break;
             }
@@ -281,13 +279,12 @@ public class SgfModel extends GameInfo implements Enumeration {
               // switch the model into "marked solution mode"
               newModel.markedSolution = true;
               //#ifdef DEBUG
-              System.out.println("Marked solution !");
+              log.debug("Marked solution !");
               //#endif
               SgfNode current = latestNode;
               // mark all the path correct
               while (current != null) {
                 current.setCorrect(true);
-                //System.out.println("Marked " + current);
                 current = current.getFather();
               }
 
@@ -423,8 +420,6 @@ public class SgfModel extends GameInfo implements Enumeration {
     if (son != null) {
       son.setFatherOnly(null);
     }
-    // System.out.println("End Parse :" + (System.currentTimeMillis() -
-    // begin));
     return newModel;
   }
 

@@ -91,9 +91,10 @@ public class MenuEngine implements CommandListener {
 
   //#ifdef MIDP2 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+  FileBrowserV2 fileBrowser;
+  //#else
+  //# FileBrowserV1 fileBrowser;
   //#endif
-
-  FileBrowser fileBrowser;
 
   Options optionsForm = null;
 
@@ -225,7 +226,11 @@ public class MenuEngine implements CommandListener {
           }
         } else if (c == FILES) {
           try {
-            fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
+            //#ifdef MIDP2
+            fileBrowser = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
+            //#else
+            //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
+            //#endif
             fileBrowser.show(Gome.singleton.display);
           } catch (IOException e1) {
             Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e1.getMessage()), AlertType.ERROR); //$NON-NLS-1$
@@ -261,8 +266,11 @@ public class MenuEngine implements CommandListener {
         } else if (c == PASS) {
           gc.pass();
         } else if (c == SAVE) {
-
-          fileBrowser = new FileBrowser(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
+          //#ifdef MIDP2
+          fileBrowser = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
+          //#else
+          //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
+          //#endif
           new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fileBrowser).show(Gome.singleton.display);
 
         } else if (c == OPTIONS) {

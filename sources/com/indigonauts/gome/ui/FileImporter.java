@@ -17,10 +17,10 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.URLFileEntry;
 
 public class FileImporter extends Fetcher {
-  private FileBrowser callback;
+  private DownloadCallback callback;
   private FileEntry selectedFile;
 
-  public FileImporter(FileBrowser callback, FileEntry selectedFile) {
+  public FileImporter(DownloadCallback callback, FileEntry selectedFile) {
     super(selectedFile);
     this.callback = callback;
     this.selectedFile = selectedFile;
@@ -64,7 +64,7 @@ public class FileImporter extends Fetcher {
   }
 
   protected void downloadFailed(Exception reason) {
-    callback.failed(reason);
+    callback.downloadFailure(reason);
   }
 
 }

@@ -29,7 +29,7 @@ public class FileEntry {
   }
 
   public boolean isRemote() {
-    return path.startsWith("http://"); //$NON-NLS-1$
+    return getUrl().startsWith("http://"); //$NON-NLS-1$
   }
 
   public char getPlayMode() {

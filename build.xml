@@ -66,7 +66,6 @@
 	</patternset>
 
 	<target name="MIDP2">
-		<!--var name="wtk.midpapi" value="/opt/wtk2.2/lib/midpapi20.jar:/opt/wtk2.2/lib/cldcapi11.jar:/opt/wtk2.2/lib/wma20.jar:/opt/wtk2.2/lib/mmapi.jar:/opt/wtk2.2/lib/j2me-ws.jar:/opt/wtk2.2/lib/jsr75.jar:/opt/wtk2.2/lib/jsr082.jar:/opt/wtk2.2/lib/jsr184.jar" /-->
 		<var name="wtk.midpapi" value="/opt/wtk251/lib/midpapi20.jar:/opt/wtk251/lib/cldcapi11.jar:/opt/wtk251/lib/wma20.jar:/opt/wtk251/lib/mmapi.jar:/opt/wtk251/lib/j2me-ws.jar:/opt/wtk251/lib/jsr75.jar:/opt/wtk251/lib/jsr082.jar:/opt/wtk251/lib/jsr184.jar" />
 		<var name="wtk.cldc.version" value="1.1" />
 		<var name="wtk.midp.version" value="2.0" />
@@ -78,8 +77,7 @@
 		<var name="wtk.midp.version" value="1.0" />
 	</target>
 
-	<!-- target name="all" depends="cleandist,VMIDP2, VMIDP2_JSR75" /-->
-	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75" />
+	<target name="all" depends="cleandist,Vminimal,Vminimal-bundle,Vonline,Vi18n,Vnormal,Vjoseki,VMIDP2, VMIDP2_JSR75, VJOSEKI_MIDP2_JSR75" />
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
 		<exclude name="**/*.*" />
@@ -168,6 +166,17 @@
 		<patternset refid="problems" />
 	</fileset>
 
+	<fileset id="gome-joseki-MIDP2-JSR75-files" dir="${project.root.gome}/sources">
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
+		<patternset refid="gomoku" />
+		<patternset refid="i18n" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
+		<patternset refid="joseki" />
+	</fileset>
+
+
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
 		<echo message="MIDP2" />
 		<var name="midlet.name" value="gome-MIDP2" />
@@ -179,6 +188,15 @@
 	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="MIDP2 JSR75" />
 		<var name="midlet.name" value="gome-MIDP2-JSR75" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
+		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<antcall target="deployable" />
+	</target>
+
+	
+	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
+		<echo message="JOSEKI MIDP2 JSR75" />
+		<var name="midlet.name" value="gome-joseki-MIDP2-JSR75" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />

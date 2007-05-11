@@ -111,7 +111,6 @@ public class BoardPainter {
   }
 
   public void drawBoard(Graphics graphicsScreen, Vector annotations) {
-    long timing = System.currentTimeMillis();
     Graphics graphics = null;
 
     if (doubleBuffered)
@@ -144,11 +143,9 @@ public class BoardPainter {
           if (!changeMask[x][y]) {
             drawCell(graphics, x, y);
             changeMask[x][y] = true;
-            System.out.print("[" + x + ", " + y + "]");
           }
         }
       }
-      System.out.println();
       board.setChanged(false);
     }
     if (doubleBuffered)
@@ -162,7 +159,6 @@ public class BoardPainter {
 
     if (annotations != null)
       drawAnnotations(graphicsScreen, annotations);
-    System.out.println(System.currentTimeMillis() - timing);
   }
 
   public void drawMe(Graphics g, Point cursor, int playerColor, boolean showHints, SgfNode currentNode, SgfModel model) {

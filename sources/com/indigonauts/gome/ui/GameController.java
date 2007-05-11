@@ -707,7 +707,6 @@ public class GameController implements ServerCallback
   private void playNode(final SgfNode node) {
     if (node.getPoint() != null) {
       Vector vec = board.play(node.getPoint(), node.getPlayerColor());
-      // System.out.println("dead stone="+vec.size());
       if (vec.size() == 0)
         vec = null;
       node.setDeadStones(vec); // the player color is reversed inside
@@ -787,8 +786,6 @@ public class GameController implements ServerCallback
   private void warnPassed(byte color) {
     if (!countMode)
       canvas.setSplashInfo((color == 1 ? Gome.singleton.bundle.getString("game.blackLong") : Gome.singleton.bundle.getString("game.whiteLong")) + " " + Gome.singleton.bundle.getString("game.passed"));
-    // System.out.println("take a look at this: "
-    // + (color == 1 ? "Black" : "White") + " passed");
   }
 
   public void doGoPrevBrother() {

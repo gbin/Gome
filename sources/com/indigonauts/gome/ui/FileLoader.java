@@ -6,10 +6,6 @@ package com.indigonauts.gome.ui;
 
 import java.io.IOException;
 
-import javax.microedition.lcdui.Alert;
-import javax.microedition.lcdui.AlertType;
-
-import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.SgfModel;
