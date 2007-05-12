@@ -139,6 +139,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     ended = false;
     ticker = new Thread(this);
     ticker.start();
+    visibleItems.removeAllElements();
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
@@ -440,11 +441,13 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   }
 
   private IllustratedItem currentItem;
+  private static final Vector visibleItems = new Vector();
 
   class IllustratedItem extends CustomItem {
     private Image icon;
     private FileEntry entry;
     private String text;
+    private boolean repaint, traversed;
 
     public IllustratedItem(FileEntry entry, Image icon, String text) {
       super(null);
@@ -458,20 +461,28 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     // }
 
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
-      //log.debug("traverse " + text);
-      //log.debug("dir = " + dir);
-      if (currentItem == this)
-        return false;
+      repaint = !traversed;
+      traversed = true;
       currentItem = this;
       tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
-      return true;
+      repaint();
+      return false;
 
     }
 
     protected void traverseOut() {
-      //log.debug("traverse out" + text);
+      currentItem = null;
       ticked = -2;
-      this.repaint();
+      for (int i = 0, size = visibleItems.size(); i < size; i++)
+        ((IllustratedItem) visibleItems.elementAt(i)).repaint();
+    }
+
+    protected void showNotify() {
+      visibleItems.addElement(this);
+    }
+
+    protected void hideNotify() {
+      visibleItems.removeElement(this);
     }
 
     protected int getMinContentHeight() {
@@ -492,6 +503,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected void paint(Graphics g, int w, int h) {
+      if (repaint)
+        repaint();
+      repaint = false;
       if (currentItem == this) {
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_BACKGROUND));
         g.fillRect(0, 0, uiFolder.getWidth(), uiFolder.getHeight());
