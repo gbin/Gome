@@ -51,16 +51,17 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   //#endif
 
   private Vector entries = new Vector(10);
-  MenuEngine listener;
+  private MenuEngine listener;
   private Showable parent;
   private Form uiFolder;
   private List uiFileBlock;
   private List uiFile;
-  private static final int BLOCK_SIZE = 20;
+
   private int indexFolder;
   private int indexBlock;
   private int selectedNum;
   private Display display;
+
   public static Command OPEN;
   public static Command OPEN_REVIEW;
   public static Command DELETE;
@@ -68,15 +69,14 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   public static Command SEND_BY_EMAIL;
   private static Command RANDOM;
 
-  //#ifdef MIDP2
   private static final Font ITEM_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-  //#endif
 
   private static Image dirImg;
   private static Image remoteDirImg;
   private static Image fileImg;
   private static Image remoteFileImg;
   private static Image textFileImg;
+  private static final int BLOCK_SIZE = 20;
   private static final int DEFAULT_ILLUSTRATIVE_SIZE = 48;
   private static GraphicRectangle illustrativeRectangle;
 
@@ -108,6 +108,12 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private String currentDirectory;
   private Form saveGame;
 
+  public FileBrowserV2(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
+    this(parent, listener, saveMode);
+    this.entries = entries;
+    this.currentDirectory = path;
+  }
+
   private FileBrowserV2(Showable parent, MenuEngine listener, boolean saveMode) {
 
     this.parent = parent;
@@ -115,12 +121,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     this.saveMode = saveMode;
 
     reset();
-  }
-
-  public FileBrowserV2(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
-    this(parent, listener, saveMode);
-    this.entries = entries;
-    this.currentDirectory = path;
   }
 
   public void addFile(FileEntry entry) {
@@ -187,6 +187,8 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
     uiFolder.setCommandListener(this);
     display = disp;
+    if (!saveMode)
+      listener.updateLastBrowser(this);
     display.setCurrent(uiFolder);
   }
 
@@ -255,7 +257,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
       else if (c == MenuEngine.BACK) {
         parent.show(display);
-        parent = null;
+        // You cannot put it at null as it is cached now
       } else if (c == DELETE) {
         FileEntry entry = currentItem.getEntry();
         if (!(entry instanceof LocalFileEntry)) {
@@ -272,7 +274,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         }
         show(Gome.singleton.display);
       } else if (c == IMPORT) {
-        FileEntry selectedFile =currentItem.getEntry();
+        FileEntry selectedFile = currentItem.getEntry();
         importFile(selectedFile);
       } else if (c == SEND_BY_EMAIL) {
         IOManager.singleton.sendFileByMail(currentItem.getEntry(), Gome.singleton.options.email);
@@ -369,6 +371,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       remain -= BLOCK_SIZE;
       ++n;
     }
+    for (int i = 0; i < uiFileBlock.size(); i++) {
+      uiFileBlock.setFont(i, ITEM_FONT);
+    }
 
     display.setCurrent(uiFileBlock);
   }
@@ -386,6 +391,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
     for (int i = min; i <= max; ++i)
       uiFile.append(String.valueOf(i), null);
+
+    for (int i = 0; i < uiFile.size(); i++) {
+      uiFile.setFont(i, ITEM_FONT);
+    }
     display.setCurrent(uiFile);
 
   }
@@ -432,7 +441,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
   private IllustratedItem currentItem;
 
-  //#ifdef MIDP2
   class IllustratedItem extends CustomItem {
     private Image icon;
     private FileEntry entry;
@@ -532,9 +540,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     int ticked = -2;
 
     public void tick() {
-      //#ifdef DEBUG
-      log.debug("tick " + ticked);
-      //#endif
       ticked++;
       repaint();
     }
@@ -545,9 +550,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   Thread ticker;
 
   public void run() {
-    //#ifdef DEBUG
-    log.debug("ticker starts");
-    //#endif
     while (!ended) {
       synchronized (this) {
         try {
@@ -565,9 +567,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     log.debug("end of ticker");
     //#endif
   }
-
-  //#endif
-
 }
 // MIDP1 case, just do nothing
 //#else

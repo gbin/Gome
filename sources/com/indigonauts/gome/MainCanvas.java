@@ -388,18 +388,12 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void paint(Graphics g) {
 
-    // log.debug("Paint " + g.getClipX() + "/" + g.getClipY() + "/" +
-    // g.getClipWidth() + "/" + g.getClipHeight());
-
     if (scroller != null && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
-      // log.debug("Refresh only the bottom");
       drawStatusBar(g);
     } else if (bottomMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
             && clockPainter.getHeight() == g.getClipHeight()) {
-      // log.debug("Refresh only the TIME");
       drawStatusBar(g);
     } else {
-      // log.debug("Refresh all");
       if (boardPainter != null) {
         boardPainter.drawMe(g, gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), gc.getCurrentNode(), gc.getSgfModel());
       } /*
@@ -413,9 +407,6 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       // draw Status bar clip, so put it at the end
       drawStatusBar(g);
     }
-    // log.debug("End Paint " + g.getClipX() + "/" + g.getClipY() + "/" +
-    // g.getClipWidth() + "/" + g.getClipHeight());
-
   }
 
   private void drawSplashInfo(Graphics g) {
@@ -494,6 +485,17 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       if (scroller != null) {
         scroller.stop();
         scroller = null;
+      }
+    }
+  }
+  
+  public void pauseScroller() {
+    //#ifdef DEBUG
+    log.debug("Stop scroller");
+    //#endif
+    synchronized (SCROLLER_SYNC) {
+      if (scroller != null) {
+        scroller.stop();
       }
     }
   }

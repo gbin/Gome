@@ -91,9 +91,9 @@ public class MenuEngine implements CommandListener {
 
   //#ifdef MIDP2 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-  FileBrowserV2 fileBrowser;
+  private FileBrowserV2 fileBrowser;
   //#else
-  //# FileBrowserV1 fileBrowser;
+  //# private FileBrowserV1 fileBrowser;
   //#endif
 
   Options optionsForm = null;
@@ -211,7 +211,14 @@ public class MenuEngine implements CommandListener {
     createForm.setCommandListener(cmd);
     return createForm;
   }
-
+  //#ifdef MIDP2
+  public void updateLastBrowser(FileBrowserV2 browser)
+  //#else
+  //# public void updateLastBrowser(FileBrowserV1 browser)
+  //#endif
+  {
+    fileBrowser = browser;
+  }
   public void commandAction(Command c, Displayable d) {
     try {
       Gome.singleton.mainCanvas.setSplashInfo(null);
@@ -226,11 +233,13 @@ public class MenuEngine implements CommandListener {
           }
         } else if (c == FILES) {
           try {
-            //#ifdef MIDP2
-            fileBrowser = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
-            //#else
-            //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
-            //#endif
+            if (fileBrowser == null) {
+              //#ifdef MIDP2
+              fileBrowser = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
+              //#else
+              //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", false);
+              //#endif
+            }
             fileBrowser.show(Gome.singleton.display);
           } catch (IOException e1) {
             Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e1.getMessage()), AlertType.ERROR); //$NON-NLS-1$
@@ -267,11 +276,11 @@ public class MenuEngine implements CommandListener {
           gc.pass();
         } else if (c == SAVE) {
           //#ifdef MIDP2
-          fileBrowser = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
+          FileBrowserV2 fb = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
           //#else
-          //# fileBrowser = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
+          //# FileBrowserV2 fb = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
           //#endif
-          new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fileBrowser).show(Gome.singleton.display);
+          new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fb).show(Gome.singleton.display);
 
         } else if (c == OPTIONS) {
           optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, false);
