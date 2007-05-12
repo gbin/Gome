@@ -461,12 +461,21 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     // }
 
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
-      repaint = !traversed;
-      traversed = true;
-      currentItem = this;
       tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
-      repaint();
-      return false;
+      if (Util.S60_FLAG) {
+        currentItem = this;
+      }
+
+      if (currentItem == this) {
+        repaint = !traversed;
+        traversed = true;
+        repaint();
+        return false;
+      } else {
+        currentItem = this;
+        repaint();
+        return true;
+      }
 
     }
 
@@ -503,9 +512,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected void paint(Graphics g, int w, int h) {
-      if (repaint)
+      if (repaint) {
         repaint();
-      repaint = false;
+        repaint = false;
+      }
       if (currentItem == this) {
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_BACKGROUND));
         g.fillRect(0, 0, uiFolder.getWidth(), uiFolder.getHeight());

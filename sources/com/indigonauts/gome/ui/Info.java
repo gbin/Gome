@@ -339,7 +339,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
     int grsize = boardSize * MainCanvas.SMALL_FONT.getHeight() + 1;
     GraphicRectangle imgArea = new GraphicRectangle(0, 0, grsize, grsize);
     BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
-    int total = grsize + (BoardPainter.S60_BUG ? 0 : 2);
+    int total = grsize + (Util.S60_FLAG ? 0 : 2);
     Image img = Image.createImage(total, total);
     SgfNode firstNode = model.getFirstNode();
     board.placeStones(firstNode.getAB(), Board.BLACK);

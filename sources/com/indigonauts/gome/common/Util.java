@@ -22,6 +22,21 @@ public class Util {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Util");
   //#endif
 
+  /**
+   * Flag for the e60 for several specific behavior
+   */
+  public static boolean S60_FLAG = false;
+  
+  static {
+    String version = System.getProperty("microedition.platform");
+    //#ifdef DEBUG
+    log.debug("Version = " + version);
+    //#endif
+    if (version != null && version.startsWith("NokiaE60")) {
+      S60_FLAG = true;
+    }
+  }
+  
   public static final int COLOR_WHITE = 0x00FFFFFF;
   public static final int COLOR_BLACK = 0x00000000;
   public static final int COLOR_DARKGREY = 0x00555555;

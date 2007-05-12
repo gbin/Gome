@@ -28,7 +28,7 @@ public class BoardPainter {
 
   private static final int MARGIN = 0;
 
-  public static boolean S60_BUG = false;
+  
 
   private Board board;
 
@@ -331,15 +331,7 @@ public class BoardPainter {
     }
   }
 
-  static {
-    String version = System.getProperty("microedition.platform");
-    //#ifdef DEBUG
-    log.debug("Version = " + version);
-    //#endif
-    if (version != null && version.startsWith("NokiaE60")) {
-      S60_BUG = true;
-    }
-  }
+  
 
   private void drawStone(Graphics g, int xx, int yy, int color) {
     int cx = getCellX(xx);
@@ -349,7 +341,7 @@ public class BoardPainter {
     int y = cy - halfdelta;
     g.setColor(color);
 
-    if (S60_BUG)
+    if (Util.S60_FLAG)
       g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
     else
       g.fillArc(x, y, w, w, 0, 360);
