@@ -443,24 +443,15 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
-  public void scrollerPosition(int x, int y, int width, int height) {
-    //#ifdef DEBUG
-    log.debug("set position " + x + "," + y + " , " + width + "," + height);
-    //#endif
-    this.scrollx = x;
-    this.scrolly = y;
-    this.scrollWidth = width;
-    this.scrollHeight = height;
-  }
-
   private void startScroller() {
     //#ifdef DEBUG
     log.debug("Start scroller");
     //#endif
     synchronized (SCROLLER_SYNC) {
       Font scrollerFont = Gome.singleton.options.getScrollerFont();
-      if (scroller != null && scroller.isStarted())
+      if (scroller != null && scroller.isStarted()) {
         scroller.stop();
+      }
 
       scroller = new Scroller(this, scrollx, scrolly, scrollWidth, scrollHeight);
       scroller.setSpeed(Gome.singleton.options.getScrollerSpeed());
@@ -488,7 +479,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       }
     }
   }
-  
+
   public void pauseScroller() {
     //#ifdef DEBUG
     log.debug("Stop scroller");
@@ -553,9 +544,12 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void recalculateLayout() {
+    //#ifdef DEBUG
+    log.debug("recalcultate Layout");
+    //#endif
     int minimalBottomHeight = 0;
     if (bottomMode == COMMENT_MODE) {
-        minimalBottomHeight +=  Gome.singleton.options.getScrollerSize();
+      minimalBottomHeight += Gome.singleton.options.getScrollerSize();
     }
     if (bottomMode == CLOCK_MODE) {
       if (clockPainter != null) {
@@ -595,6 +589,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       scrollx = 0;
       scrolly = boardHeight;
       scrollHeight = extraSpace;
+      //#ifdef DEBUG
+      log.debug("boardHeight =" + boardHeight);
+      log.debug("scroller height =" + scrollHeight);
+      //#endif
+
       scrollWidth = getWidth();
     } else {
       // log.debug("Board height = " + getHeight());
@@ -619,6 +618,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void setBoardPainter(BoardPainter boardPainter) {
     // log.debug("Set Board Painter - redo the layout");
     this.boardPainter = boardPainter;
+    //#ifdef DEBUG
+    log.debug("recalcultate Layout by setBoardPainter");
+    //#endif
     recalculateLayout();
     //log.debug("repaint() called from setBoardPainter");
     refresh();
@@ -631,6 +633,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void setClockAndCommentMode(int mode) {
     bottomMode = mode;
+    //#ifdef DEBUG
+    log.debug("recalcultate Layout by setClockAndCommentMode");
+    //#endif
     recalculateLayout();
     if (bottomMode == COMMENT_MODE) {
       startScroller();

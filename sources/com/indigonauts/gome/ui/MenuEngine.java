@@ -278,7 +278,7 @@ public class MenuEngine implements CommandListener {
           //#ifdef MIDP2
           FileBrowserV2 fb = new FileBrowserV2(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);
           //#else
-          //# FileBrowserV2 fb = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
+          //# FileBrowserV1 fb = new FileBrowserV1(Gome.singleton.mainCanvas, this, IOManager.singleton.getRootBundledGamesList(), "/", true);          
           //#endif
           new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fb).show(Gome.singleton.display);
 

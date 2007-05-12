@@ -273,8 +273,9 @@ public class GameController implements ServerCallback
     } else {
       commentMode = MainCanvas.NOTHING_TO_DISPLAY_MODE;
     }
+    initPainter(); // setclockandcomment need the definitive painter for the layout
     Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
-    initPainter();
+    
   }
 
   private int normalDelta;
