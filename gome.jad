@@ -1,12 +1,12 @@
 MIDlet-1: Gome,/gome.png,com.indigonauts.gome.Gome
-MIDlet-Jar-URL: http://www.indigonauts.com/gome/releases/gome-1.2.jar
+MIDlet-Jar-URL: @JAR_URL
 MIDlet-Icon: /gome.png
-MicroEdition-Configuration: CLDC-1.1
-MIDlet-Version: 1.20
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Version: @VERSION
 MIDlet-Vendor: Indigonauts
-MIDlet-Name: Gome
 MIDlet-Description: Go game tool
+MIDlet-Name: Gome
 MIDlet-Data-Size: 5
 MIDlet-Info-URL: http://www.indigonauts.com/gome
-MicroEdition-Profile: MIDP-2.0
+MicroEdition-Profile: MIDP-1.0
 MIDlet-Permissions: javax.microedition.io.Connector.file.read, javax.microedition.io.Connector.file.write, javax.microedition.io.Connector.http

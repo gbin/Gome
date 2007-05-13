@@ -89,6 +89,7 @@
 		<var name="symbols" value="" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 	<fileset id="gome-minimal-bundle-files" dir="${project.root.gome}/sources">
@@ -102,6 +103,7 @@
 		<var name="symbols" value="" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 	<fileset id="gome-online-files" dir="${project.root.gome}/sources">
@@ -115,6 +117,7 @@
 		<var name="symbols" value="IGS" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 	<fileset id="gome-i18n-files" dir="${project.root.gome}/sources">
@@ -129,6 +132,7 @@
 		<var name="symbols" value="IGS,I18N" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 	<fileset id="gome-normal-files" dir="${project.root.gome}/sources">
@@ -146,9 +150,10 @@
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
-	<fileset id="gome-MIDP2-files" dir="${project.root.gome}/sources">
+	<fileset id="gome-normal-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
 		<patternset refid="gomoku" />
@@ -157,7 +162,7 @@
 		<patternset refid="problems" />
 	</fileset>
 
-	<fileset id="gome-MIDP2-JSR75-files" dir="${project.root.gome}/sources">
+	<fileset id="gome-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
 		<patternset refid="gomoku" />
@@ -166,7 +171,7 @@
 		<patternset refid="problems" />
 	</fileset>
 
-	<fileset id="gome-joseki-MIDP2-JSR75-files" dir="${project.root.gome}/sources">
+	<fileset id="gome-joseki-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
 		<patternset refid="gomoku" />
@@ -179,27 +184,30 @@
 
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
 		<echo message="MIDP2" />
-		<var name="midlet.name" value="gome-MIDP2" />
+		<var name="midlet.name" value="gome-normal-MIDP2" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="MIDP2 JSR75" />
-		<var name="midlet.name" value="gome-MIDP2-JSR75" />
+		<var name="midlet.name" value="gome-jsr75-MIDP2" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
-		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
-	
+
 	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="JOSEKI MIDP2 JSR75" />
-		<var name="midlet.name" value="gome-joseki-MIDP2-JSR75" />
+		<var name="midlet.name" value="gome-joseki-jsr75-MIDP2" />
 		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,MIDP2,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 	<target name="Vjoseki" depends="MIDP1" description="Joseki version">
@@ -218,6 +226,7 @@
 		</fileset>
 
 		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad"/>
 	</target>
 
 
@@ -238,6 +247,7 @@
 			<fileset refid="base" />
 			<fileset refid="${midlet.name}-files" />
 		</copy>
+		<replace file="${project.root.gome}/src/com/indigonauts/gome/Gome.java" token="@VERSION" value="${gome.version}" />
 	</target>
 
 	<!-- Build the classes that make up the midlet -->
@@ -251,6 +261,10 @@
 	<!-- Package up the compiled code with obfuscation -->
 	<target name="deployable" depends="build,-eclipseme-deployable" description="Packages the midlet jar, with obfuscation">
 		<move file="${project.root.gome}/deployed/${midlet.name}.jad" tofile="${project.root.gome}/dist/${midlet.name}-${gome.version}.jad" />
+		<replace file="${project.root.gome}/dist/${midlet.name}-${gome.version}.jad">
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+			<replacefilter token="@VERSION" value="${gome.version}" />
+		</replace>
 		<move file="${project.root.gome}/deployed/${midlet.name}.jar" tofile="${project.root.gome}/dist/${midlet.name}-${gome.version}.jar" />
 	</target>
 
