@@ -444,6 +444,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private static final Vector visibleItems = new Vector();
 
   class IllustratedItem extends CustomItem {
+    //#ifdef DEBUG
+    private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
+    //#endif
     private Image icon;
     private FileEntry entry;
     private String text;
@@ -495,18 +498,25 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected int getMinContentHeight() {
+      //log.debug("get Minimum ocntent height = " + ITEM_FONT.getHeight());
       return ITEM_FONT.getHeight();
     }
 
     protected int getMinContentWidth() {
+      //log.debug("get Minimum ocntent width = " + uiFolder.getWidth());
       return uiFolder.getWidth();
     }
 
-    protected int getPrefContentHeight(int arg0) {
+    protected int getPrefContentHeight(int height) {
+      //log.debug("passed height = " + height);
+      //log.debug("icon height = " + icon.getHeight());
+      //log.debug("font height = " + ITEM_FONT.getHeight());
       return Math.max(icon.getHeight(), ITEM_FONT.getHeight());
     }
 
-    protected int getPrefContentWidth(int arg0) {
+    protected int getPrefContentWidth(int width) {
+      //log.debug("passed width = " + width);
+      //log.debug("ui folder width = " + uiFolder.getWidth());
       return uiFolder.getWidth();
       //return icon.getHeight() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text);
     }
@@ -518,7 +528,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       }
       if (currentItem == this) {
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_BACKGROUND));
-        g.fillRect(0, 0, uiFolder.getWidth(), uiFolder.getHeight());
+        g.fillRect(0, 0, w, h);
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_FOREGROUND));
       } else {
         g.setColor(Gome.singleton.display.getColor(Display.COLOR_FOREGROUND));
@@ -532,13 +542,13 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       if (ticked > 0) {
         showText = text.substring(ticked) + "-" + text;
         if (ticked == text.length()) {
-          ticked = 0;
+          ticked = -1;
         }
 
       } else {
         showText = text;
       }
-      g.drawString(showText, icon.getWidth() + ITEM_FONT.charWidth(' '), 0, Graphics.TOP | Graphics.LEFT);
+      g.drawString(showText, icon.getWidth() + ITEM_FONT.charWidth(' '), (h - ITEM_FONT.getHeight())/2 , Graphics.TOP | Graphics.LEFT);
 
     }
 
@@ -559,6 +569,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     public boolean isTooLarge() {
       return tooLarge;
 
+    }
+
+    protected void pointerReleased(int x, int y) {
+      (FileBrowserV2.this).commandAction(OPEN, uiFolder);
     }
 
     int ticked = -2;
