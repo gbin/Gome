@@ -9,4 +9,4 @@ MIDlet-Name: Gome
 MIDlet-Data-Size: 5
 MIDlet-Info-URL: http://www.indigonauts.com/gome
 MicroEdition-Profile: MIDP-1.0
-MIDlet-Permissions: javax.microedition.io.Connector.file.read, javax.microedition.io.Connector.file.write, javax.microedition.io.Connector.http
+MIDlet-Permissions: 
