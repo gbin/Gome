@@ -481,16 +481,25 @@ public class BoardPainter {
 
     int cx = getCellX(pt.x);
     int cy = getCellY(pt.y);
+    
+    g.setFont(currentAnnotationFont);
+    
+    int x = cx;
+    int y = cy - (delta - currentAnnotationFont.getHeight()) / 2 + halfdelta;
     if (erasebg) {
       g.setColor(Gome.singleton.options.gobanColor);
-      g.fillRect(cx - halfdelta, cy - halfdelta, delta, delta);
+      g.drawString(text, cx-1, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y-1, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx+1, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y+1, Graphics.BOTTOM | Graphics.HCENTER);    
+      g.drawString(text, cx-2, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y-2, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx+2, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y+2, Graphics.BOTTOM | Graphics.HCENTER);
     }
-    g.setFont(currentAnnotationFont);
+    
     g.setColor(color);
-
-    int offset = (delta - currentAnnotationFont.getHeight()) / 2;
-
-    g.drawString(text, cx, cy - offset + halfdelta, Graphics.BOTTOM | Graphics.HCENTER);
+    g.drawString(text, cx, y, Graphics.BOTTOM | Graphics.HCENTER);
   }
 
   public void drawSymbolAnnotation(Graphics g, SymbolAnnotation annotation, int color) {
