@@ -26,17 +26,23 @@ public class Util {
    * Flag for the e60 for several specific behavior
    */
   public static boolean S60_FLAG = false;
-  
+  public static boolean SE_J5_FLAG = false;
+
   static {
     String version = System.getProperty("microedition.platform");
     //#ifdef DEBUG
     log.debug("Version = " + version);
     //#endif
-    if (version != null && version.startsWith("NokiaE60")) {
-      S60_FLAG = true;
-    }
+    if (version != null)
+      if (version.startsWith("NokiaE60"))
+        S60_FLAG = true;
+      else if (version.startsWith("SonyEricssonV600i"))
+        SE_J5_FLAG = true;
+      else if (version.startsWith("SonyEricssonK750"))
+        SE_J5_FLAG = true;
+
   }
-  
+
   public static final int COLOR_WHITE = 0x00FFFFFF;
   public static final int COLOR_BLACK = 0x00000000;
   public static final int COLOR_DARKGREY = 0x00555555;
@@ -51,7 +57,6 @@ public class Util {
   public static final int GOBAN_COLOR_MEDIUM = 0x00F0CC00;
   public static final int GOBAN_COLOR_DARK = 0x00E0BB00;
 
-  
   public static final String EMPTY_STRING = ""; //$NON-NLS-1$
   private static Random rnd = new Random();
 

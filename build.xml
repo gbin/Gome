@@ -90,7 +90,7 @@
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 		<antcall target="deployable" />
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
@@ -108,7 +108,7 @@
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -127,7 +127,7 @@
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -147,7 +147,7 @@
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -170,7 +170,7 @@
 		<copy file="${project.root.gome}/gome.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -213,7 +213,7 @@
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -227,7 +227,7 @@
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -242,7 +242,7 @@
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />
@@ -265,7 +265,7 @@
 		</fileset>
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.version}" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
 		<antcall target="deployable" />

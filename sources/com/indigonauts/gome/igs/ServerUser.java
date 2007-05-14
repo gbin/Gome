@@ -78,6 +78,6 @@ public class ServerUser extends QuickSortable {
   }
 
   public String toString() {
-    return Util.padd(nick,10,true)+ " [" + Util.padd(rank,4,true) + "] " + ((play != -1) ? " Playing #" + play : "") + ((watch != -1) ? " Watching #" + watch : "");
+    return Util.padd(rank,3,true) + "| " + nick + ((play != -1) ? " P#" + play : "") + ((watch != -1) ? " W#" + watch : "");
   }
 }

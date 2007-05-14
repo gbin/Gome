@@ -108,6 +108,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private String currentDirectory;
   private Form saveGame;
 
+  boolean ended = false;
+  Thread ticker;
+
   public FileBrowserV2(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
     this(parent, listener, saveMode);
     this.entries = entries;
@@ -169,6 +172,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         uiFolder.append(illustratedItem);
       }
 
+    }
+    // Workaround : the traverse method of the first item will not be called if it is this serie of buggy SonyEricssons
+    if (Util.SE_J5_FLAG) {
+      ((IllustratedItem) uiFolder.get(0)).traverse(0, 0, 0, null);
     }
 
     uiFolder.addCommand(MenuEngine.BACK);
@@ -441,49 +448,68 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   }
 
   private IllustratedItem currentItem;
+  private IllustratedItem lastClickedItem;
   private static final Vector visibleItems = new Vector();
 
   class IllustratedItem extends CustomItem {
     //#ifdef DEBUG
-    private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
+    //# private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
     //#endif
     private Image icon;
     private FileEntry entry;
     private String text;
     private boolean repaint, traversed;
+    private boolean tooLarge;
+    private int ticked = -2;
 
     public IllustratedItem(FileEntry entry, Image icon, String text) {
       super(null);
       this.icon = icon;
       this.entry = entry;
       this.text = text == null ? "" : text;
+      this.tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
     }
 
-    //public IllustratedItem(String sgf, String text) {
-    //  super(null);
-    // }
-
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
-      tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
-      if (Util.S60_FLAG) {
-        currentItem = this;
-      }
 
-      if (currentItem == this) {
-        repaint = !traversed;
-        traversed = true;
-        repaint();
-        return false;
+      // hack for the buggy Sonyericsson implementations
+      if (currentItem == this) // should never be possible but for SE it is considered as a traverse out 
+      {
+
+        // find back where I was
+        int index = 0;
+        while (uiFolder.get(index) != this)
+        {
+          index++;
+        }
+          
+
+        switch (dir) {
+        case Canvas.UP:
+        case Canvas.LEFT:
+          if (index > 0)
+            index--;
+          break;
+        case Canvas.DOWN:
+        case Canvas.RIGHT:
+          if (index < uiFolder.size() - 1) {
+            index++;
+          }
+        }
+        // do what it is supposed to do on the *right* traverse in item 
+        currentItem = (IllustratedItem) uiFolder.get(index);
+        traverseOut();
       } else {
         currentItem = this;
-        repaint();
-        return true;
       }
-
+      // end of hack
+      currentItem.repaint = !currentItem.traversed;
+      currentItem.traversed = true;
+      currentItem.repaint();
+      return false;
     }
 
     protected void traverseOut() {
-      currentItem = null;
       ticked = -2;
       for (int i = 0, size = visibleItems.size(); i < size; i++)
         ((IllustratedItem) visibleItems.elementAt(i)).repaint();
@@ -498,27 +524,19 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
     protected int getMinContentHeight() {
-      //log.debug("get Minimum ocntent height = " + ITEM_FONT.getHeight());
       return ITEM_FONT.getHeight();
     }
 
     protected int getMinContentWidth() {
-      //log.debug("get Minimum ocntent width = " + uiFolder.getWidth());
       return uiFolder.getWidth();
     }
 
     protected int getPrefContentHeight(int height) {
-      //log.debug("passed height = " + height);
-      //log.debug("icon height = " + icon.getHeight());
-      //log.debug("font height = " + ITEM_FONT.getHeight());
       return Math.max(icon.getHeight(), ITEM_FONT.getHeight());
     }
 
     protected int getPrefContentWidth(int width) {
-      //log.debug("passed width = " + width);
-      //log.debug("ui folder width = " + uiFolder.getWidth());
       return uiFolder.getWidth();
-      //return icon.getHeight() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text);
     }
 
     protected void paint(Graphics g, int w, int h) {
@@ -548,7 +566,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       } else {
         showText = text;
       }
-      g.drawString(showText, icon.getWidth() + ITEM_FONT.charWidth(' '), (h - ITEM_FONT.getHeight())/2 , Graphics.TOP | Graphics.LEFT);
+      g.drawString(showText, icon.getWidth() + ITEM_FONT.charWidth(' '), (h - ITEM_FONT.getHeight()) / 2, Graphics.TOP | Graphics.LEFT);
 
     }
 
@@ -564,18 +582,18 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
       }
     }
 
-    boolean tooLarge;
-
     public boolean isTooLarge() {
       return tooLarge;
 
     }
 
     protected void pointerReleased(int x, int y) {
-      (FileBrowserV2.this).commandAction(OPEN, uiFolder);
+      if (lastClickedItem == this) {
+        (FileBrowserV2.this).commandAction(OPEN, uiFolder);
+      } else {
+        lastClickedItem = this;
+      }
     }
-
-    int ticked = -2;
 
     public void tick() {
       ticked++;
@@ -583,9 +601,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     }
 
   }
-
-  boolean ended = false;
-  Thread ticker;
 
   public void run() {
     while (!ended) {

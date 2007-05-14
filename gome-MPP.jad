@@ -1,0 +1,16 @@
+MPP-Scale: 1.0
+MIDlet-1: Gome,/gome.png,com.indigonauts.gome.Gome
+MPP-Show-Keypad: false
+MIDlet-Jar-URL: gome-joseki-jsr75-MIDP2-1.2pre6.jar
+MIDlet-Icon: /gome.png
+MPP-Height: 416 
+MPP-Antialias: false
+MicroEdition-Configuration: CLDC-1.1
+MIDlet-Version: 1.2
+MIDlet-Vendor: Indigonauts
+MIDlet-Description: Go game tool
+MIDlet-Name: Gome
+MIDlet-Data-Size: 5
+MIDlet-Info-URL: http://www.indigonauts.com/gome
+MicroEdition-Profile: MIDP-2.0
+MPP-Width: 352

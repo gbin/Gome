@@ -514,7 +514,7 @@ public class BoardPainter {
       g.drawArc(cx - (proportion), cy - (proportion), proportion * 2, proportion * 2, 0, 360);
       break;
     case SymbolAnnotation.CROSS:
-      proportion = delta / 3;
+      proportion = (halfdelta*1000) /1414; // sqrt2
       g.drawLine(cx - proportion, cy - proportion, cx + proportion, cy + proportion);
       g.drawLine(cx - proportion, cy + proportion, cx + proportion, cy - proportion);
       break;
@@ -523,14 +523,24 @@ public class BoardPainter {
       g.fillRect(cx - (proportion), cy - (proportion), proportion * 2 + 1, proportion * 2 + 1);
       break;
     case SymbolAnnotation.TRIANGLE:
-      proportion = (delta * 2) / 5;
-      g.drawLine(cx, cy - (proportion), cx - (proportion), cy + (proportion));
-      g.drawLine(cx - (proportion), cy + (proportion), cx + (proportion), cy + (proportion));
-      g.drawLine(cx + (proportion), cy + (proportion), cx, cy - (proportion));
+      int halfm1 = halfdelta -1;
+      proportion = sin120(halfm1);
+      g.drawLine(cx, cy - halfm1, cx - proportion, cy + halfm1/2);
+      g.drawLine(cx - proportion, cy + halfm1/2, cx + proportion, cy + halfm1/2);
+      g.drawLine(cx + proportion, cy + halfm1/2, cx, cy - halfm1);
+      g.drawLine(cx, cy - halfm1+1, cx - proportion, cy + halfm1/2+1);
+      g.drawLine(cx - proportion, cy + halfm1/2+1, cx + proportion, cy + halfm1/2+1);
+      g.drawLine(cx + proportion, cy + halfm1/2+1, cx, cy - halfm1+1);
+
       break;
 
     }
 
+  }
+  
+  int sin120(int x)
+  {
+    return (866 * x) / 1000; 
   }
 
   Rectangle getPlayArea() {
