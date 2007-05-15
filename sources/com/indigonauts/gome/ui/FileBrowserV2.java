@@ -140,8 +140,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   public void show(Display disp) {
     uiFolder = new Form(Gome.singleton.bundle.getString("ui.filesIn", new String[] { currentDirectory }));
     ended = false;
-    ticker = new Thread(this);
-    ticker.start();
+    if (!Util.SE_J5_FLAG) {
+      ticker = new Thread(this);
+      ticker.start();
+    }
     visibleItems.removeAllElements();
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
@@ -478,11 +480,9 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
 
         // find back where I was
         int index = 0;
-        while (uiFolder.get(index) != this)
-        {
+        while (uiFolder.get(index) != this) {
           index++;
         }
-          
 
         switch (dir) {
         case Canvas.UP:
