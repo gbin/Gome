@@ -13,6 +13,8 @@ public class SymbolAnnotation extends Point {
     public static final byte SQUARE = 3;
 
     public static final byte TRIANGLE = 4;
+    
+    public static final byte FILLED_CIRCLE = 5;
 
     private int type;
 

@@ -18,17 +18,16 @@ import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
+import com.indigonauts.gome.sgf.SgfPoint;
 import com.indigonauts.gome.sgf.SymbolAnnotation;
 import com.indigonauts.gome.sgf.TextAnnotation;
 
 public class BoardPainter {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BoardPainter");
+  //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BoardPainter");
   //#endif
 
   private static final int MARGIN = 0;
-
-  
 
   private Board board;
 
@@ -160,13 +159,21 @@ public class BoardPainter {
       drawAnnotations(graphicsScreen, annotations);
   }
 
-  public void drawMe(Graphics g, Point cursor, int playerColor, boolean showHints, SgfNode currentNode, SgfModel model) {
+  public void drawMe(Graphics g, Point cursor, int playerColor, boolean showHints, boolean markLastMove, SgfNode currentNode, SgfModel model) {
     drawBoard(g, currentNode.getAnnotations());
 
     // draw cursor
     if (cursor != null)
       drawCursor(g, cursor, playerColor); // guess the
     // next color
+    
+    if(markLastMove)
+    {
+      SgfPoint point = currentNode.getPoint();
+      if(point != null)
+        drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.FILLED_CIRCLE), Util.COLOR_RED);
+    }
+      
 
     // draw hints
     if (showHints) {
@@ -331,8 +338,6 @@ public class BoardPainter {
     }
   }
 
-  
-
   private void drawStone(Graphics g, int xx, int yy, int color) {
     int cx = getCellX(xx);
     int cy = getCellY(yy);
@@ -481,23 +486,23 @@ public class BoardPainter {
 
     int cx = getCellX(pt.x);
     int cy = getCellY(pt.y);
-    
+
     g.setFont(currentAnnotationFont);
-    
+
     int x = cx;
     int y = cy - (delta - currentAnnotationFont.getHeight()) / 2 + halfdelta;
     if (erasebg) {
       g.setColor(Gome.singleton.options.gobanColor);
-      g.drawString(text, cx-1, y, Graphics.BOTTOM | Graphics.HCENTER);
-      g.drawString(text, cx, y-1, Graphics.BOTTOM | Graphics.HCENTER);
-      g.drawString(text, cx+1, y, Graphics.BOTTOM | Graphics.HCENTER);
-      g.drawString(text, cx, y+1, Graphics.BOTTOM | Graphics.HCENTER);    
-      g.drawString(text, cx-2, y, Graphics.BOTTOM | Graphics.HCENTER);
-      g.drawString(text, cx, y-2, Graphics.BOTTOM | Graphics.HCENTER);
-      g.drawString(text, cx+2, y, Graphics.BOTTOM | Graphics.HCENTER);
-      g.drawString(text, cx, y+2, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx - 1, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y - 1, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx + 1, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y + 1, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx - 2, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y - 2, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx + 2, y, Graphics.BOTTOM | Graphics.HCENTER);
+      g.drawString(text, cx, y + 2, Graphics.BOTTOM | Graphics.HCENTER);
     }
-    
+
     g.setColor(color);
     g.drawString(text, cx, y, Graphics.BOTTOM | Graphics.HCENTER);
   }
@@ -513,8 +518,12 @@ public class BoardPainter {
       proportion = delta / 4;
       g.drawArc(cx - (proportion), cy - (proportion), proportion * 2, proportion * 2, 0, 360);
       break;
+    case SymbolAnnotation.FILLED_CIRCLE:
+      proportion = delta / 4;
+      g.fillArc(cx - (proportion), cy - (proportion), proportion * 2+1, proportion * 2+1, 0, 360);
+      break;
     case SymbolAnnotation.CROSS:
-      proportion = (halfdelta*1000) /1414; // sqrt2
+      proportion = (halfdelta * 1000) / 1414; // sqrt2
       g.drawLine(cx - proportion, cy - proportion, cx + proportion, cy + proportion);
       g.drawLine(cx - proportion, cy + proportion, cx + proportion, cy - proportion);
       break;
@@ -523,24 +532,23 @@ public class BoardPainter {
       g.fillRect(cx - (proportion), cy - (proportion), proportion * 2 + 1, proportion * 2 + 1);
       break;
     case SymbolAnnotation.TRIANGLE:
-      int halfm1 = halfdelta -1;
+      int halfm1 = halfdelta - 1;
       proportion = sin120(halfm1);
-      g.drawLine(cx, cy - halfm1, cx - proportion, cy + halfm1/2);
-      g.drawLine(cx - proportion, cy + halfm1/2, cx + proportion, cy + halfm1/2);
-      g.drawLine(cx + proportion, cy + halfm1/2, cx, cy - halfm1);
-      g.drawLine(cx, cy - halfm1+1, cx - proportion, cy + halfm1/2+1);
-      g.drawLine(cx - proportion, cy + halfm1/2+1, cx + proportion, cy + halfm1/2+1);
-      g.drawLine(cx + proportion, cy + halfm1/2+1, cx, cy - halfm1+1);
+      g.drawLine(cx, cy - halfm1, cx - proportion, cy + halfm1 / 2);
+      g.drawLine(cx - proportion, cy + halfm1 / 2, cx + proportion, cy + halfm1 / 2);
+      g.drawLine(cx + proportion, cy + halfm1 / 2, cx, cy - halfm1);
+      g.drawLine(cx, cy - halfm1 + 1, cx - proportion, cy + halfm1 / 2 + 1);
+      g.drawLine(cx - proportion, cy + halfm1 / 2 + 1, cx + proportion, cy + halfm1 / 2 + 1);
+      g.drawLine(cx + proportion, cy + halfm1 / 2 + 1, cx, cy - halfm1 + 1);
 
       break;
 
     }
 
   }
-  
-  int sin120(int x)
-  {
-    return (866 * x) / 1000; 
+
+  int sin120(int x) {
+    return (866 * x) / 1000;
   }
 
   Rectangle getPlayArea() {

@@ -344,7 +344,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
     SgfNode firstNode = model.getFirstNode();
     board.placeStones(firstNode.getAB(), Board.BLACK);
     board.placeStones(firstNode.getAW(), Board.WHITE);
-    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false, firstNode, model);
+    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false,false, firstNode, model);
     return Image.createImage(img);
   }
 
