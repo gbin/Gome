@@ -62,8 +62,8 @@ public class ServerGame {
   }
 
   public String toString() {
-    return Util.padd("#" + nb, 4, false) + " " + Util.padd(white, 10, true) + " [" + Util.padd(whiteRank, 4, true) + "]-" + Util.padd(black, 10, false) + " [" + Util.padd(blackRank, 4, true) + "] "
-            + Util.padd("M" + move, 4, false) + " H" + handi;
+    return "#" + nb + " " + white + " ["+ whiteRank+ "] " + black + " [" + blackRank+ "]"
+             + " H" + handi + " M"+ move;
   }
 
 }

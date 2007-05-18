@@ -396,7 +396,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     } else {
       if (boardPainter != null) {
         char playMode = gc.getPlayMode();
-        boolean passiveMode = playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE;  
+        boolean passiveMode = (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) && !gc.isCountMode();  
         boardPainter.drawMe(g, passiveMode ? null : gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), passiveMode, gc.getCurrentNode(), gc.getSgfModel());
       } /*
        * else { log.debug("Board is null "); }

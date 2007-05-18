@@ -456,10 +456,12 @@ public class MenuEngine implements CommandListener {
     log.debug("Show igs gamelist");
     //#endif
     igsGameList = new List(Gome.singleton.bundle.getString("online.gameList"), Choice.IMPLICIT);
+    
     for (int i = 0; i < games.length; i++) {
       igsGameList.append(games[i].toString(), null);
     }
     //#ifdef MIDP2
+    igsGameList.setFitPolicy(Choice.TEXT_WRAP_ON);
     for (int i = 0; i < igsGameList.size(); i++)
       igsGameList.setFont(i, FIXED_FONT);
     //#endif
