@@ -78,10 +78,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private static Image textFileImg;
   private static final int BLOCK_SIZE = 20;
   private static final int DEFAULT_ILLUSTRATIVE_SIZE = 48;
-  private static GraphicRectangle illustrativeRectangle;
+  private static Rectangle illustrativeRectangle;
 
   static {
-    illustrativeRectangle = new GraphicRectangle(0, 0, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
+    illustrativeRectangle = new Rectangle(0, 0, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
 
     try {
       dirImg = Image.createImage("/dir.png");

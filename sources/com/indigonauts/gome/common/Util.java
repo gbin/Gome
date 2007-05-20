@@ -4,6 +4,8 @@
 
 package com.indigonauts.gome.common;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStreamReader;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.Vector;
@@ -16,6 +18,11 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.MainCanvas;
+import com.indigonauts.gome.sgf.Board;
+import com.indigonauts.gome.sgf.SgfModel;
+import com.indigonauts.gome.sgf.SgfNode;
+import com.indigonauts.gome.ui.BoardPainter;
 
 public class Util {
   //#ifdef DEBUG
@@ -56,6 +63,12 @@ public class Util {
   public static final int GOBAN_COLOR_LIGHT = 0x00FFDD00;
   public static final int GOBAN_COLOR_MEDIUM = 0x00F0CC00;
   public static final int GOBAN_COLOR_DARK = 0x00E0BB00;
+  
+  public static final byte FILL_BUG1 = 1;
+  public static final byte FILL_NORMAL = 0;
+  
+  public static final byte FOR_SPEED = 0;
+  public static final byte FOR_MEMORY = 0;
 
   public static final String EMPTY_STRING = ""; //$NON-NLS-1$
   private static Random rnd = new Random();
@@ -333,4 +346,23 @@ public class Util {
     }
     return buff.toString();
   }
+
+  public static Image generatePosition(String sgf) {
+    SgfModel model = SgfModel.parse(new InputStreamReader(new ByteArrayInputStream(sgf.getBytes())));
+    Rectangle viewArea = model.getViewArea();
+    byte boardSize = model.getBoardSize();
+    Board board = new Board(boardSize);
+    int grsize = boardSize * MainCanvas.SMALL_FONT.getHeight() + 1;
+    Rectangle imgArea = new Rectangle(0, 0, grsize, grsize);
+    BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
+    int total = grsize + (Gome.singleton.options.stoneBug == 1 ? 0 : 2);
+    Image img = Image.createImage(total, total);
+    SgfNode firstNode = model.getFirstNode();
+    board.placeStones(firstNode.getAB(), Board.BLACK);
+    board.placeStones(firstNode.getAW(), Board.WHITE);
+    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false,false, firstNode, model);
+    return Image.createImage(img);
+  }
+
+  
 }

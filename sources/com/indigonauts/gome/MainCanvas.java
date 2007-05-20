@@ -16,11 +16,11 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
+import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.ui.BoardPainter;
 import com.indigonauts.gome.ui.ClockPainterTask;
 import com.indigonauts.gome.ui.GameController;
-import com.indigonauts.gome.ui.GraphicRectangle;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Showable;
 
@@ -153,8 +153,12 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   protected void keyPressed(int keyCode) {
+    //#ifdef DEBUG
+    long actionTime = System.currentTimeMillis();
+    //#endif
+
     scroll(keyCode);
-    boolean refreshNeeded = false;
+    Rectangle refreshNeeded = null;
     char playMode = gc.getPlayMode();
     boolean review = playMode == GameController.REVIEW_MODE || playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE;
 
@@ -163,28 +167,36 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     case ACTION_DOWN:
     case ACTION_LEFT:
     case ACTION_RIGHT:
-      splashInfo = null;
+      if (splashInfo != null) {
+        splashInfo = null;
+        refreshNeeded = getBoardPainter().getDrawArea();
+
+      }
+
       if (gc.isCountMode()) {
-        refreshNeeded = gc.doMoveCursor(keyCode);
+        refreshNeeded = Rectangle.union(refreshNeeded, gc.doMoveCursor(keyCode));
       } else {
         if (review)
-          refreshNeeded = gc.doReviewMove(keyCode);
+          refreshNeeded = Rectangle.union(refreshNeeded, gc.doReviewMove(keyCode));
         else
-          refreshNeeded = gc.doMoveCursor(keyCode);
+          refreshNeeded = Rectangle.union(refreshNeeded, gc.doMoveCursor(keyCode));
       }
       break;
 
     default:
       if (review) {
-        refreshNeeded = gc.doAction(keyCode) | gc.doReviewAction(keyCode);
+        refreshNeeded = Rectangle.union(refreshNeeded, Rectangle.union(gc.doAction(keyCode), gc.doReviewAction(keyCode)));
       } else {
-        refreshNeeded = gc.doAction(keyCode);
+        refreshNeeded = Rectangle.union(refreshNeeded, gc.doAction(keyCode));
       }
     }
-    if (refreshNeeded) {
-      //log.debug("repaint() called from keyPressed");
-      refresh();
+    if (refreshNeeded != null) {
+      refresh(refreshNeeded);
     }
+    //#ifdef DEBUG
+    log.debug("->" + (System.currentTimeMillis() - actionTime));
+    //#endif
+
   }
 
   private void clearOptionalItems() {
@@ -390,25 +402,28 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
     if (scroller != null && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
       drawStatusBar(g);
-    } else if (bottomMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
+      return;
+    }
+
+    if (bottomMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
             && clockPainter.getHeight() == g.getClipHeight()) {
       drawStatusBar(g);
-    } else {
-      if (boardPainter != null) {
-        char playMode = gc.getPlayMode();
-        boolean passiveMode = (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) && !gc.isCountMode();  
-        boardPainter.drawMe(g, passiveMode ? null : gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), passiveMode, gc.getCurrentNode(), gc.getSgfModel());
-      } /*
-       * else { log.debug("Board is null "); }
-       */
-
-      if (splashInfo != null) {
-        drawSplashInfo(g);
-      }
-
-      // draw Status bar clip, so put it at the end
-      drawStatusBar(g);
+      return;
     }
+
+    if (boardPainter != null) {
+      char playMode = gc.getPlayMode();
+      boolean passiveMode = (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) && !gc.isCountMode();
+      boardPainter.drawMe(g, passiveMode ? null : gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), passiveMode, gc.getCurrentNode(), gc.getSgfModel());
+    }
+
+    if (splashInfo != null) {
+      drawSplashInfo(g);
+    }
+
+    // draw Status bar clip, so put it at the end
+    drawStatusBar(g);
+
   }
 
   private void drawSplashInfo(Graphics g) {
@@ -536,13 +551,13 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void setSplashInfo(String splash) {
     this.splashInfo = splash;
-    //log.debug("repaint() called from setSplashInfo");
-    refresh();
+    //log.debug("repaint() called from setSplashInfo with " + splash);
+    refresh(boardPainter.getDrawArea());
   }
 
   protected void showNotify() {
     //log.debug("repaint() called from showNotify");
-    refresh();
+    refresh(boardPainter.getDrawArea());
   }
 
   public void recalculateLayout() {
@@ -602,14 +617,24 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       boardHeight = getHeight();
     }
     if (boardPainter != null) {
-      boardPainter.setDrawArea(new GraphicRectangle(0, 0, getWidth(), boardHeight));
+      boardPainter.setDrawArea(new Rectangle(0, 0, getWidth(), boardHeight));
       gc.tuneBoardPainter();
     }
   }
 
   public void refresh() {
-    //log.debug("refresh called");
+    //#ifdef DEBUG
+    //# log.debug("total refresh");
+    //#endif
     repaint();
+    serviceRepaints();
+  }
+
+  public void refresh(Rectangle grArea) {
+    //#ifdef DEBUG
+    //# log.debug("refresh called on " + grArea);
+    //#endif
+    repaint(grArea.x0, grArea.y0, grArea.getWidth(), grArea.getHeight());
     serviceRepaints();
   }
 
@@ -625,7 +650,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#endif
     recalculateLayout();
     //log.debug("repaint() called from setBoardPainter");
-    refresh();
+    refresh(boardPainter.getDrawArea());
   }
 
   public void stopClockPainting() {

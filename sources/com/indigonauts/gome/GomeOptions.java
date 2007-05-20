@@ -32,7 +32,7 @@ public class GomeOptions {
   public static final byte SLOW = 0;
 
   public static final byte FAST = 2;
-  
+
   public static final String EN_US = "en_US";
   public static final String FR_FR = "fr_FR";
   public static final String JP_JP = "jp_JP";
@@ -40,6 +40,8 @@ public class GomeOptions {
   public String locale = EN_US;
 
   public int gobanColor = Util.GOBAN_COLOR_MEDIUM;
+  public byte stoneBug = (Util.S60_FLAG) ? Util.FILL_BUG1 : Util.FILL_NORMAL;
+  public byte optimize = Util.FOR_SPEED;
 
   public int fontSize = Font.SIZE_MEDIUM;
 
@@ -49,7 +51,6 @@ public class GomeOptions {
 
   public String igsLogin = "";
   public String igsPassword = "";
-
   public byte igsSize = 19;
 
   public int igsMinutes = 25;
@@ -93,6 +94,9 @@ public class GomeOptions {
       user = is.readUTF();
       key = is.readUTF();
       expiration = is.readLong();
+      stoneBug = is.readByte();
+      optimize = is.readByte();
+      
 
     } catch (IOException ioe) {
       //#ifdef DEBUG
@@ -235,6 +239,8 @@ public class GomeOptions {
     out.writeUTF(user);
     out.writeUTF(key);
     out.writeLong(expiration);
+    out.writeByte(stoneBug);
+    out.writeByte(optimize);
   }
 
   public int getScrollerSpeed() {

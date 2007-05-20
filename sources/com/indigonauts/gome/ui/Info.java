@@ -1,8 +1,6 @@
 package com.indigonauts.gome.ui;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Enumeration;
 
 import javax.microedition.lcdui.Command;
@@ -11,20 +9,16 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
-import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.StringItem;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
-import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.IOManager;
-import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
-import com.indigonauts.gome.sgf.SgfNode;
 
 public class Info extends Fetcher implements CommandListener, Showable {
   //#ifdef DEBUG
@@ -331,23 +325,6 @@ public class Info extends Fetcher implements CommandListener, Showable {
 
   }
 
-  private static Image generatePosition(String sgf) {
-    SgfModel model = SgfModel.parse(new InputStreamReader(new ByteArrayInputStream(sgf.getBytes())));
-    Rectangle viewArea = model.getViewArea();
-    byte boardSize = model.getBoardSize();
-    Board board = new Board(boardSize);
-    int grsize = boardSize * MainCanvas.SMALL_FONT.getHeight() + 1;
-    GraphicRectangle imgArea = new GraphicRectangle(0, 0, grsize, grsize);
-    BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
-    int total = grsize + (Util.S60_FLAG ? 0 : 2);
-    Image img = Image.createImage(total, total);
-    SgfNode firstNode = model.getFirstNode();
-    board.placeStones(firstNode.getAB(), Board.BLACK);
-    board.placeStones(firstNode.getAW(), Board.WHITE);
-    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false,false, firstNode, model);
-    return Image.createImage(img);
-  }
-
   private static final Font TITLE_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
   private static final Font UNDERLINED_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_UNDERLINED, Font.SIZE_MEDIUM);
 
@@ -361,7 +338,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
       while (all.hasMoreElements()) {
         String element = (String) all.nextElement();
         if (element.startsWith("(;")) {
-          form.append(generatePosition(element));
+          form.append(Util.generatePosition(element));
         } else if (element.startsWith("*")) {
           StringItem si = new StringItem("", element.substring(1));
           //#ifdef MIDP2

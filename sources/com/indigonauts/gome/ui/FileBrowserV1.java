@@ -72,7 +72,7 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
   private Image textFileImg;
 
   private static final int DEFAULT_ILLUSTRATIVE_SIZE = 32;
-  private GraphicRectangle illustrativeRectangle;
+  private Rectangle illustrativeRectangle;
   //#endif
 
   private boolean saveMode;
@@ -87,7 +87,7 @@ public class FileBrowserV1 implements CommandListener, Showable, DownloadCallbac
     this.saveMode = saveMode;
 
     //#ifdef MENU_IMAGES
-    illustrativeRectangle = new GraphicRectangle(1, 1, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
+    illustrativeRectangle = new Rectangle(1, 1, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
 
     try {
       dirImg = Util.renderIcon(Image.createImage("/dir.png"), DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);

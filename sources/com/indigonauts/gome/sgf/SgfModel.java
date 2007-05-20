@@ -636,9 +636,9 @@ public class SgfModel extends GameInfo implements Enumeration {
     Rectangle view = getViewArea();
     if (view.isValid()) {
       buf.append("VW["); //$NON-NLS-1$
-      buf.append(new SgfPoint(view.x0, view.y0));
+      buf.append(new SgfPoint((byte)view.x0, (byte)view.y0));
       buf.append(':');
-      buf.append(new SgfPoint(view.x1, view.y1));
+      buf.append(new SgfPoint((byte)view.x1, (byte)view.y1));
       buf.append(']');
     }
     if (handicap != 0) {

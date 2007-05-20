@@ -12,6 +12,7 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.TextField;
 
@@ -25,9 +26,13 @@ public class Options extends Form {
 
   private ChoiceGroup gobanColor;
 
+  private ChoiceGroup stoneBug;
+
   private ChoiceGroup scrollerSpeed;
 
   private ChoiceGroup scrollerSize;
+  
+  private ChoiceGroup optimize;
 
   //#ifdef IGS
   private TextField igsLogin;
@@ -49,6 +54,29 @@ public class Options extends Form {
 
   private boolean registrationOnly;
 
+  private static Image generateFillTest(byte mode, int width, int height) {
+    Image temp = Image.createImage(width, height);
+    int w = width / 2;
+    int h = height / 2;
+    int x = width / 4;
+    int y = height / 4;
+    Graphics g = temp.getGraphics();
+
+    g.setColor(Util.COLOR_RED);
+    switch (mode) {
+    case Util.FILL_NORMAL:
+      g.fillArc(x, y, w, h, 0, 360);
+      break;
+    case Util.FILL_BUG1:
+      g.fillArc(x + 1, y + 1, w - 1, h - 1, 0, 360);
+      break;
+    
+    }
+    g.setColor(Util.COLOR_BLACK);
+    g.drawArc(x, y, w, h, 0, 360);
+    return Image.createImage(temp);
+  }
+
   public Options(String title, CommandListener parent, boolean registrationOnly) throws IOException {
     super(title);
     this.registrationOnly = registrationOnly;
@@ -61,6 +89,8 @@ public class Options extends Form {
     Image medium = null;
     Image dark = null;
     Image jp = null;
+    Image[] stones = new Image[2];
+
     int bestImageWidth = 32;
     int bestImageHeight = 32;
 
@@ -69,10 +99,13 @@ public class Options extends Form {
     bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
     bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
     //#endif MIDP2
-    smallLetter = Util.renderOffScreenTextIcon("abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
-    mediumLetter = Util.renderOffScreenTextIcon("abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
-    largeLetter = Util.renderOffScreenTextIcon("abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
-    
+    smallLetter = Util.renderOffScreenTextIcon(
+            "abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
+    mediumLetter = Util.renderOffScreenTextIcon(
+            "abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_MEDIUM), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
+    largeLetter = Util.renderOffScreenTextIcon(
+            "abc", bestImageWidth, bestImageHeight, Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_LARGE), Util.COLOR_BLACK, Util.COLOR_LIGHT_BACKGROUND); //$NON-NLS-1$
+
     //#ifdef I18N
     en = Util.renderIcon(Image.createImage("/en.png"), bestImageWidth, bestImageHeight);
     fr = Util.renderIcon(Image.createImage("/fr.png"), bestImageWidth, bestImageHeight);
@@ -81,6 +114,8 @@ public class Options extends Form {
     light = Util.renderIcon(Image.createImage("/glight.png"), bestImageWidth, bestImageHeight);
     medium = Util.renderIcon(Image.createImage("/gmedium.png"), bestImageWidth, bestImageHeight);
     dark = Util.renderIcon(Image.createImage("/gdark.png"), bestImageWidth, bestImageHeight);
+    for (byte i = 0; i < 2; i++)
+      stones[i] = generateFillTest(i, bestImageWidth, bestImageHeight);
     //#endif
 
     //#ifdef I18N
@@ -97,13 +132,20 @@ public class Options extends Form {
     scrollerFont.append(Gome.singleton.bundle.getString("ui.option.large"), largeLetter); //$NON-NLS-1$
     scrollerFont.setSelectedIndex(Gome.singleton.options.getScrollerFontByte(), true);
     gobanColor = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.gobanColor"), Choice.EXCLUSIVE); //$NON-NLS-1$
-
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.light"), light); //$NON-NLS-1$//$NON-NLS-2$
-
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.medium"), medium); //$NON-NLS-1$ //$NON-NLS-2$
-
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.dark"), dark); //$NON-NLS-1$ //$NON-NLS-2$
     gobanColor.setSelectedIndex(Gome.singleton.options.getGobanColorByte(), true);
+
+    stoneBug = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.stoneBug"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    for (int i = 0; i < 2; i++)
+      stoneBug.append(Gome.singleton.bundle.getString("ui.option.stone") + " " + (i+1) , stones[i]); //$NON-NLS-1$//$NON-NLS-2$
+     stoneBug.setSelectedIndex(Gome.singleton.options.stoneBug, true);
+    optimize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.optimize"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    optimize.append(Gome.singleton.bundle.getString("ui.option.speed"), null);
+    optimize.append(Gome.singleton.bundle.getString("ui.option.memory"), null);
+    optimize.setSelectedIndex(Gome.singleton.options.optimize, true);
+
     scrollerSpeed = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerSpeed"), Choice.EXCLUSIVE); //$NON-NLS-1$
     scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.slow"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.medium"), null); //$NON-NLS-1$ //$NON-NLS-2$
@@ -143,10 +185,15 @@ public class Options extends Form {
       //#ifdef I18N
       append(lang);
       //#endif
+      append(Gome.singleton.bundle.getString("ui.option.aspect"));
       append(scrollerFont);
       append(gobanColor);
       append(scrollerSpeed);
       append(scrollerSize);
+      append(Gome.singleton.bundle.getString("ui.option.compatibility"));
+      append(stoneBug);
+      append(optimize);
+
       //#ifdef IGS
       append(Gome.singleton.bundle.getString("ui.option.igs"));
       append(igsLogin);
@@ -175,6 +222,8 @@ public class Options extends Form {
     Gome.singleton.options.setScrollerFontFromByte((byte) scrollerFont.getSelectedIndex());
     Gome.singleton.options.scrollerSize = (byte) scrollerSize.getSelectedIndex();
     Gome.singleton.options.scrollerSpeed = (byte) scrollerSpeed.getSelectedIndex();
+    Gome.singleton.options.stoneBug = (byte) stoneBug.getSelectedIndex();
+    Gome.singleton.options.optimize = (byte) optimize.getSelectedIndex();
     //#ifdef IGS
     Gome.singleton.options.igsLogin = igsLogin.getString();
     Gome.singleton.options.igsPassword = igsPassword.getString();

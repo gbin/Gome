@@ -264,8 +264,8 @@ public class GameController implements ServerCallback
       playArea = new Rectangle((byte) 0, (byte) 0, (byte) (board.getBoardSize() - 1), (byte) (board.getBoardSize() - 1));
     }
 
-    cursor.x = playArea.x0;
-    cursor.y = playArea.y0;
+    cursor.x = (byte) ((playArea.x0 + playArea.x1) / 2);
+    cursor.y = (byte) ((playArea.y0 + playArea.y1) / 2);
     switchCurrentNode(model.getFirstNode());
     playNode(currentNode);
     if (model.isCommented()) {
@@ -275,14 +275,14 @@ public class GameController implements ServerCallback
     }
     initPainter(); // setclockandcomment need the definitive painter for the layout
     Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
-    
+
   }
 
   private int normalDelta;
 
   void initPainter() {
     // log.debug("initPainter");
-    GraphicRectangle drawArea = new GraphicRectangle(0, 0, canvas.getWidth(), canvas.getHeight());
+    Rectangle drawArea = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
     BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea, true);
     canvas.setBoardPainter(boardPainter);
     tuneBoardPainter();
@@ -323,7 +323,9 @@ public class GameController implements ServerCallback
     // tuneBoardPainter();
   }
 
-  public boolean doMoveCursor(int keyCode) {
+  private Rectangle areaToRefresh = new Rectangle(0, 0, 0, 0);
+
+  public Rectangle doMoveCursor(int keyCode) {
     boolean refreshPainter = false;
     Rectangle area = canvas.getBoardPainter().getPlayArea();
     byte x = cursor.x;
@@ -380,15 +382,25 @@ public class GameController implements ServerCallback
     }
 
     boolean refreshNeeded = (x != cursor.x) || (y != cursor.y);
+    if (refreshNeeded) {
+      areaToRefresh.x0 = canvas.getBoardPainter().getCellX(Math.min(x, cursor.x) - 1);
+      areaToRefresh.x1 = canvas.getBoardPainter().getCellX(Math.max(x, cursor.x) + 1);
+      areaToRefresh.y0 = canvas.getBoardPainter().getCellY(Math.min(y, cursor.y) - 1);
+      areaToRefresh.y1 = canvas.getBoardPainter().getCellY(Math.max(y, cursor.y) + 1);
+      //#ifdef DEBUG
+      //log.debug("Area to refresh = (" + areaToRefresh.x0 + "," + areaToRefresh.y0 + ")-(" + areaToRefresh.x1 + "," + areaToRefresh.y1 + ")");
+      //#endif
+    }
+
     cursor.x = x;
     cursor.y = y;
-    return refreshNeeded;
+    return refreshNeeded ? areaToRefresh : null;
   }
 
   /*
    * return true if the action needs a repaint
    */
-  public boolean doReviewMove(int keyCode) {
+  public Rectangle doReviewMove(int keyCode) {
     boolean refreshNeeded = true;
     switch (canvas.getGameAction(keyCode)) {
     case MainCanvas.ACTION_UP:
@@ -423,27 +435,37 @@ public class GameController implements ServerCallback
       switchToZoomedPainter();
     }
 
-    return refreshNeeded;
+    return refreshNeeded ? canvas.getBoardPainter().getDrawArea() : null;
   }
 
-  public boolean doReviewAction(int keyCode) {
+  /**
+   * 
+   * @param keyCode
+   * @return a graphic rectangle to refresh or null if nothing need to be refreshed
+   */
+  public Rectangle doReviewAction(int keyCode) {
     if (keyCode == canvas.KEY_10PREVMOVES) {
       for (int i = 0; i < 10; i++)
         doGoBack();
       tuneBoardPainter();
-      return true;
+      return canvas.getBoardPainter().getDrawArea();
     } else if (keyCode == canvas.KEY_10NEXTMOVES) {
       for (int i = 0; i < 10; i++)
         doGoNext();
       tuneBoardPainter();
-      return true;
+      return canvas.getBoardPainter().getDrawArea();
     }
-    return false;
+    return null;
   }
 
-  public boolean doAction(int keyCode) {
+  /**
+   * 
+   * @param keyCode
+   * @return a graphic rectangle to refresh or null if nothing need to be refreshed
+   */
+  public Rectangle doAction(int keyCode) {
     if (currentNode == null)
-      return false;
+      return null;
     boolean refreshNeeded = true;
 
     switch (canvas.getGameAction(keyCode)) {
@@ -486,7 +508,7 @@ public class GameController implements ServerCallback
     if (refreshNeeded) {
       tuneBoardPainter();
     }
-    return refreshNeeded;
+    return refreshNeeded ? canvas.getBoardPainter().getDrawArea() : null;
   }
 
   /* return refreshNeded */
@@ -627,7 +649,7 @@ public class GameController implements ServerCallback
       break;
     }
     //log.debug("repaint() called from doClick");
-    canvas.refresh();
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
   private SgfNode getLeaf(SgfNode node) {
@@ -1034,7 +1056,7 @@ public class GameController implements ServerCallback
       }
       tuneBoardPainter();
       Gome.singleton.mainCanvas.setSplashInfo(null);
-      canvas.refresh();
+      canvas.refresh(canvas.getBoardPainter().getDrawArea());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1059,7 +1081,7 @@ public class GameController implements ServerCallback
 
     playNewMove(move.color, move.x, move.y);
     tuneBoardPainter();
-    canvas.refresh();
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
   //#endif
@@ -1164,7 +1186,7 @@ public class GameController implements ServerCallback
   public void goToFirstMove() {
     notifyLoadReady();
     tuneBoardPainter();
-    canvas.refresh();
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
   public void goToLastMove() {
@@ -1190,7 +1212,7 @@ public class GameController implements ServerCallback
     if (node != null)
       playNode(node);// play correctly the last one
     tuneBoardPainter();
-    canvas.refresh();
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
   //#ifdef IGS
@@ -1364,7 +1386,7 @@ public class GameController implements ServerCallback
     canvas.removeOnlineSetKomiAndHandicapMenuItem();
     //#endif
     canvas.setSplashInfo(Gome.singleton.bundle.getString("count.restoreCounting"));
-    canvas.refresh();
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
   public void oppRemoveDeadStone(byte x, byte y) {
@@ -1373,7 +1395,7 @@ public class GameController implements ServerCallback
         board.markDeadGroup(x, y);
         // log.debug("opp has mark dead stone x: " + x + " y:" + y);
         tuneBoardPainter();
-        canvas.refresh();
+        canvas.refresh(canvas.getBoardPainter().getDrawArea());
       }
     }
   }
@@ -1405,7 +1427,7 @@ public class GameController implements ServerCallback
     currentNode.setComment(out);
 
     canvas.setSplashInfo(out);
-    canvas.refresh();
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
 
     playMode = GAME_MODE;
     Gome.singleton.mainCanvas.switchToIGSOnlineMenu();
@@ -1421,7 +1443,7 @@ public class GameController implements ServerCallback
       Gome.singleton.mainCanvas.removeOnlineSetHandicapMenuItem();
 
       clock.clockSwitcher(Board.BLACK);
-      canvas.refresh();
+      canvas.refresh(canvas.getBoardPainter().getDrawArea());
     }
   }
 

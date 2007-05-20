@@ -24,16 +24,23 @@ import com.indigonauts.gome.sgf.TextAnnotation;
 
 public class BoardPainter {
   //#ifdef DEBUG
-  //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BoardPainter");
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BoardPainter");
   //#endif
 
   private static final int MARGIN = 0;
 
   private Board board;
 
+  /**
+   * These are BOARD coordinates
+   */
+
   private Rectangle boardArea;
 
-  private GraphicRectangle drawArea;
+  /**
+   * These are GRAPHIC coordinates
+   */
+  private Rectangle drawArea;
 
   // draw positions
   private int delta;
@@ -65,7 +72,7 @@ public class BoardPainter {
 
   private boolean doubleBuffered;
 
-  public BoardPainter(Board newBoard, GraphicRectangle imageArea, Rectangle newBoardArea, boolean doubleBuffered) {
+  public BoardPainter(Board newBoard, Rectangle imageArea, Rectangle newBoardArea, boolean doubleBuffered) {
     board = newBoard;
 
     boardArea = newBoardArea != null ? newBoardArea : newBoard.getFullBoardArea();
@@ -73,7 +80,10 @@ public class BoardPainter {
 
     // calc the size of each cell
     calcDrawingPosition();
-    this.doubleBuffered = doubleBuffered;
+    this.doubleBuffered = doubleBuffered && Gome.singleton.options.optimize == Util.FOR_SPEED;
+    //#ifdef DEBUG
+    log.info("doublebuffered =" + this.doubleBuffered);
+    //#endif
     if (this.doubleBuffered)
       resetBackBuffer();
 
@@ -87,67 +97,119 @@ public class BoardPainter {
     this.counting = counting;
   }
 
+  /**
+   * 
+   * @param playArea there are BOARD coordinates
+   */
   public void setPlayArea(Rectangle playArea) {
     boardArea = playArea;
     calcDrawingPosition();
     resetBackBuffer();
   }
 
-  public void setDrawArea(GraphicRectangle imageArea) {
+  /**
+   * 
+   * @param imageArea these are GRAPHIC coordinates
+   */
+  public void setDrawArea(Rectangle imageArea) {
     drawArea = imageArea;
     calcDrawingPosition();
     resetBackBuffer();
   }
 
   private void resetBackBuffer() {
-
-    if (backBuffer == null || backBuffer.getWidth() != drawArea.getWidth() || backBuffer.getHeight() != drawArea.getHeight())
-      backBuffer = Image.createImage(drawArea.getWidth(), drawArea.getHeight());
-    if (board != null) {
-      board.setChanged(true); // force a redraw
-      board.setResetted(true); // force a redraw
+    if (doubleBuffered) {
+      if (backBuffer == null || backBuffer.getWidth() != drawArea.getWidth() || backBuffer.getHeight() != drawArea.getHeight())
+        backBuffer = Image.createImage(drawArea.getWidth(), drawArea.getHeight());
+      if (board != null) {
+        board.setChanged(true); // force a redraw
+        board.setResetted(true); // force a redraw
+      }
     }
   }
 
   public void drawBoard(Graphics graphicsScreen, Vector annotations) {
     Graphics graphics = null;
 
-    if (doubleBuffered)
+    int clipX0 = graphicsScreen.getClipX();
+    int clipY0 = graphicsScreen.getClipY();
+    int clipX1 = clipX0 + graphicsScreen.getClipWidth();
+    int clipY1 = clipY0 + graphicsScreen.getClipHeight();
+
+    int clipMokuX0 = (clipX0 - boardX) / delta;
+    int clipMokuY0 = (clipY0 - boardY) / delta;
+    int clipMokuX1 = (clipX1 - boardX) / delta;
+    int clipMokuY1 = (clipY1 - boardY) / delta;
+    if (clipMokuX0 < boardArea.x0)
+      clipMokuX0 = boardArea.x0;
+
+    if (clipMokuX1 > boardArea.x1)
+      clipMokuX1 = boardArea.x1;
+
+    if (clipMokuY0 < boardArea.y0)
+      clipMokuY0 = boardArea.y0;
+
+    if (clipMokuY1 > boardArea.y1)
+      clipMokuY1 = boardArea.y1;
+
+    //#ifdef DEBUG
+    log.debug(clipMokuX0 + "," + clipMokuY0 + " " + clipMokuX1 + "," + clipMokuY1);
+    //#endif
+
+    if (doubleBuffered) {
       graphics = backBuffer.getGraphics();
-    else
+    } else {
       graphics = graphicsScreen;
+    }
 
     if (!doubleBuffered || board.isResetted()) {
       //redraw everything
       graphics.setColor(Util.TATAMI);
-      graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2); //FIXME: ca va pas
+      graphics.fillRect(0, 0, drawArea.getWidth() + 2, drawArea.getHeight() + 2);
       board.setResetted(false);
     }
-
-    if (!doubleBuffered || board.isChanged()) {
-      boolean[][] changeMask = board.getChangeMask();
-      // draw the empty first
-      for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
-        for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
-          if (!changeMask[x][y] && board.getPosition(x, y) == Board.EMPTY) {
-            drawCell(graphics, x, y);
-            changeMask[x][y] = true;
+    if (doubleBuffered) {
+      if (board.isChanged()) {
+        boolean[][] changeMask = board.getChangeMask();
+        // draw the empty first
+        for (int x = clipMokuX0; x <= clipMokuX1; x++) {
+          for (int y = clipMokuY0; y <= clipMokuY1; y++) {
+            if (!changeMask[x][y] && board.getPosition(x, y) == Board.EMPTY) {
+              drawCell(graphics, x, y);
+              changeMask[x][y] = true;
+            }
           }
         }
-      }
 
-      for (byte x = boardArea.x0; x <= boardArea.x1; x++) {
-        for (byte y = boardArea.y0; y <= boardArea.y1; y++) {
-          if (!changeMask[x][y]) {
-            drawCell(graphics, x, y);
-            changeMask[x][y] = true;
+        for (int x = clipMokuX0; x <= clipMokuX1; x++) {
+          for (int y = clipMokuY0; y <= clipMokuY1; y++) {
+            if (!changeMask[x][y]) {
+              drawCell(graphics, x, y);
+              changeMask[x][y] = true;
+            }
           }
         }
+        board.setChanged(false);
       }
-      board.setChanged(false);
-    }
-    if (doubleBuffered)
       graphicsScreen.drawImage(backBuffer, 0, 0, Graphics.TOP | Graphics.LEFT);
+    } else {
+      for (int x = clipMokuX0; x <= clipMokuX1; x++) {
+        for (int y = clipMokuY0; y <= clipMokuY1; y++) {
+          if (board.getPosition(x, y) == Board.EMPTY) {
+            drawCell(graphics, x, y);
+          }
+        }
+      }
+      for (int x = clipMokuX0; x <= clipMokuX1; x++) {
+        for (int y = clipMokuY0; y <= clipMokuY1; y++) {
+          if (board.getPosition(x, y) != Board.EMPTY)
+            drawCell(graphics, x, y);
+        }
+      }
+      //graphicsScreen.setColor(Util.COLOR_RED);
+      //graphicsScreen.drawRect(graphicsScreen.getClipX(), graphicsScreen.getClipY(), graphicsScreen.getClipWidth()-1, graphicsScreen.getClipHeight()-1);
+    }
+
     if (counting) {
       drawTerritory(graphicsScreen);
       return; // nothing else
@@ -166,14 +228,12 @@ public class BoardPainter {
     if (cursor != null)
       drawCursor(g, cursor, playerColor); // guess the
     // next color
-    
-    if(markLastMove)
-    {
+
+    if (markLastMove) {
       SgfPoint point = currentNode.getPoint();
-      if(point != null)
+      if (point != null)
         drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.FILLED_CIRCLE), Util.COLOR_RED);
     }
-      
 
     // draw hints
     if (showHints) {
@@ -313,13 +373,14 @@ public class BoardPainter {
   }
 
   private void drawCell(Graphics g, int x, int y) {
-    int position = board.getPosition(x, y);
+
     int cx = getCellX(x);
     int cy = getCellY(y);
 
     int tlx = cx - halfdelta; // top left
     int tly = cy - halfdelta;
 
+    int position = board.getPosition(x, y);
     g.setColor(Gome.singleton.options.gobanColor);
     g.fillRect(tlx, tly, delta + 1, delta + 1);
 
@@ -346,7 +407,7 @@ public class BoardPainter {
     int y = cy - halfdelta;
     g.setColor(color);
 
-    if (Util.S60_FLAG)
+    if (Gome.singleton.options.stoneBug == 1)
       g.fillArc(x + 1, y + 1, w - 1, w - 1, 0, 360);
     else
       g.fillArc(x, y, w, w, 0, 360);
@@ -466,7 +527,6 @@ public class BoardPainter {
     g.drawLine(upx, downy, upx + q, downy);
     g.drawLine(upx, downy, upx, downy - q);
 
-    //if (color == -1) {
     g.drawLine(upx, upy + 1, upx + q, upy + 1);
     g.drawLine(upx + 1, upy, upx + 1, upy + q);
 
@@ -478,7 +538,6 @@ public class BoardPainter {
 
     g.drawLine(upx, downy - 1, upx + q, downy - 1);
     g.drawLine(upx + 1, downy, upx + 1, downy - q);
-    //}
 
   }
 
@@ -489,7 +548,6 @@ public class BoardPainter {
 
     g.setFont(currentAnnotationFont);
 
-    int x = cx;
     int y = cy - (delta - currentAnnotationFont.getHeight()) / 2 + halfdelta;
     if (erasebg) {
       g.setColor(Gome.singleton.options.gobanColor);
@@ -520,7 +578,7 @@ public class BoardPainter {
       break;
     case SymbolAnnotation.FILLED_CIRCLE:
       proportion = delta / 4;
-      g.fillArc(cx - (proportion), cy - (proportion), proportion * 2+1, proportion * 2+1, 0, 360);
+      g.fillArc(cx - (proportion), cy - (proportion), proportion * 2 + 1, proportion * 2 + 1, 0, 360);
       break;
     case SymbolAnnotation.CROSS:
       proportion = (halfdelta * 1000) / 1414; // sqrt2
@@ -589,12 +647,28 @@ public class BoardPainter {
 
   }
 
+  /**
+   * 
+   * @return GRAPHIC coordinates
+   */
   public int getWidth() {
-    return drawArea.x1 - drawArea.x0;
+    return drawArea.getWidth();
   }
 
+  /**
+   * 
+   * @return GRAPHIC coordinates
+   */
   public int getHeight() {
-    return drawArea.y1 - drawArea.y0;
+    return drawArea.getHeight();
+  }
+
+  /**
+   * 
+   * @return GRAPHIC coordinates
+   */
+  public Rectangle getDrawArea() {
+    return drawArea;
   }
 
 }
