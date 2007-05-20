@@ -20,7 +20,6 @@ public class Loader extends Canvas {
 
   //#ifdef SPLASH
   private Image gomoku;
-
   //#endif
 
   public Loader() {

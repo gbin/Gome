@@ -61,7 +61,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public static final byte NOTHING_TO_DISPLAY_MODE = 0;
   public static final byte COMMENT_MODE = 1;
   public static final byte CLOCK_MODE = 2;
-
+  
+  private Rectangle fullCanvas;
+  
   private void assignUnassignedKey() {
     Vector keys = new Vector();
     keys.addElement(new Integer(KEY_POUND));
@@ -98,8 +100,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public MainCanvas() {
+    super();
     //#ifdef MIDP2
     setFullScreenMode(true);
+    fullCanvas= new Rectangle(0,0,getWidth(),getHeight());
     //#endif
 
     assignUnassignedKey();
@@ -124,6 +128,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#ifdef DEBUG
     log.debug("Main Canvas Loaded");
     //#endif
+  }
+  
+  public Rectangle getFullCanvas()
+  {
+    return fullCanvas;
   }
 
   public void assignClockController(ClockController c) {
@@ -557,7 +566,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   protected void showNotify() {
     //log.debug("repaint() called from showNotify");
-    refresh(boardPainter.getDrawArea());
+    refresh();
   }
 
   public void recalculateLayout() {

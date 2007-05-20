@@ -508,7 +508,7 @@ public class GameController implements ServerCallback
     if (refreshNeeded) {
       tuneBoardPainter();
     }
-    return refreshNeeded ? canvas.getBoardPainter().getDrawArea() : null;
+    return refreshNeeded ? canvas.getFullCanvas() : null;
   }
 
   /* return refreshNeded */

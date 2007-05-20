@@ -31,7 +31,7 @@ public class Options extends Form {
   private ChoiceGroup scrollerSpeed;
 
   private ChoiceGroup scrollerSize;
-  
+
   private ChoiceGroup optimize;
 
   //#ifdef IGS
@@ -61,8 +61,12 @@ public class Options extends Form {
     int x = width / 4;
     int y = height / 4;
     Graphics g = temp.getGraphics();
-
+    g.setColor(Util.GOBAN_COLOR_LIGHT);
+    g.fillRect(0, 0, width, height);
     g.setColor(Util.COLOR_RED);
+    g.drawArc(x, y, w, h, 0, 360);
+
+    g.setColor(Util.COLOR_WHITE);
     switch (mode) {
     case Util.FILL_NORMAL:
       g.fillArc(x, y, w, h, 0, 360);
@@ -70,12 +74,16 @@ public class Options extends Form {
     case Util.FILL_BUG1:
       g.fillArc(x + 1, y + 1, w - 1, h - 1, 0, 360);
       break;
-    
+
     }
-    g.setColor(Util.COLOR_BLACK);
-    g.drawArc(x, y, w, h, 0, 360);
     return Image.createImage(temp);
   }
+
+  //#ifdef MIDP2
+  private static final int CHOICE_TYPE = Choice.POPUP;
+  //#else
+  //# private static final int CHOICE_TYPE = Choice.EXCLUSIVE;
+  //#endif
 
   public Options(String title, CommandListener parent, boolean registrationOnly) throws IOException {
     super(title);
@@ -119,41 +127,42 @@ public class Options extends Form {
     //#endif
 
     //#ifdef I18N
-    lang = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.lang"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    lang = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.lang"), CHOICE_TYPE);
+
     lang.append(Gome.singleton.bundle.getString("ui.option.en"), en);
     lang.append(Gome.singleton.bundle.getString("ui.option.fr"), fr); //$NON-NLS-1$ //$NON-NLS-2$
     lang.append(Gome.singleton.bundle.getString("ui.option.jp"), jp); //$NON-NLS-1$ //$NON-NLS-2$
     lang.setSelectedIndex(Gome.singleton.options.getLocaleByte(), true);
     //#endif
 
-    scrollerFont = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerFont"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    scrollerFont = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerFont"), CHOICE_TYPE); //$NON-NLS-1$
     scrollerFont.append(Gome.singleton.bundle.getString("ui.option.small"), smallLetter); //$NON-NLS-1$
     scrollerFont.append(Gome.singleton.bundle.getString("ui.option.medium"), mediumLetter); //$NON-NLS-1$
     scrollerFont.append(Gome.singleton.bundle.getString("ui.option.large"), largeLetter); //$NON-NLS-1$
     scrollerFont.setSelectedIndex(Gome.singleton.options.getScrollerFontByte(), true);
-    gobanColor = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.gobanColor"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    gobanColor = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.gobanColor"), CHOICE_TYPE); //$NON-NLS-1$
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.light"), light); //$NON-NLS-1$//$NON-NLS-2$
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.medium"), medium); //$NON-NLS-1$ //$NON-NLS-2$
     gobanColor.append(Gome.singleton.bundle.getString("ui.option.dark"), dark); //$NON-NLS-1$ //$NON-NLS-2$
     gobanColor.setSelectedIndex(Gome.singleton.options.getGobanColorByte(), true);
 
-    stoneBug = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.stoneBug"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    stoneBug = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.stoneBug"), CHOICE_TYPE); //$NON-NLS-1$
     for (int i = 0; i < 2; i++)
-      stoneBug.append(Gome.singleton.bundle.getString("ui.option.stone") + " " + (i+1) , stones[i]); //$NON-NLS-1$//$NON-NLS-2$
-     stoneBug.setSelectedIndex(Gome.singleton.options.stoneBug, true);
-    optimize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.optimize"), Choice.EXCLUSIVE); //$NON-NLS-1$
+      stoneBug.append(Gome.singleton.bundle.getString("ui.option.stone") + " " + (i + 1), stones[i]); //$NON-NLS-1$//$NON-NLS-2$
+    stoneBug.setSelectedIndex(Gome.singleton.options.stoneBug, true);
+    optimize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.optimize"), CHOICE_TYPE); //$NON-NLS-1$
     optimize.append(Gome.singleton.bundle.getString("ui.option.speed"), null);
     optimize.append(Gome.singleton.bundle.getString("ui.option.memory"), null);
     optimize.setSelectedIndex(Gome.singleton.options.optimize, true);
 
-    scrollerSpeed = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerSpeed"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    scrollerSpeed = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerSpeed"), CHOICE_TYPE); //$NON-NLS-1$
     scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.slow"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.medium"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.fast"), null); //$NON-NLS-1$//$NON-NLS-2$
     scrollerSpeed.append(Gome.singleton.bundle.getString("ui.option.manual"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSpeed.setSelectedIndex(Gome.singleton.options.scrollerSpeed, true);
 
-    scrollerSize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerSize"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    scrollerSize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.scrollerSize"), CHOICE_TYPE); //$NON-NLS-1$
     scrollerSize.append(Gome.singleton.bundle.getString("ui.option.oneLiner"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSize.append(Gome.singleton.bundle.getString("ui.option.oneHalf"), null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSize.append(Gome.singleton.bundle.getString("ui.option.twoLiner"), null); //$NON-NLS-1$//$NON-NLS-2$
@@ -164,7 +173,7 @@ public class Options extends Form {
 
     igsPassword = new TextField(Gome.singleton.bundle.getString("ui.password"), Gome.singleton.options.igsPassword, 10, TextField.ANY);
 
-    igsSize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.igsSize"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    igsSize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.option.igsSize"), CHOICE_TYPE); //$NON-NLS-1$
     igsSize.append("9x9", null); //$NON-NLS-1$ //$NON-NLS-2$
     igsSize.append("13x13", null); //$NON-NLS-1$ //$NON-NLS-2$
     igsSize.append("19x19", null); //$NON-NLS-1$ //$NON-NLS-2$
