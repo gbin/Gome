@@ -30,9 +30,6 @@ public class Loader extends Canvas {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    //#ifdef MIDP2
-    setFullScreenMode(true);
-    //#endif
     //#endif
   }
 

@@ -57,7 +57,6 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   private List uiFileBlock;
   private List uiFile;
 
-  private int indexFolder;
   private int indexBlock;
   private int selectedNum;
   private Display display;
@@ -301,10 +300,10 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
         indexBlock = index;
         showFile();
       } else if (c == RANDOM) {
-        Object entry = entries.elementAt(indexFolder);
-        int num = ((CollectionEntry) entry).getCollectionSize();
+        CollectionEntry entry = (CollectionEntry) currentItem.getEntry();
+        int num = entry.getCollectionSize();
         selectedNum = Util.rnd(num);
-        listener.loadFile((CollectionEntry) entry, selectedNum);
+        listener.loadFile(entry, selectedNum);
 
       }
     } else if (s == uiFile) {
@@ -361,11 +360,12 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
    */
   private void showFileBlock() {
 
-    uiFileBlock = new List(currentItem.getEntry().getUrl(), Choice.IMPLICIT);
+    FileEntry entry = currentItem.getEntry();
+    uiFileBlock = new List(entry.getUrl(), Choice.IMPLICIT);
 
     uiFileBlock.addCommand(MenuEngine.BACK);
     uiFileBlock.setCommandListener(this);
-    int all = ((CollectionEntry) entries.elementAt(indexFolder)).getCollectionSize();
+    int all = ((CollectionEntry) entry).getCollectionSize();
     int remain = all;
     int n = 0;
 
@@ -389,14 +389,15 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
   }
 
   private void showFile() {
-    uiFile = new List(currentItem.getEntry().getUrl(), Choice.IMPLICIT);
+    FileEntry entry = currentItem.getEntry();
+    uiFile = new List(entry.getUrl(), Choice.IMPLICIT);
     uiFile.addCommand(MenuEngine.BACK);
     uiFile.addCommand(OPEN);
     uiFile.setCommandListener(this);
 
     int min = indexBlock * BLOCK_SIZE + 1;
 
-    int all = ((CollectionEntry) entries.elementAt(indexFolder)).getCollectionSize();
+    int all = ((CollectionEntry) entry).getCollectionSize();
     int max = Math.min((indexBlock + 1) * BLOCK_SIZE, all);
 
     for (int i = min; i <= max; ++i)

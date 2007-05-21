@@ -25,7 +25,7 @@ import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Options;
 
-public class Gome extends MIDlet implements CommandListener, Runnable {
+public class Gome extends MIDlet implements CommandListener {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Gome");
   //#endif
@@ -53,7 +53,15 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   private Options optionsForm;
 
   public Gome() {
+    super();
     singleton = this;
+    display = Display.getDisplay(this);
+    Loader splash = new Loader();
+    //#ifdef MIDP2
+    splash.setFullScreenMode(true);
+    //#endif
+    display.setCurrent(splash);
+    splash.serviceRepaints();
   }
 
   void loadOptions() throws IOException {
@@ -92,18 +100,24 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
     //#ifdef DEBUG
     log.info("Application start");
     //#endif
-
-    if (display == null) {
-      display = Display.getDisplay(this);
-
-      Loader splash = new Loader();
-
-      display.setCurrent(splash);
-
-      Thread t = new Thread(this);
-      t.start();
-      splash.serviceRepaints();
+    try {
+      try {
+        loadOptions();
+      } catch (Throwable t) {
+        options = new GomeOptions();
+      }
+      bundle = new ResourceBundle("main", Gome.singleton.options.locale); //$NON-NLS-1$
+      if (!checkLicense())
+        return;
+      bootGome();
+    } catch (Throwable t) {
+      //#ifdef DEBUG
+      log.error("Load error", t);
+      t.printStackTrace();
+      //#endif
+      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }
+
   }
 
   public void pauseApp() {
@@ -191,8 +205,10 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
   private void bootGome() {
     if (gameController == null)
       gameController = new GameController(display);
-    if (mainCanvas == null)
+    if (mainCanvas == null) {
       mainCanvas = new MainCanvas();
+    }
+
     if (menuEngine == null) {
       menuEngine = new MenuEngine();
     }
@@ -207,26 +223,6 @@ public class Gome extends MIDlet implements CommandListener, Runnable {
     }
 
     mainCanvas.setSplashInfo(message);
-  }
-
-  public void run() {
-    try {
-      try {
-        loadOptions();
-      } catch (Throwable t) {
-        options = new GomeOptions();
-      }
-      bundle = new ResourceBundle("main", Gome.singleton.options.locale); //$NON-NLS-1$
-      if (!checkLicense())
-        return;
-      bootGome();
-    } catch (Throwable t) {
-      //#ifdef DEBUG
-      log.error("Load error", t);
-      t.printStackTrace();
-      //#endif
-      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
-    }
   }
 
 }
