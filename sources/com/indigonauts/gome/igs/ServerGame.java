@@ -6,8 +6,6 @@ package com.indigonauts.gome.igs;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import com.indigonauts.gome.common.Util;
-
 public class ServerGame {
   public int nb;
 
