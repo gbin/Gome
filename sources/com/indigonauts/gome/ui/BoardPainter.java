@@ -136,18 +136,19 @@ public class BoardPainter {
     int clipX1 = clipX0 + graphicsScreen.getClipWidth();
     int clipY1 = clipY0 + graphicsScreen.getClipHeight();
 
-    int clipMokuX0 = (clipX0 - boardX) / delta;
-    int clipMokuY0 = (clipY0 - boardY) / delta;
-    int clipMokuX1 = (clipX1 - boardX) / delta;
-    int clipMokuY1 = (clipY1 - boardY) / delta;
-    if (clipMokuX0 < boardArea.x0)
-      clipMokuX0 = boardArea.x0;
+    int clipMokuX0 = (clipX0 - boardX) / delta + boardArea.x0;
+    int clipMokuY0 = (clipY0 - boardY) / delta + boardArea.y0;
+    int clipMokuX1 = (clipX1 - boardX) / delta + boardArea.x0;
+    int clipMokuY1 = (clipY1 - boardY) / delta + boardArea.y0;
+
+    if (clipMokuX0 < 0)
+      clipMokuX0 = 0;
 
     if (clipMokuX1 > boardArea.x1)
       clipMokuX1 = boardArea.x1;
 
-    if (clipMokuY0 < boardArea.y0)
-      clipMokuY0 = boardArea.y0;
+    if (clipMokuY0 < 0)
+      clipMokuY0 = 0;
 
     if (clipMokuY1 > boardArea.y1)
       clipMokuY1 = boardArea.y1;
