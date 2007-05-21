@@ -102,8 +102,6 @@ public class GameController implements ServerCallback
 
   private ClockController clock;
 
-  private int commentMode = 0;
-
   private boolean tryingToConnect = false;
 
   private boolean connectToIgs = false;
@@ -268,13 +266,12 @@ public class GameController implements ServerCallback
     cursor.y = (byte) ((playArea.y0 + playArea.y1) / 2);
     switchCurrentNode(model.getFirstNode());
     playNode(currentNode);
-    if (model.isCommented()) {
-      commentMode = MainCanvas.COMMENT_MODE;
-    } else {
-      commentMode = MainCanvas.NOTHING_TO_DISPLAY_MODE;
-    }
     initPainter(); // setclockandcomment need the definitive painter for the layout
-    Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
+    if (model.isCommented()) {
+      canvas.updateClockAndCommentMode(MainCanvas.COMMENT_MODE);
+    } else {
+      canvas.updateClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
+    }
 
   }
 
@@ -533,17 +530,14 @@ public class GameController implements ServerCallback
     case JOSEKI_MODE:
     case REVIEW_MODE:
     case PROBLEM_MODE:
-      // TODO enable the clock for the observe mode
-      commentMode = (commentMode + 1) % 2; // max = 1 so no clock
-
+      canvas.cycleClockAndCommentMode(false);
       break;
     case OBSERVE_MODE:
     case ONLINE_MODE:
-      commentMode = (commentMode + 1) % 3; // max = 2 so clock and both
+      canvas.cycleClockAndCommentMode(true);
       break;
 
     }
-    canvas.setClockAndCommentMode(commentMode);
     refreshPainter();
   }
 
@@ -976,8 +970,7 @@ public class GameController implements ServerCallback
       clock = new ClockController(true, this);
 
       canvas.assignClockController(clock);
-      commentMode = MainCanvas.CLOCK_MODE;
-      Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
+      canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
     } catch (Exception e) {
       Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
     }
@@ -1152,8 +1145,7 @@ public class GameController implements ServerCallback
     clock = new ClockController(time, byoTime, byoStone, this);
 
     canvas.assignClockController(clock);
-    commentMode = MainCanvas.CLOCK_MODE;
-    Gome.singleton.mainCanvas.setClockAndCommentMode(commentMode);
+    canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
 
     newGame(challenge.size, 0, ONLINE_MODE); // we don't know yet the
     // handi
@@ -1300,7 +1292,7 @@ public class GameController implements ServerCallback
     countMode = true;
     this.evaluationMode = evaluationMode;
     board.startCounting(evaluationMode, (playMode != ONLINE_MODE) && !evaluationMode);
-    Gome.singleton.mainCanvas.setClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
+    Gome.singleton.mainCanvas.updateClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
     canvas.setSplashInfo(Gome.singleton.bundle.getString("count.markDeadStone"));
     //#ifdef IGS
     if (playMode == ONLINE_MODE)

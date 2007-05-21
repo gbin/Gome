@@ -152,15 +152,17 @@ class Scroller extends Thread {
   }
 
   public void setImg(Image img) {
+    reachTheEnd = false;
+    offset = 0;
     //#ifdef DEBUG
     log.debug("set img " + img);
     //#endif
     this.img = img;
     if (img != null && img.getHeight() > height) {
-      log.debug("image too large start the scroll");
+      //log.debug("image too large start the scroll");
       resume();
     } else {
-      log.debug("image is null or small pause");
+      //log.debug("image is null or small pause");
       pause();
     }
   }
@@ -186,10 +188,12 @@ class Scroller extends Thread {
   }
 
   private void pause() {
+    //log.debug("pause scroller");
     this.paused = true;
   }
 
   private void resume() {
+    //log.debug("resume scroller");
     this.paused = false;
     synchronized (this) {
       notifyAll();
@@ -205,6 +209,7 @@ class Scroller extends Thread {
   }
 
   public void setVisible(boolean visible) {
+    //log.debug("Set scroller visible to "+ visible);
     this.visible = visible;
     if (!visible)
       pause();

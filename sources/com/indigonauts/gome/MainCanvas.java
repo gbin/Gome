@@ -52,7 +52,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   private String splashInfo;
   private ClockController clockControl;
   private ClockPainterTask clockPainter;
-  private int bottomMode = NOTHING_TO_DISPLAY_MODE;
+  private int clockAndCommentMode = NOTHING_TO_DISPLAY_MODE;
   private int scrollx;
   private int scrolly;
   private int scrollWidth;
@@ -125,7 +125,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     setCommandListener(this);
     clockPainter = new ClockPainterTask(this);
     scroller = new Scroller(this);
-    bottomMode = NOTHING_TO_DISPLAY_MODE;
+    clockAndCommentMode = NOTHING_TO_DISPLAY_MODE;
     //#ifdef DEBUG
     log.debug("Main Canvas Loaded");
     //#endif
@@ -396,33 +396,28 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       if (clockControl != null) {
         clockControl.resumeClock();
       }
-      setClockAndCommentMode(CLOCK_MODE);
+      updateClockAndCommentMode(NOTHING_TO_DISPLAY_MODE);
     } else if (c == MenuEngine.REVIEW_MODE) {
       gc.setPlayMode(GameController.REVIEW_MODE);
       setSplashInfo(Gome.singleton.bundle.getString("ui.switchToReviewMode"));
       if (clockControl != null)
         clockControl.pauseClock();
-      setClockAndCommentMode(COMMENT_MODE);
+      updateClockAndCommentMode(COMMENT_MODE);
     } else
       Gome.singleton.menuEngine.commandAction(c, d);
   }
 
   public void paint(Graphics g) {
-log.debug("x?"+scroller.getX());
-log.debug("->"+ g.getClipX());
-log.debug("y?"+scroller.getY());
-log.debug("->"+ g.getClipY());
-log.debug("w?"+scroller.getWidth());
-log.debug("->"+ g.getClipWidth());    
-log.debug("h?"+scroller.getHeight());
-log.debug("->"+ g.getClipHeight());    
+
     if (scroller.isVisible() && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
+      //#ifdef DEBUG
       log.debug("status bar only");
+      //#endif
       drawStatusBar(g);
       return;
     }
 
-    if (bottomMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
+    if (clockAndCommentMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
             && clockPainter.getHeight() == g.getClipHeight()) {
       drawStatusBar(g);
       return;
@@ -449,7 +444,7 @@ log.debug("->"+ g.getClipHeight());
   }
 
   public void drawStatusBar(Graphics g) {
-    switch (bottomMode) {
+    switch (clockAndCommentMode) {
     case COMMENT_MODE:
       if (clockPainter != null) {
         clockPainter.cancel();
@@ -541,7 +536,7 @@ log.debug("->"+ g.getClipHeight());
       // log.debug("Set current comment to " + currentComment);
       this.currentComment = currentComment;
 
-      if (bottomMode == COMMENT_MODE) {
+      if (clockAndCommentMode == COMMENT_MODE) {
         startScroller();
       }
     }
@@ -563,10 +558,10 @@ log.debug("->"+ g.getClipHeight());
     log.debug("recalcultate Layout");
     //#endif
     int minimalBottomHeight = 0;
-    if (bottomMode == COMMENT_MODE) {
+    if (clockAndCommentMode == COMMENT_MODE) {
       minimalBottomHeight += Gome.singleton.options.getScrollerSize();
     }
-    if (bottomMode == CLOCK_MODE) {
+    if (clockAndCommentMode == CLOCK_MODE) {
       if (clockPainter != null) {
         clockPainter.cancel();
         clockPainter = null;
@@ -594,11 +589,11 @@ log.debug("->"+ g.getClipHeight());
 
     // log.debug("ExtraSpace = " + extraSpace);
 
-    if (bottomMode == CLOCK_MODE) {
+    if (clockAndCommentMode == CLOCK_MODE) {
       // log.debug("clock height = " + (clockPainter.getMinimumHeight() +
       // extraSpace));
       clockPainter.setPosition(0, boardHeight, getWidth(), extraSpace);
-    } else if (bottomMode == COMMENT_MODE) {
+    } else if (clockAndCommentMode == COMMENT_MODE) {
       // log.debug("scroller height = " + (scroller.getMinimumHeight() +
       // extraSpace));
       scrollx = 0;
@@ -610,6 +605,7 @@ log.debug("->"+ g.getClipHeight());
       //#endif
 
       scrollWidth = getWidth();
+      scroller.setPosition(scrollx, scrolly, scrollWidth, scrollHeight);
     } else {
       // log.debug("Board height = " + getHeight());
       boardHeight = getHeight();
@@ -656,16 +652,28 @@ log.debug("->"+ g.getClipHeight());
       clockPainter.cancel();
   }
 
-  public void setClockAndCommentMode(int mode) {
-    bottomMode = mode;
+  public void updateClockAndCommentMode(int mode) {
+    clockAndCommentMode = mode;
     //#ifdef DEBUG
     log.debug("recalcultate Layout by setClockAndCommentMode");
     //#endif
+    
     recalculateLayout();
-    if (bottomMode == COMMENT_MODE) {
+    if (clockAndCommentMode == COMMENT_MODE) {
       startScroller();
     } else
       stopScroller();
+    refresh();
   }
+  
+  public void cycleClockAndCommentMode(boolean withClock)
+  {
+  if(withClock)
+    updateClockAndCommentMode((clockAndCommentMode + 1) % 3);
+  else
+    updateClockAndCommentMode((clockAndCommentMode + 1) % 2);
+  
+  }
+  
 
 }
