@@ -475,7 +475,7 @@ public class FileBrowserV2 implements CommandListener, Showable, Runnable, Downl
     protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
 
       // hack for the buggy Sonyericsson implementations
-      if (currentItem == this) // should never be possible but for SE it is considered as a traverse out 
+      if (Util.SE_J5_FLAG && currentItem == this) 
       {
 
         // find back where I was
