@@ -105,6 +105,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     setFullScreenMode(true);
     fullCanvas = new Rectangle(0, 0, getWidth(), getHeight());
     //#endif
+
     assignUnassignedKey();
     addCommand(MenuEngine.NEW);
     addCommand(MenuEngine.FILES);
@@ -123,11 +124,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.EXIT);
     setCommandListener(this);
     clockPainter = new ClockPainterTask(this);
+    scroller = new Scroller(this);
     bottomMode = NOTHING_TO_DISPLAY_MODE;
     //#ifdef DEBUG
     log.debug("Main Canvas Loaded");
     //#endif
-    
   }
 
   public Rectangle getFullCanvas() {
@@ -407,8 +408,16 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void paint(Graphics g) {
-
-    if (scroller != null && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
+log.debug("x?"+scroller.getX());
+log.debug("->"+ g.getClipX());
+log.debug("y?"+scroller.getY());
+log.debug("->"+ g.getClipY());
+log.debug("w?"+scroller.getWidth());
+log.debug("->"+ g.getClipWidth());    
+log.debug("h?"+scroller.getHeight());
+log.debug("->"+ g.getClipHeight());    
+    if (scroller.isVisible() && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
+      log.debug("status bar only");
       drawStatusBar(g);
       return;
     }
@@ -470,49 +479,30 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   private void startScroller() {
     //#ifdef DEBUG
-    log.debug("Start scroller");
+    log.debug("set scroller");
     //#endif
     synchronized (SCROLLER_SYNC) {
       Font scrollerFont = Gome.singleton.options.getScrollerFont();
-      if (scroller != null && scroller.isStarted()) {
-        scroller.stop();
-      }
-
-      scroller = new Scroller(this, scrollx, scrolly, scrollWidth, scrollHeight);
+      scroller.setPosition(scrollx, scrolly, scrollWidth, scrollHeight);
       scroller.setSpeed(Gome.singleton.options.getScrollerSpeed());
       scroller.setBigStep(scrollerFont.getHeight() / 2);
 
       // log.debug("Scroller height = " + scroller.getHeight());
-
-      Image img;
-
-      img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
+      Image img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
               Util.COLOR_LIGHT_BACKGROUND);
       scroller.setImg(img);
-      scroller.start();
+      scroller.setVisible(true);
+      scroller.repaint();
     }
   }
 
   public void stopScroller() {
     //#ifdef DEBUG
-    log.debug("Stop scroller");
+    log.debug("Pause scroller");
     //#endif
     synchronized (SCROLLER_SYNC) {
-      if (scroller != null) {
-        scroller.stop();
-        scroller = null;
-      }
-    }
-  }
-
-  public void pauseScroller() {
-    //#ifdef DEBUG
-    log.debug("Stop scroller");
-    //#endif
-    synchronized (SCROLLER_SYNC) {
-      if (scroller != null) {
-        scroller.stop();
-      }
+      scroller.setVisible(false);
+      scroller.setImg(null);
     }
   }
 

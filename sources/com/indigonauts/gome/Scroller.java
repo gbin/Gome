@@ -14,8 +14,9 @@ class Scroller extends Thread {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Scroller");
   //#endif
-  private boolean running = true;
+
   private Canvas target;
+
   private int x;
   private int y;
   private int width;
@@ -27,19 +28,35 @@ class Scroller extends Thread {
   private boolean reachTheEnd = false;
   boolean waitingRepaint = true;
 
-  public Scroller(Canvas target, int x, int y, int width, int height) {
+  boolean visible = false;
+  boolean paused = true;
+  private boolean running = true;
+
+  public Scroller(Canvas target) {
     this.target = target;
-    setPosition(x, y, width, height);
+    start();
   }
 
   public void run() {
-    if (speed == -1)// manual
-      return; // don't do anything wait for the events
 
     try {
-      while (running) {
-        synchronized (this) {
-          this.wait(speed);
+      synchronized (this) {
+        while (running) {
+          if (paused) {
+            //#ifdef DEBUG
+            log.debug("scroller paused");
+            //#endif
+            this.wait();
+            //#ifdef DEBUG
+            log.debug("scroller resumed");
+            //#endif
+          } else {
+            this.wait(speed);
+          }
+          //#ifdef DEBUG
+          log.debug("scroller pulse");
+          //#endif
+
           stepUp();
         }
       }
@@ -57,9 +74,10 @@ class Scroller extends Thread {
   public void drawMe(Graphics g) // should be callbacked from the paint
   {
     waitingRepaint = false;
-    g.setClip(x, y, width, height);
-    g.drawImage(img, 0, y - offset, Graphics.LEFT | Graphics.TOP);
-
+    if (img != null) {
+      g.setClip(x, y, width, height);
+      g.drawImage(img, 0, y - offset, Graphics.LEFT | Graphics.TOP);
+    }
   }
 
   public void bigStepUp() {
@@ -73,29 +91,38 @@ class Scroller extends Thread {
   }
 
   public void stepUp() {
-    if (waitingRepaint)
-      return;
-    offset++;
-    if (offset >= img.getHeight() - height) {
-      offset = 0;
-      reachTheEnd = true;
+    if (img != null) {
+      if (waitingRepaint)
+        return;
+      offset++;
+      if (offset >= img.getHeight() - height) {
+        offset = 0;
+        reachTheEnd = true;
+      }
+      waitingRepaint = true;
+      repaint();
     }
-    waitingRepaint = true;
+  }
+
+  public void repaint() {
     target.repaint(x, y, width, height);
   }
 
   public void stepDown() {
     if (waitingRepaint)
       return;
-    offset--;
-    if (offset <= 0)
-      offset = img.getHeight() - height;
-    waitingRepaint = true;
-    target.repaint(x, y, width, height);
+    if (img != null) {
+      offset--;
+      if (offset <= 0)
+        offset = img.getHeight() - height;
+      waitingRepaint = true;
+      target.repaint(x, y, width, height);
+    }
   }
 
   public void stop() {
     running = false;
+    paused = false;
     synchronized (this) {
       notifyAll();
     }
@@ -117,7 +144,7 @@ class Scroller extends Thread {
     return y;
   }
 
-  private void setPosition(int x, int y, int width, int height) {
+  public void setPosition(int x, int y, int width, int height) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -129,18 +156,22 @@ class Scroller extends Thread {
     log.debug("set img " + img);
     //#endif
     this.img = img;
+    if (img != null && img.getHeight() > height) {
+      log.debug("image too large start the scroll");
+      resume();
+    } else {
+      log.debug("image is null or small pause");
+      pause();
+    }
   }
 
   public synchronized void start() {
-  
-    reachTheEnd = false;
 
+    reachTheEnd = false;
     offset = 0;
     running = true;
-    if (img.getHeight() > height) {
-      setPriority(Thread.MIN_PRIORITY);
-      super.start();
-    }
+    setPriority(Thread.MIN_PRIORITY);
+    super.start();
   }
 
   public void setBigStep(int bigStep) {
@@ -149,14 +180,34 @@ class Scroller extends Thread {
 
   public void setSpeed(int speed) {
     this.speed = speed;
+    if (speed == -1)// manual
+      pause();
+
   }
 
-  public synchronized boolean isStarted() {
-    return running;
+  private void pause() {
+    this.paused = true;
+  }
+
+  private void resume() {
+    this.paused = false;
+    synchronized (this) {
+      notifyAll();
+    }
   }
 
   public boolean endOfScroll() {
     return reachTheEnd;
+  }
+
+  public boolean isVisible() {
+    return visible;
+  }
+
+  public void setVisible(boolean visible) {
+    this.visible = visible;
+    if (!visible)
+      pause();
   }
 
 }
