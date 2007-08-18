@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eclipsemeMetadata jad="" version="1.6.5">
+<eclipsemeMetadata jad="gome.jad" version="1.7.3">
    <device group="Sun Java(TM) Wireless Toolkit 2.5.1 for CLDC, EA" name="DefaultColorPhone"/>
-   <signing signProject="true">
-      <keystore>$/indigonauts.keystore</keystore>
-      <alias>mykey</alias>
-      <provider/>
-      <keystoreType/>
-      <passwords storePasswords="2">
-         <keystore>Vx3J1VLp</keystore>
-         <key>Vx3J1VLp</key>
-      </passwords>
-   </signing>
+   <signing signProject="false"/>
 </eclipsemeMetadata>

@@ -17,6 +17,7 @@ import javax.microedition.lcdui.Graphics;
 
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.ui.BoardPainter;
 import com.indigonauts.gome.ui.ClockPainterTask;
 import com.indigonauts.gome.ui.GameController;
@@ -496,6 +497,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       scroller.setMoveNb(gc.getMoveNb());
       scroller.setComment(currentComment);
       scroller.setCoordinates(gc.getCursor());
+      SgfNode currentNode = gc.getCurrentNode();
+      scroller.setBrothers(currentNode.getOlder() != null, currentNode.getYounger() != null);
       scroller.setVisible(true);
       scroller.repaint();
     }

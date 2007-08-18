@@ -99,13 +99,14 @@ public class Board {
         nbCapturedWhite += vec.size();
       else
         nbCapturedBlack += vec.size();
-    }
-    if (vec.size() == 1) // only one stone captured ? perhaps it is a ko
-    // ?
-    {
-      Point capturedStone = (Point) vec.elementAt(0);
-      if (isItAKo(point, capturedStone, player)) {
-        ko = capturedStone;
+
+      if (vec.size() == 1) // only one stone captured ? perhaps it is a ko
+      // ?
+      {
+        Point capturedStone = (Point) vec.elementAt(0);
+        if (isItAKo(point, capturedStone, player)) {
+          ko = capturedStone;
+        }
       }
     }
 

@@ -148,7 +148,7 @@ public class Util {
 
   }
 
-  public static Image renderOffScreenScrollableText(String text, int width, int scrollHeight, Font font, int fgColor, int bgcolor) {
+  /*public static Image renderOffScreenScrollableText(String text, int width, int scrollHeight, Font font, int fgColor, int bgcolor) {
     Vector lines = lineSplitter(text, width, font);
     int textHeight = lines.size() * font.getHeight();
     Image imagedComment;
@@ -176,11 +176,12 @@ public class Util {
     graphics.fillRect(0, 0, imagedComment.getWidth(), imagedComment.getHeight());
     drawText(graphics,0, 0, lines, font, fgColor);
     return imagedComment;
-  }
+  }*/
 
-  public static Vector lineSplitter(String text, int width, Font font) {
+  public static Vector lineSplitter(String text, int width, int initWidth, Font font) {
     Vector lines = new Vector();
     char[] commentChars = text.toCharArray();
+    int w = initWidth;
 
     int totallength = commentChars.length;
     int index = 0;
@@ -188,7 +189,7 @@ public class Util {
       int lineWidth = 0;
       int lastSpace = -1;
       int lineBeginIndex = index;
-      while (lineWidth < width && index < totallength) {
+      while (lineWidth < w && index < totallength) {
         char currentChar = commentChars[index];
         if ((currentChar == '\n' || currentChar == '\r')) {
 
@@ -214,6 +215,7 @@ public class Util {
       String line = new String(commentChars, lineBeginIndex, lastSpace - lineBeginIndex + 1).trim();
       if (line.length() != 0)
         lines.addElement(line);
+      w = width;
     }
     return lines;
   }
@@ -276,7 +278,7 @@ public class Util {
   public static void renderSplash(Graphics g, String splashInfo, int totalwidth, int totalHeight, Font info_font, int fg, int bg) {
 
     int textWidth = totalwidth * 5 / 6;
-    Vector lines = lineSplitter(splashInfo, textWidth, info_font);
+    Vector lines = lineSplitter(splashInfo, textWidth, textWidth, info_font);
     int height = (lines.size()) * info_font.getHeight();
     int x = totalwidth / 12;
     int y = totalHeight / 4;

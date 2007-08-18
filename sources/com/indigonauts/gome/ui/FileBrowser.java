@@ -9,11 +9,9 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.microedition.lcdui.AlertType;
-import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
@@ -21,6 +19,7 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
+import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Rectangle;
@@ -35,9 +34,6 @@ import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
-//#ifndef JSR75
-import javax.microedition.rms.RecordStoreException;
-//#endif
 
 /**
  * Fetcher extention is just for the text files
@@ -49,7 +45,30 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
 
-  private Vector entries = new Vector(10);
+  private static final Vector visibleItems = new Vector();
+  public static Command OPEN;
+  public static Command SAVE_AS;
+  public static Command OPEN_REVIEW;
+  public static Command DELETE;
+  public static Command IMPORT;
+  public static Command SEND_BY_EMAIL;
+  private static Command RANDOM;
+
+  public static final Font ITEM_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+
+  private static Image dirImg;
+  private static Image remoteDirImg;
+  private static Image fileImg;
+  private static Image remoteFileImg;
+  private static Image textFileImg;
+  private static final int BLOCK_SIZE = 20;
+  private static final int DEFAULT_ILLUSTRATIVE_SIZE = 48;
+  private static Rectangle illustrativeRectangle;
+
+  private static Vector pathStack = new Vector();
+  private static Vector entriesStack = new Vector();
+
+  private Vector entries;
   private MenuEngine listener;
   private Showable parent;
   private Form uiFolder;
@@ -60,24 +79,13 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   private int selectedNum;
   private Display display;
 
-  public static Command OPEN;
-  public static Command SAVE_AS;
-  public static Command OPEN_REVIEW;
-  public static Command DELETE;
-  public static Command IMPORT;
-  public static Command SEND_BY_EMAIL;
-  private static Command RANDOM;
+  private boolean saveMode;
 
-  private static final Font ITEM_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+  private String currentDirectory;
+  private Form saveGame;
 
-  private static Image dirImg;
-  private static Image remoteDirImg;
-  private static Image fileImg;
-  private static Image remoteFileImg;
-  private static Image textFileImg;
-  private static final int BLOCK_SIZE = 20;
-  private static final int DEFAULT_ILLUSTRATIVE_SIZE = 48;
-  private static Rectangle illustrativeRectangle;
+  private IllustratedItem currentItem;
+  private IllustratedItem lastClickedItem;
 
   static {
     illustrativeRectangle = new Rectangle(0, 0, DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
@@ -103,14 +111,6 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
 
   }
 
-  private boolean saveMode;
-
-  private String currentDirectory;
-  private Form saveGame;
-
-  //boolean ended = false;
-  //Thread ticker;
-
   public FileBrowser(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
     this(parent, listener, saveMode);
     this.entries = entries;
@@ -122,28 +122,15 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     this.parent = parent;
     this.listener = listener;
     this.saveMode = saveMode;
-
-    reset();
   }
 
   public void addFile(FileEntry entry) {
     entries.addElement(entry);
   }
 
-  /**
-   * delete all contents
-   */
-  public void reset() {
-    entries.removeAllElements();
-  }
-
+ 
   public void show(Display disp) {
     uiFolder = new Form(Gome.singleton.bundle.getString("ui.filesIn", new String[] { currentDirectory }));
-    //ended = false;
-    //if (!Util.SE_J5_FLAG) {
-    //  ticker = new Thread(this);
-    //  ticker.start();
-    //}
     visibleItems.removeAllElements();
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
@@ -166,7 +153,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         } else {
           image = file.isRemote() ? remoteFileImg : fileImg;
         }
-        IllustratedItem illustratedItem = new IllustratedItem(current, image, description + (fileNum != 1 ? " [" + fileNum + "]" : ""));
+        IllustratedItem illustratedItem = new IllustratedItem(current, image, description + (fileNum != 1 ? " [" + fileNum + "]" : ""), this);
         uiFolder.append(illustratedItem);
       } else if (current instanceof IndexEntry) {
         IndexEntry file = (IndexEntry) current;
@@ -175,15 +162,11 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         } else {
           image = file.isRemote() ? remoteDirImg : dirImg;
         }
-        IllustratedItem illustratedItem = new IllustratedItem(current, image, file.getDescription());
+        IllustratedItem illustratedItem = new IllustratedItem(current, image, file.getDescription(), this);
         uiFolder.append(illustratedItem);
       }
 
     }
-    // Workaround : the traverse method of the first item will not be called if it is this serie of buggy SonyEricssons
-    //if (Util.SE_J5_FLAG) {
-    //  ((IllustratedItem) uiFolder.get(0)).traverse(0, 0, 0, null);
-    //}
 
     uiFolder.addCommand(MenuEngine.BACK);
     if (saveMode) {
@@ -210,7 +193,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     display.setCurrent(uiFolder);
   }
 
-  private Image generateIllustrativePosition(String boardArea, String black, String white) {
+  private static Image generateIllustrativePosition(String boardArea, String black, String white) {
     StringVector blackPoints = new StringVector(black, ';');
     StringVector whitePoints = new StringVector(white, ';');
     Image generated = Image.createImage(DEFAULT_ILLUSTRATIVE_SIZE, DEFAULT_ILLUSTRATIVE_SIZE);
@@ -238,13 +221,12 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void commandAction(Command c, Displayable s) {
-    //ended = true;
     if (s == uiFolder) {
       if (c == OPEN || c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
         FileEntry entry = currentItem.getEntry();
         if (entry instanceof IndexEntry) {
 
-          new IndexLoader((IndexEntry) entry, this).show(Gome.singleton.display);
+          new IndexLoader((IndexEntry) entry, this).show(display);
           return;
 
         }
@@ -271,15 +253,23 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       } else if (c == MenuEngine.SAVE) {
         saveGame = listener.createSaveGameMenu(this, currentDirectory, currentItem.getEntry().getName());
         Gome.singleton.display.setCurrent(saveGame);
-      }
-      else if (c == SAVE_AS) {
+      } else if (c == SAVE_AS) {
         saveGame = listener.createSaveGameMenu(this, currentDirectory, null);
         Gome.singleton.display.setCurrent(saveGame);
       }
 
       else if (c == MenuEngine.BACK) {
-        parent.show(display);
-        // You cannot put it at null as it is cached now
+        int size = pathStack.size();
+        if (size == 0)
+          parent.show(display);
+        else {
+          this.currentDirectory = (String) pathStack.lastElement();
+          this.entries = (Vector) entriesStack.lastElement();
+          pathStack.removeElementAt(size - 1);
+          entriesStack.removeElementAt(size - 1);
+          show(display);
+        }
+
       } else if (c == DELETE) {
         FileEntry entry = currentItem.getEntry();
         if (!(entry instanceof LocalFileEntry)) {
@@ -294,7 +284,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
             break;
           }
         }
-       
+
         Gome.singleton.display.setCurrent(uiFolder); // don't reparse everthing with "show"
       } else if (c == IMPORT) {
         FileEntry selectedFile = currentItem.getEntry();
@@ -346,8 +336,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
           }
         }
         // TODO confirmation
-        
-        
+
         //#ifdef JSR75
         //# try {
         //#   IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
@@ -361,7 +350,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
           Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
         }
         //#endif
-        
+
         if (!alreadyThere)
           addFile(new LocalFileEntry(currentDirectory, name, name));
         this.show(display);
@@ -452,8 +441,13 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void downloadFinished(String path, Vector files) {
-    FileBrowser son = new FileBrowser(this, listener, files, path, saveMode);
-    son.show(Gome.singleton.display);
+    pathStack.addElement(currentDirectory);
+    entriesStack.addElement(entries);
+    //FileBrowser son = new FileBrowser(this, listener, files, path, saveMode);
+    //son.show(Gome.singleton.display);
+    this.currentDirectory = path;
+    this.entries = files;
+    show(Gome.singleton.display);
   }
 
   public void downloadFailure(Exception reason) {
@@ -468,146 +462,42 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
   }
 
-  private IllustratedItem currentItem;
-  private IllustratedItem lastClickedItem;
-  private static final Vector visibleItems = new Vector();
+  public IllustratedItem getCurrentItem() {
+    return currentItem;
+  }
 
-  class IllustratedItem extends CustomItem {
-    //#ifdef DEBUG
-    //# private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
-    //#endif
-    private Image icon;
-    private FileEntry entry;
-    private String text;
-    private boolean repaint, traversed;
-    private boolean tooLarge;
-    private int ticked = 0;
+  public void setCurrentItem(IllustratedItem currentItem) {
+    this.currentItem = currentItem;
+  }
 
-    public IllustratedItem(FileEntry entry, Image icon, String text) {
-      super(null);
-      this.icon = icon;
-      this.entry = entry;
-      this.text = text == null ? "" : text;
-      this.tooLarge = icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text) > uiFolder.getWidth();
+  public void traverseOut() {
+    for (int i = 0, size = visibleItems.size(); i < size; i++)
+      ((IllustratedItem) visibleItems.elementAt(i)).forceRedraw();
+
+  }
+
+  public void showNotify(IllustratedItem illustratedItem) {
+    visibleItems.addElement(illustratedItem);
+  }
+
+  public void hideNotify(IllustratedItem illustratedItem) {
+    visibleItems.removeElement(illustratedItem);
+  }
+
+  public int getWidth() {
+    return uiFolder.getWidth();
+  }
+
+  public void open() {
+    commandAction(OPEN, uiFolder);
+  }
+
+  public void clicked(IllustratedItem illustratedItem) {
+    if (lastClickedItem == illustratedItem) {
+      open();
+    } else {
+      lastClickedItem = illustratedItem;
     }
 
-    protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
-      if (currentItem != this) {
-        currentItem = this;
-        currentItem.repaint = !currentItem.traversed;
-        currentItem.traversed = true;
-        currentItem.repaint();
-        return true;
-      }
-
-      if (tooLarge) {
-        if (dir == Canvas.RIGHT) {
-          tickRight();
-
-        } else if (dir == Canvas.LEFT) {
-          tickLeft();
-        } else
-          return false;
-        return true;
-      }
-      return false;
-
-    }
-
-    protected void traverseOut() {
-      //ticked = 0;
-      for (int i = 0, size = visibleItems.size(); i < size; i++)
-        ((IllustratedItem) visibleItems.elementAt(i)).repaint();
-    }
-
-    protected void showNotify() {
-      visibleItems.addElement(this);
-    }
-
-    protected void hideNotify() {
-      visibleItems.removeElement(this);
-    }
-
-    protected int getMinContentHeight() {
-      return ITEM_FONT.getHeight();
-    }
-
-    protected int getMinContentWidth() {
-      return uiFolder.getWidth();
-    }
-
-    protected int getPrefContentHeight(int height) {
-      return Math.max(icon.getHeight(), ITEM_FONT.getHeight());
-    }
-
-    protected int getPrefContentWidth(int width) {
-      return uiFolder.getWidth();
-    }
-
-    protected void paint(Graphics g, int w, int h) {
-      if (repaint) {
-        repaint();
-        repaint = false;
-      }
-      if (currentItem == this) {
-        g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_BACKGROUND));
-        g.fillRect(0, 0, w, h);
-        g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_FOREGROUND));
-      } else {
-        g.setColor(Gome.singleton.display.getColor(Display.COLOR_FOREGROUND));
-      }
-      g.setFont(ITEM_FONT);
-
-      g.drawImage(icon, 0, 0, Graphics.TOP | Graphics.LEFT);
-
-      String showText;
-
-      if (ticked > 0) {
-        showText = text.substring(ticked);
-      }
-
-      else {
-        showText = text;
-      }
-      g.drawString(showText, icon.getWidth() + ITEM_FONT.charWidth(' '), (h - ITEM_FONT.getHeight()) / 2, Graphics.TOP | Graphics.LEFT);
-
-    }
-
-    public FileEntry getEntry() {
-      return entry;
-    }
-
-    protected void keyPressed(int keyCode) {
-      if (Gome.singleton.mainCanvas.getGameAction(keyCode) == Canvas.FIRE) {
-        (FileBrowser.this).commandAction(OPEN, uiFolder);
-      } else {
-        super.keyPressed(keyCode);
-      }
-    }
-
-    public boolean isTooLarge() {
-      return tooLarge;
-
-    }
-
-    protected void pointerReleased(int x, int y) {
-      if (lastClickedItem == this) {
-        (FileBrowser.this).commandAction(OPEN, uiFolder);
-      } else {
-        lastClickedItem = this;
-      }
-    }
-
-    public void tickRight() {
-      if (icon.getWidth() + ITEM_FONT.charWidth(' ') + ITEM_FONT.stringWidth(text.substring(ticked)) > uiFolder.getWidth())
-        ticked++;
-      repaint();
-    }
-
-    public void tickLeft() {
-      if (ticked > 0)
-        ticked--;
-      repaint();
-    }
   }
 }

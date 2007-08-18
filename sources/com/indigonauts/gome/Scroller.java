@@ -36,7 +36,7 @@ public class Scroller extends Thread {
   boolean visible = false;
   boolean paused = true;
   private boolean running = true;
-  
+
   private static final int boxHeight = SMALL_FONT_BOLD.getHeight();
 
   public Scroller(Canvas target) {
@@ -78,8 +78,6 @@ public class Scroller extends Thread {
     //#endif
   }
 
-  
-
   private Image tempBuff;
   private int[] afterRaster;
 
@@ -98,16 +96,16 @@ public class Scroller extends Thread {
 
     boxWidth += content.length * sep;
     boxWidth += space;
-    
+
     Graphics gt = tempBuff.getGraphics();
     gt.setColor(bg);
     gt.fillRect(0, 0, boxWidth, boxHeight);
 
     gt.setColor(Util.COLOR_WHITE);
-    
+
     gt.fillRoundRect(0, 0, boxWidth, boxHeight, boxHeight, boxHeight);
     gt.setFont(SMALL_FONT_BOLD);
-    
+
     int xx = space;
     for (int i = 0; i < content.length - 1; i++) {
       gt.setColor(color[i]);
@@ -117,20 +115,20 @@ public class Scroller extends Thread {
       gt.drawString(SEP, xx, boxHeight, Graphics.BOTTOM | Graphics.LEFT);
       xx += sep;
     }
-    
+
     gt.setColor(color[content.length - 1]);
     gt.drawString(content[content.length - 1], xx, boxHeight, Graphics.BOTTOM | Graphics.LEFT);
 
     int len = boxWidth * boxHeight;
     if (afterRaster == null || afterRaster.length < len)
       afterRaster = new int[len];
-    
+
     tempBuff.getRGB(afterRaster, 0, boxWidth, 0, 0, boxWidth, boxHeight);
-    
+
     for (int i = 0; i < len; i++) {
       afterRaster[i] = 0xA0000000 + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
     }
-    g.drawRGB(afterRaster, 0, boxWidth, x -boxWidth, y, boxWidth, boxHeight, true);
+    g.drawRGB(afterRaster, 0, boxWidth, x - boxWidth, y, boxWidth, boxHeight, true);
 
   }
 
@@ -144,36 +142,51 @@ public class Scroller extends Thread {
     if (lines != null) {
       Util.drawText(g, 0, y - offset, lines, font, Util.COLOR_BLACK);
     }
-    
+
     int nb = 1;
     if (coordinates != null)
       nb++;
     if (fileIndex != null)
       nb++;
-    
+    if (older || younger)
+      nb++;
+
     String[] strings = new String[nb];
     int[] colors = new int[nb];
-    
-    
-    
+
+    if (older && younger) {
+      strings[--nb] = UP_DOWN;
+      colors[nb] = Util.COLOR_RED;
+    } else if (older) {
+      strings[--nb] = UP;
+      colors[nb] = Util.COLOR_RED;
+    } else if (younger) {
+      strings[--nb] = DOWN;
+      colors[nb] = Util.COLOR_RED;
+    }
+
     if (coordinates != null) {
       strings[--nb] = coordinates;
       colors[nb] = Util.COLOR_RED;
     }
-    
+
     strings[--nb] = "#" + moveNb;
     colors[nb] = Util.COLOR_BLUE;
-    
+
     if (fileIndex != null) {
       strings[--nb] = fileIndex;
       colors[nb] = Util.COLOR_GREEN;
     }
-    
 
-    drawOverlayBox(g, width-2, y+1, strings, colors, Util.COLOR_LIGHT_BACKGROUND);
-    
-
+    drawOverlayBox(g, width - 2, y + 1, strings, colors, Util.COLOR_LIGHT_BACKGROUND);
   }
+
+  private static final char[] UPC = { 8593 };
+  private static final char[] DOWNC = { 8595 };
+  private static final char[] UP_DOWNC = { 8597 };
+  private static final String UP = new String(UPC);
+  private static final String DOWN = new String(DOWNC);
+  private static final String UP_DOWN = new String(UP_DOWNC);
 
   public void bigStepUp() {
     offset += bigStep;
@@ -253,9 +266,30 @@ public class Scroller extends Thread {
   private Font font;
   private int textHeight;
   private String fileIndex;
+  private boolean younger;
+  private boolean older;
+
+  public void setBrothers(boolean older, boolean younger) {
+    this.older = older;
+    this.younger = younger;
+  }
 
   public void setMoveNb(int nb) {
     moveNb = nb;
+  }
+
+  private int initTextWidth() {
+    int l = 4; // #1 + 2 margin 
+    if (moveNb > 10)
+      l++;
+    if (moveNb > 100)
+      l++;
+
+    l += 3; // - coordinates
+
+    if (older || younger)
+      l += 2; // - arrow
+    return width - SMALL_FONT_BOLD.charWidth('-') * l;
   }
 
   private static final char[] COORDS = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T' };
@@ -273,7 +307,7 @@ public class Scroller extends Thread {
       lines = null;
       pause();
     } else {
-      lines = Util.lineSplitter(comments, width, Gome.singleton.options.getScrollerFont());
+      lines = Util.lineSplitter(comments, width, initTextWidth(), Gome.singleton.options.getScrollerFont());
 
       font = Gome.singleton.options.getScrollerFont();
       textHeight = lines.size() * font.getHeight();
@@ -340,11 +374,11 @@ public class Scroller extends Thread {
   }
 
   public void setFileIndex(int i) {
-    if(i==0)
+    if (i == 0)
       fileIndex = null;
     else
-      fileIndex = String.valueOf(i); 
-    
+      fileIndex = String.valueOf(i);
+
   }
 
 }

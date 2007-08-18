@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="con" path="J2MELIB"/>
 	<classpathentry kind="src" path="sources"/>
-	<classpathentry kind="con" path="J2MELIB"/>
-	<classpathentry kind="output" path="classes"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>

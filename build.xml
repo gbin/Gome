@@ -25,6 +25,7 @@
 		<include name="com/indigonauts/gome/i18n/help/*.*" />
 		<include name="index.txt" />
 		<include name="gome.png" />
+		<include name="gomoicon.png" />
 	</fileset>
 
 	<patternset id="gomoku">
@@ -148,7 +149,7 @@
 	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="JOSEKI MIDP2 JSR75" />
 		<var name="midlet.name" value="gome-joseki-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,JSR75" />
+		<var name="symbols" value="IGS,I18N,SPLASH,MENU_IMAGES,JSR75,DEBUG" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
@@ -163,7 +164,7 @@
 	<target name="VJOSEKI_NOIMAGE_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 			<echo message="JOSEKI NOIMAGE MIDP2 JSR75" />
 			<var name="midlet.name" value="gome-joseki-noimage-jsr75-MIDP2" />
-			<var name="symbols" value="IGS,I18N,SPLASH,JSR75,DEBUG" />
+			<var name="symbols" value="IGS,I18N,SPLASH,JSR75" />
 			<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 			<replace file="${project.root.gome}/${midlet.name}.jad">
 				<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
