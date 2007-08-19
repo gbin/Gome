@@ -71,13 +71,14 @@ public class MenuEngine implements CommandListener {
   //#endif
 
   public static Command REQUEST;
-  
+
   public static Command OPTIONS;
   //#ifdef DEBUG
   public static Command CONSOLE;
   //#endif
   public static Command HELP;
   public static Command BACK;
+  public static Command OK;
   public static Command START;
   public static Command EXIT;
 
@@ -88,6 +89,7 @@ public class MenuEngine implements CommandListener {
   public static Command RESIGN;
 
   public static Command COMMENT;
+  public static Command EDIT_NODE;
   public static Command ZOOM;
   public static Command UNDO;
   public static Command HINT;
@@ -101,6 +103,9 @@ public class MenuEngine implements CommandListener {
 
   private Form newGameForm;
   private Form saveGameForm;
+
+  private EditNodeForm editNodeForm;
+
   private List igsGameList;
   private ChoiceGroup newGameSize, setKomi;
   private TextField newGameHandicap, newGameKomi;
@@ -161,6 +166,7 @@ public class MenuEngine implements CommandListener {
 
     HELP = new Command(Gome.singleton.bundle.getString("ui.help"), Command.SCREEN, 9); //$NON-NLS-1$
     BACK = new Command(Gome.singleton.bundle.getString("ui.back"), Command.BACK, 0); // BACK
+    OK = new Command(Gome.singleton.bundle.getString("ui.ok"), Command.BACK, 5); // BACK
     START = new Command(Gome.singleton.bundle.getString("ui.start"), Command.SCREEN, 10); //$NON-NLS-1$
     EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); // EXIT
 
@@ -170,9 +176,9 @@ public class MenuEngine implements CommandListener {
     DECLINE = new Command(Gome.singleton.bundle.getString("ui.decline"), Command.SCREEN, 5); //$NON-NLS-1$
     RESIGN = new Command(Gome.singleton.bundle.getString("ui.resign"), Command.SCREEN, 5); //$NON-NLS-1$
     REQUEST = new Command(Gome.singleton.bundle.getString("ui.request"), Command.SCREEN, 5); //$NON-NLS-1$
-    
 
     COMMENT = new Command(Gome.singleton.bundle.getString("ui.comment"), Command.SCREEN, 5); //$NON-NLS-1$
+    EDIT_NODE = new Command(Gome.singleton.bundle.getString("ui.editNode"), Command.SCREEN, 5); //$NON-NLS-1$
     ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
     UNDO = new Command(Gome.singleton.bundle.getString("ui.undo"), Command.SCREEN, 5); //$NON-NLS-1$
     HINT = new Command(Gome.singleton.bundle.getString("ui.hint"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -220,8 +226,7 @@ public class MenuEngine implements CommandListener {
     return createForm;
   }
 
-  public void updateLastBrowser(FileBrowser browser)
-  {
+  public void updateLastBrowser(FileBrowser browser) {
     fileBrowser = browser;
   }
 
@@ -320,6 +325,12 @@ public class MenuEngine implements CommandListener {
           gc.reverseShowHint();
           gc.tuneBoardPainter();
           Gome.singleton.mainCanvas.refresh();
+        } else if (c == EDIT_NODE) {
+          editNodeForm = new EditNodeForm(null, Gome.singleton.gameController.getBoard(), Gome.singleton.gameController.getCurrentNode());
+          editNodeForm.addCommand(OK);
+          editNodeForm.addCommand(BACK);
+          editNodeForm.setCommandListener(this);
+          editNodeForm.show(Gome.singleton.display);
         }
 
         else if (c == HELP) {
@@ -413,7 +424,7 @@ public class MenuEngine implements CommandListener {
           refreshUserList(gc.igs.getUserList());
           return;
         }
-
+        igsUserList = null;
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
 
       } else if (d == challengeForm) {
@@ -448,14 +459,26 @@ public class MenuEngine implements CommandListener {
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
       }
       //#endif
+      else if (d == editNodeForm) {
+        if (c == OK) {
+          gc.setCurrentNodeComment(((EditNodeForm) d).getComment());
+        }
+        editNodeForm = null;
+        Gome.singleton.mainCanvas.show(Gome.singleton.display);
+      }
       //#ifdef DEBUG
       else if (d == logCanvas) {
+        logCanvas = null;
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
       }
       //#endif
     } catch (Throwable t) {
       //#ifdef DEBUG
       log.error(t);
+      logCanvas = Logger.getLogCanvas();
+      logCanvas.addCommand(BACK);
+      logCanvas.setCommandListener(this);
+      Gome.singleton.display.setCurrent(logCanvas);
       //#endif
     }
   }

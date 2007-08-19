@@ -63,10 +63,10 @@ public class Util {
   public static final int GOBAN_COLOR_LIGHT = 0x00FFDD00;
   public static final int GOBAN_COLOR_MEDIUM = 0x00F0CC00;
   public static final int GOBAN_COLOR_DARK = 0x00E0BB00;
-  
+
   public static final byte FILL_BUG1 = 1;
   public static final byte FILL_NORMAL = 0;
-  
+
   public static final byte FOR_SPEED = 0;
   public static final byte FOR_MEMORY = 0;
 
@@ -223,7 +223,7 @@ public class Util {
   public static void drawText(Graphics graphics, int x, int y, Vector lines, Font font, int fgColor) {
     Enumeration lineEnum = lines.elements();
     int drawat = y;
-   
+
     graphics.setFont(font);
     graphics.setColor(fgColor);
     while (lineEnum.hasMoreElements()) {
@@ -244,12 +244,12 @@ public class Util {
   }
 
   public static Image renderIcon(Image icon, int width, int height) {
-    if(width < icon.getWidth() || height < icon.getHeight())
+    if (width < icon.getWidth() || height < icon.getHeight())
       return icon;
     int[] is = new int[width * height];
     int x = (width - icon.getWidth()) / 2;
     int y = (height - icon.getHeight()) / 2;
-    icon.getRGB(is, x + y *width, width,0, 0, icon.getWidth(), icon.getHeight());
+    icon.getRGB(is, x + y * width, width, 0, 0, icon.getWidth(), icon.getHeight());
     return Image.createRGBImage(is, width, height, true);
   }
 
@@ -282,7 +282,7 @@ public class Util {
     int height = (lines.size()) * info_font.getHeight();
     int x = totalwidth / 12;
     int y = totalHeight / 4;
-    
+
     g.setColor(bg);
     g.fillRect(x, y, textWidth, height);
     drawText(g, x, y, lines, info_font, fg);
@@ -363,9 +363,25 @@ public class Util {
     SgfNode firstNode = model.getFirstNode();
     board.placeStones(firstNode.getAB(), Board.BLACK);
     board.placeStones(firstNode.getAW(), Board.WHITE);
-    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false,false, firstNode, model);
+    illustrativeBoard.drawMe(img.getGraphics(), null, 0, false, false, firstNode, model);
     return Image.createImage(img);
   }
 
-  
+  public String expandString(String originalMessage, String[] args) {
+    StringBuffer newMessage = new StringBuffer();
+
+    for (int i = 0; i < args.length; i++) {
+      String k = "%" + i;
+      int index = originalMessage.indexOf(k);
+      if (index == -1)
+        break;
+
+      String token = originalMessage.substring(0, index);
+      originalMessage = originalMessage.substring(index + 2, originalMessage.length());
+      newMessage.append(token + args[i]);
+    }
+    newMessage.append(originalMessage);
+    return newMessage.toString();
+  }
+
 }

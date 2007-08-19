@@ -224,6 +224,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.FINISHED_COUNTING);
     removeCommand(MenuEngine.EVALUATE);
     removeCommand(MenuEngine.RESIGN);
+    removeCommand(MenuEngine.EDIT_NODE);
     //#ifdef IGS
     removeCommand(MenuEngine.IGS_MESSAGE);
     removeCommand(MenuEngine.IGS_GAMELIST);
@@ -250,6 +251,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.ZOOM);
     addCommand(MenuEngine.UNDO);
     addCommand(MenuEngine.EVALUATE);
+    addCommand(MenuEngine.EDIT_NODE);
     //#ifdef IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
 
@@ -267,8 +269,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.PASS);
     addCommand(MenuEngine.RESIGN);
     removeCommand(MenuEngine.IGS_CONNECT);
-    addCommand(MenuEngine.REQUEST_KOMI);
-    addCommand(MenuEngine.CHANGE_ONLINE_HANDICAP);
+    addCommand(MenuEngine.IGS_REQUEST_KOMI);
+    addCommand(MenuEngine.IGS_CHANGE_HANDICAP);
     addCommand(MenuEngine.IGS_MESSAGE);
     addCommand(MenuEngine.ZOOM);
   }
@@ -276,14 +278,14 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   //#endif
   //#ifdef IGS
   public void removeOnlineSetKomiAndHandicapMenuItem() {
-    removeCommand(MenuEngine.REQUEST_KOMI);
-    removeCommand(MenuEngine.CHANGE_ONLINE_HANDICAP);
+    removeCommand(MenuEngine.IGS_REQUEST_KOMI);
+    removeCommand(MenuEngine.IGS_CHANGE_HANDICAP);
   }
 
   //#endif
   //#ifdef IGS
   public void removeOnlineSetHandicapMenuItem() {
-    removeCommand(MenuEngine.CHANGE_ONLINE_HANDICAP);
+    removeCommand(MenuEngine.IGS_CHANGE_HANDICAP);
   }
 
   //#endif

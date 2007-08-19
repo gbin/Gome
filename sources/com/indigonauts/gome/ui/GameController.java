@@ -154,8 +154,6 @@ public class GameController implements ServerCallback
   }
 
   public void setPlayMode(char playMode) {
-    // if ((this.playMode == GAME_ENDED_MODE) && (playMode != REVIEW_MODE))
-    // Gome.singleton.mainCanvas.switchToReviewMenu();
 
     this.playMode = playMode;
 
@@ -885,12 +883,20 @@ public class GameController implements ServerCallback
     //  long bf = System.currentTimeMillis();
     //  SgfNode current = model.getFirstNode();
     //  current.getSon();
-      //#ifdef DEBUG
+    //#ifdef DEBUG
     //  log.debug("tree building time = " + (System.currentTimeMillis() - bf));
-      //#endif
+    //#endif
 
     //}
 
+  }
+
+  public void setCurrentNodeComment(String comment) {
+    if (comment != null && comment.length() == 0) {
+      comment = null;
+    }
+    currentNode.setComment(comment);
+    canvas.setCurrentComment(comment);
   }
 
   private void switchCurrentNode(SgfNode node) {
@@ -900,10 +906,7 @@ public class GameController implements ServerCallback
       canvas.setCurrentComment(currentNode.getFather().getComment() + "\n--\n" + comment);
 
     } else {
-      if (comment != null)
-        canvas.setCurrentComment(comment);
-      else
-        canvas.setCurrentComment(null);
+      canvas.setCurrentComment(comment);
     }
   }
 
