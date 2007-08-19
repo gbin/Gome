@@ -62,14 +62,16 @@ public class MenuEngine implements CommandListener {
   public static Command IGS_SORT_BY_RANK;
   public static Command IGS_SORT_BY_NICK;
   public static Command IGS_SORT_BY_WATCH;
-  //#endif
-
-  public static Command REQUEST;
-  public static Command REQUEST_KOMI;
-  public static Command CHANGE_ONLINE_HANDICAP;
+  public static Command IGS_CHANGE_HANDICAP;
   public static Command IGS_RESET_DEAD_STONES;
   public static Command IGS_DONE_SCORE;
   public static Command GAME_STATUS;
+  public static Command IGS_REQUEST_KOMI;
+
+  //#endif
+
+  public static Command REQUEST;
+  
   public static Command OPTIONS;
   //#ifdef DEBUG
   public static Command CONSOLE;
@@ -145,8 +147,9 @@ public class MenuEngine implements CommandListener {
     IGS_SORT_BY_WATCH = new Command(Gome.singleton.bundle.getString("online.sortWatch"), Command.SCREEN, 5); //$NON-NLS-1$
 
     IGS_DONE_SCORE = new Command(Gome.singleton.bundle.getString("ui.done"), Command.SCREEN, 5);
-    REQUEST_KOMI = new Command(Gome.singleton.bundle.getString("online.requestKomi"), Command.SCREEN, 5); //$NON-NLS-1$
-    CHANGE_ONLINE_HANDICAP = new Command(Gome.singleton.bundle.getString("online.changeHandicap"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_REQUEST_KOMI = new Command(Gome.singleton.bundle.getString("online.requestKomi"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_CHANGE_HANDICAP = new Command(Gome.singleton.bundle.getString("online.changeHandicap"), Command.SCREEN, 5); //$NON-NLS-1$
+    IGS_RESET_DEAD_STONES = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
     //#endif
 
     GAME_STATUS = new Command(Gome.singleton.bundle.getString("ui.gameStatus"), Command.SCREEN, 8); //$NON-NLS-1$
@@ -167,7 +170,7 @@ public class MenuEngine implements CommandListener {
     DECLINE = new Command(Gome.singleton.bundle.getString("ui.decline"), Command.SCREEN, 5); //$NON-NLS-1$
     RESIGN = new Command(Gome.singleton.bundle.getString("ui.resign"), Command.SCREEN, 5); //$NON-NLS-1$
     REQUEST = new Command(Gome.singleton.bundle.getString("ui.request"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_RESET_DEAD_STONES = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
+    
 
     COMMENT = new Command(Gome.singleton.bundle.getString("ui.comment"), Command.SCREEN, 5); //$NON-NLS-1$
     ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
@@ -255,9 +258,9 @@ public class MenuEngine implements CommandListener {
           gc.disconnectFromServer();
         } else if (c == IGS_MESSAGE) {
           chat.sendMessage(currentChallenge.nick, null, null, Gome.singleton.mainCanvas);
-        } else if (c == REQUEST_KOMI) {
+        } else if (c == IGS_REQUEST_KOMI) {
           gomeOnlineWantKomi();
-        } else if (c == CHANGE_ONLINE_HANDICAP) {
+        } else if (c == IGS_CHANGE_HANDICAP) {
           gomeOnlineChangeHandicap();
         }
         //#endif
