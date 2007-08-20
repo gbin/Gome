@@ -15,6 +15,7 @@ import javax.microedition.lcdui.TextField;
 import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.DownloadStatus;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
@@ -48,11 +49,11 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   public Fetcher()
   {
-    super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
+    super(I18N.download_inprogress); //$NON-NLS-1$
   }
   
   public Fetcher(FileEntry entry) {
-    super(Gome.singleton.bundle.getString("ui.download.inprogress")); //$NON-NLS-1$
+    super(I18N.download_inprogress); //$NON-NLS-1$
     this.entry = entry;
     setup();
   }
@@ -81,9 +82,9 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   protected abstract void downloadFinished();
 
   public void requestLoginPassword(String pwdFile) {
-    ok = new Command(Gome.singleton.bundle.getString("ui.login"), Command.OK, 1);
-    login = new TextField(Gome.singleton.bundle.getString("ui.login"), "", 32, TextField.ANY);
-    password = new TextField(Gome.singleton.bundle.getString("ui.password"), "", 32, TextField.PASSWORD);
+    ok = new Command(I18N.login, Command.OK, 1);
+    login = new TextField(I18N.login, "", 32, TextField.ANY);
+    password = new TextField(I18N.password, "", 32, TextField.PASSWORD);
     this.pwdFile = pwdFile;
     this.delete(0);
     this.addCommand(ok);

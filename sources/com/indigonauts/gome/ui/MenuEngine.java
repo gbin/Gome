@@ -21,6 +21,7 @@ import org.apache.log4j.Logger;
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.igs.ServerChallenge;
 import com.indigonauts.gome.igs.ServerGame;
 import com.indigonauts.gome.igs.ServerUser;
@@ -36,65 +37,65 @@ public class MenuEngine implements CommandListener {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MenuEngine");
   //#endif
 
-  GameController gc;
+  private final GameController gc;
 
   // constants
-  public static Command NEXT;
-  public static Command PREVIOUS;
-  public static Command NEW;
-  public static Command FILES;
-  public static Command SAVE;
-  public static Command PLAY_MODE;
-  public static Command PASS;
-  public static Command LAST_MOVE;
-  public static Command FIRST_MOVE;
-  public static Command REVIEW_MODE;
+  public static final Command NEXT = new Command(I18N.nextInCollection, Command.SCREEN, 1);
+  public static final Command PREVIOUS = new Command(I18N.previousInCollection, Command.SCREEN, 1);
+  public static final Command NEW = new Command(I18N.new_, Command.SCREEN, 2);
+  public static final Command FILES = new Command(I18N.fileselect, Command.SCREEN, 2);
+  public static final Command SAVE = new Command(I18N.save, Command.SCREEN, 2);
+  public static final Command PLAY_MODE = new Command(I18N.playMode, Command.SCREEN, 5);
+  public static final Command PASS = new Command(I18N.pass, Command.SCREEN, 5);
+  public static final Command LAST_MOVE = new Command(I18N.lastMove, Command.SCREEN, 5);
+  public static final Command FIRST_MOVE = new Command(I18N.firstMove, Command.SCREEN, 5);
+  public static final Command REVIEW_MODE = new Command(I18N.reviewMode, Command.SCREEN, 5);
 
   //#ifdef IGS
-  public static Command IGS_CONNECT;
-  public static Command IGS_GAMELIST;
-  public static Command IGS_USERLIST;
-  public static Command IGS_DISCONNECT;
-  public static Command IGS_OBSERVE;
-  public static Command IGS_CHALLENGE;
-  public static Command IGS_DECLINE;
-  public static Command IGS_MESSAGE;
-  public static Command IGS_SORT_BY_RANK;
-  public static Command IGS_SORT_BY_NICK;
-  public static Command IGS_SORT_BY_WATCH;
-  public static Command IGS_CHANGE_HANDICAP;
-  public static Command IGS_RESET_DEAD_STONES;
-  public static Command IGS_DONE_SCORE;
-  public static Command GAME_STATUS;
-  public static Command IGS_REQUEST_KOMI;
+  public static final Command IGS_CONNECT = new Command(I18N.online.connect, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_GAMELIST = new Command(I18N.online.gameList, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_USERLIST = new Command(I18N.online.userlist, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_DISCONNECT = new Command(I18N.online.disconnect, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_OBSERVE = new Command(I18N.online.observe, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_MESSAGE = new Command(I18N.online.message, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_SORT_BY_RANK = new Command(I18N.online.sortRank, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_SORT_BY_NICK = new Command(I18N.online.sortNick, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_SORT_BY_WATCH = new Command(I18N.online.sortWatch, Command.SCREEN, 5); //$NON-NLS-1$
 
+  public static final Command IGS_DONE_SCORE = new Command(I18N.done, Command.SCREEN, 5);
+  public static final Command IGS_REQUEST_KOMI = new Command(I18N.online.requestKomi, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_CHANGE_HANDICAP = new Command(I18N.online.changeHandicap, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_RESET_DEAD_STONES = new Command(I18N.count.undoMarkDeadStone, Command.SCREEN, 5);
   //#endif
 
-  public static Command REQUEST;
+  public static final Command GAME_STATUS = new Command(I18N.gameStatus, Command.SCREEN, 8); //$NON-NLS-1$
+  public static final Command OPTIONS = new Command(I18N.options, Command.SCREEN, 8); //$NON-NLS-1$
 
-  public static Command OPTIONS;
   //#ifdef DEBUG
-  public static Command CONSOLE;
+  public static final Command CONSOLE = new Command("Console", Command.SCREEN, 9); //$NON-NLS-1$
   //#endif
-  public static Command HELP;
-  public static Command BACK;
-  public static Command OK;
-  public static Command START;
-  public static Command EXIT;
+  public static final Command HELP = new Command(I18N.help.help, Command.SCREEN, 9); //$NON-NLS-1$
+  public static final Command BACK = new Command(I18N.back, Command.BACK, 0); // BACK
+  public static final Command OK = new Command(I18N.ok, Command.BACK, 5); // BACK
+  public static final Command START = new Command(I18N.start, Command.SCREEN, 10); //$NON-NLS-1$
+  public static final Command EXIT = new Command(I18N.exit, Command.EXIT, 9); // EXIT
 
-  public static Command EVALUATE;
-  public static Command FINISHED_COUNTING;
-  public static Command ACCEPT;
-  public static Command DECLINE;
-  public static Command RESIGN;
+  public static final Command FINISHED_COUNTING = new Command(I18N.count_endCounting, Command.SCREEN, 4); //$NON-NLS-1$
+  public static final Command EVALUATE = new Command(I18N.count_evaluate, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command ACCEPT = new Command(I18N.accept, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command RESIGN = new Command(I18N.resign, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command REQUEST = new Command(I18N.request, Command.SCREEN, 5); //$NON-NLS-1$
 
-  public static Command COMMENT;
-  public static Command EDIT_NODE;
-  public static Command ZOOM;
-  public static Command UNDO;
-  public static Command HINT;
-  public static Command NEXT10MOVES;
-  public static Command PREV10MOVES;
+  public static final Command COMMENT = new Command(I18N.comment, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command EDIT_NODE = new Command(I18N.editNode, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command ZOOM = new Command(I18N.zoom, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command UNDO = new Command(I18N.undo, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command HINT = new Command(I18N.hint, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command NEXT10MOVES = new Command(I18N.next10Moves, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command PREV10MOVES = new Command(I18N.prev10Moves, Command.SCREEN, 5); //$NON-NLS-1$
 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
   private FileBrowser fileBrowser;
@@ -126,77 +127,21 @@ public class MenuEngine implements CommandListener {
 
   private byte komi;
 
-  static {
-    NEXT = new Command(Gome.singleton.bundle.getString("ui.nextInCollection"), Command.SCREEN, 1); //$NON-NLS-1$
-    PREVIOUS = new Command(Gome.singleton.bundle.getString("ui.previousInCollection"), Command.SCREEN, 1); //$NON-NLS-1$
-    NEW = new Command(Gome.singleton.bundle.getString("ui.new"), Command.SCREEN, 2); //$NON-NLS-1$
-    FILES = new Command(Gome.singleton.bundle.getString("ui.fileselect"), Command.SCREEN, 2); //$NON-NLS-1$
-    SAVE = new Command(Gome.singleton.bundle.getString("ui.save"), Command.SCREEN, 2); //$NON-NLS-1$
-    PLAY_MODE = new Command(Gome.singleton.bundle.getString("ui.playMode"), Command.SCREEN, 5); //$NON-NLS-1$
-    PASS = new Command(Gome.singleton.bundle.getString("ui.pass"), Command.SCREEN, 5); //$NON-NLS-1$
-    LAST_MOVE = new Command(Gome.singleton.bundle.getString("ui.lastMove"), Command.SCREEN, 5); //$NON-NLS-1$
-    FIRST_MOVE = new Command(Gome.singleton.bundle.getString("ui.firstMove"), Command.SCREEN, 5); //$NON-NLS-1$
-    REVIEW_MODE = new Command(Gome.singleton.bundle.getString("ui.reviewMode"), Command.SCREEN, 5); //$NON-NLS-1$
-
-    //#ifdef IGS
-    IGS_CONNECT = new Command(Gome.singleton.bundle.getString("online.connect"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_GAMELIST = new Command(Gome.singleton.bundle.getString("online.gameList"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_USERLIST = new Command(Gome.singleton.bundle.getString("online.userlist"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_DISCONNECT = new Command(Gome.singleton.bundle.getString("online.disconnect"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_OBSERVE = new Command(Gome.singleton.bundle.getString("online.observe"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_CHALLENGE = new Command(Gome.singleton.bundle.getString("online.challenge"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_DECLINE = new Command(Gome.singleton.bundle.getString("online.decline"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_MESSAGE = new Command(Gome.singleton.bundle.getString("online.message"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_SORT_BY_RANK = new Command(Gome.singleton.bundle.getString("online.sortRank"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_SORT_BY_NICK = new Command(Gome.singleton.bundle.getString("online.sortNick"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_SORT_BY_WATCH = new Command(Gome.singleton.bundle.getString("online.sortWatch"), Command.SCREEN, 5); //$NON-NLS-1$
-
-    IGS_DONE_SCORE = new Command(Gome.singleton.bundle.getString("ui.done"), Command.SCREEN, 5);
-    IGS_REQUEST_KOMI = new Command(Gome.singleton.bundle.getString("online.requestKomi"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_CHANGE_HANDICAP = new Command(Gome.singleton.bundle.getString("online.changeHandicap"), Command.SCREEN, 5); //$NON-NLS-1$
-    IGS_RESET_DEAD_STONES = new Command(Gome.singleton.bundle.getString("count.undoMarkDeadStone"), Command.SCREEN, 5);
-    //#endif
-
-    GAME_STATUS = new Command(Gome.singleton.bundle.getString("ui.gameStatus"), Command.SCREEN, 8); //$NON-NLS-1$
-    OPTIONS = new Command(Gome.singleton.bundle.getString("ui.options"), Command.SCREEN, 8); //$NON-NLS-1$
-
-    //#ifdef DEBUG
-    CONSOLE = new Command("Console", Command.SCREEN, 9); //$NON-NLS-1$
-    //#endif
-
-    HELP = new Command(Gome.singleton.bundle.getString("ui.help"), Command.SCREEN, 9); //$NON-NLS-1$
-    BACK = new Command(Gome.singleton.bundle.getString("ui.back"), Command.BACK, 0); // BACK
-    OK = new Command(Gome.singleton.bundle.getString("ui.ok"), Command.BACK, 5); // BACK
-    START = new Command(Gome.singleton.bundle.getString("ui.start"), Command.SCREEN, 10); //$NON-NLS-1$
-    EXIT = new Command(Gome.singleton.bundle.getString("ui.exit"), Command.EXIT, 9); // EXIT
-
-    FINISHED_COUNTING = new Command(Gome.singleton.bundle.getString("count.endCounting"), Command.SCREEN, 4); //$NON-NLS-1$
-    EVALUATE = new Command(Gome.singleton.bundle.getString("count.evaluate"), Command.SCREEN, 5); //$NON-NLS-1$
-    ACCEPT = new Command(Gome.singleton.bundle.getString("ui.accept"), Command.SCREEN, 5); //$NON-NLS-1$
-    DECLINE = new Command(Gome.singleton.bundle.getString("ui.decline"), Command.SCREEN, 5); //$NON-NLS-1$
-    RESIGN = new Command(Gome.singleton.bundle.getString("ui.resign"), Command.SCREEN, 5); //$NON-NLS-1$
-    REQUEST = new Command(Gome.singleton.bundle.getString("ui.request"), Command.SCREEN, 5); //$NON-NLS-1$
-
-    COMMENT = new Command(Gome.singleton.bundle.getString("ui.comment"), Command.SCREEN, 5); //$NON-NLS-1$
-    EDIT_NODE = new Command(Gome.singleton.bundle.getString("ui.editNode"), Command.SCREEN, 5); //$NON-NLS-1$
-    ZOOM = new Command(Gome.singleton.bundle.getString("ui.zoom"), Command.SCREEN, 5); //$NON-NLS-1$
-    UNDO = new Command(Gome.singleton.bundle.getString("ui.undo"), Command.SCREEN, 5); //$NON-NLS-1$
-    HINT = new Command(Gome.singleton.bundle.getString("ui.hint"), Command.SCREEN, 5); //$NON-NLS-1$
-    NEXT10MOVES = new Command(Gome.singleton.bundle.getString("ui.next10Moves"), Command.SCREEN, 5); //$NON-NLS-1$
-    PREV10MOVES = new Command(Gome.singleton.bundle.getString("ui.prev10Moves"), Command.SCREEN, 5); //$NON-NLS-1$
+  public MenuEngine(GameController gc) {
+    this.gc = gc;
   }
 
   public Form createNewGameMenu() {
-    Form game = new Form(Gome.singleton.bundle.getString("ui.new")); //$NON-NLS-1$
+    Form game = new Form(I18N.new_); //$NON-NLS-1$
 
-    newGameSize = new ChoiceGroup(Gome.singleton.bundle.getString("ui.goban"), Choice.EXCLUSIVE); //$NON-NLS-1$
+    newGameSize = new ChoiceGroup(I18N.goban, Choice.EXCLUSIVE); //$NON-NLS-1$
     newGameSize.append("9", null); //$NON-NLS-1$
     newGameSize.append("13", null); //$NON-NLS-1$
     newGameSize.append("19", null); //$NON-NLS-1$
     boolean[] flagsNew = { false, false, true };
     newGameSize.setSelectedFlags(flagsNew);
     game.append(newGameSize);
-    newGameHandicap = new TextField(Gome.singleton.bundle.getString("ui.handicap"), "0", 1, TextField.NUMERIC); //$NON-NLS-1$ //$NON-NLS-2$
+    newGameHandicap = new TextField(I18N.handicap, "0", 1, TextField.NUMERIC); //$NON-NLS-1$ //$NON-NLS-2$
     game.append(newGameHandicap);
     game.addCommand(BACK);
     game.addCommand(START);
@@ -215,10 +160,10 @@ public class MenuEngine implements CommandListener {
       int y = cal.get(Calendar.YEAR);
       int m = cal.get(Calendar.MONTH) + 1;
       int d = cal.get(Calendar.DAY_OF_MONTH);
-      defaultFN = Gome.singleton.bundle.getString("ui.defaultFilename") + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d)) + ".sgf";
+      defaultFN = I18N.defaultFilename + String.valueOf(y) + (m < 10 ? "0" + m : String.valueOf(m)) + (d < 10 ? "0" + d : String.valueOf(d)) + ".sgf";
     }
-    Form createForm = new Form(Gome.singleton.bundle.getString("ui.saveIn", new String[] { name })); //$NON-NLS-1$
-    gameFileName = new TextField(Gome.singleton.bundle.getString("ui.filename"), defaultFN, 28, TextField.ANY); //$NON-NLS-1$
+    Form createForm = new Form(Util.expandString(I18N.saveIn, new String[] { name })); //$NON-NLS-1$
+    gameFileName = new TextField(I18N.filename, defaultFN, 28, TextField.ANY); //$NON-NLS-1$
     createForm.append(gameFileName);
     createForm.addCommand(BACK);
     createForm.addCommand(SAVE);
@@ -249,7 +194,7 @@ public class MenuEngine implements CommandListener {
             }
             fileBrowser.show(Gome.singleton.display);
           } catch (IOException e1) {
-            Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e1.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+            Util.messageBox(I18N.error.error, e1.getMessage(), AlertType.ERROR); //$NON-NLS-1$
           }
         }
         //#ifdef IGS
@@ -288,7 +233,7 @@ public class MenuEngine implements CommandListener {
           new IndexLoader(new IndexEntry(IOManager.LOCAL_NAME, null, ""), fb).show(Gome.singleton.display);
 
         } else if (c == OPTIONS) {
-          optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, false);
+          optionsForm = new Options(I18N.options, this, false);
           Gome.singleton.display.setCurrent(optionsForm);
         }
 
@@ -378,7 +323,7 @@ public class MenuEngine implements CommandListener {
           try {
             IOManager.singleton.saveLocalGame(gameFileName.getString(), gc.getSgfModel());
           } catch (RecordStoreException e) {
-            Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+            Util.messageBox(I18N.error.error, e.getMessage(), AlertType.ERROR); //$NON-NLS-1$
           }
         }
         saveGameForm = null;
@@ -488,7 +433,7 @@ public class MenuEngine implements CommandListener {
     //#ifdef DEBUG
     log.debug("Show igs gamelist");
     //#endif
-    igsGameList = new List(Gome.singleton.bundle.getString("online.gameList"), Choice.IMPLICIT);
+    igsGameList = new List(I18N.online.gameList, Choice.IMPLICIT);
 
     for (int i = 0; i < games.length; i++) {
       igsGameList.append(games[i].toString(), null);
@@ -523,7 +468,7 @@ public class MenuEngine implements CommandListener {
   }
 
   private void setUpUserList() {
-    igsUserList = new List(Gome.singleton.bundle.getString("online.userlist"), Choice.IMPLICIT);
+    igsUserList = new List(I18N.online.userlist, Choice.IMPLICIT);
     igsUserList.addCommand(BACK);
     igsUserList.addCommand(IGS_CHALLENGE);
     igsUserList.addCommand(IGS_MESSAGE);
@@ -555,12 +500,10 @@ public class MenuEngine implements CommandListener {
       size = 19;
       handi = 0;
     }
-    gc = Gome.singleton.gameController;
     gc.newGame(size, handi, GameController.GAME_MODE);
   }
 
   public void loadFile(CollectionEntry file, int filenum) {
-    gc = Gome.singleton.gameController;
     gc.reset(Gome.singleton.mainCanvas);
     gc.loadAndPlay(file, filenum);
   }
@@ -574,22 +517,22 @@ public class MenuEngine implements CommandListener {
       try {
         IOManager.singleton.deleteLocalStore(file.getName());
       } catch (RecordStoreException e) {
-        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.delete"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+        Util.messageBox(I18N.error.error, I18N.error.delete, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       }
       //#endif
     } else {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.wrongType"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      Util.messageBox(I18N.error.error, I18N.error.wrongtype, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }
   }
 
   //#ifdef IGS
   public void showIgsChallenge(ServerChallenge challenge) {
     currentChallenge = challenge;
-    String colors = ((challenge.color == Board.BLACK) ? Gome.singleton.bundle.getString("game.blackLong") : Gome.singleton.bundle.getString("game.whiteLong"));
-    challengeForm = new Form(challenge.nick + Gome.singleton.bundle.getString("online.challengesYou"));
-    String byoORnot = ((challenge.min_per25moves != -1) ? " + " + challenge.min_per25moves + Gome.singleton.bundle.getString("clock.min25stones") : Gome.singleton.bundle.getString("online.noByo"));
+    String colors = ((challenge.color == Board.BLACK) ? I18N.game.blackLong : I18N.game.whiteLong);
+    challengeForm = new Form(challenge.nick + I18N.online.challengesYou);
+    String byoORnot = ((challenge.min_per25moves != -1) ? " + " + challenge.min_per25moves + I18N.clock.min25stones : I18N.online.noByo);
     String args[] = { colors, String.valueOf(challenge.size), String.valueOf(challenge.size), String.valueOf(challenge.time_minutes), byoORnot };
-    String message = Gome.singleton.bundle.getString("online.challengeMessage", args);
+    String message = Util.expandString(I18N.online.challengeMessage, args);
 
     challengeForm.append(message);
     challengeForm.addCommand(IGS_CHALLENGE);
@@ -600,10 +543,9 @@ public class MenuEngine implements CommandListener {
 
   public void showOppWantKomi(byte k) {
     this.komi = k;
-    oppRequestKomiForm = new Form(Gome.singleton.bundle.getString("online.komiChangeForm"));
+    oppRequestKomiForm = new Form(I18N.online.komiChangeForm);
     String temp = Util.komi2String(k);
-    oppRequestKomiForm.append(Gome.singleton.bundle.getString("online.opponentWantsToChangeKomi") + temp);
-
+    oppRequestKomiForm.append(I18N.online.opponentWantsToChangeKomi + temp);
     oppRequestKomiForm.addCommand(ACCEPT);
     oppRequestKomiForm.addCommand(DECLINE);
     oppRequestKomiForm.setCommandListener(this);
@@ -625,16 +567,16 @@ public class MenuEngine implements CommandListener {
   }
 
   public void gomeOnlineWantKomi() {
-    requestOnlineKomiForm = new Form(Gome.singleton.bundle.getString("online.komiChangeForm"));
-    newGameKomi = new TextField(Gome.singleton.bundle.getString("ui.komi"), "5", 2, TextField.NUMERIC); //$NON-NLS-1$ //$NON-NLS-2$        
-    requestOnlineKomiForm.append(Gome.singleton.bundle.getString("online.youWantToChangeKomi"));
+    requestOnlineKomiForm = new Form(I18N.online.komiChangeForm);
+    newGameKomi = new TextField(I18N.komi, "5", 2, TextField.NUMERIC); //$NON-NLS-1$ //$NON-NLS-2$        
+    requestOnlineKomiForm.append(I18N.online.youWantToChangeKomi);
 
     requestOnlineKomiForm.addCommand(REQUEST);
     requestOnlineKomiForm.addCommand(BACK);
 
-    setKomi = new ChoiceGroup(Gome.singleton.bundle.getString("ui.komi"), Choice.EXCLUSIVE); //$NON-NLS-1$
-    setKomi.append(Gome.singleton.bundle.getString("online.blackGives"), null); //$NON-NLS-1$
-    setKomi.append(Gome.singleton.bundle.getString("online.whiteGives"), null); //$NON-NLS-1$        
+    setKomi = new ChoiceGroup(I18N.komi, Choice.EXCLUSIVE); //$NON-NLS-1$
+    setKomi.append(I18N.online.blackGives, null); //$NON-NLS-1$
+    setKomi.append(I18N.online.whiteGives, null); //$NON-NLS-1$        
     boolean[] flagsNew = { true, false };
     setKomi.setSelectedFlags(flagsNew);
     requestOnlineKomiForm.append(setKomi);
@@ -645,13 +587,13 @@ public class MenuEngine implements CommandListener {
   }
 
   public void gomeOnlineChangeHandicap() {
-    onlineChangeHandicapForm = new Form(Gome.singleton.bundle.getString("online.handicapChangeForm"));
-    onlineChangeHandicapForm.append(Gome.singleton.bundle.getString("online.youWantToChangeHandicap"));
+    onlineChangeHandicapForm = new Form(I18N.online.handicapChangeForm);
+    onlineChangeHandicapForm.append(I18N.online.youWantToChangeHandicap);
 
     onlineChangeHandicapForm.addCommand(ACCEPT);
     onlineChangeHandicapForm.addCommand(BACK);
 
-    newGameHandicap = new TextField(Gome.singleton.bundle.getString("ui.handicap"), "2", 1, TextField.NUMERIC);
+    newGameHandicap = new TextField(I18N.handicap, "2", 1, TextField.NUMERIC);
     onlineChangeHandicapForm.append(newGameHandicap);
     onlineChangeHandicapForm.setCommandListener(this);
 

@@ -17,6 +17,7 @@ import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.igs.ServerCallback;
 import com.indigonauts.gome.igs.ServerChallenge;
 import com.indigonauts.gome.igs.ServerConnector;
@@ -92,11 +93,7 @@ public class GameController implements ServerCallback
 
   //#ifdef IGS
   ServerConnector igs;
-  //#endif
-
-  //#ifdef IGS
   ServerGame currentIgsGame = null;
-
   //#endif
 
   //#ifdef IGS
@@ -282,7 +279,7 @@ public class GameController implements ServerCallback
       playArea = new Rectangle((byte) 0, (byte) 0, (byte) (board.getBoardSize() - 1), (byte) (board.getBoardSize() - 1));
     }
 
-    switchCurrentNode(model.getFirstNode());
+    switchCurrentNode(model.getRoot());
     playNode(currentNode);
     initPainter(); // setclockandcomment need the definitive painter for the layout
     if (model.isCommented()) {
@@ -445,11 +442,11 @@ public class GameController implements ServerCallback
       break;
     case MainCanvas.ACTION_LEFT:
       if (!doGoBack())
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.noMoreMove"));
+        canvas.setSplashInfo(I18N.noMoreMove);
       break;
     case MainCanvas.ACTION_RIGHT:
       if (!doGoNext())
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.noMoreMove"));
+        canvas.setSplashInfo(I18N.noMoreMove);
       break;
     default:
       refreshNeeded = false;
@@ -617,7 +614,7 @@ public class GameController implements ServerCallback
             igs.playMove(new ServerMove(moveNb, color, Point.PASS, Point.PASS));
 
         } catch (Exception e) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+          Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
         }
       }
 
@@ -647,16 +644,16 @@ public class GameController implements ServerCallback
           try {
             igs.playMove(new ServerMove(moveNb, color, cursor.x, cursor.y));
           } catch (Exception e) {
-            Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+            Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
           }
         } else {
           if (!board.isValidMove(cursor, color))
-            canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.notValidMove"));
+            canvas.setSplashInfo(I18N.notValidMove);
           else
-            canvas.setSplashInfo(Gome.singleton.bundle.getString("online.notYourTurn"));
+            canvas.setSplashInfo(I18N.online.notYourTurn);
         }
       } else
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.gameHadEnded"));
+        canvas.setSplashInfo(I18N.gameHadEnded);
       break;
     //#endif
     case GAME_MODE:
@@ -667,9 +664,9 @@ public class GameController implements ServerCallback
           next = playNewMove(color, cursor.x, cursor.y);
         }
       } else if (connectToIgs) {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.noStartedGame"));
+        canvas.setSplashInfo(I18N.online.noStartedGame);
       } else
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.gameHadEnded"));
+        canvas.setSplashInfo(I18N.gameHadEnded);
       break;
     case PROBLEM_MODE:
       if (next != null) {
@@ -678,14 +675,14 @@ public class GameController implements ServerCallback
           playNode(next.getSon());
         }
       } else {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.wrongMove"));
+        canvas.setSplashInfo(I18N.wrongMove);
       }
       if (currentNode.getSon() == null) // no more move
       {
         if (model.isCorrectNode(currentNode)) {
-          canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.rightMove"));
+          canvas.setSplashInfo(I18N.rightMove);
         } else {
-          canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.wrongMove"));
+          canvas.setSplashInfo(I18N.wrongMove);
         }
 
       }
@@ -714,7 +711,7 @@ public class GameController implements ServerCallback
       }
       SgfNode lastNode = getLeaf(currentNode);
       if (lastNode != currentNode) {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.movePlayed"));
+        canvas.setSplashInfo(I18N.online.movePlayed);
         SgfNode next = lastNode.addBranch(new SgfPoint(x, y));
         next.setPlayerColor(color);
 
@@ -807,7 +804,8 @@ public class GameController implements ServerCallback
       return true;
     }
     SgfNode prev = currentNode.searchFather();
-    if (prev != null) {
+    
+    if (prev.searchFather() != null) {
       board.placeStone(currentNode.getPoint(), Board.EMPTY);
       Vector deadStones = currentNode.getDeadStones();
       if (deadStones != null) {
@@ -848,7 +846,7 @@ public class GameController implements ServerCallback
 
   private void warnPassed(byte color) {
     if (!countMode)
-      canvas.setSplashInfo((color == 1 ? Gome.singleton.bundle.getString("game.blackLong") : Gome.singleton.bundle.getString("game.whiteLong")) + " " + Gome.singleton.bundle.getString("game.passed"));
+      canvas.setSplashInfo((color == 1 ? I18N.game.blackLong : I18N.game.whiteLong) + " " + I18N.game.passed);
   }
 
   public void doGoPrevBrother() {
@@ -950,7 +948,7 @@ public class GameController implements ServerCallback
   }
 
   public void downloadFailure(Exception reason) {
-    Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+    Util.messageBox(I18N.failure, reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
   }
 
   /**
@@ -963,7 +961,7 @@ public class GameController implements ServerCallback
   public void newGame(byte size, int handi, char gameMode) {
     gameHasEnded = false;
     playMode = gameMode;
-    SgfModel game = SgfModel.createNewModel(size, handi, Gome.singleton.bundle.getString("game.whiteLong"), Gome.singleton.bundle.getString("game.blackLong")); //$NON-NLS-1$ //$NON-NLS-2$
+    SgfModel game = SgfModel.createNewModel(size, handi, I18N.game.whiteLong, I18N.game.blackLong); //$NON-NLS-1$ //$NON-NLS-2$
 
     if (playMode == GAME_MODE) {
       stopClockAndStopPainingClock();
@@ -989,13 +987,13 @@ public class GameController implements ServerCallback
 
         igs = new ServerConnector(Gome.singleton.options.igsLogin, Gome.singleton.options.igsPassword, this);
         // log.debug(" - start thread");
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.connecting"));
+        canvas.setSplashInfo(I18N.online.connecting);
         igs.start();
       }
     } catch (Exception e) {
       tryingToConnect = false;
-      canvas.setSplashInfo(Gome.singleton.bundle.getString("online.connectionError"));
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      canvas.setSplashInfo(I18N.online.connectionError);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
@@ -1003,46 +1001,46 @@ public class GameController implements ServerCallback
 
   //#ifdef IGS
   public void getServerGameList() {
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.gettingGameList"));
+    canvas.setSplashInfo(I18N.online.gettingGameList);
     try {
       igs.getGames();
     } catch (IOException e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
   //#endif
   //#ifdef IGS
   public void getServerUserList() {
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.getUserList"));
+    canvas.setSplashInfo(I18N.online.getUserList);
     try {
       igs.getUsers();
     } catch (IOException e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
   //#endif
   //#ifdef IGS
   public void observeServerGame(int selectedIndex) {
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.connecting"));
+    canvas.setSplashInfo(I18N.online.connecting);
     try {
       currentIgsGame = igs.getGameList()[selectedIndex];
       igs.observe(currentIgsGame.nb);
 
     } catch (Exception e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
   //#endif
   //#ifdef IGS
   public void acceptChallenge(ServerChallenge challenge) {
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.acceptChallenge"));
+    canvas.setSplashInfo(I18N.online.acceptChallenge);
     try {
       igs.challenge(challenge);
     } catch (Exception e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
@@ -1052,7 +1050,7 @@ public class GameController implements ServerCallback
     try {
       igs.decline(currentChallenge.nick);
     } catch (Exception e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
 
   }
@@ -1060,7 +1058,7 @@ public class GameController implements ServerCallback
   //#endif
   //#ifdef IGS
   public void challengeServerUser(int selectedIndex) {
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.sendChallenge"));
+    canvas.setSplashInfo(I18N.online.sendChallenge);
     try {
       // log.debug("challenge " + igs.getUserList()[selectedIndex]);
       ServerChallenge challenge = new ServerChallenge();
@@ -1072,7 +1070,7 @@ public class GameController implements ServerCallback
       challenge.size = 19;
       igs.challenge(challenge);
     } catch (Exception e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
@@ -1084,7 +1082,7 @@ public class GameController implements ServerCallback
     stopClockAndStopPainingClock();
     Gome.singleton.mainCanvas.switchToIGSOnlineMenu();
     tuneBoardPainter();
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.connectedToIgs"));
+    canvas.setSplashInfo(I18N.online.connectedToIgs);
     Gome.singleton.menuEngine.switchToOnline();
     connectToIgs = true;
     // set splash will repaint
@@ -1174,7 +1172,7 @@ public class GameController implements ServerCallback
         tryingToConnect = false;
       }
       connectToIgs = false;
-      canvas.setSplashInfo(Gome.singleton.bundle.getString(message));
+      canvas.setSplashInfo(message);
       stopClockAndStopPainingClock();
       setPlayMode(REVIEW_MODE);
       break;
@@ -1201,7 +1199,7 @@ public class GameController implements ServerCallback
   //#endif
   //#ifdef IGS
   public void startGame(ServerChallenge challenge) {
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.onlineGameStarted"));
+    canvas.setSplashInfo(I18N.online.onlineGameStarted);
     // log.debug("Start online game");
 
     // log.debug("Your color " + challenge.color);
@@ -1231,7 +1229,7 @@ public class GameController implements ServerCallback
     connectToIgs = false;
     // log.debug("disconnect from IGS");
     igs.disconnect();
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("online.disconnected"));
+    canvas.setSplashInfo(I18N.online.disconnected);
     Gome.singleton.menuEngine.switchToOffline();
 
     stopClockAndStopPainingClock();
@@ -1284,7 +1282,7 @@ public class GameController implements ServerCallback
     try {
       igs.sendMessage(nickToSend, message);
     } catch (IOException e) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
 
@@ -1303,21 +1301,21 @@ public class GameController implements ServerCallback
       white += komi / 2;
       boolean dotfivedKomi = (komi % 2) != 0;
       int diff = white - black;
-      StringBuffer scoreSentence = new StringBuffer(Gome.singleton.bundle.getString("game.score"));
+      StringBuffer scoreSentence = new StringBuffer(I18N.game.score);
       if (diff > 0 || (diff == 0 && dotfivedKomi)) {
-        scoreSentence.append(Gome.singleton.bundle.getString("game.whiteWin"));
+        scoreSentence.append(I18N.game.whiteWin);
         scoreSentence.append(diff);
       } else {
         if (diff < 0) {
           diff = -diff;
-          scoreSentence.append(Gome.singleton.bundle.getString("game.blackWin"));
+          scoreSentence.append(I18N.game.blackWin);
           if (dotfivedKomi && komi > 0) {
             scoreSentence.append(diff - 1);
           } else {
             scoreSentence.append(diff);
           }
         } else if (diff == 0 && !dotfivedKomi)
-          scoreSentence.append(Gome.singleton.bundle.getString("game.jigo"));
+          scoreSentence.append(I18N.game.jigo);
       }
       if (dotfivedKomi) {
         scoreSentence.append(".5");
@@ -1336,7 +1334,7 @@ public class GameController implements ServerCallback
   public void askIgsForScore() {
     try {
       igs.getScore();
-      canvas.setSplashInfo(Gome.singleton.bundle.getString("online.gettingScore"));
+      canvas.setSplashInfo(I18N.online.gettingScore);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1346,7 +1344,7 @@ public class GameController implements ServerCallback
     try {
       igs.doneWithTheCounting();
       // log.info("DONE WITH Scoring");
-      canvas.setSplashInfo(Gome.singleton.bundle.getString("count.doneWithScoring"));
+      canvas.setSplashInfo(I18N.count.doneWithScoring);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -1361,7 +1359,7 @@ public class GameController implements ServerCallback
     this.evaluationMode = evaluationMode;
     board.startCounting(evaluationMode, (playMode != ONLINE_MODE) && !evaluationMode);
     Gome.singleton.mainCanvas.updateClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("count.markDeadStone"));
+    canvas.setSplashInfo(I18N.count.markDeadStone);
     //#ifdef IGS
     if (playMode == ONLINE_MODE)
       canvas.switchToOnlineCountingMenu();
@@ -1411,11 +1409,11 @@ public class GameController implements ServerCallback
     if (playMode == GAME_MODE) {
       switch (color) {
       case Board.BLACK:
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("clock.blackTimeUp"));
+        canvas.setSplashInfo(I18N.clock.blackTimeUp);
         break;
 
       case Board.WHITE:
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("clock.whiteTimeUp"));
+        canvas.setSplashInfo(I18N.clock.whiteTimeUp);
         break;
 
       }
@@ -1424,8 +1422,8 @@ public class GameController implements ServerCallback
   }
 
   public void timesUP(String name) {
-    canvas.setSplashInfo(name + Gome.singleton.bundle.getString("clock.timesUp"));
-    currentNode.setComment(name + Gome.singleton.bundle.getString("clock.timesUp"));
+    canvas.setSplashInfo(name + I18N.clock.timesUp);
+    currentNode.setComment(name + I18N.clock.timesUp);
     gameHasEnded = true;
     //#ifdef IGS
     canvas.switchToIGSOnlineMenu();
@@ -1435,7 +1433,7 @@ public class GameController implements ServerCallback
 
   public void endGame() {
     startCountMode(false);
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("count.endGameMarkStone"));
+    canvas.setSplashInfo(I18N.count.endGameMarkStone);
     // setPlayMode(ONLINE_MODE);
   }
 
@@ -1445,7 +1443,7 @@ public class GameController implements ServerCallback
     //#ifdef IGS
     canvas.removeOnlineSetKomiAndHandicapMenuItem();
     //#endif
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("count.restoreCounting"));
+    canvas.setSplashInfo(I18N.count.restoreCounting);
     canvas.refresh(canvas.getBoardPainter().getDrawArea());
   }
 
@@ -1475,13 +1473,13 @@ public class GameController implements ServerCallback
     if (value1 > value2) {
       String v3 = String.valueOf(value1 - value2);
       v3 = v3.substring(0, v3.length() - 1) + "." + v3.substring(v3.length() - 1);
-      out = name1 + " (" + v1 + ") " + name2 + " (" + v2 + ") " + name1 + Gome.singleton.bundle.getString("game.winBy") + v3;
+      out = name1 + " (" + v1 + ") " + name2 + " (" + v2 + ") " + name1 + I18N.game.winBy + v3;
     }
     if (value1 < value2) {
       String v3 = String.valueOf(value2 - value1);
       v3 = v3.substring(0, v3.length() - 1) + "." + v3.substring(v3.length() - 1);
 
-      out = name2 + " (" + v2 + ") " + name1 + " (" + v1 + ") " + name2 + Gome.singleton.bundle.getString("game.winBy") + v3;
+      out = name2 + " (" + v2 + ") " + name1 + " (" + v1 + ") " + name2 + I18N.game.winBy + v3;
     }
 
     currentNode.setComment(out);
@@ -1517,7 +1515,7 @@ public class GameController implements ServerCallback
         gomeWantOnlineKomi = k;
       } else {
         setKomi(k);
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.opponentAgreedNewKomi"));
+        canvas.setSplashInfo(I18N.online.opponentAgreedNewKomi);
       }
     }
   }
@@ -1528,7 +1526,7 @@ public class GameController implements ServerCallback
   public void setKomi(byte k) {
     if (model != null && playMode == ONLINE_MODE) {
       String temp = Util.komi2String(k);
-      canvas.setSplashInfo(Gome.singleton.bundle.getString("online.newKomi") + temp);
+      canvas.setSplashInfo(I18N.online.newKomi + temp);
       model.setNewKomi(k);
     }
   }
@@ -1538,19 +1536,19 @@ public class GameController implements ServerCallback
       try {
         igs.setKomi(k);
       } catch (IOException e) {
-        Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+        Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
       }
     }
   }
 
   public void onlineResigned(String name) {
-    String color = Gome.singleton.bundle.getString("game.whiteLong");
+    String color = null;
 
     if (currentNode.getPlayerColor() == Board.BLACK)
-      color = Gome.singleton.bundle.getString("game.whiteLong");
+      color = I18N.game.whiteLong;
     else
-      color = Gome.singleton.bundle.getString("game.blackLong");
-    String message = name + " (" + color + ") " + Gome.singleton.bundle.getString("ui.resigned");
+      color = I18N.game.blackLong;
+    String message = name + " (" + color + ") " + I18N.resigned;
     canvas.setSplashInfo(message);
     stopClockAndStopPainingClock();
     currentNode.setComment(message);
@@ -1564,9 +1562,9 @@ public class GameController implements ServerCallback
   public void resign() {
     if (playMode == GAME_MODE && !gameHasEnded) {
 
-      String message = Gome.singleton.bundle.getString("ui.whiteResigned");
+      String message = I18N.whiteResigned;
       if (getCurrentPlayerColor() == Board.BLACK) {
-        message = Gome.singleton.bundle.getString("ui.blackResigned");
+        message = I18N.blackResigned;
       }
       currentNode.setComment(message);
 
@@ -1584,10 +1582,10 @@ public class GameController implements ServerCallback
         try {
           igs.resign();
         } catch (IOException e) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+          Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
         }
       } else {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.notYourTurn"));
+        canvas.setSplashInfo(I18N.online.notYourTurn);
       }
     }
     //#endif
@@ -1606,11 +1604,11 @@ public class GameController implements ServerCallback
 
       String komiString = Util.komi2String(komi);
       if (mode == 0) {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.requestingBlackKomi") + komiString);
+        canvas.setSplashInfo(I18N.online.requestingBlackKomi + komiString);
         onlineSetKomi(komi);
         gomeWantOnlineKomi = komi;
       } else {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("online.requestingWhiteKomi") + komiString);
+        canvas.setSplashInfo(I18N.online.requestingWhiteKomi + komiString);
         onlineSetKomi((byte) -komi);
         gomeWantOnlineKomi = (byte) -komi;
       }
@@ -1621,11 +1619,11 @@ public class GameController implements ServerCallback
   public void gomeSetOnlineHandicap(byte h) {
     if (playMode == ONLINE_MODE) {
       if (h > 1) {
-        canvas.setSplashInfo(Gome.singleton.bundle.getString("ui.settingHandicapTo") + h);
+        canvas.setSplashInfo(I18N.settingHandicapTo + h);
         try {
           igs.setHandicap(h);
         } catch (IOException e) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+          Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
         }
       }
     }
@@ -1636,14 +1634,14 @@ public class GameController implements ServerCallback
       try {
         igs.resetDeadStone();
       } catch (IOException e) {
-        Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), e.getMessage(), AlertType.ERROR);
+        Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
       }
     }
   }
 
   public void onlineScore(int whiteScore, int blackScore) {
-    String black = Gome.singleton.bundle.getString("game.blackLong");
-    String white = Gome.singleton.bundle.getString("game.whiteLong");
+    String black = I18N.game.blackLong;
+    String white = I18N.game.whiteLong;
 
     String whiteScoreString = String.valueOf(whiteScore);
     whiteScoreString = whiteScoreString.substring(0, whiteScoreString.length() - 1) + "." + whiteScoreString.substring(whiteScoreString.length() - 1);
@@ -1651,7 +1649,7 @@ public class GameController implements ServerCallback
     String blackScoreString = String.valueOf(blackScore);
     blackScoreString = blackScoreString.substring(0, blackScoreString.length() - 1) + "." + blackScoreString.substring(blackScoreString.length() - 1);
 
-    canvas.setSplashInfo(Gome.singleton.bundle.getString("game.score") + black + ":" + blackScoreString + " " + white + ": " + whiteScoreString);
+    canvas.setSplashInfo(I18N.game.score + black + ":" + blackScoreString + " " + white + ": " + whiteScoreString);
   }
 
   //#endif
@@ -1660,7 +1658,7 @@ public class GameController implements ServerCallback
     String v1 = String.valueOf(winByValue);
     v1 = v1.substring(0, v1.length() - 1) + "." + v1.substring(v1.length() - 1);
 
-    canvas.setSplashInfo(name + Gome.singleton.bundle.getString("game.winBy") + v1);
+    canvas.setSplashInfo(name + I18N.game.winBy + v1);
   }
 
   public Board getBoard() {

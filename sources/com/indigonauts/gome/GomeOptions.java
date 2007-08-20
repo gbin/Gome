@@ -16,9 +16,6 @@ public class GomeOptions {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GomeOptions");
   //#endif
-  private static final byte ENGLISH = 0;
-  private static final byte FRENCH = 1;
-  private static final byte JAPANESE = 2;
 
   private static final byte SMALL = 0;
   public static final byte MEDIUM = 1;
@@ -32,12 +29,6 @@ public class GomeOptions {
   public static final byte SLOW = 0;
 
   public static final byte FAST = 2;
-
-  public static final String EN_US = "en_US";
-  public static final String FR_FR = "fr_FR";
-  public static final String JP_JP = "jp_JP";
-
-  public String locale = EN_US;
 
   public int gobanColor = Util.GOBAN_COLOR_MEDIUM;
   public byte stoneBug = (Util.S60_FLAG) ? Util.FILL_BUG1 : Util.FILL_NORMAL;
@@ -71,17 +62,11 @@ public class GomeOptions {
   }
 
   public GomeOptions() {
-    // default options
-    String l = System.getProperty("microedition.locale"); //$NON-NLS-1$
-    if (l != null) {
-      locale = l; // some systems don't have a
-      // locale//$NON-NLS-1$
-    }
   }
 
   public GomeOptions(DataInputStream is) {
     try {
-      setLocaleFromByte(is.readByte());
+      is.readByte(); // ex language kept for backward compatibility
       setGobanColorFromByte(is.readByte());
       setScrollerFontFromByte(is.readByte());
       scrollerSpeed = is.readByte();
@@ -158,34 +143,6 @@ public class GomeOptions {
     }
   }
 
-  /**
-   * @param localeByte
-   */
-  public void setLocaleFromByte(byte localeByte) {
-    // Locale
-    switch (localeByte) {
-    case FRENCH:
-      locale = FR_FR; //$NON-NLS-1$
-      break;
-    case ENGLISH:
-      locale = EN_US; //$NON-NLS-1$
-      break;
-    case JAPANESE:
-      locale = JP_JP; //$NON-NLS-1$
-      break;
-    }
-  }
-
-  public byte getLocaleByte() {
-    if (locale == EN_US)
-      return ENGLISH;
-    else if (locale == FR_FR)
-      return FRENCH;
-    else if (locale == JP_JP)
-      return JAPANESE;
-    return ENGLISH;
-  }
-
   public byte getGobanColorByte() {
     switch (gobanColor) {
     case Util.GOBAN_COLOR_LIGHT:
@@ -226,7 +183,7 @@ public class GomeOptions {
   }
 
   public void marshalOut(DataOutputStream out) throws IOException {
-    out.writeByte(getLocaleByte());
+    out.writeByte(0); // ex language, kept for backward compatibility
     out.writeByte(getGobanColorByte());
     out.writeByte(getScrollerFontByte());
     out.writeByte(scrollerSpeed);

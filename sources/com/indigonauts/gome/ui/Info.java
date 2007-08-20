@@ -14,9 +14,9 @@ import javax.microedition.lcdui.StringItem;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
-import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.SgfModel;
 
@@ -36,10 +36,10 @@ public class Info extends Fetcher implements CommandListener, Showable {
   private static final Command ABOUT;
   private boolean inSubMenu = false;
   static {
-    RULES = new Command(Gome.singleton.bundle.getString("ui.help.rules"), Command.SCREEN, 1); //$NON-NLS-1$
-    HELP = new Command(Gome.singleton.bundle.getString("ui.help.help"), Command.SCREEN, 1); //$NON-NLS-1$
-    KEYS = new Command(Gome.singleton.bundle.getString("ui.help.key"), Command.SCREEN, 1); //$NON-NLS-1$
-    ABOUT = new Command(Gome.singleton.bundle.getString("ui.about"), Command.SCREEN, 9); //$NON-NLS-1$
+    RULES = new Command(I18N.help.rules, Command.SCREEN, 1); //$NON-NLS-1$
+    HELP = new Command(I18N.help.help, Command.SCREEN, 1); //$NON-NLS-1$
+    KEYS = new Command(I18N.help.key, Command.SCREEN, 1); //$NON-NLS-1$
+    ABOUT = new Command(I18N.about, Command.SCREEN, 9); //$NON-NLS-1$
   }
 
   /**
@@ -140,57 +140,56 @@ public class Info extends Fetcher implements CommandListener, Showable {
 
   private Form getKeys() {
     MainCanvas canvas = Gome.singleton.mainCanvas;
-    ResourceBundle bundle = Gome.singleton.bundle;
-    Form help = new Form(bundle.getString("ui.help"));
+    Form help = new Form(I18N.help.help);
     StringBuffer buf = new StringBuffer();
-    buf.append(bundle.getString("ui.help.pointerReview1")); //$NON-NLS-1$
+    buf.append(I18N.help.pointerReview1); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(bundle.getString("ui.help.pointerReview2")); //$NON-NLS-1$
+    buf.append(I18N.help.pointerReview2); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(bundle.getString("ui.help.pointerReview3")); //$NON-NLS-1$
+    buf.append(I18N.help.pointerReview3); //$NON-NLS-1$
     buf.append('\n');
-    buf.append(bundle.getString("ui.help.pointerReview4")); //$NON-NLS-1$
-    buf.append(bundle.getString("ui.help.pointer")); //$NON-NLS-1$
+    buf.append(I18N.help.pointerReview4); //$NON-NLS-1$
+    buf.append(I18N.help.pointer); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_COMMENT));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.comment")); //$NON-NLS-1$
+    buf.append(I18N.help.comment); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_ZOOM));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.zoom")); //$NON-NLS-1$
+    buf.append(I18N.help.zoom); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_UNDO));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.undo")); //$NON-NLS-1$
+    buf.append(I18N.help.undo); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.getActionKeyName(canvas, MainCanvas.ACTION_HINT));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.hint")); //$NON-NLS-1$
+    buf.append(I18N.help.hint); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_SCROLLUP));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.scrollUp")); //$NON-NLS-1$
+    buf.append(I18N.help.scrollUp); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_SCROLLDOWN));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.scrollDown")); //$NON-NLS-1$
+    buf.append(I18N.help.scrollDown); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_10NEXTMOVES));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.next10Moves")); //$NON-NLS-1$
+    buf.append(I18N.help.next10Moves); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_10PREVMOVES));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.prev10Moves")); //$NON-NLS-1$
+    buf.append(I18N.help.prev10Moves); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_NEXTCORNER));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.nextCorner")); //$NON-NLS-1$
+    buf.append(I18N.help.nextCorner); //$NON-NLS-1$
     buf.append('\n');
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_PREVCORNER));
     buf.append(' ');
-    buf.append(bundle.getString("ui.help.prevCorner")); //$NON-NLS-1$
+    buf.append(I18N.help.prevCorner); //$NON-NLS-1$
     
     StringItem si = new StringItem("", buf.toString());
     si.setFont(MainCanvas.SMALL_FONT);
@@ -199,29 +198,28 @@ public class Info extends Fetcher implements CommandListener, Showable {
   }
 
   private Form getGameInfo() {
-    ResourceBundle bundle = Gome.singleton.bundle;
-    Form form = new Form(bundle.getString("game.info"));
+    Form form = new Form(I18N.game.info);
     GameController gc = Gome.singleton.gameController;
     SgfModel model = gc.getSgfModel();
 
     StringBuffer info = new StringBuffer();
-    info.append(bundle.getString("game.captured")); //$NON-NLS-1$
+    info.append(I18N.game.captured); //$NON-NLS-1$
     info.append(gc.getBoard().getNbCapturedBlack());
     info.append('/');
     info.append(gc.getBoard().getNbCapturedWhite());
     info.append('\n');
     if (model.getName() != null) {
-      info.append(bundle.getString("game.name")); //$NON-NLS-1$
+      info.append(I18N.game.name); //$NON-NLS-1$
       info.append(model.getName());
       info.append('\n');
     }
     if (model.getEvent() != null) {
-      info.append(bundle.getString("game.event")); //$NON-NLS-1$
+      info.append(I18N.game.event); //$NON-NLS-1$
       info.append(model.getEvent());
       info.append('\n');
     }
     if (model.getRound() != null) {
-      info.append(bundle.getString("game.round")); //$NON-NLS-1$
+      info.append(I18N.game.round); //$NON-NLS-1$
       info.append(model.getRound());
       info.append('\n');
     }
@@ -233,17 +231,17 @@ public class Info extends Fetcher implements CommandListener, Showable {
       info.append('\n');
       info.append(model.getWhitePlayer());
       if (model.getWhiteRank() != null) {
-        info.append(bundle.getString("game.whiteShort")); //$NON-NLS-1$
+        info.append(I18N.game.whiteShort); //$NON-NLS-1$
         info.append('[');
         info.append(model.getWhiteRank());
         info.append(']');
       }
       info.append(' ');
-      info.append(bundle.getString("game.versus")); //$NON-NLS-1$
+      info.append(I18N.game.versus); //$NON-NLS-1$
       info.append(' ');
       info.append(model.getBlackPlayer());
       if (model.getBlackRank() != null) {
-        info.append(bundle.getString("game.blackShort")); //$NON-NLS-1$
+        info.append(I18N.game.blackShort); //$NON-NLS-1$
         info.append('[');
         info.append(model.getBlackRank());
         info.append(']');
@@ -253,53 +251,53 @@ public class Info extends Fetcher implements CommandListener, Showable {
     if (model.getBlackTeam() != null & model.getWhiteTeam() != null) {
       info.append(model.getWhiteTeam());
       info.append(' ');
-      info.append(bundle.getString("game.versus")); //$NON-NLS-1$
+      info.append(I18N.game.versus); //$NON-NLS-1$
       info.append(' ');
       info.append(model.getBlackTeam());
       info.append('\n');
     }
     if (model.getKomi() != null) {
-      info.append(bundle.getString("game.komi")); //$NON-NLS-1$
+      info.append(I18N.game.komi); //$NON-NLS-1$
       info.append(model.getKomi());
       info.append('\n');
     }
     if (model.getResult() != null) {
-      info.append(bundle.getString("game.result")); //$NON-NLS-1$
+      info.append(I18N.game.result); //$NON-NLS-1$
       info.append(model.getResult());
       info.append('\n');
     }
     if (model.getOpening() != null) {
-      info.append(bundle.getString("game.opening")); //$NON-NLS-1$
+      info.append(I18N.game.opening); //$NON-NLS-1$
       info.append(model.getOpening());
       info.append('\n');
     }
     if (model.getPlace() != null) {
-      info.append(bundle.getString("game.place")); //$NON-NLS-1$
+      info.append(I18N.game.place); //$NON-NLS-1$
       info.append(model.getPlace());
       info.append('\n');
     }
     if (model.getContext() != null) {
-      info.append(bundle.getString("game.context")); //$NON-NLS-1$
+      info.append(I18N.game.context); //$NON-NLS-1$
       info.append(model.getContext());
       info.append('\n');
     }
     if (model.getScribe() != null) {
-      info.append(bundle.getString("game.scribe")); //$NON-NLS-1$
+      info.append(I18N.game.scribe); //$NON-NLS-1$
       info.append(model.getScribe());
       info.append('\n');
     }
     if (model.getSource() != null) {
-      info.append(bundle.getString("game.source")); //$NON-NLS-1$
+      info.append(I18N.game.source); //$NON-NLS-1$
       info.append(model.getSource());
       info.append('\n');
     }
     if (model.getApplication() != null) {
-      info.append(bundle.getString("game.application")); //$NON-NLS-1$
+      info.append(I18N.game.application); //$NON-NLS-1$
       info.append(model.getApplication());
       info.append('\n');
     }
     if (model.getCopyright() != null) {
-      info.append(bundle.getString("game.copyright")); //$NON-NLS-1$
+      info.append(I18N.game.copyright); //$NON-NLS-1$
       info.append(model.getCopyright());
       info.append('\n');
     }
@@ -310,8 +308,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
   }
 
   private Form getAbout() {
-    ResourceBundle bundle = Gome.singleton.bundle;
-    Form form = new Form(bundle.getString("ui.about"));
+    Form form = new Form(I18N.about);
     StringBuffer buf = new StringBuffer("GOME v");
     buf.append(Gome.VERSION);
     buf.append("\n\n");
@@ -361,13 +358,13 @@ public class Info extends Fetcher implements CommandListener, Showable {
   }
 
   private void fetchHelp() {
-    title = Gome.singleton.bundle.getString("ui.help.help");
+    title = I18N.help.help;
     urlToFetch = "jar:/com/indigonauts/gome/i18n/help/general_US.hlp";
   }
 
   private void fetchRules() {
-    title = Gome.singleton.bundle.getString("ui.help.rules");
-    urlToFetch = "http://www.indigonauts.com/gome/library/help/rules_" + Gome.singleton.options.locale + ".hlp";
+    title = I18N.help.rules;
+    urlToFetch = "http://www.indigonauts.com/gome/library/help/rules_" + Gome.LOCALE + ".hlp";
   }
 
   protected void download() throws IOException {

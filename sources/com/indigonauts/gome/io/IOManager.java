@@ -28,6 +28,7 @@ import javax.microedition.rms.RecordStoreNotFoundException;
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.sgf.SgfModel;
 
 public class IOManager {
@@ -100,7 +101,7 @@ public class IOManager {
   private DataInputStream readBundledFile(String filename) throws IOException {
     InputStream resourceAsStream = getClass().getResourceAsStream(filename);
     if (resourceAsStream == null) {
-      throw new IOException(Gome.singleton.bundle.getString("ui.noBundle"));
+      throw new IOException(I18N.noBundle);
     }
     return new DataInputStream(resourceAsStream);
   }
@@ -205,7 +206,7 @@ public class IOManager {
           os.write(game, i, l - i);
 
         } catch (IOException e) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.posting"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+          Util.messageBox(I18N.error.error, I18N.error.posting, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
           return;
 
         } finally {
@@ -216,7 +217,7 @@ public class IOManager {
               e.printStackTrace();
             }
         }
-        Util.messageBox(Gome.singleton.bundle.getString("ui.success"), Gome.singleton.bundle.getString("ui.email.success"), AlertType.INFO); //$NON-NLS-1$ //$NON-NLS-2$
+        Util.messageBox(I18N.success, I18N.email_success, AlertType.INFO); //$NON-NLS-1$ //$NON-NLS-2$
 
       }
     };

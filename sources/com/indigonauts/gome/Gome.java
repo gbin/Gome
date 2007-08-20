@@ -18,8 +18,8 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.rms.RecordStoreException;
 
-import com.indigonauts.gome.common.ResourceBundle;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
@@ -31,12 +31,11 @@ public class Gome extends MIDlet implements CommandListener {
   //#endif
 
   public static final String VERSION = "@VERSION"; //$NON-NLS-1$
+  public static final String LOCALE = "@LOCALE"; //$NON-NLS-1$
 
   private static final String OPTIONS_FILE = VERSION + ".o"; //$NON-NLS-1$
   private static long HOUR = 60 * 60 * 1000L;
   private static long EXPIRATION_PERIOD = 48 * HOUR;
-
-  public ResourceBundle bundle;
 
   public MenuEngine menuEngine;
 
@@ -56,10 +55,6 @@ public class Gome extends MIDlet implements CommandListener {
     super();
     singleton = this;
     display = Display.getDisplay(this);
-    Loader splash = new Loader();
-    splash.setFullScreenMode(true);
-    display.setCurrent(splash);
-    splash.serviceRepaints();
   }
 
   void loadOptions() throws IOException {
@@ -104,7 +99,6 @@ public class Gome extends MIDlet implements CommandListener {
       } catch (Throwable t) {
         options = new GomeOptions();
       }
-      bundle = new ResourceBundle("main", Gome.singleton.options.locale); //$NON-NLS-1$
       if (!checkLicense())
         return;
       bootGome();
@@ -113,7 +107,7 @@ public class Gome extends MIDlet implements CommandListener {
       log.error("Load error", t);
       t.printStackTrace();
       //#endif
-      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
   }
@@ -149,9 +143,9 @@ public class Gome extends MIDlet implements CommandListener {
           log.debug("License EXPIRED");
           //#endif
 
-          Alert al = new Alert(bundle.getString("ui.expired"), bundle.getString("ui.expiredExplanation"), null, AlertType.ERROR);
+          Alert al = new Alert(I18N.expired, I18N.expiredExplanation, null, AlertType.ERROR);
           al.setTimeout(Alert.FOREVER);
-          optionsForm = new Options(Gome.singleton.bundle.getString("ui.options"), this, true);
+          optionsForm = new Options(I18N.options, this, true);
           display.setCurrent(al, optionsForm);
           return false;
         }
@@ -172,7 +166,7 @@ public class Gome extends MIDlet implements CommandListener {
       //#endif
       return true;
     } catch (Throwable t) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR);
+      Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR);
       return false;
     }
 
@@ -186,7 +180,7 @@ public class Gome extends MIDlet implements CommandListener {
     //#endif
     boolean save = optionsForm.save();
     if (options.user.length() == 0) {
-      Util.messageBox(bundle.getString("ui.option.invalidKey"), bundle.getString("ui.option.invalidKeyExplanation"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      Util.messageBox(I18N.option.invalidKey, I18N.option.invalidKeyExplanation, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       return;
     }
     if (save) {
@@ -194,32 +188,24 @@ public class Gome extends MIDlet implements CommandListener {
         bootGome();
 
       } catch (Throwable t) {
-        Util.messageBox(bundle.getString("ui.error"), t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+        Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       }
 
     }
   }
 
   public void bootGome() {
-    if (gameController == null)
-      gameController = new GameController(display);
-    if (mainCanvas == null) {
-      mainCanvas = new MainCanvas(gameController);
-      mainCanvas.setFullScreenMode(true);
-    }
-
-    if (menuEngine == null) {
-      menuEngine = new MenuEngine();
-    }
+    gameController = new GameController(display);
+    mainCanvas = new MainCanvas(gameController);
+    menuEngine = new MenuEngine(gameController);
     menuEngine.startNewGame();
     String message;
     if (options.user.length() == 0) {
       long msLeft = options.expiration - System.currentTimeMillis();
-      message = bundle.getString("ui.hoursLeft", new String[] { String.valueOf(msLeft / HOUR), String.valueOf((msLeft % HOUR) / (60 * 1000L)) });
+      message = Util.expandString(I18N.hoursLeft, new String[] { String.valueOf(msLeft / HOUR), String.valueOf((msLeft % HOUR) / (60 * 1000L)) });
       mainCanvas.setSplashInfo(message);
     }
 
-    
   }
 
 }

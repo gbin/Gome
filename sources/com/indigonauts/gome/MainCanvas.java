@@ -17,6 +17,7 @@ import javax.microedition.lcdui.Graphics;
 
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.ui.BoardPainter;
 import com.indigonauts.gome.ui.ClockPainterTask;
@@ -121,9 +122,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     clockPainter = new ClockPainterTask(this);
     scroller = new Scroller(this);
     clockAndCommentMode = NOTHING_TO_DISPLAY_MODE;
+    setFullScreenMode(true);
     //#ifdef DEBUG
     log.debug("Main Canvas constructed");
     //#endif
+    
   }
 
   public Rectangle getFullCanvas() {
@@ -401,14 +404,15 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void commandAction(Command c, Displayable d) {
     if (c == MenuEngine.PLAY_MODE) {
       gc.setPlayMode(GameController.GAME_MODE);
-      setSplashInfo(Gome.singleton.bundle.getString("ui.switchToPlayEditMode"));
+      setSplashInfo(I18N.switchToPlayEditMode);
       if (clockControl != null) {
         clockControl.resumeClock();
       }
       updateClockAndCommentMode(NOTHING_TO_DISPLAY_MODE);
     } else if (c == MenuEngine.REVIEW_MODE) {
       gc.setPlayMode(GameController.REVIEW_MODE);
-      setSplashInfo(Gome.singleton.bundle.getString("ui.switchToReviewMode"));
+      
+      setSplashInfo(I18N.switchToReviewMode);
       if (clockControl != null)
         clockControl.pauseClock();
       updateClockAndCommentMode(COMMENT_MODE);

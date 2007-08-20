@@ -360,14 +360,14 @@ public class Util {
     BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
     int total = grsize + (Gome.singleton.options.stoneBug == 1 ? 0 : 2);
     Image img = Image.createImage(total, total);
-    SgfNode firstNode = model.getFirstNode();
+    SgfNode firstNode = model.getRoot();
     board.placeStones(firstNode.getAB(), Board.BLACK);
     board.placeStones(firstNode.getAW(), Board.WHITE);
     illustrativeBoard.drawMe(img.getGraphics(), null, 0, false, false, firstNode, model);
     return Image.createImage(img);
   }
 
-  public String expandString(String originalMessage, String[] args) {
+  public static String expandString(String originalMessage, String[] args) {
     StringBuffer newMessage = new StringBuffer();
 
     for (int i = 0; i < args.length; i++) {

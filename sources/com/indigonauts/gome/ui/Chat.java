@@ -15,6 +15,7 @@ import javax.microedition.lcdui.TextBox;
 import javax.microedition.lcdui.TextField;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.i18n.I18N;
 
 public class Chat implements CommandListener {
   public static Command REPLY;
@@ -37,8 +38,8 @@ public class Chat implements CommandListener {
 
   public Chat(Display display) {
     this.display = display;
-    REPLY = new Command(Gome.singleton.bundle.getString("ui.reply"), Command.SCREEN, 0); //$NON-NLS-1$
-    SEND = new Command(Gome.singleton.bundle.getString("ui.send"), Command.SCREEN, 0); //$NON-NLS-1$
+    REPLY = new Command(I18N.reply, Command.SCREEN, 0); //$NON-NLS-1$
+    SEND = new Command(I18N.send, Command.SCREEN, 0); //$NON-NLS-1$
 
   }
 
@@ -59,7 +60,7 @@ public class Chat implements CommandListener {
     else if (displayable == chatBox && command == SEND) {
       Gome.singleton.gameController.sendOnlineMessage(nickToSend, chatBox.getString());
       display.setCurrent(Gome.singleton.mainCanvas);
-      Gome.singleton.mainCanvas.setSplashInfo(Gome.singleton.bundle.getString("online.messageSent"));
+      Gome.singleton.mainCanvas.setSplashInfo(I18N.online.messageSent);
     } else if (displayable == chatBox && command == MenuEngine.BACK) {
       display.setCurrent(messageReturnTo);
     }

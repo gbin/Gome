@@ -13,6 +13,7 @@ import javax.microedition.lcdui.AlertType;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 
 public class ServerConnector extends Thread {
   private static final String SERVER_INCOMING = "socket://gome.indigonauts.com:1402";
@@ -246,7 +247,7 @@ public class ServerConnector extends Thread {
       log.debug("Read version " + version);
       //#endif
       if (version != SERVER_VERSION) {
-        Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("online.versionError"), AlertType.ERROR);
+        Util.messageBox(I18N.error.error, I18N.online.versionError, AlertType.ERROR);
         connectionIncoming.close();
         return;
       }

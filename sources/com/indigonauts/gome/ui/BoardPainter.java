@@ -176,6 +176,7 @@ public class BoardPainter {
         for (int x = clipMokuX0; x <= clipMokuX1; x++) {
           for (int y = clipMokuY0; y <= clipMokuY1; y++) {
             if (!changeMask[x][y] && board.getPosition(x, y) == Board.EMPTY) {
+              
               drawCell(graphics, x, y);
               changeMask[x][y] = true;
             }
@@ -406,10 +407,9 @@ public class BoardPainter {
 
     int tlx = cx - halfdelta; // top left
     int tly = cy - halfdelta;
-
-    int position = board.getPosition(x, y);
     g.setColor(Gome.singleton.options.gobanColor);
     g.fillRect(tlx, tly, delta + 1, delta + 1);
+    int position = board.getPosition(x, y);
 
     switch (position) {
     case Board.BLACK:

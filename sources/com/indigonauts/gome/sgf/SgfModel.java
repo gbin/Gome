@@ -13,6 +13,7 @@ import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 
 /**
  * SgfModel is used to parse a sgf string and save the game in memory as a tree
@@ -76,7 +77,7 @@ public class SgfModel extends GameInfo implements Enumeration {
       newnode.setPlayerColor((byte) -1);
     }
     if (handi == 9 && size == 9)
-      newnode.setComment(Gome.singleton.bundle.getString("ui.easterEgg")); //$NON-NLS-1$
+      newnode.setComment(I18N.easterEgg); //$NON-NLS-1$
 
     if (handi >= 1) {
       model.komi = "0.5"; //$NON-NLS-1$
@@ -238,7 +239,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             //#ifdef DEBUG
             //log.error("Did not expect '" + c + "'");
             //#endif
-            throw new IllegalArgumentException(Gome.singleton.bundle.getString("ui.error.sgfParsing") + " at chr " + index); //$NON-NLS-1$
+            throw new IllegalArgumentException(I18N.error.sgfParsing + " at chr " + index); //$NON-NLS-1$
           }
         } else if (c != ']') {
           if (property.equals("C") || (c != -1)) { //$NON-NLS-1$
@@ -413,7 +414,7 @@ public class SgfModel extends GameInfo implements Enumeration {
       }
     } catch (Exception e) {
       e.printStackTrace();
-      throw new IllegalArgumentException(Gome.singleton.bundle.getString("ui.error.sgfParsing") + e.getMessage()); //$NON-NLS-1$
+      throw new IllegalArgumentException(I18N.error.sgfParsing + e.getMessage()); //$NON-NLS-1$
     }
     // upon successful parse, disconnect the root node from the sfg tree
     SgfNode son = newModel.root.getSon();
@@ -427,7 +428,7 @@ public class SgfModel extends GameInfo implements Enumeration {
     return boardSize;
   }
 
-  public SgfNode getFirstNode() {
+  public SgfNode getRoot() {
     return root.getSon();
   }
 
@@ -560,7 +561,7 @@ public class SgfModel extends GameInfo implements Enumeration {
       return PL; // first respect what it is written in the SFG
     }
 
-    SgfNode node = this.getFirstNode(); // Then try to guess from the played
+    SgfNode node = this.getRoot(); // Then try to guess from the played
     // moved
     byte color = 0;
 
@@ -578,7 +579,7 @@ public class SgfModel extends GameInfo implements Enumeration {
 
   public String toString() {
     StringBuffer buf = new StringBuffer();
-    SgfNode firstNode = getFirstNode();
+    SgfNode firstNode = getRoot();
 
     if (firstNode == null)
       return "(;)"; //$NON-NLS-1$
@@ -828,7 +829,7 @@ public class SgfModel extends GameInfo implements Enumeration {
 
   private void addHandicapStones(String[] placements) {
     for (int i = 0; i < placements.length; i++) {
-      getFirstNode().addABElement(SgfPoint.createFromSgf(placements[i]));
+      getRoot().addABElement(SgfPoint.createFromSgf(placements[i]));
     }
   }
 

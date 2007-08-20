@@ -25,6 +25,7 @@ import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.StringVector;
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.BundledFileEntry;
 import com.indigonauts.gome.io.CollectionEntry;
 import com.indigonauts.gome.io.FileEntry;
@@ -101,13 +102,13 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       // Nothing we can do
     }
 
-    OPEN = new Command(Gome.singleton.bundle.getString("ui.open"), Command.SCREEN, 2); //$NON-NLS-1$
-    SAVE_AS = new Command(Gome.singleton.bundle.getString("ui.saveAs"), Command.SCREEN, 2); //$NON-NLS-1$
-    OPEN_REVIEW = new Command(Gome.singleton.bundle.getString("ui.openReview"), Command.SCREEN, 2); //$NON-NLS-1$
-    DELETE = new Command(Gome.singleton.bundle.getString("ui.delete"), Command.SCREEN, 3); //$NON-NLS-1$
-    IMPORT = new Command(Gome.singleton.bundle.getString("ui.import"), Command.SCREEN, 2); //$NON-NLS-1$
-    SEND_BY_EMAIL = new Command(Gome.singleton.bundle.getString("ui.sendByEmail"), Command.SCREEN, 2); //$NON-NLS-1$
-    RANDOM = new Command(Gome.singleton.bundle.getString("ui.random"), Command.SCREEN, 2); //$NON-NLS-1$
+    OPEN = new Command(I18N.open, Command.SCREEN, 2); //$NON-NLS-1$
+    SAVE_AS = new Command(I18N.saveAs, Command.SCREEN, 2); //$NON-NLS-1$
+    OPEN_REVIEW = new Command(I18N.openReview, Command.SCREEN, 2); //$NON-NLS-1$
+    DELETE = new Command(I18N.delete, Command.SCREEN, 3); //$NON-NLS-1$
+    IMPORT = new Command(I18N.import_, Command.SCREEN, 2); //$NON-NLS-1$
+    SEND_BY_EMAIL = new Command(I18N.sendByEmail, Command.SCREEN, 2); //$NON-NLS-1$
+    RANDOM = new Command(I18N.random, Command.SCREEN, 2); //$NON-NLS-1$
 
   }
 
@@ -130,7 +131,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
 
  
   public void show(Display disp) {
-    uiFolder = new Form(Gome.singleton.bundle.getString("ui.filesIn", new String[] { currentDirectory }));
+    uiFolder = new Form(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
     visibleItems.removeAllElements();
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
@@ -273,7 +274,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       } else if (c == DELETE) {
         FileEntry entry = currentItem.getEntry();
         if (!(entry instanceof LocalFileEntry)) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.onlyLocal"), AlertType.ERROR);
+          Util.messageBox(I18N.error.error, I18N.error.onlyLocal, AlertType.ERROR);
           return;
         }
         listener.deleteFile(entry);
@@ -341,13 +342,13 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         //# try {
         //#   IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
         //# } catch (IOException e) {
-        //#   Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(e.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+        //#   Util.messageBox(I18N.error.error, e.getMessage(), AlertType.ERROR); //$NON-NLS-1$
         //# }
         //#else
         try {
           IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
         } catch (RecordStoreException rse) {
-          Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString(rse.getMessage()), AlertType.ERROR); //$NON-NLS-1$ 
+          Util.messageBox(I18N.error.error, rse.getMessage(), AlertType.ERROR); //$NON-NLS-1$ 
         }
         //#endif
 
@@ -431,7 +432,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         typeok = false;
     }
     if (!typeok) {
-      Util.messageBox(Gome.singleton.bundle.getString("ui.error"), Gome.singleton.bundle.getString("ui.error.onlyOnline"), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      Util.messageBox(I18N.error.error, I18N.error.onlyOnline, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       return;
     }
 
@@ -451,7 +452,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void downloadFailure(Exception reason) {
-    Util.messageBox(Gome.singleton.bundle.getString("ui.error"), reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
+    Util.messageBox(I18N.error.error, reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
   }
 
   public void done() {
@@ -459,7 +460,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void failed(Exception reason) {
-    Util.messageBox(Gome.singleton.bundle.getString("ui.failure"), Gome.singleton.bundle.getString(reason.getMessage()), AlertType.ERROR); //$NON-NLS-1$
+    Util.messageBox(I18N.failure, reason.getMessage(), AlertType.ERROR); //$NON-NLS-1$
   }
 
   public IllustratedItem getCurrentItem() {
