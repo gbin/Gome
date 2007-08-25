@@ -14,6 +14,9 @@ public interface I18N {
     String markDeadStone = "Mark dead stones";
     String restoreCounting = "The game is restored for re-scoring";
     String undoMarkDeadStone = "Reset dead stones";
+    String evaluate = "Score Est.";
+    String endCounting = "End Scoring";
+
   }
 
   public interface game {
@@ -120,7 +123,6 @@ public interface I18N {
     String igsByoyomi = "Min for 25 moves";
     String igsChallenge = "- Challenge -";
     String igsSize = "Goban";
-    String lang = "Language";
     String manual = "Manual scroll";
     String medium = "Medium";
     String oneHalf = "One & half liner";
@@ -242,8 +244,6 @@ public interface I18N {
   String undo = "Undo";
   String hint = "Hint";
   String openReview = "Open for review";
-  String count_evaluate = "Score Est.";
-  String count_endCounting = "End Scoring";
   String previousInCollection = "Previous";
   String next10Moves = "Jump 10 moves";
   String prev10Moves = "Back 10 moves";

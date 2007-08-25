@@ -1,0 +1,255 @@
+package com.indigonauts.gome.i18n;
+
+
+
+
+public interface I18N_fr {
+  public interface clock {
+    String blackTimeUp = "Le temps de Noir est expiré. Blanc a gagné";
+    String min25stones = "min/25 pierres";
+    String timesUp = "a son temps expiré";
+    String whiteTimeUp = "Le temps de Blanc est expiré. Noir a gagné";
+  }
+
+  public interface count {
+    String doneWithScoring = "Le comptage est terminé. En attente de la confirmation de l'adversaire.";
+    String endGameMarkStone = "La partie est terminée. Marquer les pierres capturées.";
+    String markDeadStone = "Marquer les pierres capturées";
+    String restoreCounting = "La partie est restaurée pour le recomptage.";
+    String undoMarkDeadStone = "Reinitialiser le marquage des pierres mortes";
+    String evaluate = "Score Est.";
+    String endCounting = "Comptage";
+
+  }
+
+  public interface game {
+    String application = "Application :";
+    String blackLong = "Noir";
+    String blackShort = "(N)";
+    String blackWin = "N+";
+    String captured = "Capturés :";
+    String context = "Contexte :";
+    String copyright = "Copyright :";
+    String event = "Evénement :";
+    String info = "Infos sur la partie";
+    String jigo = "Jigo";
+    String komi = "Komi :";
+    String name = "Connu sous le nom de :";
+    String opening = "Ouverture :";
+    String passed = "passé";
+    String place = "Lieu :";
+    String result = "Résultat :";
+    String round = "Ronde :";
+    String score = "score :";
+    String scribe = "Scribe :";
+    String source = "Source :";
+    String versus = "contre";
+    String whiteLong = "Blanc";
+    String whiteShort = "(B)";
+    String whiteWin = "B+";
+    String winBy = "gagné par";
+  }
+
+  public interface online {
+    String acceptChallenge = "Accepte le défi...";
+    String blackGives = "Noir donne";
+    String challenge = "Défi";
+    String challengeMessage = "Votre couleur : %0 |Taille du Goban : %1 x %2 |Temps : %3 min %4";
+    String challengesYou = "vous défie";
+    String changeHandicap = "Changer l'handicap";
+    String connect = "Connexion vers IGS";
+    String connectedToIgs = "Connecté à IGS";
+    String connecting = "Connexion en cours ...";
+    String connectionError = "Erreur de connexion";
+    String decline = "Refuser";
+    String disconnect = "Déconnecter";
+    String disconnected = "Déconnecté";
+    String gameList = "Parties en ligne";
+    String getUserList = "Récupère la liste des utilisateurs...";
+    String gettingGameList = "Récupère la liste des jeux...";
+    String gettingScore = "En attente du score final ...";
+    String handicapChangeForm = "Changer l'handicap";
+    String komiChangeForm = "Changer le komi";
+    String loginError = "Login ou mot de passe incorrect.";
+    String message = "Envoyer un message";
+    String messageSent = "Message envoyé";
+    String movePlayed = "Un nouveau coup a été joué";
+    String newKomi = "le komi a été établit à ";
+    String noByo = "Pas de byoyomi";
+    String noStartedGame = "Il n'y a pas de partie en cours";
+    String notYourTurn = "Ce n'est pas votre tour";
+    String observe = "Observer";
+    String onlineGameStarted = "La partie en ligne a commencée";
+    String opponentAgreedNewKomi = "Votre adversaire est d'accord pour ce komi.";
+    String opponentWantsToChangeKomi = "Votre adversaire veut changer le komi à";
+    String requestKomi = "Demander à changer le Komi";
+    String requestingBlackKomi = "Demander que Noir donne un komi de";
+    String requestingWhiteKomi = "Demander que Blanc donne un komi de";
+    String sendChallenge = "Envoi du défi...";
+    String userlist = "Utilisateurs en ligne";
+    String versionError = "La version du serveur ne correspond pas à celle de Gome. Veuillez mettre à jour Gome.";
+    String whiteGives = "Blanc donne";
+    String youWantToChangeHandicap = "Vous voulez mettre un handicap de";
+    String youWantToChangeKomi = "Vous voulez changer le Komi à";
+    String sortRank = "Trier par Rang";
+    String sortNick = "Trier par Pseudo";
+    String sortWatch = "Trier par Observé";
+  }
+
+  public interface help {
+    String help = "Aide";
+    String comment = "pour voir les commentaires au complet";
+    String hint = "pour voir les prochains coups possibles";
+    String next10Moves = "saute 10 coups";
+    String pointer = "Utiliser les flèches pour déplacer le curseur";
+    String pointerReview1 = "DROITE coup suivant";
+    String pointerReview2 = "GAUCHE coup precedent";
+    String pointerReview3 = "HAUT variation précédente";
+    String pointerReview4 = "BAS variation suivante";
+    String prev10Moves = "remonte 10 coup";
+    String scrollDown = "descends dans les commentaires";
+    String scrollUp = "remonte dans les commentaires";
+    String undo = "pour défaire";
+    String zoom = "pour zoomer autour du curseur";
+    String rules = "Règles (en ligne)";
+    String gome = "Gome";
+    String key = "Raccourcis";
+    String prevCorner = "Coin précédent";
+    String nextCorner = "Coin suivant";
+
+  }
+
+  public interface option {
+    String fast = "Rapide";
+    String gobanColor = "Couleur";
+    String igs = "Options pour IGS";
+    String igsByoyomi = "Min pour 25 coups";
+    String igsChallenge = "- Défi -";
+    String igsSize = "Goban";
+    String manual = "Manuel";
+    String medium = "Moyenne";
+    String oneHalf = "Une ligne & demi";
+    String oneLiner = "Une ligne";
+    String scrollerFont = "Commentaires";
+    String scrollerSize = "Taille du défilement";
+    String scrollerSpeed = "Vitesse de défilement";
+    String slow = "Lente";
+    String twoHalf = "Deux lignes & demi";
+    String twoLiner = "Deux lignes";
+    String register = "Activation";
+    String user = "Nom";
+    String key = "Clef";
+    String invalidKey = "Votre clef d'activation est invalide.";
+    String invalidKeyExplanation = "Les informations entrées pour l'activation sont invalides, vérifiez SVP si le nom et la clef sont correctes.";
+    String light = "clair";
+    String dark = "foncé";
+    String small = "petit";
+    String large = "grande";
+    String igsMinutes = "Temps principal";
+    String aspect = "Graphiques";
+    String stoneBug = "Selectionner la pierre au meilleur rendu";
+    String stone = "Pierre";
+    String optimize = "Optimiser pour ...";
+    String speed = "vitesse et batterie";
+    String memory = "mémoire";
+    String compatibility = "Compatibilité";
+    String ghostStone = "Pierre fantôme";
+    String email = "Votre Email";
+  }
+
+  public interface error {
+    String error = "Erreur";
+    String delete = "Erreur lors de la suppression du fichier";
+    String onlyOnline = "Vous ne pouvez importer que des fichiers en ligne";
+    String recordStored = "Erreur lors de l'accès au stockage interne";
+    String sgfParsing = "Erreur de forma SGF";
+    String stream = "Flux fermé";
+    String wrongtype = "Mauvais type de fichier";
+    String onlyLocal = "Seulement les fichiers locaux peuvent être supprimés";
+    String posting = "Impossible de poster le fichier au serveur";
+  }
+
+  String about = "A propos";
+  String accept = "Accepter";
+  String back = "Retour";
+  String blackResigned = "Noir a abandonné";
+  String dark = "Foncé";
+  String defaultFilename = "jeu";
+  String delete = "Supprimer";
+  String done = "Terminé";
+  String download_failure = "Le transfert a échoué";
+  String download_inprogress = "Chargement ...";
+  String easterEgg = "Bonne chance !";
+
+  String exit = "Sortir";
+  String failure = "Problème";
+  String filename = "Nom du ficher";
+  String firstMove = "Aller au premier coup";
+  String gameHadEnded = "Cette partie est terminée. Veuillez en démarrer une autre";
+  String gameStatus = "Info sur la partie";
+  String goban = "Taille du goban...";
+  String handicap = "Handicap";
+
+  String import_ = "Importer";
+  String info = "Info";
+  String komi = "Komi";
+  String large = "Grand";
+  String lastMove = "Aller au dernier coup";
+  String library = "Gérer";
+  String light = "Claire";
+  String medium = "Medium";
+  String menu = "Menu";
+  String needReboot = "Redemarrer";
+  String new_ = "Nouveau";
+  String nextInCollection = "Suivant";
+  String noMoreMove = "Il n'y a plus de coups";
+  String nogame = "Aucune partie trouvée a continuer";
+  String nohandicap = "Sans handicap";
+  String notValidMove = "Coup invalide";
+  String open = "Ouvrir";
+  String login = "Login";
+  String password = "Mot de passe";
+  String options = "Options";
+  String pass = "Passe";
+  String playMode = "Mode Jeu";
+  String random = "Au hasard";
+  String request = "Demande";
+  String resign = "Abandonner";
+  String resigned = "a abandoné.";
+  String resume = "Continue";
+  String reviewMode = "Mode revue";
+  String selectall = "Selectionner tout";
+  String settingHandicapTo = "Mettre le handicap à";
+  String small = "Petit";
+  String start = "Démarrer";
+  String switchToPlayEditMode = "Mode jeu/édition";
+  String switchToReviewMode = "Mode revue";
+  String whiteResigned = "Blanc a abandonné.";
+  String wrongMove = "Mauvais coup";
+  String rightMove = "Correcte !";
+  String success = "Succès";
+  String email_success = "Votre partie a été envoyée.";
+  String sendByEmail = "Envoyer par Email";
+  String expired = "Votre période d'essai a expirée. ";
+  String expiredExplanation = "Vous avez aimer Gome ? Achetez le sur http://indigonauts.com/gome/ !";
+  String hoursLeft = "Vous avez %0 heures et %1 minutes restantes sur votre période d'évaluation";
+  String send = "Envoi";
+  String loginProblem = "Erreur pendant le login";
+  String noBundle = "Cette option n'est pas presente dans cette version de Gome";
+  String fileselect = "Fichiers";
+  String filesIn = "Dans %0";
+  String saveIn = "Sauver dans %0";
+  String save = "Sauve";
+  String comment = "Commentaires";
+  String zoom = "Zoom";
+  String undo = "Défaire";
+  String hint = "Indice";
+  String openReview = "Ouvrir pour revue";
+  String previousInCollection = "Précédent";
+  String next10Moves = "Sauter 10 coups";
+  String prev10Moves = "Revenir 10 coups";
+  String saveAs = "Enregister sous...";
+  String reply = "repondre";
+  String editNode = "Editer";
+  String ok = "ok";
+}

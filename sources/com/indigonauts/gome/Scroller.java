@@ -20,6 +20,13 @@ public class Scroller extends Thread {
   //#endif
   public static final Font SMALL_FONT_BOLD = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL);
 
+  private static final char[] UPC = { 8593 };
+  private static final char[] DOWNC = { 8595 };
+  private static final char[] UP_DOWNC = { 8597 };
+  private static final String UP = new String(UPC);
+  private static final String DOWN = new String(DOWNC);
+  private static final String UP_DOWN = new String(UP_DOWNC);
+  
   private Canvas target;
 
   private int x;
@@ -86,7 +93,7 @@ public class Scroller extends Thread {
   /*
    * Specify top right corner
    */
-  private void drawOverlayBox(Graphics g, int x, int y, String[] content, int[] color, int bg) {
+  private void drawOverlayBox(Graphics g, int x, int y, String[] content, int[] color, int bg, int alpha) {
     int boxWidth = 0;
     int sep = SMALL_FONT_BOLD.stringWidth(SEP);
     int space = SMALL_FONT_BOLD.charWidth(' ');
@@ -126,7 +133,7 @@ public class Scroller extends Thread {
     tempBuff.getRGB(afterRaster, 0, boxWidth, 0, 0, boxWidth, boxHeight);
 
     for (int i = 0; i < len; i++) {
-      afterRaster[i] = 0xA0000000 + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
+      afterRaster[i] = ((alpha<<24)&0xFF000000) + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
     }
     g.drawRGB(afterRaster, 0, boxWidth, x - boxWidth, y, boxWidth, boxHeight, true);
 
@@ -177,17 +184,21 @@ public class Scroller extends Thread {
       strings[--nb] = fileIndex;
       colors[nb] = Util.COLOR_GREEN;
     }
+    
+    int transparency = 0x00;
+    if(offset/2<boxHeight)
+    {
+      transparency = (0xA0 * (boxHeight - (offset/2)))/boxHeight;
+    }
+    else if (offset > textHeight - height - boxHeight)
+    {
+      transparency = (0xA0 * (offset + boxHeight - textHeight + height))/boxHeight;
+    }
 
-    drawOverlayBox(g, width - 2, y + 1, strings, colors, Util.COLOR_LIGHT_BACKGROUND);
+    drawOverlayBox(g, width - 2, y + 1, strings, colors, Util.COLOR_LIGHT_BACKGROUND, transparency);
   }
 
-  private static final char[] UPC = { 8593 };
-  private static final char[] DOWNC = { 8595 };
-  private static final char[] UP_DOWNC = { 8597 };
-  private static final String UP = new String(UPC);
-  private static final String DOWN = new String(DOWNC);
-  private static final String UP_DOWN = new String(UP_DOWNC);
-
+  
   public void bigStepUp() {
     offset += bigStep;
     stepUp();
@@ -279,7 +290,7 @@ public class Scroller extends Thread {
   }
 
   private int initTextWidth() {
-    int l = 4; // #1 + 2 margin 
+    int l = 5; // #1 + 2 margin 
     if (moveNb > 10)
       l++;
     if (moveNb > 100)
@@ -346,12 +357,10 @@ public class Scroller extends Thread {
   }
 
   private void pause() {
-    //log.debug("pause scroller");
     this.paused = true;
   }
 
   private void resume() {
-    //log.debug("resume scroller");
     this.paused = false;
     synchronized (this) {
       notifyAll();
@@ -367,7 +376,6 @@ public class Scroller extends Thread {
   }
 
   public void setVisible(boolean visible) {
-    //log.debug("Set scroller visible to "+ visible);
     this.visible = visible;
     if (!visible)
       pause();
@@ -378,7 +386,6 @@ public class Scroller extends Thread {
       fileIndex = null;
     else
       fileIndex = String.valueOf(i);
-
   }
 
 }

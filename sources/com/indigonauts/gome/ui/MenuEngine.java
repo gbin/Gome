@@ -82,8 +82,8 @@ public class MenuEngine implements CommandListener {
   public static final Command START = new Command(I18N.start, Command.SCREEN, 10); //$NON-NLS-1$
   public static final Command EXIT = new Command(I18N.exit, Command.EXIT, 9); // EXIT
 
-  public static final Command FINISHED_COUNTING = new Command(I18N.count_endCounting, Command.SCREEN, 4); //$NON-NLS-1$
-  public static final Command EVALUATE = new Command(I18N.count_evaluate, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command FINISHED_COUNTING = new Command(I18N.count.endCounting, Command.SCREEN, 4); //$NON-NLS-1$
+  public static final Command EVALUATE = new Command(I18N.count.evaluate, Command.SCREEN, 5); //$NON-NLS-1$
   public static final Command ACCEPT = new Command(I18N.accept, Command.SCREEN, 5); //$NON-NLS-1$
   public static final Command DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5); //$NON-NLS-1$
   public static final Command RESIGN = new Command(I18N.resign, Command.SCREEN, 5); //$NON-NLS-1$
