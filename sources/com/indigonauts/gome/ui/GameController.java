@@ -1352,12 +1352,12 @@ public class GameController implements ServerCallback
 
   //#endif
 
-  public void startCountMode(boolean evaluationMode) {
+  public void startCountMode(boolean evaluationMode1) {
     clock.pauseClock();
     canvas.stopClockPainting();
     countMode = true;
-    this.evaluationMode = evaluationMode;
-    board.startCounting(evaluationMode, (playMode != ONLINE_MODE) && !evaluationMode);
+    this.evaluationMode = evaluationMode1;
+    board.startCounting(evaluationMode1, (playMode != ONLINE_MODE) && !evaluationMode1);
     Gome.singleton.mainCanvas.updateClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
     canvas.setSplashInfo(I18N.count.markDeadStone);
     //#ifdef IGS

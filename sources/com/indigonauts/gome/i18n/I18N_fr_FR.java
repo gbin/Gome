@@ -3,7 +3,7 @@ package com.indigonauts.gome.i18n;
 
 
 
-public interface I18N_fr {
+public interface I18N_fr_FR {
   public interface clock {
     String blackTimeUp = "Le temps de Noir est expiré. Blanc a gagné";
     String min25stones = "min/25 pierres";

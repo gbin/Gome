@@ -15,11 +15,9 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.microedition.io.Connector;
-import javax.microedition.io.HttpConnection;
-//#ifdef JSR75
+import javax.microedition.io.HttpConnection; //#ifdef JSR75
 import javax.microedition.io.file.FileConnection;
-import javax.microedition.io.file.FileSystemRegistry;
-//#endif
+import javax.microedition.io.file.FileSystemRegistry; //#endif
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
@@ -33,7 +31,7 @@ import com.indigonauts.gome.sgf.SgfModel;
 
 public class IOManager {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("IOManager");
+  public static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("IOManager");
   //#endif
   private static final String SGF = ".sgf"; //$NON-NLS-1$
 
@@ -126,8 +124,7 @@ public class IOManager {
     pwdFile = currentHttpConnection.getHost() + ".pwd";
 
     try {
-      if (ident == null)
-        ident = new String(loadLocalStore(pwdFile, null));
+      ident = new String(loadLocalStore(pwdFile, null));
     } catch (RecordStoreException e1) {
       //#ifdef DEBUG
       log.debug("No ident is stored for " + pwdFile);
@@ -155,12 +152,11 @@ public class IOManager {
       status.requestLoginPassword(pwdFile);
       return null;
 
-    } else {
-      //#ifdef DEBUG
-      log.debug("no ident required");
-      //#endif
     }
-
+    
+    //#ifdef DEBUG
+    log.debug("no ident required");
+    //#endif
     return is;
   }
 
@@ -193,17 +189,17 @@ public class IOManager {
           //#ifdef DEBUG
           log.debug("load file " + url);
           //#endif
-          byte[] game = singleton.loadFile(url, null);
+          byte[] game1 = singleton.loadFile(url, null);
 
-          int l = game.length;
+          int l = game1.length;
           //#ifdef DEBUG
           log.debug("gonna send " + l + " bytes");
           //#endif
           int i = 0;
           for (; i < l - BUFF_SIZE; i += BUFF_SIZE) {
-            os.write(game, i, BUFF_SIZE);
+            os.write(game1, i, BUFF_SIZE);
           }
-          os.write(game, i, l - i);
+          os.write(game1, i, l - i);
 
         } catch (IOException e) {
           Util.messageBox(I18N.error.error, I18N.error.posting, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
@@ -448,8 +444,8 @@ public class IOManager {
     if (!fileName.toLowerCase().endsWith(SGF))
       fileName += SGF;
     String gameStr = gameToSave.toString();
-    byte[] game = gameStr.getBytes();
-    saveLocalStore(fileName, game);
+    byte[] game1 = gameStr.getBytes();
+    saveLocalStore(fileName, game1);
   }
 
   /**
@@ -466,7 +462,7 @@ public class IOManager {
     //#ifdef DEBUG
     log.debug("Load " + url);
     //#endif
-    SgfModel game = null;
+    SgfModel game1 = null;
     DataInputStream readFileAsStream = null;
     InputStreamReader inputStreamReader = null;
     try {
@@ -480,7 +476,7 @@ public class IOManager {
 
         status.setPercent((i * 100) / gameIndex);
       }
-      game = SgfModel.parse(inputStreamReader);
+      game1 = SgfModel.parse(inputStreamReader);
 
     }
     //#ifdef DEBUG
@@ -506,7 +502,7 @@ public class IOManager {
         e.printStackTrace();
       }
     }
-    return game;
+    return game1;
   }
 
   private boolean skipAGame(InputStreamReader is) throws IOException {
@@ -615,6 +611,7 @@ public class IOManager {
               fc.close();
             fc = null;
           } catch (IOException e) {
+            // Nothing can be done
           }
         }
 
@@ -650,6 +647,7 @@ public class IOManager {
               fc = null;
             }
           } catch (IOException e) {
+            // nothing can be done
           }
         }
       }

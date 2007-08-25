@@ -23,7 +23,7 @@ import com.indigonauts.gome.sgf.Board;
 
 public class Options extends Form {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Options");
+  //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Options");
   //#endif
 
   private ChoiceGroup scrollerFont;

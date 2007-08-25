@@ -93,7 +93,7 @@ public class Scroller extends Thread {
   /*
    * Specify top right corner
    */
-  private void drawOverlayBox(Graphics g, int x, int y, String[] content, int[] color, int bg, int alpha) {
+  private void drawOverlayBox(Graphics g, int xBox, int yBox, String[] content, int[] color, int bg, int alpha) {
     int boxWidth = 0;
     int sep = SMALL_FONT_BOLD.stringWidth(SEP);
     int space = SMALL_FONT_BOLD.charWidth(' ');
@@ -135,7 +135,7 @@ public class Scroller extends Thread {
     for (int i = 0; i < len; i++) {
       afterRaster[i] = ((alpha<<24)&0xFF000000) + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
     }
-    g.drawRGB(afterRaster, 0, boxWidth, x - boxWidth, y, boxWidth, boxHeight, true);
+    g.drawRGB(afterRaster, 0, boxWidth, xBox - boxWidth, yBox, boxWidth, boxHeight, true);
 
   }
 

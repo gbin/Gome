@@ -9,7 +9,6 @@ import java.util.Enumeration;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
-import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;

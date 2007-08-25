@@ -11,7 +11,6 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.lcdui.AlertType;
 
-import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 

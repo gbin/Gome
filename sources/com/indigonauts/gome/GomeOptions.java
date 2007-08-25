@@ -61,9 +61,6 @@ public class GomeOptions {
     return Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, fontSize);
   }
 
-  public GomeOptions() {
-  }
-
   public GomeOptions(DataInputStream is) {
     try {
       is.readByte(); // ex language kept for backward compatibility
@@ -91,6 +88,10 @@ public class GomeOptions {
       // probably ended before the end, leav the remaining defaults for
       // compatiibility
     }
+  }
+
+  public GomeOptions() {
+    //nothing to do
   }
 
   /**
@@ -218,17 +219,17 @@ public class GomeOptions {
   }
 
   public int getScrollerSize() {
-    int fontSize = getScrollerFont().getHeight();
+    int size = getScrollerFont().getHeight();
     switch (scrollerSize) {
     default:
     case SMALL:
-      return fontSize;
+      return size;
     case MEDIUM:
-      return (fontSize * 3) / 2;
+      return (size * 3) / 2;
     case LARGE:
-      return fontSize * 2;
+      return size * 2;
     case EXTRA_LARGE:
-      return (fontSize * 5) / 2;
+      return (size * 5) / 2;
     }
   }
 

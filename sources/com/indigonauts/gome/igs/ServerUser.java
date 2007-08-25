@@ -38,9 +38,9 @@ public class ServerUser extends QuickSortable {
     char second = user.rank.charAt(1);
     char first = user.rank.charAt(0);
     if (!Character.isDigit(second)) {
-      user.numRank = (int) (first - '0');
+      user.numRank = first - '0';
     } else {
-      user.numRank = (int) (10 * (first - '0')) + (second - '0');
+      user.numRank = 10 * (first - '0') + (second - '0');
     }
     return user;
   }

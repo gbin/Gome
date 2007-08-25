@@ -11,6 +11,7 @@ public class Point {
     public byte y= NO_POINT;
 
     public Point() {
+      // nothing to do
     }
 
     public Point(Point pt) {

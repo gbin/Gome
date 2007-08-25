@@ -14,7 +14,6 @@ import javax.microedition.lcdui.Gauge;
 import javax.microedition.lcdui.TextField;
 import javax.microedition.rms.RecordStoreException;
 
-import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.DownloadStatus;
 import com.indigonauts.gome.io.FileEntry;
@@ -81,11 +80,11 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
 
   protected abstract void downloadFinished();
 
-  public void requestLoginPassword(String pwdFile) {
+  public void requestLoginPassword(String pwdFile1) {
     ok = new Command(I18N.login, Command.OK, 1);
     login = new TextField(I18N.login, "", 32, TextField.ANY);
     password = new TextField(I18N.password, "", 32, TextField.PASSWORD);
-    this.pwdFile = pwdFile;
+    this.pwdFile = pwdFile1;
     this.delete(0);
     this.addCommand(ok);
     this.append(login);

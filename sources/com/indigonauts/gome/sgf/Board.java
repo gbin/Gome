@@ -396,10 +396,10 @@ public class Board {
       recurseDumbMarkDead(i, j + 1, color);
   }
 
-  public void startCounting(boolean evaluationMode, boolean smartMarking) {
+  public void startCounting(boolean evaluationMode, boolean smartMarking1) {
     dead = new boolean[boardSize][boardSize];
     evaluationCountingMode = evaluationMode;
-    this.smartMarking = smartMarking;
+    this.smartMarking = smartMarking1;
   }
 
   public void endCounting() {

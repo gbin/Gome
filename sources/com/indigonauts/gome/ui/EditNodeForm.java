@@ -13,7 +13,7 @@ import com.indigonauts.gome.sgf.SgfNode;
 
 class EditNodeForm extends Form implements Showable {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("EditNodeForm");
+  //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("EditNodeForm");
   //#endif
 
   TextField comment;

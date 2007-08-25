@@ -31,7 +31,7 @@ public class Gome extends MIDlet implements CommandListener {
   //#endif
 
   public static final String VERSION = "@VERSION"; //$NON-NLS-1$
-  public static final String LOCALE = "@LOCALE"; //$NON-NLS-1$
+  public static final String LOCALE = "_en_US"; //$NON-NLS-1$
 
   private static final String OPTIONS_FILE = VERSION + ".o"; //$NON-NLS-1$
   private static long HOUR = 60 * 60 * 1000L;
