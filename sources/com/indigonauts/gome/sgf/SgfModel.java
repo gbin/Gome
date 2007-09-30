@@ -427,8 +427,12 @@ public class SgfModel extends GameInfo implements Enumeration {
     return boardSize;
   }
 
-  public SgfNode getRoot() {
+  public SgfNode getFirstMove() {
     return root.getSon();
+  }
+  
+   public SgfNode getRoot() {
+    return root;
   }
 
   public Enumeration elements() {
@@ -560,7 +564,7 @@ public class SgfModel extends GameInfo implements Enumeration {
       return PL; // first respect what it is written in the SFG
     }
 
-    SgfNode node = this.getRoot(); // Then try to guess from the played
+    SgfNode node = this.getFirstMove(); // Then try to guess from the played
     // moved
     byte color = 0;
 
@@ -578,7 +582,7 @@ public class SgfModel extends GameInfo implements Enumeration {
 
   public String toString() {
     StringBuffer buf = new StringBuffer();
-    SgfNode firstNode = getRoot();
+    SgfNode firstNode = getFirstMove();
 
     if (firstNode == null)
       return "(;)"; //$NON-NLS-1$
@@ -828,7 +832,7 @@ public class SgfModel extends GameInfo implements Enumeration {
 
   private void addHandicapStones(String[] placements) {
     for (int i = 0; i < placements.length; i++) {
-      getRoot().addABElement(SgfPoint.createFromSgf(placements[i]));
+      getFirstMove().addABElement(SgfPoint.createFromSgf(placements[i]));
     }
   }
 

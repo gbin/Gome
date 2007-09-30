@@ -279,7 +279,7 @@ public class GameController implements ServerCallback
       playArea = new Rectangle((byte) 0, (byte) 0, (byte) (board.getBoardSize() - 1), (byte) (board.getBoardSize() - 1));
     }
 
-    switchCurrentNode(model.getRoot());
+    switchCurrentNode(model.getFirstMove());
     playNode(currentNode);
     initPainter(); // setclockandcomment need the definitive painter for the layout
     if (model.isCommented()) {
@@ -441,7 +441,7 @@ public class GameController implements ServerCallback
       doGoNextBrother();
       break;
     case MainCanvas.ACTION_LEFT:
-      if (!doGoBack())
+      if (!doGoBack(true)) // root allowed in review
         canvas.setSplashInfo(I18N.noMoreMove);
       break;
     case MainCanvas.ACTION_RIGHT:
@@ -497,7 +497,7 @@ public class GameController implements ServerCallback
 
   public void do10PrevMoves() {
     for (int i = 0; i < 10; i++)
-      doGoBack();
+      doGoBack(true); // root allowed in review
     tuneBoardPainter();
   }
 
@@ -557,9 +557,9 @@ public class GameController implements ServerCallback
   /* return refreshNeded */
   public boolean doUndo() {
     if (playMode != ONLINE_MODE && playMode != OBSERVE_MODE) {
-      doGoBack();
+      doGoBack(false);
       if (playMode == PROBLEM_MODE && model.getFirstPlayer() == currentNode.getPlayerColor()) {
-        doGoBack();
+        doGoBack(false);
       }
       return true;
     }
@@ -798,14 +798,14 @@ public class GameController implements ServerCallback
 
   }
 
-  public boolean doGoBack() {
+  public boolean doGoBack(boolean rootAllowed) {
     if (countMode && !gameHasEnded) {
       resumeFromCounting();
       return true;
     }
     SgfNode prev = currentNode.searchFather();
-    
-    if (prev.searchFather() != null) {
+
+    if ((rootAllowed && prev != null) || (!rootAllowed && prev != null && model.getRoot() != prev)) {
       board.placeStone(currentNode.getPoint(), Board.EMPTY);
       Vector deadStones = currentNode.getDeadStones();
       if (deadStones != null) {
@@ -851,7 +851,7 @@ public class GameController implements ServerCallback
 
   public void doGoPrevBrother() {
     SgfNode current = currentNode;
-    if (!doGoBack()) // if there is no parent ignore
+    if (!doGoBack(false)) // if there is no parent ignore
       return;
     Vector children = currentNode.getChildren();
     int index = children.indexOf(current) - 1;
@@ -864,7 +864,7 @@ public class GameController implements ServerCallback
 
   public void doGoNextBrother() {
     SgfNode current = currentNode;
-    if (!doGoBack()) // if there is no parent ignore
+    if (!doGoBack(false)) // if there is no parent ignore
       return;
     Vector children = currentNode.getChildren();
     int index = children.indexOf(current) + 1;

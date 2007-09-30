@@ -60,10 +60,11 @@
 	</target>
 
 	<target name="all" depends="cleandist">
-		<var name="lang" value="en_US" />
-		<antcall target="all_types" />
 		<var name="lang" value="fr_FR" />
 		<antcall target="all_types" />
+		<var name="lang" value="en_US" />
+		<antcall target="all_types" />
+		
 	</target>
 	
 	<target name="all_types" depends="VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75, VJOSEKI_NOIMAGE_MIDP2_JSR75"/>

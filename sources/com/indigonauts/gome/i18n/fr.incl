@@ -1,5 +1,5 @@
 
-public interface I18N_fr_FR {
+public interface I18N {
   public interface clock {
     String blackTimeUp = "Le temps de Noir est expiré. Blanc a gagné";
     String min25stones = "min/25 pierres";
