@@ -49,7 +49,6 @@ public class Info extends Fetcher implements CommandListener, Showable {
    * @param urlToFetch
    */
   public Info(Showable parent, String title, String urlToFetch) {
-    setUpCurrentExternal();
     this.title = title;
     this.urlToFetch = urlToFetch;
     this.parent = parent;
@@ -369,6 +368,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
 
   protected void download() throws IOException {
     current = formatHelp(title, urlToFetch);
+    setUpCurrentExternal();
   }
 
   protected void downloadFailed(Exception reason) {

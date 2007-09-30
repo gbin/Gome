@@ -1,6 +1,6 @@
 package com.indigonauts.gome.i18n;
 
-//#if lang=="en_US" 
+//#if LOCALE=="en_US" 
 public interface I18N {
   public interface clock {
     String blackTimeUp = "Black's time is up. White won.";
@@ -252,7 +252,7 @@ public interface I18N {
   String editNode = "Edit";
   String ok = "ok";
 }
-//#elif lang=="fr_FR"
+//#elif LOCALE=="fr_FR"
 //#include fr.incl
 //#endinclude
 //#endif

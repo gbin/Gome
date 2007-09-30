@@ -60,9 +60,9 @@
 	</target>
 
 	<target name="all" depends="cleandist">
-		<var name="lang" value="fr_FR" />
+		<var name="LOCALE" value="fr_FR" />
 		<antcall target="all_types" />
-		<var name="lang" value="en_US" />
+		<var name="LOCALE" value="en_US" />
 		<antcall target="all_types" />
 		
 	</target>
@@ -106,12 +106,12 @@
 
 
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
-		<echo message="MIDP2-${lang}" />
+		<echo message="MIDP2-${LOCALE}" />
 		<var name="midlet.name" value="gome-normal-MIDP2" />
 		<var name="symbols" value="IGS,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${lang}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -125,7 +125,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -140,7 +140,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,DEBUG" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -155,7 +155,7 @@
 		<var name="symbols" value="IGS,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -175,12 +175,11 @@
 	</target>
 
 	<target name="preprocess" depends="clean, -eclipseme-initialize, -initialize">
-		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},lang=&quot;${lang}&quot;" />
+		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
 			<fileset refid="${midlet.name}-files" />
 		</copy>
-		<replace file="${project.root.gome}/src/com/indigonauts/gome/Gome.java" token="@VERSION" value="${gome.version}" />
 	</target>
 
 	<!-- Build the classes that make up the midlet -->
@@ -193,8 +192,8 @@
 
 	<!-- Package up the compiled code with obfuscation -->
 	<target name="deployable" depends="build,-eclipseme-deployable" description="Packages the midlet jar, with obfuscation">
-		<move file="${project.root.gome}/deployed/${midlet.name}.jad" tofile="${project.root.gome}/dist/${midlet.name}-${lang}-${gome.version}.jad" />
-		<move file="${project.root.gome}/deployed/${midlet.name}.jar" tofile="${project.root.gome}/dist/${midlet.name}-${lang}-${gome.version}.jar" />
+		<move file="${project.root.gome}/deployed/${midlet.name}.jad" tofile="${project.root.gome}/dist/${midlet.name}-${LOCALE}-${gome.version}.jad" />
+		<move file="${project.root.gome}/deployed/${midlet.name}.jar" tofile="${project.root.gome}/dist/${midlet.name}-${LOCALE}-${gome.version}.jar" />
 	</target>
 
 	<!-- Run the packaged code -->
