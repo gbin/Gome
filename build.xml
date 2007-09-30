@@ -58,14 +58,22 @@
 		<var name="wtk.cldc.version" value="1.1" />
 		<var name="wtk.midp.version" value="2.0" />
 	</target>
+
+	<target name="all" depends="cleandist">
+		<var name="lang" value="en_US" />
+		<antcall target="all_types" />
+		<var name="lang" value="fr_FR" />
+		<antcall target="all_types" />
+	</target>
 	
-	<target name="all" depends="cleandist, VMIDP2, VMIDP2_JSR75, VJOSEKI_MIDP2_JSR75, VJOSEKI_NOIMAGE_MIDP2_JSR75" />
+	<target name="all_types" depends="VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75, VJOSEKI_NOIMAGE_MIDP2_JSR75"/>
+		
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
 		<exclude name="**/*.*" />
 	</fileset>
 
-	
+
 	<fileset id="gome-normal-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
@@ -88,21 +96,21 @@
 		<patternset refid="joseki" />
 	</fileset>
 	<fileset id="gome-joseki-noimage-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
-			<patternset refid="file-icons" />
-			<patternset refid="menu-icons" />
-			<patternset refid="games" />
-			<patternset refid="problems" />
-			<patternset refid="joseki" />
-		</fileset>
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
+		<patternset refid="joseki" />
+	</fileset>
 
 
 	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
-		<echo message="MIDP2" />
+		<echo message="MIDP2-${lang}" />
 		<var name="midlet.name" value="gome-normal-MIDP2" />
 		<var name="symbols" value="IGS,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${lang}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -141,18 +149,18 @@
 
 
 	<target name="VJOSEKI_NOIMAGE_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
-			<echo message="JOSEKI NOIMAGE MIDP2 JSR75" />
-			<var name="midlet.name" value="gome-joseki-noimage-jsr75-MIDP2" />
-			<var name="symbols" value="IGS,JSR75" />
-			<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-			<replace file="${project.root.gome}/${midlet.name}.jad">
-				<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-				<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-			</replace>
+		<echo message="JOSEKI NOIMAGE MIDP2 JSR75" />
+		<var name="midlet.name" value="gome-joseki-noimage-jsr75-MIDP2" />
+		<var name="symbols" value="IGS,JSR75" />
+		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<replace file="${project.root.gome}/${midlet.name}.jad">
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+		</replace>
 
-			<antcall target="deployable" />
-			<delete file="${project.root.gome}/${midlet.name}.jad" />
-		</target>
+		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad" />
+	</target>
 
 	<!-- Initialize the build environment as necessary -->
 	<target name="-initialize">
@@ -166,7 +174,7 @@
 	</target>
 
 	<target name="preprocess" depends="clean, -eclipseme-initialize, -initialize">
-		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols}" />
+		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},lang=&quot;${lang}&quot;" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
 			<fileset refid="${midlet.name}-files" />
@@ -184,8 +192,8 @@
 
 	<!-- Package up the compiled code with obfuscation -->
 	<target name="deployable" depends="build,-eclipseme-deployable" description="Packages the midlet jar, with obfuscation">
-		<move file="${project.root.gome}/deployed/${midlet.name}.jad" tofile="${project.root.gome}/dist/${midlet.name}-${gome.version}.jad" />
-		<move file="${project.root.gome}/deployed/${midlet.name}.jar" tofile="${project.root.gome}/dist/${midlet.name}-${gome.version}.jar" />
+		<move file="${project.root.gome}/deployed/${midlet.name}.jad" tofile="${project.root.gome}/dist/${midlet.name}-${lang}-${gome.version}.jad" />
+		<move file="${project.root.gome}/deployed/${midlet.name}.jar" tofile="${project.root.gome}/dist/${midlet.name}-${lang}-${gome.version}.jar" />
 	</target>
 
 	<!-- Run the packaged code -->
