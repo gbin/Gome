@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 import java.util.Stack;
+import java.util.Vector;
 
 import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
@@ -22,6 +23,7 @@ import com.indigonauts.gome.i18n.I18N;
  */
 public class SgfModel extends GameInfo implements Enumeration {
 
+  private static final String RIGHT = "RIGHT";
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("SgfModel");
   //#endif
@@ -273,7 +275,7 @@ public class SgfModel extends GameInfo implements Enumeration {
           {
             newModel.commented = true;
             int r = -1;
-            if ((r = content.indexOf("RIGHT")) != -1) {
+            if ((r = content.indexOf(RIGHT)) != -1) {
               // Remove the ugly word
               content = content.substring(0, r) + content.substring(r + 5);
               // switch the model into "marked solution mode"
@@ -283,10 +285,20 @@ public class SgfModel extends GameInfo implements Enumeration {
               //#endif
               SgfNode current = latestNode;
               // mark all the path correct
+              //#ifdef DEBUG
+              Vector correctPath = new Vector();
+              //#endif
               while (current != null) {
+                //#ifdef DEBUG
+                correctPath.addElement(current.getPoint());
+                //#endif
                 current.setCorrect(true);
-                current = current.getFather();
+                current = current.searchFather();
               }
+              //#ifdef DEBUG
+              for (int i = correctPath.size() - 1; i > 0; i--)
+                log.debug("Path to Solution : " + correctPath.elementAt(i));
+              //#endif
 
             }
             if ((r = content.indexOf("CHOICE")) != -1) {
@@ -430,8 +442,8 @@ public class SgfModel extends GameInfo implements Enumeration {
   public SgfNode getFirstMove() {
     return root.getSon();
   }
-  
-   public SgfNode getRoot() {
+
+  public SgfNode getRoot() {
     return root;
   }
 
@@ -537,7 +549,7 @@ public class SgfModel extends GameInfo implements Enumeration {
   }
 
   public boolean isCorrectNode(SgfNode node) {
-    return markedSolution ? node.isCorrect() :isMainBranch(node);  
+    return markedSolution ? node.isCorrect() : isMainBranch(node);
   }
 
   /**
@@ -636,13 +648,12 @@ public class SgfModel extends GameInfo implements Enumeration {
     buf.append(getKomi());
     buf.append(']');
 
-    
     Rectangle view = getViewArea();
     if (view.isValid()) {
       buf.append("VW["); //$NON-NLS-1$
-      buf.append(new SgfPoint((byte)view.x0, (byte)view.y0));
+      buf.append(new SgfPoint((byte) view.x0, (byte) view.y0));
       buf.append(':');
-      buf.append(new SgfPoint((byte)view.x1, (byte)view.y1));
+      buf.append(new SgfPoint((byte) view.x1, (byte) view.y1));
       buf.append(']');
     }
     if (handicap != 0) {

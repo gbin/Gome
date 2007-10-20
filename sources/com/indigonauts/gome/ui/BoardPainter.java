@@ -176,7 +176,7 @@ public class BoardPainter {
         for (int x = clipMokuX0; x <= clipMokuX1; x++) {
           for (int y = clipMokuY0; y <= clipMokuY1; y++) {
             if (!changeMask[x][y] && board.getPosition(x, y) == Board.EMPTY) {
-              
+
               drawCell(graphics, x, y);
               changeMask[x][y] = true;
             }
@@ -245,27 +245,19 @@ public class BoardPainter {
       Vector children = currentNode.getChildren();
       Enumeration enume = children.elements();
 
-      // draw first son, red if it's in the main branch
-      if (enume.hasMoreElements()) {
+      while (enume.hasMoreElements()) {
         int color = Util.COLOR_BLACK;
         SgfNode node = (SgfNode) (enume.nextElement());
         if (model.isCorrectNode(node)) {
           color = Util.COLOR_RED;
         }
-
         Point point = node.getPoint();
 
         if (point != null)
           drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.CIRCLE), color);
       }
 
-      // draw other children
-      while (enume.hasMoreElements()) {
-        SgfNode node = (SgfNode) (enume.nextElement());
-        Point point = node.getPoint();
-        if (point != null)
-          drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.CIRCLE), Util.COLOR_BLACK);
-      }
+     
     }
 
   }
