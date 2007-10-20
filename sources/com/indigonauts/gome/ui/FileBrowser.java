@@ -35,7 +35,6 @@ import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
 
-
 /**
  * Fetcher extention is just for the text files
  * @author gbin
@@ -129,10 +128,9 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     entries.addElement(entry);
   }
 
- 
   public void show(Display disp) {
     uiFolder = new Form(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
-    visibleItems.removeAllElements();
+    //visibleItems.removeAllElements();
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
@@ -473,6 +471,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
 
   public void traverseOut() {
     for (int i = 0, size = visibleItems.size(); i < size; i++)
+
       ((IllustratedItem) visibleItems.elementAt(i)).forceRedraw();
 
   }

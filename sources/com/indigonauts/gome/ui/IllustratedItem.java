@@ -7,6 +7,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.FileEntry;
 
 public class IllustratedItem extends CustomItem {
@@ -33,27 +34,31 @@ public class IllustratedItem extends CustomItem {
   protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
     if (parent.getCurrentItem() != this) {
       parent.setCurrentItem(this);
-      repaint = traversed;
+      repaint = !traversed;
       traversed = true;
       repaint();
+      visRect_inout[0] = 0;
+      visRect_inout[1] = 0;
+      visRect_inout[2] = parent.getWidth();
+      visRect_inout[3] = Math.max(icon.getHeight(), FileBrowser.ITEM_FONT.getHeight());
       return true;
     }
 
     if (tooLarge) {
       if (dir == Canvas.RIGHT) {
         tickRight();
-
+        return true;
       } else if (dir == Canvas.LEFT) {
         tickLeft();
-      } else
-        return false;
-      return true;
+        return true;
+      }
     }
     return false;
 
   }
 
   protected void traverseOut() {
+    traversed = false;
     parent.traverseOut();
   }
 
@@ -86,11 +91,14 @@ public class IllustratedItem extends CustomItem {
       repaint();
       repaint = false;
     }
+
     if (parent.getCurrentItem() == this) {
       g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_BACKGROUND));
       g.fillRect(0, 0, w, h);
       g.setColor(Gome.singleton.display.getColor(Display.COLOR_HIGHLIGHTED_FOREGROUND));
     } else {
+      //g.setColor(Gome.singleton.display.getColor(Display.COLOR_BACKGROUND));
+      //g.fillRect(0, 0, w, h);
       g.setColor(Gome.singleton.display.getColor(Display.COLOR_FOREGROUND));
     }
     g.setFont(FileBrowser.ITEM_FONT);
@@ -106,7 +114,7 @@ public class IllustratedItem extends CustomItem {
     else {
       showText = text;
     }
-    g.drawString(showText, icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' '), (h - FileBrowser.ITEM_FONT.getHeight()) / 2, Graphics.TOP | Graphics.LEFT);
+    g.drawString(showText, icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' '), (h - FileBrowser.ITEM_FONT.getHeight()) / 2 + 1, Graphics.TOP | Graphics.LEFT);
 
   }
 
