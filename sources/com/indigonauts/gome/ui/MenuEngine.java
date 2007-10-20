@@ -511,14 +511,14 @@ public class MenuEngine implements CommandListener {
   public void deleteFile(FileEntry file) {
     if (file instanceof LocalFileEntry) {
       //#ifdef JSR75
-      //# IOManager.singleton.deleteJSR75(file.getUrl());
+      IOManager.singleton.deleteJSR75(file.getUrl());
       //#else
 
-      try {
-        IOManager.singleton.deleteLocalStore(file.getName());
-      } catch (RecordStoreException e) {
-        Util.messageBox(I18N.error.error, I18N.error.delete, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
-      }
+      //# try {
+      //#   IOManager.singleton.deleteLocalStore(file.getName());
+      //# } catch (RecordStoreException e) {
+      //#   Util.messageBox(I18N.error.error, I18N.error.delete, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      //# }
       //#endif
     } else {
       Util.messageBox(I18N.error.error, I18N.error.wrongtype, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$

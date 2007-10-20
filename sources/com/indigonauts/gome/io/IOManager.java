@@ -38,7 +38,7 @@ public class IOManager {
   private static final String INDEX_NAME = "index.txt"; //$NON-NLS-1$
 
   public static final String LOCAL_NAME = "file:///"; //$NON-NLS-1$
-
+ 
   public static IOManager singleton = new IOManager();
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
@@ -409,14 +409,14 @@ public class IOManager {
       return readFileFromHttp(url, status);
     }
     //#ifdef JSR75
-    //# else if (url.startsWith(LOCAL_NAME)) {
-    //#  return loadJSR75(url, status);
-    //# }
+     else if (url.startsWith(LOCAL_NAME)) {
+      return loadJSR75(url, status);
+     }
     //#else
-    else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
-      url = url.substring(url.indexOf(':') + 4);
-      return readFromLocalStore(url);
-    }
+    //# else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
+    //#  url = url.substring(url.indexOf(':') + 4);
+    //#  return readFromLocalStore(url);
+    //#}
     //#endif
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);
@@ -547,7 +547,6 @@ public class IOManager {
   }
 
   public Vector loadJSR75Index(String baseRep, String subRep) throws IOException {
-    //String fcRep = baseRep.substring(LOCAL_NAME.length() - 1); // -1 because it needs a / at the beginning ...
     //#ifdef DEBUG
     log.debug("Base rep = " + baseRep);
     log.debug("Sub rep = " + subRep);

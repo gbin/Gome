@@ -21,6 +21,14 @@ public class FileEntry {
     return path;
   }
 
+  public void setPath(String path) {
+    this.path = path;
+  }
+  
+  public void setName(String name) {
+    this.name = name;
+  }
+
   /**
    * @return Returns the path.
    */
@@ -37,9 +45,9 @@ public class FileEntry {
   }
 
   public void setPlayMode(char mode) {
-    playMode=mode;
+    playMode = mode;
   }
-  
+
   public String getName() {
     return name;
   }

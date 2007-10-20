@@ -53,6 +53,8 @@ public class GomeOptions {
   public String user = "";
 
   public String key = "";
+  
+  public String defaultDirectory = "file:///root1/";
 
   public long expiration = 0;
   public byte ghostStone = 3;
@@ -80,6 +82,7 @@ public class GomeOptions {
       stoneBug = is.readByte();
       optimize = is.readByte();
       ghostStone = is.readByte();
+      defaultDirectory = is.readUTF();
 
     } catch (IOException ioe) {
       //#ifdef DEBUG
@@ -201,6 +204,7 @@ public class GomeOptions {
     out.writeByte(stoneBug);
     out.writeByte(optimize);
     out.writeByte(ghostStone);
+    out.writeUTF(defaultDirectory);
   }
 
   public int getScrollerSpeed() {

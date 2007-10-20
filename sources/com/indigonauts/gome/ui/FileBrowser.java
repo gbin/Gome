@@ -50,6 +50,8 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   public static Command SAVE_AS;
   public static Command OPEN_REVIEW;
   public static Command DELETE;
+  public static Command BOOKMARK;
+  public static Command GOTO_BOOKMARK;
   public static Command IMPORT;
   public static Command SEND_BY_EMAIL;
   private static Command RANDOM;
@@ -101,13 +103,15 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       // Nothing we can do
     }
 
-    OPEN = new Command(I18N.open, Command.SCREEN, 2); //$NON-NLS-1$
-    SAVE_AS = new Command(I18N.saveAs, Command.SCREEN, 2); //$NON-NLS-1$
-    OPEN_REVIEW = new Command(I18N.openReview, Command.SCREEN, 2); //$NON-NLS-1$
-    DELETE = new Command(I18N.delete, Command.SCREEN, 3); //$NON-NLS-1$
-    IMPORT = new Command(I18N.import_, Command.SCREEN, 2); //$NON-NLS-1$
-    SEND_BY_EMAIL = new Command(I18N.sendByEmail, Command.SCREEN, 2); //$NON-NLS-1$
-    RANDOM = new Command(I18N.random, Command.SCREEN, 2); //$NON-NLS-1$
+    OPEN = new Command(I18N.open, Command.SCREEN, 2);
+    SAVE_AS = new Command(I18N.saveAs, Command.SCREEN, 2);
+    OPEN_REVIEW = new Command(I18N.openReview, Command.SCREEN, 2);
+    DELETE = new Command(I18N.delete, Command.SCREEN, 3);
+    IMPORT = new Command(I18N.import_, Command.SCREEN, 2);
+    SEND_BY_EMAIL = new Command(I18N.sendByEmail, Command.SCREEN, 2);
+    RANDOM = new Command(I18N.random, Command.SCREEN, 2);
+    BOOKMARK = new Command(I18N.bookmark, Command.SCREEN, 2);
+    GOTO_BOOKMARK = new Command(I18N.gotoBookmark, Command.SCREEN, 2);
 
   }
 
@@ -176,6 +180,8 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     } else {
       uiFolder.addCommand(OPEN);
       uiFolder.addCommand(SEND_BY_EMAIL);
+      uiFolder.addCommand(BOOKMARK);
+      uiFolder.addCommand(GOTO_BOOKMARK);
       if (currentDirectory.startsWith(IOManager.LOCAL_NAME)) {
         uiFolder.addCommand(OPEN_REVIEW);
         uiFolder.addCommand(DELETE);
@@ -224,10 +230,8 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       if (c == OPEN || c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
         FileEntry entry = currentItem.getEntry();
         if (entry instanceof IndexEntry) {
-
           new IndexLoader((IndexEntry) entry, this).show(display);
           return;
-
         }
         if (saveMode)
           return; //don't load any file in save mode
@@ -255,6 +259,19 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       } else if (c == SAVE_AS) {
         saveGame = listener.createSaveGameMenu(this, currentDirectory, null);
         Gome.singleton.display.setCurrent(saveGame);
+      } else if (c == BOOKMARK) {
+        Gome.singleton.options.defaultDirectory = currentDirectory;
+        try {
+          Gome.singleton.saveOptions();
+          Util.messageBox(I18N.bookmark, I18N.bookmarkSet, AlertType.INFO);
+        } catch (Exception e) {
+          Util.messageBox(I18N.error.error, I18N.error.error + " " + e, AlertType.ERROR);
+        }
+        return;
+      } else if (c == GOTO_BOOKMARK) {
+        IndexEntry bookmark = new IndexEntry(Gome.singleton.options.defaultDirectory, "", "");
+        new IndexLoader(bookmark, this).show(display);
+        return;
       }
 
       else if (c == MenuEngine.BACK) {
@@ -337,17 +354,17 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         // TODO confirmation
 
         //#ifdef JSR75
-        //# try {
-        //#   IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
-        //# } catch (IOException e) {
-        //#   Util.messageBox(I18N.error.error, e.getMessage(), AlertType.ERROR); //$NON-NLS-1$
-        //# }
-        //#else
         try {
-          IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
-        } catch (RecordStoreException rse) {
-          Util.messageBox(I18N.error.error, rse.getMessage(), AlertType.ERROR); //$NON-NLS-1$ 
+          IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
+        } catch (IOException e) {
+          Util.messageBox(I18N.error.error, e.getMessage(), AlertType.ERROR); //$NON-NLS-1$
         }
+        //#else
+        //# try {
+        //#   IOManager.singleton.saveLocalGame(name, Gome.singleton.gameController.getSgfModel());
+        //# } catch (RecordStoreException rse) {
+        //#  Util.messageBox(I18N.error.error, rse.getMessage(), AlertType.ERROR); //$NON-NLS-1$ 
+        //# }
         //#endif
 
         if (!alreadyThere)
