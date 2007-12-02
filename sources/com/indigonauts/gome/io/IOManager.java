@@ -416,7 +416,7 @@ public class IOManager {
     //# else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
     //#  url = url.substring(url.indexOf(':') + 4);
     //#  return readFromLocalStore(url);
-    //#}
+    //# }
     //#endif
     url = url.substring(url.indexOf(':') + 1);
     return readBundledFile(url);
