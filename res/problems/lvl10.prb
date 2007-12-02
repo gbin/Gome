@@ -1,0 +1,1305 @@
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[fc][eb][gb][hb]
+AW[fb][ha][ib][hc][gc]
+C[How do you capture a stone?]
+
+(;B[fa]
+C[RIGHT])
+(;B[ga];W[fa])
+(;B[ic];W[ga])
+(;B[ec];W[ga])
+(;B[ia];W[ga]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[jh][ig][hg][gh][hi][fi]
+AW[fh][gg][gf][hf][if][ih][hh]
+C[Where should you play to capture two stones?]
+
+(;B[ii]
+C[RIGHT])
+(;B[gi];W[jg])
+(;B[jg];W[gi])
+(;B[ji];W[jg]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[ee][dg][df][ch][di][ei][fi][gh][hg][hf][ge][ff]
+AW[dd][de][fe][fd][ef][eg][fh][eh][dh][fg][gg]
+C[Which stone should you capture?]
+
+PL[W]
+(;W[ed]
+C[Good.]
+
+C[RIGHT])
+(;W[gf]
+C[No.  Your big group still has only one liberty so it will be
+captured.]
+;B[ff])
+(;W[cf];B[gf])
+(;W[cg];B[gf])
+(;W[hh];B[gf])
+(;W[gi];B[gf]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[em][fl][gk][hk][il]
+AW[ik][hl][gl][gm][fm][el][dk][ci]
+C[How do you play to capture some stones?]
+
+PL[B]
+(;B[hm]
+C[RIGHT])
+(;B[fk];W[dm])
+(;B[dm];W[fk])
+(;B[ek];W[fk];B[dl];W[ej])
+(;B[dl];W[fk])
+(;B[jl];W[fk]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[cm][cl][em][dk][dj][cj]
+AW[ck][bl][dl][dm][ek][ej][fl]
+C[Which stones should you capture?]
+
+(;B[el]
+C[Correct.  Capturing here saves one of your own stones, and the \
+two stones near the corner can't be saved.]
+
+C[RIGHT];W[bk];B[bj]
+C[The 3 enemy stones will surely be captured.]
+)
+(;B[bk];W[el])
+(;B[fm];W[bm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[dm][dl][em][fl][gl][hl][hk][hm][im][jl][kk][ki]
+AW[jm][il][ik][hj][gk][fk][ek][el][fm]
+C[Which stone should you capture?]
+
+(;B[gm]
+C[No.  Your group still has only one liberty.]
+;W[fm])
+(;B[km]
+C[RIGHT])
+(;B[ij];W[gm])
+(;B[jk];W[gm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[cj][ci][dh][dg][eh][fh][gg][gf][ff][ef][he][hh]
+AW[ge][fe][ee][fg][hf][hg][gh][fi][ei][di][ch][cg][cf][df]
+C[Which stone should you capture?]
+
+(;B[eg]
+C[No. You still only have one liberty.]
+;W[fg])
+(;B[gi]
+C[RIGHT])
+(;B[ig];W[eg])
+(;B[if];W[eg]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[kl][kk][jk][il][hk][hj][gl]
+AW[jl][hl][gj][hi][ik][ij][jj][kj]
+C[Where should you capture?]
+
+(;B[jm];W[gk])
+(;B[hm]
+C[RIGHT])
+(;B[gk];W[im])
+(;B[im];W[gk]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[em][dl][ek][fk][dj][gj][hi][ij][ik][hl][gm]
+AW[hj][hk][gk][gl][fl][el][ii][jj][jk][dk][cl]
+C[Where should you capture?]
+
+(;B[fm]
+C[RIGHT])
+(;B[ck];W[il])
+(;B[il];W[dm])
+(;B[dm];W[il])
+(;B[gi];W[dm])
+(;B[fj];W[dm])
+(;B[ji];W[il]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[gd][fd][ed][ee][df][dg][dh][eh][fg][gh][gi][hg][hf][he]
+AW[hd][fe][ge][gf][gg][ef][eg][fh][fi][gc][ec][dd][de]
+C[After your opponent plays at 1, where should you capture?]
+
+PL[W]LB[fg:1]
+
+(;W[ff]
+C[No.  Your group still only has one liberty.]
+;B[fg])
+(;W[fc]
+C[RIGHT]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[ed][ge][eg][ei][eh][ej][fi][gh][gg]
+AW[ef][fg][gi][fj][ek][dj][di][dh][dg]
+C[How should you answer the move at 1?]
+LB[fg:1]
+
+(;B[fh]
+C[RIGHT])
+(;B[ff];W[fh])
+(;B[gj];W[fh])
+(;B[fk];W[fh])
+(;B[df];W[fh])
+(;B[gf];W[fh]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[5.5]
+
+AB[fj][gj][gi][gk][fh][fg][gf][hf][if][jg][kg][ih][hh]
+AW[ej][ei][fi][fk][gl][hk][hj][hi][ii][jh][ig][hg]
+C[How should you answer the move at 1?]
+LB[hi:1]
+
+(;B[gh]
+C[RIGHT])
+(;B[gg];W[gh];B[gi])
+(;B[ji];W[gh])
+(;B[kh];W[gh])
+(;B[ek];W[gh])
+(;B[fl];W[gh]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[hb][gc]
+AW[gb][hc][ic]
+C[How should you give atari?  Atari means reducing a group of stones \
+to only one liberty.]
+
+(;B[ga]
+C[No.  Now the stone will escape.]
+;W[fb];B[fc];W[eb])
+(;B[fb]
+C[Good.  Now the stone will be captured.]
+
+C[RIGHT];W[ga]
+C[If your opponent tries to save it...]
+
+(;B[ha]
+C[How should you give atari?  Atari means reducing a group of stones \
+to only one liberty.]
+
+C[RIGHT];W[fa];B[ea]
+C[Good.  Now the stone will be captured.]
+)
+(;B[fa]
+C[RIGHT];W[ha];B[ia]
+C[How should you give atari?  Atari means reducing a group of stones \
+to only one liberty.]
+))
+(;B[ib];W[fb]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ij][ji][jk][kk][jh][kh][hk][hl]
+AW[gk][hj][hi][ih][jg][kg][lh][ki][kj]
+C[How should you give atari?]
+
+PL[W]
+(;W[ii]
+C[This atari gains nothing.]
+;B[jj])
+(;W[jj]
+C[RIGHT]
+(;B[ii]
+C[If your opponent connects...]
+;W[ik]
+C[You capture.]
+)
+(;B[ik];W[ii])))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ij][hj][kk][gi][fj][fk][gl]
+AW[gk][gj][hk][fl][el][ek]
+C[How should you give atari?]
+
+PL[B]
+(;B[hl]
+C[Now the stones will be captured in a ladder.]
+
+C[RIGHT];W[ik]
+(;B[il];W[jk];B[jj];W[jl];B[kl];W[jm];B[km];W[im];B[hm])
+(;B[jk]
+C[RIGHT];W[il]
+(;B[jl]
+C[How should you give atari?]
+
+C[RIGHT];W[im];B[jm];W[hm];B[gm])
+(;B[im]
+C[RIGHT];W[jl];B[kl];W[jm];B[km]
+C[How should you give atari?]
+)))
+(;B[ik]
+C[This time pushing toward the edge is wrong, and the stones will \
+escape.]
+;W[hl]
+(;B[il];W[gm])
+(;B[gm];W[hm];B[il];W[fm]))
+(;B[fi];W[hl])
+(;B[ej];W[hl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ge][hf][if][gg][fg][jh][hi]
+AW[ee][hg][gf][ff][fh][dg]
+C[Where should you give atari?]
+
+PL[W]
+(;W[gh]
+C[RIGHT];B[eg];W[eh];B[ef];W[df])
+(;W[eg]
+C[This move lets the stones escape.]
+;B[gh]
+(;W[gi];B[hh])
+(;W[hh];B[gi];W[ii];B[ih]))
+(;W[hh];B[ef];W[fe];B[eg];W[eh];B[df];W[cf];B[de];W[dd]
+;B[ed];W[fd];B[cd];W[dc];B[ce];W[cc];B[dh];W[cg];B[gh];W[gi]
+;B[fi];W[ei];B[gj]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[kb][kc][jd][id][hd][ie]
+AW[lb][lc][jc][kd][je][kf][ld]
+C[Where do you give atari?]
+
+(;B[jb]
+C[RIGHT];W[ic];B[hc];W[ib]
+(;B[hb]
+C[RIGHT];W[ia];B[ha];W[ja];B[ka])
+(;B[ia]
+C[RIGHT];W[hb];B[gb];W[ha];B[ga]
+C[Where do you give atari?]
+))
+(;B[ic];W[jb];B[ib];W[ka]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[hj][hk][gk][fk][ej][dj][di][eh]
+AW[ij][ik][ei][fj][gj][hi][hl][ek][el]
+C[Where do you give atari?]
+
+(;B[fi]
+C[No.  The two stones will escape and your four stones will be \
+captured.]
+;W[gi]
+(;B[dk];W[fl];B[dl];W[gl])
+(;B[fl];W[fm];B[gl];W[gm]))
+(;B[gi]
+C[RIGHT];W[fi];B[fh];W[gl];B[fl];W[fm])
+(;B[gl];W[gm];B[fi];W[fl])
+(;B[fl];W[fm];B[fi];W[gl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[fj][gj][fk][fh][gl]
+AW[ej][ek][fl][gk][hk][ik]
+C[Where should you give atari?]
+
+(;B[el]
+C[Good.  Now the stone will be captured, and yours will be saved]
+
+C[RIGHT];W[fm]
+(;B[em]
+C[RIGHT];W[gm];B[hm])
+(;B[gm]
+C[RIGHT];W[em];B[dm]
+C[Where should you give atari?]
+))
+(;B[fm];W[el]
+C[His stone escapes and your two stones near the edge will be captured.]
+)
+(;B[hl];W[el])
+(;B[gm];W[el]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ej][ei][ci][fk][fl][el][em][hl][ik]
+AW[ek][dk][dl][dm][fj][gj][gk][fm]
+C[Where should you play?]
+
+(;B[gm];W[gl]
+(;B[fm];W[hm])
+(;B[hm];W[fm]))
+(;B[gl]
+C[RIGHT])
+(;B[bk];W[gl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ei][ek][gi][gj][hl][hk][gl]
+AW[gk][fk][hj][hi][gh][ik][il][hm]
+C[Where should you give atari to the two stones?]
+
+(;B[fl]
+C[RIGHT];W[fj];B[fi];W[ej];B[dj])
+(;B[fj];W[fl]
+(;B[el];W[gm])
+(;B[fm];W[gm]))
+(;B[gm];W[fl];B[im];W[fm];B[hm];W[jm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[eb][ec][ef][dd][de]
+AW[ed][cd][ce][cc][dc][gd]
+C[How should you give atari?]
+
+(;B[fd]
+C[Good.  Capture the cutting stone to connect your groups.]
+
+C[RIGHT]
+(;W[ee];B[fe])
+(;W[df];B[ee]))
+(;B[ee];W[fd]
+C[Now your stones are separated.  This is not good.]
+)
+(;B[df];W[fc]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[dk][dj][di][dh][fj][gj][hj][hi][gh][ek]
+AW[ej][ei][gi][fk][gk][hk][ik][ij][ii][ih][hg][gg][fg][eg]
+C[Where should you play here?]
+
+(;B[fi];W[eh]
+C[Your stones are surrounded and will surely be captured.]
+)
+(;B[eh]
+C[RIGHT]
+(;W[fi];B[fh])
+(;W[fh];B[fi]))
+(;B[fh];W[eh])
+(;B[hh];W[fi]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ic][hd][gd][fc][fb]
+AW[gc][eb][ec][fd][fe]
+C[Where should you give atari?]
+
+(;B[hc];W[gb];B[hb];W[fa])
+(;B[gb]
+C[RIGHT];W[hc];B[hb])
+(;B[fa];W[gb];B[ga];W[ha];B[ea];W[da]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ij][ii][ih][hh][hk][gl][fl][el][ek]
+AW[fk][gk][hj][hi][gh][fi][ej][dk][cj]
+C[How do you give double atari?  Double atari is a move that reduces \
+two groups to a single liberty each.]
+
+(;B[gj]
+C[Your opponent can only save one group.]
+
+C[RIGHT]
+(;W[gi];B[fj])
+(;W[fj];B[gi]))
+(;B[gi];W[gj])
+(;B[fj];W[gj]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[bj][bi][bh][ci][dh][ei][ej][fj][gj][gk][fl]
+AW[aj][fk][ek][gl][hl][hk][dj][di][cj][bk][cl]
+C[How do you give double atari?]
+
+(;B[dk]
+C[RIGHT]
+(;W[ck];B[dl];W[dm];B[el]
+C[The whole corner will die now.]
+
+(;W[al];B[bm])
+(;W[bm];B[al]))
+(;W[el]
+(;B[dl]
+C[RIGHT];W[fm];B[ck];W[dm];B[bl]
+C[Another double atari!]
+)
+(;B[ck];W[dl];B[bl])))
+(;B[el];W[dk];B[dl];W[ck];B[cm];W[bm];B[dm];W[fm])
+(;B[ck];W[dk])
+(;B[ai];W[dk];B[ak];W[al]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[kd][je][if][hg][gh][fi][fj][gk][hj][ii][jh][kg][lf]
+AW[kc][fk][ek][ej][gj][gi][hi][hh][ih][ig][jg][jf][kf][ke][le]
+
+C[Ladders.  This zigzag formation is called a ladder.  How do you \
+give atari?]
+
+(;B[ld]
+C[RIGHT];W[me]
+(;B[mf]
+C[Ladders.  This zigzag formation is called a ladder.  How do you \
+give atari?]
+
+C[RIGHT];W[md];B[mc])
+(;B[md]
+C[RIGHT];W[mf];B[mg]
+C[Ladders.  This zigzag formation is called a ladder.  How do you \
+give atari?]
+))
+(;B[me];W[ld]
+(;B[jd];W[lc])
+(;B[lc];W[jd];B[md];W[ie])))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[hi][hj][hh][gg][fh]
+AW[di][ii][gh][gi][hg][hf][ih]
+C[How do you set up ladder to capture the two stones?]
+
+(;B[fi]
+C[RIGHT];W[gj]
+(;B[gk]
+C[RIGHT];W[fj];B[ej];W[fk];B[fl];W[ek];B[dk];W[el]
+(;B[dl]
+C[How do you set up ladder to capture the two stones?]
+
+C[RIGHT];W[em]
+(;B[fm];W[dm];B[cm])
+(;B[dm];W[fm];B[gm]))
+(;B[em]
+C[RIGHT];W[dl];B[cl];W[dm];B[cm]
+C[How do you set up ladder to capture the two stones?]
+))
+(;B[fj];W[gk];B[hk];W[fk];B[ek];W[el];B[gl];W[fl];B[dl]
+;W[ej];B[dk];W[fg];B[gf];W[eh];B[fm];W[ei]))
+(;B[gj];W[fi];B[ei];W[fj];B[fk];W[ej];B[dj];W[eh];B[ek]
+;W[fg])
+(;B[fj];W[fg];B[gf];W[fi];B[eh];W[ei])
+(;B[fg];W[fi]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[dc][cd][ce][df][ef][fe]
+AW[di][cg][cf][de][dd][ec][fd]
+C[Snapbacks.  In a snapback, a single stone is captured, then a \
+play is made back into the same spot to capture a multistone \
+group.  How do you play to capture with a snapback?]
+
+(;B[ed]
+C[RIGHT];W[ee];B[ed])
+(;B[ee];W[ed])
+(;B[ch];W[dh];B[dg];W[bh]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[jj][ji][ik][hk][gj][hi]
+AW[ij][ii][hh][gi][fi][fj]
+C[How do you make a snapback?]
+
+(;B[ih]
+C[RIGHT];W[hj];B[hi])
+(;B[hj];W[ih])
+(;B[gh];W[hj];B[ih];W[gk])
+(;B[gk];W[jh];B[hj];W[ih]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[dj][cj][bj][ej][fj][hj][gi][hh][gg][ee][fe][ge][df][cf][bf]
+
+AW[ff][fg][ef][dg][cg][dh][di][ei][fi][ci][bi][bh][gh]
+C[Your opponent just played 1 to capture 3 stones (at the marked \
+points).  How do you respond?]
+LB[gh:1]
+TR[fh][eh][eg]
+
+(;B[fh]
+C[RIGHT])
+(;B[gf];W[fh]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[gg][fg][eh][fi][gi]
+AW[jh][ii][hi][ig][hg][fh][ei][gh]
+C[1 just captured two stones.  How do you respond?]
+LB[gh:1]
+SQ[ih][hh]
+;B[hh]
+C[RIGHT])
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[hc][gc][gb][gd][gf][he][jf]
+AW[id][hd][ic][kc][fb][fd][fc][fe]
+C[Your opponent just played at 1.   How do you connect your stones?]
+LB[fe:1]
+
+(;B[ge]
+C[RIGHT])
+(;B[ib];W[ge];B[jb];W[ga];B[hb];W[jc])
+(;B[ie];W[ge];B[ib];W[ga];B[hb];W[jb]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[je][jh][ih][kh][gj][fk][ek]
+AW[dk][dj][ei][fh][gh][ji][ij][hk][jk]
+C[How can you link up all your stones?]
+
+(;B[hi]
+C[RIGHT])
+(;B[hj];W[hi])
+(;B[ii];W[hi])
+(;B[gi];W[hi])
+(;B[hh];W[hi]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[jk][il][hm][hk][hj][gj][ek][dk][ck][cj]
+AW[hl][gl][fl][gk][fj][ej][dh][dj][ci]
+C[How can you cut off four stones?]
+
+(;B[fk]
+C[RIGHT])
+(;B[el];W[fk]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[el][dk][dl][bj][cj][di][ei][cf]
+AW[ik][gl][fl][ek][dm][cl][ck][bk]
+C[How can you separate your opponent into two groups?]
+
+(;B[em]
+C[Now the corner will be captured.]
+
+C[RIGHT];W[cm];B[bm];W[ak];B[aj];W[bl];B[am];W[al];B[am]
+;W[bm];B[am])
+(;B[fk];W[em];B[ej])
+(;B[ej];W[em];B[fk])
+(;B[cm];W[bm])
+(;B[fm];W[gm];B[em];W[dj]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[jk][ij][gi][fj][fk][fl][fm][em]
+AW[dm][el][ek][ej][ei][dh][ch][bh][cj]
+C[Your opponent's position is defective.  How can you take advantage \
+of it?]
+
+(;B[dl]
+C[RIGHT];W[cm];B[cl];W[bm];B[bl];W[am];B[al])
+(;B[cm];W[dl])
+(;B[cl];W[dl])
+(;B[bl];W[cl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[kh][jj][ik][jl][km][hj][hi]
+AW[jm][im][il][hk][gk][gj][dj]
+C[How do you play here?]
+
+(;B[kl];W[hl])
+(;B[hl]
+C[RIGHT]
+(;W[gl]
+(;B[gm]
+C[RIGHT];W[fm];B[hm];W[fl]
+C[How do you play here?]
+)
+(;B[hm]
+C[There is a better way to capture.]
+;W[gm]))
+(;W[kl];B[hm]))
+(;B[hm];W[hl])
+(;B[gm];W[hl])
+(;B[kk];W[hl])
+(;B[ll];W[hl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[el][em][fl][fk][gk][hl]
+AW[dm][dl][dk][ek][fj][gj][hj][ik][il][kl]
+C[How do you make a living group?]
+
+(;B[gm]
+C[RIGHT])
+(;B[hm];W[gm])
+(;B[hk];W[gm])
+(;B[im];W[gm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[fh][eh][ei][ej][fk][el][em][fm][gl][gk][gj]
+AW[dm][dl][dk][ek][dj][di][dh][eg][fg][gg][gh][hl][hk][hj][hi]
+
+C[How do you make a living group?]
+
+(;B[gi]
+C[RIGHT]
+(;W[fi];B[fj])
+(;W[fj];B[fi]))
+(;B[fi];W[gi];B[fj];W[hm])
+(;B[fj];W[gi])
+(;B[gm];W[fj];B[fi];W[gi];B[fj];W[hm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[ek][fl][gm][hm][hl][gj][gk][fj]
+AW[em][dl][dk][dj][ej][im][il][hk][hj][hi][gi][fi]
+C[How do you make a living group?]
+
+(;B[el]
+C[RIGHT]
+(;W[fm];B[dm])
+(;W[dm];B[fm]))
+(;B[fm];W[el];B[fk];W[gl])
+(;B[ik];W[fm];B[gl];W[el]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[fd][gd][hd][id][jd][ke][kf][kg][jh][ih][hh][gh][fh][eg][ef]
+[ee]
+AW[ge][hf][ie][je][jf][ig][hg][gg][fg][ff]
+C[How do you kill?]
+
+(;B[he]
+C[RIGHT]
+(;W[fe];B[jg];W[if];B[gf])
+(;W[jg];B[fe]))
+(;B[fe];W[he];B[jg])
+(;B[jg];W[he];B[fe]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[jb][kb][jc][jd][ie][he][ge][fe][ed][ec][eb][fb]
+AW[ja][ha][ib][fc][fd][gd][gb][hc]
+C[How do you kill?]
+
+(;B[hd]
+C[RIGHT];W[gc])
+(;B[ic];W[hd])
+(;B[ka];W[hd];B[ia];W[ic]
+(;B[fa];W[ga])
+(;B[ga];W[fa];B[ea];W[ga]))
+(;B[ga];W[hd]
+(;B[ic];W[fa];B[ea];W[ga])
+(;B[fa];W[ic];B[ka];W[ia]))
+(;B[fa];W[hd];B[ga];W[ic];B[ka];W[ia]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[bl][bk][ck][dk][ek][fj][gj][hj][ij][ik][im][il]
+AW[hk][gk][hl][hm][fl][fm][em][dl][cl][cm]
+C[How do you kill?]
+
+(;B[el]
+C[This makes the marked point a false eye.  Your opponent will \
+have to fill it eventually.]
+
+C[RIGHT]TR[dm]
+)
+(;B[fk];W[el]
+(;B[gm];W[gl])
+(;B[gl];W[gm]))
+(;B[bm];W[el])
+(;B[gl];W[el];B[fk];W[gm])
+(;B[gm];W[el];B[fk];W[gl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[il][hl][gk][fj][fi][ej][ek][el][em][fl]
+AW[jk][jl][ik][hk][im][hm][gj][gi][dm][dl][dk][dj][ei][eh][fh]
+
+C[How do you make life?]
+
+(;B[gl];W[gm])
+(;B[gm]
+C[RIGHT];W[gl];B[hl])
+(;B[fm];W[gl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[hl][gm][fm][em][el][ek][ej][fk][gk][gj][gi][fi]
+AW[hk][il][im][hj][hi][hh][gh][fh][ei][di][dm][dl][dk][dj][gl]
+
+C[How do you make life?]
+
+(;B[fl];W[hm])
+(;B[hm]
+C[RIGHT])
+(;B[ik];W[hm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ge][fe][fd][fc][fb][fa][ha][hb][hc][hd]
+AW[id][ie][he][ic][ib][ia][gf][ff][ea][eb][ec][ed][ee][gc]
+C[How do you make life?]
+
+(;B[gb]
+C[RIGHT])
+(;B[gd];W[gb];B[ga];W[gb];B[gc];W[gb])
+(;B[ga];W[gb];B[gd];W[gc];B[gb];W[gc]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ia][hb][gb][fb][eb][db][da][fa]
+AW[dc][cc][cb][ca][hc][ec][gc][fc][ib][jb]
+C[How do you kill?]
+
+PL[W]
+(;W[ja];B[ha])
+(;W[ha]
+C[This sacrifice eliminates one eye.]
+
+C[RIGHT]
+(;B[ga];W[ja])
+(;B[ja];W[ka]))
+(;W[ga];B[ha]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[em][el][fl][fk][gj][hk][hl][il][im]
+AW[gk][hj][hi][gh][fi][fj][ek][ik][jk][jl][dk][dl]
+C[How do you live?]
+
+(;B[gl];W[gm])
+(;B[gm]
+C[RIGHT];W[gi];B[gl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[id][ed][ec][eb][fb][ib][ic][ie][if][hg][gg][fg][ee][ef]
+AW[hd][fd][gf][ff][fe][fa][fc][gb][hb][hc][he]
+C[How do you kill?]
+
+(;B[gd]
+C[The center point is the key to a 3 space eye shape.  The group \
+is dead.]
+
+C[RIGHT])
+(;B[ha];W[gd])
+(;B[ga];W[gd];B[ea])
+(;B[gc];W[gd])
+(;B[ge];W[gd]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[dm][dl][dk][ej][fj][gj][hj][ik][jk][jl][im]
+AW[il][hl][gm][gk][fk][el][em]
+C[How do you kill?]
+
+(;B[fl]
+C[RIGHT])
+(;B[hk];W[fl];B[hm];W[jm])
+(;B[hm]
+(;W[fl])
+(;W[jm];B[im];W[fl];B[km]))
+(;B[ek];W[fl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[il][hl][gl][fk][ek][el]
+AW[dl][dk][dj][ej][fj][gk][hk][jk][ik][jl]
+C[How do you live?]
+
+(;B[em];W[im]
+(;B[hm];W[fm])
+(;B[fm];W[hm]))
+(;B[fm]
+C[RIGHT];W[im];B[hm];W[dm];B[em])
+(;B[fl];W[em])
+(;B[im];W[em];B[fl];W[fm])
+(;B[gm];W[em];B[fl];W[im])
+(;B[hm];W[em];B[fl];W[fm])
+(;B[dm];W[fm]
+(;B[cl];W[fl];B[em];W[cm])
+(;B[em];W[cl];B[im];W[cm];B[fl];W[gm]))
+(;B[jm];W[em];B[fl];W[kl]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[gl][hl][hm][fk][ek][el][em]
+AW[dm][dl][dk][dj][ei][fj][gi][gk][hk][ik][jk][jl][fl][gm]
+C[Is your group alive or dead?  Do you have to make another move? \
+Click on A if your group is already alive.  Click on B if you \
+need to add another move.]
+LB[cg:A][fg:B]
+
+(;B[cg]
+C[Right.  Your opponent can't connect the two  stones, since the \
+resulting group would have no liberties.]
+
+C[RIGHT])
+(;B[fg]
+C[Wrong.  Your opponent can't connect the two stones since that \
+would make a group with no liberties.  When you later capture \
+the two stones you will have two eyes.]
+))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[de][ee][ef][eg][cd][bd][be][dh][ch][bh][ag]
+AW[dd][cc][bc][ce][df][dg][cg][bg][bf][ad]
+C[Ko.  When your opponent plays at 1, how do you answer?]
+LB[ad:1]
+
+(;B[cf]
+C[This makes a ko.  Your opponent can't recapture without playing \
+somewhere else first.]
+
+C[RIGHT];W[ae];B[af])
+(;B[ae];W[af])
+(;B[af];W[ae])
+(;B[ah];W[ae])
+(;B[ed];W[ae]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[dj][ch][ck][ek][dl][fl]
+AW[ej][ei][fk][gk][el]
+C[Where should you play in this position?]
+
+(;B[em]
+C[RIGHT])
+(;B[dk];W[gl];B[em])
+(;B[gl];W[dk]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[jk][ik][hk][gl][fl][el][fm][fk][fj][kl][lm]
+AW[km][jl][il][hl][gm][im][gk][gj][fi][ej][ek][dl]
+C[How do you answer the move at 1?]
+LB[dl:1]
+
+(;B[hm]
+C[RIGHT])
+(;B[em];W[dm])
+(;B[jm];W[em])
+(;B[dm];W[em]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[dj][di][ei][fi][fj][ek][dk][dl][em][cl][cm][bk]
+AW[bl][bm][ck][cj][bj][ci][ch][dh][eh][fh][gh][hi][hj][gk][gl]
+[fk][fm][el]
+C[Your opponent has just captured a stone wih 1.  How do you respond?]
+LB[el:1]
+TR[fl]
+
+(;B[fl]
+C[Recapturing the ko immediately is illegal.  You must make another \
+move first.]
+)
+(;B[ak]
+C[This is a ko threat.  Since it threatens to make a second eye \
+in the corner, your opponent will respond.]
+
+C[RIGHT];W[aj];B[fl]
+C[Now you can recapture the ko.]
+)
+(;B[al]
+C[This ko threat is not as good as the correct answer, since after \
+your opponent captures, there are no more ko threats here.  The \
+correct answer leaves another ko threat for later.]
+;W[ak];B[fl])
+(;B[am];W[ak];B[fl])
+(;B[dm]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[kc][ke][ic][gc]
+AW[dc][ce][ck][kk]
+C[Play in the opening.  After 1 through 8, who has the better game? \
+Click on A if the odd numbers are better.  Click on B if the \
+even numbers are better.]
+LB[ie:A][di:B][kc:1][dc:2][ic:3][gc:7][ce:8][ck:4][kk:6][ke:5]
+
+(;B[di]
+C[This player has a start in 3 corners and a much better position.]
+
+C[RIGHT])
+(;B[ie]
+C[These stones are overconcentrated.  It is better to spread your \
+stones out in the opening.]
+))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[jc][jj][ej]
+AW[cj][dd][kk]
+C[How should you respond to 1?  There are two correct answers.]
+LB[kk:1]
+
+(;B[kj]
+C[RIGHT])
+(;B[jk]
+C[RIGHT])
+(;B[lj];W[kj];B[ki];W[jk];B[ij];W[lk];B[li];W[hk])
+(;B[jl];W[jk];B[ik];W[kj];B[ji];W[kl];B[il];W[kh]))
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+AB[ac][ad][bc][cc][dc][eb][fc][gc][hc][hd][id][jd][ie][jb][kc]
+[lc][ld][md][me][mg][mh][mi][lh][kh][jh][ki][jg][ig][hg][ii]
+[ij][jj][hi][gj][fj][fi][fh][gh][ei][di][ci][bi][ai][bj][cj]
+[ch][dg][eg][cf][dd][ed][ee][bl][ll]
+AW[jc][ic][kd][if][mf][lf][le][ke][kf][kg][lg][jf][je][hf][he]
+[gd][fd][fe][ff][fg][gg][ef][df][de][cd][bd][ae][bf][cg][bg]
+[bh][ah][hh][aj][ak][bk][ck][cl][dk][dj][ej][fk][gk][hk][hj]
+[ik][jk][kj][lj][mj][li][lk][kl]
+C[The game is over.  Both sides have taken 3 prisoners and both \
+have 3 dead stones left on the board.  The dead stones are marked. \
+Who won?  Click on A or B in the territory of the winning player, \
+or on C if it is a draw.]
+LB[gb:A][gl:B][gf:C]
+TR[cf][bl][ll][hh][jc][ic]
+;B[gf]
+C[RIGHT])
+(;
+GM[1]FF[4]
+SZ[13]
+HA[0]
+
+
+KM[8.0]
+RU[GOE]
+GC[2]
+AB[dc][db][eb][ed][fc][gd][gc][fe][ef][eg][dh][ch][bh][ag][bf]
+[ce][em][el][ek][dl][fl][fj][gj][hj][hk][ik][jj][kj][lj][li]
+[mi][mh][kk]
+AW[hb][gb][fb][hc][hd][jc][kd][lf][mg][lh][kh][ki][ji][ii][ij]
+[hh][gh][gi][fi][ei][fk][ej][dk][cl][bm][bk][ge][gf][ff][fg]
+[di][ci][bi][ai][ah]
+C[This game is almost over.  There are only two profitable points \
+left.  Where are they?]
+
+(;B[eh]
+C[This keeps your opponent fromn making one point, and is the smaller \
+place to play.]
+
+C[RIGHT];W[ea];B[da];W[fa])
+(;B[fa]
+C[This  takes one point from your opponent and adds one to yourself. \
+It is biggest place to play.]
+
+C[RIGHT];W[ga];B[ea];W[eh])
+(;B[hi];W[ea];B[da];W[fa];B[eh])
+(;B[dm];W[ea];B[da];W[fa];B[eh])
+(;B[cm];W[ea];B[da];W[fa];B[eh];W[dm])
+(;B[fh];W[eh]))

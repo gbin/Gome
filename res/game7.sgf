@@ -1,0 +1,2044 @@
+(
+;
+GaMe[1]
+VieW[]
+SiZe[19]
+PlayerBlack[Sakata Eio]
+BlackRank[9-dan]
+PlayerWhite[Go Seigen]
+WhiteRank[9-dan]
+GameName[The 1st Japan's Strongest Deciding Matches]
+EVent[Go Seigen vs Sakata Eio]
+DaTe[July 2-3, 1957]
+PlaCe[Toyko, Japan]
+TiMe[10 hours each]
+REsult[W+4]
+SOurce["Detailed Analysis on Wu's Famous Games" Vol 1. pp.189-282.  People's Sports \[China\], 1984]
+KoMi[0]
+Comment[Go Seigen \(Wu\) vs. Sakata
+
+\(The 1st Japan's Strongest Deciding Matches\)
+
+Black: Sakata Eio, 9d
+
+White: Go Seigen \(Wu\), 9d
+
+Date:  July 2-3, 1957
+
+Place: Tokyo]
+;
+Black[qd]
+Comment[\(* In these matches \[1st Japan's Strongest Deciding Matches\], Go Seigen 9-dan and Sakata 9-dan played a total of two games.  The result of the first game \[posted as Game 3 of the Go Seigen series\] was that Go Seigen won by resignation on B.  This game was the second match between the two; Wu played W. *\)]
+;
+White[dc]
+Comment[\(* At the beginning \[of this game\], in an avalanche joseki at the lower right corner, Go Seigen 9-dan's W #24 should have captured a stone cleanly \[according to the joseki\], but to lure B to extend out \[the stone under atari\], W chose to play a move at lower left corner instead.  This unusual move, as an interesting inclination, certainly contained its speical understanding of the game, but it eventually brought W unfavorable results.  Thereafter, Sakata 9-dan \[B\] gained with move after move, and to the middle game stage, B grabbed the lead. *\)]
+;
+Black[pq]
+Comment[\(Overview continued\)
+\(* From then on, Wu fought hard all over the board.  Gradually he pulled it even, and the outcome of the game became uncertain.  But then, because of W #132 and #134's mistakes, B made an extraordinary move in W's territory, and B grabbed the lead again.  Go Seigen 9-dan then started a ko to struggle, and it turned out to be a favorable exchange for W.  The situation thus turned sharply, and this time W had the lead.  Finally, a big B team was invovled in a ko fight --- this was almost a free ko to W and B was therefore already in disadvantage, but B even decided to ignore the ko fight and jumped into endgame after tenuki.  This ko would directly decide the game, and with even one more ko threat, W would force B to a state of despair.  It became extremely tensive and violent on the board.  At the end, since B was under time pressure and he had no time to do the most careful calculation, B lost points during the ko fight, and B ended up losing by 4 points. *\)]
+;
+Comment[\(* This game was full of violent and nerve-straining fights.  Both sides spent a great amount of energy and brain cells.  Reflecting onto the board, it was a seesaw game from the beginning to the end.  This was indeed a rare masterpiece. *\)]
+White[dq]
+;
+Black[oc]
+Comment[\(* In Go Seigen 9-dan's games, there were almost always ko fights.  He often said, "Mr. Such-and-such really like to fight ko." --- Although in fact he didn't dislike ko fights himself. *\)]
+;
+Letter[qn][qo][qk]
+White[po]
+Comment[W #6 this move is often played at \[a\] after the War.
+
+\(* If W #6 simply kakari at \[b\] instead of \[a\], then B's next move would certainly be at \[c\], a move implies both a pincer and an extension.  Therefore, W almost never plays \[b\] anymore. *\)]
+;
+Black[qo]
+;
+White[pp]
+Comment[\(* W #8 is the avalanche joseki. Next up to #10 is the certain consequence after this move \[#8\]. *\)]
+;
+Black[qp]
+;
+White[oq]
+Comment[Next move \(B #11\) is the splitting point of the variations of avalanche joseki.  B has \[a\] to extend, \[b\] to connect, \[c\] to double hane, or \[d\] to hane from the other side.]
+Letter[qn][qq][or][pn]
+;
+Black[pn]
+Comment[This variation of B #11 hane is called "small avalanche" joseki. Comparing with other avalanche josekis, this one has less variations.]
+;
+White[qq]
+Comment[W #12 cuts...]
+;
+Black[pr]
+;
+White[rq]
+Comment[To W #14 extends.  This is the only sequence.]
+;
+Black[or]
+;
+White[np]
+;
+Black[nq]
+;
+White[qn]
+Comment[\(* If W #18 connects at \[P4\] --- *\)
+
+\[*** 'B' to see this variation.\]]
+(
+;
+Black[op]
+;
+White[oo]
+;
+Black[no]
+;
+White[on]
+;
+Black[mp]
+Comment[\(* To B #23, it's the joseki that everyone is familiar with. *\)]
+;
+White[do]
+Letter[pm][nm]
+Comment[W #24's normal play \[joseki\] is to capture a stone at \[a\].  But if so, B would get the sente, leaving a possible jump of B\[b\]. Therefore, many people believe this shape \[after W\[a\]\] is B's thickness.  Besides, under the current situation, if W #24 captures a stone, B would certainly gets #24 \[D5\] for a kakari move.  Next ---
+
+\[*** 'B' to see a reference.\]]
+(
+;
+Black[de]
+;
+Comment[Had W \[D5\] shimari \[enclosure move\] at \[a\], when W #26, B probably would choose to play B\[b\]-W\[c\]-B\[d\] to form an avalanche shape.  But now the shimari at lower left corner is a one-space jump, therefore ---]
+White[ce]
+Letter[co][dd][cd][ec]
+;
+Comment[B chooses #27 and...]
+Black[cf]
+;
+White[cd]
+;
+Letter[cl][co]
+Comment[\[And\] #29.  Thus, a big extension to \[a\] by B next would be a good move, since the shape of W's present enclosure at lower left leaves openings at the bottom, and B would be able to invade.  However, had W's \[D5\] move played at \[b\], B\[a\] extension would not be so good.  B #27 didn't go for an avalanche joseki, it was probably because of this thinking.]
+Black[dg]
+;
+White[ef]
+;
+Black[df]
+;
+White[ed]
+;
+Comment[B #33 good move, and it's B's plan.
+
+B #33 sometimes adopts the following variation ---
+
+\[*** 'B' and 'C' to see it.\]]
+Black[cl]
+(
+;
+Letter[ck][bo]
+Comment[B occupies the good point of #33 \[C8\], but W too gets a thick shape by #34 connecting.
+
+In the previous diagram, B #33 to extend to \[a\] is joseki.  But the actual extension of #33 also aims at a subsequent ogeima B\[b\] to invade the corner.  From this point of view, the distance between #33 and \[b\] is appropriate.  If B tries to extend to \[b\] from \[a\] instead, there is a danger that W might counterattack with #33 \[C8\], an attachment on B\[a\] stone.]
+White[ee]
+;
+Letter[cj]
+Comment[B #35 has no choice.  Since B's extension \[to C8\] is one space too far \[comparing with joseki\], W is able to invade at \[a\].  B #35 prevents this invasion.]
+Black[eg]
+;
+Letter[cj]
+Comment[\[But,\] After W #36 kosumi, W \[again\] has \[a\] to invade.
+
+\[*** 'B' to see a reference.\]]
+White[cn]
+(
+;
+Comment[Therefore, B #37 jumps to defend one move.]
+Black[el]
+;
+White[kd]
+Comment[W #38 is the big point of fuseki.  The three W stones at the left serves as a thick wall, and that's why W could extend as far as #38.  If W tenuki here, and let B extend to \[a\], the difference would be huge.  After this wide extension of #38, next W\[b\] hane, when B\[c\], W\[d\] hane again would be severe.]
+Letter[jd][fg][fh][gh]
+;
+Black[gg]
+;
+White[cj]
+Comment[W #40 invade to observe B's reaction.
+
+\[*** 'B' to see a possible variation for B's next move.\]
+
+Or if B\[a\] kosumi next, W\[b\] jumps and B cannot capture W stones.]
+Letter[bk][ej]
+(
+;
+Black[dk]
+Comment[When B #41...]
+;
+White[bm]
+Comment[W #42 is sente to benefit.
+
+In the future, W still can take advantage \[of \[C10\] stone\] to play \[a\] or \[b\]; the invaded one W stone \[C10\] is not so easily swallowed by B.
+
+After B already fence up a territory, W still have various ways to invade.  One should master this method.]
+Letter[gi][fk]
+;
+Black[bl]
+;
+Letter[pm]
+White[ph]
+Comment[W #44's purpose is to lure B \[Q6\] stone to extend out.  However, this move \(#44\) should still correctly play at \[a\].  \[Suppose\] After W #44 captures one stone ---
+
+\[*** 'B' to see this reference.\]]
+(
+;
+Black[pm]
+Comment[B #45 to extend is of course what W expected.  However, as soon as B made this move, W shape unexpectedly became thin.
+
+Next W #46 ---
+
+\[*** 'B' to see a variation.\]]
+(
+;
+White[ro]
+;
+Black[qm]
+;
+White[rp]
+Letter[rn]
+Comment[If W #48 connects at \[a\], B would be able to force again from above.  To be forced by B in sente in consecutive moves this way would be unbearable, therefore W #48 has to capture.]
+;
+Black[rn]
+;
+White[pk]
+Comment[W #50 ---
+
+\[*** 'B' to see a variation.\]]
+(
+;
+Black[ol]
+;
+White[nn]
+Letter[ok]
+Comment[W #52's purpose is to hope B would press at \[a\] ---
+
+\[*** 'B' to see this variation of B's next move.\]]
+(
+;
+Black[qf]
+Comment[B #53 good move.  What should W do next?  It's indeed difficult for W now.]
+;
+White[qg]
+Comment[W #54 and...]
+;
+Black[pf]
+;
+White[rl]
+Comment[\[And\] #56's shape is thin, but W has no other choices.  W's only strategy here is defense.
+
+In short, after B #45 \[Q7\] extended out, W didn't gain any satisfactory result in this local conflict.  Looking back, this is the fault of an inappropriate inclination in W #44 \[Q12\].]
+;
+Black[ok]
+;
+White[pj]
+;
+Comment[B #59 is certainly the move.  If B tenuki here, and when W attacks from #59, B would be immediately in trouble.]
+Black[mk]
+;
+White[lo]
+;
+Letter[oh][nh]
+Comment[B #61 good move; thick.  Next if W\[a\], B\[b\] hane.  B's upper part is solid, and going out toward \[opponent's\] solid zone is hopeless.]
+Black[oi]
+;
+Comment[If W #62 is omitted, B\[a\] invasion would be quite severe.
+
+\[*** 'B' and 'C' to see two other varations of #62.\]]
+Letter[id]
+White[hf]
+(
+;
+Comment[B #63 of course.
+
+Since W has already fenced a move at a high point \[H14\], the lower side would certainly be invaded.  W really cannot help.]
+Black[kb]
+;
+Letter[ei]
+Comment[W #64 is the tesuji move aimed at since long ago.  Next W prepares to play \[a\] to save a stone.]
+White[fk]
+;
+Black[fl]
+;
+White[hk]
+;
+Comment[B #67 to play at \[a\] \(\[P12\]\) is also a thick move, but W would certainly play #67 \[G8\], and next W\[b\] to save one stone is even more severe.
+
+It's difficult to say which move is better, #67 or \[a\].]
+Letter[oh][ei]
+Black[gl]
+;
+Letter[oh]
+Comment[W #68 to go out at \[a\] directly would be awkward, and the reason was explained earlier. \[That is, if W\[a\], B would hane to force W move toward the upper side, where B is very solid.\]]
+White[oj]
+;
+Black[nj]
+;
+Comment[W has no other way but to push and cut and fight with #68 \[P10\] and #70 \[O11\].
+
+Next B #71 ---
+
+\[*** 'B' to see a variation.\]]
+White[ni]
+(
+;
+Comment[B #71 was the seal move at the end of first day.
+
+B #71 atari, sacrificing one stone \[P11\]...]
+Black[mi]
+;
+White[nh]
+;
+Comment[Then B #73 keima to invade W's territory, gaining some profeit first.  At this point, B already leads on territory, so he avoids complicated fights like the one shown in the variation \[at node 70\].  Clearly, this is a wise choice.
+
+To summerize the process up to B #73: W #44 did not capture a stone cleanly, and after B #45 extended out, W's working space became narrow, and his activities were thus limited.  During the conflicts that followed, W was unable to make a comfortable path, and B finally grabbed the upper hand, invading into W's upper side, establishing a winning form.]
+Black[ic]
+;
+Comment[W cannot hope to make territory at the lower side, so W's only move is to attach with #74, seperating B groups for a deciding fight!]
+White[nc]
+;
+Comment[B #75 ---
+
+\[*** 'B' to see a variation.\]]
+Black[lc]
+(
+;
+White[mh]
+;
+Black[li]
+;
+Comment[... ...]
+White[ob]
+;
+Black[pc]
+;
+White[md]
+;
+Black[ld]
+;
+Letter[le][og][oh]
+Comment[W #82 really wants to block at \[a\] but W cannot.  If W\[a\] hastily blocks, after B\[b\]-W\[c\], B cuts at #82 \[N15\] and W is captured.
+
+\[*** 'B' to see a clearer picture.\]
+
+Therefore, W has to play #82, running for life.]
+White[me]
+(
+;
+Black[le]
+Letter[mf][lh][lg][kg]
+Comment[When B #83, if W extends to \[a\] next, after B\[b\]-W\[c\]-B\[d\], B connects easily.
+
+The big B team from the right side to the middle is not completely settled yet.  If W loses the chances to attack this big dragon of B, W would lose the chance to win the game as well.  Therefore, W's top priority now is to separate this B team from the B stones at the top.]
+;
+White[lf]
+Comment[W #84 hane...]
+;
+Black[kf]
+;
+White[lg]
+;
+Black[kg]
+;
+White[lh]
+;
+Black[kh]
+;
+White[ki]
+Comment[...To #90 cut, W finished the preparation of the coming deciding fight.
+
+Next B move is very difficult.
+
+\[*** 'B' to see a variation.\]]
+(
+;
+Letter[mn][kk][kj][ih]
+Comment[B #91 is dubious.  B's purpose is to force W\[a\], then after B\[b\]-W\[c\]-B\[\[d\], B would be able to settle both teams.  This was a picture B hoped to see, but W wouldn't follow B's plan.
+
+B #91 is better to play as follows.
+
+\[*** 'B' to see a variation.\]]
+Black[mm]
+(
+;
+Letter[id]
+Comment[W #92 gets the key point.  Next W aims at \[a\] tesuji.]
+White[ih]
+;
+Black[mn]
+;
+White[mo]
+;
+Black[np]
+;
+Comment[To W #96, W has successfully set up for a splitting attack.]
+White[kj]
+;
+Black[qo]
+Comment[B #97 capture is the premise of...]
+;
+White[sn]
+;
+Black[kk]
+Comment[\[...of\] B #99.  B is now connected. That is to say, even if W\[a\] peep, after B\[b\]-W\[c\]-B\[d\], W cannot cut B.]
+Letter[ll][lk][ml][nm]
+;
+White[nm]
+Letter[nl][ll]
+Comment[W #100 to push a move here is good order.  If B\[a\] blocks, W\[b\] next would be valid.]
+;
+Black[ml]
+Comment[Therefore, B #101 has to connect this way.]
+;
+White[jk]
+Comment[After forcing B #101 \[N8\] to connect, *then* W #102 is the important order.]
+;
+Black[kl]
+Comment[Had W #102 first \(before #100 \[O7\]\), after B #103, when W then #100, B would block at \[a\] instead of connecting at #101 \[N8\].
+
+\[The eyeshape would be different.\]]
+Letter[nl]
+;
+White[lj]
+;
+Black[mj]
+;
+White[id]
+Comment[#106 is a move W has aimed at.  If W #106 cuts at \[a\] ---
+
+\[*** 'B' to see this variation.\]]
+Letter[ke]
+(
+;
+Black[ke]
+;
+White[fi]
+;
+Black[ej]
+;
+White[im]
+Comment[... ...]
+;
+Black[jn]
+;
+White[ei]
+;
+Black[di]
+Comment[After W #112 pushes \[E11\] and B #113 blocks, next W #114 ---
+
+\[*** 'B' to see variation 1.\]
+\[*** 'C' to see variation 2.\]]
+(
+;
+White[ip]
+Comment[\(* Therefore, W gives up the profit at the top, and turns to get this point with #114. *\)]
+;
+Letter[in]
+Comment[To let B #115 hane is very painful, but W cannot help.
+
+When #114 \[J4\], W's plan was that if B #115 was to play at \[a\] to block W's connection at the bottom, W \[#116\] would then play at the point of #115 \[H16\].]
+Black[hd]
+;
+White[ie]
+;
+Comment[When B #117, If W next plays at \[a\] ---
+
+\[*** 'B' to see a reference.\]
+
+Also, if W next plays at \[b\], after B\[c\], two W stones would be unable to escape.  Under this situation, how should W play the next move is indeed a difficult problem.]
+Letter[kp][in][jo]
+Black[gc]
+(
+;
+Comment[W finally adopted the following strategy: #118 pushes first...]
+White[jc]
+;
+Black[jb]
+;
+Comment[...Then W #120 to probe.
+
+If B #121 next blocks from "outside" ---
+
+\[*** 'B' to see this variation.\]]
+White[hb]
+(
+;
+Black[hc]
+;
+Letter[ig]
+Comment[If W #122 doesn't connect in a hurry, W's future moves would be difficult.
+
+\[For instance,\] if W #122 tenuki and turns to the bottom, B would cut at #122, and next B\[a\] tesuji would force W into a dangerous situation.
+
+\[By the way,\] W's lower right corner is alive.
+
+\[*** 'B' to see a reference on W's lower right corner.\]]
+White[gf]
+(
+;
+Black[eb]
+;
+Letter[db][ec]
+Comment[W #124 is sente tesuji.  If W #124 plays at \[a\] instead, after B\[b\], W is gote.]
+White[fb]
+;
+Black[fc]
+;
+White[ec]
+;
+Comment[\[Next\] W #128 ---
+
+\[*** 'B' to see a variation.\]]
+Black[gb]
+(
+;
+White[kq]
+Comment[Based on the results of this period of fight, although he suffered some loss at the top, W's middle team is connected and W also got #128.  Overall, therefore, W is not bad.]
+;
+Comment[If B #129 extended at \[a\] ---
+
+\[*** 'B' to see this variation.\]]
+Letter[in]
+Black[lp]
+(
+;
+Comment[If W ignores #130 this move ---
+
+\[*** 'B' to see a reference.\]
+
+\[Reference shows that the result is not good for W if he ignores #130.\] Besides, W #130 itself is a big move.]
+White[db]
+(
+;
+Black[kp]
+;
+Letter[ea][jq]
+Comment[W #132 is a bad move.
+
+This move should either capture at \[a\] at the top, or extend at \[b\] at the bottom.
+
+If so \[either \[a\] or \[b\]\], W's situation would be much better, and it would be quite a hopeful game for W.]
+White[dj]
+;
+Black[ci]
+;
+Comment[W #134 is another bad move.  If W is to lose this game, this move should be the losing cause. The reason would be explained later.]
+White[ek]
+;
+Letter[gk][fj][hi]
+Comment[Because of W #134's \(\[D10\]\) misjudgment, later after B\[a\]-W\[b\]-B\[c\] sequence, the whole W team at the middle would be in danger.
+
+In short, W made his own stones heavy, which is absolutely unnecessary.]
+Black[bj]
+;
+White[ea]
+;
+Black[qi]
+;
+White[pi]
+;
+Black[og]
+;
+White[oh]
+;
+Comment[B's top lives without #141.  However, if B doesn't play it, after W gets #141, B would have to live as follows.
+
+\[*** 'B' to see a reference.\]]
+Black[mb]
+(
+;
+White[rg]
+;
+Letter[ng]
+Comment[B #143 is better not to play now. B \[a\] was a sente peep, and #143 cost a ko threat.  Sakata 9-dan's time was almost used up; this move was to gain some time.]
+Black[nf]
+;
+White[mf]
+;
+Comment[B #145 of course can also invade at \[a\].  B is looking to do someting at W's corner \[lower left\]; to prepare for that, B needs to cut the connection between the W groups.  Therefore, B #145 plays from the top.]
+Letter[gq]
+Black[ho]
+;
+White[hp]
+;
+Comment[B #147 excellent move.
+
+If W defends with \[B6\] ---
+
+\[*** 'B' to see a variation.\]
+
+Now the bad result caused by W #134 \(\[E9\]\) earlier is clearly shown.
+
+\[*** 'C' to see a reference.\]]
+Black[bo]
+Mark[ek]
+(
+;
+White[fj]
+Comment[\(* As it was shown, the mistake of W #134 brought serious problem for W, and when B #147 was placed in the corner, W #148 actually has to capture a stone here... *\)]
+;
+Black[cp]
+;
+White[dp]
+;
+Black[cq]
+Comment[\(* ...And B thus gets the chance to play #149 and #151, stealing the territory from W. *\)]
+;
+White[nb]
+;
+Black[pb]
+;
+White[jq]
+;
+Black[dr]
+;
+White[er]
+;
+Black[cr]
+Comment[After B #155 and #157 hane and connect, B is clear leading on territoy.
+
+W's loss at the corner is serious.]
+;
+White[go]
+Letter[fr]
+Comment[W #158 prevents B\[a\].]
+;
+Black[sm]
+;
+White[so]
+Letter[rk][rm]
+Comment[After B #159 \(\[T7\]\) exchanges with W #160, B now has \[a\] tesuji.  Here B\[a\] will be more powerful than B\[b\] simply connecting.]
+;
+Black[gn]
+;
+White[jo]
+;
+Black[io]
+;
+White[fn]
+;
+Black[hn]
+Comment[These moves follow a natual sequence.]
+;
+White[jp]
+;
+Black[ko]
+;
+White[fo]
+Comment[Although B's situation is better, the difference is actually small.  Overall, it's still a close game.]
+;
+Black[ff]
+Comment[B #169 is a scary move.
+
+Next W #170 ---
+
+\[*** 'B' to see a variation.\]]
+(
+;
+White[gm]
+Comment[W #170 is wrong.  This move ---
+
+\[*** 'B' to see a variation.\]
+\[*** 'C' to see a variation for B's response, #171.\]]
+(
+;
+Black[hl]
+Comment[\[However,\] B #171 to push is a good move.]
+;
+White[fe]
+Comment[Now W has to play #172 and...]
+;
+Black[fg]
+;
+White[he]
+Comment[\[And\] #174 to connect.
+
+W stones at the middle suddenly become thin.]
+;
+Black[hj]
+;
+White[hi]
+;
+Black[gk]
+;
+White[ij]
+;
+Black[ik]
+Letter[gi]
+Comment[After B #179 captures a stone, B\[a\] next is a tesuji.
+
+If W wants to avoid such a trouble \[of B\[a\]\], W could answer a move here.  However, although it's still close, W is shorthand already.]
+;
+White[hm]
+Comment[So W #180 challenges B.]
+;
+Black[gi]
+;
+White[gj]
+Comment[If W #182 wants to avoid this ko fight ---
+
+\[*** 'B' to see a variation.\]]
+(
+;
+Black[gh]
+;
+White[hk]
+;
+Black[rm]
+;
+Comment[W #186 to answer at \[a\] is better.
+
+\(* The reason is, later W\[b\] to threat is almost unavoidable.  After B\[c\], this W group would become one liberty shorter.  Since W has played #186, this would leave B\[a\] tesuji to force a seki.  From this point of view, W #186 lost a little bit. *\)]
+Letter[rs][nl][nk]
+White[qr]
+;
+Black[hj]
+;
+White[nl]
+;
+Black[nk]
+;
+Comment[... ...]
+White[hk]
+;
+Black[sr]
+;
+White[sq]
+;
+Black[hj]
+;
+White[ck]
+;
+Black[dl]
+;
+Comment[... ...]
+White[hk]
+;
+Black[rs]
+;
+White[qs]
+;
+Black[hj]
+;
+Comment[W #200 loses points, but since W has no other threats now, #200 has no choice.
+
+As a result, W has run out of ko threats, and B's leading.]
+White[bk]
+;
+Black[ak]
+;
+White[hk]
+;
+Comment[B is satified with #203 to capture four W stones, but B\[a\] would have been better.]
+Letter[fr]
+Black[ej]
+;
+Comment[After W #204 ends the ko fight, the outcome once again becomes unclear.]
+White[il]
+;
+Black[es]
+;
+White[fr]
+;
+Black[rk]
+;
+White[rj]
+;
+Letter[qk]
+Comment[B #209 at \[a\] would have been sente.]
+Black[sj]
+;
+White[qk]
+;
+Comment[B #209 and #211 gain more points locally, but clearly B can't get sente this way.]
+Black[sk]
+;
+White[re]
+;
+Black[rd]
+;
+White[si]
+;
+Black[sl]
+;
+Comment[... ...]
+White[ga]
+;
+Black[jh]
+;
+White[ha]
+;
+Black[ia]
+;
+Letter[ri][pa][qa][na]
+Comment[W #220 is better to connect at \[a\].
+
+W #220 is aiming at \[b\] hane at the top.  When B\[c\], W\[d\] could create a ko.  However, if B wants to spend a move to prevent a ko there, B's territoy would be not enough...]
+White[rf]
+;
+Comment[Therefore, B #221 challenges W.
+
+Now B has gone into byo-yomi period, but B continues to fight with upmost effort.
+
+B #221 is a big move worth nearly 10 points.]
+Black[ri]
+;
+White[od]
+;
+Black[pd]
+;
+White[jm]
+;
+Black[fs]
+Letter[kn][in]
+Comment[B #225 should \[a\] first to exchange with W\[b\].]
+;
+White[kn]
+;
+Black[ln]
+Letter[km][in]
+Comment[B #227 this move to cut at \[a\] certainly gains more, but W wouldn't immediately answer B\[a\] with W\[b\]; instead, W would probably leave here as a ko threat.
+
+Later in the game, a big ko fight will be created at the upper side, forming a situation that one more ko threat from either side would decide the game.  Based on this, B #227 did not really lose anything. \[It prevented W from getting one more ko threat, that is.\]]
+;
+White[pa]
+;
+Black[qa]
+;
+White[na]
+Comment[The situation of the game is like a pendulum swinging to and fro.  Who will eventually win is still unexpectable.]
+;
+Black[oa]
+;
+White[gs]
+Comment[W #232 is better to throw in at \[a\] first.
+
+\[*** 'B' to see a reference.\]]
+Letter[ds]
+(
+;
+Black[ds]
+;
+Comment[W #234 should connect at \[a\] \(\[G2\]\).  Since W tenuki here \(\[a\]\), it later will lead a B cut that stirs up the waves.]
+Letter[gr]
+White[pa]
+;
+Black[rb]
+;
+White[ma]
+;
+Black[la]
+;
+White[fa]
+Comment[W #238 should have been omitted. \(This way W loses on ko threats; reason will be explained later.\)]
+;
+Black[ib]
+;
+White[ka]
+Comment[W #240 tesuji.  Next move ---
+
+\[*** 'B' to see a variation.\]]
+(
+;
+Comment[To B, rather than starting a ko fight in the way shown in the previous variation, it's better to start the ko fight this way, since B gets more threats now.]
+Black[mc]
+;
+Comment[Overall, it's a very light ko to W, while it's directly related to B team's life and death.  Under such a situation, B adopts a very tough, "ignorning" attitude throughout the coming ko fights --- this would be totally unexpected by W.]
+White[lb]
+;
+Black[ig]
+;
+White[hg]
+;
+Black[la]
+;
+White[qe]
+;
+Black[pe]
+;
+Comment[... ...]
+White[lb]
+;
+Black[hh]
+;
+White[ii]
+;
+Black[la]
+;
+White[qb]
+;
+Black[qc]
+;
+Comment[... ...]
+White[lb]
+;
+Black[ji]
+;
+White[jj]
+;
+Black[la]
+;
+White[bf]
+;
+Black[bg]
+;
+Letter[be][jr][gr]
+Comment[Even if W eventually cannot capture this B team, as long as W can get \[a\] connecting at the upper left and \[b\] extending at the bottom \(which also prevents B\[c\] cut\) two moves, W would win for sure.]
+White[lb]
+;
+Black[kc]
+;
+White[jd]
+;
+Black[la]
+;
+Letter[ja][jr]
+Comment[When W #264 connects, W was expecting B to play \[a\], then W\[b\] would be enough.]
+White[be]
+;
+Comment[Unexpectedly, B cuts to fight!  Such a stubborn fight spirit is indeed admirable.]
+Black[gr]
+;
+White[lb]
+;
+Black[da]
+;
+White[ca]
+;
+Black[la]
+;
+White[hs]
+;
+Comment[B #271 finally finished this heavy ko.  Thus B let W get \[a\], and the outcome of the game is decided.
+
+However, B #271 actually had another chance to struggle, this is, B #271 to extend at \[b\] instead, continuing the ko fight.
+
+Had B chosen this path, what would the result have been?
+
+\[*** 'B' to see this *exciting* variation.\]]
+Black[ja]
+(
+;
+Comment[\[The spectacular variation did not appear in the real game.  Now, after W gets #272, the game is decided.\]]
+White[jr]
+;
+Black[lr]
+;
+White[bn]
+;
+Black[ag]
+;
+White[sh]
+;
+Black[qj]
+;
+White[co]
+;
+Black[bp]
+;
+White[lq]
+;
+Black[mr]
+;
+White[km]
+;
+Black[ps]
+;
+Comment[\(* The ko \[M19\] was very light to W; almost "worry-free".  Therefore, B was already in a huge disadvantage.  Yet, B even dared to ignore it \[when B played \[G2\] cut\], stubbornly to continue the ko fight.  No one would have expected so.  Had Sakata 9-dan had more time to ponder, he probably would have found the way shown in the variation to continue this struggle. *\)]
+White[qp]
+;
+Black[om]
+;
+White[qn]
+;
+Black[kr]
+;
+White[js]
+;
+Black[qo]
+;
+White[ao]
+;
+Black[br]
+;
+White[qn]
+;
+Comment[\(* Sakata 9-dan engaged in such a complicated and enormous fight in the last minute \[that is, byo-yomi period\], and he refused to gave in even an inch.  Such a fighting spirit was astonishing.  Alas, he could not help the shortage of game time, and this fighting spirit was unable to hold to the end.  In short, in a match between two unmatchable top players in the world, the winning chance turned hands throughout the game.  This was indeed a rare masterpiece. *\)]
+Black[oa]
+;
+White[nd]
+;
+Black[qo]
+;
+White[if]
+;
+Black[dj]
+;
+White[qn]
+;
+Black[eq]
+;
+White[fq]
+;
+Comment[\(* Toward end of the game, a ko fight in which one more ko threat from either side would decide the game appeared.  In professional matches, ko threats are normally counted clearly before a ko fight is started.  In this game, however, the result of the ko fight was unclear until almost the end; this was extremely rare.  Perhaps because of the limit of the game clock, the players were unable to carry out throughout and accurate calculations; this could not have been helped. *\)]
+Black[qo]
+;
+White[jg]
+;
+Black[af]
+;
+White[ae]
+;
+Black[rh]
+;
+White[sg]
+;
+Black[se]
+;
+White[ng]
+;
+Black[qn]
+;
+White[eh]
+;
+Comment[\(* Go Seigen 9-dan often only spent half of the given time in his games.  In this game, however, he had only nine minutes left at the end.  This also spelled a complicated and difficult game. *\)]
+Black[dh]
+;
+White[ql]
+;
+Black[jf]
+;
+White[ks]
+;
+Black[ap]
+;
+White[ls]
+;
+Black[ms]
+;
+White[en]
+;
+Black[ig]
+;
+Comment[\(* After the war \(WWII\), Go Seigen and Sakata Eio played many time in major competitions.  For example, Go Seigen vs. High Dans series \(Sakata Eio was then 7-dan\) in 1949 \(Wu won by resignation on white\); Go Seigen 9-dan vs. Sakata Eio 8-dan 6-game series in 1953 \(Even; Wu 1 win, 1 jigo, and 4 losses\); Go Seigen 9-dan vs. Sakata Eio 8-dan 10-game series in 1953 \(Wu 6 wins, 2 losses\); and in 1957 the 1st Japan's Strongest Deciding Matches, 1958 the 2nd Japan's Strongest Deciding Matches, 1959 the 3rd Japan's Strongest Deciding Matches, and 1961 the 1st Meijin Matches, they also matched many time. *\)]
+White[jl]
+;
+Black[an]
+;
+White[am]
+;
+Black[dm]
+;
+White[lk]
+;
+Black[ll]
+;
+White[jg]
+;
+Black[pa]
+;
+Comment[Total of 327 moves.  W wins by 4 points.
+
+Time given: 10 hours apiece
+
+Time consumed:
+
+Black: 9 hours 59 minutes
+
+White: 9 hours 51 minutes
+
+\[*** END OF GAME ***\]]
+)
+(
+;
+Comment[Suppose B extends here \[G3\] to struggle...]
+AddBlack[gq]
+AddWhite[ka]
+AddEmpty[ja]
+Name[variation]
+;
+White[lb]
+;
+Black[ge]
+;
+White[gd]
+;
+Black[la]
+;
+White[fp]
+;
+Black[ir]
+;
+White[lb]
+;
+Black[fd]
+;
+White[ge]
+;
+Black[la]
+;
+White[jr]
+;
+Black[is]
+;
+White[lb]
+;
+Black[nd]
+;
+White[ne]
+;
+Black[la]
+;
+White[hq]
+;
+Black[hr]
+;
+White[lb]
+;
+Black[oe]
+;
+White[nd]
+;
+Comment[To here, W doesn't have any more good threats.
+
+In the process, B had \[G15\] and \[F16\] two threats; plus a threat used earlier at \[a\], there were three ko threats for B that were led by W #238 \[Go to node 238 for reference\].  This is why W #238 was said to be not good.
+
+Next ---]
+Black[la]
+;
+Comment[This is the only ko threat left for W...]
+White[ra]
+;
+Comment[\[B goes ahead to finish this heavy ko...\]]
+Black[ja]
+;
+White[qb]
+;
+Black[sc]
+;
+White[qa]
+;
+Black[pg]
+;
+White[ng]
+;
+Comment[To here, it's a semeai.  Although yet another ko fight \[P14\] is invovled, but this time, it's a favorable ko fight to B.  If so, the game would be turned around.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+Black[qh]
+)
+)
+(
+;
+Comment[\[When W \[L19\]...\]]
+Name[variation \(B #241\)]
+;
+Comment[If B captures...]
+Black[ja]
+;
+White[mc]
+;
+Black[ig]
+;
+White[hg]
+;
+Black[je]
+;
+White[jd]
+;
+Comment[When B makes an eye...]
+Black[if]
+;
+Comment[W captures to start a ko fight.
+
+\[*** end of variation.\]
+\[*** 'g241' to continue.\]]
+White[lb]
+)
+)
+(
+;
+Name[reference]
+AddWhite[ds]
+AddEmpty[gs]
+Comment[\[Suppose W throws in here first...\]]
+;
+Black[cs]
+;
+White[gs]
+;
+Black[ds]
+;
+Comment[When later W is able to play \[B6\]...]
+White[bn]
+;
+Comment[\[Say W tenuki...\]]
+Black[tt]
+;
+Comment[Then W would have these endgame tesuji...]
+White[co]
+;
+Black[ap]
+;
+Comment[\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+White[ar]
+)
+)
+(
+;
+Name[variation]
+AddWhite[gh]
+AddEmpty[gj]
+Comment[If W plays \[G12\] to avoid the ko fight...]
+;
+Black[gj]
+;
+White[fh]
+;
+Black[hg]
+;
+White[hh]
+;
+Black[ig]
+;
+White[jl]
+;
+Black[jm]
+;
+White[il]
+;
+Black[in]
+;
+Comment[To here, although W connects, W has lost for sure.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+White[fm]
+)
+)
+(
+;
+Name[variation]
+AddWhite[ii]
+AddEmpty[gm]
+Comment[W \[J11\] to extend here is the best play.]
+;
+Black[fg]
+Comment[Next if B \[F13\] to cut the connection of B teams \[between upper left and middle\] ...]
+;
+White[hh]
+Comment[W \[H12\] bend can live at the middle. \(Eventually it will be a "bent-four" at the middle, which is an alive shape.\)
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+)
+(
+;
+Name[variation \(B #171\)]
+Comment[When W \[G7\] wedges in...]
+;
+Black[hm]
+Comment[If B \[H7\] blocks here...]
+;
+White[hl]
+;
+Black[in]
+;
+White[jm]
+;
+Black[kn]
+;
+White[ij]
+Comment[To \[J10\], W easily lives.  If so, of course W would be good.  However ---
+
+\[*** end of variation.\]
+\[*** 'g171' to continue.\]]
+)
+)
+(
+;
+Name[variation \(W #170\)]
+Comment[\[When B \[F14\] wedges in...\]]
+;
+White[fe]
+Comment[If W answers this way...]
+;
+Black[fg]
+;
+White[he]
+Comment[Although W \[H15\] connecting is a good move...]
+;
+Black[ig]
+Comment[B has \[J13\] tesuji...]
+;
+White[hg]
+;
+Black[ji]
+;
+White[jj]
+;
+Black[ii]
+Comment[Then \[J11\] is another tesuji, and W group is not clean.
+
+\[*** end of variation.\]
+\[*** 'g170' to continue.\]]
+)
+)
+(
+;
+Name[variation]
+Comment[\[When B places at \[B5\]...\]]
+;
+Comment[If W answers with \[B6\]...]
+White[bn]
+;
+Black[cp]
+;
+White[cq]
+;
+Comment[When B keima, W would have no answer.  Next if W\[a\], B\[b\].
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+Letter[fq][gq]
+Black[fp]
+)
+(
+;
+Comment[Suppose there were not the exchange of W\[E9\] and B\[B10\]\).  Then when B \[B5\]...]
+AddEmpty[ek][bj]
+Name[reference]
+;
+White[al]
+;
+Black[ak]
+;
+Comment[W can hane and connect first...]
+White[am]
+;
+Comment[When B \[C4\]...]
+Black[cp]
+;
+Comment[W has \[B10\].  Also, even though B had \[C4\], it's still not easy for B to live at the corner.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+White[bj]
+)
+)
+(
+;
+Name[reference]
+Comment[\[Say B doesn't play \[N18\]...\]]
+AddEmpty[mb]
+;
+Comment[\[Then W would get it...\]]
+White[mb]
+;
+Comment[Then B would have to make an eye in the following order...]
+Black[ig]
+;
+White[hg]
+;
+Black[if]
+;
+White[he]
+;
+Black[je]
+;
+White[jd]
+;
+Letter[gk]
+Comment[\[To here, B lives.\]
+
+If so, B's attack from \[a\] \[see comments at node 135\] would disappear, and such a loss would be painful.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+Black[jh]
+)
+)
+(
+;
+Comment[\[If W ignores \[D18\] point and plays elsewhere...\]]
+AddEmpty[db]
+Name[reference]
+;
+Comment[When B gets this point...]
+Black[db]
+;
+Comment[This W block cannot be omitted.]
+White[cb]
+;
+Comment[Then, later, after B \[F14\]...]
+Black[ff]
+;
+White[fe]
+;
+Letter[ge]
+Comment[And B connects.  Now, if B cuts next at \[a\], W's corner would be lack of eyeshapes. \[After B \[D18\] and W \[C18\] exchange, that is.\]
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+Black[fg]
+)
+)
+(
+;
+Comment[\[If B extends with \[J6\] instead...\]]
+AddBlack[in]
+AddEmpty[lp]
+Name[variation]
+;
+Comment[When W \[L6\] and...]
+White[kn]
+;
+Comment[...\[And\] B \[K7\]...]
+Black[jm]
+;
+Comment[W \[N2\] keima attacking is severe.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+White[mr]
+)
+)
+(
+;
+Comment[\[Next...\]]
+Name[variation \(W #128\)]
+;
+Comment[If W plays \[L4\]...]
+White[kp]
+;
+Comment[After B extends, B would next have \[a\] or \[b\] to invade.
+
+\[*** end of variation.\]
+\[*** 'g128' to continue.\]]
+Letter[jq][kr]
+Black[in]
+)
+)
+(
+;
+Comment[\[W's lower right corner is alive.\]]
+Name[reference \(LR\)]
+;
+Comment[Even if B cuts here...]
+Black[sm]
+;
+White[so]
+;
+Black[rm]
+;
+Comment[To here, W lives cleanly.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+White[qr]
+)
+)
+(
+;
+Comment[\[When W \[H18\] probes...\]]
+Name[variation \(B #121\)]
+;
+Comment[If B blocks from outside...]
+Black[gb]
+;
+Comment[W \[H17\] squeezes...]
+White[hc]
+;
+Black[ib]
+;
+Comment[And when \[G16\] atari, even if W would lose the two stones, W has managed to connect \[to the left\] in sente, thus W would have chance to turn to the bottom.
+
+\[*** end of variation.\]
+\[*** 'g121' to continue.\]]
+White[gd]
+)
+)
+(
+;
+Comment[\[When B \[G17\]...\]]
+Name[reference]
+;
+Comment[If W plays \[L4\]...]
+White[kp]
+;
+Comment[After B extends...]
+Black[in]
+;
+Comment[W would have to connect the central team to the left, but then B would get the chance to invade W's bottom.  If so, it would be a lost game for W.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+White[gf]
+)
+)
+(
+;
+Comment[\[After B \[D11\]...\]]
+Name[variation 1]
+;
+White[jc]
+Comment[If W \[K17\] hane...]
+;
+Black[jb]
+Comment[And B \[K18\] blocks this way...]
+;
+White[hc]
+;
+Black[ib]
+Comment[Then W gains too much in sente.
+
+When W \[K17\], however, B has other responses than \[K18\].
+
+\[*** end of variation 1.\]
+\[*** '\[' to get back and see variation 2.\]]
+)
+(
+;
+Name[variation 2]
+Comment[\[Again after B \[D11\]...\]]
+;
+White[jc]
+Comment[When W \[K17\] hane...]
+;
+Black[ie]
+Comment[B counterattacks!]
+;
+White[hc]
+;
+Black[he]
+Comment[To here, W's middle team is cut down and can be hurt.  If so, it would be difficult for W to catch up.
+
+\[*** end of variation 2.\]
+\[*** 'g114' to continue.\]]
+)
+)
+(
+;
+Name[variation]
+AddWhite[ke]
+AddEmpty[id]
+Comment[If W cuts at \[L15\] instead...]
+;
+Black[jf]
+;
+White[id]
+;
+Black[jd]
+;
+White[je]
+;
+Black[ie]
+Comment[To here, W is captured.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+)
+)
+(
+;
+Comment[B should jump a step here \[L9\]...]
+AddBlack[kk]
+AddEmpty[mm]
+Name[variation]
+;
+White[ji]
+;
+Black[ih]
+;
+White[jk]
+;
+Black[kl]
+;
+Comment[Then when W pushes through...]
+White[jh]
+;
+Comment[B does not block; instead, B extends too...]
+Black[ig]
+;
+White[jg]
+;
+Black[if]
+;
+White[jf]
+;
+Comment[To here, B's both teams are settled.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+Black[ke]
+)
+)
+(
+;
+Name[variation \(B #91\)]
+Comment[\[When W \[L11\] cuts...\]]
+;
+Black[ih]
+Comment[If B plays \[J12\] to try to connect with the stones at the top...]
+;
+White[kj]
+Comment[W \[L10\] extends...]
+;
+Black[lk]
+;
+White[kk]
+;
+Black[kl]
+;
+White[lj]
+;
+Black[mj]
+Comment[When B \[N10\] connects...]
+;
+White[ll]
+Comment[W \[M8\] is a severe move.]
+;
+Black[km]
+;
+White[ml]
+;
+Black[nk]
+;
+White[jl]
+;
+Black[mm]
+Comment[When B \[N7\] captures two W stones...]
+;
+White[kn]
+Comment[W \[L6\] tesuji.  B's big team is now in danger. \[Only one eye, it seems.\]
+
+Which move is the best \[for B #91\]?  Please consult the answer shown in the next variation diagram \[at node #91\].
+
+\[*** end of variation.\]
+\[*** 'g91' to continue.\]]
+)
+)
+(
+;
+Comment[If W hastily blocks here...]
+AddWhite[le]
+AddEmpty[me]
+Name[reference]
+;
+Black[og]
+;
+White[oh]
+;
+Comment[W stones \[N16\] are captured.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+Black[me]
+)
+)
+(
+;
+Comment[If B hane here \[O18\]...]
+AddBlack[nb]
+AddEmpty[lc]
+Name[variation]
+;
+Comment[W hane too...]
+White[mb]
+;
+Comment[When B \[N17\] atari...]
+Black[mc]
+;
+Comment[W \[K18\] is tesuji...]
+White[jb]
+;
+Black[jc]
+;
+White[lb]
+;
+Black[kc]
+;
+Comment[To here, W successfully separate B.
+
+\[*** 'B' to see a reference explaining W \[K18\] tesuji.\]
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+White[nd]
+(
+;
+)
+(
+;
+AddWhite[lc]
+AddEmpty[jb][lb][jc][kc][nd]
+Comment[Earlier, If W \[K18\] move atari here...]
+Name[reference]
+;
+Comment[B captures...]
+Black[nd]
+;
+Comment[When W connects...]
+White[lb]
+;
+Comment[B jumps and escapes.  If so, W would be difficult.
+
+\[*** end of reference\]
+\[*** '\[' to continue.\]]
+Black[ie]
+)
+)
+)
+(
+;
+Comment[\[When W \[O11\] cross-cut...\]]
+Name[variation \(B #71\)]
+;
+Comment[If B \[P12\] extends to fight...]
+Black[oh]
+;
+White[mi]
+;
+Black[kk]
+;
+White[og]
+;
+Black[nh]
+;
+Letter[nc]
+Comment[To here, it evolves into a complicated fight.  At the upper side W has \[a\] tesuji, and where this fight would lead to, B couldn't predict either.
+
+\[And that's what W wants, since his situation is not so good.\]
+
+\[*** end of variation.\]
+\[*** 'g71' to continue.\]]
+White[pg]
+)
+)
+(
+;
+Comment[If W draws back to fence from a lower point \[H16\]...]
+AddWhite[hd]
+AddEmpty[hf]
+Name[variation 1]
+;
+Comment[After B's endgame moves...]
+Black[lc]
+;
+White[kc]
+;
+Black[kb]
+;
+White[jb]
+;
+Comment[B still has \[a\] left.  Thus, even though W fenced from a lower point \[H16 comparing with H14\], W is still not solid enough.  To make territory this way is not good enough.
+
+\[*** end of variation 1.\]
+\[*** '\[' to get back and see variation 2.\]]
+Letter[ib]
+Black[lb]
+)
+(
+;
+Comment[W can also play here \[J16\].]
+AddWhite[id]
+AddEmpty[hf]
+Name[variation 2]
+;
+Comment[But if so...]
+Black[lc]
+;
+White[kc]
+;
+Black[kb]
+;
+Comment[When W \[K18\] blocks...]
+White[jb]
+;
+Comment[B would tenuki and play here.
+
+\[*** end of variation 2.\]
+\[*** '\[' to continue.\]]
+Black[hp]
+)
+)
+(
+;
+Name[variation \(B #53\)]
+Comment[\[W bend is to expect B...\]]
+;
+Black[ok]
+Comment[\[Expect B to\] press here...]
+;
+White[qf]
+Comment[Then W turns to approach here...]
+;
+Black[pj]
+Comment[If B hane...]
+;
+White[qj]
+Comment[W has \[R10\] and \[Q11\]...]
+;
+Black[qk]
+;
+White[pi]
+;
+Black[pl]
+Comment[Next if B captures this stone...]
+;
+White[rj]
+Letter[oj][rk]
+Comment[\[S10\] and W is settled.  Or, if B \[Q8\] earlier connects at \[a\] instead, W could \[b\] atari.  In either case, W has beautiful shape.
+
+But such an expectation is somewhat one-sided.  B would not play as W planned.
+
+\[*** end of variation.\]
+\[*** 'g53' to continue.\]]
+)
+)
+(
+;
+Name[variation]
+AddWhite[om]
+AddEmpty[pk]
+Comment[If W plays \[P7\]...]
+;
+Black[pk]
+Comment[B would take the opportunity to settle down...]
+;
+White[ol]
+;
+Black[qj]
+Comment[To here, W didn't gain.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+)
+)
+(
+;
+Name[variation \(W #46\)]
+Comment[\[When B extends out at \[Q7\]...\]]
+;
+White[om]
+Comment[If W presses here...]
+;
+Black[qm]
+;
+White[rn]
+;
+Black[ol]
+;
+White[nm]
+;
+Black[nl]
+;
+White[mm]
+;
+Black[ml]
+;
+White[lm]
+;
+Black[rm]
+;
+White[ro]
+;
+Black[qj]
+Comment[To here, W is clearly not good.
+
+\[*** end of variation.\]
+\[*** 'g46' to continue.\]]
+)
+)
+(
+;
+Name[reference]
+AddWhite[pm]
+AddEmpty[ph][pn]
+Comment[\[Suppose W \[Q7\] captures one B stone...\]]
+;
+Black[qh]
+Comment[Since W's lower side is very solid, B at most can extend to here...]
+;
+White[oe]
+;
+Black[pe]
+;
+White[od]
+Comment[After these force moves...]
+;
+Black[pc]
+;
+White[hq]
+Comment[W can turn to get this extension \(again, B's right side is very solid, and W's extention up to here is common sense\).  Next...]
+;
+Black[id]
+Comment[If B invades at \[J16\]...]
+;
+White[hf]
+Comment[W answers \[H14\].  If playing this way, W's shape is widely extended out, and W needs not to hurry.  The territories on both sides would be in a good balance as well.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+)
+)
+(
+;
+Name[variation \(B #41\)]
+Comment[\[When W \[C10\] invade...\]]
+;
+Black[ej]
+Comment[If B \[E10\] bent-jump...]
+;
+White[bl]
+;
+Black[bm]
+;
+White[dl]
+;
+Black[dk]
+;
+White[cm]
+;
+Black[dm]
+;
+White[bk]
+Comment[To here, W connects from below.
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+)
+)
+(
+;
+Comment[\[Assume W gets chance to invade here...\]]
+AddWhite[cj]
+Name[reference]
+;
+Comment[Even if B \[D9\] kosumi...]
+Black[dk]
+;
+White[ei]
+;
+Black[di]
+;
+White[dj]
+;
+Black[ej]
+;
+White[ek]
+;
+Black[fj]
+;
+Comment[To here, B cannot capture W.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+White[bl]
+)
+)
+(
+;
+Comment[B \[E15\] and...]
+AddBlack[ee]
+AddEmpty[cl]
+Name[variation 1]
+;
+White[fd]
+;
+Comment[\[F15\] to push through...]
+Black[fe]
+;
+White[ge]
+;
+Comment[Then \[C8\] extends to here.  I once used this variation against a 6-dan.
+
+\[*** end of variation 1.\]
+\[*** '\[' to go back and see variation 2.\]]
+Black[cl]
+)
+(
+;
+Comment[In this game, however, if B pushes here \[E15\]...]
+AddBlack[ee]
+AddEmpty[cl]
+Name[variation 2]
+;
+Comment[I would be ready to get \[D9\] point first...]
+White[dk]
+;
+Black[fd]
+;
+White[fc]
+;
+Black[gd]
+;
+White[gc]
+;
+Black[hd]
+;
+Comment[To here, it's a different formation.
+
+\[*** end of variation 2.\]
+\[*** '\[' to continue.\]]
+White[ic]
+)
+)
+(
+;
+Name[reference]
+AddWhite[pm]
+AddEmpty[do][pn]
+Comment[\[Suppose W plays here \[Q7\] to capture a stone...\]]
+;
+Black[do]
+Comment[When B \[D5\] kakari...]
+;
+White[co]
+Comment[If W chooses this joseki...]
+;
+Black[dp]
+;
+White[cp]
+;
+Black[eq]
+;
+White[cn]
+;
+Black[dr]
+;
+White[cq]
+;
+Black[fp]
+Comment[To B \[F4\], B's thickness at both sides forms a nice frame, and the space between the two walls is just right; it would be difficult for W to reduce this moyo.
+
+\[*** end of reference.\]
+\[*** '\[' to continue.\]]
+)
+)
+(
+;
+AddWhite[oq][op]
+AddEmpty[qn]
+Comment[\(* When B \[O3\] atari, if W \[P4\] connects... *\)]
+Name[variation]
+;
+Black[qm]
+;
+White[mq]
+;
+Black[nr]
+;
+White[lp]
+;
+Black[rr]
+Comment[\(* To B \[S2\], the entire corner becomes B's. *\)
+
+\[*** end of variation.\]
+\[*** '\[' to continue.\]]
+)
+)
