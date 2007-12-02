@@ -281,23 +281,26 @@ public class SgfModel extends GameInfo implements Enumeration {
               // switch the model into "marked solution mode"
               newModel.markedSolution = true;
               //#ifdef DEBUG
-              log.debug("Marked solution !");
+              log.debug("Marked solution  at " + latestNode + " (" + latestNode.getPoint() + ")");
               //#endif
               SgfNode current = latestNode;
               // mark all the path correct
               //#ifdef DEBUG
               Vector correctPath = new Vector();
               //#endif
-              while (current != null) {
+              while (current.getPoint() != null) {
+
                 //#ifdef DEBUG
-                correctPath.addElement(current.getPoint());
+                correctPath.addElement(current);
                 //#endif
                 current.setCorrect(true);
                 current = current.searchFather();
+
               }
               //#ifdef DEBUG
-              for (int i = correctPath.size() - 1; i > 0; i--)
-                log.debug("Path to Solution : " + correctPath.elementAt(i));
+              for (int i = correctPath.size() - 1; i >= 0; i--) {
+                log.debug("Path to Solution : " + correctPath.elementAt(i) + " (" + ((SgfNode) correctPath.elementAt(i)).getPoint() + ")");
+              }
               //#endif
 
             }
