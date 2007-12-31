@@ -251,8 +251,8 @@ public interface I18N {
   String reply = "reply";
   String editNode = "Edit";
   String ok = "ok";
-  String bookmark = "set bookmark";
-  String gotoBookmark = "go bookmark";
+  String bookmark = "Set bookmark";
+  String gotoBookmark = "Go bookmark";
   String bookmarkSet = "The bookmark has been set";
 }
 //#elif LOCALE=="fr_FR"
