@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<eclipsemeMetadata jad="gome.jad" version="1.7.3">
-   <device group="Sun Java(TM) Wireless Toolkit 2.5.1 for CLDC, EA" name="DefaultColorPhone"/>
+<eclipsemeMetadata jad="gome.jad" version="1.7.7">
+   <device group="Sun Java(TM) Wireless Toolkit 2.5.2 for CLDC" name="DefaultColorPhone"/>
    <signing signProject="true">
       <keystore>$/indigonauts.keystore</keystore>
       <alias>indigonauts</alias>
