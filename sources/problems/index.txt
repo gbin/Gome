@@ -1,3 +1,4 @@
 jar:/problems/
 easy.sgf,P,Easy,40
-hard.sgf,P,Intermediate,40
+medium.sgf,P,Medium,180
+hard.sgf,P,Hard,140
