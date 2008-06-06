@@ -1,7 +1,7 @@
 /*
  * (c) 2006 Indigonauts
  */
-package com.indigonauts.gome.igs;
+package com.indigonauts.gome.multiplayer;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Util;
 
-public class ServerUser extends QuickSortable {
+public class User extends QuickSortable {
   public String nick;
   public String rank;
   public int play;
@@ -27,8 +27,8 @@ public class ServerUser extends QuickSortable {
   //private boolean isStar;
   private int numRank;
 
-  public static ServerUser unmarshal(DataInputStream in) throws IOException {
-    ServerUser user = new ServerUser();
+  public static User unmarshal(DataInputStream in) throws IOException {
+    User user = new User();
     user.nick = in.readUTF();
     user.rank = in.readUTF();
     user.play = in.readInt();
@@ -47,13 +47,13 @@ public class ServerUser extends QuickSortable {
 
   public boolean lessThan(QuickSortable other) {
 
-    ServerUser otherUser;
-    ServerUser meUser;
+    User otherUser;
+    User meUser;
     if (sortOrder) {
-      otherUser = ((ServerUser) other);
+      otherUser = ((User) other);
       meUser = this;
     } else {
-      meUser = ((ServerUser) other);
+      meUser = ((User) other);
       otherUser = this;
     }
     switch (sortCriteria) {

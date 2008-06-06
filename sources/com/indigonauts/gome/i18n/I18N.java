@@ -48,6 +48,16 @@ public interface I18N {
     String winBy = "wins by";
   }
 
+  public interface bt {
+    String connect = "Connect to Bluetooth";
+    String connecting = "Looking for remote Gome";
+    String connectionError = "Bluetooth connection error";
+    String noPeerFound = "Error : No other Gome found.";
+    String peerList = "Available remote gomes";
+    String connected = "Connected to Bluetooth Peer";
+    String disconnect = "Disconnect Bluetooth";
+  }
+
   public interface online {
     String acceptChallenge = "Accepting Challenge...";
     String blackGives = "Black Gives";

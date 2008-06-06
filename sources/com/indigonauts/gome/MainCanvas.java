@@ -112,6 +112,10 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     switchToIGSOfflineMenu();
     //#endif
 
+    //#ifdef BT
+    switchToBTOfflineMenu();
+    //#endif
+
     addCommand(MenuEngine.OPTIONS);
     //#ifdef DEBUG
     addCommand(MenuEngine.CONSOLE);
@@ -126,7 +130,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#ifdef DEBUG
     log.debug("Main Canvas constructed");
     //#endif
-    
+
   }
 
   public Rectangle getFullCanvas() {
@@ -350,8 +354,25 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   //#endif
+
+  //#ifdef BT
+  private void switchToBTOfflineMenu() {
+    addCommand(MenuEngine.BT_CONNECT);
+  }
+
+  //#endif
+
+  //#ifdef BT
+  public void switchToBTOnlineMenu() {
+    removeCommand(MenuEngine.BT_CONNECT);
+    addCommand(MenuEngine.BT_CHALLENGE);
+    addCommand(MenuEngine.BT_DISCONNECT);
+  }
+
+  //#endif
+
   //#ifdef IGS
-  public void switchToIGSOfflineMenu() {
+  private void switchToIGSOfflineMenu() {
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
       addCommand(MenuEngine.IGS_CONNECT);
     }
@@ -411,7 +432,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       updateClockAndCommentMode(NOTHING_TO_DISPLAY_MODE);
     } else if (c == MenuEngine.REVIEW_MODE) {
       gc.setPlayMode(GameController.REVIEW_MODE);
-      
+
       setSplashInfo(I18N.switchToReviewMode);
       if (clockControl != null)
         clockControl.pauseClock();

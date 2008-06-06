@@ -22,14 +22,16 @@ import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
-import com.indigonauts.gome.igs.ServerChallenge;
-import com.indigonauts.gome.igs.ServerGame;
-import com.indigonauts.gome.igs.ServerUser;
 import com.indigonauts.gome.io.CollectionEntry;
 import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
+import com.indigonauts.gome.multiplayer.Challenge;
+import com.indigonauts.gome.multiplayer.Game;
+import com.indigonauts.gome.multiplayer.User;
+import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
+import com.indigonauts.gome.multiplayer.igs.IGSConnector;
 import com.indigonauts.gome.sgf.Board;
 
 public class MenuEngine implements CommandListener {
@@ -51,22 +53,28 @@ public class MenuEngine implements CommandListener {
   public static final Command FIRST_MOVE = new Command(I18N.firstMove, Command.SCREEN, 5);
   public static final Command REVIEW_MODE = new Command(I18N.reviewMode, Command.SCREEN, 5);
 
+  //#ifdef BT
+  public static final Command BT_CONNECT = new Command(I18N.bt.connect, Command.SCREEN, 5);
+  public static final Command BT_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5);
+  public static final Command BT_DISCONNECT = new Command(I18N.bt.disconnect, Command.SCREEN, 5);;
+  //#endif
+
   //#ifdef IGS
-  public static final Command IGS_CONNECT = new Command(I18N.online.connect, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_GAMELIST = new Command(I18N.online.gameList, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_USERLIST = new Command(I18N.online.userlist, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_DISCONNECT = new Command(I18N.online.disconnect, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_OBSERVE = new Command(I18N.online.observe, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_MESSAGE = new Command(I18N.online.message, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_SORT_BY_RANK = new Command(I18N.online.sortRank, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_SORT_BY_NICK = new Command(I18N.online.sortNick, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_SORT_BY_WATCH = new Command(I18N.online.sortWatch, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_CONNECT = new Command(I18N.online.connect, Command.SCREEN, 5);
+  public static final Command IGS_GAMELIST = new Command(I18N.online.gameList, Command.SCREEN, 5);
+  public static final Command IGS_USERLIST = new Command(I18N.online.userlist, Command.SCREEN, 5);
+  public static final Command IGS_DISCONNECT = new Command(I18N.online.disconnect, Command.SCREEN, 5);
+  public static final Command IGS_OBSERVE = new Command(I18N.online.observe, Command.SCREEN, 5);
+  public static final Command IGS_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5);
+  public static final Command IGS_DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5);
+  public static final Command IGS_MESSAGE = new Command(I18N.online.message, Command.SCREEN, 5);
+  public static final Command IGS_SORT_BY_RANK = new Command(I18N.online.sortRank, Command.SCREEN, 5);
+  public static final Command IGS_SORT_BY_NICK = new Command(I18N.online.sortNick, Command.SCREEN, 5);
+  public static final Command IGS_SORT_BY_WATCH = new Command(I18N.online.sortWatch, Command.SCREEN, 5);
 
   public static final Command IGS_DONE_SCORE = new Command(I18N.done, Command.SCREEN, 5);
-  public static final Command IGS_REQUEST_KOMI = new Command(I18N.online.requestKomi, Command.SCREEN, 5); //$NON-NLS-1$
-  public static final Command IGS_CHANGE_HANDICAP = new Command(I18N.online.changeHandicap, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command IGS_REQUEST_KOMI = new Command(I18N.online.requestKomi, Command.SCREEN, 5);
+  public static final Command IGS_CHANGE_HANDICAP = new Command(I18N.online.changeHandicap, Command.SCREEN, 5);
   public static final Command IGS_RESET_DEAD_STONES = new Command(I18N.count.undoMarkDeadStone, Command.SCREEN, 5);
   //#endif
 
@@ -98,6 +106,8 @@ public class MenuEngine implements CommandListener {
   public static final Command PREV10MOVES = new Command(I18N.prev10Moves, Command.SCREEN, 5); //$NON-NLS-1$
 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
+
+
   private FileBrowser fileBrowser;
 
   private Options optionsForm = null;
@@ -123,9 +133,11 @@ public class MenuEngine implements CommandListener {
   private Chat chat;
 
   private List igsUserList;
-  private ServerChallenge currentChallenge;
+  private Challenge currentChallenge;
 
   private byte komi;
+
+  private List btPeerList;
 
   public MenuEngine(GameController gc) {
     this.gc = gc;
@@ -199,7 +211,7 @@ public class MenuEngine implements CommandListener {
         }
         //#ifdef IGS
         else if (c == IGS_CONNECT) {
-          gc.connectToServer();
+          gc.connectToIGS();
         } else if (c == IGS_GAMELIST) {
           gc.getServerGameList();
         } else if (c == IGS_USERLIST) {
@@ -212,6 +224,13 @@ public class MenuEngine implements CommandListener {
           gomeOnlineWantKomi();
         } else if (c == IGS_CHANGE_HANDICAP) {
           gomeOnlineChangeHandicap();
+        }
+        //#endif
+        //#ifdef BT
+        else if (c == BT_CONNECT) {
+          gc.connectToBT();
+        } else if (c == BT_CHALLENGE) {
+          gc.challengeBT();
         }
         //#endif
         else if (c == NEXT) {
@@ -329,6 +348,18 @@ public class MenuEngine implements CommandListener {
         saveGameForm = null;
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
       }
+
+      //#ifdef BT
+      else if (d == btPeerList) {
+        if (c == BT_CONNECT || c == List.SELECT_COMMAND) {
+          log.debug("Connecting to BT");
+          ((BluetoothClientConnector) gc.multiplayerConnector).connectToPeer(btPeerList.getSelectedIndex());
+        }
+        btPeerList = null;
+        Gome.singleton.mainCanvas.show(Gome.singleton.display);
+      }
+      //#endif
+
       //#ifdef IGS
       else if (d == igsGameList) {
         if (c == IGS_OBSERVE || c == List.SELECT_COMMAND) {
@@ -345,28 +376,28 @@ public class MenuEngine implements CommandListener {
           chat.sendMessage(gc.getNick(igsUserList.getSelectedIndex()), "", "", Gome.singleton.mainCanvas);
           return;
         } else if (c == IGS_SORT_BY_RANK) {
-          if (ServerUser.sortCriteria == ServerUser.RANK) {
-            ServerUser.sortOrder = !ServerUser.sortOrder;
+          if (User.sortCriteria == User.RANK) {
+            User.sortOrder = !User.sortOrder;
           } else {
-            ServerUser.sortCriteria = ServerUser.RANK;
+            User.sortCriteria = User.RANK;
           }
-          refreshUserList(gc.igs.getUserList());
+          refreshUserList(((IGSConnector) gc.multiplayerConnector).getUserList());
           return;
         } else if (c == IGS_SORT_BY_NICK) {
-          if (ServerUser.sortCriteria == ServerUser.NICK) {
-            ServerUser.sortOrder = !ServerUser.sortOrder;
+          if (User.sortCriteria == User.NICK) {
+            User.sortOrder = !User.sortOrder;
           } else {
-            ServerUser.sortCriteria = ServerUser.NICK;
+            User.sortCriteria = User.NICK;
           }
-          refreshUserList(gc.igs.getUserList());
+          refreshUserList(((IGSConnector) gc.multiplayerConnector).getUserList());
           return;
         } else if (c == IGS_SORT_BY_WATCH) {
-          if (ServerUser.sortCriteria == ServerUser.WATCH) {
-            ServerUser.sortOrder = !ServerUser.sortOrder;
+          if (User.sortCriteria == User.WATCH) {
+            User.sortOrder = !User.sortOrder;
           } else {
-            ServerUser.sortCriteria = ServerUser.WATCH;
+            User.sortCriteria = User.WATCH;
           }
-          refreshUserList(gc.igs.getUserList());
+          refreshUserList(((IGSConnector) gc.multiplayerConnector).getUserList());
           return;
         }
         igsUserList = null;
@@ -428,8 +459,28 @@ public class MenuEngine implements CommandListener {
     }
   }
 
+  //#ifdef BT
+  public void showBTPeers(String[] friendyNames) {
+    //#ifdef DEBUG
+    log.debug("Show bt peers");
+    //#endif
+    btPeerList = new List(I18N.bt.peerList, Choice.IMPLICIT);
+    for (int i = 0; i < friendyNames.length; i++) {
+      btPeerList.append(friendyNames[i], null);
+    }
+    btPeerList.setFitPolicy(Choice.TEXT_WRAP_ON);
+    for (int i = 0; i < friendyNames.length; i++)
+      btPeerList.setFont(i, FIXED_FONT);
+    btPeerList.addCommand(BACK);
+    btPeerList.addCommand(BT_CONNECT);
+    btPeerList.setCommandListener(this);
+    Gome.singleton.display.setCurrent(btPeerList);
+  }
+
+  //#endif
+
   //#ifdef IGS
-  public void showIgsGameList(ServerGame[] games) {
+  public void showIgsGameList(Game[] games) {
     //#ifdef DEBUG
     log.debug("Show igs gamelist");
     //#endif
@@ -445,12 +496,9 @@ public class MenuEngine implements CommandListener {
     igsGameList.addCommand(IGS_OBSERVE);
     igsGameList.setCommandListener(this);
     Gome.singleton.display.setCurrent(igsGameList);
-    //#ifdef DEBUG
-    log.debug("Show igs gamelist Done ?");
-    //#endif
   }
 
-  public void refreshUserList(ServerUser[] users) {
+  public void refreshUserList(User[] users) {
     //#ifdef DEBUG
     log.debug("refreshUserList");
     //#endif
@@ -478,7 +526,7 @@ public class MenuEngine implements CommandListener {
     igsUserList.setCommandListener(this);
   }
 
-  public void showIgsUserList(ServerUser[] users) {
+  public void showIgsUserList(User[] users) {
     //#ifdef DEBUG
     log.debug("Show igs userlist");
     //#endif
@@ -526,7 +574,7 @@ public class MenuEngine implements CommandListener {
   }
 
   //#ifdef IGS
-  public void showIgsChallenge(ServerChallenge challenge) {
+  public void showIgsChallenge(Challenge challenge) {
     currentChallenge = challenge;
     String colors = ((challenge.color == Board.BLACK) ? I18N.game.blackLong : I18N.game.whiteLong);
     challengeForm = new Form(challenge.nick + I18N.online.challengesYou);
@@ -600,4 +648,5 @@ public class MenuEngine implements CommandListener {
     Gome.singleton.display.setCurrent(onlineChangeHandicapForm);
   }
   //#endif
+
 }

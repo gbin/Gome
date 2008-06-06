@@ -21,6 +21,7 @@ import javax.microedition.rms.RecordStoreException;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.IOManager;
+import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector;
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Options;
@@ -78,17 +79,11 @@ public class Gome extends MIDlet implements CommandListener {
   }
 
   public void saveOptions() throws RecordStoreException, IOException {
-    //#ifdef DEBUG
-    //# log.info("Save options");
-    //#endif
     ByteArrayOutputStream outba = new ByteArrayOutputStream();
     DataOutputStream os = new DataOutputStream(outba);
     options.marshalOut(os);
     IOManager.singleton.saveLocalStore(OPTIONS_FILE, outba.toByteArray());
     os.close();
-    //#ifdef DEBUG
-    //# log.info("Save options done OK");
-    //#endif
   }
 
   public void startApp() {
@@ -196,11 +191,21 @@ public class Gome extends MIDlet implements CommandListener {
     }
   }
 
+  //#ifdef BT
+  public BluetoothServiceConnector bluetoothServiceConnector;
+  //#endif
+
   public void bootGome() {
     gameController = new GameController(display);
     mainCanvas = new MainCanvas(gameController);
     menuEngine = new MenuEngine(gameController);
     menuEngine.startNewGame();
+    //#ifdef BT
+    bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
+    log.debug("Start BT Service");
+    bluetoothServiceConnector.start();
+    //#endif
+
     String message;
     if (options.user.length() == 0) {
       long msLeft = options.expiration - System.currentTimeMillis();

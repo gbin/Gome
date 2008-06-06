@@ -1,12 +1,12 @@
 /*
  * (c) 2006 Indigonauts
  */
-package com.indigonauts.gome.igs;
+package com.indigonauts.gome.multiplayer;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class ServerGame {
+public class Game {
   public int nb;
 
   public String white;
@@ -27,11 +27,11 @@ public class ServerGame {
 
   public byte handi;
 
-  private ServerGame() {
+  private Game() {
     // empty private constructor
   }
 
-  public ServerGame(int nb, String white, String whiteRank, String black, String blackRank, int move, byte size, byte handi, byte komi, int nbobs) {
+  public Game(int nb, String white, String whiteRank, String black, String blackRank, int move, byte size, byte handi, byte komi, int nbobs) {
     this.nb = nb;
     this.white = white;
     this.whiteRank = whiteRank;
@@ -44,8 +44,8 @@ public class ServerGame {
     this.nbobs = nbobs;
   }
 
-  public static ServerGame unmarshal(DataInputStream in) throws IOException {
-    ServerGame newOne = new ServerGame();
+  public static Game unmarshal(DataInputStream in) throws IOException {
+    Game newOne = new Game();
     newOne.nb = in.readInt();
     newOne.white = in.readUTF();
     newOne.whiteRank = in.readUTF();

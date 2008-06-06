@@ -1,12 +1,12 @@
 /*
  * (c) 2006 Indigonauts
  */
-package com.indigonauts.gome.igs;
+package com.indigonauts.gome.multiplayer;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 
-public class ServerMove {
+public class Move {
     public int nb;
     public byte color;
     public byte x;
@@ -17,19 +17,19 @@ public class ServerMove {
      * @param x
      * @param y
      */
-    public ServerMove(int nb, byte color, byte x, byte y) {
+    public Move(int nb, byte color, byte x, byte y) {
         this.nb = nb;
         this.color = color;
         this.x = x;
         this.y = y;
     }
 
-    private ServerMove() {
+    private Move() {
         // private constructor
     }
 
-    public static ServerMove unmarshal(DataInputStream in) throws IOException {
-        ServerMove newOne = new ServerMove();
+    public static Move unmarshal(DataInputStream in) throws IOException {
+        Move newOne = new Move();
 
         newOne.nb = in.readInt();
         newOne.color = in.readByte();

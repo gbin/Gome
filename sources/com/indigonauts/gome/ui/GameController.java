@@ -18,20 +18,22 @@ import com.indigonauts.gome.common.QuickSortable;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
-import com.indigonauts.gome.igs.ServerCallback;
-import com.indigonauts.gome.igs.ServerChallenge;
-import com.indigonauts.gome.igs.ServerConnector;
-import com.indigonauts.gome.igs.ServerGame;
-import com.indigonauts.gome.igs.ServerMove;
-import com.indigonauts.gome.igs.ServerUser;
 import com.indigonauts.gome.io.CollectionEntry;
+import com.indigonauts.gome.multiplayer.Challenge;
+import com.indigonauts.gome.multiplayer.Game;
+import com.indigonauts.gome.multiplayer.Move;
+import com.indigonauts.gome.multiplayer.MultiplayerCallback;
+import com.indigonauts.gome.multiplayer.MultiplayerConnector;
+import com.indigonauts.gome.multiplayer.User;
+import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
+import com.indigonauts.gome.multiplayer.igs.IGSConnector;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.sgf.SgfPoint;
 
-//#ifdef IGS
-public class GameController implements ServerCallback
+//#ifdef IGS || BT
+public class GameController implements MultiplayerCallback
 //#else
 //# public class GameController
 //#endif
@@ -53,6 +55,8 @@ public class GameController implements ServerCallback
   public static final char OBSERVE_MODE = 'B';
 
   public static final char TEXT_MODE = 'T';
+
+  public static final char P2P_MODE = '2';
 
   private SgfModel model;
 
@@ -76,11 +80,11 @@ public class GameController implements ServerCallback
   private boolean gameHasEnded = false;
 
   // options
-  private boolean bShowHint;
+  private boolean showHint;
 
   private char playMode = GAME_MODE;
 
-  private boolean bZoomIn;
+  private boolean zoomedIn;
 
   private boolean countMode = false;
   private boolean evaluationMode = false;
@@ -91,29 +95,28 @@ public class GameController implements ServerCallback
 
   private int moveNb = 0;
 
-  //#ifdef IGS
-  ServerConnector igs;
-  ServerGame currentIgsGame = null;
+  //#ifdef IGS || BT
+  MultiplayerConnector multiplayerConnector;
   //#endif
 
   //#ifdef IGS
-  private byte onlineColor;
+  Game currentIgsGame = null;
+  //#endif
 
+  //#ifdef IGS || BT
+  private byte onlineColor;
+  private boolean tryingToConnect = false;
+  private boolean connectToIgs = false;
+  private byte gomeWantOnlineKomi = 0;
   //#endif
 
   private ClockController clock;
-
-  private boolean tryingToConnect = false;
-
-  private boolean connectToIgs = false;
-
-  private byte gomeWantOnlineKomi = 0;
 
   public GameController(Display display) {
     this.display = display;
     model = new SgfModel();
     moveNb = 0;
-    bZoomIn = false;
+    zoomedIn = false;
     // log.debug("Game Controller instantiated");
   }
 
@@ -140,7 +143,7 @@ public class GameController implements ServerCallback
     cursor.y = (byte) 0;
     fileLoader = null;
 
-    bShowHint = false;
+    showHint = false;
     countMode = false;
     setPlayMode(GAME_MODE);
     canvas.assignClockController(clock);
@@ -467,7 +470,7 @@ public class GameController implements ServerCallback
 
   private void spanInZoomedModeIfTheCursorIsOut() {
     Rectangle displayArea = canvas.getBoardPainter().getViewedArea();
-    if (bZoomIn && (cursor.x > displayArea.x1 || cursor.x < displayArea.x0 || cursor.y < displayArea.y0 || cursor.y > displayArea.y1)) {
+    if (zoomedIn && (cursor.x > displayArea.x1 || cursor.x < displayArea.x0 || cursor.y < displayArea.y0 || cursor.y > displayArea.y1)) {
 
       switchToZoomedPainter();
     }
@@ -518,7 +521,7 @@ public class GameController implements ServerCallback
         if (playMode == ONLINE_MODE) {
           try {
             if (!(board.isValidMove(cursor, Board.BLACK) | board.isValidMove(cursor, Board.WHITE)) && !board.hasBeenRemove(cursor.x, cursor.y)) {
-              igs.removeDeadStone(cursor.x, cursor.y);
+              multiplayerConnector.removeDeadStone(cursor.x, cursor.y);
             }
           } catch (Exception e) {
             e.printStackTrace();
@@ -611,7 +614,7 @@ public class GameController implements ServerCallback
       if (color == onlineColor) {
         try {
           if (!countMode)
-            igs.playMove(new ServerMove(moveNb, color, Point.PASS, Point.PASS));
+            multiplayerConnector.playMove(new Move(moveNb, color, Point.PASS, Point.PASS));
 
         } catch (Exception e) {
           Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
@@ -642,7 +645,7 @@ public class GameController implements ServerCallback
         if (color == onlineColor && board.isValidMove(cursor, color)) {
           // next = playNewMove(color, cursor.getX(), cursor.getY());
           try {
-            igs.playMove(new ServerMove(moveNb, color, cursor.x, cursor.y));
+            multiplayerConnector.playMove(new Move(moveNb, color, cursor.x, cursor.y));
           } catch (Exception e) {
             Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
           }
@@ -782,7 +785,7 @@ public class GameController implements ServerCallback
 
     switchCurrentNode(node);
 
-    if (bShowHint) {
+    if (showHint) {
       SgfNode son = node.getSon();
 
       if (son != null && !son.isPass() && (playMode == REVIEW_MODE || playMode == JOSEKI_MODE)) { // Make
@@ -875,7 +878,7 @@ public class GameController implements ServerCallback
   }
 
   public void reverseShowHint() {
-    bShowHint = !bShowHint;
+    showHint = !showHint;
 
     //if (bShowHint) {
     //  long bf = System.currentTimeMillis();
@@ -917,16 +920,16 @@ public class GameController implements ServerCallback
    *          The bZoomIn to set.
    */
   void setZoomIn(boolean bZoomIn) {
-    this.bZoomIn = bZoomIn;
+    this.zoomedIn = bZoomIn;
     refreshPainter();
 
   }
 
   /**
-   * @param bZoomIn
+   * @param zoomedIn
    */
   public void refreshPainter() {
-    if (bZoomIn) {
+    if (zoomedIn) {
       switchToZoomedPainter();
     } else {
       switchToNormalPainter();
@@ -937,7 +940,7 @@ public class GameController implements ServerCallback
    * @return Returns the bZoomIn.
    */
   boolean isZoomIn() {
-    return bZoomIn;
+    return zoomedIn;
   }
 
   /**
@@ -979,16 +982,16 @@ public class GameController implements ServerCallback
   }
 
   //#ifdef IGS
-  public void connectToServer() {
+  public void connectToIGS() {
     try {
       if (!tryingToConnect) {
         tryingToConnect = true;
         // log.debug("Connect to IGS");
 
-        igs = new ServerConnector(Gome.singleton.options.igsLogin, Gome.singleton.options.igsPassword, this);
+        multiplayerConnector = new IGSConnector(Gome.singleton.options.igsLogin, Gome.singleton.options.igsPassword, this);
         // log.debug(" - start thread");
         canvas.setSplashInfo(I18N.online.connecting);
-        igs.start();
+        multiplayerConnector.start();
       }
     } catch (Exception e) {
       tryingToConnect = false;
@@ -999,11 +1002,35 @@ public class GameController implements ServerCallback
 
   //#endif
 
+  //#ifdef BT
+  public void connectToBT() {
+    try {
+      if (!tryingToConnect) {
+        tryingToConnect = true;
+        log.debug("Connect to BT");
+        canvas.setSplashInfo(I18N.bt.connecting);
+        multiplayerConnector = new BluetoothClientConnector(this);
+        log.debug(" - start thread");
+        multiplayerConnector.start();
+      }
+    } catch (Exception e) {
+      tryingToConnect = false;
+      canvas.setSplashInfo(I18N.bt.connectionError);
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
+    }
+  }
+
+  //#endif
+
+  public void setSplashInfo(String message) {
+    canvas.setSplashInfo(message);
+  }
+
   //#ifdef IGS
   public void getServerGameList() {
     canvas.setSplashInfo(I18N.online.gettingGameList);
     try {
-      igs.getGames();
+      ((IGSConnector) multiplayerConnector).getGames();
     } catch (IOException e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
@@ -1014,7 +1041,7 @@ public class GameController implements ServerCallback
   public void getServerUserList() {
     canvas.setSplashInfo(I18N.online.getUserList);
     try {
-      igs.getUsers();
+      ((IGSConnector) multiplayerConnector).getUsers();
     } catch (IOException e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
@@ -1025,8 +1052,8 @@ public class GameController implements ServerCallback
   public void observeServerGame(int selectedIndex) {
     canvas.setSplashInfo(I18N.online.connecting);
     try {
-      currentIgsGame = igs.getGameList()[selectedIndex];
-      igs.observe(currentIgsGame.nb);
+      currentIgsGame = ((IGSConnector) multiplayerConnector).getGameList()[selectedIndex];
+      ((IGSConnector) multiplayerConnector).observe(currentIgsGame.nb);
 
     } catch (Exception e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
@@ -1034,11 +1061,11 @@ public class GameController implements ServerCallback
   }
 
   //#endif
-  //#ifdef IGS
-  public void acceptChallenge(ServerChallenge challenge) {
+  //#ifdef IGS || BT
+  public void acceptChallenge(Challenge challenge) {
     canvas.setSplashInfo(I18N.online.acceptChallenge);
     try {
-      igs.challenge(challenge);
+      multiplayerConnector.acceptChallenge(challenge);
     } catch (Exception e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
@@ -1046,9 +1073,9 @@ public class GameController implements ServerCallback
 
   //#endif
   //#ifdef IGS
-  public void declineChallenge(ServerChallenge currentChallenge) {
+  public void declineChallenge(Challenge currentChallenge) {
     try {
-      igs.decline(currentChallenge.nick);
+      multiplayerConnector.decline(currentChallenge.nick);
     } catch (Exception e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
@@ -1061,20 +1088,38 @@ public class GameController implements ServerCallback
     canvas.setSplashInfo(I18N.online.sendChallenge);
     try {
       // log.debug("challenge " + igs.getUserList()[selectedIndex]);
-      ServerChallenge challenge = new ServerChallenge();
-      challenge.nick = igs.getUserList()[selectedIndex].nick;
+      Challenge challenge = new Challenge();
+      challenge.nick = ((IGSConnector) multiplayerConnector).getUserList()[selectedIndex].nick;
       // TODO: remove defaults
       challenge.color = Board.BLACK;
       challenge.time_minutes = 25;
       challenge.min_per25moves = 10;
       challenge.size = 19;
-      igs.challenge(challenge);
+      multiplayerConnector.challenge(challenge);
     } catch (Exception e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
-
   //#endif
+  //#ifdef BT
+  public void challengeBT() {
+    canvas.setSplashInfo(I18N.online.sendChallenge);
+    try {
+      Challenge challenge = new Challenge();
+      challenge.nick = "";
+      // TODO: remove defaults
+      challenge.color = Board.BLACK;
+      challenge.time_minutes = 25;
+      challenge.min_per25moves = 10;
+      challenge.size = 19;
+      multiplayerConnector.challenge(challenge);
+    } catch (Exception e) {
+      Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
+    }
+  }
+  //#endif
+  
+  
   //#ifdef IGS
   public void loggedEvent() {
     tryingToConnect = false;
@@ -1087,16 +1132,30 @@ public class GameController implements ServerCallback
     connectToIgs = true;
     // set splash will repaint
   }
-
   //#endif
+  
+  //#ifdef BT
+  public void connectedBTEvent(MultiplayerConnector connector) {
+    this.multiplayerConnector = connector;
+    tryingToConnect = false;
+    stopClockAndStopPainingClock();
+    Gome.singleton.mainCanvas.switchToBTOnlineMenu();
+    tuneBoardPainter();
+    canvas.setSplashInfo(I18N.bt.connected);
+    Gome.singleton.menuEngine.switchToOnline();
+    connectToIgs = true;
+    // set splash will repaint
+  }
+  //#endif
+  
   //#ifdef IGS
-  public void gameListEvent(ServerGame[] games) {
+  public void gameListEvent(Game[] games) {
     Gome.singleton.menuEngine.showIgsGameList(games);
   }
 
   //#endif
   //#ifdef IGS
-  public void observeEvent(ServerMove[] moves) {
+  public void observeEvent(Move[] moves) {
     try {
       newGame(currentIgsGame.size, currentIgsGame.handi, OBSERVE_MODE);
 
@@ -1105,7 +1164,7 @@ public class GameController implements ServerCallback
       canvas.assignClockController(clock);
       canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
 
-      ServerMove move = null;
+      Move move = null;
       SgfNode current = currentNode;
       for (int i = 0; i < moves.length; i++) {
         move = moves[i];
@@ -1123,7 +1182,7 @@ public class GameController implements ServerCallback
 
   //#endif
   //#ifdef IGS
-  public void moveEvent(ServerMove move) {
+  public void moveEvent(Move move) {
     // log.debug("Move received from server");
     Gome.singleton.mainCanvas.setSplashInfo(null);
     if (move.x == Point.PASS) {
@@ -1147,15 +1206,15 @@ public class GameController implements ServerCallback
   //#ifdef IGS
   public void userListEvent() {
     Gome.singleton.mainCanvas.setSplashInfo(null);
-    ServerUser[] userList = igs.getUserList();
+    User[] userList = ((IGSConnector) multiplayerConnector).getUserList();
     QuickSortable.quicksort(userList); //inplace sort, external criteria
     Gome.singleton.menuEngine.showIgsUserList(userList);
   }
 
   //#endif
-  //#ifdef IGS
-  public void challenge(ServerChallenge challenge) {
-    // log.debug("Received Challenge from user " + challenge.nick);
+  //#ifdef IGS || BT
+  public void challenge(Challenge challenge) {
+    log.debug("Received Challenge from user " + challenge.nick);
     Gome.singleton.menuEngine.showIgsChallenge(challenge);
   }
 
@@ -1163,11 +1222,11 @@ public class GameController implements ServerCallback
   //#ifdef IGS
   public void message(byte type, String nick, String message) {
     switch (type) {
-    case ServerCallback.MESSAGE_CHAT_TYPE:
+    case MultiplayerCallback.MESSAGE_CHAT_TYPE:
       Gome.singleton.menuEngine.incomingChatMessage(nick, message);
       break;
 
-    case ServerCallback.MESSAGE_ERROR_TYPE:
+    case MultiplayerCallback.MESSAGE_ERROR_TYPE:
       if (tryingToConnect) {
         tryingToConnect = false;
       }
@@ -1177,7 +1236,7 @@ public class GameController implements ServerCallback
       setPlayMode(REVIEW_MODE);
       break;
 
-    case ServerCallback.MESSAGE_KIBITZING_TYPE:
+    case MultiplayerCallback.MESSAGE_KIBITZING_TYPE:
       String comment = currentNode.getComment();
       StringBuffer buffer;
       if (comment == null) {
@@ -1198,7 +1257,7 @@ public class GameController implements ServerCallback
 
   //#endif
   //#ifdef IGS
-  public void startGame(ServerChallenge challenge) {
+  public void startGame(Challenge challenge) {
     canvas.setSplashInfo(I18N.online.onlineGameStarted);
     // log.debug("Start online game");
 
@@ -1228,7 +1287,7 @@ public class GameController implements ServerCallback
   public void disconnectFromServer() {
     connectToIgs = false;
     // log.debug("disconnect from IGS");
-    igs.disconnect();
+    multiplayerConnector.disconnect();
     canvas.setSplashInfo(I18N.online.disconnected);
     Gome.singleton.menuEngine.switchToOffline();
 
@@ -1275,12 +1334,12 @@ public class GameController implements ServerCallback
 
   //#ifdef IGS
   public String getNick(int userIndex) {
-    return igs.getUserList()[userIndex].nick;
+    return ((IGSConnector) multiplayerConnector).getUserList()[userIndex].nick;
   }
 
   public void sendOnlineMessage(String nickToSend, String message) {
     try {
-      igs.sendMessage(nickToSend, message);
+      multiplayerConnector.sendMessage(nickToSend, message);
     } catch (IOException e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
@@ -1333,7 +1392,7 @@ public class GameController implements ServerCallback
   //#ifdef IGS
   public void askIgsForScore() {
     try {
-      igs.getScore();
+      ((IGSConnector) multiplayerConnector).getScore();
       canvas.setSplashInfo(I18N.online.gettingScore);
     } catch (Exception e) {
       e.printStackTrace();
@@ -1342,7 +1401,7 @@ public class GameController implements ServerCallback
 
   public void doneWithScore() {
     try {
-      igs.doneWithTheCounting();
+      multiplayerConnector.doneWithTheCounting();
       // log.info("DONE WITH Scoring");
       canvas.setSplashInfo(I18N.count.doneWithScoring);
     } catch (Exception e) {
@@ -1393,7 +1452,7 @@ public class GameController implements ServerCallback
   }
 
   public boolean getShowHints() {
-    return bShowHint;
+    return showHint;
   }
 
   //#ifdef IGS
@@ -1534,7 +1593,7 @@ public class GameController implements ServerCallback
   public void onlineSetKomi(byte k) {
     if (model != null && playMode == ONLINE_MODE) {
       try {
-        igs.setKomi(k);
+        multiplayerConnector.setKomi(k);
       } catch (IOException e) {
         Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
       }
@@ -1580,7 +1639,7 @@ public class GameController implements ServerCallback
       if (getCurrentPlayerColor() == onlineColor || countMode == true) {
         gameHasEnded = true;
         try {
-          igs.resign();
+          multiplayerConnector.resign();
         } catch (IOException e) {
           Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
         }
@@ -1621,7 +1680,7 @@ public class GameController implements ServerCallback
       if (h > 1) {
         canvas.setSplashInfo(I18N.settingHandicapTo + h);
         try {
-          igs.setHandicap(h);
+          multiplayerConnector.setHandicap(h);
         } catch (IOException e) {
           Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
         }
@@ -1632,7 +1691,7 @@ public class GameController implements ServerCallback
   public void gomeRestoreGameForCounting() {
     if (model != null) {
       try {
-        igs.resetDeadStone();
+        multiplayerConnector.resetDeadStone();
       } catch (IOException e) {
         Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
       }
@@ -1735,5 +1794,6 @@ public class GameController implements ServerCallback
       canvas.refresh(canvas.getBoardPainter().getDrawArea());
     }
   }
+
 
 }

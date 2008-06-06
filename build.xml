@@ -67,7 +67,7 @@
 		
 	</target>
 	
-	<target name="all_types" depends="VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75, VJOSEKI_NOIMAGE_MIDP2_JSR75"/>
+	<target name="all_types" depends="VMIDP2_MINIMAL,VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2"/>
 		
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
@@ -80,6 +80,11 @@
 		<patternset refid="menu-icons" />
 		<patternset refid="games" />
 		<patternset refid="problems" />
+	</fileset>
+	
+	<fileset id="gome-minimal-MIDP2-files" dir="${project.root.gome}/sources">
+			<patternset refid="file-icons" />
+			<patternset refid="menu-icons" />
 	</fileset>
 
 	<fileset id="gome-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
@@ -96,7 +101,16 @@
 		<patternset refid="problems" />
 		<patternset refid="joseki" />
 	</fileset>
+	
 	<fileset id="gome-joseki-noimage-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
+		<patternset refid="joseki" />
+	</fileset>
+
+	<fileset id="gome-joseki-noimage-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
 		<patternset refid="games" />
@@ -118,6 +132,20 @@
 		<antcall target="deployable" />
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
+	
+	<target name="VMIDP2_MINIMAL" depends="MIDP2" description="MIDP2 version minimale">
+			<echo message="MIDP2-${LOCALE}" />
+			<var name="midlet.name" value="gome-minimal-MIDP2" />
+			<var name="symbols" value="IGS,MENU_IMAGES" />
+			<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+			<replace file="${project.root.gome}/${midlet.name}.jad">
+				<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+				<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+			</replace>
+
+			<antcall target="deployable" />
+			<delete file="${project.root.gome}/${midlet.name}.jad" />
+	</target>
 
 	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="MIDP2 JSR75" />
@@ -137,7 +165,7 @@
 	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="JOSEKI MIDP2 JSR75" />
 		<var name="midlet.name" value="gome-joseki-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,DEBUG" />
+		<var name="symbols" value="IGS,MENU_IMAGES,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
@@ -153,6 +181,20 @@
 		<echo message="JOSEKI NOIMAGE MIDP2 JSR75" />
 		<var name="midlet.name" value="gome-joseki-noimage-jsr75-MIDP2" />
 		<var name="symbols" value="IGS,JSR75" />
+		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<replace file="${project.root.gome}/${midlet.name}.jad">
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+		</replace>
+
+		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad" />
+	</target>
+
+	<target name="VJOSEKI_NOIMAGE_MIDP2" depends="MIDP2" description="MIDP2 version without JSR75">
+		<echo message="JOSEKI NOIMAGE MIDP2" />
+		<var name="midlet.name" value="gome-joseki-noimage-MIDP2" />
+		<var name="symbols" value="IGS" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
 			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
@@ -163,6 +205,7 @@
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
 
+	
 	<!-- Initialize the build environment as necessary -->
 	<target name="-initialize">
 		<echo message="Initializing build environment..." />
