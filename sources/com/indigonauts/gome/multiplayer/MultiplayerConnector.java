@@ -4,9 +4,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import com.indigonauts.gome.ui.GameController;
+
 public abstract class MultiplayerConnector extends Thread {
   //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("ServerConnector");
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MultiplayerConnector");
   //#endif
   protected MultiplayerCallback callback;
 
@@ -33,9 +35,9 @@ public abstract class MultiplayerConnector extends Thread {
 
   private static final byte RESET_DEAD_STONE = 0x13;
   
-  private static final byte MOVE_EVENT = PLAY_MOVE;
+  private static final byte MOVE_EVENT = 0x14;
 
-  private static final byte MESSAGE_EVENT = 0x46;
+  protected static final byte MESSAGE_EVENT = 0x46;
 
   protected static final byte GAME_EVENT = 0x47;
 
@@ -45,7 +47,7 @@ public abstract class MultiplayerConnector extends Thread {
 
   private static final byte END_GAME_EVENT = 0x50;
 
-  private static final byte MARK_STONE_EVENT = 0x51;
+  protected static final byte MARK_STONE_EVENT = 0x51;
 
   private static final byte RESTORE_GAME_FOR_COUNING_EVENT = 0x52;
 
@@ -59,10 +61,10 @@ public abstract class MultiplayerConnector extends Thread {
 
   private static final byte IGS_RESIGNED_EVENT = 0x58;
 
-  private static final byte SCORE_EVENT = 0x59;
+  protected static final byte SCORE_EVENT = 0x59;
 
   private static final byte LOST_MESSAGE_EVENT = 0x60;
-  private static final byte CHALLENGE_EVENT = CHALLENGE;
+  private static final byte CHALLENGE_EVENT = 0x61;
 
   public MultiplayerConnector(MultiplayerCallback callback) {
     this.callback = callback;
@@ -85,6 +87,7 @@ public abstract class MultiplayerConnector extends Thread {
   }
 
   public void playMove(Move move) throws IOException {
+    log.debug("playMove " + move);
     output.writeByte(PLAY_MOVE);
     output.writeInt(move.nb);
     output.writeByte(move.color);
@@ -102,13 +105,14 @@ public abstract class MultiplayerConnector extends Thread {
   }
 
   public void removeDeadStone(byte posX, byte posY) throws IOException {
+    log.debug("Remove dead stone");
     output.writeByte(MARK_STONE);
     output.writeByte(posX);
     output.writeByte(posY);
     output.flush();
   }
-
-  public void doneWithTheCounting() throws IOException {
+  // scores for P2P
+  public void doneWithTheCounting(int whiteScore,int blackScore) throws IOException {
     output.writeByte(DONE_WITH_COUNTING);
     output.flush();
   }
@@ -143,28 +147,21 @@ public abstract class MultiplayerConnector extends Thread {
    */
   protected boolean handleEvent(byte event) throws IOException {
     switch (event) {
+    case PLAY_MOVE: // for symetric conversations
     case MOVE_EVENT:
       Move move = Move.unmarshal(input);
       //#ifdef DEBUG
-      log.debug("IGS move event " + move);
+      log.debug("Move event " + move);
       //#endif
       callback.moveEvent(move);
       break;
 
+    case CHALLENGE: // for symetric conversations
     case CHALLENGE_EVENT:
       //#ifdef DEBUG
       log.debug("Challenge Event Received");
       //#endif
-      Challenge challenge = new Challenge();
-
-      challenge.nick = input.readUTF();
-      //#ifdef DEBUG
-      log.debug("Nick = " + challenge.nick);
-      //#endif
-      challenge.color = input.readByte();
-      challenge.size = input.readByte();
-      challenge.time_minutes = input.readInt();
-      challenge.min_per25moves = input.readInt();
+      Challenge challenge = Challenge.unmarshal(input);
       callback.challenge(challenge);
       break;
     case MESSAGE_EVENT:
@@ -180,16 +177,8 @@ public abstract class MultiplayerConnector extends Thread {
       //#ifdef DEBUG
       log.debug("Start game event");
       //#endif
-      challenge = new Challenge();
-      challenge.nick = input.readUTF();
-      //#ifdef DEBUG
-      log.debug("Nick = " + challenge.nick);
-      //#endif
-      challenge.color = input.readByte();
-      challenge.size = input.readByte();
-      challenge.time_minutes = input.readInt();
-      challenge.min_per25moves = input.readInt();
-      callback.startGame(challenge);
+      challenge = Challenge.unmarshal(input);
+      callback.startGame(challenge,GameController.ONLINE_MODE);
       break;
     case TIME_EVENT:
 

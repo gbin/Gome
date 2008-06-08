@@ -17,8 +17,11 @@ import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Move;
 import com.indigonauts.gome.multiplayer.MultiplayerCallback;
 import com.indigonauts.gome.multiplayer.MultiplayerConnector;
+import com.indigonauts.gome.multiplayer.P2PConnector;
+import com.indigonauts.gome.ui.GameController;
+import com.indigonauts.gome.ui.MenuEngine;
 
-public class BluetoothClientConnector extends MultiplayerConnector {
+public class BluetoothClientConnector extends P2PConnector {
   //#ifdef DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BluetoothClientConnector");
   //#endif
@@ -77,16 +80,4 @@ public class BluetoothClientConnector extends MultiplayerConnector {
     this.notifyAll();
   }
 
-  public void acceptChallenge(Challenge challenge) throws IOException {
-    log.debug("Accept challenge");
-    output.writeByte(GAME_EVENT);
-    challenge.marshall(output);
-    output.flush();
-    callback.startGame(challenge.reverse());
-  }
-  
-  public void playMove(Move move) throws IOException {
-    super.playMove(move);
-    callback.moveEvent(move);
-  }
 }

@@ -54,9 +54,9 @@ public class MenuEngine implements CommandListener {
   public static final Command REVIEW_MODE = new Command(I18N.reviewMode, Command.SCREEN, 5);
 
   //#ifdef BT
-  public static final Command BT_CONNECT = new Command(I18N.bt.connect, Command.SCREEN, 5);
-  public static final Command BT_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5);
-  public static final Command BT_DISCONNECT = new Command(I18N.bt.disconnect, Command.SCREEN, 5);;
+  public static final Command BT_CONNECT = new Command(I18N.bt.connect, Command.SCREEN, 2);
+  public static final Command BT_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 2);
+  public static final Command BT_DISCONNECT = new Command(I18N.bt.disconnect, Command.SCREEN, 2);
   //#endif
 
   //#ifdef IGS
@@ -67,7 +67,7 @@ public class MenuEngine implements CommandListener {
   public static final Command IGS_OBSERVE = new Command(I18N.online.observe, Command.SCREEN, 5);
   public static final Command IGS_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5);
   public static final Command IGS_DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5);
-  public static final Command IGS_MESSAGE = new Command(I18N.online.message, Command.SCREEN, 5);
+  public static final Command IGS_MESSAGE = new Command(I18N.online.message, Command.SCREEN, 2);
   public static final Command IGS_SORT_BY_RANK = new Command(I18N.online.sortRank, Command.SCREEN, 5);
   public static final Command IGS_SORT_BY_NICK = new Command(I18N.online.sortNick, Command.SCREEN, 5);
   public static final Command IGS_SORT_BY_WATCH = new Command(I18N.online.sortWatch, Command.SCREEN, 5);
@@ -219,7 +219,7 @@ public class MenuEngine implements CommandListener {
         } else if (c == IGS_DISCONNECT) {
           gc.disconnectFromServer();
         } else if (c == IGS_MESSAGE) {
-          chat.sendMessage(currentChallenge.nick, null, null, Gome.singleton.mainCanvas);
+          chat.sendMessage(currentChallenge != null ? currentChallenge.nick : "TODO", null, null, Gome.singleton.mainCanvas);
         } else if (c == IGS_REQUEST_KOMI) {
           gomeOnlineWantKomi();
         } else if (c == IGS_CHANGE_HANDICAP) {
@@ -404,7 +404,7 @@ public class MenuEngine implements CommandListener {
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
 
       } else if (d == challengeForm) {
-        if (c == IGS_CHALLENGE) {
+        if (c == ACCEPT) {
           gc.acceptChallenge(currentChallenge);
         } else if (c == IGS_DECLINE) {
           gc.declineChallenge(currentChallenge);
@@ -552,7 +552,7 @@ public class MenuEngine implements CommandListener {
   }
 
   public void loadFile(CollectionEntry file, int filenum) {
-    gc.reset(Gome.singleton.mainCanvas);
+    gc.reset(Gome.singleton.mainCanvas, GameController.GAME_MODE);
     gc.loadAndPlay(file, filenum);
   }
 
@@ -583,7 +583,7 @@ public class MenuEngine implements CommandListener {
     String message = Util.expandString(I18N.online.challengeMessage, args);
 
     challengeForm.append(message);
-    challengeForm.addCommand(IGS_CHALLENGE);
+    challengeForm.addCommand(ACCEPT);
     challengeForm.addCommand(IGS_DECLINE);
     challengeForm.setCommandListener(this);
     Gome.singleton.display.setCurrent(challengeForm);

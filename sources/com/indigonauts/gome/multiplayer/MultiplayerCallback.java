@@ -34,7 +34,7 @@ public interface MultiplayerCallback {
 
   void message(byte type, String nick, String message);
 
-  void startGame(Challenge challenge);
+  void startGame(Challenge challenge, char mode);
 
   void synOnlineTime(int whiteTime, int whiteByoStone, int blackTime, int blackByoStone);
 

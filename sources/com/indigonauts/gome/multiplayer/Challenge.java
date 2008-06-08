@@ -4,6 +4,7 @@
 
 package com.indigonauts.gome.multiplayer;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -32,6 +33,16 @@ public class Challenge {
     t.time_minutes = time_minutes;
     t.min_per25moves = min_per25moves;
     return t;
+  }
+
+  public static Challenge unmarshal(DataInputStream input) throws IOException {
+    Challenge challenge = new Challenge();
+    challenge.nick = input.readUTF();
+    challenge.color = input.readByte();
+    challenge.size = input.readByte();
+    challenge.time_minutes = input.readInt();
+    challenge.min_per25moves = input.readInt();
+    return challenge;
   }
 
 }

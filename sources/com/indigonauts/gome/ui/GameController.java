@@ -132,7 +132,7 @@ public class GameController implements MultiplayerCallback
     return currentIndexInCollection > 1;
   }
 
-  public void reset(MainCanvas c) {
+  public void reset(MainCanvas c, char mode) {
     this.canvas = c;
     currentNode = null;
     model = new SgfModel();
@@ -145,7 +145,7 @@ public class GameController implements MultiplayerCallback
 
     showHint = false;
     countMode = false;
-    setPlayMode(GAME_MODE);
+    setPlayMode(mode);
     canvas.assignClockController(clock);
   }
 
@@ -159,29 +159,35 @@ public class GameController implements MultiplayerCallback
 
     switch (this.playMode) {
     case GAME_MODE:
-      // log.info("Switch to standard play mode");
+      log.info("Switch to standard play mode");
       Gome.singleton.mainCanvas.switchToPlayMenu();
       break;
     case PROBLEM_MODE:
-      // log.info("Switch to problem Mode");
+      log.info("Switch to problem Mode");
       Gome.singleton.mainCanvas.switchToProblemMenu();
       break;
     case JOSEKI_MODE:
-      // log.info("Switch to joseki mode");
+      log.info("Switch to joseki mode");
       Gome.singleton.mainCanvas.switchToJosekiMenu();
       break;
     case REVIEW_MODE:
-      // log.info("Switch to game review mode");
+      log.info("Switch to game review mode");
       Gome.singleton.mainCanvas.switchToReviewMenu();
       break;
     //#ifdef IGS
     case ONLINE_MODE:
-      // log.info("Switch to Online play mode");
+      log.info("Switch to Online play mode");
       Gome.singleton.mainCanvas.switchToOnlinePlayMenu();
       break;
     case OBSERVE_MODE:
-      // log.info("Switch to Observe play mode");
+      log.info("Switch to Observe play mode");
       Gome.singleton.mainCanvas.switchToObservePlayMenu();
+      break;
+    //#endif
+    //ifdef BT
+    case P2P_MODE:
+      log.info("Switch to P2P play mode");
+      Gome.singleton.mainCanvas.switchToP2PPlayMenu();
       break;
     //#endif
     }
@@ -253,6 +259,7 @@ public class GameController implements MultiplayerCallback
     case GAME_MODE:
     case REVIEW_MODE:
     case ONLINE_MODE:
+    case P2P_MODE:
     case OBSERVE_MODE:
       playArea = board.getFullBoardArea();
       // by politeness put the cursor at the top right corner
@@ -518,7 +525,7 @@ public class GameController implements MultiplayerCallback
     case MainCanvas.ACTION_FIRE:
       if (countMode && !gameHasEnded) {
         //#ifdef IGS
-        if (playMode == ONLINE_MODE) {
+        if (playMode == ONLINE_MODE || playMode == P2P_MODE) {
           try {
             if (!(board.isValidMove(cursor, Board.BLACK) | board.isValidMove(cursor, Board.WHITE)) && !board.hasBeenRemove(cursor.x, cursor.y)) {
               multiplayerConnector.removeDeadStone(cursor.x, cursor.y);
@@ -559,7 +566,7 @@ public class GameController implements MultiplayerCallback
 
   /* return refreshNeded */
   public boolean doUndo() {
-    if (playMode != ONLINE_MODE && playMode != OBSERVE_MODE) {
+    if (playMode != ONLINE_MODE && playMode != P2P_MODE && playMode != OBSERVE_MODE) {
       doGoBack(false);
       if (playMode == PROBLEM_MODE && model.getFirstPlayer() == currentNode.getPlayerColor()) {
         doGoBack(false);
@@ -583,6 +590,7 @@ public class GameController implements MultiplayerCallback
       break;
     case OBSERVE_MODE:
     case ONLINE_MODE:
+    case P2P_MODE:
       canvas.cycleClockAndCommentMode(true);
       break;
 
@@ -605,26 +613,37 @@ public class GameController implements MultiplayerCallback
   }
 
   public void pass() {
+
+    log.debug("pass");
     byte color = getCurrentPlayerColor();
 
     switch (playMode) {
-    //#ifdef IGS
-    case ONLINE_MODE:
-      // warnPassed(color);
-      if (color == onlineColor) {
-        try {
-          if (!countMode)
-            multiplayerConnector.playMove(new Move(moveNb, color, Point.PASS, Point.PASS));
+    //#ifdef IGS || BT
 
-        } catch (Exception e) {
-          Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
+    case ONLINE_MODE:
+    case P2P_MODE:
+      if (color != onlineColor) {
+        canvas.setSplashInfo(I18N.online.notYourTurn);
+        break;
+      }
+      try {
+        if (!countMode)
+          multiplayerConnector.playMove(new Move(moveNb, color, Point.PASS, Point.PASS));
+      } catch (IOException e) {
+        Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
+      }
+      if (playMode == P2P_MODE) {
+        SgfNode father = currentNode.getFather();
+        if (father != null && father.isPass() && !gameHasEnded) {
+          startCountMode(false); // exact mode
         }
       }
 
       break;
+
     //#endif
+
     case GAME_MODE:
-      // warnPassed(color);
       if (currentNode.isPass() && !gameHasEnded) {
         startCountMode(false); // exact mode
       }
@@ -639,14 +658,15 @@ public class GameController implements MultiplayerCallback
     byte color = getCurrentPlayerColor();
 
     switch (playMode) {
-    //#ifdef IGS
+    //#ifdef IGS || BT
     case ONLINE_MODE:
+    case P2P_MODE:
       if (!gameHasEnded) {
         if (color == onlineColor && board.isValidMove(cursor, color)) {
           // next = playNewMove(color, cursor.getX(), cursor.getY());
           try {
             multiplayerConnector.playMove(new Move(moveNb, color, cursor.x, cursor.y));
-          } catch (Exception e) {
+          } catch (IOException e) {
             Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
           }
         } else {
@@ -728,7 +748,7 @@ public class GameController implements MultiplayerCallback
       }
     }
 
-    if (playMode == ONLINE_MODE) {
+    if (playMode == ONLINE_MODE || playMode == P2P_MODE) {
       if (clock != null) {
         clock.clockOnlineSwitcher(color);
       }
@@ -977,7 +997,7 @@ public class GameController implements MultiplayerCallback
         clock.clockSwitcher(Board.EMPTY);
     }
 
-    reset(Gome.singleton.mainCanvas);
+    reset(Gome.singleton.mainCanvas, gameMode);
     downloadFinished(game, gameMode);
   }
 
@@ -1100,6 +1120,7 @@ public class GameController implements MultiplayerCallback
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
+
   //#endif
   //#ifdef BT
   public void challengeBT() {
@@ -1117,9 +1138,9 @@ public class GameController implements MultiplayerCallback
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
+
   //#endif
-  
-  
+
   //#ifdef IGS
   public void loggedEvent() {
     tryingToConnect = false;
@@ -1132,8 +1153,9 @@ public class GameController implements MultiplayerCallback
     connectToIgs = true;
     // set splash will repaint
   }
+
   //#endif
-  
+
   //#ifdef BT
   public void connectedBTEvent(MultiplayerConnector connector) {
     this.multiplayerConnector = connector;
@@ -1146,8 +1168,9 @@ public class GameController implements MultiplayerCallback
     connectToIgs = true;
     // set splash will repaint
   }
+
   //#endif
-  
+
   //#ifdef IGS
   public void gameListEvent(Game[] games) {
     Gome.singleton.menuEngine.showIgsGameList(games);
@@ -1181,16 +1204,18 @@ public class GameController implements MultiplayerCallback
   }
 
   //#endif
-  //#ifdef IGS
+  //#ifdef IGS || BT
   public void moveEvent(Move move) {
     // log.debug("Move received from server");
     Gome.singleton.mainCanvas.setSplashInfo(null);
+
     if (move.x == Point.PASS) {
-      pass();
-      // return;
+      if (playMode == P2P_MODE && currentNode.isPass() && !gameHasEnded) {
+        startCountMode(false); // exact mode
+      }
+
     }
     //
-
     if (moveNb == 1) {
       Gome.singleton.mainCanvas.removeOnlineSetHandicapMenuItem();
     } else if (moveNb == 20) {
@@ -1257,11 +1282,10 @@ public class GameController implements MultiplayerCallback
 
   //#endif
   //#ifdef IGS
-  public void startGame(Challenge challenge) {
+  public void startGame(Challenge challenge, char mode) {
     canvas.setSplashInfo(I18N.online.onlineGameStarted);
-    // log.debug("Start online game");
-
-    // log.debug("Your color " + challenge.color);
+    log.debug("Start online game");
+    log.debug("Your color " + challenge.color);
     onlineColor = challenge.color;
     int time = challenge.time_minutes * 60;
     int byoStone = 25;
@@ -1272,7 +1296,7 @@ public class GameController implements MultiplayerCallback
     canvas.assignClockController(clock);
     canvas.updateClockAndCommentMode(MainCanvas.CLOCK_MODE);
 
-    newGame(challenge.size, 0, ONLINE_MODE); // we don't know yet the
+    newGame(challenge.size, 0, mode); // we don't know yet the
     // handi
     if (playMode == ONLINE_MODE) {
       if (onlineColor != Board.BLACK) {
@@ -1345,9 +1369,37 @@ public class GameController implements MultiplayerCallback
     }
   }
 
+  private void displayScore(int white, int black) {
+    byte komi = model.getByteKomi();
+    white += komi / 2;
+    boolean dotfivedKomi = (komi % 2) != 0;
+    int diff = white - black;
+    StringBuffer scoreSentence = new StringBuffer(I18N.game.score);
+    if (diff > 0 || (diff == 0 && dotfivedKomi)) {
+      scoreSentence.append(I18N.game.whiteWin);
+      scoreSentence.append(diff);
+    } else {
+      if (diff < 0) {
+        diff = -diff;
+        scoreSentence.append(I18N.game.blackWin);
+        if (dotfivedKomi && komi > 0) {
+          scoreSentence.append(diff - 1);
+        } else {
+          scoreSentence.append(diff);
+        }
+      } else if (diff == 0 && !dotfivedKomi)
+        scoreSentence.append(I18N.game.jigo);
+    }
+    if (dotfivedKomi) {
+      scoreSentence.append(".5");
+    }
+    canvas.setSplashInfo(scoreSentence.toString());
+  }
+
   //#endif
   public void doScore() {
-    if (playMode == GAME_MODE || playMode == REVIEW_MODE) {
+    log.debug("doScore");
+    if (playMode == GAME_MODE || playMode == REVIEW_MODE || playMode == P2P_MODE) {
       if (!evaluationMode) {
         gameHasEnded = true;
         stopClockAndStopPainingClock();
@@ -1356,34 +1408,22 @@ public class GameController implements MultiplayerCallback
       int[] scores = board.getScore();
       int white = scores[0];
       int black = scores[1];
-      byte komi = model.getByteKomi();
-      white += komi / 2;
-      boolean dotfivedKomi = (komi % 2) != 0;
-      int diff = white - black;
-      StringBuffer scoreSentence = new StringBuffer(I18N.game.score);
-      if (diff > 0 || (diff == 0 && dotfivedKomi)) {
-        scoreSentence.append(I18N.game.whiteWin);
-        scoreSentence.append(diff);
-      } else {
-        if (diff < 0) {
-          diff = -diff;
-          scoreSentence.append(I18N.game.blackWin);
-          if (dotfivedKomi && komi > 0) {
-            scoreSentence.append(diff - 1);
-          } else {
-            scoreSentence.append(diff);
-          }
-        } else if (diff == 0 && !dotfivedKomi)
-          scoreSentence.append(I18N.game.jigo);
-      }
-      if (dotfivedKomi) {
-        scoreSentence.append(".5");
-      }
       setPlayMode(playMode);
-      canvas.setSplashInfo(scoreSentence.toString());
+      displayScore(white, black);
+      //#ifdef BT
+      if (playMode == P2P_MODE) {
+        try {
+          multiplayerConnector.doneWithTheCounting(white, black);
+        } catch (IOException e) {
+          // TODO Error Handling
+
+        }
+      }
+      //#endif
     }
+
     //#ifdef IGS
-    else if (playMode == ONLINE_MODE) {
+    else if (playMode == ONLINE_MODE) { // TODO P2P ?
       askIgsForScore();
     }
     //#endif
@@ -1401,8 +1441,8 @@ public class GameController implements MultiplayerCallback
 
   public void doneWithScore() {
     try {
-      multiplayerConnector.doneWithTheCounting();
-      // log.info("DONE WITH Scoring");
+      log.info("DONE WITH Scoring");
+      multiplayerConnector.doneWithTheCounting(-1, -1); // scores are irrelevent there
       canvas.setSplashInfo(I18N.count.doneWithScoring);
     } catch (Exception e) {
       e.printStackTrace();
@@ -1419,8 +1459,8 @@ public class GameController implements MultiplayerCallback
     board.startCounting(evaluationMode1, (playMode != ONLINE_MODE) && !evaluationMode1);
     Gome.singleton.mainCanvas.updateClockAndCommentMode(MainCanvas.NOTHING_TO_DISPLAY_MODE);
     canvas.setSplashInfo(I18N.count.markDeadStone);
-    //#ifdef IGS
-    if (playMode == ONLINE_MODE)
+    //#ifdef IGS || BT
+    if (playMode == ONLINE_MODE || playMode == P2P_MODE)
       canvas.switchToOnlineCountingMenu();
     else
       //#endif
@@ -1490,11 +1530,13 @@ public class GameController implements MultiplayerCallback
     playMode = REVIEW_MODE;
   }
 
+  //#ifdef IGS
   public void endGame() {
     startCountMode(false);
     canvas.setSplashInfo(I18N.count.endGameMarkStone);
-    // setPlayMode(ONLINE_MODE);
   }
+
+  //#endif
 
   public void restoreGameForCounting() {
     startCountMode(false);
@@ -1634,8 +1676,8 @@ public class GameController implements MultiplayerCallback
       setPlayMode(REVIEW_MODE);
       gameHasEnded = true;
     }
-    //#ifdef IGS
-    else if (playMode == ONLINE_MODE) {
+    //#ifdef IGS || BT
+    else if (playMode == ONLINE_MODE || playMode == P2P_MODE) {
       if (getCurrentPlayerColor() == onlineColor || countMode == true) {
         gameHasEnded = true;
         try {
@@ -1699,16 +1741,13 @@ public class GameController implements MultiplayerCallback
   }
 
   public void onlineScore(int whiteScore, int blackScore) {
-    String black = I18N.game.blackLong;
-    String white = I18N.game.whiteLong;
-
-    String whiteScoreString = String.valueOf(whiteScore);
-    whiteScoreString = whiteScoreString.substring(0, whiteScoreString.length() - 1) + "." + whiteScoreString.substring(whiteScoreString.length() - 1);
-
-    String blackScoreString = String.valueOf(blackScore);
-    blackScoreString = blackScoreString.substring(0, blackScoreString.length() - 1) + "." + blackScoreString.substring(blackScoreString.length() - 1);
-
-    canvas.setSplashInfo(I18N.game.score + black + ":" + blackScoreString + " " + white + ": " + whiteScoreString);
+    displayScore(whiteScore, blackScore);
+    if (playMode == P2P_MODE) {
+      // No server round trip in P2P so we can end the game now
+      gameHasEnded = true;
+      countMode = false;
+      setPlayMode(playMode);
+    }
   }
 
   //#endif
@@ -1794,6 +1833,5 @@ public class GameController implements MultiplayerCallback
       canvas.refresh(canvas.getBoardPainter().getDrawArea());
     }
   }
-
 
 }

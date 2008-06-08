@@ -283,6 +283,18 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   //#endif
+  //#ifdef BT
+  public void switchToP2PPlayMenu() {
+    clearOptionalItems();
+    addCommand(MenuEngine.PASS);
+    addCommand(MenuEngine.RESIGN);
+    removeCommand(MenuEngine.BT_CONNECT);
+    addCommand(MenuEngine.IGS_REQUEST_KOMI);
+    addCommand(MenuEngine.IGS_CHANGE_HANDICAP);
+    addCommand(MenuEngine.IGS_MESSAGE);
+    addCommand(MenuEngine.ZOOM);
+  }
+  //#endif
   //#ifdef IGS
   public void removeOnlineSetKomiAndHandicapMenuItem() {
     removeCommand(MenuEngine.IGS_REQUEST_KOMI);
@@ -366,6 +378,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void switchToBTOnlineMenu() {
     removeCommand(MenuEngine.BT_CONNECT);
     addCommand(MenuEngine.BT_CHALLENGE);
+    addCommand(MenuEngine.IGS_MESSAGE);
     addCommand(MenuEngine.BT_DISCONNECT);
   }
 
@@ -703,6 +716,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       updateClockAndCommentMode((clockAndCommentMode + 1) % 2);
 
   }
+
+  
 
   //protected void sizeChanged(int x, int y) {
   //#ifdef DEBUG

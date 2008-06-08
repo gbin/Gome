@@ -6,6 +6,9 @@ package com.indigonauts.gome.multiplayer;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import com.indigonauts.gome.common.Point;
+import com.indigonauts.gome.sgf.Board;
+
 public class Move {
     public int nb;
     public byte color;
@@ -37,4 +40,10 @@ public class Move {
         newOne.y = in.readByte();
         return newOne;
     }
+    //#ifdef DEBUG
+    public String toString() {
+      return "Move #"+ nb +" " + ((color == Board.BLACK) ? "black":"white") + " " + ((x == Point.PASS) ? " Pass" : "") + x + "-" + y; 
+      
+    }
+    //#endif
 }
