@@ -305,7 +305,9 @@ public class GameController implements MultiplayerCallback
   void initPainter() {
     // log.debug("initPainter");
     Rectangle drawArea = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
-    BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea, true);
+    // TODO : make it optional
+    //BoardPainter boardPainter = new BoardPainter(board, drawArea, playArea, true);
+    BoardPainter boardPainter = new GlyphBoardPainter(board, drawArea, playArea, true);
     canvas.setBoardPainter(boardPainter);
     tuneBoardPainter();
     normalDelta = boardPainter.getDelta();
@@ -1110,11 +1112,11 @@ public class GameController implements MultiplayerCallback
       // log.debug("challenge " + igs.getUserList()[selectedIndex]);
       Challenge challenge = new Challenge();
       challenge.nick = ((IGSConnector) multiplayerConnector).getUserList()[selectedIndex].nick;
-      // TODO: remove defaults
-      challenge.color = Board.BLACK;
-      challenge.time_minutes = 25;
-      challenge.min_per25moves = 10;
-      challenge.size = 19;
+
+      challenge.color =  Gome.singleton.options.igsColor;
+      challenge.time_minutes = Gome.singleton.options.igsMinutes;
+      challenge.min_per25moves = Gome.singleton.options.igsByoyomi;
+      challenge.size = Gome.singleton.options.igsSize;
       multiplayerConnector.challenge(challenge);
     } catch (Exception e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
@@ -1127,12 +1129,11 @@ public class GameController implements MultiplayerCallback
     canvas.setSplashInfo(I18N.online.sendChallenge);
     try {
       Challenge challenge = new Challenge();
-      challenge.nick = "";
-      // TODO: remove defaults
-      challenge.color = Board.BLACK;
-      challenge.time_minutes = 25;
-      challenge.min_per25moves = 10;
-      challenge.size = 19;
+      challenge.nick = ""; // unused 
+      challenge.color = Gome.singleton.options.igsColor;
+      challenge.time_minutes = Gome.singleton.options.igsMinutes;
+      challenge.min_per25moves = Gome.singleton.options.igsByoyomi;
+      challenge.size = Gome.singleton.options.igsSize;
       multiplayerConnector.challenge(challenge);
     } catch (Exception e) {
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);

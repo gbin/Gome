@@ -11,6 +11,8 @@ public abstract class MultiplayerConnector extends Thread {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MultiplayerConnector");
   //#endif
   protected MultiplayerCallback callback;
+  
+  private Challenge currentChallenge;
 
   protected DataInputStream input;
   protected DataOutputStream output;
@@ -34,7 +36,7 @@ public abstract class MultiplayerConnector extends Thread {
   private static final byte SET_HANDICAP = 0x12;
 
   private static final byte RESET_DEAD_STONE = 0x13;
-  
+
   private static final byte MOVE_EVENT = 0x14;
 
   protected static final byte MESSAGE_EVENT = 0x46;
@@ -76,9 +78,8 @@ public abstract class MultiplayerConnector extends Thread {
     challenge.marshall(output);
     output.flush();
   }
-  
-  public abstract void acceptChallenge(Challenge challenge) throws IOException;
 
+  public abstract void acceptChallenge(Challenge challenge) throws IOException;
 
   public void decline(String nick) throws IOException {
     output.writeByte(DECLINE);
@@ -111,8 +112,9 @@ public abstract class MultiplayerConnector extends Thread {
     output.writeByte(posY);
     output.flush();
   }
+
   // scores for P2P
-  public void doneWithTheCounting(int whiteScore,int blackScore) throws IOException {
+  public void doneWithTheCounting(int whiteScore, int blackScore) throws IOException {
     output.writeByte(DONE_WITH_COUNTING);
     output.flush();
   }
@@ -178,7 +180,7 @@ public abstract class MultiplayerConnector extends Thread {
       log.debug("Start game event");
       //#endif
       challenge = Challenge.unmarshal(input);
-      callback.startGame(challenge,GameController.ONLINE_MODE);
+      callback.startGame(challenge, GameController.ONLINE_MODE);
       break;
     case TIME_EVENT:
 
@@ -280,9 +282,10 @@ public abstract class MultiplayerConnector extends Thread {
   }
 
   protected abstract void connect() throws IOException;
-    /**
-   * @see java.lang.Thread#run()
-   */
+
+  /**
+  * @see java.lang.Thread#run()
+  */
   public void run() {
     try {
       connect();
@@ -328,7 +331,8 @@ public abstract class MultiplayerConnector extends Thread {
     }
     return;
   }
-public void disconnect() {
+
+  public void disconnect() {
     try {
       if (input != null)
         input.close();
@@ -347,4 +351,15 @@ public void disconnect() {
     }
     noneErrorDisconnect = true;
   }
+
+  public abstract String getCurrentOpponent();
+
+  public Challenge getCurrentChallenge() {
+    return currentChallenge;
+  }
+
+  public void setCurrentChallenge(Challenge currentChallenge) {
+    this.currentChallenge = currentChallenge;
+  }
+
 }

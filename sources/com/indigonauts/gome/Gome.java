@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import javax.bluetooth.BluetoothStateException;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Command;
@@ -201,7 +202,12 @@ public class Gome extends MIDlet implements CommandListener {
     menuEngine = new MenuEngine(gameController);
     menuEngine.startNewGame();
     //#ifdef BT
-    bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
+    try {
+      bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
+    } catch (BluetoothStateException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     log.debug("Start BT Service");
     bluetoothServiceConnector.start();
     //#endif

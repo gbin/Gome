@@ -73,7 +73,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   private Vector entries;
   private MenuEngine listener;
   private Showable parent;
-  private Form uiFolder;
+  private Form uiFolder = new Form("");
   private List uiFileBlock;
   private List uiFile;
 
@@ -133,8 +133,15 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void show(Display disp) {
-    uiFolder = new Form(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
-    //visibleItems.removeAllElements();
+    //uiFolder = new Form(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
+    visibleItems.removeAllElements();
+    uiFolder.deleteAll();
+    uiFolder.setTitle(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
+    
+    uiFileBlock = null;
+    uiFile = null;
+    saveGame = null;
+    
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
@@ -459,8 +466,6 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   public void downloadFinished(String path, Vector files) {
     pathStack.addElement(currentDirectory);
     entriesStack.addElement(entries);
-    //FileBrowser son = new FileBrowser(this, listener, files, path, saveMode);
-    //son.show(Gome.singleton.display);
     this.currentDirectory = path;
     this.entries = files;
     show(Gome.singleton.display);

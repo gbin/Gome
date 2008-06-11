@@ -25,14 +25,8 @@ public class Challenge {
     output.writeInt(min_per25moves);
   }
 
-  public Challenge reverse() {
-    Challenge t = new Challenge();
-    t.nick = nick;
-    t.color = color == Board.BLACK ? Board.WHITE : Board.BLACK;
-    t.size = size;
-    t.time_minutes = time_minutes;
-    t.min_per25moves = min_per25moves;
-    return t;
+  public void reverse() {
+    color = (color == Board.BLACK) ? Board.WHITE : Board.BLACK;
   }
 
   public static Challenge unmarshal(DataInputStream input) throws IOException {

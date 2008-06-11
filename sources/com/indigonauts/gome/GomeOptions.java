@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Font;
 
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.sgf.Board;
 
 public class GomeOptions {
   //#ifdef DEBUG
@@ -42,10 +43,11 @@ public class GomeOptions {
 
   public String igsLogin = "";
   public String igsPassword = "";
+  
+  // TODO : make the GUI for the color
+  public byte igsColor = Board.BLACK;
   public byte igsSize = 19;
-
   public int igsMinutes = 25;
-
   public int igsByoyomi = 10;
 
   public String email = "";

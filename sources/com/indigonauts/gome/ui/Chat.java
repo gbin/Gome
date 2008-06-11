@@ -56,9 +56,11 @@ public class Chat implements CommandListener {
     if (displayable == history && (command == REPLY || command == List.SELECT_COMMAND)) {
       sendMessage((String) nicks.elementAt(history.getSelectedIndex()), (String) messages.elementAt(history.getSelectedIndex()), "", history);
     }
-    //#ifdef IGS
+    //#ifdef IGS || BT
     else if (displayable == chatBox && command == SEND) {
       Gome.singleton.gameController.sendOnlineMessage(nickToSend, chatBox.getString());
+      // TODO : Est-ce vraiment utile en IGS ?
+      addMessage(nickToSend, chatBox.getString());
       display.setCurrent(Gome.singleton.mainCanvas);
       Gome.singleton.mainCanvas.setSplashInfo(I18N.online.messageSent);
     } else if (displayable == chatBox && command == MenuEngine.BACK) {
@@ -99,10 +101,11 @@ public class Chat implements CommandListener {
 
   private String nickToSend;
 
-  public void sendMessage(String nick, String lastMessage, String prevalue, Displayable returnTo) {
+  public void sendMessage(String nick, String message, String prevalue, Displayable returnTo) {
+
     nickToSend = nick;
     messageReturnTo = returnTo;
-    String prompt = lastMessage != null ? nick + ": " + lastMessage : "To " + nick;
+    String prompt = message != null ? nick + ": " + message : "To " + nick;
     chatBox = new TextBox(prompt, prevalue, 255, TextField.ANY);
     chatBox.addCommand(SEND);
     chatBox.addCommand(MenuEngine.BACK);

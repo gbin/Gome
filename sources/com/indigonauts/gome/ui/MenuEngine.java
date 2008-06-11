@@ -133,7 +133,7 @@ public class MenuEngine implements CommandListener {
   private Chat chat;
 
   private List igsUserList;
-  private Challenge currentChallenge;
+  
 
   private byte komi;
 
@@ -219,7 +219,7 @@ public class MenuEngine implements CommandListener {
         } else if (c == IGS_DISCONNECT) {
           gc.disconnectFromServer();
         } else if (c == IGS_MESSAGE) {
-          chat.sendMessage(currentChallenge != null ? currentChallenge.nick : "TODO", null, null, Gome.singleton.mainCanvas);
+          chat.sendMessage(gc.multiplayerConnector.getCurrentOpponent(), null, null, Gome.singleton.mainCanvas);
         } else if (c == IGS_REQUEST_KOMI) {
           gomeOnlineWantKomi();
         } else if (c == IGS_CHANGE_HANDICAP) {
@@ -405,9 +405,9 @@ public class MenuEngine implements CommandListener {
 
       } else if (d == challengeForm) {
         if (c == ACCEPT) {
-          gc.acceptChallenge(currentChallenge);
+          gc.acceptChallenge(gc.multiplayerConnector.getCurrentChallenge());
         } else if (c == IGS_DECLINE) {
-          gc.declineChallenge(currentChallenge);
+          gc.declineChallenge(gc.multiplayerConnector.getCurrentChallenge());
         }
         challengeForm = null;
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
@@ -575,7 +575,7 @@ public class MenuEngine implements CommandListener {
 
   //#ifdef IGS
   public void showIgsChallenge(Challenge challenge) {
-    currentChallenge = challenge;
+    gc.multiplayerConnector.setCurrentChallenge(challenge);
     String colors = ((challenge.color == Board.BLACK) ? I18N.game.blackLong : I18N.game.whiteLong);
     challengeForm = new Form(challenge.nick + I18N.online.challengesYou);
     String byoORnot = ((challenge.min_per25moves != -1) ? " + " + challenge.min_per25moves + I18N.clock.min25stones : I18N.online.noByo);

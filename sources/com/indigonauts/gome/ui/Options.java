@@ -119,7 +119,7 @@ public class Options extends Form {
     Graphics g = cachedStone.getGraphics();
     g.setColor(Gome.singleton.options.gobanColor);
     g.fillRect(0, 0, bestImageWidth, bestImageHeight);
-    BoardPainter.drawStone(g, bestImageWidth / 4, bestImageWidth / 4, bestImageWidth / 2, Board.BLACK);
+    BoardPainter.drawVectStone(g, bestImageWidth / 4, bestImageWidth / 4, bestImageWidth / 2, Board.BLACK);
     for (byte i = 0; i < 6; i++)
       transparentStones[i] = generateTransparencyTest(cachedStone, i * 32, bestImageWidth, bestImageHeight);
     //#endif

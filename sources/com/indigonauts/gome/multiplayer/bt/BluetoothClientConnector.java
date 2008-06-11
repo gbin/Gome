@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.bluetooth.BluetoothStateException;
+import javax.bluetooth.LocalDevice;
 import javax.bluetooth.ServiceRecord;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
@@ -26,8 +27,9 @@ public class BluetoothClientConnector extends P2PConnector {
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BluetoothClientConnector");
   //#endif
 
-  public BluetoothClientConnector(MultiplayerCallback callback) {
+  public BluetoothClientConnector(MultiplayerCallback callback) throws BluetoothStateException {
     super(callback);
+    ourselvesFriendlyName = LocalDevice.getLocalDevice().getFriendlyName() + " (Client)";
 
   }
 
@@ -60,11 +62,13 @@ public class BluetoothClientConnector extends P2PConnector {
       }
       log.debug("Woke up");
       String serverConnectionString = discoverer.getServerConnectionString(index);
+      otherFriendlyName = discoverer.getServerFriendlyName(index);
       log.debug("ConnectionString = " + serverConnectionString);
       StreamConnection connection = (StreamConnection) Connector.open(serverConnectionString);
       log.debug("Connection opened");
       input = new DataInputStream(connection.openInputStream());
       output = new DataOutputStream(connection.openOutputStream());
+      output.writeUTF(ourselvesFriendlyName);
       callback.connectedBTEvent(this);
 
     } catch (BluetoothStateException e) {

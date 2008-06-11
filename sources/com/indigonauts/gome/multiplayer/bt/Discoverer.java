@@ -1,5 +1,6 @@
 package com.indigonauts.gome.multiplayer.bt;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import javax.bluetooth.BluetoothStateException;
@@ -316,5 +317,10 @@ public class Discoverer implements DiscoveryListener {
     // return the connection String
     return tempURL;
 
+  }
+
+  public String getServerFriendlyName(int index) throws IOException {
+    ServiceRecord dbS = (ServiceRecord) serviceList.elementAt(index);
+    return dbS.getHostDevice().getFriendlyName(true);
   }
 }
