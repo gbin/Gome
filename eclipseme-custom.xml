@@ -11,9 +11,7 @@
    </path>
    <target name="-eclipseme-initialize">
       <echo message="Initializing EclipseME Antenna build environment..."/>
-      <taskdef resource="antenna.properties">
-         <classpath location="${path.antenna.jar}"/>
-      </taskdef>
+      
       <mkdir dir="${path.build.classes}/_no_export"/>
    </target>
    <target depends="-eclipseme-initialize" name="-eclipseme-build">

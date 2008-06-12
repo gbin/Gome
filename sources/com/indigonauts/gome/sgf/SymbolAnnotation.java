@@ -6,15 +6,17 @@ package com.indigonauts.gome.sgf;
 import com.indigonauts.gome.common.Point;
 
 public class SymbolAnnotation extends Point {
-    public static final byte CIRCLE = 1;
+    public static final byte CIRCLE = 0;
 
+    public static final byte FILLED_CIRCLE = 1;
+    
     public static final byte CROSS = 2;
 
     public static final byte SQUARE = 3;
 
     public static final byte TRIANGLE = 4;
     
-    public static final byte FILLED_CIRCLE = 5;
+    
 
     private int type;
 

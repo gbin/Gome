@@ -5,9 +5,10 @@
 <!-- Modifications may be made to this file and to the user-build.properties files.    -->
 <!-- Do not alter eclipseme-build.xml or eclipseme-build.properties.                   -->
 <!-- ================================================================================= -->
+
 <project name="gome" default="all" basedir=".">
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
-
+	<taskdef resource="antenna.properties" classpath="${path.antenna.jar}"/>
 	<!-- User build properties come first so that they can override -->
 	<!-- the generated properties file.  Be careful with these      -->
 	<!-- overrides.                                                 -->

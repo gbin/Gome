@@ -203,6 +203,10 @@ public class IGSConnector extends MultiplayerConnector {
     
   }
 
+  public String getCurrentOpponent() {
+    return getCurrentChallenge().nick;
+  }
+
   
 
 }
