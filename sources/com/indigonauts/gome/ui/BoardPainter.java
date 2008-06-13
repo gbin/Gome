@@ -23,7 +23,7 @@ import com.indigonauts.gome.sgf.SymbolAnnotation;
 import com.indigonauts.gome.sgf.TextAnnotation;
 
 public class BoardPainter {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BoardPainter");
   //#endif
 
@@ -153,7 +153,7 @@ public class BoardPainter {
     if (clipMokuY1 > boardArea.y1)
       clipMokuY1 = boardArea.y1;
 
-    //#ifdef DEBUG
+    //#if DEBUG
     //log.debug(clipMokuX0 + "," + clipMokuY0 + " " + clipMokuX1 + "," + clipMokuY1);
     //#endif
 
@@ -348,7 +348,9 @@ public class BoardPainter {
     int deltax = (drawArea.getWidth() - (MARGIN * 2)) / boardArea.getWidth();
     int deltay = (drawArea.getHeight() - (MARGIN * 2)) / boardArea.getHeight();
     delta = Math.min(deltax, deltay);
+    //#if DEBUG
     log.debug("delta = " + delta);
+    //#endif
     halfdelta = delta / 2;
 
     // how big is the board actually drawn (inside the border)
@@ -398,7 +400,7 @@ public class BoardPainter {
     int tlx = cx - halfdelta; // top left
     int tly = cy - halfdelta;
     g.setColor(Gome.singleton.options.gobanColor);
-    g.fillRect(tlx, tly, delta + 1, delta + 1);
+    g.fillRect(tlx, tly, delta, delta);
     int position = board.getPosition(x, y);
 
     switch (position) {

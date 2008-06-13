@@ -22,13 +22,15 @@ import javax.microedition.rms.RecordStoreException;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.IOManager;
+//#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector;
+//#endif
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Options;
 
 public class Gome extends MIDlet implements CommandListener {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Gome");
   //#endif
 
@@ -62,14 +64,14 @@ public class Gome extends MIDlet implements CommandListener {
   }
 
   void loadOptions() throws IOException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.info("Load options");
     //#endif
     DataInputStream input = null;
     try {
       input = IOManager.singleton.readFromLocalStore(OPTIONS_FILE);
       options = new GomeOptions(input);
-      //#ifdef DEBUG
+      //#if DEBUG
       log.info("Load options OK");
       //#endif
 
@@ -88,7 +90,7 @@ public class Gome extends MIDlet implements CommandListener {
   }
 
   public void startApp() {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.info("Application start");
     //#endif
     try {
@@ -101,11 +103,10 @@ public class Gome extends MIDlet implements CommandListener {
         return;
       bootGome();
     } catch (Throwable t) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error("Load error", t);
-      t.printStackTrace();
       //#endif
-      Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      Util.errorNotifier(t);
     }
 
   }
@@ -126,18 +127,18 @@ public class Gome extends MIDlet implements CommandListener {
   }
 
   public boolean checkLicense() {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Check License");
     //#endif
     try {
       if (options.user.length() == 0 || !Util.keygen(options.user).equals(options.key)) {
-        //#ifdef DEBUG
+        //#if DEBUG
         log.debug("Current expiration date = " + Gome.singleton.options.expiration);
         log.debug("Current time = " + System.currentTimeMillis());
         //#endif
 
         if (options.expiration != 0 && System.currentTimeMillis() > options.expiration) {
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("License EXPIRED");
           //#endif
 
@@ -151,27 +152,27 @@ public class Gome extends MIDlet implements CommandListener {
         if (Gome.singleton.options.expiration == 0) {
           options.expiration = System.currentTimeMillis() + EXPIRATION_PERIOD;
           saveOptions();
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("Initiated new license period");
           //#endif
 
         }
       }
-      //#ifdef DEBUG
+      //#if DEBUG
       else {
         log.info("Software licensed to " + Gome.singleton.options.user);
       }
       //#endif
       return true;
     } catch (Throwable t) {
-      Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR);
+      Util.errorNotifier(t);
       return false;
     }
 
   }
 
   public void commandAction(Command command, Displayable displayable) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("commandAction for license");
     log.debug("optionsForm = " + optionsForm);
     log.debug("options = " + options);
@@ -186,14 +187,15 @@ public class Gome extends MIDlet implements CommandListener {
         bootGome();
 
       } catch (Throwable t) {
-        Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+        Util.errorNotifier(t);
       }
 
     }
   }
 
-  //#ifdef BT
+  //#if BT
   public BluetoothServiceConnector bluetoothServiceConnector;
+
   //#endif
 
   public void bootGome() {
@@ -201,16 +203,6 @@ public class Gome extends MIDlet implements CommandListener {
     mainCanvas = new MainCanvas(gameController);
     menuEngine = new MenuEngine(gameController);
     menuEngine.startNewGame();
-    //#ifdef BT
-    try {
-      bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
-    } catch (BluetoothStateException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    log.debug("Start BT Service");
-    bluetoothServiceConnector.start();
-    //#endif
 
     String message;
     if (options.user.length() == 0) {
@@ -218,7 +210,24 @@ public class Gome extends MIDlet implements CommandListener {
       message = Util.expandString(I18N.hoursLeft, new String[] { String.valueOf(msLeft / HOUR), String.valueOf((msLeft % HOUR) / (60 * 1000L)) });
       mainCanvas.setSplashInfo(message);
     }
-
+    //#if BT
+    if (options.bluetooth == 0) {
+      startBTService();
+    }
+    //#endif
   }
 
+  //#if BT
+  public void startBTService() {
+    try {
+      bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
+    } catch (BluetoothStateException e) {
+      Util.errorNotifier(e);
+    }
+    //#if DEBUG
+    log.debug("Start BT Service");
+    //#endif
+    bluetoothServiceConnector.start();
+  }
+  //#endif
 }

@@ -24,7 +24,7 @@ import com.indigonauts.gome.i18n.I18N;
 public class SgfModel extends GameInfo implements Enumeration {
 
   private static final String RIGHT = "RIGHT";
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("SgfModel");
   //#endif
   private final static byte DEFAULT_BOARD_SIZE = 19;
@@ -151,7 +151,7 @@ public class SgfModel extends GameInfo implements Enumeration {
           if (c == '(') {
 
             level++;
-            //#ifdef DEBUG
+            //#if DEBUG
             //log.debug("Starting of ( " + level + "-");
             //#endif
             while (c1 == '\r' || c1 == '\n') {
@@ -169,13 +169,13 @@ public class SgfModel extends GameInfo implements Enumeration {
             }
           } else if (c == ')') {
             level--;
-            //#ifdef DEBUG
+            //#if DEBUG
             //log.debug("Ending of ) " + level + "-");
             //#endif
 
             while (c1 == ')') {
               level--;
-              //#ifdef DEBUG
+              //#if DEBUG
               //log.debug("Ending again of ) " + level + "-");
               //#endif
               brotherStack.pop();
@@ -189,7 +189,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             }
             if (c1 == '(') {
               level++;
-              //#ifdef DEBUG
+              //#if DEBUG
               //log.debug("Starting directly  of ( " + level + "-");
               //#endif
               if (readAndMark(src) == ';') {
@@ -209,7 +209,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             }
 
           } else if (c1 == (char) -1) {
-            //#ifdef DEBUG
+            //#if DEBUG
             log.debug("EOF");
             //#endif
             brotherStack.pop();
@@ -227,7 +227,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             latestNode = newnode;
             property = Util.EMPTY_STRING;
           } else if (c == '[') {
-            //#ifdef DEBUG
+            //#if DEBUG
             //log.debug("Starting of [ " + level + "-");
             //#endif
             flag = true;
@@ -237,7 +237,7 @@ public class SgfModel extends GameInfo implements Enumeration {
           } else if (c == '\n' || c == '\r' || c == ' ' || c == '\t') {
             // System.out.println(" CR ignored");
           } else {
-            //#ifdef DEBUG
+            //#if DEBUG
             //log.error("Did not expect '" + c + "'");
             //#endif
             throw new IllegalArgumentException(I18N.error.sgfParsing + " at chr " + index); //$NON-NLS-1$
@@ -280,24 +280,24 @@ public class SgfModel extends GameInfo implements Enumeration {
               content = content.substring(0, r) + content.substring(r + 5);
               // switch the model into "marked solution mode"
               newModel.markedSolution = true;
-              //#ifdef DEBUG
+              //#if DEBUG
               log.debug("Marked solution  at " + latestNode + " (" + latestNode.getPoint() + ")");
               //#endif
               SgfNode current = latestNode;
               // mark all the path correct
-              //#ifdef DEBUG
+              //#if DEBUG
               Vector correctPath = new Vector();
               //#endif
               while (current.getPoint() != null) {
 
-                //#ifdef DEBUG
+                //#if DEBUG
                 correctPath.addElement(current);
                 //#endif
                 current.setCorrect(true);
                 current = current.searchFather();
 
               }
-              //#ifdef DEBUG
+              //#if DEBUG
               for (int i = correctPath.size() - 1; i >= 0; i--) {
                 log.debug("Path to Solution : " + correctPath.elementAt(i) + " (" + ((SgfNode) correctPath.elementAt(i)).getPoint() + ")");
               }
@@ -315,7 +315,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             if (content.length() == 2) {
               SgfPoint p = SgfPoint.createFromSgf(content);
               latestNode.addABElement(p);
-              //#ifdef DEBUG
+              //#if DEBUG
               //log.debug("AB " + p);
               //#endif
             }
@@ -325,7 +325,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             if (content.length() == 2) {
               SgfPoint p = SgfPoint.createFromSgf(content);
               latestNode.addAWElement(p);
-              //#ifdef DEBUG
+              //#if DEBUG
               //log.debug("AW " + p);
               //#endif
             }
@@ -338,7 +338,7 @@ public class SgfModel extends GameInfo implements Enumeration {
             if (content.length() == 2) {
               SgfPoint p = SgfPoint.createFromSgf(content);
               latestNode.setPoint(p);
-              //#ifdef DEBUG
+              //#if DEBUG
               //log.debug("B or W " + p);
               //#endif
             } else if (content.length() == 0) {
@@ -420,14 +420,13 @@ public class SgfModel extends GameInfo implements Enumeration {
           } else {
             property = Util.EMPTY_STRING;
             flag = false;
-            //#ifdef DEBUG
+            //#if DEBUG
             //log.debug("flag = false ");
             //#endif
           }
         }
       }
     } catch (Exception e) {
-      e.printStackTrace();
       throw new IllegalArgumentException(I18N.error.sgfParsing + e.getMessage()); //$NON-NLS-1$
     }
     // upon successful parse, disconnect the root node from the sfg tree

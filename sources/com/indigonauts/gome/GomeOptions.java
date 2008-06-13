@@ -14,7 +14,7 @@ import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.sgf.Board;
 
 public class GomeOptions {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GomeOptions");
   //#endif
 
@@ -51,15 +51,15 @@ public class GomeOptions {
   public int igsByoyomi = 10;
 
   public String email = "";
-
   public String user = "";
-
   public String key = "";
   
-  public String defaultDirectory = "file:///root1/";
+  public String defaultDirectory = "file:///";
 
   public long expiration = 0;
   public byte ghostStone = 3;
+  
+  public byte bluetooth = 0;
 
   public Font getScrollerFont() {
     return Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, fontSize);
@@ -85,9 +85,10 @@ public class GomeOptions {
       optimize = is.readByte();
       ghostStone = is.readByte();
       defaultDirectory = is.readUTF();
+      bluetooth = is.readByte();
 
     } catch (IOException ioe) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.warn("Error loading the options", ioe);
       //#endif
       // probably ended before the end, leav the remaining defaults for
@@ -207,6 +208,7 @@ public class GomeOptions {
     out.writeByte(optimize);
     out.writeByte(ghostStone);
     out.writeUTF(defaultDirectory);
+    out.writeByte(bluetooth);
   }
 
   public int getScrollerSpeed() {

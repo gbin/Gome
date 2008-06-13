@@ -41,7 +41,7 @@ import com.indigonauts.gome.sgf.SgfPoint;
  *
  */
 public class FileBrowser implements CommandListener, Showable, DownloadCallback {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
 
@@ -137,15 +137,15 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     visibleItems.removeAllElements();
     uiFolder.deleteAll();
     uiFolder.setTitle(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
-    
+
     uiFileBlock = null;
     uiFile = null;
     saveGame = null;
-    
+
     Enumeration all = entries.elements();
     while (all.hasMoreElements()) {
       FileEntry current = (FileEntry) all.nextElement();
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Entry name: " + current.getName());
       log.debug("Entry url: " + current.getUrl());
       log.debug("Entry path: " + current.getPath());
@@ -220,8 +220,14 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     }
 
     StringVector boardAreaSplitted = new StringVector(boardArea, ';');
-    BoardPainter bp = new BoardPainter(position, illustrativeRectangle, new Rectangle(SgfPoint.createFromSgf((String) boardAreaSplitted.elementAt(0)), SgfPoint
+    //#if AA
+    BoardPainter bp = new GlyphBoardPainter(position, illustrativeRectangle, new Rectangle(SgfPoint.createFromSgf((String) boardAreaSplitted.elementAt(0)), SgfPoint
             .createFromSgf((String) boardAreaSplitted.elementAt(1))), false);
+    //#else
+    //# BoardPainter bp = new BoardPainter(position, illustrativeRectangle, new Rectangle(SgfPoint.createFromSgf((String) boardAreaSplitted.elementAt(0)), SgfPoint
+    //#       .createFromSgf((String) boardAreaSplitted.elementAt(1))), false);
+    //#endif
+    
 
     Graphics g = generated.getGraphics();
     g.setColor(Util.COLOR_LIGHTGREY);
@@ -360,7 +366,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
         }
         // TODO confirmation
 
-        //#ifdef JSR75
+        //#if JSR75
         try {
           IOManager.singleton.saveJSR75(currentDirectory, name, Gome.singleton.gameController.getSgfModel());
         } catch (IOException e) {

@@ -26,7 +26,7 @@ import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Showable;
 
 public class MainCanvas extends Canvas implements CommandListener, Showable {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MainCanvas");
   //#endif
   public static final Font SMALL_FONT = Font.getFont(Font.FACE_PROPORTIONAL, Font.STYLE_PLAIN, Font.SIZE_SMALL);
@@ -108,16 +108,16 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.SAVE);
     addCommand(MenuEngine.GAME_STATUS);
 
-    //#ifdef IGS
+    //#if IGS
     switchToIGSOfflineMenu();
     //#endif
 
-    //#ifdef BT
+    //#if BT
     switchToBTOfflineMenu();
     //#endif
 
     addCommand(MenuEngine.OPTIONS);
-    //#ifdef DEBUG
+    //#if DEBUG
     addCommand(MenuEngine.CONSOLE);
     //#endif
     addCommand(MenuEngine.HELP);
@@ -127,7 +127,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     scroller = new Scroller(this);
     clockAndCommentMode = NOTHING_TO_DISPLAY_MODE;
     setFullScreenMode(true);
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Main Canvas constructed");
     //#endif
 
@@ -166,7 +166,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   protected void keyPressed(int keyCode) {
-    //#ifdef DEBUG
+    //#if DEBUG
     long actionTime = System.currentTimeMillis();
     //#endif
 
@@ -216,7 +216,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     if (refreshNeeded != null) {
       refresh(refreshNeeded);
     }
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("->" + (System.currentTimeMillis() - actionTime));
     //#endif
 
@@ -232,7 +232,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.EVALUATE);
     removeCommand(MenuEngine.RESIGN);
     removeCommand(MenuEngine.EDIT_NODE);
-    //#ifdef IGS
+    //#if IGS
     removeCommand(MenuEngine.IGS_MESSAGE);
     removeCommand(MenuEngine.IGS_GAMELIST);
     removeCommand(MenuEngine.IGS_USERLIST);
@@ -259,7 +259,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.UNDO);
     addCommand(MenuEngine.EVALUATE);
     addCommand(MenuEngine.EDIT_NODE);
-    //#ifdef IGS
+    //#if IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
 
       addCommand(MenuEngine.IGS_CONNECT);
@@ -270,7 +270,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
-  //#ifdef IGS
+  //#if IGS
   public void switchToOnlinePlayMenu() {
     clearOptionalItems();
     addCommand(MenuEngine.PASS);
@@ -283,7 +283,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   //#endif
-  //#ifdef BT
+  //#if BT
   public void switchToP2PPlayMenu() {
     clearOptionalItems();
     addCommand(MenuEngine.PASS);
@@ -295,14 +295,14 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.ZOOM);
   }
   //#endif
-  //#ifdef IGS
+  //#if IGS
   public void removeOnlineSetKomiAndHandicapMenuItem() {
     removeCommand(MenuEngine.IGS_REQUEST_KOMI);
     removeCommand(MenuEngine.IGS_CHANGE_HANDICAP);
   }
 
   //#endif
-  //#ifdef IGS
+  //#if IGS
   public void removeOnlineSetHandicapMenuItem() {
     removeCommand(MenuEngine.IGS_CHANGE_HANDICAP);
   }
@@ -319,7 +319,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.PREV10MOVES);
     addCommand(MenuEngine.PLAY_MODE);
     addCommand(MenuEngine.EVALUATE);
-    //#ifdef IGS
+    //#if IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
       addCommand(MenuEngine.IGS_CONNECT);
     }
@@ -341,7 +341,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
-  //#ifdef IGS
+  //#if IGS
   public void switchToObservePlayMenu() {
     clearOptionalItems();
     addCommand(MenuEngine.FIRST_MOVE);
@@ -356,7 +356,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   //#endif
-  //#ifdef IGS
+  //#if IGS
   public void switchToIGSOnlineMenu() {
     clearOptionalItems();
     removeCommand(MenuEngine.IGS_CONNECT);
@@ -367,14 +367,14 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   //#endif
 
-  //#ifdef BT
+  //#if BT
   private void switchToBTOfflineMenu() {
     addCommand(MenuEngine.BT_CONNECT);
   }
 
   //#endif
 
-  //#ifdef BT
+  //#if BT
   public void switchToBTOnlineMenu() {
     removeCommand(MenuEngine.BT_CONNECT);
     addCommand(MenuEngine.BT_CHALLENGE);
@@ -384,7 +384,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   //#endif
 
-  //#ifdef IGS
+  //#if IGS
   private void switchToIGSOfflineMenu() {
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
       addCommand(MenuEngine.IGS_CONNECT);
@@ -403,7 +403,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
-  //#ifdef IGS
+  //#if IGS
   public void switchToOnlineCountingMenu() {
     removeCommand(MenuEngine.PASS);
     addCommand(MenuEngine.FINISHED_COUNTING);
@@ -459,7 +459,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     g.fillRect(0, 0, getWidth(), getHeight());
 
     if (scroller.isVisible() && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("status bar only");
       //#endif
       drawStatusBar(g);
@@ -522,7 +522,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   private void startScroller() {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("set scroller");
     //#endif
     synchronized (SCROLLER_SYNC) {
@@ -545,7 +545,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void stopScroller() {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Pause scroller");
     //#endif
     synchronized (SCROLLER_SYNC) {
@@ -603,7 +603,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void recalculateLayout() {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("recalcultate Layout");
     //#endif
     int minimalBottomHeight = 0;
@@ -660,7 +660,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void refresh() {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("total refresh");
     //#endif
     repaint();
@@ -668,7 +668,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void refresh(Rectangle grArea) {
-    //#ifdef DEBUG
+    //#if DEBUG
     //# log.debug("refresh called on " + grArea);
     //#endif
     repaint(grArea.x0, grArea.y0, grArea.getWidth(), grArea.getHeight());
@@ -682,7 +682,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void setBoardPainter(BoardPainter boardPainter) {
     // log.debug("Set Board Painter - redo the layout");
     this.boardPainter = boardPainter;
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("recalcultate Layout by setBoardPainter");
     //#endif
     recalculateLayout();
@@ -697,7 +697,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   public void updateClockAndCommentMode(int mode) {
     clockAndCommentMode = mode;
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("recalcultate Layout by setClockAndCommentMode");
     //#endif
 
@@ -720,7 +720,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   
 
   //protected void sizeChanged(int x, int y) {
-  //#ifdef DEBUG
+  //#if DEBUG
   // log.debug("sizeChanged called");
   //#endif
   //recalculateLayout();

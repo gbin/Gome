@@ -1,3 +1,4 @@
+//#condition AA
 package com.indigonauts.gome.ui;
 
 import java.io.IOException;
@@ -14,8 +15,8 @@ import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 public class GlyphBoardPainter extends BoardPainter {
-  //#ifdef DEBUG
-  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GlyphBoardPainter");
+  //#if DEBUG
+  //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GlyphBoardPainter");
   //#endif
   private static final byte[] availStoneSizes = { 6, 8, 9, 10, 12, 14, 15, 16, 17, 18, 22, 24, 26, 27, 30, 39 };
   private static final byte[] availGlyphSizes = { 6, 8, 10, 12, 16, 18 };
@@ -33,7 +34,7 @@ public class GlyphBoardPainter extends BoardPainter {
     try {
       readStones(delta);
     } catch (IOException e) {
-      e.printStackTrace();
+      Util.errorNotifier(e);
       whiteStone = null;
       blackStone = null;
     }
@@ -85,18 +86,15 @@ public class GlyphBoardPainter extends BoardPainter {
       }
       g.drawRGB(readSymbol, 0, delta, tlx, tly, delta, delta, true);
     } catch (IOException e) {
-      e.printStackTrace();
+      Util.errorNotifier(e);
     }
 
   }
 
   private int[] readSymbol(char c, int size, int color) throws IOException {
     int chrIndex = symbols.indexOf(c);
-    System.out.println("Asked Size = " + size);
-    System.out.println("Index of " + c + " = " + chrIndex);
     int srcsize = bestFitFor(availGlyphSizes, size);
-    System.out.println("BestFit = " + srcsize);
-    InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/a" + srcsize+ ".r");
+    InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/a" + srcsize + ".r");
     int[] arrayRep = readGfx(input, chrIndex, srcsize, color);
     input.close();
     return size != srcsize ? resize(arrayRep, srcsize, size) : arrayRep;
@@ -104,7 +102,6 @@ public class GlyphBoardPainter extends BoardPainter {
 
   private void readStones(int size) throws IOException {
     int srcsize = bestFitFor(availStoneSizes, size);
-    System.out.println("/gfx/" + srcsize);
     InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/" + srcsize + ".r");
 
     final int intSize = srcsize * srcsize;
@@ -207,14 +204,16 @@ public class GlyphBoardPainter extends BoardPainter {
     int srcsize = bestFitFor(availGlyphSizes, delta);
     try {
       int[] arrayRep;
-      InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/g" + srcsize+ ".r");
+      InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/g" + srcsize + ".r");
       arrayRep = readGfx(input, annotation.getType(), srcsize, color);
       input.close();
       arrayRep = delta != srcsize ? resize(arrayRep, srcsize, delta) : arrayRep;
       g.drawRGB(arrayRep, 0, delta, cx - halfdelta, cy - halfdelta, delta, delta, true);
     } catch (IOException e) {
-
+      //#if DEBUG
       e.printStackTrace();
+      //#endif
+      Util.errorNotifier(e);
     }
 
   }

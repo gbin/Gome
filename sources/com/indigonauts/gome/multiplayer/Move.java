@@ -1,3 +1,4 @@
+//#condition BT || IGS
 /*
  * (c) 2006 Indigonauts
  */
@@ -40,7 +41,7 @@ public class Move {
         newOne.y = in.readByte();
         return newOne;
     }
-    //#ifdef DEBUG
+    //#if DEBUG
     public String toString() {
       return "Move #"+ nb +" " + ((color == Board.BLACK) ? "black":"white") + " " + ((x == Point.PASS) ? " Pass" : "") + x + "-" + y; 
       

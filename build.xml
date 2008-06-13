@@ -7,6 +7,7 @@
 <!-- ================================================================================= -->
 
 <project name="gome" default="all" basedir=".">
+	
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
 	<taskdef resource="antenna.properties" classpath="${path.antenna.jar}"/>
 	<!-- User build properties come first so that they can override -->
@@ -219,7 +220,7 @@
 	</target>
 
 	<target name="preprocess" depends="clean, -eclipseme-initialize, -initialize">
-		<wtkpreprocess srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
+		<wtkpreprocess version="2" encoding="utf8" srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
 			<fileset refid="${midlet.name}-files" />

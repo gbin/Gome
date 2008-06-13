@@ -1,3 +1,4 @@
+//#condition BT || IGS
 /*
  * (c) 2006 Indigonauts
  */

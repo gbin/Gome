@@ -28,13 +28,13 @@ public class IndexLoader extends Fetcher {
   protected void download() throws IOException {
 
     if (entry.getUrl().equals(IOManager.LOCAL_NAME)) {
-      //#ifdef JSR75
+      //#if JSR75
       fileList = IOManager.singleton.getJSR75Roots();
       //#else
       //# fileList = IOManager.singleton.getLocalGamesList();
       //#endif
     } else {
-      //#ifdef JSR75
+      //#if JSR75
       if (entry.getUrl().startsWith(IOManager.LOCAL_NAME)) {
         fileList = IOManager.singleton.loadJSR75Index(((IndexEntry) entry).getPath(), ((IndexEntry) entry).getName());
       } else

@@ -1,3 +1,4 @@
+//#condition IGS 
 /*
  * (c) 2006 Indigonauts
  */
@@ -24,7 +25,7 @@ public class IGSConnector extends MultiplayerConnector {
   private static final String SERVER_INCOMING = "socket://gome.indigonauts.com:1402";
 
   private static final String SERVER_OUTGOING = "socket://gome.indigonauts.com:1403";
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("ServerConnector");
   //#endif
 
@@ -63,7 +64,7 @@ public class IGSConnector extends MultiplayerConnector {
   }
 
   private void login() throws IOException {
-    //#ifdef DEBUG  
+    //#if DEBUG  
     log.debug("login on IGS:" + login + "/*******");
     //#endif
     output.writeByte(LOGIN);
@@ -100,23 +101,23 @@ public class IGSConnector extends MultiplayerConnector {
   }
 
   protected void connect() throws IOException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Open incoming stream ...");
     //#endif
     StreamConnection connectionIncoming = (StreamConnection) Connector.open(SERVER_INCOMING);
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Stream  connected");
     //#endif
     input = new DataInputStream(connectionIncoming.openInputStream());
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Read magic");
     //#endif
     int magic = input.readInt();
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("magic = " + magic);
     //#endif
     byte version = input.readByte();
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Read version " + version);
     //#endif
     if (version != SERVER_VERSION) {
@@ -124,15 +125,15 @@ public class IGSConnector extends MultiplayerConnector {
       connectionIncoming.close();
       return;
     }
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Open outgoing stream ...");
     //#endif
     StreamConnection connectionOutgoing = (StreamConnection) Connector.open(SERVER_OUTGOING);
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("outgoing stream connected...");
     //#endif
     output = new DataOutputStream(connectionOutgoing.openOutputStream());
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("write magic");
     //#endif
     output.writeInt(magic);
@@ -148,7 +149,7 @@ public class IGSConnector extends MultiplayerConnector {
     switch (event) {
     case LOGGED_EVENT:
       byte reason = input.readByte();
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("IGS Logged event " + reason);
       //#endif
       callback.loggedEvent();
@@ -163,7 +164,7 @@ public class IGSConnector extends MultiplayerConnector {
       break;
     case OBSERVE_EVENT:
       int nbMoves = input.readInt();
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Observe event with " + nbMoves + " moves");
       //#endif
       Move[] moveList = new Move[nbMoves];
@@ -196,7 +197,9 @@ public class IGSConnector extends MultiplayerConnector {
   }
 
   public void acceptChallenge(Challenge challenge) throws IOException {
+    //#if DEBUG
     log.debug("accept challenge");
+    //#endif
     output.writeByte(CHALLENGE);
     challenge.marshall(output);
     output.flush();

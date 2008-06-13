@@ -1,3 +1,4 @@
+//#condition BT
 package com.indigonauts.gome.multiplayer.bt;
 
 import java.io.IOException;
@@ -13,6 +14,9 @@ import javax.bluetooth.ServiceRecord;
 import javax.bluetooth.UUID;
 
 public class Discoverer implements DiscoveryListener {
+  //#if DEBUG
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Discoverer");
+  //#endif
 
   private static final int L2PCAP_UUID = 0x0100;
 
@@ -41,7 +45,6 @@ public class Discoverer implements DiscoveryListener {
      * Retrieve the local Bluetooth device object.
      */
     LocalDevice local = LocalDevice.getLocalDevice();
-    progress(1);
 
     /*
      * Retrieve the DiscoveryAgent object that allows us to perform device
@@ -51,10 +54,6 @@ public class Discoverer implements DiscoveryListener {
 
     deviceList = new Vector();
     serviceList = new Vector();
-
-  }
-
-  public void progress(int ps) {
 
   }
 
@@ -75,7 +74,6 @@ public class Discoverer implements DiscoveryListener {
 
       try {
         System.out.println("Service Search on " + devList[i].getBluetoothAddress());
-        progress(5);
         agent.searchServices(attrs, searchList, devList[i], this);
       } catch (BluetoothStateException e) {
         System.out.println("BluetoothStateException: " + e.getMessage());
@@ -104,7 +102,6 @@ public class Discoverer implements DiscoveryListener {
     try {
 
       agent.startInquiry(DiscoveryAgent.GIAC, this);
-      progress(2);
       /*
        * Wait until all the devices are found before trying to start the
        * service search.
@@ -150,9 +147,9 @@ public class Discoverer implements DiscoveryListener {
    * 
    */
   public void deviceDiscovered(RemoteDevice btDevice, DeviceClass cod) {
-
-    progress(3);
-    System.out.println("FoundDEV= " + btDevice.getBluetoothAddress());
+    //#if DEBUG
+    log.debug("FoundDEV= " + btDevice.getBluetoothAddress());
+    //#endif
     int minorDeviceClass;
     int majorDeviceClass;
 
@@ -165,13 +162,10 @@ public class Discoverer implements DiscoveryListener {
 
     majorDeviceClass = cod.getMajorDeviceClass();
     minorDeviceClass = cod.getMinorDeviceClass();
-    // TODO filter phones/PDA
-    progress(4);
-
-    System.out.println("Adding dev(" + majorDeviceClass + "/" + minorDeviceClass + ")");
+    //#if DEBUG
+    log.debug("Adding dev(" + majorDeviceClass + "/" + minorDeviceClass + ")");
+    //#endif
     deviceList.addElement(btDevice);
-
-    progress(5);
   }
 
   /**
@@ -246,21 +240,18 @@ public class Discoverer implements DiscoveryListener {
    * @see DiscoveryAgent#searchServices
    */
   public void servicesDiscovered(int transID, ServiceRecord[] servRecord) {
-
-    progress(6);
-    System.out.println("Service:" + transID);
-    System.out.println("SLength= " + servRecord.length);
+    //#if DEBUG
+    log.info("Service:" + transID);
+    log.info("SLength= " + servRecord.length);
+    //#endif
     if (servRecord[0] == null) {
-
-      System.out.println("The service record is null");
+      //#if DEBUG
+      log.info("The service record is null");
+      //#endif
 
     } else {
-
-      System.out.println("Adding SRecord");
       serviceList.addElement(servRecord[0]);
-
     }
-    progress(7);
   }
 
   /**
@@ -277,7 +268,7 @@ public class Discoverer implements DiscoveryListener {
    *            or <code>INQUIRY_TERMINATED</code>
    */
   public void inquiryCompleted(int discType) {
-
+    //#if DEBUG
     // Log the Action
     String outLog = "[Inquiry100%,";
     switch (discType) {
@@ -298,13 +289,15 @@ public class Discoverer implements DiscoveryListener {
     }
     }
     outLog += "]";
-    System.out.println(outLog);
-    progress(4);
+    log.info(outLog);
+    //#endif
+    
     // free the waits
     synchronized (this) {
       try {
         this.notifyAll();
       } catch (Exception e) {
+        //nothing to do
       }
     }
   }

@@ -15,7 +15,7 @@ import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Util;
 
 public class Scroller extends Thread {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Scroller");
   //#endif
   public static final Font SMALL_FONT_BOLD = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, Font.SIZE_SMALL);
@@ -57,17 +57,17 @@ public class Scroller extends Thread {
       synchronized (this) {
         while (running) {
           if (paused) {
-            //#ifdef DEBUG
+            //#if DEBUG
             log.debug("scroller paused");
             //#endif
             this.wait();
-            //#ifdef DEBUG
+            //#if DEBUG
             log.debug("scroller resumed");
             //#endif
           } else {
             this.wait(speed);
           }
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("scroller pulse");
           //#endif
 
@@ -77,7 +77,7 @@ public class Scroller extends Thread {
     } catch (InterruptedException e) {
       // interrupted, do nothing
     }
-    //#ifdef DEBUG
+    //#if DEBUG
     catch (Throwable t) {
       log.error("scroller loop error", t);
       Util.messageBox("Uncaught exception cf logs", "Uncaught exception " + t.getMessage(), AlertType.ERROR);

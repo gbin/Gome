@@ -17,12 +17,13 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.TextField;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.GomeOptions;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.sgf.Board;
 
 public class Options extends Form {
-  //#ifdef DEBUG
+  //#if DEBUG
   //private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Options");
   //#endif
 
@@ -40,11 +41,12 @@ public class Options extends Form {
 
   private ChoiceGroup optimize;
 
-  //#ifdef IGS
+  //#if IGS 
   private TextField igsLogin;
 
   private TextField igsPassword;
-
+  //#endif
+  //#if IGS || BT
   private ChoiceGroup igsSize;
 
   private TextField igsMinutes;
@@ -52,6 +54,10 @@ public class Options extends Form {
   private TextField igsByoyomi;
 
   //#endif
+  //#if IGS || BT
+  private ChoiceGroup btService;
+  //#endif
+
   private TextField email;
 
   private TextField user;
@@ -99,7 +105,7 @@ public class Options extends Form {
     Image[] bugStones = new Image[2];
     Image[] transparentStones = new Image[6];
 
-    //#ifdef MENU_IMAGES
+    //#if MENU_IMAGES
     int bestImageWidth = Gome.singleton.display.getBestImageWidth(Display.CHOICE_GROUP_ELEMENT);
     int bestImageHeight = Gome.singleton.display.getBestImageHeight(Display.CHOICE_GROUP_ELEMENT);
     smallLetter = Util.renderOffScreenTextIcon(
@@ -162,11 +168,13 @@ public class Options extends Form {
     scrollerSize.append(I18N.option.twoLiner, null); //$NON-NLS-1$//$NON-NLS-2$
     scrollerSize.append(I18N.option.twoHalf, null); //$NON-NLS-1$ //$NON-NLS-2$
     scrollerSize.setSelectedIndex(Gome.singleton.options.scrollerSize, true);
-    //#ifdef IGS
+    //#if IGS
     igsLogin = new TextField(I18N.login, Gome.singleton.options.igsLogin, 10, TextField.ANY);
 
     igsPassword = new TextField(I18N.password, Gome.singleton.options.igsPassword, 10, TextField.ANY);
+    //#endif
 
+    //#if IGS || BT
     igsSize = new ChoiceGroup(I18N.option.igsSize, CHOICE_TYPE); //$NON-NLS-1$
     igsSize.append("9x9", null); //$NON-NLS-1$ //$NON-NLS-2$
     igsSize.append("13x13", null); //$NON-NLS-1$ //$NON-NLS-2$
@@ -178,10 +186,15 @@ public class Options extends Form {
 
     igsByoyomi = new TextField(I18N.option.igsByoyomi, String.valueOf(Gome.singleton.options.igsByoyomi), 2, TextField.NUMERIC);
     //#endif
+
+    //#if BT
+    btService = new ChoiceGroup(I18N.option.bluetooth, CHOICE_TYPE); //$NON-NLS-1$
+    btService.append(I18N.option.start, null); //$NON-NLS-1$ //$NON-NLS-2$
+    btService.append(I18N.option.dontstart, null); //$NON-NLS-1$ //$NON-NLS-2$
+    btService.setSelectedIndex(Gome.singleton.options.bluetooth, true);
+    //#endif
     email = new TextField(I18N.option.email, String.valueOf(Gome.singleton.options.email), 80, TextField.EMAILADDR);
-
     user = new TextField(I18N.option.user, Gome.singleton.options.user, 30, TextField.ANY);
-
     key = new TextField(I18N.option.key, Gome.singleton.options.key, 32, TextField.ANY);
 
     if (!registrationOnly) {
@@ -195,14 +208,20 @@ public class Options extends Form {
       append(stoneBug);
       append(optimize);
 
-      //#ifdef IGS
+      
+      //#if IGS
       append(I18N.option.igs);
       append(igsLogin);
       append(igsPassword);
+      //#endif
+      //#if IGS || BT
       append(I18N.option.igsChallenge);
       append(igsSize);
       append(igsMinutes);
       append(igsByoyomi);
+      //#endif
+      //#if BT
+      append(btService);
       //#endif
       append(email);
     }
@@ -234,44 +253,53 @@ public class Options extends Form {
   }
 
   public boolean save() {
-    Gome.singleton.options.setGobanColorFromByte((byte) gobanColor.getSelectedIndex());
-    Gome.singleton.options.setScrollerFontFromByte((byte) scrollerFont.getSelectedIndex());
-    Gome.singleton.options.scrollerSize = (byte) scrollerSize.getSelectedIndex();
-    Gome.singleton.options.scrollerSpeed = (byte) scrollerSpeed.getSelectedIndex();
-    Gome.singleton.options.stoneBug = (byte) stoneBug.getSelectedIndex();
-    Gome.singleton.options.ghostStone = (byte) ghostStone.getSelectedIndex();
-    Gome.singleton.options.optimize = (byte) optimize.getSelectedIndex();
-    //#ifdef IGS
-    Gome.singleton.options.igsLogin = igsLogin.getString();
-    Gome.singleton.options.igsPassword = igsPassword.getString();
-    Gome.singleton.options.igsMinutes = Integer.parseInt(igsMinutes.getString());
-    Gome.singleton.options.igsByoyomi = Integer.parseInt(igsByoyomi.getString());
+    Gome singleton = Gome.singleton;
+    GomeOptions options = singleton.options;
+    options.setGobanColorFromByte((byte) gobanColor.getSelectedIndex());
+    options.setScrollerFontFromByte((byte) scrollerFont.getSelectedIndex());
+    options.scrollerSize = (byte) scrollerSize.getSelectedIndex();
+    options.scrollerSpeed = (byte) scrollerSpeed.getSelectedIndex();
+    options.stoneBug = (byte) stoneBug.getSelectedIndex();
+    options.ghostStone = (byte) ghostStone.getSelectedIndex();
+    options.optimize = (byte) optimize.getSelectedIndex();
+    //#if IGS
+    options.igsLogin = igsLogin.getString();
+    options.igsPassword = igsPassword.getString();
+    options.igsMinutes = Integer.parseInt(igsMinutes.getString());
+    options.igsByoyomi = Integer.parseInt(igsByoyomi.getString());
     //#endif
-    Gome.singleton.options.email = email.getString();
-    Gome.singleton.options.user = user.getString().trim();
-    Gome.singleton.options.key = key.getString().toLowerCase();
 
-    if (Gome.singleton.options.user.length() != 0 && !Util.keygen(Gome.singleton.options.user).equals(Gome.singleton.options.key)) {
+    //#if BT
+    options.bluetooth = (byte) btService.getSelectedIndex();
+    if (options.bluetooth == 0 && singleton.bluetoothServiceConnector == null)
+      singleton.startBTService();
+    //#endif
+
+    options.email = email.getString();
+    options.user = user.getString().trim();
+    options.key = key.getString().toLowerCase();
+
+    if (options.user.length() != 0 && !Util.keygen(options.user).equals(options.key)) {
       Util.messageBox(I18N.option.invalidKey, I18N.option.invalidKeyExplanation, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       return false;
     }
 
     if (!registrationOnly) {
-      //#ifdef IGS
-      Gome.singleton.options.setIGSGobanSizeFromByte((byte) igsSize.getSelectedIndex());
+      //#if IGS
+      options.setIGSGobanSizeFromByte((byte) igsSize.getSelectedIndex());
       //#endif
-      Gome.singleton.mainCanvas.stopScroller();// stop the scroller in
+      singleton.mainCanvas.stopScroller();// stop the scroller in
       // order to
       // change its font
-      Gome.singleton.mainCanvas.recalculateLayout();// change the
+      singleton.mainCanvas.recalculateLayout();// change the
       // proportions
-      Gome.singleton.gameController.refreshPainter(); // the painter can
+      singleton.gameController.refreshPainter(); // the painter can
       // affected
-      Gome.singleton.gameController.tuneBoardPainter();// to change the
+      singleton.gameController.tuneBoardPainter();// to change the
     }
 
     try {
-      Gome.singleton.saveOptions();
+      singleton.saveOptions();
     } catch (Exception e) {
       Util.messageBox(I18N.error.error, e.getMessage(), AlertType.ERROR); //$NON-NLS-1$
     }

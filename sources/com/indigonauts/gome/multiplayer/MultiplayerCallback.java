@@ -1,9 +1,8 @@
+//#condition BT || IGS
 /*
  * (c) 2006 Indigonauts
  */
 package com.indigonauts.gome.multiplayer;
-
-import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector;
 
 public interface MultiplayerCallback {
 
@@ -11,16 +10,16 @@ public interface MultiplayerCallback {
   static final byte MESSAGE_CHAT_TYPE = 0x1;
   static final byte MESSAGE_KIBITZING_TYPE = 0x2;
 
-  //#ifdef IGS
+  //#if IGS
   void loggedEvent();
 
   //#endif
   
-  //#ifdef BT
+  //#if BT
   void connectedBTEvent(MultiplayerConnector connector);
   //#endif
 
-  //#ifdef IGS
+  //#if IGS
   void gameListEvent(Game[] games);
 
   void userListEvent();

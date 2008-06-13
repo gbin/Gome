@@ -30,12 +30,16 @@ import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
 import com.indigonauts.gome.multiplayer.User;
+//#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
+//#endif
+//#if IGS
 import com.indigonauts.gome.multiplayer.igs.IGSConnector;
+//#endif
 import com.indigonauts.gome.sgf.Board;
 
 public class MenuEngine implements CommandListener {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MenuEngine");
   //#endif
 
@@ -53,13 +57,13 @@ public class MenuEngine implements CommandListener {
   public static final Command FIRST_MOVE = new Command(I18N.firstMove, Command.SCREEN, 5);
   public static final Command REVIEW_MODE = new Command(I18N.reviewMode, Command.SCREEN, 5);
 
-  //#ifdef BT
+  //#if BT
   public static final Command BT_CONNECT = new Command(I18N.bt.connect, Command.SCREEN, 2);
   public static final Command BT_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 2);
   public static final Command BT_DISCONNECT = new Command(I18N.bt.disconnect, Command.SCREEN, 2);
   //#endif
 
-  //#ifdef IGS
+  //#if IGS
   public static final Command IGS_CONNECT = new Command(I18N.online.connect, Command.SCREEN, 5);
   public static final Command IGS_GAMELIST = new Command(I18N.online.gameList, Command.SCREEN, 5);
   public static final Command IGS_USERLIST = new Command(I18N.online.userlist, Command.SCREEN, 5);
@@ -81,7 +85,7 @@ public class MenuEngine implements CommandListener {
   public static final Command GAME_STATUS = new Command(I18N.gameStatus, Command.SCREEN, 8); //$NON-NLS-1$
   public static final Command OPTIONS = new Command(I18N.options, Command.SCREEN, 8); //$NON-NLS-1$
 
-  //#ifdef DEBUG
+  //#if DEBUG
   public static final Command CONSOLE = new Command("Console", Command.SCREEN, 9); //$NON-NLS-1$
   //#endif
   public static final Command HELP = new Command(I18N.help.help, Command.SCREEN, 9); //$NON-NLS-1$
@@ -122,7 +126,7 @@ public class MenuEngine implements CommandListener {
   private TextField newGameHandicap, newGameKomi;
   public TextField gameFileName;
 
-  //#ifdef DEBUG
+  //#if DEBUG
   private LogCanvas logCanvas;
   //#endif
 
@@ -193,7 +197,7 @@ public class MenuEngine implements CommandListener {
       if (d == Gome.singleton.mainCanvas) {
         if (c == NEW) {
           if (gc.getPlayMode() != GameController.ONLINE_MODE) {
-            //#ifdef DEBUG
+            //#if DEBUG
             log.info("Game Mode: " + gc.getPlayMode());
             //#endif
             newGameForm = createNewGameMenu();
@@ -209,7 +213,7 @@ public class MenuEngine implements CommandListener {
             Util.messageBox(I18N.error.error, e1.getMessage(), AlertType.ERROR); //$NON-NLS-1$
           }
         }
-        //#ifdef IGS
+        //#if IGS
         else if (c == IGS_CONNECT) {
           gc.connectToIGS();
         } else if (c == IGS_GAMELIST) {
@@ -226,11 +230,13 @@ public class MenuEngine implements CommandListener {
           gomeOnlineChangeHandicap();
         }
         //#endif
-        //#ifdef BT
+        //#if BT
         else if (c == BT_CONNECT) {
           gc.connectToBT();
         } else if (c == BT_CHALLENGE) {
           gc.challengeBT();
+        } else if (c == BT_DISCONNECT) {
+          gc.disconnectBT();
         }
         //#endif
         else if (c == NEXT) {
@@ -256,7 +262,7 @@ public class MenuEngine implements CommandListener {
           Gome.singleton.display.setCurrent(optionsForm);
         }
 
-        //#ifdef DEBUG
+        //#if DEBUG
         else if (c == CONSOLE) {
           logCanvas = Logger.getLogCanvas();
           logCanvas.addCommand(BACK);
@@ -298,7 +304,7 @@ public class MenuEngine implements CommandListener {
         }
 
         else if (c == HELP) {
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("help");
           //#endif
           Info help = new Info(Gome.singleton.mainCanvas);
@@ -313,7 +319,7 @@ public class MenuEngine implements CommandListener {
         } else if (c == RESIGN) {
           gc.resign();
         }
-        //#ifdef IGS
+        //#if IGS
         else if (c == IGS_RESET_DEAD_STONES) {
           gc.gomeRestoreGameForCounting();
         } else if (c == IGS_DONE_SCORE) {
@@ -349,7 +355,7 @@ public class MenuEngine implements CommandListener {
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
       }
 
-      //#ifdef BT
+      //#if BT
       else if (d == btPeerList) {
         if (c == BT_CONNECT || c == List.SELECT_COMMAND) {
           log.debug("Connecting to BT");
@@ -360,7 +366,7 @@ public class MenuEngine implements CommandListener {
       }
       //#endif
 
-      //#ifdef IGS
+      //#if IGS
       else if (d == igsGameList) {
         if (c == IGS_OBSERVE || c == List.SELECT_COMMAND) {
           gc.observeServerGame(igsGameList.getSelectedIndex());
@@ -442,14 +448,14 @@ public class MenuEngine implements CommandListener {
         editNodeForm = null;
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
       }
-      //#ifdef DEBUG
+      //#if DEBUG
       else if (d == logCanvas) {
         logCanvas = null;
         Gome.singleton.mainCanvas.show(Gome.singleton.display);
       }
       //#endif
     } catch (Throwable t) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error(t);
       logCanvas = Logger.getLogCanvas();
       logCanvas.addCommand(BACK);
@@ -459,9 +465,9 @@ public class MenuEngine implements CommandListener {
     }
   }
 
-  //#ifdef BT
+  //#if BT
   public void showBTPeers(String[] friendyNames) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Show bt peers");
     //#endif
     btPeerList = new List(I18N.bt.peerList, Choice.IMPLICIT);
@@ -479,9 +485,9 @@ public class MenuEngine implements CommandListener {
 
   //#endif
 
-  //#ifdef IGS
+  //#if IGS
   public void showIgsGameList(Game[] games) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Show igs gamelist");
     //#endif
     igsGameList = new List(I18N.online.gameList, Choice.IMPLICIT);
@@ -499,7 +505,7 @@ public class MenuEngine implements CommandListener {
   }
 
   public void refreshUserList(User[] users) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("refreshUserList");
     //#endif
     QuickSortable.quicksort(users);
@@ -527,7 +533,7 @@ public class MenuEngine implements CommandListener {
   }
 
   public void showIgsUserList(User[] users) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Show igs userlist");
     //#endif
     setUpUserList();
@@ -558,7 +564,7 @@ public class MenuEngine implements CommandListener {
 
   public void deleteFile(FileEntry file) {
     if (file instanceof LocalFileEntry) {
-      //#ifdef JSR75
+      //#if JSR75
       IOManager.singleton.deleteJSR75(file.getUrl());
       //#else
 
@@ -573,7 +579,7 @@ public class MenuEngine implements CommandListener {
     }
   }
 
-  //#ifdef IGS
+  //#if IGS
   public void showIgsChallenge(Challenge challenge) {
     gc.multiplayerConnector.setCurrentChallenge(challenge);
     String colors = ((challenge.color == Board.BLACK) ? I18N.game.blackLong : I18N.game.whiteLong);

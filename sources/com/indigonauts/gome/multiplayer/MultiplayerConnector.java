@@ -1,17 +1,19 @@
+//#condition BT || IGS
 package com.indigonauts.gome.multiplayer;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.ui.GameController;
 
 public abstract class MultiplayerConnector extends Thread {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("MultiplayerConnector");
   //#endif
   protected MultiplayerCallback callback;
-  
+
   private Challenge currentChallenge;
 
   protected DataInputStream input;
@@ -73,7 +75,9 @@ public abstract class MultiplayerConnector extends Thread {
   }
 
   public void challenge(Challenge challenge) throws IOException {
+    //#if DEBUG
     log.debug("send challenge");
+    //#endif
     output.writeByte(CHALLENGE);
     challenge.marshall(output);
     output.flush();
@@ -88,7 +92,9 @@ public abstract class MultiplayerConnector extends Thread {
   }
 
   public void playMove(Move move) throws IOException {
+    //#if DEBUG
     log.debug("playMove " + move);
+    //#endif
     output.writeByte(PLAY_MOVE);
     output.writeInt(move.nb);
     output.writeByte(move.color);
@@ -106,7 +112,9 @@ public abstract class MultiplayerConnector extends Thread {
   }
 
   public void removeDeadStone(byte posX, byte posY) throws IOException {
+    //#if DEBUG
     log.debug("Remove dead stone");
+    //#endif
     output.writeByte(MARK_STONE);
     output.writeByte(posX);
     output.writeByte(posY);
@@ -152,7 +160,7 @@ public abstract class MultiplayerConnector extends Thread {
     case PLAY_MOVE: // for symetric conversations
     case MOVE_EVENT:
       Move move = Move.unmarshal(input);
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Move event " + move);
       //#endif
       callback.moveEvent(move);
@@ -160,14 +168,14 @@ public abstract class MultiplayerConnector extends Thread {
 
     case CHALLENGE: // for symetric conversations
     case CHALLENGE_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Challenge Event Received");
       //#endif
       Challenge challenge = Challenge.unmarshal(input);
       callback.challenge(challenge);
       break;
     case MESSAGE_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Incoming message event");
       //#endif
       byte type = input.readByte();
@@ -176,7 +184,7 @@ public abstract class MultiplayerConnector extends Thread {
       callback.message(type, nick, message);
       break;
     case GAME_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Start game event");
       //#endif
       challenge = Challenge.unmarshal(input);
@@ -188,26 +196,26 @@ public abstract class MultiplayerConnector extends Thread {
       int whiteByoStone = input.readInt();
       int blackTime = input.readInt();
       int blackByoStone = input.readInt();
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("W" + whiteTime + "/" + whiteByoStone + " B " + blackTime + "/" + blackByoStone);
       //#endif
       callback.synOnlineTime(whiteTime, whiteByoStone, blackTime, blackByoStone);
       break;
     case TIMES_UP_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("times up event");
       //#endif
       String name = input.readUTF();
       callback.timesUP(name);
       break;
     case END_GAME_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("end game event");
       //#endif
       callback.endGame();
       break;
     case MARK_STONE_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("mark stone event");
       //#endif
       byte x = input.readByte();
@@ -215,13 +223,13 @@ public abstract class MultiplayerConnector extends Thread {
       callback.oppRemoveDeadStone(x, y);
       break;
     case RESTORE_GAME_FOR_COUNING_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("restore game for counting event");
       //#endif
       callback.restoreGameForCounting();
       break;
     case GAME_IS_DONE_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("game is done event");
       //#endif
       String name1 = input.readUTF();
@@ -231,35 +239,35 @@ public abstract class MultiplayerConnector extends Thread {
       callback.gameIsDone(name1, value1, name2, value2);
       break;
     case HANDICAP_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("handicap event");
       //#endif
       byte value = input.readByte();
       callback.oppSetHandicap(value);
       break;
     case OPP_WANT_KOMI_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("opp want komi event");
       //#endif
       byte komi = input.readByte();
       callback.oppWantToSetNewKomi(komi);
       break;
     case SET_KOMI_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("set komi event event");
       //#endif
       byte k = input.readByte();
       callback.setKomi(k);
       break;
     case IGS_RESIGNED_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("resigned event");
       //#endif
       String resignedName = input.readUTF();
       callback.onlineResigned(resignedName);
       break;
     case SCORE_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("score event");
       //#endif
       int whiteScore = input.readInt();
@@ -267,7 +275,7 @@ public abstract class MultiplayerConnector extends Thread {
       callback.onlineScore(whiteScore, blackScore);
       break;
     case LOST_MESSAGE_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("igs lost message event");
       //#endif
       String winnerName = input.readUTF();
@@ -294,19 +302,20 @@ public abstract class MultiplayerConnector extends Thread {
         handleEvent(input.readByte());
 
     } catch (java.io.InterruptedIOException iie) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error("Disconnected ", iie);
       //#endif
     } catch (IOException e) {
       // let the disconnected message go
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error("IOException", e);
       //#endif
+      Util.errorNotifier(e);
     } catch (Throwable t) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error("server loop error " + t.getClass(), t);
-      t.printStackTrace();
       //#endif
+      Util.errorNotifier(t);
     }
 
     finally {
@@ -337,7 +346,7 @@ public abstract class MultiplayerConnector extends Thread {
       if (input != null)
         input.close();
     } catch (IOException e) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error(e);
       //#endif
     }
@@ -345,7 +354,7 @@ public abstract class MultiplayerConnector extends Thread {
       if (output != null)
         output.close();
     } catch (IOException e) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.error(e);
       //#endif
     }

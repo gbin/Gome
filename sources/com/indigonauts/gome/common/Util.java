@@ -19,13 +19,19 @@ import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.ui.BoardPainter;
 
+//#if AA
+import com.indigonauts.gome.ui.GlyphBoardPainter;
+
+//#endif
+
 public class Util {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Util");
   //#endif
 
@@ -37,7 +43,7 @@ public class Util {
 
   static {
     String version = System.getProperty("microedition.platform");
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Version = " + version);
     //#endif
     if (version != null)
@@ -152,12 +158,12 @@ public class Util {
     Vector lines = lineSplitter(text, width, font);
     int textHeight = lines.size() * font.getHeight();
     Image imagedComment;
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("scrollHeight = " + scrollHeight);
     log.debug("font height = " + font.getHeight());
     //#endif
     int extraLines = scrollHeight / font.getHeight() + 1;
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Extralines = " + extraLines);
     //#endif
     if (lines.size() >= extraLines) {
@@ -357,7 +363,12 @@ public class Util {
     Board board = new Board(boardSize);
     int grsize = boardSize * MainCanvas.SMALL_FONT.getHeight() + 1;
     Rectangle imgArea = new Rectangle(0, 0, grsize, grsize);
-    BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
+
+    //#if AA
+    BoardPainter illustrativeBoard = new GlyphBoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
+    //#else
+    //# BoardPainter illustrativeBoard = new BoardPainter(board, imgArea, viewArea.isValid() ? viewArea : null, false);
+    //#endif
     int total = grsize + (Gome.singleton.options.stoneBug == 1 ? 0 : 2);
     Image img = Image.createImage(total, total);
     SgfNode firstNode = model.getFirstMove();
@@ -382,6 +393,13 @@ public class Util {
     }
     newMessage.append(originalMessage);
     return newMessage.toString();
+  }
+
+  public static void errorNotifier(Throwable t) {
+    //#if BEBUG
+    t.printStackTrace();
+    //#endif
+    Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR);
   }
 
 }

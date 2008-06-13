@@ -15,7 +15,7 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import javax.microedition.io.Connector;
-import javax.microedition.io.HttpConnection; //#ifdef JSR75
+import javax.microedition.io.HttpConnection; //#if JSR75
 import javax.microedition.io.file.FileConnection;
 import javax.microedition.io.file.FileSystemRegistry; //#endif
 import javax.microedition.lcdui.AlertType;
@@ -30,7 +30,7 @@ import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.sgf.SgfModel;
 
 public class IOManager {
-  //#ifdef DEBUG
+  //#if DEBUG
   public static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("IOManager");
   //#endif
   private static final String SGF = ".sgf"; //$NON-NLS-1$
@@ -108,7 +108,7 @@ public class IOManager {
    * if this returns null, we should ignore it, it is supposed to be recalled (for example with a login/passwd correctly set
    */
   public DataInputStream readFileFromHttp(String url, DownloadStatus status) throws IOException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("readFileFromHttp " + url);
     //#endif
 
@@ -117,7 +117,7 @@ public class IOManager {
     String pwdFile = null;
 
     HttpConnection currentHttpConnection = (HttpConnection) Connector.open(url);
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("opened");
     //#endif
 
@@ -126,7 +126,7 @@ public class IOManager {
     try {
       ident = new String(loadLocalStore(pwdFile, null));
     } catch (RecordStoreException e1) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("No ident is stored for " + pwdFile);
       //#endif
     }
@@ -136,7 +136,7 @@ public class IOManager {
     currentHttpConnection.setRequestProperty("Connection", "close");
     currentHttpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
     if (ident != null) {
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Put ident header" + ident);
       //#endif
       currentHttpConnection.setRequestProperty("Authorization", "Basic " + ident);
@@ -146,7 +146,7 @@ public class IOManager {
 
     if (currentHttpConnection.getResponseCode() == 401 && currentHttpConnection.getHeaderField("WWW-Authenticate").startsWith("Basic")) {
 
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("401 response, try to get the login/password");
       //#endif
       status.requestLoginPassword(pwdFile);
@@ -154,7 +154,7 @@ public class IOManager {
 
     }
     
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("no ident required");
     //#endif
     return is;
@@ -167,7 +167,7 @@ public class IOManager {
 
   public void sendFileByMail(FileEntry selectedFile, String email) {
     String url = selectedFile.getUrl();
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Send by email url = " + url);
     //#endif
     postFileToHttp(url, EMAIL_SEND_BASE + "email=" + URLEncode(email) + "&game=" + selectedFile.getName());
@@ -186,13 +186,13 @@ public class IOManager {
           httpConnection.setRequestProperty("Content-Type", "application/x-go-sgf");
           httpConnection.setRequestProperty("Gome-Version", Gome.VERSION); //$NON-NLS-1$ //$NON-NLS-2$
           os = httpConnection.openDataOutputStream();
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("load file " + url);
           //#endif
           byte[] game1 = singleton.loadFile(url, null);
 
           int l = game1.length;
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("gonna send " + l + " bytes");
           //#endif
           int i = 0;
@@ -210,7 +210,9 @@ public class IOManager {
             try {
               os.close();
             } catch (IOException e) {
-              e.printStackTrace();
+              //#if DEBUG 
+              e.printStackTrace(); // can be ignored
+              //#endif
             }
         }
         Util.messageBox(I18N.success, I18N.email_success, AlertType.INFO); //$NON-NLS-1$ //$NON-NLS-2$
@@ -262,7 +264,7 @@ public class IOManager {
   }
 
   public void saveLocalStore(String fileName, byte[] content) throws RecordStoreException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("fileName " + fileName);
     //#endif
     try {
@@ -277,14 +279,14 @@ public class IOManager {
   }
 
   public void deleteLocalStore(String name) throws RecordStoreException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("deleteLocalStore " + name);
     //#endif
     RecordStore.deleteRecordStore(name);
   }
 
   public Vector getFileEntriesFromIndex(String indexFile) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("getFileEntriesFromIndex :" + indexFile);
     //#endif
     Vector answer = new Vector();
@@ -308,19 +310,19 @@ public class IOManager {
 
       if (mode == 'I') { //$NON-NLS-1$
         if (fileEntry.size() > 3) {
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("retreive the illustrative area");
           //#endif
           String boardArea = fileEntry.stringElementAt(3).trim();
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("boardArea =" + boardArea);
           //#endif
           String black = fileEntry.stringElementAt(4).trim();
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("black =" + black);
           //#endif
           String white = fileEntry.stringElementAt(5).trim();
-          //#ifdef DEBUG
+          //#if DEBUG
           log.debug("white =" + white);
           //#endif
           entry = new IndexEntry(path, name, description, boardArea, black, white);
@@ -351,7 +353,7 @@ public class IOManager {
       }
       answer.addElement(entry);
     }
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("returned " + answer + " elements");
     //#endif
     return answer;
@@ -395,12 +397,11 @@ public class IOManager {
           dis.close();
         }
       } catch (IOException e) {
-        e.printStackTrace();
-
+        //#if DEBUG
+        e.printStackTrace(); // can be ignored
+        //#endif
       }
-
     }
-
     return baos.toByteArray();
   }
 
@@ -408,7 +409,7 @@ public class IOManager {
     if (url.startsWith("http://")) { //$NON-NLS-1$
       return readFileFromHttp(url, status);
     }
-    //#ifdef JSR75
+    //#if JSR75
      else if (url.startsWith(LOCAL_NAME)) {
       return loadJSR75(url, status);
      }
@@ -459,7 +460,7 @@ public class IOManager {
    * @throws IOException
    */
   public SgfModel extractGameFromCollection(String url, int gameIndex, DownloadStatus status) throws IllegalArgumentException, IOException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Load " + url);
     //#endif
     SgfModel game1 = null;
@@ -479,7 +480,7 @@ public class IOManager {
       game1 = SgfModel.parse(inputStreamReader);
 
     }
-    //#ifdef DEBUG
+    //#if DEBUG
     catch (IllegalArgumentException e) {
       int index = SgfModel.index;
       inputStreamReader = new InputStreamReader(singleton.readFileAsStream(url, status));
@@ -499,7 +500,10 @@ public class IOManager {
           inputStreamReader.close();
         }
       } catch (IOException e) {
+        // can be ignored
+        //#if DEBUG
         e.printStackTrace();
+        //#endif
       }
     }
     return game1;
@@ -535,7 +539,7 @@ public class IOManager {
     return c != -1;
   }
 
-  //#ifdef JSR75
+  //#if JSR75
   public Vector getJSR75Roots() {
     Vector roots = new Vector();
     Enumeration listRoots = FileSystemRegistry.listRoots();
@@ -547,7 +551,7 @@ public class IOManager {
   }
 
   public Vector loadJSR75Index(String baseRep, String subRep) throws IOException {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Base rep = " + baseRep);
     log.debug("Sub rep = " + subRep);
     //#endif
@@ -580,7 +584,7 @@ public class IOManager {
     cd = currentDirectory;
     if (!fn.toLowerCase().endsWith(SGF))
       fn += SGF;
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("Tried to save in " + currentDirectory + fileName);
     //#endif
     String gameStr = gameToSave.toString();
@@ -599,7 +603,7 @@ public class IOManager {
           outputStream.write(game);
 
         } catch (IOException e) {
-          //#ifdef DEBUG
+          //#if DEBUG
           log.error(e);
           //#endif
         } finally {
@@ -616,7 +620,7 @@ public class IOManager {
 
         game = null;
         fn = null;
-        //#ifdef DEBUG
+        //#if DEBUG
         log.debug("Save done");
         //#endif
       }
@@ -636,7 +640,7 @@ public class IOManager {
           }
 
         } catch (IOException e) {
-          //#ifdef DEBUG
+          //#if DEBUG
           log.error(e);
           //#endif
         } finally {

@@ -1,3 +1,4 @@
+//#condition BT
 package com.indigonauts.gome.multiplayer;
 
 import java.io.IOException;
@@ -5,7 +6,7 @@ import java.io.IOException;
 import com.indigonauts.gome.ui.GameController;
 
 public abstract class P2PConnector extends MultiplayerConnector {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("P2PConnector");
   //#endif
 
@@ -18,7 +19,9 @@ public abstract class P2PConnector extends MultiplayerConnector {
   }
 
   public void acceptChallenge(Challenge challenge) throws IOException {
+    //#if DEBUG
     log.debug("Accept challenge");
+    //#endif
     output.writeByte(GAME_EVENT);
     challenge.nick = ourselvesFriendlyName;
     challenge.reverse();
@@ -33,7 +36,9 @@ public abstract class P2PConnector extends MultiplayerConnector {
   }
 
   public void doneWithTheCounting(int whiteScore, int blackScore) throws IOException {
+    //#if DEBUG
     log.debug(" P2P done with counting");
+    //#endif
     output.writeByte(SCORE_EVENT);
     output.writeInt(whiteScore);
     output.writeInt(blackScore);
@@ -41,7 +46,9 @@ public abstract class P2PConnector extends MultiplayerConnector {
   }
 
   public void removeDeadStone(byte posX, byte posY) throws IOException {
+    //#if DEBUG
     log.debug("Remove dead stone");
+    //#endif
     output.writeByte(MARK_STONE_EVENT);
     output.writeByte(posX);
     output.writeByte(posY);
@@ -49,7 +56,9 @@ public abstract class P2PConnector extends MultiplayerConnector {
   }
 
   public void sendMessage(String nickToSend, String message) throws IOException {
+    //#if DEBUG
     log.debug("Send message");
+    //#endif
     output.writeByte(MESSAGE_EVENT);
     output.writeByte(MultiplayerCallback.MESSAGE_CHAT_TYPE);
     output.writeUTF(ourselvesFriendlyName);
@@ -66,7 +75,7 @@ public abstract class P2PConnector extends MultiplayerConnector {
   protected boolean handleEvent(byte event) throws IOException {
     switch (event) {
     case GAME_EVENT:
-      //#ifdef DEBUG
+      //#if DEBUG
       log.debug("Start game event");
       //#endif
       callback.startGame(Challenge.unmarshal(input), GameController.P2P_MODE);

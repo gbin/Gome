@@ -56,7 +56,7 @@ public class Chat implements CommandListener {
     if (displayable == history && (command == REPLY || command == List.SELECT_COMMAND)) {
       sendMessage((String) nicks.elementAt(history.getSelectedIndex()), (String) messages.elementAt(history.getSelectedIndex()), "", history);
     }
-    //#ifdef IGS || BT
+    //#if IGS || BT
     else if (displayable == chatBox && command == SEND) {
       Gome.singleton.gameController.sendOnlineMessage(nickToSend, chatBox.getString());
       // TODO : Est-ce vraiment utile en IGS ?

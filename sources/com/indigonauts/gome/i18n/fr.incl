@@ -6,7 +6,15 @@ public interface I18N {
     String timesUp = "a son temps expiré";
     String whiteTimeUp = "Le temps de Blanc est expiré. Noir a gagné";
   }
-
+  public interface bt {
+    String connect = "Connexion Bluetooth";
+    String connecting = "Recherche de Gome distants";
+    String connectionError = "Erreur de connexion Bluetooth";
+    String noPeerFound = "Erreur : Pas de Gome trouvé";
+    String peerList = "Gome distants";
+    String connected = "Connecté au gome distant";
+    String disconnect = "Déconnecter Bluetooth";
+  }
   public interface count {
     String doneWithScoring = "Le comptage est terminé. En attente de la confirmation de l'adversaire.";
     String endGameMarkStone = "La partie est terminée. Marquer les pierres capturées.";

@@ -21,7 +21,7 @@ import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.sgf.SgfModel;
 
 public class Info extends Fetcher implements CommandListener, Showable {
-  //#ifdef DEBUG
+  //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("Info");
   //#endif
 
@@ -59,7 +59,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
   }
 
   public Info(Showable parent) {
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("help");
     //#endif
 
@@ -67,7 +67,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
     this.current = getKeys();
     setUpCurrentHelp();
 
-    //#ifdef DEBUG
+    //#if DEBUG
     log.debug("end if constructor");
     //#endif
 

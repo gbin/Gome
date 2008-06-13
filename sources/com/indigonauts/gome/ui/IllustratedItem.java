@@ -11,7 +11,7 @@ import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.FileEntry;
 
 public class IllustratedItem extends CustomItem {
-  //#ifdef DEBUG
+  //#if DEBUG
   //# private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("FileBrowser");
   //#endif
   private Image icon;

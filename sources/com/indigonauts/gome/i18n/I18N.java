@@ -163,6 +163,9 @@ public interface I18N {
     String compatibility = "Compatibility";
     String ghostStone = "Ghost Stone";
     String email = "Your Email";
+    String bluetooth = "Bluetooth Service";
+    String start = "Start";
+    String dontstart = "Don't start";
   }
 
   public interface error {
