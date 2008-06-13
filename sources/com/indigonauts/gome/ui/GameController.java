@@ -328,7 +328,7 @@ public class GameController implements MultiplayerCallback
 
   private int normalDelta;
 
-  void initPainter() {
+  public void initPainter() {
     // log.debug("initPainter");
     Rectangle drawArea = new Rectangle(0, 0, canvas.getWidth(), canvas.getHeight());
 

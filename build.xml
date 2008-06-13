@@ -21,9 +21,7 @@
 	<!-- The primary target of the build file.  The end result is   -->
 	<!-- the deployed jar and jad files.                            -->
 	<target name="deployedSuite" depends="deployable" />
-	
-	<!-- default -->
-	<var name="LOCALE" value="en_US" />
+	<var name="LOCALE" value="en_US" /> <!-- default -->
 
 	<fileset id="base" dir="${project.root.gome}/sources">
 		<include name="com/indigonauts/gome/i18n/help/*.*" />
@@ -59,7 +57,7 @@
 	</patternset>
 
 	<patternset id="gfx">
-		<include name="gfx/**/*.*" />
+		<include name="gfx/*.r" />
 	</patternset>
 
 	<target name="MIDP2">
@@ -109,6 +107,7 @@
 		<patternset refid="games" />
 		<patternset refid="problems" />
 		<patternset refid="joseki" />
+		<patternset refid="gfx" />
 	</fileset>
 
 	<fileset id="gome-joseki-jsr75-MIDP2-files" dir="${project.root.gome}/sources">

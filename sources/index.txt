@@ -1,6 +1,5 @@
 
 file:///,I,Local Files
-jar:/test.sgf,R,Test
 jar:/games/index.txt,I,Bundled Games
 jar:/problems/index.txt,I,Bundled Problems
 jar:/joseki/index.txt,I,Kogo Joseki dictionary (http://waterfire.us/joseki.htm)

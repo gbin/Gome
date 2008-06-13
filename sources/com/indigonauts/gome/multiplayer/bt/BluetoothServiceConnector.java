@@ -23,7 +23,15 @@ public class BluetoothServiceConnector extends P2PConnector {
 
   public BluetoothServiceConnector(MultiplayerCallback callback) throws BluetoothStateException {
     super(callback);
+    //#if DEBUG
+    log.debug("Retreive our Friendly name :");
+    log.debug("Local device = " + LocalDevice.getLocalDevice());
+    //#endif
     ourselvesFriendlyName = LocalDevice.getLocalDevice().getFriendlyName() + " (Server)";
+    //#if DEBUG
+    log.debug(" Friendly name :" + ourselvesFriendlyName);
+    //#endif
+
   }
 
   private StreamConnectionNotifier notifier;
@@ -31,16 +39,20 @@ public class BluetoothServiceConnector extends P2PConnector {
 
   private void registerService() throws IOException {
     //#if DEBUG
-    log.debug("Create server connection");
+    log.debug("Register Service");
     //#endif
     notifier = (StreamConnectionNotifier) Connector.open(serviceURL);
   }
 
   protected void connect() throws IOException {
     registerService();
-    System.out.println("Server wait for connection");
+    //#if DEBUG
+    log.debug("Connect wait for connection");
+    //#endif
     connection = notifier.acceptAndOpen();
-    System.out.println("Bluetooth Connection arrived");
+    //#if DEBUG
+    log.debug("Connection arrived");
+    //#endif
     input = connection.openDataInputStream();
     output = connection.openDataOutputStream();
     otherFriendlyName = input.readUTF();

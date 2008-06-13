@@ -21,10 +21,8 @@ import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
-import com.indigonauts.gome.io.IOManager;
-//#if BT
-import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector;
-//#endif
+import com.indigonauts.gome.io.IOManager; //#if BT
+import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector; //#endif
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Options;
@@ -212,6 +210,9 @@ public class Gome extends MIDlet implements CommandListener {
     }
     //#if BT
     if (options.bluetooth == 0) {
+      //#if DEBUG
+      log.debug("Bluetooth service is selected in options... start it");
+      //#endif
       startBTService();
     }
     //#endif
@@ -220,6 +221,9 @@ public class Gome extends MIDlet implements CommandListener {
   //#if BT
   public void startBTService() {
     try {
+      //#if DEBUG
+      log.debug("Instantiate the bluetooth connector");
+      //#endif
       bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
     } catch (BluetoothStateException e) {
       Util.errorNotifier(e);

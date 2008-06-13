@@ -294,6 +294,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.IGS_MESSAGE);
     addCommand(MenuEngine.ZOOM);
   }
+
   //#endif
   //#if IGS
   public void removeOnlineSetKomiAndHandicapMenuItem() {
@@ -717,13 +718,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
-  
-
-  //protected void sizeChanged(int x, int y) {
-  //#if DEBUG
-  // log.debug("sizeChanged called");
-  //#endif
-  //recalculateLayout();
-  //}
+  protected void sizeChanged(int x, int y) {
+    //#if DEBUG
+    log.debug("sizeChanged called");
+    //#endif
+    gc.initPainter();
+  }
 
 }
