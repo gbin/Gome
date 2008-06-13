@@ -12,11 +12,13 @@ import com.indigonauts.gome.common.Point;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.sgf.Board;
+import com.indigonauts.gome.sgf.SgfNode;
+import com.indigonauts.gome.sgf.SgfPoint;
 import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 public class GlyphBoardPainter extends BoardPainter {
   //#if DEBUG
-  //# private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GlyphBoardPainter");
+  private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("GlyphBoardPainter");
   //#endif
   private static final byte[] availStoneSizes = { 6, 8, 9, 10, 12, 14, 15, 16, 17, 18, 22, 24, 26, 27, 30, 39 };
   private static final byte[] availGlyphSizes = { 6, 8, 10, 12, 16, 18 };
@@ -28,6 +30,10 @@ public class GlyphBoardPainter extends BoardPainter {
 
   Image whiteStone;
   Image blackStone;
+  Image stoneMarker;
+
+  int[] buffer;
+  int[] backbuffer;
 
   protected void calcDrawingPosition() {
     super.calcDrawingPosition();
@@ -105,7 +111,14 @@ public class GlyphBoardPainter extends BoardPainter {
     InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/" + srcsize + ".r");
 
     final int intSize = srcsize * srcsize;
-    int[] arrayRep = new int[intSize];
+    if (backbuffer == null || backbuffer.length < intSize) {
+      //#if DEBUG
+      log.debug("Realloc backbuffer to " + intSize);
+      //#endif
+      backbuffer = new int[intSize];
+    }
+
+    int[] arrayRep = backbuffer;
 
     for (int i = 0; i < intSize; i++) {
       arrayRep[i] = input.read() + (input.read() << 8) + (input.read() << 16) + (input.read() << 24);
@@ -126,10 +139,17 @@ public class GlyphBoardPainter extends BoardPainter {
 
     int toSkip = intSize * index * 4;
     while (toSkip > 0) {
-      System.out.println("to skip = " + toSkip);
       toSkip -= input.skip(toSkip);
     }
-    int[] arrayRep = new int[intSize];
+
+    if (backbuffer == null || backbuffer.length < intSize) {
+      //#if DEBUG
+      log.debug("Realloc backbuffer to " + intSize);
+      //#endif
+      backbuffer = new int[intSize];
+    }
+
+    int[] arrayRep = backbuffer;
     for (int i = 0; i < intSize; i++) {
       arrayRep[i] = (input.read() + (input.read() << 8) + (input.read() << 16) + (input.read() << 24)) | color;
     }
@@ -137,7 +157,15 @@ public class GlyphBoardPainter extends BoardPainter {
   }
 
   private int[] resize(int[] source, int oldSize, int newSize) {
-    int[] result = new int[newSize * newSize];
+    int intSize = newSize * newSize;
+    if (buffer == null || buffer.length < intSize) {
+      //#if DEBUG
+      log.debug("Realloc buffer to " + intSize);
+      //#endif
+      buffer = new int[intSize];
+    }
+
+    int[] result = buffer;
     float srcCenterFP = oldSize / 2.0f;
     float dstCenterFP = newSize / 2.0f - 0.5f;
     float scaleFP = ((float) newSize) / oldSize;
@@ -198,21 +226,41 @@ public class GlyphBoardPainter extends BoardPainter {
   }
 
   public void drawSymbolAnnotation(Graphics g, SymbolAnnotation annotation, int color) {
-    int cx = getCellX(annotation.x);
-    int cy = getCellY(annotation.y);
-
-    int srcsize = bestFitFor(availGlyphSizes, delta);
     try {
-      int[] arrayRep;
-      InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/g" + srcsize + ".r");
-      arrayRep = readGfx(input, annotation.getType(), srcsize, color);
-      input.close();
-      arrayRep = delta != srcsize ? resize(arrayRep, srcsize, delta) : arrayRep;
+      int cx = getCellX(annotation.x);
+      int cy = getCellY(annotation.y);
+      int[] arrayRep = readAnnotation(annotation, color);
       g.drawRGB(arrayRep, 0, delta, cx - halfdelta, cy - halfdelta, delta, delta, true);
     } catch (IOException e) {
       //#if DEBUG
       e.printStackTrace();
       //#endif
+      Util.errorNotifier(e);
+    }
+
+  }
+
+  private int[] readAnnotation(SymbolAnnotation annotation, int color) throws IOException {
+    int srcsize = bestFitFor(availGlyphSizes, delta);
+    InputStream input = GlyphBoardPainter.class.getResourceAsStream("/gfx/g" + srcsize + ".r");
+    int[] arrayRep = readGfx(input, annotation.getType(), srcsize, color);
+    input.close();
+    arrayRep = delta != srcsize ? resize(arrayRep, srcsize, delta) : arrayRep;
+    return arrayRep;
+  }
+
+  protected void renderStoneMarker(Graphics g, SgfNode currentNode) {
+    try {
+      SgfPoint point = currentNode.getPoint();
+      if (point != null) {
+        if (stoneMarker == null) {
+          stoneMarker = Image.createRGBImage(readAnnotation(new SymbolAnnotation(point, SymbolAnnotation.FILLED_CIRCLE), Util.COLOR_RED), delta, delta, true);
+        }
+        int cx = getCellX(point.x);
+        int cy = getCellY(point.y);
+        g.drawImage(stoneMarker, cx, cy, Graphics.HCENTER | Graphics.VCENTER);
+      }
+    } catch (IOException e) {
       Util.errorNotifier(e);
     }
 

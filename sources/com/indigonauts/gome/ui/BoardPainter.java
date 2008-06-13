@@ -208,8 +208,6 @@ public class BoardPainter {
             drawCell(graphics, x, y);
         }
       }
-      //graphicsScreen.setColor(Util.COLOR_RED);
-      //graphicsScreen.drawRect(graphicsScreen.getClipX(), graphicsScreen.getClipY(), graphicsScreen.getClipWidth()-1, graphicsScreen.getClipHeight()-1);
     }
 
     if (counting) {
@@ -235,9 +233,7 @@ public class BoardPainter {
     // next color
 
     if (markLastMove) {
-      SgfPoint point = currentNode.getPoint();
-      if (point != null)
-        drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.FILLED_CIRCLE), Util.COLOR_RED);
+      renderStoneMarker(g, currentNode);
     }
 
     // draw hints
@@ -259,6 +255,12 @@ public class BoardPainter {
 
     }
 
+  }
+
+  protected void renderStoneMarker(Graphics g, SgfNode currentNode) {
+    SgfPoint point = currentNode.getPoint();
+    if (point != null)
+      drawSymbolAnnotation(g, new SymbolAnnotation(point, SymbolAnnotation.FILLED_CIRCLE), Util.COLOR_RED);
   }
 
   public void drawAnnotations(Graphics g, Vector annotations) {
