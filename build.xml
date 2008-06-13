@@ -7,9 +7,9 @@
 <!-- ================================================================================= -->
 
 <project name="gome" default="all" basedir=".">
-	
+
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
-	<taskdef resource="antenna.properties" classpath="${path.antenna.jar}"/>
+	<taskdef resource="antenna.properties" classpath="${path.antenna.jar}" />
 	<!-- User build properties come first so that they can override -->
 	<!-- the generated properties file.  Be careful with these      -->
 	<!-- overrides.                                                 -->
@@ -21,6 +21,9 @@
 	<!-- The primary target of the build file.  The end result is   -->
 	<!-- the deployed jar and jad files.                            -->
 	<target name="deployedSuite" depends="deployable" />
+	
+	<!-- default -->
+	<var name="LOCALE" value="en_US" />
 
 	<fileset id="base" dir="${project.root.gome}/sources">
 		<include name="com/indigonauts/gome/i18n/help/*.*" />
@@ -55,6 +58,10 @@
 		<include name="joseki/**/*.*" />
 	</patternset>
 
+	<patternset id="gfx">
+		<include name="gfx/**/*.*" />
+	</patternset>
+
 	<target name="MIDP2">
 		<var name="wtk.midpapi" value="${wtk.home}/lib/midpapi20.jar:${wtk.home}/lib/cldcapi11.jar:${wtk.home}/lib/wma20.jar:${wtk.home}/lib/mmapi.jar:${wtk.home}/lib/j2me-ws.jar:${wtk.home}/lib/jsr75.jar:${wtk.home}/lib/jsr082.jar:${wtk.home}/lib/jsr184.jar" />
 		<var name="wtk.cldc.version" value="1.1" />
@@ -66,11 +73,11 @@
 		<antcall target="all_types" />
 		<var name="LOCALE" value="en_US" />
 		<antcall target="all_types" />
-		
+
 	</target>
-	
-	<target name="all_types" depends="VMIDP2_MINIMAL,VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2"/>
-		
+
+	<target name="all_types" depends="VMIDP2_MINIMAL,VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2,VJOSEKI_MIDP2_JSR75_BT_AA" />
+
 
 	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
 		<exclude name="**/*.*" />
@@ -83,10 +90,10 @@
 		<patternset refid="games" />
 		<patternset refid="problems" />
 	</fileset>
-	
+
 	<fileset id="gome-minimal-MIDP2-files" dir="${project.root.gome}/sources">
-			<patternset refid="file-icons" />
-			<patternset refid="menu-icons" />
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
 	</fileset>
 
 	<fileset id="gome-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
@@ -96,6 +103,14 @@
 		<patternset refid="problems" />
 	</fileset>
 
+	<fileset id="gome-joseki-jsr75-bt-aa-MIDP2-files" dir="${project.root.gome}/sources">
+		<patternset refid="file-icons" />
+		<patternset refid="menu-icons" />
+		<patternset refid="games" />
+		<patternset refid="problems" />
+		<patternset refid="joseki" />
+	</fileset>
+
 	<fileset id="gome-joseki-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
@@ -103,7 +118,7 @@
 		<patternset refid="problems" />
 		<patternset refid="joseki" />
 	</fileset>
-	
+
 	<fileset id="gome-joseki-noimage-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
 		<patternset refid="file-icons" />
 		<patternset refid="menu-icons" />
@@ -134,19 +149,19 @@
 		<antcall target="deployable" />
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
-	
-	<target name="VMIDP2_MINIMAL" depends="MIDP2" description="MIDP2 version minimale">
-			<echo message="MIDP2-${LOCALE}" />
-			<var name="midlet.name" value="gome-minimal-MIDP2" />
-			<var name="symbols" value="IGS,MENU_IMAGES" />
-			<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-			<replace file="${project.root.gome}/${midlet.name}.jad">
-				<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
-				<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-			</replace>
 
-			<antcall target="deployable" />
-			<delete file="${project.root.gome}/${midlet.name}.jad" />
+	<target name="VMIDP2_MINIMAL" depends="MIDP2" description="MIDP2 version minimale">
+		<echo message="MIDP2-${LOCALE}" />
+		<var name="midlet.name" value="gome-minimal-MIDP2" />
+		<var name="symbols" value="IGS,MENU_IMAGES" />
+		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<replace file="${project.root.gome}/${midlet.name}.jad">
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+		</replace>
+
+		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
 
 	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
@@ -162,7 +177,20 @@
 		<antcall target="deployable" />
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
+	
+	<target name="VJOSEKI_MIDP2_JSR75_BT_AA" depends="MIDP2" description="Full version">
+		<echo message="Full Version" />
+		<var name="midlet.name" value="gome-joseki-jsr75-bt-aa-MIDP2" />
+		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,BT,AA" />
+		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<replace file="${project.root.gome}/${midlet.name}.jad">
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+		</replace>
 
+		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad" />
+	</target>
 
 	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
 		<echo message="JOSEKI MIDP2 JSR75" />
@@ -207,7 +235,7 @@
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
 
-	
+
 	<!-- Initialize the build environment as necessary -->
 	<target name="-initialize">
 		<echo message="Initializing build environment..." />
@@ -243,10 +271,6 @@
 
 	<!-- Run the packaged code -->
 	<target name="run" depends="deployable,-eclipseme-run" description="Runs the deployed package in the emulator">
-	</target>
-
-	<!-- Build a Palm PRC file -->
-	<target name="makeprc" depends="deployable,-eclipseme-makeprc" description="Generates a deployable Palm PRC file">
 	</target>
 
 	<target name="cleandist" depends="-eclipseme-initialize">

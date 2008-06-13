@@ -358,7 +358,9 @@ public class MenuEngine implements CommandListener {
       //#if BT
       else if (d == btPeerList) {
         if (c == BT_CONNECT || c == List.SELECT_COMMAND) {
+          //#if DEBUG
           log.debug("Connecting to BT");
+          //#endif
           ((BluetoothClientConnector) gc.multiplayerConnector).connectToPeer(btPeerList.getSelectedIndex());
         }
         btPeerList = null;
@@ -567,11 +569,10 @@ public class MenuEngine implements CommandListener {
       //#if JSR75
       IOManager.singleton.deleteJSR75(file.getUrl());
       //#else
-
       //# try {
       //#   IOManager.singleton.deleteLocalStore(file.getName());
       //# } catch (RecordStoreException e) {
-      //#   Util.messageBox(I18N.error.error, I18N.error.delete, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
+      //#   Util.messageBox(I18N.error.error, I18N.error.errorDelete, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
       //# }
       //#endif
     } else {

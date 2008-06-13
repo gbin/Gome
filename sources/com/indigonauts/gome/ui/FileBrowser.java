@@ -19,8 +19,6 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.List;
-import javax.microedition.rms.RecordStoreException;
-
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.StringVector;
@@ -34,6 +32,10 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfPoint;
+
+//#ifndef JSR75
+//# import javax.microedition.rms.RecordStoreException;
+//#endif
 
 /**
  * Fetcher extention is just for the text files

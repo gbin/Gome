@@ -159,11 +159,14 @@ public interface I18N {
     String compatibility = "Compatibilité";
     String ghostStone = "Pierre fantôme";
     String email = "Votre Email";
+    String bluetooth = "Service Bluetooth";
+    String start = "Démarrer";
+    String dontstart = "Ne pas démarrer";
   }
 
   public interface error {
     String error = "Erreur";
-    String delete = "Erreur lors de la suppression du fichier";
+    String errorDelete = "Erreur lors de la suppression du fichier";
     String onlyOnline = "Vous ne pouvez importer que des fichiers en ligne";
     String recordStored = "Erreur lors de l'accès au stockage interne";
     String sgfParsing = "Erreur de forma SGF";

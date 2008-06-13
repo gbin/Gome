@@ -7,7 +7,6 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
-import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.io.FileEntry;
 
 public class IllustratedItem extends CustomItem {

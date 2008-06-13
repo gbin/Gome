@@ -170,7 +170,7 @@ public interface I18N {
 
   public interface error {
     String error = "Error";
-    String delete = "Error while deleting file";
+    String errorDelete = "Error while deleting file";
     String onlyOnline = "You can only import online files";
     String recordStored = "Error accessing internal storage";
     String sgfParsing = "SGF format error";

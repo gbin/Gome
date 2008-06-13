@@ -30,7 +30,9 @@ public class BluetoothServiceConnector extends P2PConnector {
   private StreamConnection connection;
 
   private void registerService() throws IOException {
+    //#if DEBUG
     log.debug("Create server connection");
+    //#endif
     notifier = (StreamConnectionNotifier) Connector.open(serviceURL);
   }
 

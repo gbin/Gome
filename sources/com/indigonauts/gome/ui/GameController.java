@@ -210,7 +210,9 @@ public class GameController implements MultiplayerCallback
     //#endif
     //#if BT
     case P2P_MODE:
+      //#if DEBUG
       log.info("Switch to P2P play mode");
+      //#endif
       Gome.singleton.mainCanvas.switchToP2PPlayMenu();
       break;
     //#endif
@@ -1045,10 +1047,14 @@ public class GameController implements MultiplayerCallback
     try {
       if (!tryingToConnect) {
         tryingToConnect = true;
+        //#if DEBUG
         log.debug("Connect to BT");
+        //#endif
         canvas.setSplashInfo(I18N.bt.connecting);
         multiplayerConnector = new BluetoothClientConnector(this);
+        //#if DEBUG
         log.debug(" - start thread");
+        //#endif
         multiplayerConnector.start();
       }
     } catch (Exception e) {
