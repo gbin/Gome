@@ -396,8 +396,9 @@ public class Util {
   }
 
   public static void errorNotifier(Throwable t) {
-    //#if BEBUG
+    //#if DEBUG
     t.printStackTrace();
+    log.error("Unhandled Error", t);
     //#endif
     Util.messageBox(I18N.error.error, t.getMessage() + ", " + t.toString(), AlertType.ERROR);
   }
