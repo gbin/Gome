@@ -23,14 +23,9 @@ public class BluetoothServiceConnector extends P2PConnector {
 
   public BluetoothServiceConnector(MultiplayerCallback callback) throws BluetoothStateException {
     super(callback);
-    //#if DEBUG
-    log.debug("Retreive our Friendly name :");
-    log.debug("Local device = " + LocalDevice.getLocalDevice());
-    //#endif
-    ourselvesFriendlyName = LocalDevice.getLocalDevice().getFriendlyName() + " (Server)";
-    //#if DEBUG
-    log.debug(" Friendly name :" + ourselvesFriendlyName);
-    //#endif
+
+    LocalDevice localDevice = LocalDevice.getLocalDevice();
+    ourselvesFriendlyName = localDevice.getFriendlyName() + " (Server)";
 
   }
 

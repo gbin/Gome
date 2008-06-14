@@ -225,13 +225,16 @@ public class Gome extends MIDlet implements CommandListener {
       log.debug("Instantiate the bluetooth connector");
       //#endif
       bluetoothServiceConnector = new BluetoothServiceConnector(gameController);
-    } catch (BluetoothStateException e) {
-      Util.errorNotifier(e);
+
+      //#if DEBUG
+      log.debug("Start BT Service");
+      //#endif
+      bluetoothServiceConnector.start();
+    } catch (Throwable e) {
+      Util.messageBox(I18N.bt.noBTAvailableTitle, I18N.bt.noBTAvailable + " (" + e.toString() + ")", AlertType.ERROR);
+      bluetoothServiceConnector = null;
+
     }
-    //#if DEBUG
-    log.debug("Start BT Service");
-    //#endif
-    bluetoothServiceConnector.start();
   }
   //#endif
 }

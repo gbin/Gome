@@ -14,6 +14,8 @@ public interface I18N {
     String peerList = "Gome distants";
     String connected = "Connecté au gome distant";
     String disconnect = "Déconnecter Bluetooth";
+    String noBTAvailableTitle = "Sous-système Bluetooth indisponible";
+    String noBTAvailable = "Raison :";
   }
   public interface count {
     String doneWithScoring = "Le comptage est terminé. En attente de la confirmation de l'adversaire.";

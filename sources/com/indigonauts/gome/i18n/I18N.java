@@ -56,6 +56,8 @@ public interface I18N {
     String peerList = "Available remote gomes";
     String connected = "Connected to Bluetooth Peer";
     String disconnect = "Disconnect Bluetooth";
+    String noBTAvailableTitle = "Bluetooth subsystem unavailable";
+    String noBTAvailable = "Unavailibility reason :";
   }
 
   public interface online {

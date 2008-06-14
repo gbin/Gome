@@ -71,9 +71,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     keys.addElement(new Integer(KEY_NUM0));
     keys.addElement(new Integer(KEY_NUM1));
     keys.addElement(new Integer(KEY_NUM3));
-    keys.addElement(new Integer(KEY_NUM5));
     keys.addElement(new Integer(KEY_NUM7));
     keys.addElement(new Integer(KEY_NUM9));
+    keys.addElement(new Integer(KEY_NUM5));
     keys.addElement(new Integer(KEY_NUM2));
     keys.addElement(new Integer(KEY_NUM8));
     keys.addElement(new Integer(KEY_NUM4));
