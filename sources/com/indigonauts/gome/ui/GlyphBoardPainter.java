@@ -39,6 +39,7 @@ public class GlyphBoardPainter extends BoardPainter {
     super.calcDrawingPosition();
     try {
       readStones(delta);
+      stoneMarker = null; // reset it so it will reread it if needed
     } catch (IOException e) {
       Util.errorNotifier(e);
       whiteStone = null;
