@@ -261,8 +261,8 @@ public interface I18N {
   String reply = "repondre";
   String editNode = "Editer";
   String ok = "ok";
-  String bookmark = "marquer";
-  String gotoBookmark = "aller marque";
-  String bookmarkSet = "La marque a été mise";
-  String mark = "Marque";
+  String bookmark = "placer le marque-page";
+  String gotoBookmark = "aller au marque-page";
+  String bookmarkSet = "Le marque-page a été placé";
+  String mark = "Marquer";
 }
