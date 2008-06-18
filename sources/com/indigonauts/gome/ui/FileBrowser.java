@@ -260,7 +260,8 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
 
           indexBlock = 0;
           selectedNum = 0;
-          if (c == OPEN_REVIEW) {
+          // by default the click is the review mode
+          if (c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
             collectionEntry.setPlayMode(GameController.REVIEW_MODE);
           }
           listener.loadFile((CollectionEntry) entry, 0);
