@@ -73,11 +73,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     keys.addElement(new Integer(KEY_NUM3));
     keys.addElement(new Integer(KEY_NUM7));
     keys.addElement(new Integer(KEY_NUM9));
-    keys.addElement(new Integer(KEY_NUM5));
-    keys.addElement(new Integer(KEY_NUM2));
-    keys.addElement(new Integer(KEY_NUM8));
-    keys.addElement(new Integer(KEY_NUM4));
-    keys.addElement(new Integer(KEY_NUM6));
+    
     int[] allActions = { Canvas.GAME_A, Canvas.GAME_B, Canvas.GAME_C, Canvas.GAME_D, Canvas.UP, Canvas.DOWN, Canvas.LEFT, Canvas.RIGHT, Canvas.FIRE };
     for (int j = 0; j < allActions.length; j++) {
       keys.removeElement(new Integer(getKeyCode(allActions[j])));
