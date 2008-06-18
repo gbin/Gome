@@ -9,7 +9,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import javax.bluetooth.BluetoothStateException;
 import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Command;
@@ -21,11 +20,15 @@ import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
-import com.indigonauts.gome.io.IOManager; //#if BT
-import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector; //#endif
+import com.indigonauts.gome.io.IOManager; 
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Options;
+
+//#if BT
+import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector; 
+//#endif
+
 
 public class Gome extends MIDlet implements CommandListener {
   //#if DEBUG

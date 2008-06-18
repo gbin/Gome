@@ -456,36 +456,39 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   }
 
   public void paint(Graphics g) {
-    g.setColor(0xccccff);
-    g.fillRect(0, 0, getWidth(), getHeight());
+    try {
+      g.setColor(0xccccff);
+      g.fillRect(0, 0, getWidth(), getHeight());
 
-    if (scroller.isVisible() && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
-      //#if DEBUG
-      log.debug("status bar only");
-      //#endif
+      if (scroller.isVisible() && scroller.getX() == g.getClipX() && scroller.getY() == g.getClipY() && scroller.getWidth() == g.getClipWidth() && scroller.getHeight() == g.getClipHeight()) {
+        //#if DEBUG
+        log.debug("status bar only");
+        //#endif
+        drawStatusBar(g);
+        return;
+      }
+
+      if (clockAndCommentMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
+              && clockPainter.getHeight() == g.getClipHeight()) {
+        drawStatusBar(g);
+        return;
+      }
+
+      if (boardPainter != null) {
+        char playMode = gc.getPlayMode();
+        boolean passiveMode = (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) && !gc.isCountMode();
+        boardPainter.drawMe(g, passiveMode ? null : gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), passiveMode, gc.getCurrentNode(), gc.getSgfModel());
+      }
+
+      if (splashInfo != null) {
+        drawSplashInfo(g);
+      }
+
+      // draw Status bar clip, so put it at the end
       drawStatusBar(g);
-      return;
+    } catch (Throwable t) {
+      Util.errorNotifier(t);
     }
-
-    if (clockAndCommentMode == CLOCK_MODE && clockPainter.getX() == g.getClipX() && clockPainter.getY() == g.getClipY() && clockPainter.getWidth() == g.getClipWidth()
-            && clockPainter.getHeight() == g.getClipHeight()) {
-      drawStatusBar(g);
-      return;
-    }
-
-    if (boardPainter != null) {
-      char playMode = gc.getPlayMode();
-      boolean passiveMode = (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) && !gc.isCountMode();
-      boardPainter.drawMe(g, passiveMode ? null : gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), passiveMode, gc.getCurrentNode(), gc.getSgfModel());
-    }
-
-    if (splashInfo != null) {
-      drawSplashInfo(g);
-    }
-
-    // draw Status bar clip, so put it at the end
-    drawStatusBar(g);
-
   }
 
   private void drawSplashInfo(Graphics g) {
@@ -528,13 +531,11 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     //#endif
     synchronized (SCROLLER_SYNC) {
       Font scrollerFont = Gome.singleton.options.getScrollerFont();
-      scroller.setSpeed(Gome.singleton.options.getScrollerSpeed());
+      int scrollerSpeed = Gome.singleton.options.getScrollerSpeed();
+      if(scrollerSpeed == -1) // if it is a manual scroll, paus eit right away before it starts 
+        scroller.paused = true; 
+      scroller.setSpeed(scrollerSpeed);
       scroller.setBigStep(scrollerFont.getHeight() / 2);
-
-      // log.debug("Scroller height = " + scroller.getHeight());
-      //Image img = Util.renderOffScreenScrollableText(currentComment != null ? currentComment : "#" + gc.getMoveNb(), getWidth(), scroller.getHeight(), scrollerFont, Util.COLOR_BLACK, //$NON-NLS-1$ //$NON-NLS-2$
-      //        Util.COLOR_LIGHT_BACKGROUND);
-      //scroller.setImg(img);
       scroller.setMoveNb(gc.getMoveNb());
       scroller.setComment(currentComment);
       scroller.setCoordinates(gc.getCursor());

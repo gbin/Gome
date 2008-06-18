@@ -26,7 +26,7 @@ public class Scroller extends Thread {
   private static final String UP = new String(UPC);
   private static final String DOWN = new String(DOWNC);
   private static final String UP_DOWN = new String(UP_DOWNC);
-  
+
   private Canvas target;
 
   private int x;
@@ -76,13 +76,10 @@ public class Scroller extends Thread {
       }
     } catch (InterruptedException e) {
       // interrupted, do nothing
+    } catch (Throwable t) {
+      Util.errorNotifier(t);
     }
-    //#if DEBUG
-    catch (Throwable t) {
-      log.error("scroller loop error", t);
-      Util.messageBox("Uncaught exception cf logs", "Uncaught exception " + t.getMessage(), AlertType.ERROR);
-    }
-    //#endif
+
   }
 
   private Image tempBuff;
@@ -133,7 +130,7 @@ public class Scroller extends Thread {
     tempBuff.getRGB(afterRaster, 0, boxWidth, 0, 0, boxWidth, boxHeight);
 
     for (int i = 0; i < len; i++) {
-      afterRaster[i] = ((alpha<<24)&0xFF000000) + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
+      afterRaster[i] = ((alpha << 24) & 0xFF000000) + (afterRaster[i] & 0x00FFFFFF); // get the color of the pixel.
     }
     g.drawRGB(afterRaster, 0, boxWidth, xBox - boxWidth, yBox, boxWidth, boxHeight, true);
 
@@ -184,21 +181,17 @@ public class Scroller extends Thread {
       strings[--nb] = fileIndex;
       colors[nb] = Util.COLOR_GREEN;
     }
-    
+
     int transparency = 0x00;
-    if(offset/2<boxHeight)
-    {
-      transparency = (0xA0 * (boxHeight - (offset/2)))/boxHeight;
-    }
-    else if (offset > textHeight - height - boxHeight)
-    {
-      transparency = (0xA0 * (offset + boxHeight - textHeight + height))/boxHeight;
+    if (offset / 2 < boxHeight) {
+      transparency = (0xA0 * (boxHeight - (offset / 2))) / boxHeight;
+    } else if (offset > textHeight - height - boxHeight) {
+      transparency = (0xA0 * (offset + boxHeight - textHeight + height)) / boxHeight;
     }
 
     drawOverlayBox(g, width - 2, y + 1, strings, colors, Util.COLOR_LIGHT_BACKGROUND, transparency);
   }
 
-  
   public void bigStepUp() {
     offset += bigStep;
     stepUp();
@@ -329,7 +322,8 @@ public class Scroller extends Thread {
         }
         // put the new textHeight
         textHeight += height;
-        resume(); // start the scroller itself
+        if (speed != -1) // don't resume anything if it is on manual scroll
+          resume(); // start the scroller itself
       } else {
         pause();
       }
@@ -351,9 +345,6 @@ public class Scroller extends Thread {
 
   public void setSpeed(int speed) {
     this.speed = speed;
-    if (speed == -1)// manual
-      pause();
-
   }
 
   private void pause() {
@@ -365,6 +356,7 @@ public class Scroller extends Thread {
     synchronized (this) {
       notifyAll();
     }
+
   }
 
   public boolean endOfScroll() {
