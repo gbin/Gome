@@ -8,6 +8,7 @@ import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
@@ -29,13 +30,10 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
-import com.indigonauts.gome.multiplayer.User;
-//#if BT
-import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
-//#endif
+import com.indigonauts.gome.multiplayer.User; //#if BT
+import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector; //#endif
 //#if IGS
-import com.indigonauts.gome.multiplayer.igs.IGSConnector;
-//#endif
+import com.indigonauts.gome.multiplayer.igs.IGSConnector; //#endif
 import com.indigonauts.gome.sgf.Board;
 
 public class MenuEngine implements CommandListener {
@@ -103,6 +101,7 @@ public class MenuEngine implements CommandListener {
 
   public static final Command COMMENT = new Command(I18N.comment, Command.SCREEN, 5); //$NON-NLS-1$
   public static final Command EDIT_NODE = new Command(I18N.editNode, Command.SCREEN, 5); //$NON-NLS-1$
+  public static final Command MARK = new Command(I18N.mark, Command.SCREEN, 5);
   public static final Command ZOOM = new Command(I18N.zoom, Command.SCREEN, 5); //$NON-NLS-1$
   public static final Command UNDO = new Command(I18N.undo, Command.SCREEN, 5); //$NON-NLS-1$
   public static final Command HINT = new Command(I18N.hint, Command.SCREEN, 5); //$NON-NLS-1$
@@ -110,7 +109,6 @@ public class MenuEngine implements CommandListener {
   public static final Command PREV10MOVES = new Command(I18N.prev10Moves, Command.SCREEN, 5); //$NON-NLS-1$
 
   private static final Font FIXED_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
-
 
   private FileBrowser fileBrowser;
 
@@ -137,7 +135,6 @@ public class MenuEngine implements CommandListener {
   private Chat chat;
 
   private List igsUserList;
-  
 
   private byte komi;
 
@@ -301,6 +298,8 @@ public class MenuEngine implements CommandListener {
           editNodeForm.addCommand(BACK);
           editNodeForm.setCommandListener(this);
           editNodeForm.show(Gome.singleton.display);
+        } else if (c == MARK) {
+          gc.rollCurrentMark();
         }
 
         else if (c == HELP) {
@@ -457,13 +456,7 @@ public class MenuEngine implements CommandListener {
       }
       //#endif
     } catch (Throwable t) {
-      //#if DEBUG
-      log.error(t);
-      logCanvas = Logger.getLogCanvas();
-      logCanvas.addCommand(BACK);
-      logCanvas.setCommandListener(this);
-      Gome.singleton.display.setCurrent(logCanvas);
-      //#endif
+      Util.errorNotifier(t);
     }
   }
 

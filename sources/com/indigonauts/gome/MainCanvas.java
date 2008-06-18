@@ -228,6 +228,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.EVALUATE);
     removeCommand(MenuEngine.RESIGN);
     removeCommand(MenuEngine.EDIT_NODE);
+    removeCommand(MenuEngine.MARK);
     //#if IGS
     removeCommand(MenuEngine.IGS_MESSAGE);
     removeCommand(MenuEngine.IGS_GAMELIST);
@@ -255,6 +256,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.UNDO);
     addCommand(MenuEngine.EVALUATE);
     addCommand(MenuEngine.EDIT_NODE);
+    addCommand(MenuEngine.MARK);
     //#if IGS
     if (!Gome.singleton.options.igsLogin.equals("") && !Gome.singleton.options.igsPassword.equals("")) {
 

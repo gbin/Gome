@@ -19,30 +19,19 @@ import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.CollectionEntry;
-
-//#if BT || IGS
-
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
 import com.indigonauts.gome.multiplayer.Move;
 import com.indigonauts.gome.multiplayer.MultiplayerCallback;
 import com.indigonauts.gome.multiplayer.MultiplayerConnector;
 import com.indigonauts.gome.multiplayer.User;
-
-//#endif
-
-//#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
-
-//#endif
-//#if IGS
 import com.indigonauts.gome.multiplayer.igs.IGSConnector;
-
-//#endif
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
 import com.indigonauts.gome.sgf.SgfPoint;
+import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 //#if IGS || BT
 public class GameController implements MultiplayerCallback
@@ -1872,5 +1861,41 @@ public class GameController implements MultiplayerCallback
     multiplayerConnector.disconnect();
     multiplayerConnector = null;
   }
+
   //#endif
+
+  public void rollCurrentMark() {
+    // whatever happens, refresh the current position
+    board.getChangeMask()[cursor.x][cursor.y] = false;
+
+    // switch the annotation
+    Vector annotations = currentNode.getAnnotations();
+    if (annotations != null) {
+      int size = annotations.size();
+      for (int i = 0; i < size; i++) {
+        Object elementAt = annotations.elementAt(i);
+        if (elementAt instanceof SymbolAnnotation) {
+          SymbolAnnotation symbol = (SymbolAnnotation) elementAt;
+          if (symbol.x == cursor.x && symbol.y == cursor.y) {
+            int type = symbol.getType();
+            if (type == SymbolAnnotation.MAX_TYPE) { // after maxtype remove it
+              annotations.removeElementAt(i);
+              // ask for a refresh of the area
+              canvas.refresh(canvas.getBoardPainter().getDrawArea());
+              return;
+            }
+            symbol.setType(++type); // switch it to the next type
+            // ask for a refresh of the area
+            canvas.refresh(canvas.getBoardPainter().getDrawArea());
+            return;
+          }
+        }
+      }
+    }
+    // else create it...
+    SymbolAnnotation symbol = new SymbolAnnotation(cursor, 0); // the first type
+    currentNode.addAnnotation(symbol);
+    // ask for a refresh of the area
+    canvas.refresh(canvas.getBoardPainter().getDrawArea());
+  }
 }

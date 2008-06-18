@@ -149,8 +149,9 @@ public class Board {
       return;
     board[x][y] = color;
     changeMask[x][y] = false; // this is reversed (to optimize the new)
-
+    //#if !AA
     // The stones are slightly larger than the moku so redraw the adjacent stones
+    // no need with the AA version
     if (color == EMPTY) {
       if (x > 0 && board[x - 1][y] != EMPTY)
         changeMask[x - 1][y] = false;
@@ -165,6 +166,7 @@ public class Board {
         changeMask[x][y + 1] = false;
 
     }
+    //#endif
     changed = true;
   }
 

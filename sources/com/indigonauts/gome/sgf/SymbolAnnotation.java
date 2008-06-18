@@ -15,6 +15,7 @@ public class SymbolAnnotation extends Point {
     public static final byte SQUARE = 3;
 
     public static final byte TRIANGLE = 4;
+    public static final byte MAX_TYPE = TRIANGLE;
     
     
 
@@ -35,5 +36,9 @@ public class SymbolAnnotation extends Point {
      */
     public int getType() {
         return type;
+    }
+
+    public void setType(int t) {
+      type = t;
     }
 }

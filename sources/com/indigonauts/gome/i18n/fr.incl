@@ -264,5 +264,5 @@ public interface I18N {
   String bookmark = "marquer";
   String gotoBookmark = "aller marque";
   String bookmarkSet = "La marque a été mise";
-  
+  String mark = "Marque";
 }

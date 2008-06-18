@@ -269,6 +269,7 @@ public interface I18N {
   String bookmark = "Set bookmark";
   String gotoBookmark = "Go bookmark";
   String bookmarkSet = "The bookmark has been set";
+  String mark = "Mark";
 }
 //#elif LOCALE=="fr_FR"
 //#include fr.incl
