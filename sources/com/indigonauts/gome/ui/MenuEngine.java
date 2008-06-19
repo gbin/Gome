@@ -8,7 +8,6 @@ import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
-import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
@@ -30,10 +29,13 @@ import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
-import com.indigonauts.gome.multiplayer.User; //#if BT
-import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector; //#endif
+import com.indigonauts.gome.multiplayer.User; 
+//#if BT
+import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector; 
+//#endif
 //#if IGS
-import com.indigonauts.gome.multiplayer.igs.IGSConnector; //#endif
+import com.indigonauts.gome.multiplayer.igs.IGSConnector; 
+//#endif
 import com.indigonauts.gome.sgf.Board;
 
 public class MenuEngine implements CommandListener {

@@ -1,6 +1,3 @@
-/*
- * (c) 2006  Indigonauts
- */
 package com.indigonauts.gome.ui;
 
 import java.io.IOException;
@@ -25,8 +22,12 @@ import com.indigonauts.gome.multiplayer.Move;
 import com.indigonauts.gome.multiplayer.MultiplayerCallback;
 import com.indigonauts.gome.multiplayer.MultiplayerConnector;
 import com.indigonauts.gome.multiplayer.User;
+//#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
+//#endif
+//#if IGS
 import com.indigonauts.gome.multiplayer.igs.IGSConnector;
+//#endif
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
