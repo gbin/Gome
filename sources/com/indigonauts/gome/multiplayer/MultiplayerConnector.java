@@ -59,9 +59,9 @@ public abstract class MultiplayerConnector extends Thread {
 
   private static final byte HANDICAP_EVENT = 0x54;
 
-  private static final byte OPP_WANT_KOMI_EVENT = 0x55;
+  protected static final byte OPP_WANT_KOMI_EVENT = 0x55;
 
-  private static final byte SET_KOMI_EVENT = 0x56;
+  protected static final byte SET_KOMI_EVENT = 0x56;
 
   private static final byte IGS_RESIGNED_EVENT = 0x58;
 
@@ -245,20 +245,8 @@ public abstract class MultiplayerConnector extends Thread {
       byte value = input.readByte();
       callback.oppSetHandicap(value);
       break;
-    case OPP_WANT_KOMI_EVENT:
-      //#if DEBUG
-      log.debug("opp want komi event");
-      //#endif
-      byte komi = input.readByte();
-      callback.oppWantToSetNewKomi(komi);
-      break;
-    case SET_KOMI_EVENT:
-      //#if DEBUG
-      log.debug("set komi event event");
-      //#endif
-      byte k = input.readByte();
-      callback.setKomi(k);
-      break;
+    
+    
     case IGS_RESIGNED_EVENT:
       //#if DEBUG
       log.debug("resigned event");

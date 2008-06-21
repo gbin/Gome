@@ -35,7 +35,7 @@
          <fileset dir="${path.build.output}" includes="*,*/**"/>
       </delete>
       <antcall target="-eclipseme-internal-package">
-         <param name="flag.should.obfuscate" value="true"/>
+         <!-- param name="flag.should.obfuscate" value="true"/-->
       </antcall>
    </target>
    <target depends="-eclipseme-build" name="-eclipseme-internal-package">

@@ -10,23 +10,15 @@
 
 	<taskdef resource="net/sf/antcontrib/antlib.xml" />
 	<taskdef resource="antenna.properties" classpath="${path.antenna.jar}" />
-	<!-- User build properties come first so that they can override -->
-	<!-- the generated properties file.  Be careful with these      -->
-	<!-- overrides.                                                 -->
 	<property file="user-build.properties" />
-
-	<!-- Import the low-level targets -->
 	<import file="eclipseme-custom.xml" />
-
-	<!-- The primary target of the build file.  The end result is   -->
-	<!-- the deployed jar and jad files.                            -->
 	<target name="deployedSuite" depends="deployable" />
-	<var name="LOCALE" value="en_US" /> <!-- default -->
+
+	<!--var name="LOCALE" value="en_US" /-->
 
 	<fileset id="base" dir="${project.root.gome}/sources">
 		<include name="com/indigonauts/gome/i18n/help/*.*" />
 		<include name="index.txt" />
-		<include name="gome.png" />
 		<include name="gomoicon.png" />
 	</fileset>
 
@@ -176,7 +168,7 @@
 		<antcall target="deployable" />
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
-	
+
 	<target name="VJOSEKI_MIDP2_JSR75_BT_AA" depends="MIDP2" description="Full version">
 		<echo message="Full Version" />
 		<var name="midlet.name" value="gome-joseki-jsr75-bt-aa-MIDP2" />
@@ -247,7 +239,7 @@
 	</target>
 
 	<target name="preprocess" depends="clean, -eclipseme-initialize, -initialize">
-		<wtkpreprocess version="2" encoding="utf8" srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
+		<wtkpreprocess device="Generic/Java" version="2" encoding="utf8" srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
 			<fileset refid="${midlet.name}-files" />
@@ -281,9 +273,49 @@
 	<target name="clean" depends="-eclipseme-initialize">
 		<delete dir="${project.root.gome}/src" />
 		<delete dir="${path.build.classes}" />
-		<!--delete dir="${project.root.gome}/deployed" /-->
 		<mkdir dir="${project.root.gome}/src" />
 		<mkdir dir="${path.build.classes}" />
-		<!--mkdir dir="${project.root.gome}/deployed" /-->
+	</target>
+
+	<scriptdef name="split" language="javascript">
+		<attribute name="value" />
+		<attribute name="sep" />
+		<![CDATA[
+	             values = attributes.get("value").split(attributes.get("sep"));
+	             for(i=0; i<values.length; i++) {
+	                 project.setNewProperty(values[i],"true");
+	             }
+	         ]]>
+	</scriptdef>
+
+
+
+	<!-- adapt to the symbols given from the command line -->
+	<target name="dynamic" depends="MIDP2">
+		<echo message="Build a dynamic version of gome with ${symbols} locale = ${LOCALE}" />
+		<split value="${symbols}" sep="," />
+		<var name="midlet.name" value="gome-custom" />
+		<fileset id="gome-custom-files" dir="${project.root.gome}/sources">
+			<include name="dir.png" if="MENU_IMAGES" />
+			<include name="game.png" if="MENU_IMAGES" />
+			<include name="rdir.png" if="MENU_IMAGES" />
+			<include name="rgame.png" if="MENU_IMAGES" />
+			<include name="text.png" if="MENU_IMAGES" />
+			<include name="gdark.png" if="MENU_IMAGES" />
+			<include name="glight.png" if="MENU_IMAGES" />
+			<include name="gmedium.png" if="MENU_IMAGES" />
+			<include name="games/*.*" if="GAMES" />
+			<include name="problems/*.*" if="PROBLEMS" />
+			<include name="joseki/**/*.*" if="JOSEKI" />
+			<include name="gfx/*.r" if="AA" />
+		</fileset>
+
+		<copy file="${project.root.gome}/gome-MIDP2-JSR75-BT.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+		<replace file="${project.root.gome}/${midlet.name}.jad">
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+		</replace>
+		<antcall target="deployable" />
+		<delete file="${project.root.gome}/${midlet.name}.jad" />
 	</target>
 </project>

@@ -230,13 +230,13 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     removeCommand(MenuEngine.EDIT_NODE);
     removeCommand(MenuEngine.MARK);
     //#if IGS
-    removeCommand(MenuEngine.IGS_MESSAGE);
+    removeCommand(MenuEngine.MESSAGE);
     removeCommand(MenuEngine.IGS_GAMELIST);
     removeCommand(MenuEngine.IGS_USERLIST);
     removeCommand(MenuEngine.IGS_DISCONNECT);
     removeCommand(MenuEngine.IGS_CONNECT);
-    removeCommand(MenuEngine.IGS_RESET_DEAD_STONES);
-    removeCommand(MenuEngine.IGS_DONE_SCORE);
+    removeCommand(MenuEngine.RESET_DEAD_STONES);
+    removeCommand(MenuEngine.DONE_SCORE);
     removeOnlineSetKomiAndHandicapMenuItem();
     //#endif
 
@@ -274,9 +274,9 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.PASS);
     addCommand(MenuEngine.RESIGN);
     removeCommand(MenuEngine.IGS_CONNECT);
-    addCommand(MenuEngine.IGS_REQUEST_KOMI);
-    addCommand(MenuEngine.IGS_CHANGE_HANDICAP);
-    addCommand(MenuEngine.IGS_MESSAGE);
+    addCommand(MenuEngine.REQUEST_KOMI);
+    addCommand(MenuEngine.CHANGE_HANDICAP);
+    addCommand(MenuEngine.MESSAGE);
     addCommand(MenuEngine.ZOOM);
   }
 
@@ -287,23 +287,23 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     addCommand(MenuEngine.PASS);
     addCommand(MenuEngine.RESIGN);
     removeCommand(MenuEngine.BT_CONNECT);
-    addCommand(MenuEngine.IGS_REQUEST_KOMI);
-    addCommand(MenuEngine.IGS_CHANGE_HANDICAP);
-    addCommand(MenuEngine.IGS_MESSAGE);
+    addCommand(MenuEngine.REQUEST_KOMI);
+    addCommand(MenuEngine.CHANGE_HANDICAP);
+    addCommand(MenuEngine.MESSAGE);
     addCommand(MenuEngine.ZOOM);
   }
 
   //#endif
   //#if IGS
   public void removeOnlineSetKomiAndHandicapMenuItem() {
-    removeCommand(MenuEngine.IGS_REQUEST_KOMI);
-    removeCommand(MenuEngine.IGS_CHANGE_HANDICAP);
+    removeCommand(MenuEngine.REQUEST_KOMI);
+    removeCommand(MenuEngine.CHANGE_HANDICAP);
   }
 
   //#endif
-  //#if IGS
+  //#if IGS || BT
   public void removeOnlineSetHandicapMenuItem() {
-    removeCommand(MenuEngine.IGS_CHANGE_HANDICAP);
+    removeCommand(MenuEngine.CHANGE_HANDICAP);
   }
 
   //#endif
@@ -377,7 +377,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
   public void switchToBTOnlineMenu() {
     removeCommand(MenuEngine.BT_CONNECT);
     addCommand(MenuEngine.BT_CHALLENGE);
-    addCommand(MenuEngine.IGS_MESSAGE);
+    addCommand(MenuEngine.MESSAGE);
     addCommand(MenuEngine.BT_DISCONNECT);
   }
 
@@ -402,12 +402,12 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
 
   }
 
-  //#if IGS
+  //#if IGS || BT
   public void switchToOnlineCountingMenu() {
     removeCommand(MenuEngine.PASS);
     addCommand(MenuEngine.FINISHED_COUNTING);
-    addCommand(MenuEngine.IGS_DONE_SCORE);
-    addCommand(MenuEngine.IGS_RESET_DEAD_STONES);
+    addCommand(MenuEngine.DONE_SCORE);
+    addCommand(MenuEngine.RESET_DEAD_STONES);
   }
 
   //#endif

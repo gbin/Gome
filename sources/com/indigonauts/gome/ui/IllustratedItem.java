@@ -7,7 +7,11 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
 import com.indigonauts.gome.Gome;
+import com.indigonauts.gome.io.BundledFileEntry;
 import com.indigonauts.gome.io.FileEntry;
+import com.indigonauts.gome.io.IndexEntry;
+import com.indigonauts.gome.io.LocalFileEntry;
+import com.indigonauts.gome.io.URLFileEntry;
 
 public class IllustratedItem extends CustomItem {
   //#if DEBUG
@@ -26,7 +30,9 @@ public class IllustratedItem extends CustomItem {
     this.icon = icon;
     this.entry = entry;
     this.text = text == null ? "" : text;
-    this.tooLarge = icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' ') + FileBrowser.ITEM_FONT.stringWidth(text) > parent.getWidth();
+
+    this.tooLarge = (icon != null ? icon.getWidth() : 0) + FileBrowser.ITEM_FONT.charWidth(' ') + FileBrowser.ITEM_FONT.stringWidth(text) > parent.getWidth();
+
     this.parent = parent;
   }
 
@@ -39,7 +45,10 @@ public class IllustratedItem extends CustomItem {
       visRect_inout[0] = 0;
       visRect_inout[1] = 0;
       visRect_inout[2] = parent.getWidth();
-      visRect_inout[3] = Math.max(icon.getHeight(), FileBrowser.ITEM_FONT.getHeight());
+      if (icon != null)
+        visRect_inout[3] = Math.max(icon.getHeight(), FileBrowser.ITEM_FONT.getHeight());
+      else
+        visRect_inout[3] = FileBrowser.ITEM_FONT.getHeight();
       return true;
     }
 
@@ -78,7 +87,10 @@ public class IllustratedItem extends CustomItem {
   }
 
   protected int getPrefContentHeight(int height) {
-    return Math.max(icon.getHeight(), FileBrowser.ITEM_FONT.getHeight());
+    if (icon != null)
+      return Math.max(icon.getHeight(), FileBrowser.ITEM_FONT.getHeight());
+
+    return FileBrowser.ITEM_FONT.getHeight();
   }
 
   protected int getPrefContentWidth(int width) {
@@ -102,7 +114,8 @@ public class IllustratedItem extends CustomItem {
     }
     g.setFont(FileBrowser.ITEM_FONT);
 
-    g.drawImage(icon, 0, 0, Graphics.TOP | Graphics.LEFT);
+    if (icon != null)
+      g.drawImage(icon, 0, 0, Graphics.TOP | Graphics.LEFT);
 
     String showText;
 
@@ -113,7 +126,22 @@ public class IllustratedItem extends CustomItem {
     else {
       showText = text;
     }
-    g.drawString(showText, icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' '), (h - FileBrowser.ITEM_FONT.getHeight()) / 2 + 1, Graphics.TOP | Graphics.LEFT);
+    if (icon != null)
+      g.drawString(showText, icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' '), (h - FileBrowser.ITEM_FONT.getHeight()) / 2 + 1, Graphics.TOP | Graphics.LEFT);
+    else {
+      String id;
+      if (entry instanceof IndexEntry)
+        id = "[DIR]";
+      else if (entry instanceof URLFileEntry)
+        id = "[Int]";
+      else if (entry instanceof LocalFileEntry)
+        id = "[Loc]";
+      else if (entry instanceof BundledFileEntry)
+        id = "[Bun]";
+      else
+        id = "[???]";
+      g.drawString(id + showText, 0, (h - FileBrowser.ITEM_FONT.getHeight()) / 2 + 1, Graphics.TOP | Graphics.LEFT);
+    }
 
   }
 
@@ -139,8 +167,11 @@ public class IllustratedItem extends CustomItem {
   }
 
   public void tickRight() {
-    if (icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' ') + FileBrowser.ITEM_FONT.stringWidth(text.substring(ticked)) > parent.getWidth())
-      ticked++;
+    if (icon != null)
+      if (icon.getWidth() + FileBrowser.ITEM_FONT.charWidth(' ') + FileBrowser.ITEM_FONT.stringWidth(text.substring(ticked)) > parent.getWidth())
+        ticked++;
+      else if (FileBrowser.ITEM_FONT.stringWidth("?????") + FileBrowser.ITEM_FONT.stringWidth(text.substring(ticked)) > parent.getWidth())
+        ticked++;
     repaint();
   }
 

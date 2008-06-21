@@ -182,11 +182,24 @@ public class IGSConnector extends MultiplayerConnector {
       }
       callback.userListEvent();
       break;
+    case OPP_WANT_KOMI_EVENT:
+      //#if DEBUG
+      log.debug("opp want komi event");
+      //#endif
+      byte komi = input.readByte();
+      callback.oppWantToSetNewKomi(komi);
+      break;
+    case SET_KOMI_EVENT:
+      //#if DEBUG
+      log.debug("set komi event event");
+      //#endif
+      byte k = input.readByte();
+      callback.setKomi(k);
+      break;
     }
     return true;
 
   }
-
 
   public Game[] getGameList() {
     return gameList;
@@ -203,13 +216,11 @@ public class IGSConnector extends MultiplayerConnector {
     output.writeByte(CHALLENGE);
     challenge.marshall(output);
     output.flush();
-    
+
   }
 
   public String getCurrentOpponent() {
     return getCurrentChallenge().nick;
   }
-
-  
 
 }

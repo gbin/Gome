@@ -27,9 +27,13 @@ import com.indigonauts.gome.io.FileEntry;
 import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.io.IndexEntry;
 import com.indigonauts.gome.io.LocalFileEntry;
+
+//#if BT || IGS
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
-import com.indigonauts.gome.multiplayer.User; 
+import com.indigonauts.gome.multiplayer.User;
+//#endif
+
 //#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector; 
 //#endif
@@ -70,16 +74,17 @@ public class MenuEngine implements CommandListener {
   public static final Command IGS_DISCONNECT = new Command(I18N.online.disconnect, Command.SCREEN, 5);
   public static final Command IGS_OBSERVE = new Command(I18N.online.observe, Command.SCREEN, 5);
   public static final Command IGS_CHALLENGE = new Command(I18N.online.challenge, Command.SCREEN, 5);
-  public static final Command IGS_DECLINE = new Command(I18N.online.decline, Command.SCREEN, 5);
-  public static final Command IGS_MESSAGE = new Command(I18N.online.message, Command.SCREEN, 2);
   public static final Command IGS_SORT_BY_RANK = new Command(I18N.online.sortRank, Command.SCREEN, 5);
   public static final Command IGS_SORT_BY_NICK = new Command(I18N.online.sortNick, Command.SCREEN, 5);
   public static final Command IGS_SORT_BY_WATCH = new Command(I18N.online.sortWatch, Command.SCREEN, 5);
-
-  public static final Command IGS_DONE_SCORE = new Command(I18N.done, Command.SCREEN, 5);
-  public static final Command IGS_REQUEST_KOMI = new Command(I18N.online.requestKomi, Command.SCREEN, 5);
-  public static final Command IGS_CHANGE_HANDICAP = new Command(I18N.online.changeHandicap, Command.SCREEN, 5);
-  public static final Command IGS_RESET_DEAD_STONES = new Command(I18N.count.undoMarkDeadStone, Command.SCREEN, 5);
+  //#endif
+  
+  //#if IGS || BT
+  public static final Command MESSAGE = new Command(I18N.online.message, Command.SCREEN, 2);
+  public static final Command REQUEST_KOMI = new Command(I18N.online.requestKomi, Command.SCREEN, 5);
+  public static final Command CHANGE_HANDICAP = new Command(I18N.online.changeHandicap, Command.SCREEN, 5);
+  public static final Command DONE_SCORE = new Command(I18N.done, Command.SCREEN, 5);
+  public static final Command RESET_DEAD_STONES = new Command(I18N.count.undoMarkDeadStone, Command.SCREEN, 5);
   //#endif
 
   public static final Command GAME_STATUS = new Command(I18N.gameStatus, Command.SCREEN, 8); //$NON-NLS-1$
@@ -221,11 +226,11 @@ public class MenuEngine implements CommandListener {
           gc.getServerUserList();
         } else if (c == IGS_DISCONNECT) {
           gc.disconnectFromServer();
-        } else if (c == IGS_MESSAGE) {
+        } else if (c == MESSAGE) {
           chat.sendMessage(gc.multiplayerConnector.getCurrentOpponent(), null, null, Gome.singleton.mainCanvas);
-        } else if (c == IGS_REQUEST_KOMI) {
+        } else if (c == REQUEST_KOMI) {
           gomeOnlineWantKomi();
-        } else if (c == IGS_CHANGE_HANDICAP) {
+        } else if (c == CHANGE_HANDICAP) {
           gomeOnlineChangeHandicap();
         }
         //#endif
@@ -321,9 +326,9 @@ public class MenuEngine implements CommandListener {
           gc.resign();
         }
         //#if IGS
-        else if (c == IGS_RESET_DEAD_STONES) {
+        else if (c == RESET_DEAD_STONES) {
           gc.gomeRestoreGameForCounting();
-        } else if (c == IGS_DONE_SCORE) {
+        } else if (c == DONE_SCORE) {
           gc.doneWithScore();
         }
         //#endif
@@ -381,7 +386,7 @@ public class MenuEngine implements CommandListener {
           gc.challengeServerUser(igsUserList.getSelectedIndex());
           igsUserList = null;
 
-        } else if (c == IGS_MESSAGE) {
+        } else if (c == MESSAGE) {
           chat.sendMessage(gc.getNick(igsUserList.getSelectedIndex()), "", "", Gome.singleton.mainCanvas);
           return;
         } else if (c == IGS_SORT_BY_RANK) {
@@ -415,7 +420,7 @@ public class MenuEngine implements CommandListener {
       } else if (d == challengeForm) {
         if (c == ACCEPT) {
           gc.acceptChallenge(gc.multiplayerConnector.getCurrentChallenge());
-        } else if (c == IGS_DECLINE) {
+        } else if (c == DECLINE) {
           gc.declineChallenge(gc.multiplayerConnector.getCurrentChallenge());
         }
         challengeForm = null;
@@ -522,7 +527,7 @@ public class MenuEngine implements CommandListener {
     igsUserList = new List(I18N.online.userlist, Choice.IMPLICIT);
     igsUserList.addCommand(BACK);
     igsUserList.addCommand(IGS_CHALLENGE);
-    igsUserList.addCommand(IGS_MESSAGE);
+    igsUserList.addCommand(MESSAGE);
     igsUserList.addCommand(IGS_SORT_BY_RANK);
     igsUserList.addCommand(IGS_SORT_BY_NICK);
     igsUserList.addCommand(IGS_SORT_BY_WATCH);
@@ -574,8 +579,14 @@ public class MenuEngine implements CommandListener {
       Util.messageBox(I18N.error.error, I18N.error.wrongtype, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }
   }
+  //#if IGS || BT
+  public void switchToOnline() {
+    chat = new Chat(Gome.singleton.display);
+  }
+  //#endif
 
-  //#if IGS
+
+  //#if IGS || BT
   public void showIgsChallenge(Challenge challenge) {
     gc.multiplayerConnector.setCurrentChallenge(challenge);
     String colors = ((challenge.color == Board.BLACK) ? I18N.game.blackLong : I18N.game.whiteLong);
@@ -586,11 +597,13 @@ public class MenuEngine implements CommandListener {
 
     challengeForm.append(message);
     challengeForm.addCommand(ACCEPT);
-    challengeForm.addCommand(IGS_DECLINE);
+    challengeForm.addCommand(DECLINE);
     challengeForm.setCommandListener(this);
     Gome.singleton.display.setCurrent(challengeForm);
   }
-
+  //#endif
+  
+  //#ifdef IGS
   public void showOppWantKomi(byte k) {
     this.komi = k;
     oppRequestKomiForm = new Form(I18N.online.komiChangeForm);
@@ -606,16 +619,16 @@ public class MenuEngine implements CommandListener {
     // some cleanup after disconnection
     chat = null;
   }
+  //#endif
 
-  public void switchToOnline() {
-    chat = new Chat(Gome.singleton.display);
-  }
-
+  //#if IGS || BT
   public void incomingChatMessage(String nick, String message) {
     chat.addMessage(nick, message);
     chat.showMessageHistory();
   }
+  //#endif
 
+  //#if IGS
   public void gomeOnlineWantKomi() {
     requestOnlineKomiForm = new Form(I18N.online.komiChangeForm);
     newGameKomi = new TextField(I18N.komi, "5", 2, TextField.NUMERIC); //$NON-NLS-1$ //$NON-NLS-2$        

@@ -47,13 +47,14 @@ public interface MultiplayerCallback {
 
   void gameIsDone(String player1, int score1, String player2, int score2);
 
+  
   void oppSetHandicap(byte handicap);
-
-  void oppWantToSetNewKomi(byte komi);
-
+  
+  //#if IGS
   void setKomi(byte komi);
-
   void onlineSetKomi(byte komi);
+  void oppWantToSetNewKomi(byte komi);
+  //#endif
 
   void onlineResigned(String name);
 

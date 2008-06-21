@@ -16,18 +16,24 @@ import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.CollectionEntry;
+
+//#if BT || IGS
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
 import com.indigonauts.gome.multiplayer.Move;
 import com.indigonauts.gome.multiplayer.MultiplayerCallback;
 import com.indigonauts.gome.multiplayer.MultiplayerConnector;
 import com.indigonauts.gome.multiplayer.User;
+//#endif
+
 //#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
 //#endif
+
 //#if IGS
 import com.indigonauts.gome.multiplayer.igs.IGSConnector;
 //#endif
+
 import com.indigonauts.gome.sgf.Board;
 import com.indigonauts.gome.sgf.SgfModel;
 import com.indigonauts.gome.sgf.SgfNode;
@@ -108,9 +114,10 @@ public class GameController implements MultiplayerCallback
   //#if IGS || BT
   private byte onlineColor;
   private boolean tryingToConnect = false;
-  private boolean connectToIgs = false;
   private byte gomeWantOnlineKomi = 0;
   //#endif
+  
+  private boolean connectToIgs = false; 
 
   private ClockController clock;
 
@@ -1228,12 +1235,13 @@ public class GameController implements MultiplayerCallback
       }
 
     }
-    //
+    //#if IGS
     if (moveNb == 1) {
       Gome.singleton.mainCanvas.removeOnlineSetHandicapMenuItem();
     } else if (moveNb == 20) {
       Gome.singleton.mainCanvas.removeOnlineSetKomiAndHandicapMenuItem();
     }
+    //#endif
 
     playNewMove(move.color, move.x, move.y);
     tuneBoardPainter();
@@ -1259,7 +1267,7 @@ public class GameController implements MultiplayerCallback
   }
 
   //#endif
-  //#if IGS
+  //#if IGS || BT
   public void message(byte type, String nick, String message) {
     switch (type) {
     case MultiplayerCallback.MESSAGE_CHAT_TYPE:
@@ -1294,9 +1302,8 @@ public class GameController implements MultiplayerCallback
     }
 
   }
-
   //#endif
-  //#if IGS
+  //#if IGS || BT
   public void startGame(Challenge challenge, char mode) {
     canvas.setSplashInfo(I18N.online.onlineGameStarted);
     //#if DEBUG
@@ -1377,7 +1384,9 @@ public class GameController implements MultiplayerCallback
   public String getNick(int userIndex) {
     return ((IGSConnector) multiplayerConnector).getUserList()[userIndex].nick;
   }
-
+  //#endif 
+  
+  //#if IGS || BT
   public void sendOnlineMessage(String nickToSend, String message) {
     try {
       multiplayerConnector.sendMessage(nickToSend, message);
@@ -1385,7 +1394,8 @@ public class GameController implements MultiplayerCallback
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
-
+  //#endif
+  
   private void displayScore(int white, int black) {
     byte komi = model.getByteKomi();
     white += komi / 2;
@@ -1413,7 +1423,7 @@ public class GameController implements MultiplayerCallback
     canvas.setSplashInfo(scoreSentence.toString());
   }
 
-  //#endif
+  
   public void doScore() {
     //#if DEBUG
     log.debug("doScore");
@@ -1516,7 +1526,7 @@ public class GameController implements MultiplayerCallback
     return showHint;
   }
 
-  //#if IGS
+  //#if IGS || BT
   public void synOnlineTime(int whiteTime, int whiteByoStone, int blackTime, int blackByoStone) {
     if (clock.thereIsClock()) {
       clock.synTime(whiteTime, whiteByoStone, blackTime, blackByoStone);
@@ -1551,7 +1561,7 @@ public class GameController implements MultiplayerCallback
     playMode = REVIEW_MODE;
   }
 
-  //#if IGS
+  //#if IGS || BT
   public void endGame() {
     startCountMode(false);
     canvas.setSplashInfo(I18N.count.endGameMarkStone);
@@ -1580,7 +1590,7 @@ public class GameController implements MultiplayerCallback
     }
   }
 
-  //#if IGS
+  //#if IGS || BT
   public void gameIsDone(String name1, int value1, String name2, int value2) {
     endCounting();
     String out = "";
@@ -1610,11 +1620,13 @@ public class GameController implements MultiplayerCallback
     canvas.refresh(canvas.getBoardPainter().getDrawArea());
 
     playMode = GAME_MODE;
+    // FIXME BT / IGS conflict
+    //#if IGS
     Gome.singleton.mainCanvas.switchToIGSOnlineMenu();
+    //#endif
   }
-
   //#endif
-  //#if IGS
+  //#if IGS || BT
   public void oppSetHandicap(byte handicap) {
     if (model != null && playMode == ONLINE_MODE) {
       //#if DEBUG
@@ -1654,7 +1666,7 @@ public class GameController implements MultiplayerCallback
       model.setNewKomi(k);
     }
   }
-
+  
   public void onlineSetKomi(byte k) {
     if (model != null && playMode == ONLINE_MODE) {
       try {
@@ -1664,7 +1676,9 @@ public class GameController implements MultiplayerCallback
       }
     }
   }
-
+  //#endif
+  
+  //#if IGS || BT
   public void onlineResigned(String name) {
     String color = null;
 
@@ -1679,7 +1693,10 @@ public class GameController implements MultiplayerCallback
     gameHasEnded = true;
 
     playMode = REVIEW_MODE;
+    // FIXME there is a BT / IGS problem there
+    //#if IGS
     Gome.singleton.mainCanvas.switchToIGSOnlineMenu();
+    //#endif
   }
 
   //#endif
@@ -1762,7 +1779,8 @@ public class GameController implements MultiplayerCallback
       }
     }
   }
-
+  //#endif
+  //#if IGS || BT
   public void onlineScore(int whiteScore, int blackScore) {
     displayScore(whiteScore, blackScore);
     if (playMode == P2P_MODE) {
