@@ -133,7 +133,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -147,7 +147,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -161,7 +161,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -175,7 +175,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,BT,AA" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75-BT.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -189,7 +189,7 @@
 		<var name="symbols" value="IGS,MENU_IMAGES,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -204,7 +204,7 @@
 		<var name="symbols" value="IGS,JSR75" />
 		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -218,7 +218,7 @@
 		<var name="symbols" value="IGS" />
 		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
 			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 		</replace>
 
@@ -242,7 +242,8 @@
 		<wtkpreprocess device="Generic/Java" version="2" encoding="utf8" srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
-			<fileset refid="${midlet.name}-files" />
+			<!--fileset refid="${midlet.name}-files" /-->
+			<fileset refid="custom-files" />
 		</copy>
 	</target>
 
@@ -287,6 +288,35 @@
 	             }
 	         ]]>
 	</scriptdef>
+	
+	<scriptdef name="defineCustomName" language="javascript">
+			<![CDATA[
+		             name = "";
+					 if(project.getProperty("IGS"))
+						name+="I";
+					 if(project.getProperty("MENU_IMAGES"))
+						name+="M";
+		 			 if(project.getProperty("JSR75"))
+						name+="J";
+		             if(project.getProperty("BT"))
+			            name+="B";
+		             if(project.getProperty("AA"))
+			            name+="A";
+		             if(project.getProperty("JOSEKI"))
+			            name+="j";
+		             if(project.getProperty("PROBLEMS"))
+			            name+="P";
+		             if(project.getProperty("GAMES"))
+			            name+="G";
+		             if(project.getProperty("DEBUG"))
+			            name+="D";
+				     if(name != "") 
+		                name = "Gome-" + name;
+		                   else
+		                name = "Gome";
+		             project.setProperty("midlet.name",name);
+		         ]]>
+     </scriptdef>
 
 
 
@@ -294,8 +324,9 @@
 	<target name="dynamic" depends="MIDP2">
 		<echo message="Build a dynamic version of gome with ${symbols} locale = ${LOCALE}" />
 		<split value="${symbols}" sep="," />
-		<var name="midlet.name" value="gome-custom" />
-		<fileset id="gome-custom-files" dir="${project.root.gome}/sources">
+		<defineCustomName/>
+		<echo message="${midlet.name}"/>
+		<fileset id="custom-files" dir="${project.root.gome}/sources">
 			<include name="dir.png" if="MENU_IMAGES" />
 			<include name="game.png" if="MENU_IMAGES" />
 			<include name="rdir.png" if="MENU_IMAGES" />
