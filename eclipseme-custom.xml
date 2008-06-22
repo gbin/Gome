@@ -16,7 +16,7 @@
    </target>
    <target depends="-eclipseme-initialize" name="-eclipseme-build">
       <echo message="Building source files..."/>
-      <wtkbuild destdir="${path.build.classes}" encoding="${src.encoding}" source="1.3" sourcepath="" srcdir="${project.root.gome}/src">
+      <wtkbuild destdir="${path.build.classes}" encoding="${src.encoding}" source="1.3" srcdir="${project.root.gome}/src">
          <classpath refid="classpath.gome"/>
       </wtkbuild>
    </target>
