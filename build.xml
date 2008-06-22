@@ -124,14 +124,14 @@
 					 }
 		             if(project.getProperty("AA"))
 			            name+="A";
-		             if(project.getProperty("JOSEKI"))
+			         if(project.getProperty("DEBUG"))
+           				name+="D";
+			  		 if(project.getProperty("JOSEKI"))
 			            name+="j";
 		             if(project.getProperty("PROBLEMS"))
-			            name+="P";
+			            name+="p";
 		             if(project.getProperty("GAMES"))
-			            name+="G";
-		             if(project.getProperty("DEBUG"))
-			            name+="D";
+			            name+="g";
 				     if(name != "") 
 		                name = "Gome-" + name;
 		                   else
