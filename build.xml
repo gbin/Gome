@@ -117,10 +117,11 @@
 						permissions+="javax.microedition.io.Connector.file.read,";
 						permissions+="javax.microedition.io.Connector.file.write,";
 					 }
-		             if(project.getProperty("BT"))
+		             if(project.getProperty("BT")) {
 						permissions+="javax.microedition.io.Connector.bluetooth.client,";
 						permissions+="javax.microedition.io.Connector.bluetooth.server,";
 			            name+="B";
+					 }
 		             if(project.getProperty("AA"))
 			            name+="A";
 		             if(project.getProperty("JOSEKI"))
