@@ -1,9 +1,0 @@
-MIDlet-1: Gome,/gomoicon.png,com.indigonauts.gome.Gome
-MIDlet-Jar-URL: @JAR_URL
-MIDlet-Icon: /gomoicon.png
-MicroEdition-Configuration: CLDC-1.1
-MIDlet-Version: @VERSION
-MIDlet-Name: Gome
-MIDlet-Vendor: Indigonauts
-MicroEdition-Profile: MIDP-2.0
-MIDlet-Permissions: javax.microedition.io.Connector.file.read,javax.microedition.io.Connector.file.write,javax.microedition.io.Connector.bluetooth.client,javax.microedition.io.Connector.bluetooth.server

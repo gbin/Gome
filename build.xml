@@ -22,36 +22,6 @@
 		<include name="gomoicon.png" />
 	</fileset>
 
-	<patternset id="file-icons">
-		<include name="dir.png" />
-		<include name="game.png" />
-		<include name="rdir.png" />
-		<include name="rgame.png" />
-		<include name="text.png" />
-	</patternset>
-
-	<patternset id="menu-icons">
-		<include name="gdark.png" />
-		<include name="glight.png" />
-		<include name="gmedium.png" />
-	</patternset>
-
-	<patternset id="games">
-		<include name="games/*.*" />
-	</patternset>
-
-	<patternset id="problems">
-		<include name="problems/*.*" />
-	</patternset>
-
-	<patternset id="joseki">
-		<include name="joseki/**/*.*" />
-	</patternset>
-
-	<patternset id="gfx">
-		<include name="gfx/*.r" />
-	</patternset>
-
 	<target name="MIDP2">
 		<var name="wtk.midpapi" value="${wtk.home}/lib/midpapi20.jar:${wtk.home}/lib/cldcapi11.jar:${wtk.home}/lib/wma20.jar:${wtk.home}/lib/mmapi.jar:${wtk.home}/lib/j2me-ws.jar:${wtk.home}/lib/jsr75.jar:${wtk.home}/lib/jsr082.jar:${wtk.home}/lib/jsr184.jar" />
 		<var name="wtk.cldc.version" value="1.1" />
@@ -60,172 +30,16 @@
 
 	<target name="all" depends="cleandist">
 		<var name="LOCALE" value="fr_FR" />
-		<antcall target="all_types" />
+		<antcall target="fullVersion" />
 		<var name="LOCALE" value="en_US" />
-		<antcall target="all_types" />
-
+		<antcall target="fullVersion" />
 	</target>
-
-	<target name="all_types" depends="VMIDP2_MINIMAL,VMIDP2,VMIDP2_JSR75,VJOSEKI_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2_JSR75,VJOSEKI_NOIMAGE_MIDP2,VJOSEKI_MIDP2_JSR75_BT_AA" />
-
-
-	<fileset id="gome-minimal-files" dir="${project.root.gome}/sources">
-		<exclude name="**/*.*" />
-	</fileset>
-
-
-	<fileset id="gome-normal-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-	</fileset>
-
-	<fileset id="gome-minimal-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-	</fileset>
-
-	<fileset id="gome-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-	</fileset>
-
-	<fileset id="gome-joseki-jsr75-bt-aa-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-		<patternset refid="joseki" />
-		<patternset refid="gfx" />
-	</fileset>
-
-	<fileset id="gome-joseki-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-		<patternset refid="joseki" />
-	</fileset>
-
-	<fileset id="gome-joseki-noimage-jsr75-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-		<patternset refid="joseki" />
-	</fileset>
-
-	<fileset id="gome-joseki-noimage-MIDP2-files" dir="${project.root.gome}/sources">
-		<patternset refid="file-icons" />
-		<patternset refid="menu-icons" />
-		<patternset refid="games" />
-		<patternset refid="problems" />
-		<patternset refid="joseki" />
-	</fileset>
-
-
-	<target name="VMIDP2" depends="MIDP2" description="MIDP2 version">
-		<echo message="MIDP2-${LOCALE}" />
-		<var name="midlet.name" value="gome-normal-MIDP2" />
-		<var name="symbols" value="IGS,MENU_IMAGES" />
-		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<target name="VMIDP2_MINIMAL" depends="MIDP2" description="MIDP2 version minimale">
-		<echo message="MIDP2-${LOCALE}" />
-		<var name="midlet.name" value="gome-minimal-MIDP2" />
-		<var name="symbols" value="IGS,MENU_IMAGES" />
-		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<target name="VMIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
-		<echo message="MIDP2 JSR75" />
-		<var name="midlet.name" value="gome-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,MENU_IMAGES,JSR75" />
-		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<target name="VJOSEKI_MIDP2_JSR75_BT_AA" depends="MIDP2" description="Full version">
+	
+	<target name="fullVersion" depends="MIDP2" description="Full version">
 		<echo message="Full Version" />
-		<var name="midlet.name" value="gome-joseki-jsr75-bt-aa-MIDP2" />
 		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,BT,AA" />
-		<copy file="${project.root.gome}/gome-MIDP2-JSR75-BT.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
+		<antcall target="dynamic"/>
 	</target>
-
-	<target name="VJOSEKI_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
-		<echo message="JOSEKI MIDP2 JSR75" />
-		<var name="midlet.name" value="gome-joseki-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,MENU_IMAGES,JSR75" />
-		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-
-	<target name="VJOSEKI_NOIMAGE_MIDP2_JSR75" depends="MIDP2" description="MIDP2 version with JSR75">
-		<echo message="JOSEKI NOIMAGE MIDP2 JSR75" />
-		<var name="midlet.name" value="gome-joseki-noimage-jsr75-MIDP2" />
-		<var name="symbols" value="IGS,JSR75" />
-		<copy file="${project.root.gome}/gome-MIDP2-JSR75.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
-	<target name="VJOSEKI_NOIMAGE_MIDP2" depends="MIDP2" description="MIDP2 version without JSR75">
-		<echo message="JOSEKI NOIMAGE MIDP2" />
-		<var name="midlet.name" value="gome-joseki-noimage-MIDP2" />
-		<var name="symbols" value="IGS" />
-		<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-	</target>
-
 
 	<!-- Initialize the build environment as necessary -->
 	<target name="-initialize">
@@ -242,7 +56,6 @@
 		<wtkpreprocess device="Generic/Java" version="2" encoding="utf8" srcdir="${project.root.gome}/sources" destdir="${project.root.gome}/src" symbols="${symbols},LOCALE=&quot;${LOCALE}&quot;,VERSION=&quot;${gome.jarVersion}&quot;" />
 		<copy todir="${project.root.gome}/src">
 			<fileset refid="base" />
-			<!--fileset refid="${midlet.name}-files" /-->
 			<fileset refid="custom-files" />
 		</copy>
 	</target>
@@ -288,17 +101,25 @@
 	             }
 	         ]]>
 	</scriptdef>
-	
-	<scriptdef name="defineCustomName" language="javascript">
-			<![CDATA[
+
+	<scriptdef name="defineMidletNameAndPermissions" language="javascript">
+		<![CDATA[
 		             name = "";
-					 if(project.getProperty("IGS"))
+					 permissions = "";
+					 if(project.getProperty("IGS")) {
 						name+="I";
+						permissions+="javax.microedition.io.Connector.socket,"; 
+					 }
 					 if(project.getProperty("MENU_IMAGES"))
 						name+="M";
-		 			 if(project.getProperty("JSR75"))
+		 			 if(project.getProperty("JSR75")) {
 						name+="J";
+						permissions+="javax.microedition.io.Connector.file.read,";
+						permissions+="javax.microedition.io.Connector.file.write,";
+					 }
 		             if(project.getProperty("BT"))
+						permissions+="javax.microedition.io.Connector.bluetooth.client,";
+						permissions+="javax.microedition.io.Connector.bluetooth.server,";
 			            name+="B";
 		             if(project.getProperty("AA"))
 			            name+="A";
@@ -314,9 +135,12 @@
 		                name = "Gome-" + name;
 		                   else
 		                name = "Gome";
+					 if(permissions != "")
+						permissions = "MIDlet-Permissions: " + permissions.slice(0, -1);
 		             project.setProperty("midlet.name",name);
+					 project.setProperty("midlet.permissions",permissions);
 		         ]]>
-     </scriptdef>
+	</scriptdef>
 
 
 
@@ -324,31 +148,45 @@
 	<target name="dynamic" depends="MIDP2">
 		<echo message="Build a dynamic version of gome with ${symbols} locale = ${LOCALE}" />
 		<split value="${symbols}" sep="," />
-		<defineCustomName/>
-		<echo message="${midlet.name}"/>
-		<fileset id="custom-files" dir="${project.root.gome}/sources">
-			<include name="dir.png" if="MENU_IMAGES" />
-			<include name="game.png" if="MENU_IMAGES" />
-			<include name="rdir.png" if="MENU_IMAGES" />
-			<include name="rgame.png" if="MENU_IMAGES" />
-			<include name="text.png" if="MENU_IMAGES" />
-			<include name="gdark.png" if="MENU_IMAGES" />
-			<include name="glight.png" if="MENU_IMAGES" />
-			<include name="gmedium.png" if="MENU_IMAGES" />
-			<include name="games/*.*" if="GAMES" />
-			<include name="problems/*.*" if="PROBLEMS" />
-			<include name="joseki/**/*.*" if="JOSEKI" />
-			<include name="gfx/*.r" if="AA" />
-		</fileset>
+		<defineMidletNameAndPermissions />
+		<echo message="${midlet.name}" />
+		<echo message="${midlet.permissions}" />
+		<uptodate property="buildNotRequired" targetfile="/tmp/gome/${midlet.name}-${LOCALE}-${gome.version}.jar">
+			<srcfiles dir="${project.root.gome}" includes="**/*.java" />
+			<srcfiles dir="${project.root.gome}" includes="**/*.xml" />
+			<srcfiles dir="${project.root.gome}" includes="**/*.png" />
+		</uptodate>
+		<if>
+			<istrue value="${buildNotRequired}"/>
+			<then>
+				<echo message="The compilation cache is uptodate" />
+			</then>
+			<else>
+				<fileset id="custom-files" dir="${project.root.gome}/sources">
+					<include name="dir.png" if="MENU_IMAGES" />
+					<include name="game.png" if="MENU_IMAGES" />
+					<include name="rdir.png" if="MENU_IMAGES" />
+					<include name="rgame.png" if="MENU_IMAGES" />
+					<include name="text.png" if="MENU_IMAGES" />
+					<include name="gdark.png" if="MENU_IMAGES" />
+					<include name="glight.png" if="MENU_IMAGES" />
+					<include name="gmedium.png" if="MENU_IMAGES" />
+					<include name="games/*.*" if="GAMES" />
+					<include name="problems/*.*" if="PROBLEMS" />
+					<include name="joseki/**/*.*" if="JOSEKI" />
+					<include name="gfx/*.r" if="AA" />
+				</fileset>
 
-		<copy file="${project.root.gome}/gome-MIDP2-JSR75-BT.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
-		<replace file="${project.root.gome}/${midlet.name}.jad">
-			<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
-			<replacefilter token="@VERSION" value="${gome.jarVersion}" />
-		</replace>
-		<antcall target="deployable" />
-		<delete file="${project.root.gome}/${midlet.name}.jad" />
-		<copy file="${project.root.gome}/dist/${midlet.name}-${LOCALE}-${gome.version}.jar" todir="/tmp/gome/" />
-
+				<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
+				<replace file="${project.root.gome}/${midlet.name}.jad">
+				<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+					<replacefilter token="@VERSION" value="${gome.jarVersion}" />
+					<replacefilter token="@PERMISSIONS" value="${midlet.permissions}" />
+				</replace>
+				<antcall target="deployable" />
+				<delete file="${project.root.gome}/${midlet.name}.jad" />
+				<copy file="${project.root.gome}/dist/${midlet.name}-${LOCALE}-${gome.version}.jar" todir="/tmp/gome/" />
+			</else>
+		</if>
 	</target>
 </project>
