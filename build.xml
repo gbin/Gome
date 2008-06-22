@@ -348,5 +348,7 @@
 		</replace>
 		<antcall target="deployable" />
 		<delete file="${project.root.gome}/${midlet.name}.jad" />
+		<copy file="${project.root.gome}/dist/${midlet.name}-${LOCALE}-${gome.version}.jar" todir="/tmp/gome/" />
+
 	</target>
 </project>
