@@ -37,7 +37,7 @@
 	
 	<target name="fullVersion" depends="MIDP2" description="Full version">
 		<echo message="Full Version" />
-		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,BT,AA" />
+		<var name="symbols" value="IGS,MENU_IMAGES,JSR75,BT,AA,JOSEKI,PROBLEMS,GAMES" />
 		<antcall target="dynamic"/>
 	</target>
 
