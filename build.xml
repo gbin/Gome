@@ -179,7 +179,7 @@
 
 				<copy file="${project.root.gome}/gome-MIDP2.jad" tofile="${project.root.gome}/${midlet.name}.jad" />
 				<replace file="${project.root.gome}/${midlet.name}.jad">
-				<replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
+				    <replacefilter token="@JAR_URL" value="${midlet.name}-${LOCALE}-${gome.version}.jar" />
 					<replacefilter token="@VERSION" value="${gome.jarVersion}" />
 					<replacefilter token="@PERMISSIONS" value="${midlet.permissions}" />
 				</replace>
