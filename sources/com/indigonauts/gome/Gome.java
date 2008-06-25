@@ -20,15 +20,15 @@ import javax.microedition.rms.RecordStoreException;
 
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
-import com.indigonauts.gome.io.IOManager; 
+import com.indigonauts.gome.io.IOManager;
 import com.indigonauts.gome.ui.GameController;
 import com.indigonauts.gome.ui.MenuEngine;
 import com.indigonauts.gome.ui.Options;
 
 //#if BT
-import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector; 
-//#endif
+import com.indigonauts.gome.multiplayer.bt.BluetoothServiceConnector;
 
+//#endif
 
 public class Gome extends MIDlet implements CommandListener {
   //#if DEBUG
@@ -91,18 +91,25 @@ public class Gome extends MIDlet implements CommandListener {
   }
 
   public void startApp() {
+
     //#if DEBUG
-    log.info("Application start");
+    log.info("Application (re)start");
     //#endif
     try {
-      try {
-        loadOptions();
-      } catch (Throwable t) {
-        options = new GomeOptions();
+      if (gameController == null) {
+        try {
+          loadOptions();
+        } catch (Throwable t) {
+          options = new GomeOptions();
+        }
+        if (!checkLicense())
+          return;
+        bootGome();
+      } else {
+        //#if DEBUG
+        log.info("This is just a restart");
+        //#endif
       }
-      if (!checkLicense())
-        return;
-      bootGome();
     } catch (Throwable t) {
       //#if DEBUG
       log.error("Load error", t);
