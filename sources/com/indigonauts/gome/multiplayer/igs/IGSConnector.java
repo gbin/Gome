@@ -155,6 +155,10 @@ public class IGSConnector extends MultiplayerConnector {
       callback.loggedEvent();
       break;
     case GAME_LIST_EVENT:
+      //#if DEBUG
+      log.debug("Game list event");
+      //#endif
+
       int nbGames = input.readInt();
       gameList = new Game[nbGames];
       for (int i = 0; i < nbGames; i++) {
@@ -175,6 +179,9 @@ public class IGSConnector extends MultiplayerConnector {
       break;
 
     case USER_LIST_EVENT:
+      //#if DEBUG
+      log.debug("User list event");
+      //#endif
       int nbUsers = input.readInt();
       userList = new User[nbUsers];
       for (int i = 0; i < nbUsers; i++) {
@@ -196,6 +203,9 @@ public class IGSConnector extends MultiplayerConnector {
       byte k = input.readByte();
       callback.setKomi(k);
       break;
+    default:
+      throw new IllegalArgumentException("Unknown event " + event);
+        
     }
     return true;
 

@@ -39,7 +39,7 @@ public abstract class MultiplayerConnector extends Thread {
 
   private static final byte RESET_DEAD_STONE = 0x13;
 
-  private static final byte MOVE_EVENT = 0x14;
+  private static final byte MOVE_EVENT = 0x43;
 
   protected static final byte MESSAGE_EVENT = 0x46;
 
@@ -271,10 +271,13 @@ public abstract class MultiplayerConnector extends Thread {
       callback.winByValue(winnerName, winValue);
       break;
     default:
-      return true;
+      //#if DEBUG
+      log.debug("Too specific event for me forward it");
+      //#endif
+      return false;
     }
-
-    return false;
+     
+    return true;
   }
 
   protected abstract void connect() throws IOException;
