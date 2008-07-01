@@ -39,7 +39,7 @@ public class BluetoothServiceConnector extends P2PConnector {
     notifier = (StreamConnectionNotifier) Connector.open(serviceURL);
   }
 
-  protected void connect() throws IOException {
+  protected boolean connect() throws IOException {
     registerService();
     //#if DEBUG
     log.debug("Connect wait for connection");
@@ -52,6 +52,7 @@ public class BluetoothServiceConnector extends P2PConnector {
     output = connection.openDataOutputStream();
     otherFriendlyName = input.readUTF();
     callback.connectedBTEvent(this);
+    return true;
   }
 
   public void disconnect() {

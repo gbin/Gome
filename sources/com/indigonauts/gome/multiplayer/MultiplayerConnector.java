@@ -6,6 +6,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import com.indigonauts.gome.common.Util;
+import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.ui.GameController;
 
 public abstract class MultiplayerConnector extends Thread {
@@ -14,7 +15,7 @@ public abstract class MultiplayerConnector extends Thread {
   //#endif
   protected MultiplayerCallback callback;
 
-  private Challenge currentChallenge;
+  protected Challenge currentChallenge;
 
   protected DataInputStream input;
   protected DataOutputStream output;
@@ -245,8 +246,7 @@ public abstract class MultiplayerConnector extends Thread {
       byte value = input.readByte();
       callback.oppSetHandicap(value);
       break;
-    
-    
+
     case IGS_RESIGNED_EVENT:
       //#if DEBUG
       log.debug("resigned event");
@@ -276,18 +276,24 @@ public abstract class MultiplayerConnector extends Thread {
       //#endif
       return false;
     }
-     
+
     return true;
   }
 
-  protected abstract void connect() throws IOException;
+  /**
+   * @return true if the connection is OK
+   * @throws IOException
+   */
+  protected abstract boolean connect() throws IOException;
 
   /**
   * @see java.lang.Thread#run()
   */
   public void run() {
     try {
-      connect();
+      noneErrorDisconnect = true;
+      if (!connect())
+        return; // should not do anything as the specific error should be displayed by the underlying specific connect
       noneErrorDisconnect = false;
       while (true)
         handleEvent(input.readByte());
@@ -297,7 +303,6 @@ public abstract class MultiplayerConnector extends Thread {
       log.error("Disconnected ", iie);
       //#endif
     } catch (IOException e) {
-      // let the disconnected message go
       //#if DEBUG
       log.error("IOException", e);
       //#endif
@@ -325,7 +330,7 @@ public abstract class MultiplayerConnector extends Thread {
         }
       }
       if (!noneErrorDisconnect) {
-        callback.message(MultiplayerCallback.MESSAGE_ERROR_TYPE, "", "online.connectionError");
+        callback.message(MultiplayerCallback.MESSAGE_ERROR_TYPE, "", I18N.online.connectionError);
         noneErrorDisconnect = true;
       }
     }

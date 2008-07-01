@@ -2,11 +2,9 @@ package com.indigonauts.gome.ui;
 
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.microedition.lcdui.AlertType;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
-
 import com.indigonauts.gome.ClockController;
 import com.indigonauts.gome.Gome;
 import com.indigonauts.gome.MainCanvas;
@@ -16,6 +14,11 @@ import com.indigonauts.gome.common.Rectangle;
 import com.indigonauts.gome.common.Util;
 import com.indigonauts.gome.i18n.I18N;
 import com.indigonauts.gome.io.CollectionEntry;
+import com.indigonauts.gome.sgf.Board;
+import com.indigonauts.gome.sgf.SgfModel;
+import com.indigonauts.gome.sgf.SgfNode;
+import com.indigonauts.gome.sgf.SgfPoint;
+import com.indigonauts.gome.sgf.SymbolAnnotation;
 
 //#if BT || IGS
 import com.indigonauts.gome.multiplayer.Challenge;
@@ -24,21 +27,18 @@ import com.indigonauts.gome.multiplayer.Move;
 import com.indigonauts.gome.multiplayer.MultiplayerCallback;
 import com.indigonauts.gome.multiplayer.MultiplayerConnector;
 import com.indigonauts.gome.multiplayer.User;
+
 //#endif
 
 //#if BT
 import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector;
+
 //#endif
 
 //#if IGS
 import com.indigonauts.gome.multiplayer.igs.IGSConnector;
-//#endif
 
-import com.indigonauts.gome.sgf.Board;
-import com.indigonauts.gome.sgf.SgfModel;
-import com.indigonauts.gome.sgf.SgfNode;
-import com.indigonauts.gome.sgf.SgfPoint;
-import com.indigonauts.gome.sgf.SymbolAnnotation;
+//#endif
 
 //#if IGS || BT
 public class GameController implements MultiplayerCallback
@@ -116,8 +116,8 @@ public class GameController implements MultiplayerCallback
   private boolean tryingToConnect = false;
   private byte gomeWantOnlineKomi = 0;
   //#endif
-  
-  private boolean connectToIgs = false; 
+
+  private boolean connectToIgs = false;
 
   private ClockController clock;
 
@@ -127,6 +127,27 @@ public class GameController implements MultiplayerCallback
     moveNb = 0;
     zoomedIn = false;
     // log.debug("Game Controller instantiated");
+  }
+
+  /**
+   * Is it interesting to show the cursor to the user ?
+   * @return
+   */
+  public boolean isPassiveMode() {
+    
+    switch (playMode) {
+    case JOSEKI_MODE:
+    case OBSERVE_MODE:
+    case REVIEW_MODE:
+      return !isCountMode();
+    case ONLINE_MODE:
+    case P2P_MODE:
+      Challenge currentChallenge = multiplayerConnector.getCurrentChallenge();
+      log.debug("current Challenge = " + currentChallenge);
+      return multiplayerConnector == null || currentChallenge == null || (getCurrentPlayerColor() != currentChallenge.color);
+    default:
+      return false;
+    }
   }
 
   public boolean hasNextInCollection() {
@@ -805,10 +826,12 @@ public class GameController implements MultiplayerCallback
     byte color = (byte) -currentNode.getPlayerColor(); // color=who is
 
     // going to play
-    if (color == 0)
+    if (color == 0) {
       color = model.getFirstPlayer(); // take the first move from
+    }
     // the model if we have no
     // clue
+
     return color;
   }
 
@@ -1302,6 +1325,7 @@ public class GameController implements MultiplayerCallback
     }
 
   }
+
   //#endif
   //#if IGS || BT
   public void startGame(Challenge challenge, char mode) {
@@ -1384,8 +1408,9 @@ public class GameController implements MultiplayerCallback
   public String getNick(int userIndex) {
     return ((IGSConnector) multiplayerConnector).getUserList()[userIndex].nick;
   }
+
   //#endif 
-  
+
   //#if IGS || BT
   public void sendOnlineMessage(String nickToSend, String message) {
     try {
@@ -1394,8 +1419,9 @@ public class GameController implements MultiplayerCallback
       Util.messageBox(I18N.failure, e.getMessage(), AlertType.ERROR);
     }
   }
+
   //#endif
-  
+
   private void displayScore(int white, int black) {
     byte komi = model.getByteKomi();
     white += komi / 2;
@@ -1423,7 +1449,6 @@ public class GameController implements MultiplayerCallback
     canvas.setSplashInfo(scoreSentence.toString());
   }
 
-  
   public void doScore() {
     //#if DEBUG
     log.debug("doScore");
@@ -1625,6 +1650,7 @@ public class GameController implements MultiplayerCallback
     Gome.singleton.mainCanvas.switchToIGSOnlineMenu();
     //#endif
   }
+
   //#endif
   //#if IGS || BT
   public void oppSetHandicap(byte handicap) {
@@ -1666,7 +1692,7 @@ public class GameController implements MultiplayerCallback
       model.setNewKomi(k);
     }
   }
-  
+
   public void onlineSetKomi(byte k) {
     if (model != null && playMode == ONLINE_MODE) {
       try {
@@ -1676,8 +1702,9 @@ public class GameController implements MultiplayerCallback
       }
     }
   }
+
   //#endif
-  
+
   //#if IGS || BT
   public void onlineResigned(String name) {
     String color = null;
@@ -1779,6 +1806,7 @@ public class GameController implements MultiplayerCallback
       }
     }
   }
+
   //#endif
   //#if IGS || BT
   public void onlineScore(int whiteScore, int blackScore) {

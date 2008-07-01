@@ -100,7 +100,7 @@ public class IGSConnector extends MultiplayerConnector {
     output.flush();
   }
 
-  protected void connect() throws IOException {
+  protected boolean connect() throws IOException {
     //#if DEBUG
     log.debug("Open incoming stream ...");
     //#endif
@@ -123,7 +123,7 @@ public class IGSConnector extends MultiplayerConnector {
     if (version != SERVER_VERSION) {
       Util.messageBox(I18N.error.error, I18N.online.versionError, AlertType.ERROR);
       connectionIncoming.close();
-      return;
+      return false;
     }
     //#if DEBUG
     log.debug("Open outgoing stream ...");
@@ -140,6 +140,7 @@ public class IGSConnector extends MultiplayerConnector {
     output.flush();
 
     login();
+    return true;
 
   }
 

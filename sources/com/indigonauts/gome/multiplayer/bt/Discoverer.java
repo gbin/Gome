@@ -126,8 +126,10 @@ public class Discoverer implements DiscoveryListener {
       searchServices(devList);
       return serviceList;
     }
-    System.out.println("No Devices found!");
-    System.out.println("No services found:(");
+    //#if DEBUG
+    log.info("No Devices found.");
+    log.info("No Services found.");
+    //#endif
     return serviceList;
   }
 

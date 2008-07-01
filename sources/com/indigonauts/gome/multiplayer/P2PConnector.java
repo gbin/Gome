@@ -24,9 +24,9 @@ public abstract class P2PConnector extends MultiplayerConnector {
     //#endif
     output.writeByte(GAME_EVENT);
     challenge.nick = ourselvesFriendlyName;
-    challenge.reverse();
     challenge.marshall(output);
     output.flush();
+    currentChallenge = challenge;
     callback.startGame(challenge, GameController.P2P_MODE);
   }
 
@@ -78,7 +78,10 @@ public abstract class P2PConnector extends MultiplayerConnector {
       //#if DEBUG
       log.debug("Start game event");
       //#endif
-      callback.startGame(Challenge.unmarshal(input), GameController.P2P_MODE);
+      Challenge challenge = Challenge.unmarshal(input);
+      challenge.reverse();
+      currentChallenge = challenge;
+      callback.startGame(challenge, GameController.P2P_MODE);
       return true;
 
     }

@@ -73,7 +73,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     keys.addElement(new Integer(KEY_NUM3));
     keys.addElement(new Integer(KEY_NUM7));
     keys.addElement(new Integer(KEY_NUM9));
-    
+
     int[] allActions = { Canvas.GAME_A, Canvas.GAME_B, Canvas.GAME_C, Canvas.GAME_D, Canvas.UP, Canvas.DOWN, Canvas.LEFT, Canvas.RIGHT, Canvas.FIRE };
     for (int j = 0; j < allActions.length; j++) {
       keys.removeElement(new Integer(getKeyCode(allActions[j])));
@@ -473,8 +473,7 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
       }
 
       if (boardPainter != null) {
-        char playMode = gc.getPlayMode();
-        boolean passiveMode = (playMode == GameController.JOSEKI_MODE || playMode == GameController.OBSERVE_MODE || playMode == GameController.REVIEW_MODE) && !gc.isCountMode();
+        boolean passiveMode = gc.isPassiveMode();
         boardPainter.drawMe(g, passiveMode ? null : gc.getCursor(), gc.getCurrentPlayerColor(), gc.getShowHints(), passiveMode, gc.getCurrentNode(), gc.getSgfModel());
       }
 
@@ -530,8 +529,8 @@ public class MainCanvas extends Canvas implements CommandListener, Showable {
     synchronized (SCROLLER_SYNC) {
       Font scrollerFont = Gome.singleton.options.getScrollerFont();
       int scrollerSpeed = Gome.singleton.options.getScrollerSpeed();
-      if(scrollerSpeed == -1) // if it is a manual scroll, paus eit right away before it starts 
-        scroller.paused = true; 
+      if (scrollerSpeed == -1) // if it is a manual scroll, paus eit right away before it starts 
+        scroller.paused = true;
       scroller.setSpeed(scrollerSpeed);
       scroller.setBigStep(scrollerFont.getHeight() / 2);
       scroller.setMoveNb(gc.getMoveNb());

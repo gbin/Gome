@@ -22,6 +22,7 @@ import com.indigonauts.gome.multiplayer.P2PConnector;
 public class BluetoothClientConnector extends P2PConnector {
   //#if DEBUG
   private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("BluetoothClientConnector");
+
   //#endif
 
   public BluetoothClientConnector(MultiplayerCallback callback) throws BluetoothStateException {
@@ -33,13 +34,13 @@ public class BluetoothClientConnector extends P2PConnector {
   private Discoverer discoverer;
   private int index;
 
-  protected void connect() throws IOException {
+  protected boolean connect() throws IOException {
     try {
       discoverer = new Discoverer();
       Vector others = discoverer.findOtherGome();
-      if (others.size() == 0) {
+      if (others == null || others.size() == 0) {
         callback.setSplashInfo(I18N.bt.noPeerFound);
-        return;
+        return false;
       }
       String[] peers = new String[others.size()];
       Enumeration elements = others.elements();
@@ -73,9 +74,10 @@ public class BluetoothClientConnector extends P2PConnector {
       output = new DataOutputStream(connection.openOutputStream());
       output.writeUTF(ourselvesFriendlyName);
       callback.connectedBTEvent(this);
-
+      return true;
     } catch (Exception e) {
       Util.errorNotifier(e);
+      return false;
     }
   }
 
