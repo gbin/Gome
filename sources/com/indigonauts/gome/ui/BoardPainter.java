@@ -418,8 +418,8 @@ public class BoardPainter {
   }
 
   protected void drawStone(Graphics g, int cx, int cy, int size, int playerColor) {
-    
-    drawVectStone(g, cx-halfdelta, cy-halfdelta, size, playerColor == Board.WHITE ? Util.COLOR_WHITE : Util.COLOR_BLACK);
+
+    drawVectStone(g, cx - halfdelta, cy - halfdelta, size, playerColor == Board.WHITE ? Util.COLOR_WHITE : Util.COLOR_BLACK);
   }
 
   public static void drawVectStone(Graphics g, int tlx, int tly, int size, int color) {

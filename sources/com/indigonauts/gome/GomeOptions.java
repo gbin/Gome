@@ -43,7 +43,7 @@ public class GomeOptions {
 
   public String igsLogin = "";
   public String igsPassword = "";
-  
+
   // TODO : make the GUI for the color
   public byte igsColor = Board.BLACK;
   public byte igsSize = 19;
@@ -53,12 +53,12 @@ public class GomeOptions {
   public String email = "";
   public String user = "";
   public String key = "";
-  
+
   public String defaultDirectory = "file:///";
 
   public long expiration = 0;
   public byte ghostStone = 3;
-  
+
   public byte bluetooth = 0;
 
   public Font getScrollerFont() {

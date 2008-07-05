@@ -48,15 +48,15 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   //#endif
 
   private static final Vector visibleItems = new Vector();
-  public static Command OPEN;
-  public static Command SAVE_AS;
-  public static Command OPEN_REVIEW;
-  public static Command DELETE;
-  public static Command BOOKMARK;
-  public static Command GOTO_BOOKMARK;
-  public static Command IMPORT;
-  public static Command SEND_BY_EMAIL;
-  private static Command RANDOM;
+  private static Command OPEN = new Command(I18N.open, Command.SCREEN, 2);
+  public static Command SAVE_AS = new Command(I18N.saveAs, Command.SCREEN, 2);
+  public static Command OPEN_REVIEW = new Command(I18N.openReview, Command.SCREEN, 1);
+  public static Command DELETE = new Command(I18N.delete, Command.SCREEN, 3);
+  public static Command BOOKMARK = new Command(I18N.bookmark, Command.SCREEN, 2);
+  public static Command GOTO_BOOKMARK = new Command(I18N.gotoBookmark, Command.SCREEN, 2);
+  public static Command IMPORT = new Command(I18N.import_, Command.SCREEN, 2);
+  public static Command SEND_BY_EMAIL = new Command(I18N.sendByEmail, Command.SCREEN, 2);
+  private static Command RANDOM = new Command(I18N.random, Command.SCREEN, 2);
 
   public static final Font ITEM_FONT = Font.getFont(Font.FACE_MONOSPACE, Font.STYLE_PLAIN, Font.SIZE_SMALL);
 
@@ -100,21 +100,9 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
       fileImg = Image.createImage("/game.png");
       remoteFileImg = Image.createImage("/rgame.png");
       textFileImg = Image.createImage("/text.png");
-
     } catch (IOException e) {
       // Nothing we can do
     }
-
-    OPEN = new Command(I18N.open, Command.SCREEN, 2);
-    SAVE_AS = new Command(I18N.saveAs, Command.SCREEN, 2);
-    OPEN_REVIEW = new Command(I18N.openReview, Command.SCREEN, 2);
-    DELETE = new Command(I18N.delete, Command.SCREEN, 3);
-    IMPORT = new Command(I18N.import_, Command.SCREEN, 2);
-    SEND_BY_EMAIL = new Command(I18N.sendByEmail, Command.SCREEN, 2);
-    RANDOM = new Command(I18N.random, Command.SCREEN, 2);
-    BOOKMARK = new Command(I18N.bookmark, Command.SCREEN, 2);
-    GOTO_BOOKMARK = new Command(I18N.gotoBookmark, Command.SCREEN, 2);
-
   }
 
   public FileBrowser(Showable parent, MenuEngine listener, Vector entries, String path, boolean saveMode) {
@@ -135,7 +123,6 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void show(Display disp) {
-    //uiFolder = new Form(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
     visibleItems.removeAllElements();
     uiFolder.deleteAll();
     uiFolder.setTitle(Util.expandString(I18N.filesIn, new String[] { currentDirectory }));
@@ -229,7 +216,6 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
     //# BoardPainter bp = new BoardPainter(position, illustrativeRectangle, new Rectangle(SgfPoint.createFromSgf((String) boardAreaSplitted.elementAt(0)), SgfPoint
     //#       .createFromSgf((String) boardAreaSplitted.elementAt(1))), false);
     //#endif
-    
 
     Graphics g = generated.getGraphics();
     g.setColor(Util.COLOR_LIGHTGREY);
@@ -243,6 +229,10 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   public void commandAction(Command c, Displayable s) {
     if (s == uiFolder) {
       if (c == OPEN || c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
+        //#if DEBUG
+        log.debug("c = " + c.getLabel());
+        log.debug("c = " + c.getCommandType());
+        //#endif
         FileEntry entry = currentItem.getEntry();
         if (entry instanceof IndexEntry) {
           new IndexLoader((IndexEntry) entry, this).show(display);
@@ -260,11 +250,14 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
 
           indexBlock = 0;
           selectedNum = 0;
-          // by default the click is the review mode
+
           if (c == OPEN_REVIEW || c == List.SELECT_COMMAND) {
+            //#if DEBUG
+            log.debug("Open in review mode");
+            //#endif
             collectionEntry.setPlayMode(GameController.REVIEW_MODE);
           }
-          listener.loadFile((CollectionEntry) entry, 0);
+          listener.loadFile(collectionEntry, 0);
           return;
         }
         showFileBlock();
@@ -520,7 +513,7 @@ public class FileBrowser implements CommandListener, Showable, DownloadCallback 
   }
 
   public void open() {
-    commandAction(OPEN, uiFolder);
+    commandAction(List.SELECT_COMMAND, uiFolder);
   }
 
   public void clicked(IllustratedItem illustratedItem) {

@@ -6,17 +6,17 @@ package com.indigonauts.gome.ui;
 import javax.microedition.lcdui.Display;
 
 public interface ModalDialog {
-    /**
-     * shows it self, also remebers the previous screen
-     * 
-     * @param dis
-     */
-    public void show(Display dis);
+  /**
+   * shows it self, also remebers the previous screen
+   * 
+   * @param dis
+   */
+  public void show(Display dis);
 
-    /**
-     * hide it self, and switch back to the previous screen
-     * 
-     */
-    public void hide();
+  /**
+   * hide it self, and switch back to the previous screen
+   * 
+   */
+  public void hide();
 
 }

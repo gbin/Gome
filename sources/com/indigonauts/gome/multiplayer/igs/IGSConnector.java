@@ -206,7 +206,7 @@ public class IGSConnector extends MultiplayerConnector {
       break;
     default:
       throw new IllegalArgumentException("Unknown event " + event);
-        
+
     }
     return true;
 

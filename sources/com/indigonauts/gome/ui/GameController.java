@@ -134,17 +134,21 @@ public class GameController implements MultiplayerCallback
    * @return
    */
   public boolean isPassiveMode() {
-    
+
     switch (playMode) {
     case JOSEKI_MODE:
     case OBSERVE_MODE:
     case REVIEW_MODE:
       return !isCountMode();
+      //#if IGS || BT
     case ONLINE_MODE:
     case P2P_MODE:
       Challenge currentChallenge = multiplayerConnector.getCurrentChallenge();
+      //#if DEBUG
       log.debug("current Challenge = " + currentChallenge);
+      //#endif
       return multiplayerConnector == null || currentChallenge == null || (getCurrentPlayerColor() != currentChallenge.color);
+      //#endif
     default:
       return false;
     }

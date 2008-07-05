@@ -64,32 +64,31 @@ package org.apache.log4j;
 
 public final class Priority {
 
-    public final static int FATAL_INT = 50000;
-    public final static int ERROR_INT = 40000;
-    public final static int WARN_INT  = 30000;
-    public final static int INFO_INT  = 20000;
-    public final static int DEBUG_INT = 10000;
+  public final static int FATAL_INT = 50000;
+  public final static int ERROR_INT = 40000;
+  public final static int WARN_INT = 30000;
+  public final static int INFO_INT = 20000;
+  public final static int DEBUG_INT = 10000;
 
-    public static final Priority FATAL = new Priority(FATAL_INT, "FATAL");
-    public static final Priority ERROR = new Priority(ERROR_INT, "ERROR");
-    public static final Priority WARN = new Priority(WARN_INT, "WARN");
-    public static final Priority INFO = new Priority(INFO_INT, "INFO");
-    public static final Priority DEBUG = new Priority(DEBUG_INT, "DEBUG");
+  public static final Priority FATAL = new Priority(FATAL_INT, "FATAL");
+  public static final Priority ERROR = new Priority(ERROR_INT, "ERROR");
+  public static final Priority WARN = new Priority(WARN_INT, "WARN");
+  public static final Priority INFO = new Priority(INFO_INT, "INFO");
+  public static final Priority DEBUG = new Priority(DEBUG_INT, "DEBUG");
 
-    private int level = 0;
-    private String name = null;
+  private int level = 0;
+  private String name = null;
 
-    private Priority(int level, String name) {
-        this.level = level;
-        this.name = name;
-    }
+  private Priority(int level, String name) {
+    this.level = level;
+    this.name = name;
+  }
 
-    public boolean isGreaterOrEqual(Priority p) {
-        return level >= p.level;
-    }
-    
-    public String toString() {
-        return name;
-    }
+  public boolean isGreaterOrEqual(Priority p) {
+    return level >= p.level;
+  }
+
+  public String toString() {
+    return name;
+  }
 }
-

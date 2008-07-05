@@ -61,8 +61,7 @@ public class Game {
   }
 
   public String toString() {
-    return "#" + nb + " " + white + " ["+ whiteRank+ "] " + black + " [" + blackRank+ "]"
-             + " H" + handi + " M"+ move;
+    return "#" + nb + " " + white + " [" + whiteRank + "] " + black + " [" + blackRank + "]" + " H" + handi + " M" + move;
   }
 
 }

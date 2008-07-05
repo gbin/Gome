@@ -189,7 +189,7 @@ public class Info extends Fetcher implements CommandListener, Showable {
     buf.append(Util.safeGetKeyName(canvas, canvas.KEY_PREVCORNER));
     buf.append(' ');
     buf.append(I18N.help.prevCorner); //$NON-NLS-1$
-    
+
     StringItem si = new StringItem("", buf.toString());
     si.setFont(MainCanvas.SMALL_FONT);
     help.append(si);

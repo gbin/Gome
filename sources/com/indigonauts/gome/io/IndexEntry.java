@@ -10,7 +10,7 @@ public class IndexEntry extends FileEntry {
   private String illustrativeWhitePosition;
 
   public IndexEntry(String path, String name, String description) {
-    super(path,name, 'I');
+    super(path, name, 'I');
     this.description = description;
   }
 

@@ -38,7 +38,7 @@ public class IOManager {
   private static final String INDEX_NAME = "index.txt"; //$NON-NLS-1$
 
   public static final String LOCAL_NAME = "file:///"; //$NON-NLS-1$
- 
+
   public static IOManager singleton = new IOManager();
 
   private static final String EMAIL_SEND_BASE = "http://www.indigonauts.com/gome/uploadGame.php?";
@@ -153,7 +153,7 @@ public class IOManager {
       return null;
 
     }
-    
+
     //#if DEBUG
     log.debug("no ident required");
     //#endif
@@ -410,9 +410,9 @@ public class IOManager {
       return readFileFromHttp(url, status);
     }
     //#if JSR75
-     else if (url.startsWith(LOCAL_NAME)) {
+    else if (url.startsWith(LOCAL_NAME)) {
       return loadJSR75(url, status);
-     }
+    }
     //#else
     //# else if (url.startsWith(LOCAL_NAME)) { //$NON-NLS-1$
     //#  url = url.substring(url.indexOf(':') + 4);

@@ -14,9 +14,10 @@ public interface MultiplayerCallback {
   void loggedEvent();
 
   //#endif
-  
+
   //#if BT
   void connectedBTEvent(MultiplayerConnector connector);
+
   //#endif
 
   //#if IGS
@@ -25,6 +26,7 @@ public interface MultiplayerCallback {
   void userListEvent();
 
   void observeEvent(Move[] moves);
+
   //#endif
 
   void moveEvent(Move move);
@@ -47,13 +49,15 @@ public interface MultiplayerCallback {
 
   void gameIsDone(String player1, int score1, String player2, int score2);
 
-  
   void oppSetHandicap(byte handicap);
-  
+
   //#if IGS
   void setKomi(byte komi);
+
   void onlineSetKomi(byte komi);
+
   void oppWantToSetNewKomi(byte komi);
+
   //#endif
 
   void onlineResigned(String name);

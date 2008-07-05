@@ -208,7 +208,6 @@ public class Options extends Form {
       append(stoneBug);
       append(optimize);
 
-      
       //#if IGS
       append(I18N.option.igs);
       append(igsLogin);

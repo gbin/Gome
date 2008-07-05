@@ -46,19 +46,17 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
   private String pwdFile;
   protected FetcherDownloadThread thread;
 
-  public Fetcher()
-  {
+  public Fetcher() {
     super(I18N.download_inprogress); //$NON-NLS-1$
   }
-  
+
   public Fetcher(FileEntry entry) {
     super(I18N.download_inprogress); //$NON-NLS-1$
     this.entry = entry;
     setup();
   }
-  
-  protected void setup()
-  {
+
+  protected void setup() {
     gauge = new Gauge(entry.getUrl(), false, 100, 0);
     status = READY;
 
@@ -89,7 +87,6 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
     this.addCommand(ok);
     this.append(login);
     this.append(password);
-    
 
   }
 
@@ -108,13 +105,13 @@ public abstract class Fetcher extends Form implements CommandListener, DownloadS
       try {
         IOManager.singleton.storeLoginPassword(pwdFile, login.getString(), password.getString());
       } catch (RecordStoreException e) {
-       // nothing to do it will loop
+        // nothing to do it will loop
       }
       this.delete(0);
       this.delete(0);
       this.append(gauge);
       this.removeCommand(ok);
-      start();  
+      start();
       return;
     }
     status = TERMINATED;

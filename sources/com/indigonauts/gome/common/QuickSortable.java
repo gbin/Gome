@@ -33,15 +33,13 @@ public abstract class QuickSortable {
     return i;
   }
 
-  
-
   // exchange a[i] and a[j]
   private static void exch(QuickSortable[] a, int i, int j) {
     QuickSortable swap = a[i];
     a[i] = a[j];
     a[j] = swap;
   }
-  
+
   public abstract boolean lessThan(QuickSortable other);
-  
+
 }

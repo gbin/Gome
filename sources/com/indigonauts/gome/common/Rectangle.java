@@ -110,6 +110,7 @@ public class Rectangle {
   public boolean contains(int xx, int yy) {
     return xx >= x0 && xx <= x1 && yy >= y0 && yy <= y1;
   }
+
   public boolean equals(Object obj) {
     if (!(obj instanceof Rectangle))
       return false;

@@ -79,6 +79,6 @@ public class User extends QuickSortable {
   }
 
   public String toString() {
-    return Util.padd(rank,3,true) + "| " + nick + ((play != -1) ? " P#" + play : "") + ((watch != -1) ? " W#" + watch : "");
+    return Util.padd(rank, 3, true) + "| " + nick + ((play != -1) ? " P#" + play : "") + ((watch != -1) ? " W#" + watch : "");
   }
 }

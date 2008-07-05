@@ -22,26 +22,26 @@ class EditNodeForm extends Form implements Showable {
     super(title);
     comment = new TextField("", currentNode.getComment(), 200, TextField.INITIAL_CAPS_SENTENCE);
     int minimumHeight = comment.getMinimumHeight();
-    comment.setPreferredSize(getWidth(),minimumHeight);
-    
-    int h = this.getHeight() - (minimumHeight * 3)/2;
+    comment.setPreferredSize(getWidth(), minimumHeight);
+
+    int h = this.getHeight() - (minimumHeight * 3) / 2;
     int w = this.getWidth();
     int s = h > w ? w : h;
     BoardPainter bp = new BoardPainter(board, new Rectangle(0, 0, s, s), board.getFullBoardArea(), false);
-    
+
     Image img = Image.createImage(s, s);
-    bp.drawMe(img.getGraphics(),null,1,false,true,currentNode,null);
-     
-    ImageItem imageItem = new ImageItem("",img,Item.LAYOUT_CENTER,"");
+    bp.drawMe(img.getGraphics(), null, 1, false, true, currentNode, null);
+
+    ImageItem imageItem = new ImageItem("", img, Item.LAYOUT_CENTER, "");
     append(imageItem);
     append(comment);
-    
+
   }
 
   public void show(Display destination) {
     destination.setCurrent(this);
     destination.setCurrentItem(comment);
-    
+
   }
 
   public String getComment() {

@@ -31,15 +31,12 @@ import com.indigonauts.gome.io.LocalFileEntry;
 //#if BT || IGS
 import com.indigonauts.gome.multiplayer.Challenge;
 import com.indigonauts.gome.multiplayer.Game;
-import com.indigonauts.gome.multiplayer.User;
-//#endif
+import com.indigonauts.gome.multiplayer.User; //#endif
 
 //#if BT
-import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector; 
-//#endif
+import com.indigonauts.gome.multiplayer.bt.BluetoothClientConnector; //#endif
 //#if IGS
-import com.indigonauts.gome.multiplayer.igs.IGSConnector; 
-//#endif
+import com.indigonauts.gome.multiplayer.igs.IGSConnector; //#endif
 import com.indigonauts.gome.sgf.Board;
 
 public class MenuEngine implements CommandListener {
@@ -78,7 +75,7 @@ public class MenuEngine implements CommandListener {
   public static final Command IGS_SORT_BY_NICK = new Command(I18N.online.sortNick, Command.SCREEN, 5);
   public static final Command IGS_SORT_BY_WATCH = new Command(I18N.online.sortWatch, Command.SCREEN, 5);
   //#endif
-  
+
   //#if IGS || BT
   public static final Command MESSAGE = new Command(I18N.online.message, Command.SCREEN, 2);
   public static final Command REQUEST_KOMI = new Command(I18N.online.requestKomi, Command.SCREEN, 5);
@@ -579,12 +576,13 @@ public class MenuEngine implements CommandListener {
       Util.messageBox(I18N.error.error, I18N.error.wrongtype, AlertType.ERROR); //$NON-NLS-1$ //$NON-NLS-2$
     }
   }
+
   //#if IGS || BT
   public void switchToOnline() {
     chat = new Chat(Gome.singleton.display);
   }
-  //#endif
 
+  //#endif
 
   //#if IGS || BT
   public void showIgsChallenge(Challenge challenge) {
@@ -601,8 +599,9 @@ public class MenuEngine implements CommandListener {
     challengeForm.setCommandListener(this);
     Gome.singleton.display.setCurrent(challengeForm);
   }
+
   //#endif
-  
+
   //#ifdef IGS
   public void showOppWantKomi(byte k) {
     this.komi = k;
@@ -619,6 +618,7 @@ public class MenuEngine implements CommandListener {
     // some cleanup after disconnection
     chat = null;
   }
+
   //#endif
 
   //#if IGS || BT
@@ -626,6 +626,7 @@ public class MenuEngine implements CommandListener {
     chat.addMessage(nick, message);
     chat.showMessageHistory();
   }
+
   //#endif
 
   //#if IGS

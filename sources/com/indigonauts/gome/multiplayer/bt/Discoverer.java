@@ -293,7 +293,7 @@ public class Discoverer implements DiscoveryListener {
     outLog += "]";
     log.info(outLog);
     //#endif
-    
+
     // free the waits
     synchronized (this) {
       try {
