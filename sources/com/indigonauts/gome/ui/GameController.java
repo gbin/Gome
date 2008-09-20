@@ -289,7 +289,6 @@ public class GameController implements MultiplayerCallback
   }
 
   public void tuneBoardPainter() {
-    // log.debug("paintBackBuffer");
     BoardPainter painter = canvas.getBoardPainter();
     painter.setCountingMode(countMode);
     painter.setKo(currentNode.getKo());
