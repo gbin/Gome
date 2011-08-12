@@ -1,0 +1,54 @@
+What is GOME ?
+--------------
+
+
+Gome is a go assistant written in Java J2ME.
+
+Gome is a J2ME go game application. It features online gaming, problem solving, game reviews and much more ... 
+Main Features 
+- Review commented games
+- Play and record your games
+- Solve problems
+- Study joseki
+- Evaluation of positions
+- Play with another gome by bluetooth
+- Access to an online updated go library of commented games and problems
+- Local repository in which you can import online files to review/play them later
+- Compatible with SGF file format.
+- Available in English, French and Japanese.
+- Play online on IGS
+- Send your recorded games by email
+
+Go Features 
+- 9x9 / 13x13 / 19x19 Goban
+- Handicap stones
+- Ko rule
+- Optional joseki dictionary (for machines with enough memory)
+- Counting feature 
+- Clock feature 
+
+Graphic features
+
+- Show annotations on the goban
+- Zoom 
+- An optimized size and collapsible scroller that show the comments
+
+After a limited commercial success, I decided to contribute all its code to the public domain.
+You can reuse any part of Gome in your own software as long as you mention me as the original contributor : Guillaume BINET <gbin@gootz.net>
+
+
+License
+-------
+This software is released under LGPL with the restriction above.
+http://www.gnu.org/licenses/lgpl-3.0.txt
+
+
+How to build Gome ? 
+-------------------
+
+You will need:
+- apache ant   http://ant.apache.org/
+- antenna jar  http://antenna.sourceforge.net/
+- wtk          http://www.oracle.com/technetwork/java/index-jsp-137162.html
+
+From ant you can call the target : fullVersion to get Gome with everything options on it. see the build.xml for other options.
